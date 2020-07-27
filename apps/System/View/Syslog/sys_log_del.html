@@ -1,0 +1,40 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+	    <div class="page-content-wrapper">
+	        <div class="page-content">
+	            <div class="mt-20"></div>
+	            <div class="portlet light right ">
+	                <form id="form_sample_2" action="" method="post" class="form-horizontal">
+	                    <div class="form-body">
+	                        <div class="row">
+	                            <div class="form-group  mt-5 col-sm-8 ">
+	                                <div class="row">
+	                                    <label class="control-label col-sm-4">名称 <span class="required"> * </span> </label>
+	                                    <div class="col-sm-4">
+	                                        <input type="text" name="opinion_title" value="{$opinion_row.opinion_title}" data-required="1" class="form-control">
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="col-sm-8 ">
+	                                <button type="button" class="btn btn-sm default w-80 bor-ra-2 mr-20 pull-right" onclick="nav_colse()">取消 </button>
+	                                <button type="submit" class="btn btn-sm blue w-75 bor-ra-2 mr-10 pull-right"> 提交 </button>
+	                            </div>
+	                            
+	                        </div>
+	                      </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    function nav_colse() {
+	        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	        parent.layer.close(index);
+	    }
+	</script>
+</block>

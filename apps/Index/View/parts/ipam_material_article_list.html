@@ -1,0 +1,21 @@
+<foreach name="article_list" item="list">
+    <li class="public_card_text_lr mt-20 w-280 mr-5">
+        <a href="{:U('Edu/ipam_material_info', array('material_id' => $list['material_id']))}" class='see-details'>
+            <div class="public_card_text_lr_img hr-s-dfdfdf h-all pull-left w-120 mr-15">
+                <div class="w-all h-all over-h">
+                    <img src="{$list.material_thumb}" class="di-b h-all center-block" alt="图书图片">
+                </div>
+            </div>
+            <div class="public_card_text_lr_txt">
+                <div class="mb-20 material_over_point">{$list.material_title}</div>
+                <div class="public_card_text_lr_txt_content fcolor-99">作者：{$list.add_staff}</div>
+                <div class="public_card_text_lr_txt_content fcolor-99">时间：{$list.add_time}</div>
+                <div class="mt-40">
+                    <span class="public_card_text_lr_txt_content fcolor-99">{$list.read_num}</span>
+                    <span class="public_card_text_lr_txt_content fcolor-99">人浏览</span>
+                    <span class="public_card_text_lr_btn">点击阅读</span>
+                </div>
+            </div>
+        </a>
+    </li>
+</foreach>

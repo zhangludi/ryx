@@ -1,0 +1,350 @@
+/* line 32, ../../sass/layouts/_layouts.scss */
+.l-flex-center {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* line 36, ../../sass/layouts/_layouts.scss */
+.l-margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 40, ../../sass/layouts/_layouts.scss */
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1720px;
+}
+
+/* line 45, ../../sass/layouts/_layouts.scss */
+.l-right {
+  float: right;
+}
+
+/* line 49, ../../sass/layouts/_layouts.scss */
+.l-flex-justify {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  justify-content: space-between;
+}
+
+/* line 15, ../../sass/objects/_button.scss */
+.button {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+}
+
+/* line 19, ../../sass/objects/_button.scss */
+.button-red {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  background: #ff582d;
+}
+
+/* line 24, ../../sass/objects/_button.scss */
+.button-linered {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  background: linear-gradient(0deg, #ff204d, #ff6745);
+}
+
+/* line 29, ../../sass/objects/_button.scss */
+.button-strokered {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  border: solid 1px #ff582d;
+  color: #ff582d;
+  background: transparent;
+}
+
+/* line 20, ../../sass/objects/_input.scss */
+.input {
+  height: 50px;
+  padding-left: 16px;
+  font-size: 26px;
+}
+/* line 10, ../../sass/objects/_input.scss */
+.input:hover, .input:focus {
+  border-style: solid;
+  border-color: #ff582d;
+}
+/* line 15, ../../sass/objects/_input.scss */
+.input:focus {
+  outline: none;
+}
+
+/* line 20, ../../sass/objects/_title.scss */
+.title {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-top: 200px;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+/* line 27, ../../sass/objects/_title.scss */
+.title-icon {
+  width: 118px;
+  height: 118px;
+  object-fit: contain;
+}
+
+/* line 31, ../../sass/objects/_title.scss */
+.title-txt {
+  width: 1218px;
+  height: 110px;
+  object-fit: contain;
+}
+
+/* line 35, ../../sass/objects/_title.scss */
+.title_photo {
+  position: absolute;
+  right: 64px;
+  top: 48px;
+}
+
+/* line 41, ../../sass/objects/_title.scss */
+.title_pic-box {
+  float: left;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: solid 4px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+/* line 51, ../../sass/objects/_title.scss */
+.title_picture {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* line 55, ../../sass/objects/_title.scss */
+.title_name {
+  float: left;
+  line-height: 48px;
+  color: #fff;
+  font-size: 24px;
+  opacity: .8;
+}
+
+/* line 23, ../../sass/sp_res/sp_login.scss */
+.bg {
+  background: url("../../public/images/bg.png");
+  background-size: cover;
+}
+
+
+
+/* line 37, ../../sass/sp_res/sp_login.scss */
+.login_content {
+  padding-top: 40px;
+}
+
+/* line 41, ../../sass/sp_res/sp_login.scss */
+.login_title {
+  height: 86px;
+  line-height: 86px;
+  font-size: 28px;
+  border-bottom: solid 1px #d6d6d6;
+  text-align: center;
+}
+
+/* line 48, ../../sass/sp_res/sp_login.scss */
+.title_item, .title_item-red {
+  display: inline-block;
+  line-height: 86px;
+  padding: 0 30px;
+}
+
+/* line 54, ../../sass/sp_res/sp_login.scss */
+.input-wrap {
+  height: 50px;
+  padding: 12px 0;
+}
+
+/* line 59, ../../sass/sp_res/sp_login.scss */
+.login_label {
+  display: inline-block;
+  font-size: 20px;
+  width: 210px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+/* line 67, ../../sass/sp_res/sp_login.scss */
+.login_input {
+  width: 360px;
+  height: 50px;
+}
+
+/* line 72, ../../sass/sp_res/sp_login.scss */
+.title_item-red {
+  color: #ff582d;
+  border-bottom: solid 1px #ff582d;
+}
+
+/* line 78, ../../sass/sp_res/sp_login.scss */
+.login_button {
+  display: block;
+  width: 470px;
+  margin-top: 40px;
+}
+
+/* line 84, ../../sass/sp_res/sp_login.scss */
+.about-pwd {
+  width: 470px;
+  color: #b8b8b8;
+  margin-top: 16px;
+}
+
+/* line 90, ../../sass/sp_res/sp_login.scss */
+.login_register {
+  color: #ff582d;
+  margin-left: 6px;
+}
+
+/* line 95, ../../sass/sp_res/sp_login.scss */
+.login_forget {
+  color: #666;
+  text-decoration: none;
+}
+
+/* line 100, ../../sass/sp_res/sp_login.scss */
+.get-code {
+  width: 126px;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  margin-left: 140px;
+}
+
+/* line 108, ../../sass/sp_res/sp_login.scss */
+.login_input-short {
+  display: none;
+  width: 310px;
+}
+
+/*微心愿样式*/
+.ind_wish{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.ind_wish li{
+	list-style: none;
+	width: 260px;
+	height: 170px;
+	float: left;
+	margin-right: 40px;
+	margin-bottom: 30px;
+	background: url("../../public/images/li_bg.png") no-repeat;
+}
+.ind_wish h1{
+	text-align: center;
+    /* background: #333; */
+    margin: 0 auto;
+    width: 200px;
+    color: #fff;
+    font-size: 26px;
+    padding-top: 10px;
+}
+.ind_wish p{
+	 padding-top: 10px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 22px;
+    width: 258px;
+    margin-left: 30px;
+    overflow: hidden;
+   
+}
+.ind_wish span{
+	height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    padding-left: 30px;
+    color: #666;
+    display: block;
+    width: 259px;
+}
+/*微捐助样式*/
+.ind_help{
+	 margin-top: 22px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+.ind_help_l{
+	font-size: 26px;
+    font-weight: bold;
+}
+.ind_help_r span{
+	color: #DE682C;
+}
+.ind_help_list li{
+	color: #333;
+    overflow: hidden;
+    width: 421px;
+    height: 36px;
+    line-height: 36px;   
+    list-style: none;
+}
+.ind_help_color{
+	color: #DE682C;
+}

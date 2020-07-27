@@ -1,0 +1,132 @@
+﻿{
+  "code": 0
+,"msg": ""
+  ,"title":"示例页"
+,"data": [
+  {
+  "name": "template"
+,"title": "添加页"
+,"icon": "layui-icon-home"
+,"list": [{
+    "name": "add"
+  ,"title": "单排添加页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/add/sp_demo_add_one.html"
+  },{
+    "name": "add"
+  ,"title": "多排添加页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/add/sp_demo_add_more.html"
+  },{
+    "name": "add"
+  ,"title": "带流程添加页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/add/sp_demo_add_pro.html"
+  },{
+    "name": "add"
+  ,"title": "带页签添加页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/add/sp_demo_add_tab.html"
+  }
+ ]
+},{
+  "name": "template"
+,"title": "详情页"
+,"icon": "layui-icon-home"
+,"list": [{
+    "name": "info"
+  ,"title": "单排详情页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/info/sp_demo_info_one.html"
+  },{
+    "name": "info"
+  ,"title": "多排详情页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/info/sp_demo_info_more.html"
+  },{
+    "name": "info"
+  ,"title": "带流程详情页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/info/sp_demo_info_pro.html"
+  },{
+    "name": "info"
+  ,"title": "文章详情页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/info/sp_demo_info_txt.html"
+  },{
+    "name": "info"
+  ,"title": "局刷详情页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/info/sp_demo_info_tab.html"
+  },{
+    "name": "info"
+  ,"title": "个人信息详情页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/info/sp_demo_info_persondetail.html"
+  }
+ ]
+},{
+  "name": "template"
+,"title": "列表页"
+,"icon": "layui-icon-home"
+,"list": [{
+    "name": "list"
+  ,"title": "一级表格页"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_newtree.html"
+  },{
+    "name": "list"
+  ,"title": "一级表格页无搜索"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_nosearch.html"
+  },
+{
+    "name": "list"
+  ,"title": "一级表格页单选按钮"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_radio.html"
+  },
+{
+    "name": "list"
+  ,"title": "数据表格"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table.html"
+  },{
+    "name": "list"
+  ,"title": "ztree表格"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_ztreedata.html"
+  },{
+    "name": "list"
+  ,"title": "带页签表格"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_tab.html"
+  },{
+    "name": "list"
+  ,"title": "卡片表格"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_card.html"
+  },{
+    "name": "list"
+  ,"title": "标准表格"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_standard.html"
+  },{
+    "name": "list"
+  ,"title": "表格-文章"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_search_artical.html"
+  },{
+    "name": "list"
+  ,"title": "表格-项目"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_search_project.html"
+  },{
+    "name": "list"
+  ,"title": "表格-应用"
+  ,"spread": true
+  ,"jump":"./views/sp_demo/list/sp_demo_table_search_use.html"
+  }
+ ]
+}]
+}

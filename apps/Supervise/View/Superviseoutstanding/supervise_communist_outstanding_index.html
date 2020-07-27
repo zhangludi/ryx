@@ -1,0 +1,119 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+<div class="layui-fluid " >
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="layui-row">
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.$type);</php>"><php>echo getFunctionInfo(ACTION_NAME.$type);</php></div>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    <div class="layui-col-xs1 center-text lh-40 text-r">
+                                        申请时间：
+                                    </div>
+                                    <div class="layui-col-xs3">
+                                        <input type="text" class="layui-input " id="start_time" autocomplete="off" placeholder="yyyy-mm-dd">
+                                    </div>
+                                    <!-- <eq name="type" valeu="1">
+                                        <div class="layui-col-xs1 center-text lh-40 text-r">组织：</div>
+                                        <div class="layui-col-xs3">
+                                            <select id="party_no" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                                <option value="0">请选择</option>
+                                                <php>echo getPartySelect()</php>
+                                            </select>
+                                        </div>
+                                    <else/>
+                                        <div class="layui-col-xs1 center-text lh-40 text-r">党员：</div>
+                                        <div class="layui-col-xs3">
+                                            <select id="communist_no" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                                <option value="0">请选择</option>
+                                                <php>echo getCommunistSelect()</php>
+                                            </select>
+                                        </div>
+                                    </eq>-->
+                                    <div class="layui-col-xs2 pull-right">
+                                        <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+                                    </div>
+                                </div>
+                                <table class="layui-table" id="demo"  lay-filter="demo">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+<script>
+    laydate.render({
+        elem: '#start_time'
+        ,type: 'date'
+        ,range: true
+    });
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("supervise_communist_outstanding_data",array("type"=>$type))}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'outstanding_id', width: 80, title: '编号', sort: true}
+                    <if condition="$type eq '1'" >
+                        , {field: 'communist_no', title: '姓名'}
+                    <else/>
+                        , {field: 'party_no', title: '党组织'}
+                    </if>
+                    , {field: 'status_name', title: '状态' , width: 120}
+                    , {field: 'update_staff', title: '审核人' , width: 120}
+                    , {field: 'add_time', title: '申请时间' , width: 120}
+                    , {field: 'update_time', title: '审核时间' , width: 120}
+                    , {field: 'operate', title: '操作',align: 'center' , width: 150}
+                ]]
+                , page: true
+            });
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            var $ = layui.$, active = {
+                reload: function(){
+                    var start_time = $('#start_time').val();
+                    var communist_no = $('#communist_no').val();
+                    var party_no = $('#party_no').val();
+                    table.reload('ztreedata', {
+                        page: {
+                          curr: 1 
+                        }
+                        ,where: {
+                            "start_time": start_time,
+                            "party_no":party_no,
+                            "communist_no":communist_no,
+                        }
+                    });
+                }
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+    });
+</script>
+</block>

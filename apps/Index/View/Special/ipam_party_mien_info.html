@@ -1,0 +1,95 @@
+<style type="text/css">
+  .public_content .org_mien {
+    height: 780px;
+    border-radius: 4px 4px 4px 4px;
+}
+</style>
+<div>
+<div class="public_content  w">
+    <div class="org_mien">
+      <div class="org_mien_title">
+        党组织：<span class="org_mien_title_two">{$party_data['party_name']}</span>
+      </div>
+      <div class="org_mien_introduce">
+        <div class="org_mien_introduce_left">
+          <a href="javascript:;">
+            <img style="width:385px;height:215px;border-radius: 4px 4px 4px 4px;" src="{$party_data['party_avatar']}" alt="">
+          </a>
+        </div>
+        <div class="org_mien_introduce_right">
+          <div>
+            <i><img src="__STATICS__/apps/page_portal/images/chengshi@2x.png" alt=""></i>
+            <h3><a href="{:U('Special/ipam_party_mien_info',array('party_no'=>$party_data['party_no']))}">{$party_data['party_name']}</a></h3>
+            <span class="org_mien_introduce_right_address">{$party_data['party_address']}</span>
+            <div class="org_mien_introduce_right_tel"><span>{$party_data['party_level_code']}</span></div>
+          </div>
+          <p class="org_mien_introduce_right_msg">
+            {$party_data['memo']}</p>
+          <ul class="org_mien_introduce_right_show clearfix">
+            <li class="one">
+              <p>{$communist_num}</p>
+              <p>党员总数</p>
+            </li>
+            <li class="two">
+              <p>{$party_count}</p>
+              <p>党组织总数</p>
+            </li>
+            <li class="three">
+              <p>{$party_p_count}</p>
+              <p>直属下级</p>
+            </li>
+            <li class="four">
+              <p>{$meeting_num}</p>
+              <p>本月会议</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="org_mien_leader">
+        <div class="org_mien_leader_tit">
+          <p><i></i><span>领导班子</span></p>
+        </div>
+        <div class="org_mien_leader_content">
+          <div class="org_mien_leader_content_chairman">
+            <h3>负责人</h3>
+            <volist name="ava" id="list">
+              <img style="width:80px;height:112px" src="{$list}" alt="">
+            </volist>
+          </div>
+          <div class="org_mien_leader_content_cochairman">
+            <h3>支部主任</h3>
+            <ul class="clearfix">
+              <volist name="communist_avatar_list" id="list">
+                <li><img style="width:80px;height:112px"  src="{$list.communist_avatar}" alt=""></li>
+              </volist>
+              <!-- <li><img src="__STATICS__/apps/page_portal/images/003.png" alt=""></li>
+              <li><img src="__STATICS__/apps/page_portal/images/007.png" alt=""></li>
+              <li><img src="__STATICS__/apps/page_portal/images/5562.png" alt=""></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="org_mien_show">
+        <div class="org_mien_show_tit">
+          <p><i></i><span>支部风采</span></p>
+        </div>
+        <div class="org_mien_show_content">
+          <ul class="clearfix">
+            <volist name="party_propagate" id="list" key="k">
+              <eq name="k" value="1">
+                <li><img src="{$list}" alt="" style="float: left;width:168px;height:126px"></li>
+              <else />
+                <li><img src="{$list}" alt="" style="margin-left:2%;float: left;width:168px;height:126px"></li>
+              </eq>
+            </volist>
+            <!-- <li><img src="__STATICS__/apps/page_portal/images/111.jpg" alt="" style="margin-left:2%;float: left;"></li>
+            <li><img src="__STATICS__/apps/page_portal/images/111.jpg" alt="" style="margin-left:2%;float: left;"></li>
+            <li><img src="__STATICS__/apps/page_portal/images/111.jpg" alt="" style="margin-left:2%;float: left;"></li>
+            <li><img src="__STATICS__/apps/page_portal/images/111.jpg" alt="" style="margin-left:2%;float: left;"></li>
+            <li><img src="__STATICS__/apps/page_portal/images/111.jpg" alt="" style="margin-left:2%;float: left;"></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

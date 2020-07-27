@@ -1,0 +1,245 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+  <!--页面自定义样式-->
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_exam_all.css">
+   <div class="public_content clearfix">
+  <!-- 左侧 -->
+  <div class="pull-left exam_all_l">
+    <div class="exam_all_tit">考试中心</div>
+    <div class="exam_all_line"></div>
+
+    <ul id="content">
+      <!-- <li class="clearfix">
+        <div class="pull-left">
+          <div class="all_list_tit white-space">学习“全国宣传思想工作会议精神”试题</div>
+          <div class="all_list_type white-space">类型：模拟考试     用时：24/60     总分：100</div>
+        </div>
+        <div class="pull-right all_list_score">85分</div>
+      </li>
+      <li class="clearfix">
+        <div class="pull-left">
+          <div class="all_list_tit white-space">学习“全国宣传思想工作会议精神”试题</div>
+          <div class="all_list_type white-space">类型：模拟考试     用时：24/60     总分：100</div>
+        </div>
+        <div class="pull-right all_list_score">85分</div>
+      </li>
+      <li class="clearfix">
+        <div class="pull-left">
+          <div class="all_list_tit white-space">学习“全国宣传思想工作会议精神”试题</div>
+          <div class="all_list_type white-space">类型：模拟考试     用时：24/60     总分：100</div>
+        </div>
+        <div class="pull-right all_list_score">85分</div>
+      </li>
+      <!--正式考试--
+      <li class="clearfix">
+        <div class="pull-left">
+          <div class="all_list_tit white-space">
+            <span class="official_bg">正式考</span>
+            学习“全国宣传思想工作会议精神”试题
+          </div>
+          <div class="all_list_type white-space">类型：模拟考试     用时：24/60     总分：100</div>
+        </div>
+        <div class="pull-right all_list_score">96分</div>
+      </li>
+      <!--模拟考试--
+      <li class="clearfix">
+        <div class="pull-left">
+          <div class="all_list_tit white-space">
+            <span class="mock_bg">模拟考</span>
+            学习“全国宣传思想工作会议精神”试题
+          </div>
+          <div class="all_list_type white-space">类型：模拟考试     用时：24/60     总分：100</div>
+        </div>
+        <div class="pull-right all_list_score">100分</div>
+      </li>
+      <!--进行中--
+      <li class="clearfix">
+        <div class="pull-left">
+          <div class="all_list_tit white-space">            
+            学习“全国宣传思想工作会议精神”试题
+          </div>
+          <div class="all_list_type white-space">类型：模拟考试     用时：24/60     总分：100</div>
+        </div>
+        <div class="pull-right all_list_processing">进行中</div>
+      </li> -->
+      
+    </ul>
+    <!--底部分页-->
+    <div id="news_page" style="margin-left:3%"></div>
+    <!--底部分页结束-->
+    
+  </div>
+  <!-- 右侧 -->
+  <div class="pull-right exam_all_r">
+      <!-- 分类筛选 -->
+      <div class="exam_all_Intro clearfix">
+        <div class="add_title">分类筛选</div>
+        <ul>
+          <!-- <li class="exam_all_Intro_active" onclick="exam_all(5)">全部</li> -->
+          <li class="exam_all_Intro_active" onclick="exam_all(1)">正式考试</li>
+          <li  onclick="exam_all(3)">模拟考试</li>
+          <li onclick="exam_all(2)">我的考试</li>
+        </ul>
+      </div>
+     <!-- 文章简介结束-->
+      <!-- 相关文章 -->
+      <div class="videoInfo_right_about">
+          <div class="add_title">最新文章</div>
+        <div class="add_line"></div>
+        <volist name="article_list" id="vo">
+        <li class="clearfix">
+          <div class="pull-left">
+            <img src="{$vo.article_thumb}" style="width:156px;height:88px;">
+          </div>
+          <div class="pull-left ml-10">
+            <div class="videoInfo_right_about_tit" title="{$vo.article_title}">{$vo.article_title}</div>
+            <div class="videoInfo_right_about_scan">浏览量：{$vo.article_view}次</div>
+          </div>
+        </li>
+      </volist>
+      <!-- <li class="clearfix">
+        <div class="pull-left">
+          <img src="img/videoInfo_tu3.png">
+        </div>
+        <div class="pull-left ml-10">
+          <div class="videoInfo_right_about_tit">两会每日图片精选：格力董明珠冲镜头大笑</div>
+          <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+        </div>
+      </li>
+      <li class="clearfix">
+        <div class="pull-left">
+          <img src="img/videoInfo_tu4.png">
+        </div>
+        <div class="pull-left ml-10">
+          <div class="videoInfo_right_about_tit">目前中医理论差异性较大 现代医学听不懂</div>
+          <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+        </div>
+      </li>
+      <li class="clearfix">
+        <div class="pull-left">
+          <img src="img/videoInfo_tu5.png">
+        </div>
+        <div class="pull-left ml-10">
+          <div class="videoInfo_right_about_tit">中药在走向世界过程中存在哪些问题</div>
+          <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+        </div>
+      </li>
+      <li class="clearfix">
+        <div class="pull-left">
+          <img src="img/videoInfo_tu6.png">
+        </div>
+        <div class="pull-left ml-10">
+          <div class="videoInfo_right_about_tit">要幸福就要奋斗!习主席最新讲话。</div>
+          <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+        </div>
+      </li> -->
+        
+      </div>
+       <!-- 相关专题视频结束 -->
+  </div>
+  </div>
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/toPage.js"></script> 
+  <!--本页面js-->
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/edu_exam_all.js"></script> 
+<script>
+  function info_exam(id,is_exam){
+    window.location.href="{:U('Edu/ipam_exam_attent')}?exam_id="+id+"&is_exam="+is_exam+"";
+  }
+  function info_exam_already(id){
+
+    window.location.href="{:U('Edu/ipam_exam_attent_already')}?exam_id="+id+"";
+  }
+  var count = {$count};
+  layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        //完整功能
+        if (count === 0) {
+            alert('暂无数据');
+        } else {
+            laypage.render({
+                elem: 'news_page'
+                ,count: count
+                ,theme: '#ff3032'
+                ,first: '首页'
+                ,last: '尾页'
+                ,limit: 10
+                ,layout: [ "count" ,'prev', 'page', 'next', 'skip']
+                ,jump: function(obj){
+                    $.ajax({
+                        type : "get",
+                        url : "{:U('Index/Edu/getexamList')}",
+                        data :{ page:obj.curr, pagesize:obj.limit},
+                        datatype: "json",
+                        success: function (data) {
+                            $('#content').html(data.content);
+                           
+                        }
+                    });
+                   
+                }
+            });
+        }
+
+    });
+    function exam_all(is_id){
+          layui.use('laypage', function(){
+          var laypage = layui.laypage;
+          var count1 = '';
+          //完整功能
+          $.ajax({
+              type: "POST",
+              data:{'value':is_id},
+              url: "{:U('Edu/ipam_exam_count_ajax')}",
+              async:false,
+              success: function(data){
+                 count1 = data;
+              }
+          });
+          if (count1 === 0) {
+              alert('暂无数据');
+          } else {
+              laypage.render({
+                  elem: 'news_page'
+                  ,count: count1
+                  ,theme: '#ff3032'
+                  ,first: '首页'
+                  ,last: '尾页'
+                  ,limit: 10
+                  ,layout: [ "count",'prev', 'page', 'next', 'skip']
+                  ,jump: function(obj){
+                      $.ajax({
+                          type : "get",
+                          url : "{:U('Index/Edu/getexamList')}",
+                          data :{ is_exam:is_id,page:obj.curr, pagesize:obj.limit},
+                          datatype: "json",
+                          success: function (data) {
+                              $('#content').html(data.content);
+                              // 查看详情验证登陆
+                              $(".see-details").click(function (e) {
+                                var flag = false;
+                                 $.ajax({
+                                       type: "POST",
+                                       url: "{:U('Index/check_login')}",
+                                       async:false,
+                                       success: function(data){
+                                         flag = data;
+                                       }
+                                   });
+                                 if(flag == true){
+                                   location.href = "{:U('Index/Index/login')}";
+                                   return false;
+                                 } else {
+                                   return true;
+                                 }
+                              });
+                          }
+                      });
+                     
+                  }
+              });
+          }
+
+      });
+    }
+    //分页
+
+</script>

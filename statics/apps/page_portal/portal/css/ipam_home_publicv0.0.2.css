@@ -1,0 +1,544 @@
+/*
+    公共样式开始
+*/
+.bg-color-white{
+    background-color: #fff;
+}
+.bg-color-gray9{
+    background-color: #f9f9f9;
+}
+.fcolor-black{
+    color: #000;
+}
+.fcolor-f33{
+    color: #ff3032;
+}
+.p-15{
+    padding: 15px;
+}
+/*
+    公共样式结束
+*/
+/*
+    背景图样式开始
+*/
+.ipam_home_public_background{
+    font-size: 16px;
+    overflow: auto;
+    background: url("../images/backgroung.jpg") no-repeat;
+    background-size: 100%;
+}
+.ipam_home_public_background .ipam_home_public_title{
+    width: 1200px;
+    margin: 62px auto 64px auto;
+    text-align: center;
+}
+.ipam_home_public_title_img{
+	width:499px;
+	height:64px;
+}
+/*
+    背景图样式结束
+*/
+/*
+    头部开始
+*/
+.ipam_home_public_header .ipam_home_public_header_nav_horizontal{
+    width: 1200px;
+    font-size: 16px;
+    height: 76px;
+    line-height: 76px;
+    /*background: #fff;*/
+    display: table;
+    margin: 0 auto;
+    padding: 0 36px;
+    color: #808080;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background:url(../../../../statics/apps/page_portal/images/party_home_index_menu.png) no-repeat;
+    display: flex;
+    justify-content: flex-end;
+    background-size:100%;
+}
+.ipam_home_public_header .ipam_home_public_header_nav_horizontal li a{
+    display: block;
+    color: #fff;
+    font-size:16px;
+}
+.ipam_home_public_header .ipam_home_public_header_nav_horizontal li{
+    display: table-cell;
+    table-layout: fixed;
+    position: relative;
+    width: 115px;
+    text-align: center;
+    cursor: pointer;
+    _zoom:1;
+}
+.ipam_home_public_header .ipam_home_public_header_nav_horizontal li:last-child{
+    border-right: none;
+    font-size: 14px;
+}
+.ipam_home_public_header .ipam_home_public_header_nav_horizontal li:hover{
+    font-size: 22px;
+}
+.ipam_home_public_header .ipam_home_public_header_nav_horizontal li:hover a{
+   font-size:22px;
+}
+.ipam_home_public_header_nav_triangle{
+    position: absolute;
+    bottom: 0;
+    left: 47%;
+    width: 0;
+    height: 0;
+
+}
+ul.ipam_home_public_header .ipam_home_public_header_nav_horizontal img{
+    padding-right: 4px;
+}
+
+.ipam_home_public_header_nav_horizontal li:hover a:not(.public_header_login):before, .ipam_home_public_header_nav_horizontal li:hover a:not(.public_header_login):after{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    transform: skew(-30deg);
+    line-height: 12px;
+    background: #fff;
+}
+.ipam_home_public_header_nav_horizontal li:hover a:after{
+    bottom: 8px;
+    left: 40%;
+}
+.ipam_home_public_header_nav_horizontal li:hover a:before{
+    top: 8px;
+    left: 58%;
+}
+/* .public_header_active a:not(.public_header_login){
+    font-size: 22px;
+} */
+
+.public_header_active a:before, .public_header_active a:after{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    transform: skew(-30deg);
+    line-height: 12px;
+    background: #fff;
+}
+.public_header_active a:before{
+    top: 12px;
+    left: 58%;
+}
+.public_header_active a:after{
+    bottom: 10px;
+    left: 40%;
+}
+.public_header_nav_horizontal img{
+    padding-right: 4px;
+}
+.public_header_nav_horizontal li:hover a:not(.public_header_login) {
+  font-size: 22px;
+}
+.public_header_nav_horizontal li:hover a:not(.public_header_login) {
+  font-size: 22px;
+}
+/*
+    头部结束
+*/
+/*
+    内容区样式开始
+*/
+.ipam_home_public_content{
+    width: 1200px;
+    margin: 0 auto;
+    border-radius: 3px;
+    padding: 0 36px;
+    margin-bottom: 64px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+/*
+    内容样式结束
+*/
+/*
+    footer样式开始
+*/
+.ipam_home_public_footer{
+    /*height: 224px;*/
+    border-top: solid 4px #c20c0c;
+    background: #f5f5f5 url("../../apps/images/ipam_home_index_footer.png") no-repeat top 65% right 14% ;
+}
+.ipam_home_public_footer .ipam_home_public_footer_header{
+    height: 44px;
+    vertical-align: middle;
+    background: #dbdbdb;
+    color: #1f1f1f;
+}
+.ipam_home_public_footer .ipam_home_public_footer_header > span{
+    font-family: "PingFang SC Bold";
+    line-height: 44px;
+}
+.ipam_home_public_footer .ipam_home_public_footer_header li{
+    display: inline-block;
+    border-right: solid 1px #b1b1b1;
+    padding: 0 26px;
+}
+.ipam_home_public_footer .ipam_home_public_footer_header li a{
+    font-family: "PingFang SC Medium";
+    color: #1f1f1f;
+}
+.ipam_home_public_footer_content{
+    box-sizing: border-box;
+    padding: 36px 0 44px 0 ;
+}
+.ipam_home_public_footer .ipam_home_public_footer_content li{
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    color: #757575;
+}
+.ipam_home_public_footer .ipam_home_public_footer_content li span:nth-child(1){
+    padding: 0 6px;
+    border-right: solid 1px #757575;
+}
+.ipam_home_public_footer .ipam_home_public_footer_content li:nth-last-child(1) span{
+    border: none;
+}
+/*
+    footer样式结束
+*/
+/*
+   面板样式开始
+*/
+.ipam_home_public_card{
+    display: inline-block;
+    width: 100%;
+}
+.ipam_home_public_card_title{
+    height: 36px;
+    width: 100%;
+    background: #f5f5f5;
+    margin-bottom: 5px;
+    color: #f21f0c;
+    font-size: 12px;
+    border-bottom: solid 1px #999;
+    font-weight: 700;
+}
+.ipam_home_public_card_title span:nth-child(1){
+    display: inline-block;
+    padding-left: 16px;
+    font-size: 18px;
+    line-height: 36px;
+    border-bottom:2px solid #f21f0c;
+    padding-right:15px;
+}
+.ipam_home_public_card_title ul.ipam_home_public_card_title_option{
+    display: inline-block;
+    float: right;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 6px 16px 0 0;
+}
+.ipam_home_public_card_title > a{
+    color: #999;
+    vertical-align: text-bottom;
+    float:right;
+    padding-right: 15px;
+    margin-top: 10px;
+}
+.ipam_home_public_card_title .ipam_home_public_card_title_option li{
+    position: relative;
+}
+.ipam_home_public_card_title .ipam_home_public_card_title_option li,
+.ipam_home_public_card_title .ipam_home_public_card_title_option a{
+    display: inline-block;
+    line-height: 16px;
+    color: #000;
+}
+.ipam_home_public_card_title .ipam_home_public_card_title_option li:hover a{
+    color: #ff3032;
+}
+/*.ipam_home_public_card_title .ipam_home_public_card_title_option li:hover */
+.ipam_home_public_card_title_triangle{
+    width: 0;
+    height: 0;
+    bottom: -12px;
+    left: 25%;
+    border-style: solid;
+    border-width: 0 6px 8px 6px;
+    border-color: transparent transparent #ff3032 transparent;
+}
+.ipam_home_public_card_title .ipam_home_public_card_title_option .ipam_home_public_card_title_triangle{
+    position: absolute;
+}
+ul.ipam_home_public_card_content, .ipam_home_public_card_content > li{
+    list-style: disc inside ;
+    color: #d9d9d9;
+}
+.ipam_home_public_card_content > li{
+    line-height: 31px;
+    font-size: 14px;
+}
+.ipam_home_public_card_content a{
+    color: #333;
+    margin-left: -6px;
+}
+.ipam_home_public_card_content li:hover > a, .ipam_home_public_card_content > li:hover{
+    color: #ff3032;
+}
+/*
+    面板样式结束
+*/
+/*
+    功能面板开始
+*/
+.ipam_home_public_card_button{
+    display: inline-block;
+    position: relative;
+    width: 125px;
+    height: 125px;
+    background: #fff5f5 no-repeat center 34%;
+    vertical-align: text-bottom;
+    color: #999;
+    font-size: 14px;
+}
+.ipam_home_public_card_button:hover .ipam_home_public_card_button_content{
+    margin-top: -14px;
+    transition: .1s;
+}
+.ipam_home_public_card_button > a{
+    display: table-cell;
+    width: 127px;
+    height: 127px;
+    color: #999;
+    vertical-align: middle;
+}
+.ipam_home_public_card_button .ipam_home_public_card_button_content{
+    min-height: 78px;
+    min-width: 62px;
+    /*margin: auto;*/
+}
+.ipam_home_public_card_button .ipam_home_public_card_button_content .ipam_home_public_card_button_content_imgbox{
+    margin: 0 auto;
+    height: 47px;
+    width: 47px;
+    overflow: hidden;
+}
+.ipam_home_public_card_button_content .ipam_home_public_card_button_content_imgbox > img{
+    height: 47px;
+}
+.ipam_home_public_card_button .ipam_home_public_card_button_txt{
+    text-align: center;
+    margin-top: 12px;
+}
+.ipam_home_public_card_button_content_imgboxactive{
+	display:none;
+	margin: 0 auto;
+  height: 47px;
+  width: 47px;
+  overflow: hidden;
+}
+.ipam_home_public_card_button:hover .ipam_home_public_card_button_content_imgboxactive{
+	display: block;
+}
+.ipam_home_public_card_button:hover .ipam_home_public_card_button_content_imgbox{
+	display: none;
+
+}
+.ipam_home_public_card_button:hover{
+	/*background-image: linear-gradient(#d60622, #f5390a);*/
+	background-image: linear-gradient(to right,#d60622, #f5390a) ;
+}
+.ipam_home_public_card_button:hover .ipam_home_public_card_button_txt{
+	color:#fff;
+}
+/*
+    功能面板结束
+*/
+/*
+    图文混排左右布局样式
+*/
+/* 图文混排左右 - 左：图；右：标题 + 文本 + 按钮     开始*/
+.ipam_home_public_card_text_lr{
+    display: inline-block;
+    /*width: 294px;*/
+    width: calc( (100% - 18px) / 4 );
+    height: 162px;
+    margin-top: 12px;
+}
+.ipam_home_public_card_text_lr:hover{
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.14);
+}
+.ipam_home_public_card_text_lr > a{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+/* 左侧图片区 */
+.ipam_home_public_card_text_lr_img{
+    float: left;
+    height: 154px;
+    width: 102px;
+    padding: 3px;
+    overflow: hidden;
+    border: solid 1px #dfdfdf;
+}
+/* 右侧文本区 */
+.ipam_home_public_card_text_lr_txt{
+    height: 162px;
+    box-sizing: border-box;
+    margin-left: 110px;
+    padding: 6px 16px 12px 12px;
+    font-size: 14px;
+    color: #333;
+}
+.ipam_home_public_card_text_lr_img > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+/* 右侧标题 */
+.ipam_home_public_card_text_lr_txt_title{
+    margin-bottom: 30px;
+}
+.ipam_home_public_card_text_lr_txt_content{
+    font-size: 12px;
+    color: #999;
+    line-height: 22px;
+}
+.ipam_home_public_card_text_lr_txt_msg{
+    margin-top: 26px;
+}
+/* 按钮 */
+.ipam_home_public_card_text_lr_btn{
+    float: right;
+    display: inline-block;
+    width: 64px;
+    height: 24px;
+    text-align: center;
+    line-height: 22px;
+    border-radius: 3px;
+    color: #fff;
+    background: #ff3032;
+}
+/* 图文混排左右 - 左：图；右：标题 + 文本 + 按钮     结束*/
+
+/* 图文混排左右 - 左：图；右：标题 + 文本      开始*/
+.ipam_home_public_word_lr_two{
+    display: table;
+    /*width: 100%;*/
+}
+.ipam_home_public_word_lr_two:hover{
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
+}
+.ipam_home_public_word_lr_two a{
+    display: block;
+}
+.ipam_home_public_word_lr_two .ipam_home_public_word_lr_two_content_title{
+    /*white-space: nowrap;*/
+}
+.ipam_home_public_word_lr_two .ipam_home_public_word_lr_two_img{
+    display: table-cell;
+    width: 120px;
+    /*height: 100%;*/
+    overflow: hidden;
+    vertical-align: middle;
+}
+.ipam_home_public_word_lr_two .ipam_home_public_word_lr_two_img img{
+    vertical-align: text-bottom;
+    /*height: 100%;*/
+}
+.ipam_home_public_word_lr_two .ipam_home_public_word_lr_two_content{
+    display: table-cell;
+    vertical-align: top;
+    color: #000;
+    box-sizing: content-box;
+    padding: 4px;
+    padding-left: 12px;
+}
+.ipam_home_public_word_lr_two_content_date, .ipam_home_public_word_lr_two_content > p{
+    /*font-size: 12px;*/
+    color: #b3b3b3;
+    margin-top: 8px;
+}
+.ipam_home_public_word_lr_two_content > p{
+    display: -webkit-box;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+/* 图文混排左右 - 左：图；右：标题 + 文本      结束*/
+/*
+    图文混排左右布局样式结束
+*/
+/*
+    内页内容区左右块布局开始
+*/
+.ipam_home_public_content_left{
+    width: 206px;
+    float: left;
+    background: #fff;
+}
+.ipam_home_public_content_right{
+    width: 982px;
+    box-sizing: border-box;
+    padding: 16px;
+    float: right;
+    background: #fff;
+}
+/*
+    内页内容区左右块布局结束
+*/
+/*
+    左侧导航开始
+*/
+.ipam_home_public_nav_vertical{
+    width: 100%;
+}
+.ipam_home_public_nav_vertical li > a{
+    height: 56px;
+    width: 100%;
+    line-height: 56px;
+    font-size: 22px;
+    padding: 0 26px;
+    font-weight: bold;
+    display: inline-block;
+    box-sizing: border-box;
+    border-bottom: solid 2px #dfdfdf;
+    color: #d10000;
+}
+.ipam_home_public_nav_vertical dl dd{
+    border-bottom: solid 1px #f5f5f5;
+    height: 42px;
+    line-height: 42px;
+    font-size: 12px;
+}
+.ipam_home_public_nav_vertical dl dd a{
+    display: block;
+    padding: 0 26px;
+    font-weight: 500;
+    color: #999;
+}
+.ipam_home_public_nav_vertical dl dd i{
+    /*float: right;*/
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    border-width: 5px 0 5px 10px;
+    text-align: right;
+}
+.ipam_home_public_nav_vertical_child dd:hover i{
+    border-color: transparent transparent transparent #cc0000;
+}
+/*
+    左侧导航结束
+*/

@@ -1,0 +1,207 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_meeting.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/sp_attmeeting.css">
+
+  <!-- 内容开始 -->
+  <div class="public_content clearfix">
+   <!-- 左侧 ------------------------------------------------------------>
+  <div class="edu_notes_left pull-left">
+    <!--banner-->
+    <div class="clearfix">
+        
+    <div class="layui-carousel pull-right" id="test1">
+      <div carousel-item>
+        <volist name="meeting_list" id="vo">
+            <div class="banner_bg" style="background: url({$vo.meetting_thumb}) no-repeat;background-position: center right;background-size: contain;">
+                <div class="title" >
+                    <p class="tit">{$vo.meeting_name}</p>
+                    <p class="time">时间：{$vo.meeting_real_start_time}</p>
+                    <p class="add">地点：{$vo.meeting_addr} </p>
+                    <p class="host">主持：{$vo.meeting_host}</p>
+                </div>
+            </div>
+        </volist>
+        <!-- <div class="banner_bg">
+            <div class="title">
+                <p class="tit">轮播图标题2轮播图标题2轮播图标题2</p>
+                <p class="time">时间：2019.11.01  11:30</p>
+                <p class="add">地点：济南市、高新区齐鲁软件园C座A301 </p>
+                <p class="host">主持：张云逸</p>
+            </div>
+        </div> -->
+        
+      </div>
+      <!--左侧固定背景-->
+      <div class="con_tit"></div>
+    </div>
+    
+    </div>
+    <!--内容列表--> 
+    <div class="metting_list">
+        <ul id="content">
+            <!-- <li>
+                <div class="tit">扫黑除恶-上犹县扫黑除恶雕塑低价促销认准指南针20年</div>
+                <div class="clearfix mt-20">
+                    <div class="pull-left po-re">
+                        <img src="__STATICS__/apps/page_index/images/list1.png">
+                        <div class="type">小组会议</div>
+                    </div>
+                    <div class="pull-right w-72">
+                        <div class="tit2">“三会一课”是助推“两学一做”学习教育常态化制度化的重要载体，那什么是“三会一课”？如何开好“会”？怎么上好“课”？</div>
+                        <div class="clearfix">
+                            <div class="pull-left address color-9e f-16em">地点：齐鲁软件园 C座 A-312 </div>
+                            <div class="pull-right time color-9e f-16em">时间：2019-12-11 11:30</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li> -->
+            <!-- <li>
+                <div class="tit">看看家门口的党建服务站，有啥新举措？ </div>
+                <div class="clearfix mt-20">
+                    <div class="pull-left po-re">
+                        <img src="__STATICS__/apps/page_index/images/list1.png">
+                        <div class="type1">党课</div>
+                    </div>
+                    <div class="pull-right w-72">
+                        <div class="tit2">“三会一课”是助推“两学一做”学习教育常态化制度化的重要载体，那什么是“三会一课”？如何开好“会”？怎么上好“课”？</div>
+                        <div class="clearfix">
+                            <div class="pull-left address color-9e f-16em">地点：齐鲁软件园 C座 A-312 </div>
+                            <div class="pull-right time color-9e f-16em">时间：2019-12-11 11:30</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="tit">看看家门口的党建服务站，有啥新举措？ </div>
+                <div class="clearfix mt-20">
+                    <div class="pull-left po-re">
+                        <img src="__STATICS__/apps/page_index/images/list1.png">
+                        <div class="type1">党课</div>
+                    </div>
+                    <div class="pull-right w-72">
+                        <div class="tit2">“三会一课”是助推“两学一做”学习教育常态化制度化的重要载体，那什么是“三会一课”？如何开好“会”？怎么上好“课”？</div>
+                        <div class="clearfix">
+                            <div class="pull-left address color-9e f-16em">地点：齐鲁软件园 C座 A-312 </div>
+                            <div class="pull-right time color-9e f-16em">时间：2019-12-11 11:30</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="tit">看看家门口的党建服务站，有啥新举措？ </div>
+                <div class="clearfix mt-20">
+                    <div class="pull-left po-re">
+                        <img src="__STATICS__/apps/page_index/images/list1.png">
+                        <div class="type1">党课</div>
+                    </div>
+                    <div class="pull-right w-72">
+                        <div class="tit2">“三会一课”是助推“两学一做”学习教育常态化制度化的重要载体，那什么是“三会一课”？如何开好“会”？怎么上好“课”？</div>
+                        <div class="clearfix">
+                            <div class="pull-left address color-9e f-16em">地点：齐鲁软件园 C座 A-312 </div>
+                            <div class="pull-right time color-9e f-16em">时间：2019-12-11 11:30</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li> -->
+        </ul>
+        <div class="more" onclick="more_on()">加载更多</div>
+    </div>
+    
+  </div>
+  
+
+   <!-- 右侧 ------------------------------------------------------------->
+  <div class="edu_notes_right pull-right">
+    {:W('Meeting/meeting_list_date')}
+        <!-- 分类筛选 -->   
+      <div class="edu_assort clearfix">
+        <div class="edu_assort_tit">分类筛选</div>
+            <ul>
+                <li class="edu_assort_active" onclick="type_no1()">全部</li>
+                <volist name="type_list" id="vo">
+                    <li onclick="type_no({$vo.type_no})">{$vo.type_name}</li>
+                </volist>
+            </ul>
+      </div>
+     
+       <!--通知公告-->
+       {:W('Article/notice_index')}
+       
+        
+  </div>
+  
+  
+  </div>
+  <!-- 内容区域结束 -->
+<script type="text/javascript" src="__STATICS__/apps/page_index/js/sp_attmeeting.js"></script> 
+<script>
+    function meeting_info(meeting_no){
+        window.location.href="{:U('Index/Meeting/ipam_meeting_detail')}?meeting_no="+meeting_no+""; 
+    }
+</script>
+<script>
+    
+    function type_no1(){
+        type_no();
+    }
+    var tt = '';
+    var count = 0;
+    type_no();
+
+    function type_no(type_no,ccc){
+        if(ccc==undefined){
+            ccc = 5;
+        }else{
+            ccc+=10;
+        }
+        tt = type_no;
+        $.ajax({
+            type : "post",
+            url : "{:U('Index/Meeting/ipam_meeting_index_count')}",
+            data :{'type_no':type_no},
+            datatype: "json",
+            async: false,
+            success: function (data) {
+                count = data;
+            }
+        });
+        //分页
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //完整功能
+            if (count == 0) {
+                $('#content').html('<li>暂无数据</li>');
+            } else {
+                laypage.render({
+                    elem: 'news_page'
+                    ,count: count
+                    ,theme: '#ff3032'
+                    ,first: '首页'
+                    ,last: '尾页'
+                    ,limit: ccc
+                    ,layout: ['count', 'prev', 'page', 'next', 'skip']
+                    ,jump: function(obj){
+                        $.ajax({
+                            type : "post",
+                            url : "{:U('Index/Meeting/ipam_meeting_index_ajax')}",
+                            data :{type_no:type_no, pagesize:obj.limit},
+                            datatype: "json",
+                            async: false,
+                            success: function (data) {
+                                $('#content').html(data.content);
+                                // 查看详情验证登陆
+                            }
+                        });
+                    }
+                });
+            }
+
+        });
+    }
+    function more_on(){
+        type_no(tt,10);
+    }
+</script>

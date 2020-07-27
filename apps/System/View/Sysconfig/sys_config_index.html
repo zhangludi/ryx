@@ -1,0 +1,389 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+    .layui-form-switch {
+        border-radius: 20px !important;
+        margin-top: 0;
+    }
+</style>    
+
+</block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-card ">
+		<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+		<div class="layui-card-body">
+			<div class="layui-tab">
+				<ul class="layui-tab-title">
+					<li class="layui-this">基本配置</li>
+                    <eq name="is_integral" value="1">
+					<li>积分配置</li>
+                    </eq>
+                   
+                    <eq name="is_fall" value="1">
+					<li>不合格党员/党组织设置</li>
+                    </eq>
+				</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show">
+                        <form class="layui-form" id="form" action="{:U('sys_config_do_save')}" method="post">
+    						<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>站点名称：</strong></div>
+                                     <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_name" lay-verify="required" autocomplete="off"  value="{$web_name}" class="layui-input"></div>
+                                     <div class="layui-col-xs5 fsize-214 fcolor-65 lh-35 text-l">【web_name】请输入站点名称</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>公司名称：</strong></div>
+                                     <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_company" lay-verify="required" autocomplete="off"  value="{$web_company}" class="layui-input"></div>
+                                     <div class="layui-col-xs5 fsize-214 fcolor-65 lh-35 text-l">【web_company】请输入公司名称</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>链接地址：</strong></div>
+                                     <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_url" lay-verify="required" autocomplete="off"  value="{$web_url}" class="layui-input"></div>
+                                     <div class="layui-col-xs5 fsize-214 fcolor-65 lh-35 text-l">【web_url】请输入连接地址</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>所在地区：</strong></div>
+                                     <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_address" lay-verify="required" autocomplete="off"  value="{$web_address}" class="layui-input"></div>
+                                     <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【web_address】请输入连接地址（截止到市级或区级）</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>版本：</strong></div>
+                                    <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_version" lay-verify="required" autocomplete="off"  value="{$web_version}" class="layui-input"></div>
+                                    <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【web_version】请输入版本</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35" style="height: 110px;"><strong>站点简介：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35 h-40"><textarea type="text" name="web_description" lay-verify="required" autocomplete="off" class="layui-input" style="height: 110px;">{$web_description}
+    								</textarea></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【web_description】请输入站点简介</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35" style="height: 110px;"><strong>站点关键字：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35 h-40"><textarea type="text" name="web_keywords" lay-verify="required" autocomplete="off" class="layui-input" style="height: 110px;">{$web_keywords}</textarea></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【web_keywords】请输入站点关键字</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>版权：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_copyright" lay-verify="required" autocomplete="off"  value="{$web_copyright}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【web_copyright】请输入版权</div>
+                                </div>
+                            </div>
+    						<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>政治生日祝福：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="birthday_biessing" lay-verify="required" autocomplete="off"  value="{$birthday_biessing}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【birthday_biessing】请输入祝福语</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>地图的AK编码：</strong></div>
+                                    <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="web_map_ak" lay-verify="required" autocomplete="off"  value="{$web_map_ak}" class="layui-input"></div>
+                                    <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【web_map_ak】请输入地图的AK编码</div>
+                                </div>
+                            </div>
+                            <eq name="mian_but" value="1">
+        						<div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+        								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>是否有优秀党员/党组织：</strong></div>
+        								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <!-- <input type="checkbox" <eq name="is_excellence" value="1"> checked="" </eq> name="is_excellence" lay-skin="switch" lay-filter="switchTest" value="1" lay-text="&nbsp;是&nbsp;|&nbsp;否&nbsp;"> -->
+                                            <input type="radio" name="is_excellence" value="1" title="是"<eq name="is_excellence" value="1">checked</eq> >
+                                            <input type="radio" name="is_excellence" value="0" title="否" <neq name="is_excellence" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_excellence】请选择是否有优秀党员/党组织</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>是否有纪检约谈：</strong></div>
+                                        <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <!-- <input type="checkbox" <eq name="is_integral" value="1"> checked="" </eq> name="is_integral" lay-skin="switch" lay-filter="switchTest" value="1" lay-text="&nbsp;是&nbsp;|&nbsp;否&nbsp;"> -->
+                                            <input type="radio" name="is_talk" value="1" title="是"<eq name="is_talk" value="1">checked</eq> >
+                                            <input type="radio" name="is_talk" value="0" title="否" <neq name="is_talk" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_talk】请选择是否有纪检约谈</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>是否有积分：</strong></div>
+                                        <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <!-- <input type="checkbox" <eq name="is_integral" value="1"> checked="" </eq> name="is_integral" lay-skin="switch" lay-filter="switchTest" value="1" lay-text="&nbsp;是&nbsp;|&nbsp;否&nbsp;"> -->
+                                            <input type="radio" name="is_integral" value="1" title="是"<eq name="is_integral" value="1">checked</eq> >
+                                            <input type="radio" name="is_integral" value="0" title="否" <neq name="is_integral" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_integral】请选择是否有积分</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>是否有电视端：</strong></div>
+                                        <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <!-- <input type="checkbox" <eq name="is_excellence" value="1"> checked="" </eq> name="is_excellence" lay-skin="switch" lay-filter="switchTest" value="1" lay-text="&nbsp;是&nbsp;|&nbsp;否&nbsp;"> -->
+                                            <input type="radio" name="is_tv" value="1" title="是"<eq name="is_tv" value="1">checked</eq> >
+                                            <input type="radio" name="is_tv" value="0" title="否" <neq name="is_tv" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_tv】请选择是否有电视端</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>是否有APP端：</strong></div>
+                                        <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <!-- <input type="checkbox" <eq name="is_integral" value="1"> checked="" </eq> name="is_integral" lay-skin="switch" lay-filter="switchTest" value="1" lay-text="&nbsp;是&nbsp;|&nbsp;否&nbsp;"> -->
+                                            <input type="radio" name="is_app" value="1" title="是"<eq name="is_app" value="1">checked</eq> >
+                                            <input type="radio" name="is_app" value="0" title="否" <neq name="is_app" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_app】请选择是否有APP端</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>不合格党员/党组织：</strong></div>
+                                        <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <!-- <input type="checkbox" <eq name="is_integral" value="1"> checked="" </eq> name="is_integral" lay-skin="switch" lay-filter="switchTest" value="1" lay-text="&nbsp;是&nbsp;|&nbsp;否&nbsp;"> -->
+                                            <input type="radio" name="is_fall" value="1" title="是"<eq name="is_fall" value="1">checked</eq> >
+                                            <input type="radio" name="is_fall" value="0" title="否" <neq name="is_fall" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_fall】请选择是否有不合格党员/党组织</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10 ">
+                                    <div class="layui-row ">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>是否有大数据：</strong></div>
+                                        <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+                                            <input type="radio" name="is_big_data" value="1" title="是"<eq name="is_big_data" value="1">checked</eq> >
+                                            <input type="radio" name="is_big_data" value="0" title="否" <neq name="is_big_data" value="1">checked</neq> >
+                                        </div>
+                                        <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【is_big_data】请选择是否有不合格党员/党组织</div>
+                                    </div>
+                                </div>
+                            </eq>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-form-item">
+                                    <div class="pull-right">
+                                        <button  class="layui-btn"  lay-filter="form-submit">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+                    <eq name="is_integral" value="1">
+					<div class="layui-tab-item">
+                        <form class="layui-form" id="form" action="{:U('sys_config_do_save')}" method="post">
+    						<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>参加志愿者活动：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_volunteer_communist" lay-verify="required" autocomplete="off"  value="{$integral_volunteer_communist}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_volunteer_communist】党员参加志愿者活动积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>组织志愿者活动：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_volunteer_party" lay-verify="required" autocomplete="off"  value="{$integral_volunteer_party}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_volunteer_party】党组织组织志愿者活动积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党员参加会议：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_meeting_communist" lay-verify="required" autocomplete="off"  value="{$integral_meeting_communist}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_meeting_communist】党员参加会议积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党员学习笔记：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_notes_communist" lay-verify="required" autocomplete="off"  value="{$integral_notes_communist}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_notes_communist】党员完成学习笔记积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>困难帮扶：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_help" lay-verify="required" autocomplete="off"  value="{$integral_help}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_help】困难帮扶积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>第一书记签到：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_firstsecretary" lay-verify="required" autocomplete="off"  value="{$integral_firstsecretary}" class="layui-input"></div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_firstsecretary】第一书记签到积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>学习文章：</strong></div>
+                                    <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_article" lay-verify="required" autocomplete="off"  value="{$integral_article}" class="layui-input"></div>
+                                    <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_article】学习文章积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>学习视频：</strong></div>
+                                    <div class="layui-col-xs5 fsize-14 fcolor-65 lh-35"><input type="text" name="integral_video" lay-verify="required" autocomplete="off"  value="{$integral_video}" class="layui-input"></div>
+                                    <div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【integral_video】学习视频积分设置</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-form-item">
+                                    <div class="pull-right">
+                                        <button  class="layui-btn"  lay-filter="form-submit">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+                    </eq>
+                    <eq name="is_fall" value="1">
+					<div class="layui-tab-item">
+                        <form class="layui-form" id="form" action="{:U('sys_config_do_save')}" method="post">
+    						<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党员考核方式：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="radio" name="communist_method" value="1" title="周" <eq name="communist_method" value="1">checked</eq>>
+    									<input type="radio" name="communist_method" value="2" title="月" <eq name="communist_method" value="2">checked</eq>>
+    									<input type="radio" name="communist_method" value="3" title="季度" <eq name="communist_method" value="3">checked</eq>>
+    									<input type="radio" name="communist_method" value="4" title="半年" <eq name="communist_method" value="4">checked</eq>>
+    									<input type="radio" name="communist_method" value="5" title="一年" <eq name="communist_method" value="5">checked</eq>>
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【communist_method】请选择党员以什么方式考核</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党员参加活动次数：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="text" name="communist_volunteer" lay-verify="required" autocomplete="off"  value="{$communist_volunteer}" class="layui-input">
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【communist_volunteer】请写入党员参加活动次数</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党员参加三会一课次数：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="text" name="communist_meeting" lay-verify="required" autocomplete="off"  value="{$communist_meeting}" class="layui-input">
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【communist_meeting】请写入党员参加三会一课次数</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党员积分：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="text" name="communist_integral" lay-verify="required" autocomplete="off"  value="{$communist_integral}" class="layui-input">
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【communist_integral】请写入党员积分</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党组织考核方式：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="radio" name="party_method" value="1" title="周" <eq name="party_method" value="1">checked</eq>>
+    									<input type="radio" name="party_method" value="2" title="月" <eq name="party_method" value="2">checked</eq>>
+    									<input type="radio" name="party_method" value="3" title="季度" <eq name="party_method" value="3">checked</eq>>
+    									<input type="radio" name="party_method" value="4" title="半年" <eq name="party_method" value="4">checked</eq>>
+    									<input type="radio" name="party_method" value="5" title="一年" <eq name="party_method" value="5">checked</eq>>
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【party_method】请选择党组织以什么方式考核</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党组织参加活动次数：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="text" name="party_volunteer" lay-verify="required" autocomplete="off"  value="{$party_volunteer}" class="layui-input">
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【party_volunteer】请写入党组织参加活动次数</div>
+                                </div>
+                            </div>
+    						<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党组织参加三会一课次数：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="text" name="party_meeting" lay-verify="required" autocomplete="off"  value="{$party_meeting}" class="layui-input">
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【party_meeting】请写入党组织参加三会一课次数</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+    								<div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>党组织积分：</strong></div>
+    								<div class="layui-col-xs5 fsize-14 fcolor-65 lh-35">
+    									<input type="text" name="party_integral" lay-verify="required" autocomplete="off"  value="{$party_integral}" class="layui-input">
+    								</div>
+    								<div class="layui-col-xs5 text-l fsize-214 fcolor-65 lh-35 pull-left">【party_integral】请写入党组织积分</div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-form-item">
+                                    <div class="pull-right">
+                                        <button  class="layui-btn"  lay-filter="form-submit">保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+                    </eq>
+					<div class="layui-form-item">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+    layui.use([ 'form', 'laydate','formSelects'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form
+                , formSelects = layui.formSelects;
+        form.render();
+    });
+	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+	layui.use('element', function(){
+		var element = layui.element;
+		//…
+	});
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#test1'
+		});
+		//日期范围
+		laydate.render({
+			elem: '#test6'
+			, range: true
+		});
+	})
+</script>
+</block>
+<block name="js">

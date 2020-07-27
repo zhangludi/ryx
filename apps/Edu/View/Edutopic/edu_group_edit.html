@@ -1,0 +1,102 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+    <style>
+        #js-grid-juicy-projects2{
+            margin-left:17% !important;
+        }
+    </style>
+</block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('group_type'));</php>"><php>echo getFunctionInfo(ACTION_NAME.session('group_type'));</php></div>
+                <form id="form_sample_2" action="{:U('edu_group_save')}" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="group_id" value="{$groupdata.group_id}">
+                        <eq name="groupdata.group_id" value="">
+                        <input type="hidden" class="form-control" name="group_type" value="{$group_type}">
+                        </eq>
+                        <neq name="groupdata.group_id" value="">
+                        <input type="hidden" class="form-control" name="group_type" value="{$groupdata.group_type}">
+                        </neq>
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="group_title" placeholder="请输入标题" value="{$groupdata.group_title}" autocomplete="off" class="layui-input" lay-verify="required"></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
+
+                                    <input type="hidden" id="source_name" name="source_name" value="" />
+                                    <input type="hidden" id="group_img_old" name="group_img_old" value="{$groupdata.group_img}" style="width: 60px">
+                                    <input type="hidden" id="group_img" name="group_img" value="{$groupdata.group_img}" style="width: 60px">
+                                    <button type="button" class="layui-btn" id="group_img" onclick="uploader_file('edu','1','group_img','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                     <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                    <div id="js-grid-juicy-projects2" style="height:100px">
+                                        <neq name="groupdata.group_img" value="">
+                                            <php>echo getUploadHtml($groupdata['group_img']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注/简介：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="memo"  placeholder="请输入简介,最长字符225" maxlength="225" class="layui-textarea">{$groupdata.memo}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                         <!-- <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">取消</button> -->
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        var index = parent.layer.getFrameIndex(window.name);
+        $('#close').click(function() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        });
+    </script>
+    <script>
+       
+        layui.use([ 'form', 'laydate'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form;
+                form.render();
+        });
+
+    </script>
+</block>
+			

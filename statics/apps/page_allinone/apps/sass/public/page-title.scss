@@ -1,0 +1,34 @@
+@charset "utf-8";
+@import "../layouts/layouts";
+@import "../variables/size";
+@import "../variables/color";
+
+.c-page-title{
+  width: $w-all;
+  height: $page-title_icon-w;
+  background: url('../../../images/guide-info-title-bg.jpg') no-repeat center/ 100% auto;
+}
+.c-page-title_content{
+  width: $content-w;
+  height: inherit;
+}
+.l-page-title_content{
+
+}
+.c-page-title_btn{
+  width: $page-title_btn-w;
+  height: $page-title_btn-h;
+  text-align: center;
+  background: $linear-white;
+}
+.c-page-title_btn:before{
+  border-width: $page-title_btn-h;
+  border-style: solid;
+  border-color: transparent $linear-white transparent transparent;
+}
+.c-page-title_icon{
+  @include img-objfit($page-title_icon-w, $page-title_icon-h, contain);
+}
+.c-page-title_txt{
+  @include img-objfit($page-title_txt-w, $page-title_txt-h, contain);
+}

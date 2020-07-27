@@ -1,0 +1,23 @@
+{
+  "code": 0
+,"msg": ""
+  ,"title":"客户示例页"
+,"data": [
+  {
+  "name": "template"
+,"title": "模板"
+,"icon": "layui-icon-home"
+,"list": [{
+    "name": "add"
+  ,"title": "代理商引导页"
+  ,"spread": true
+  ,"jump":"./views/sp_cust/sp_istore_agent.html"
+  },{
+    "name": "add"
+  ,"title": "后台引导页"
+  ,"spread": true
+  ,"jump":"./views/sp_cust/sp_istore_boot.html"
+  }
+ ]
+}]
+}

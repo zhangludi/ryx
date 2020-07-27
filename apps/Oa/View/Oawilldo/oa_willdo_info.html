@@ -1,0 +1,208 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid layui-form">
+
+<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-body ">
+					<div class="layui-row">
+						<div class=" layui-card layui-colla-title">任务详情</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+								<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.willdo_title}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务内容：</strong></div>
+								<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.willdo_content}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务周期：</strong></div>
+								<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.willdo_cycle}必做
+								</div>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务时间：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.willdo_time}
+								</div>
+							</div>
+						</div>
+						<eq name="willdo_row.is_alert" value="1">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>是否提醒：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<span style="color:{$status_color}">是</span>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>提醒时间：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.willdo_time_type}
+								</div>
+							</div>
+						</div>
+						</eq>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form action="{:U('Oawilldo/oa_willdo_info_do_save')}" id="form_sample_2" class="form-horizontal" method="post">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+						<input id="willdo_id" name="willdo_id" type="hidden" value="{$willdo_row.willdo_id}"> <input id="flag" name="flag" type="hidden"> <input name="willdolog_id" type="hidden" value="{$willdo_row.willdolog_id}">
+						<div class="layui-card layui-colla-title ">今日任务总结</div>
+						<div class="layui-row">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 fsize-14 fcolor-65 lh-35 text-r"><strong>任务总结：</strong></div>
+									<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+									<textarea id='content' name="willdolog_summary" placeholder="这个文本域的最大长度为255个字符" class="layui-textarea">{$willdo_row.willdolog_summary}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 fsize-14 fcolor-65 lh-35 text-r"><strong>提交人：</strong></div>
+									<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.add_staff}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 fsize-14 fcolor-65 lh-35 text-r"><strong>任务状态：</strong></div>
+									<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+									<if condition="$willdo_row['is_flag'] eq 1">今日已执行<else />今日未执行</if>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 fsize-14 fcolor-65 lh-35 text-r"><strong>当前日期：</strong></div>
+									<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+									{$willdo_row.update_time}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="layui-col-md12">
+			<div class="layui-card-body text-r">
+				<div class="layui-card-body">
+					<div class="layui-btn-container">
+						<if condition="($willdo_status eq 0)">
+						<a onclick="setFlag('donot')" class="layui-btn layui-btn-normal layui-btn-sm">未开展</a>
+						<a onclick="setFlag('stop')" class="layui-btn layui-btn-normal layui-btn-sm">终止任务</a>
+						<a onclick="setFlag('finish')" class="layui-btn layui-btn-normal layui-btn-sm">完成任务</a>
+						<elseif condition="$willdo_status eq 1" />
+						<a onclick="setFlag('stop')" class="layui-btn layui-btn-normal layui-btn-sm">终止任务</a>
+						<a onclick="setFlag('modify')" class="layui-btn layui-btn-normal layui-btn-sm">修改</a>
+						<else />
+						<a onclick="setFlag('recover')" class="layui-btn layui-btn-normal layui-btn-sm">恢复</a>
+						</if>
+						<a onclick="willdo_colse()" class="layui-btn layui-btn-sm layui-btn-primary">取消</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<neq name="willdo_list" value="">
+	<div class="layui-col-md12">
+		<div class="layui-card">
+			<div class="layui-card-body layui-form">
+			<div class="layui-card layui-colla-title ">执行历程</div>
+				<div class="layui-row">
+					<volist name="willdo_list" id="vo">
+					<div class="layui-col-xs12 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs12 fsize-14 fcolor-65 lh-35"><strong>
+								<img src="{$vo.staff_avatar}" width="40" height="40">  {$vo.staff_name} &nbsp;{$vo.add_time}</strong></div>
+							<div class="layui-col-xs12 fsize-14 fcolor-65 lh-35">
+								{$vo.willdo_log}
+							</div>
+						</div>
+					</div>
+					</volist>
+				</div>
+			</div>
+		</div>
+	</div>
+	</neq>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+layui.use([ 'form', 'laydate','layedit'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			var layedit = layui.layedit;
+		laydate.render({
+			elem: '#end'
+			,type: 'datetime'
+			//,range: true
+		});
+		form.on('submit(component-form-demo1)', function(data){
+			$.ajax({
+				url:"{:U('Oawilldo/oa_willdo_info_do_save')}",
+				type:'POST',
+				data:data.field,
+				success: function (data) {
+					if(data.status == 1){
+						layer.msg(data.msg, {
+							icon: 6
+							,time: 2000
+						});
+						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						parent.layer.close(index); //再执行关闭
+						window.parent.location.reload(); //刷新父页面
+					}else{
+						layer.msg(data.msg, {
+						  icon: 5
+						  ,time: 2000
+						});
+					}
+				}
+			})
+			return false;
+		});
+})		
+	function setFlag(f) {
+		$("#flag").val(f);
+		$('#form_sample_2').submit();
+
+	}
+	function willdo_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+</script>
+</block>

@@ -1,0 +1,302 @@
+body {
+	background: url('../../../statics/images/login_bg.png') no-repeat;	
+}
+#login-form {
+	background-color: transparent !important;
+}
+.p_r0 {
+	padding-right: 0px !important;
+	font-size: 14px;
+}
+/*input {
+	background-color: #FB7777 !important;
+	opacity: 0.6;
+	border-radius: 20px !important;
+	text-indent: 1rem;
+	color: #666;
+	width: 74% !important;
+	height: 45px !important;
+	font-size:14px;
+}*/
+.mui-input-group:before {
+	background-color: transparent !important;
+}
+.mui-input-group .mui-input-row:after {
+	background-color: transparent !important;
+}
+.mui-input-group:after {
+	background-color: transparent !important;
+}
+.mui-input-row {
+	margin: 14px 13px;height: 45px!important;
+}
+.dis-vis {
+	visibility: hidden;
+}
+.logo {
+	width: 100%;
+}
+.logo img {
+	display: block;
+	width: 12rem;
+	height: 7.5rem;
+	margin: 1.5rem auto;
+}
+input::-webkit-input-placeholder {
+	color: #666;
+	font-size: 14px;
+}
+button.color671 {
+	
+}
+.mt-26 {
+	margin-top: 26px;
+}
+.color-671 {
+	background-color: #e71f19;
+	color: #fff;
+	margin: 2rem 16%!important;
+	width: 72% !important;
+	padding: 8px !important;
+	border-radius: 20px !important;
+	font-size: 18px !important;
+}
+.mui-input-group label{
+    width:26%!important;
+}
+
+#branch::-webkit-input-placeholder {
+	color: #666;
+	font-size: 14px;
+}
+
+.ml-15b{margin-left:15%;}
+
+
+
+
+
+
+.mui-content{background: rgba(0,0,0,0)}
+.area {
+	margin: 20px auto 0px auto;
+}
+.mui-input-group {
+	margin-top: 10px;
+}
+.mui-input-group:first-child {
+	margin-top: 20px;
+}
+.mui-input-group label {
+	width: 25%;
+}
+.mui-input-row label~input,
+.mui-input-row label~select,
+.mui-input-row label~textarea {
+	width: 75%;
+}
+.mui-checkbox input[type=checkbox],
+.mui-radio input[type=radio] {
+	top: 6px;
+}
+.mui-content-padded {
+	margin-top: 25px;
+}
+.mui-btn {
+	padding: 10px;
+}
+.link-area {
+	display: block;
+	margin-top: 25px;
+	text-align: center;
+}
+.spliter {
+	color: #bbb;
+	padding: 0px 8px;
+}
+.height{
+    height: 100%;
+}
+.oauth-area {
+	left: 0px;
+	text-align: center;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+.oauth-area .oauth-btn {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background-size: 30px 30px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	margin: 0px 20px;
+	/*-webkit-filter: grayscale(100%); */
+	
+	border: solid 1px #ddd;
+	border-radius: 25px;
+}
+.oauth-area .oauth-btn:active {
+	border: solid 1px #aaa;
+}
+
+
+
+
+
+
+.w-103em{
+	width:5.15rem;
+} 
+.h-144em{
+	height:7.2rem;
+}
+.color-75{
+	color:#757575;
+}
+.color-ff4530{
+	color:#ff4530;
+}
+.h-19em{
+	height:0.95rem;
+}
+.f-11em{
+	font-size: 0.55rem;
+}
+.border-ff3032{
+	border:1px solid #ff3032;
+}
+.color-ff3032{
+	color:#ff3032;
+}
+.lh-19em{
+	line-height: 0.95rem;
+}
+.lh-48em{
+	line-height: 2.4rem;
+}
+.bb-df{
+	border-bottom:1px solid #dfdfdf;
+}
+.f-13em{
+	font-size: 0.65rem;
+}
+
+
+
+
+/*         新版样式                                  */
+
+
+.w-15em{width: 0.75rem !important;}
+.w-280em{width: 14rem !important;}
+
+.h-20em{height: 1rem !important;}
+.h-32em{height: 1.6rem !important;}
+.h-42em{height: 2.1rem !important;}
+.h-46em{height: 2.3rem !important;}
+
+.lh-20em{line-height: 1rem !important;}
+.lh-32em{line-height: 1.6rem !important;}
+.lh-44em{line-height: 2.2rem !important;}
+
+.p-0{padding: 0 !important;}
+.pl-65em{padding-left: 3.25rem !important;}
+
+.mb-0{margin-bottom: 0 !important;}
+.mb-8em{margin-bottom: 0.4rem;}
+
+.mt-16em{margin-top: 0.8rem;}
+.mt-18em{margin-top: 0.9rem;}
+
+.color-df{color: #dfdfdf !important;}
+.color-33{color: #333333 !important;}
+
+.f-16em{font-size: 0.8rem !important;}
+
+.bg-color-b3{background: #b3b3b3;}
+
+.b-0{border: 0 !important;}
+.pl-35em{padding-left: 1.75rem !important;}
+.bb-1-df{border-bottom: 1px solid #dfdfdf;}
+.bor-ra-3{border-radius: 3px !important;}
+
+
+#branch {color:#666;font-size:16px !important;line-height: 1.7rem !important;color: #dfdfdf;box-shadow: 0 0 4px 0 #d4d4d4 inset !important;}
+
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #dfdfdf; opacity:1; 
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #dfdfdf;opacity:1;
+}
+input:-ms-input-placeholder{
+    color: #dfdfdf;opacity:1;
+}
+input::-webkit-input-placeholder{
+    color: #dfdfdf;opacity:1;
+}
+#branch:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #dfdfdf; opacity:1; 
+}
+#branch::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #dfdfdf;opacity:1;
+}
+#branch:-ms-input-placeholder{
+    color: #dfdfdf;opacity:1;
+}
+#branch::-webkit-input-placeholder{
+    color: #dfdfdf;opacity:1;
+}
+
+input{border-radius: 0 !important;background-color: #fff !important;}
+
+.grad {
+  background: -webkit-linear-gradient(left, #ff4d4d , #ff3032 , #ff5a2d); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #ff4d4d , #ff3032 , #ff5a2d); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #ff4d4d , #ff3032 , #ff5a2d); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #ff4d4d , #ff3032 , #ff5a2d); /* 标准的语法 */
+}
+
+#tabBox2{
+	background: #f9f9f9;
+	overflow: hidden;
+}
+#tabBox2 li{
+	width: 50%;
+	float: left;
+	border-right: 1px solid #eeeeee;
+	text-align: center;
+	position: relative;
+	list-style: none;
+}
+#tabBox2 li a{
+	display: block;
+	margin: 0 auto;
+	color: #333333;
+}
+#tabBox2 li .active{
+	display: none;
+	width: 2rem;
+	height: 1px;
+	position: absolute;
+	bottom: -0.25rem;
+	left: 50%;
+	background: #ff3032;
+	margin-left: -1rem;
+}
+#tabBox2 .tabBox2-active a{
+	color: #ff3032;
+}
+#tabBox2 .tabBox2-active .active{
+	display: block;
+}
+
+.po-fix{
+    bottom:15px;
+}
+
+
+
+

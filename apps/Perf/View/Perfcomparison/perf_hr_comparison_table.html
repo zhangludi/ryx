@@ -1,0 +1,51 @@
+<div id="Broken5" style="height: 400px;width: 100%" alt="对标体系折线图"></div>
+ <script src="__STATICS__/plugins/echarts/echarts.js" type="text/javascript"></script>
+		<!-- 百度图表用的中国地图 -->
+<script>
+			// 对标体系折线图
+		var Broken5 = echarts.init(document.getElementById('Broken5'));
+		option5 = {
+			tooltip: {
+				trigger: 'axis'
+			},
+			legend: {
+				data:[<volist name="communist" id="list">
+			'{$list.communist_name}',
+				</volist>]
+			},
+			toolbox: {
+				show: false,
+				feature: {
+					dataZoom: {
+						yAxisIndex: 'none'
+					},
+					dataView: {readOnly: false},
+					magicType: {type: ['line', 'bar']},
+					restore: {},
+					saveAsImage: {}
+				}
+			},
+			xAxis:  {
+				type: 'category',
+				boundaryGap: false,
+				data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					formatter: '{value} 分'
+				}
+			},
+			series: [
+				<volist name="communist" id="list">
+					{
+					name:'{$list.communist_name}',
+					type:'line',
+					data: {$list.entering_score},
+				},
+				</volist>
+			]
+		};
+
+		Broken5.setOption(option5)
+		</script>

@@ -1,0 +1,197 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-body layui-form h-all" style="height:35rem;">
+					<form action="{:U('pref_assess_tpl_item_do_save')}" id="form_validation"  class="form-horizontal" method="post">
+					<div class="layui-row">
+						<neq name="assess_list.item_pid" value="0">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>上级考核项：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<select name="item_pid" id="item_pid" lay-filter="item_pid" lay-search>
+										<option value="0" class="sp-select">--请选择--</option>
+										<volist name="item_data" id="data">
+											<option value="{$data.item_id}" <eq name="data.item_id" value="$assess_list.item_pid">selected </eq> >{$data.item_name}</option>
+										</volist>
+									</select>
+								</div>
+							</div>
+						</div>
+						</neq>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>考核项：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="hidden" name="item_id" value="{$assess_list.item_id}" />
+									<input type="hidden" name="template_id" value="{$template_id}" />
+									<input name="item_group" type="hidden" value="{$assess_group}">
+									<input type="hidden" value="{$assess_group}" name="assess_group">
+									<input type="text" value="{$assess_list.item_name}"  autocomplete="off" id="item_name" lay-verify='required' name="item_name"  class="form-control" placeholder="请填写考核项名称" >
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+
+						<!-- 当选择了上级考核项时显示比重等信息 -->
+						<div id="odiv" 
+							<empty name="Think.get.item_id">
+								style="display:none;"
+							<else/>
+								<eq name="assess_list.item_pid" value="0">
+									style="display:none;"
+								</eq>
+							</empty>
+						>
+							<neq name="assess_list.item_pid" value="0">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>比重：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<input type="text" id="item_proportion" 
+											<empty name="Think.get.item_id">
+											value="{$remain_pro}" 
+											<else/>
+											value="{$assess_list.item_proportion}" 
+											</empty>
+										autocomplete="off" lay-verify="required|number" name="item_proportion" class="form-control"  placeholder="请按照百分比填写" >
+									</div>
+									<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>考核方式：</strong></div>
+									<input type="hidden" value="{$assess_list.item_type}" id="item_type_show">
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<select  name="item_type" id="item_type" lay-filter="item_type" lay-search>
+										<php>echo getBdTypeSelect('template_type', '', $assess_list['item_type']);</php>
+									</select>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10" id="itemtype" style="display: none;">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>录入选择：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 ">
+										<select  name="item_manual_type" id="item_manual_type" lay-filter="item_manual_type" lay-search>
+											<option value="1">积分</option>
+											<!-- <option value="2">学习笔记</option>
+											<option value="3">学习时段</option> -->
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>考核周期：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<select  name="item_cycle_type" lay-search>
+										<php>echo getBdTypeSelect('cycle_type', '', $assess_list['item_cycle_type'],$choice);</php>
+									</select>
+									</div>
+								</div>
+							</div>
+							</neq>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>责任人：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<select  lay-search="" name="item_manager">
+										<php>echo getCommunistSelect($assess_list['item_manager']);</php>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+									<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" type="submit" onclick="return check_pro();" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<button type="reset" id="close" class="layui-btn layui-btn-primary mr-40">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<SCRIPT type="text/javascript">
+	var item_type_show = $('#item_type_show').val();
+	$('#item_proportion').attr("required",false);
+	$('#item_proportion').remove('required')
+	if(item_type_show == '2'){
+		$('#itemtype').show();
+	}
+	layui.use([ 'form', 'laydate'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form;
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+        form.on('select(item_type)', function(data){
+	        var type = $('#item_type').val();
+	        if (type == 1){
+	    		$('#itemtype').hide();
+	        }else{
+	    		$('#itemtype').show();
+	        } 
+	        layui.form.render();  
+    	});
+    	 form.on('select(item_pid)', function(data){
+            var item_pid = $('#item_pid').val();
+            if (item_pid != '0'){
+            	$('#odiv').show();
+            	$('#item_proportion').attr("required",true);
+            }else{
+            	$('#odiv').hide();
+            	$('#item_proportion').attr("required",false);
+            } 
+            layui.form.render();  
+        });
+    })
+	laydate.render({elem: "input[name='chat_time']",type:'datetime'});
+</SCRIPT>
+<script type="text/javascript">
+	// var index = parent.layer.getFrameIndex(window.name);
+	// parent.layer.iframeAuto(index);//自适应弹窗高度
+	$('#close').click(function() {
+		var index = parent.layer.getFrameIndex(window.name);
+		parent.layer.close(index);
+	});
+</script>
+<script type="text/javascript" >
+	$("#form_validation").validate({
+		
+	});
+	function check_pro(){
+		//是否已有权重
+		var exist_pro=parseInt("{$assess_list.item_proportion}");
+		if(exist_pro){
+			if($("#item_proportion").val() > exist_pro){
+				alert("权重必须小于等于"+exist_pro+"！总权重必须小于100！");
+				return false;
+			}
+		}else{
+			if($("#item_proportion").val() > parseInt("{$remain_pro}")){
+				alert("权重必须小于等于{$remain_pro}！总权重必须小于100！");
+				return false;
+			}
+		}
+	}
+</script>
+</block>

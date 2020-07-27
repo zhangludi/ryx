@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title><php>echo getFunctionInfo(ACTION_NAME);</php></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
+<meta content="<php>echo getConfig('web_description')</php>" name="description" />
+<meta content="<php>echo getConfig('web_keywords')</php>" name="keywords" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/simple-line-icons/simple-line-icons.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/uniform/css/uniform.default.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/bootstrap-switch/css/bootstrap-switch.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/ztree/css/zTreeStyle/zTreeStyle.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/bootstrap-table/bootstrap-table.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/icheck/skins/all.css"  />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/select2/css/select2.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/select2/css/select2-bootstrap.min.css" />
+<link rel="stylesheet" href="__STATICS__/plugins/jqery-steps/css/jquery.steps.css">
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/umeditor/themes/default/css/umeditor.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/components.css"  />
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/plugins.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_public.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/viewer/viewer.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_content.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_layout/css/sp_custom.css" />
+<!--下拉多选css-->
+<link rel="stylesheet" href="__STATICS__/plugins/selectmultiple/public.css">
+<!--下拉多选css结束-->
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/cubeportfolio/css/cubeportfolio.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/fancybox/source/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/ystep/css/ystep.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/fancybox/source/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/bootstrap-select/css/bootstrap-select.min.css"  />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/jquery-multi-select/css/multi-select.css"  />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/layuiformSelect/css/formSelects-v4.css"  />
+<link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+<!--admin css 党建版-->
+<link rel="stylesheet" href="__STATICS__/public/css/sp_theme_button_red.css">
+<!--admin css 党建版  结束-->
+<link rel="shortcut icon" href="__ROOT__/favicon.ico" />
+<style type="text/css">
+#editor i{
+	font-style: italic;
+}
+#editor ol li{
+	list-style: decimal;
+}
+#editor ul{
+	padding-left: 40px;
+}
+#editor ul li{
+	list-style: disc;
+}
+#js-grid-juicy-projects{
+	margin-left: 17% !important;
+}
+#js-grid-juicy-projects2{
+	margin-left: 17% !important;
+}
+/*滚动条样式*/
+.layui-card-body::-webkit-scrollbar {/*滚动条整体样式*/
+	width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+	height: 4px;
+}
+.layui-card-body::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	background: rgba(0,0,0,0.2);
+}
+.layui-card-body::-webkit-scrollbar-track {/*滚动条里面轨道*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	border-radius: 0;
+	background: rgba(0,0,0,0.1);
+}
+.edui-container{
+	z-index:99 !important;
+}
+.article_over_one{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+}
+img{
+	object-fit:cover;
+}
+.layui-btn {
+	border-radius: 0.07rem !important;
+}
+</style>
+<!-- <style>
+    .ztree li a{  height:22px;}
+    .ztree li span{font-size: 12px; font-family: 微软雅黑 !important;}
+    .ztree li span.button.noline_close{background: url("__STATICS__/layuiadmin/style/res/left-arrow.png") no-repeat}
+    .ztree li span.button{background: url("__STATICS__/layuiadmin/style/res/down-arrow.png") no-repeat}
+    .ztree li span.button.noline_open{background: url("__STATICS__/layuiadmin/style/res/down-arrow.png") no-repeat}
+    .over-h-tree{width: calc(100% - 15px);height: 100%;
+        overflow: hidden;}
+    .ztree-demo{ height:100%; overflow-y: auto;width: calc(100% + 15px);}
+    .ztree li a.curSelectedNode{  height:22px;line-height: 22px}
+</style> -->
+<block name="css"></block>
+</head>
+<body class="bg-color-f2">
+
+<block name="body"></block>
+
+</body>
+<script type="text/javascript" src="__STATICS__/plugins/respond.min.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/bootstrap/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/ztree/js/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/bootstrap-table/bootstrap-table.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/jquery-validation/js/jquery.validate.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/jquery-validation/js/additional-methods.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/select2/js/select2.full.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/public/js/app.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/ystep/js/ystep.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/layer/layer.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/jqery-steps/js/jquery.steps.js"></script>
+<!-- <script type="text/javascript" src="__STATICS__/plugins/jstree/dist/jstree.min.js" ></script> -->
+<script type="text/javascript" src="__STATICS__/plugins/echarts/echarts.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/cubeportfolio/js/jquery.cubeportfolio.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/laydate/laydate.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1-2.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1-3.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1-4.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1-5.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1-6.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1-7.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/bootstrap-select/js/bootstrap-select.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+<script>
+    var ue = UM.getEditor('editor');
+    //全局定义一次, 加载formSelects
+    layui.config({
+        base: '__STATICS__/plugins/layuiformSelect/js/' //此处路径请自行处理, 可以使用绝对路径
+    }).extend({
+        formSelects: 'formSelects-v4'
+    });
+</script>
+<script>
+	function uploader_del(a,upload_id){
+        if(confirm('确认删除？')){
+        	$.get("{:U('System/Upload/upload_file_del')}",{upload_id:upload_id},function(e){
+	        	if(e==1){
+	        		$(a).parent().parent().parent().parent().parent().remove();
+	        		$("input[value="+upload_id+"]").val('');
+	        	}
+	        })
+        }
+    }
+    function uploader_file(functions,type,saveid_id,savename_id,prev_id,rel,single){
+        var url = "{:U('System/Upload/upload_form')}?function="+functions+"&type="+type+"&saveid_id="+saveid_id+"&savename_id="+savename_id+"&prev_id="+prev_id+"&rel="+rel+"&single="+single;
+        layer.open({
+            type: 2,
+            title: '文件上传',
+            shadeClose: true,
+            // offset: parent.document.body.scrollTop+10+'px',
+            shade: 0.8,
+            area: ['800px', '400px'],
+            content: url,
+            success:function(){
+            	layerAuto();
+            }//iframe的url
+        });
+    }
+
+    function preview(id){
+    	alert(functions);
+        var idstr=$("#"+id).val();
+        layer.open({
+            type:2,
+            title:'文件预览',
+            /* closeBtn:true, */
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['900px' , '450px'],
+            success:function(){
+                var idstr=layer.getChildFrame("#abc").val();
+                $("#"+strid).val(idstr);
+            },
+            content:"{:U('/System/Upload/file_preview/idstr/"+idstr+"')}"
+
+        })
+    }
+
+    function viewer_show(id) {
+        var viewer = new Viewer(document.getElementById(id), {
+            url: 'data-original'
+        });
+    }
+</script>
+<script>
+		function select_receive_user(field_name){
+			var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name+"&hide=1";
+			layer.open({
+					type: 2,
+					title: '选择联系人',
+					maxmin: true,
+					offset: window.parent.document.body.scrollTop+20+'px',
+					shadeClose: true, //点击遮罩关闭层
+					area : ['620px' , '422px'],
+					content: url //iframe的url
+				});
+		}	
+
+        function select_staff_info(field_name,group){
+            var url = "{:U('System/Public/select_staff_info_page')}?field_name="+field_name+"&group="+group;
+            layer.open({
+                type: 2,
+                title: '选择人员',
+                maxmin: true,
+                offset: window.parent.document.body.scrollTop+20+'px',
+                shadeClose: true, //点击遮罩关闭层
+                area : ['800px' , '422px'],
+                content: url //iframe的url
+            });
+        }   	
+
+		/* 附件展示js */
+		$('#js-grid-juicy-projects,#js-grid-juicy-projects2').each(function(){      //获取的是子元素，加空格			
+			if($(this).find('.cbp-item').length>0){
+				$(this).attr('style','height:100px !important');
+			}			
+		});
+		/* 弹窗高度自适应高度， */
+		function layerAuto(){
+			var index = layer.getFrameIndex(window.name);
+			var body = layer.getChildFrame('body', index);
+			body.attr('style','background:white');
+			layer.iframeAuto(index);//自适应弹窗高度
+		}
+		/* 弹窗取消返回 */
+		 function bd_colse(){
+		        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		        parent.layer.close(index);
+		    }
+	</script>
+	
+	
+<block name="js">
+</block>
+</html>

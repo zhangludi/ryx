@@ -1,0 +1,154 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('group_type'));</php>"> <php>echo getFunctionInfo(ACTION_NAME.session('group_type'));</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            标题：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入标题">
+	                        </div>
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            时间：
+	                        </div>
+	                        <div class="layui-col-xs3">
+	                            <input type="text" autocomplete="off" class="layui-input" name="time" id="time" placeholder="yyyy-mm-dd">
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <button class="layui-btn" onclick="search()">查询</button>
+	                            <a class="layui-btn table-add " data-type="add"  >添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="ztreedata"  lay-filter="demo"></table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+	//            默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#ztreedata'
+	                , url: '{:U("edu_group_index_data",array("group_type"=>$group_type))}'
+	                , height: 'full-160'
+	                , cols: [[
+	                	{field: 'group_id', width: 80, align: 'center',  title: '编号', sort: true}
+		                ,{field:'group_title', title:'标题'}
+		                ,{field:'status', title:'状态', width:80}
+		                ,{field:'add_staff', title: '添加人'}
+		                ,{field:'update_time', title:'更改时间'}
+		                ,{field: 'operate', width:200,title: '操作',align: 'center'}
+	                ]]
+	                , page: true
+	            });
+	        });
+	        var $ = layui.$, active = {
+            	add: function(){
+                	var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('edu_group_edit',array('group_type'=>$group_type))}",
+                       area: ['300px', '300px']
+                	});
+                	layer.full(index);
+            	}
+        	};
+        	$('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });   
+	    })
+	</script>
+	<script>
+    	//添加按钮的点击事件
+	    
+
+	</script>
+	<script>
+	function edit(group_id){
+		var index = layer.open({
+	       type: 2,
+	       title: false,
+	       end:false,
+	       closeBtn: 0,
+	       shift: 1,
+	       content: "{:U('edu_group_edit')}?group_id="+group_id+"",
+	       area: ['300px', '300px']
+	    });
+	    layer.full(index);
+	}
+	function pern_deiv(topic_id) {
+	        layer.open({
+	            type: 2,
+	            area:['1000px', '550px'],
+	            content: '{:U("edu_topic_edit")}?topic_id='+topic_id //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+	            
+	        });
+		}
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+
+	    function search(){
+	    	var keyword = $('#keywords').val();
+	    	var start = $('#time').val();
+	    	var url;
+	    	if(keyword == '' && start == ''){
+	    		url = '{:U("edu_group_index_data",array("group_type"=>$group_type))}';
+	    	} else if(keyword != ''&& start == ''){
+	    		url = '{:U("edu_group_index_data",array("group_type"=>$group_type))}?keyword='+keyword+'';
+	    	} else if(keyword == ''&& start != ''){
+	    		url = '{:U("edu_group_index_data",array("group_type"=>$group_type))}?start='+start+'';
+	    	} else {
+	    		url = '{:U("edu_group_index_data",array("group_type"=>$group_type))}?keyword='+keyword+'&start='+start+''
+	    	}
+	    	layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#ztreedata'
+                    , url: url
+                    , height: 'full-160'
+                    , cols: [[
+                        {field: 'group_id', width: 80, align: 'center',  title: '编号', sort: true}
+		                ,{field:'group_title', title:'标题'}
+		                ,{field:'status', title:'状态', width:80}
+		                ,{field:'add_staff', title: '添加人'}
+		                ,{field:'update_time', title:'更改时间'}
+		                ,{field: 'operate', width:200,title: '操作',align: 'center'}
+                    ]]
+                    , page: true
+                });
+            });
+		}
+	</script>
+</block>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+   	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_public_v2.1.1.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>    
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_home.css"/>
+</head>
+<style>
+header ul li{
+	display: block; !important;
+}
+body{
+	margin:0px;background:#f4f4f4;
+} 
+.top-right-1 {
+    right: 0.0rem !important;
+}
+.top-right-2 {
+    right: 1.3rem !important;
+}
+.top-right-3 {
+    right: 0.5rem !important;
+}
+.top-1em {
+    top: 0.35rem !important;
+}
+.aui-grid {
+    background-color: #f4f4f4 !important;
+}
+</style>
+<body style="height: auto;">
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>	    		
+    		<div class="aui-title icon_medium f-16em"><php>echo getConfig('web_name')</php></div>
+    		<img class="pull-right w-20em h-20em mr-17em mt-10em" src="__STATICS__/apps/page_wechat/Index/images/news.png" onclick="openMessage();"/>
+    	</li>
+    </ul>
+</header>
+<section>
+	<div class="ban w-100b h-98em bg-color-fb4747 po-ab top-0em"></div>
+</section><!--banenr背景-->
+<section>
+	<div class="ban_bg w-100b h-200em bg-color-banner po-ab top-25em"></div>
+</section>
+<section>
+	<div class="banner pl-12em pr-12em po-re">
+		<div class="swiper-container s1 swiper-container-horizontal bor-ra-5em">
+			<div class="swiper-wrapper">
+				<volist name="ad_list" id="ad">
+				<div class="bor-ra-5em swiper-slide blue-slide pulse swiper-slide-active">
+					<img class="bor-ra-5em w-100b h-200em" src="{$ad.ad_img}" />
+				</div>
+				</volist>
+			</div>
+			<div class="ban_fy w-45em h-28em color-fff icon_normal" >
+				<img class="w-45em h-28em po-ab top-right-1" style="width: 2.25rem;" src="__STATICS__/apps/page_wechat/public/aui2/img/ban.png">
+				<span class="num po-ab top-right-2 f-16em"></span>
+				<span class="toal po-ab top-right-3 f-12em"></span>
+			</div>
+		</div>		
+	</div>
+</section>
+<section class="aui-grid aui-margin-b-15 mt-25mem" style="background-color:">
+	<div class="aui-row pl-15em pr-15em">
+		<div class="aui-col-xs-3">
+		<a href="{:U('Ccp/ccp_party_index')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/work.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">党建矩阵</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3">
+		<a href="{:U('Oa/oa_notice_index')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/mess.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">通知公告</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3">
+		<a href="{:U('Life/life_affairs_index')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/images/images_bd/bd_appstore18.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">三务公开</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3">
+		<a href="{:U('Ccp/ccp_communist_integral',array('communist_no'=>$communist_no))}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/home_integral.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">党员积分</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3 mt-20mem">
+		<a href="{:U('Wechat/Ccp/ccp_dues_index')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/home_party.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">党费缴纳</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3 mt-20mem">
+		<a href="{:U('Edu/edu_material',array('type'=>1))}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/home_learning.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">专题学习</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3 mt-20mem">
+		<a href="{:U('Oa/oa_meeting_list')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/home_three.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">三会一课</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3 mt-20mem">
+		<a href="{:U('Wechat/Edu/edu_exam_list',array('is_exam'=>1))}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/public/aui2/img/home_exam.png"></i>
+			<div class="aui-grid-label icon_regular color-12 f-12em">考试中心</div>
+		</a>
+		</div>
+		<!-- <div class="aui-col-xs-3">
+		<a href="{:U('Life/life_volunteer_index')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/images/images_bd/bd_appstore21.png"></i>
+			<div class="aui-grid-label icon_regular color-12 pt-4em f-12em">志愿服务</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3 mt-20mem">
+		<a href="{:U('Life/life_affairs_index')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/images/images_bd/bd_appstore18.png"></i>
+			<div class="aui-grid-label icon_regular color-12 pt-4em f-12em">党务公开</div>
+		</a>
+		</div>
+		<div class="aui-col-xs-3 mt-20mem" >
+		<a href="{:U('Wechat/Edu/edu_notes_list')}">
+			<i><img class="h-37em w-37em center-block" src="__STATICS__/apps/page_wechat/images/images_bd/bd_appstore13.png"></i>
+			<div class="aui-grid-label icon_regular color-12 pt-4em f-12em">学习笔记</div>
+		</a>
+		</div> -->
+	</div>
+</section>
+<!--导航区块结束-->
+<neq name="communist_no" value=''>
+<!--个人信息开始-->
+<section id="home_mess" class="index_new mb-12em over-h mt-10mem">
+	<div class="clearfix bg-color-fa bb-1-f0 h-44em lh-44em pl-13em pr-13em" onclick="openIntegral({$communist_no})">
+		<div class="pull-left">
+			<img id="home_communist_avatar" class="bor-ra-50b w-30em h-30em mt-76em pull-left" src="{$communist_avatar}">
+			<div class="icon_medium f-14em color-21 pull-left pl-6em">
+				<span>{$communist_name}</span>丨
+				<span>{$party_name}</span>
+			</div>
+		</div>
+		<div class="pull-right icon_regular f-12em color-ff4242 po-re">
+			<div class="po-ab top-1em w-100em h-24em right-0mem">
+				<img class="" src="__STATICS__/apps/page_wechat/public/aui2/img/jifen.png">
+			</div>
+			<div class="pr-12em" style="line-height:2rem;padding-right:0.3rem;">
+				<span class="f-12em">积分：</span>
+				<span class="ml-10mem" >{$communist_integral}</span>
+			</div>
+		</div>
+	</div>
+	<div class="home_infor">
+		<a href="{:U('Edu/edu_index')}">
+		<li class="h-40em lh-40em clearfix va-jz">
+			<img class="pull-left w-20em h-20em ml-18em" src="__STATICS__/apps/page_wechat/public/aui2/img/home_made.png">
+			<p class="pull-left icon_regular color-9e f-12em pl-10">点击制定属于自己的学习计划！！！</p>
+			<i class="pull-right iconfont color-de f-12em lh-22em ml-5mem">&#xe613;</i>
+		</li>
+		</a>
+		<div class="bb-1-f0 w-80b pull-right ml-20em mr-20em"></div>
+		<neq name="alert_count" vlaue="">
+		<a href="{:U('Oa/alert_msg_index')}">
+		<li class="h-40em lh-40em clearfix va-jz">
+			<img class="pull-left w-20em h-20em ml-18em" src="__STATICS__/apps/page_wechat/public/aui2/img/home_notice.png">
+			<p class="pull-left icon_regular color-9e f-12em pl-10">您有【{$alert_count}条】重要信息等着您去回复</p>
+			<i class=" pull-right iconfont color-de f-12em lh-22em ml-5mem">&#xe613;</i>
+		</li>
+		</a>	
+		</neq>
+		
+	</div>
+</section>
+</neq>
+<!--个人信息结束-->
+<!--党政动态开始-->
+<section class="index_new mb-12em pl-12em pr-12em">
+	<div class="over-h h-30em lh-44em">		
+		<span class="pull-left shade f-16em icon_medium f-w">最新动态</span>
+		<span class="pull-right f-12em color-9e icon_regular" onclick="openNewCms('30');">更多
+		<i class="iconfont color-de f-12em lh-44em ml-5mem">&#xe613;</i>
+		</span>
+	</div>
+	<div>
+		<ul id="list">
+		<volist name="array" id="artic">
+			<li class="va-jz over-h bb-1-f0 pb-12em pt-12em" style="position: relative;">
+				<a href="{:U('Cms/cms_article_info', array('article_id' => $artic['article_id']))}">
+				<div class="pull-left w-97em h-73em">
+					<img class="w-97em h-73em bor-ra-2em" src="{$artic.article_thumb}">
+				</div>
+				<div class="pull-left over-h w-217em ml-13em icon_medium">
+				    <div class="pull-left w-217em mt-0em" >
+				        <div class="f-14em color-12 f-w" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{$artic.article_title}</div>
+				        <div class="" style="position: absolute; bottom: 10%;width: 65%;">
+	                        <div class="pull-left color-a4 f-11em pt-5em" >{$artic.add_staff}</div>
+	                        <div class="pull-right color-a4 mt-5em f-11em" >{$artic.add_time}</div>
+	                    </div>
+                    </div>
+                </div>
+           		</a>
+			</li>
+		</volist>
+		</ul>
+	</div>
+</section>
+<footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="background: #f4f4f4;">
+    <ul class="aui-bar-tab h-49em">
+    	<li id="tabbar1" class="active-info" onclick="randomSwitchBtn(this,'1')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage1.png" class="fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">首页</p>
+        </li>
+        <li id="tabbar2" onclick="randomSwitchBtn(this,'2')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/super_market1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/super_market2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">超市</p>
+        </li>
+        <li id="tabbar3" onclick="randomSwitchBtn(this,'3')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">学习</p>
+        </li>
+        <li id="tabbar4" onclick="randomSwitchBtn(this,'4')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">服务</p>
+        </li>
+        <li id="tabbar5" onclick="randomSwitchBtn(this,'5')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">我的</p>
+        </li>
+    </ul>
+</footer>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-list-swipe.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/bd_index.js"></script>
+<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript">
+var toal_len=$('.swiper-wrapper').find('img').length;
+$(".toal").html(toal_len);	
+var mySwiper = new Swiper('.s1',{
+	loop: true,
+	autoplay: 3000,
+	pagination: '.p1',
+	paginationClickable: true,							
+	onSlideChangeEnd : function(swiperHere) {
+		$(".num").html(swiperHere.realIndex+1);
+	 }
+});
+function openIntegral(communist_no){
+	location.href="{:U('Wechat/Ccp/ccp_communist_integral')}?communist_no="+communist_no;
+}
+function openNewCms(cat_id){
+	location.href="{:U('Wechat/Cms/cms_article_list_total')}";
+}
+function openMessage(){
+	location.href="{:U('Wechat/Oa/alert_msg_index')}";
+}
+ // 随意切换按钮
+ var current_index;//当前切换下标，主要是用来处理个人中心切换高度bug
+ function randomSwitchBtn(tag,type) {
+ 	if($(tag).hasClass('active-info')){
+ 		return ;
+ 	}
+    switch(type){
+ 	    case '1':
+ 	    	location.href="{:U('Wechat/Index/index')}";
+ 	    	;break;
+ 	    case '2':
+ 	    	location.href="{:U('Wechat/Index/store_index')}";
+ 	    	;break;
+ 	    case '3':
+ 	    	location.href="{:U('Wechat/Edu/edu_index')}";
+ 	    	;break;
+		case '4':
+			location.href="{:U('Wechat/Life/life_index')}";
+			;break;
+ 	    default:
+ 	    	location.href="{:U('Wechat/Ccp/ccp_communist_info')}";
+ 	    	;break;
+     }
+ }
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+{
+  "code": 0
+,"msg": ""
+  ,"title":"首页"
+,"data": [
+  {
+  "name": "template"
+,"title": "首页"
+,"icon": "layui-icon-home"
+,"list": [{
+    "name": "user"
+  ,"title": "党建门户"
+  ,"spread": false
+  ,"jump":"./views/sp_demo/home/console.html"
+  },{
+    "name": "user"
+  ,"title": "个人门户"
+  ,"spread": false
+  ,"jump":"./views/official/home/console.html"
+  },{
+    "name": "user"
+  ,"title": "个人门户党建"
+  ,"spread": false
+  ,"jump":"./views/official/home/sp_console_per.html"
+  }
+ ]
+}]
+}

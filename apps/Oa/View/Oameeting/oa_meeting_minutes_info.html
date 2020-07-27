@@ -1,0 +1,82 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+	#js-grid-juicy-projects{
+	    margin-left: 0% !important;
+	}
+</style>
+
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">会议记录详情</div>
+                <div class="layui-card-body layui-form">
+                    <div class="layui-row">
+                        <div class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$data.meeting_minutes_title}</span></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12" >
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>部门：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    {$data.party_no}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>发布人：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    {$data.add_staff}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>内容：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    {$data.meeting_minutes_content}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 fcolor-66 pull-right">
+                        	 <div class="layui-row">
+                        	 	<neq name="data.meeting_minutes_thumb" value="">
+	                            	<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+	                            	<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                            	<div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+										<php>echo getUploadHtml($data['meeting_minutes_thumb'],'100','100','1','0');</php>
+									</div>
+								</div>
+								</neq>
+                            </div>
+							<input type="hidden" class="form-control" id="article_img" name="article_img" value="{$notice_info.notice_attach}">
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <div class="layui-footer" style="text-align: right">
+                                    <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+</script>
+</block>

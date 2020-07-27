@@ -1,0 +1,80 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+    <div class="layui-fluid">
+        <div class="page-content">
+			<div class="layui-row layui-col-space10">
+                <div class="layui-col-md3">
+					<div class="layui-card">
+	                    <div class="layui-card-header">支部列表</div>
+	                    <div class="layui-card-body" style="overflow-y:auto">
+	                        <div class="over-h-tree">
+	                            <ul id="treeDemo" class="ztree ztree-demo">
+
+	                            </ul>
+	                        </div>
+	                    </div>
+		            </div>
+				</div>
+                <div class="layui-col-md9">
+                	<div class="layui-card">
+                        <div class="layui-card-header">支部绩效对比</div>
+                        <div class="layui-card-body assess_table">
+                            <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1" id="Broke">
+                                <div id="Broken5" style="height: 500px;width: 100%" alt="对标体系折线图"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- row结束 -->
+        </div>
+    </div>
+</block>
+<block name="js">
+		<script>
+		// 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height()-95));
+		$(".assess_table").css("height",($(window).height()-75));
+    	//window.location.href="{:U('communist_comparison_data')}?pno=1"; 
+		$.get("{:U('communist_comparison_table')}",{pno:1},function(e){
+			
+			$("#Broke").html(e)
+		})
+			  var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+          var setting = {
+	            view: {
+	                showLine: false,
+	            },
+	            data: {
+	                key: {
+	                    title: "t"
+	                },
+	                simpleData: {
+	                    enable: true
+	                }
+	            },
+	            callback: {
+	                onClick: onClick//绑定回调函数
+	            }
+        }
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            <volist name="category_lista" id="list" key = 'k'>
+            { id:"{$list.party_no}",pId:{$list.party_pno}, name:"{$list.party_name}",t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png",<eq name='list.party_pno' value='0'>open:true</eq>},
+			</volist>
+        ];
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+        function onClick(e, treeId, treeNode) {
+			var party_no=treeNode.id;
+			var data={pno:party_no};
+			$.get("{:U('communist_comparison_table')}",data,function(e){
+
+				$("#Broke").html(e)
+			})
+        }
+		</script>
+	</block>

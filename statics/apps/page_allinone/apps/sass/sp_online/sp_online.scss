@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+//base
+@import "../base/base";
+
+//helper
+@import "../helper/helper";
+
+//layout
+@import "../layouts/layouts";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//object
+@import "../objects/_title";
+
+//component
+@import "../components/function_cards";
+
+$card-w: 24%;
+$card-h: 230px;
+$card_img-space-t: 36px;
+$card_img-space-b: 16px;
+
+.bg{
+  @include bg;
+}
+
+.title{
+  position: relative;
+}
+
+.l-function_card{
+  width: $card-w;
+  height: $card-h;
+  margin: 12px;
+}
+
+.card_title{
+  @include whites(default);
+  @include font-sizes(l3);
+  opacity: .7;
+}
+
+.card_img{
+  margin-top: $card_img-space-t;
+  margin-bottom: $card_img-space-b;
+}
+
+.function_card-gray{
+  .card_title{
+    @include grays(four);
+  }
+}
+
+
+
+

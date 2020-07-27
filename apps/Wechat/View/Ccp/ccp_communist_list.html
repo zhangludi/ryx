@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-indexed-list.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/ccp/css/com_phoneBook.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/> -->
+<style type="text/css">
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+</style>
+</head>
+	<style>
+	header ul li{
+		display: block; !important;
+	}
+	img {
+	    display: inline-block;
+	}
+	.pt-10em {
+	    padding-top: 2.5rem;
+	    margin-bottom: 2.5rem;
+	}
+	</style>
+</head>
+<body class="bg-color-whiter">
+<header class="aui-bar aui-bar-nav aui-bar-info " style="position: fixed;">
+    <ul>
+    	<ul>
+			<li class="h-45em">
+				<a class="aui-pull-left"  onclick="window.history.go(-1);" >
+					<span class="aui-iconfont aui-icon-left"></span>返回
+				</a> 
+				<div class="aui-title f-w" id="titleName">通讯录</div>
+			</li>
+		</ul>
+		<!-- <li class="h-45em">
+			<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+			<div class="aui-title f-w">党员列表</div>
+		</li> -->
+    </ul>
+</header>
+
+<div>
+	<ul class="pl-12em pr-12em pt-10em">
+		<volist name="communist_list" id="list">
+			<li class="over-h" onclick="partyCommunist({$list.communist_no});">
+				<eq name="list.communist_avatar" value="">
+				<img class="pull-left w-40em h-40em bor-ra-100b mr-12em mb-10em" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" alt="" />
+				<else/>
+				<img class="pull-left w-40em h-40em bor-ra-100b mr-12em mb-10em" src="{$list.communist_avatar}" alt="" />
+				</eq>
+				<div class="pull-left w-298em">
+					<p class="f-16em lh-16em color-33 f-w pt-5em pb-8em">{$list.communist_name}</p>
+					<p class="f-16em lh-16em color-75 pb-12em">{$list.party_no}</p>
+				</div>
+			</li>
+		</volist>
+	</ul>
+</div>
+<footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="position: fixed;height: 56px;">
+	<!-- <footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="background: #f4f4f4;"> -->
+    <ul class="aui-bar-tab h-49em">
+    	<li id="tabbar1" onclick="randomSwitchBtn(this,'1')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage1.png" class="fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">首页</p>
+        </li>
+        <li id="tabbar2" onclick="randomSwitchBtn(this,'2')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/super_market1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/super_market2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">超市</p>
+        </li>
+        <li id="tabbar3" onclick="randomSwitchBtn(this,'3')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">学习</p>
+        </li>
+        <li id="tabbar4" class="active-info" onclick="randomSwitchBtn(this,'4')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">服务</p>
+        </li>
+        <li id="tabbar5" onclick="randomSwitchBtn(this,'5')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">我的</p>
+        </li>
+    </ul>
+</footer>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-tap.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-indexed-list.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jQuery.Hz2Py-min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_platform.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/ccp/js/com_phoneBook.js"></script>
+<script type="text/javascript">
+function openSpecial(){
+    location.href="{:U('Wechat/Life/life_survey_list',array('type'=>1))}";
+}
+function openLearn(){
+    location.href="{:U('Wechat/Oa/oa_article_list')}";
+}
+function openVote(){
+    location.href="{:U('Wechat/Life/life_vote_list',array('type'=>1))}";
+}
+function openMessages(){
+    location.href="{:U('Wechat/Life/life_guestbook_index')}";
+}
+function randomSwitchBtn(tag,type) {
+	if($(tag).hasClass('active-info')){
+		return ;
+	}
+	var eFootLis = $api.domAll('#aui-footer li'),
+ 	eHeaderLis = $api.domAll('header li'),
+ 	index = 0;
+	for (var i = 0,len = eFootLis.length; i < len; i++) {
+		if( tag == eFootLis[i] ){
+		 	index = i;
+		}else{
+			 $api.removeCls(eFootLis[i], 'active-info');
+			 $api.removeCls(eHeaderLis[i], 'active');
+		}
+	}
+	$api.addCls( eFootLis[index], 'active-info');
+	$api.addCls( eHeaderLis[index], 'active');
+	switch(type){
+	    case '1':
+	    	location.href="{:U('Wechat/Index/index')}";
+	    	;break;
+	    case '2':
+	    	location.href="{:U('Wechat/Index/store_index')}";
+	    	;break;
+	    case '3':
+	    	location.href="{:U('Wechat/Edu/edu_index')}";
+	    	;break;
+		case '4':
+			location.href="{:U('Wechat/Life/life_index')}";
+			;break;
+	    default:
+	    	location.href="{:U('Wechat/Ccp/ccp_communist_info')}";
+	    	;break;
+	}
+}
+</script>
+</body>
+</html>

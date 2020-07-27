@@ -1,0 +1,111 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+         <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                    <div class="layui-form layui-card-body fitheight">
+                        <div class="layui-row layui-col-space5">
+                            
+                            <div class="layui-col-xs3 pull-right" >
+                            </div>
+                        </div>
+                        <table class="layui-table" id="demo"  lay-filter="demo">
+                            <form id="form_validation" class="form-horizontal" method="post">
+                                <div class="form-body">
+                                    <volist name="subject_list" id="vo">
+                                        <h3 class="form-section">{$vo.subject_content}</h3>
+                                        <volist name="vo.option_list" id="vo1">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-md-line-input">
+                                                        <label class="col-md-3 control-label" for="form_control_1">{$vo1.option_name}：</label>
+                                                        <div class="col-md-9">
+                                                            <input type="text" class="form-control" name="email" value="{$vo1.result}" readonly="readonly">
+                                                            <div class="form-control-focus"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </volist>
+                                    </volist>
+                                </div>
+
+                            </form>
+                           
+                        </table>
+                        <script type="text/html" id="operate">
+                        </script>
+                        <div class="layui-form-item">
+		                <div class="layui-input-block">
+		                    <div class="layui-footer" style="text-align: right">
+		                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+		                    </div>
+		                </div>
+		            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm bg-color-green2">
+                                            <i class="iconfont">&#xe602;</i>
+                                        </div>
+                                    </div>
+                                    <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                                </div>
+                                <div class="tools">
+                                    <a href="" class="reload"> </a>
+                                    <a href="" class="collapse"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <form id="form_validation" class="form-horizontal" method="post">
+                                    <div class="form-body">
+                                        <volist name="subject_list" id="vo">
+                                            <h3 class="form-section">{$vo.subject_content}</h3>
+                                            <volist name="vo.option_list" id="vo1">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-md-line-input">
+                                                            <label class="col-md-3 control-label" for="form_control_1">{$vo1.option_name}：</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control" name="email" value="{$vo1.result}" readonly="readonly">
+                                                                <div class="form-control-focus"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </volist>
+                                        </volist>
+                                    </div>
+                                </form>
+                            </div>
+							<div class="clearfix mt-20 mb-10">
+								<a type="button" onclick="window.history.go(-1)" class="btn btn-sm default w-75 bor-ra-2 mr-20 pull-right">返回</a>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</block>
+<block name="js">
+    <script>
+    $("#form_validation").validate({
+
+    });
+    </script>
+</block>

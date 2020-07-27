@@ -1,0 +1,86 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <form id="form_sample_2" action="{:U('bd_location_do_save')}" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" name="location_id" value="{$location_data.location_id}" />
+                        <div class="layui-row">
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>位置名称：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+                                        	<input type="text" name="location_name" value="{$location_data.location_name}" placeholder="请输入位置名称" autocomplete="off" class="layui-input" lay-verify="required">
+                                        </div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>位置描述：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="location_description" placeholder="请输入位置描述" class="layui-textarea" maxlength="255">{$location_data.location_description}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right;margin-bottom: 30px;padding-top: 30px;">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">保存</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="bd_colse()">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script>
+        layui.use([ 'form', 'laydate'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form;
+            form.render(null, 'component-form-group');
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'time'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'datetime'
+                ,range: true
+            });
+        })
+        function bd_colse(){
+	        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	        parent.layer.close(index);
+	    }
+    </script>
+</block>

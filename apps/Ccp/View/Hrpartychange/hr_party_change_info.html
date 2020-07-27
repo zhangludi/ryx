@@ -1,0 +1,258 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	  <div class="layui-row layui-col-space15">
+	    <div class="layui-col-md12">
+	        <div class="layui-card layui-form">
+	          <div class="layui-card-header">  考试试卷</div>
+	          <div class="layui-card-body">
+	              <div class="layui-row">
+                 	<div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>组织名称：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_name}</span></div>
+                        </div>
+                    </div>
+                    <!-- <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>组织层级：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_level_name}</span></div>
+                        </div>
+                    </div> -->
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>上级组织：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_pno}</span></div>
+                        </div>
+                    </div>
+                     <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>党支部分级：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_level_code}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$code_name}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>换届时间：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$change_time}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                            <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                <neq name="change_log_info.change_file" value="">
+                                    <php>echo getUploadHtml($change_log_info['change_file'],'',100,1,0);</php>
+                                </neq>
+                            </div>
+                        </div>
+                    </div>
+	            </div>
+	          </div>
+	      </div>
+	    </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-footer" style="text-align: right">
+                    <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="history.go(-1);">返回</button>
+                </div>
+            </div>
+        </div>
+	  </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: '{:U("edu_exam_questions_data",array("is_contain"=>1,"exam_id"=>$exam_id))}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'questions_id',width:80, title: '序号'}
+                        , {field: 'questions_title', title: '名称'}
+                        , {field: 'questions_item',  title: '选项'}
+                        , {field: 'questions_answer', width:80 , title: '正确答案'}
+                        , {field: 'questions_score', width:80, title: '分值'}
+                        , {field: 'operate', title: '操作',width: 180}
+                        
+                    ]]
+                    , page: false
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+                //监听工具条
+                table.on('tool(demo)', function(obj){
+                    var data = obj.data;
+                    var idcard_no = data.idcard_no;
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除该数据吗？', function(index){
+                            window.location='{:U("Edunotes/edu_notes_del")}?notes_id='+data.notes_id+'';
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        window.location='{:U("Edunotes/edu_notes_edit")}?notes_id='+data.notes_id+'';
+                        layer.close(index);
+                    }
+                });
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keyword = $('#keywords').val();
+                        var time = $('#time').val();
+                        var notes_type = $('#notes_type').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "keyword": keyword,
+                                "start":time,
+                                "notes_type":notes_type,
+                            }
+                        });
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+            //点击左侧树的事件
+            
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+        // 设置ztree 列表和右侧列表一样高度
+        $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>
+    <script>
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo2'
+                    , url: '{:U("edu_exam_communist_data",array("status"=>$status,"exam_id"=>$exam_id))}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'communist_no', title: '编号'}
+                        , {field: 'communist_name', title: '人名'}
+                        , {field: 'party_name',  title: '所属组织'}
+                        , {field: 'log_score',  title: '分值'}
+                        , {field: 'add_time', title: '参加时间'}
+                        , {field: 'operate', title: '操作',width: 180}
+                        
+                    ]]
+                    , page: false
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+                //监听工具条
+                table.on('tool(demo)', function(obj){
+                    var data = obj.data;
+                    var idcard_no = data.idcard_no;
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除该数据吗？', function(index){
+                            window.location='{:U("Edunotes/edu_notes_del")}?notes_id='+data.notes_id+'';
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        window.location='{:U("Edunotes/edu_notes_edit")}?notes_id='+data.notes_id+'';
+                        layer.close(index);
+                    }
+                });
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keyword = $('#keywords').val();
+                        var time = $('#time').val();
+                        var notes_type = $('#notes_type').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "keyword": keyword,
+                                "start":time,
+                                "notes_type":notes_type,
+                            }
+                        });
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+            //点击左侧树的事件
+            
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+        // 设置ztree 列表和右侧列表一样高度
+        $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>
+    <script>
+        
+       $(".table-add").click(function () {
+            var exam_id = $("#exam_id").val();
+            layer.open({
+                type: 2,
+                area:['800px', '400px'],
+                content: '{:U("edu_exam_questions")}?exam_id='+exam_id+'' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+            });
+
+        });
+    </script>
+</block>

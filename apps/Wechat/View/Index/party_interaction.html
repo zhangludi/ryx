@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php></title>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_public_v2.1.1.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/edu_topic.css"/>
+
+<style>
+header ul li{
+	display: block; !important;
+}
+</style>
+</head>
+<body class="bg-color-f9" style="height: 800px;">
+<header class="aui-bar aui-bar-nav aui-bar-info ">
+    <ul>
+    	<li class="h-45em ">
+    		<div class="aui-title f-w ">党员学习</div>
+    	</li>	
+    </ul>
+</header>
+<section class="">
+	<div id="aui-slide">
+	    <div class="aui-slide-wrap" >
+	    	<volist name="ad_list" id="ad">
+		        <div class="aui-slide-node bg-dark">
+		            <img src="{$ad.ad_img}" / height="6rem" width="100%">
+		        </div>
+	        </volist>
+	    </div>
+	    <div class="aui-slide-page-wrap"><!--分页容器--></div>
+	</div>
+</section>
+<div class="pt-12em"> 
+	<section>     
+	    <div class="">
+	        <div class="w-50b pull-left">
+	        	<div class="m-10em bor-ra-3 over-h box-4-df m-a" onclick="openSpecial();">
+		            <h1 class="color-white bor-ra-t-lr-14 lh-48em f-15em f-w grad text-align">调 查 问 卷</h1>
+		            <p class="h-4em col-99 bg-color-whiter lh-22em f-14em p-10em">建设集管理、学习、服务、互动等功能与一体的信息平台，建实现党建工作的实时性、管理的科学性</p>
+		        </div>
+	        </div>	
+	        <div class="w-50b pull-left">
+	        	<div class="m-10em bor-ra-3 over-h box-4-df m-a" onclick="openLearn();">
+		            <h1 class="color-white bor-ra-t-lr-14 lh-48em f-15em f-w grad text-align">党 员 投 稿</h1>
+		          	<p class="h-4em col-99 bg-color-whiter lh-22em f-14em p-10em">建设集管理、学习、服务、互动等功能与一体的信息平台，建实现党建工作的实时性、管理的科学性</p>
+		        </div>
+	        </div>
+	        <div class="w-50b pull-left">
+	        	<div class="m-10em bor-ra-3 over-h box-4-df m-a" onclick="openVote();">
+		            <h1 class="color-white bor-ra-t-lr-14 lh-48em f-15em f-w grad text-align">投 票 管 理</h1>
+		            <p class="h-4em col-99 bg-color-whiter lh-22em f-14em p-10em">建设集管理、学习、服务、互动等功能与一体的信息平台，建实现党建工作的实时性、管理的科学性</p>
+		        </div>
+	        </div>
+	        <div class="w-50b pull-left">
+	        	<div class="m-10em bor-ra-3 over-h box-4-df m-a" onclick="openMessages();">
+		            <h1 class="color-white bor-ra-t-lr-14 lh-48em f-15em f-w grad text-align">留 言 建 议</h1>
+		            <p class="h-4em col-99 bg-color-whiter lh-22em f-14em p-10em">建设集管理、学习、服务、互动等功能与一体的信息平台，建实现党建工作的实时性、管理的科学性</p>
+		        </div>
+	        </div>
+	    </div>
+	</section>
+</div>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/config.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/eud_topic.js"></script>
+<script type="text/javascript">
+function openSpecial(){
+location.href="{:U('Wechat/Life/life_survey_list',array('type'=>1))}";
+}
+// function openLearn(){
+// 	location.href="{:U('Wechat/Oa/oa_email_index',array('status'=>1))}";
+// }
+function openLearn(){
+location.href="{:U('Wechat/Oa/oa_article_list')}";
+}
+function openVote(){
+location.href="{:U('Wechat/Life/life_vote_list',array('type'=>1))}";
+}
+function openMessages(){
+location.href="{:U('Wechat/Life/life_guestbook_index')}";
+}
+</script>
+</body>
+</html>

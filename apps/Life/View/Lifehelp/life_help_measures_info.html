@@ -1,0 +1,380 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	  <div class="layui-row layui-col-space15">
+	    <div class="layui-col-md12">
+	        <div class="layui-card layui-form">
+	          <div class="layui-card-header"><php>echo getFunctionInfo(ACTION_NAME.session('team'));</php></div>
+	          <div class="layui-card-body">
+	              <div class="layui-row">
+	              	<eq name="measures_data.type" value="1">
+              		<div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data.measures_name}</span></div>
+                        </div>
+                    </div>
+                 	<div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>所属队伍：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data.measures_team}</span></div>
+                        </div>
+                    </div>
+	                <div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>负责人：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span class="di-b">{$measures_data.measures_leader}</span></div>
+                        </div>   
+                    </div>
+                	</eq>
+                	<eq name="measures_data.type" value="2">
+                		<div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶人姓名：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data.measures_help}</span></div>
+                        </div>
+                    </div>
+                	</eq>
+                    <div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶时间：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data.measures_help_time}</span></div>
+                        </div>   
+                    </div>
+	                <div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>联系电话：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data.measures_phone}</span></div>
+                        </div>   
+                    </div>
+                    <div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶对象：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>
+                            	<eq name="measures_data.measures_genre" value="1">贫困村</eq>
+                            	<eq name="measures_data.measures_genre" value="2">贫困户</eq>
+
+                        	</span></div>
+                        </div>   
+                    </div>
+                    <div class="layui-col-xs6 mt-10">
+                    	 <eq name="measures_data.measures_genre" value="1">
+                    	 <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>选择村：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data['measures_genre_no']}</span></div>
+                        </div> 
+                        </eq>
+                        
+                        <neq name="measures_data.measures_genre" value="1">
+                         <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>选择户：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data['measures_genre_no']}</span></div>
+                        </div>
+                        </neq>  
+                        
+                    </div>
+                    <div class="layui-col-xs6 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶措施：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$measures_data.measures_type}</span></div>
+                        </div>   
+                    </div>
+	            </div>
+	            <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="text-align: right">
+                            <!-- <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button> -->
+                             <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                        </div>
+                    </div>
+                </div>
+	          </div>
+	      </div>
+	    </div>
+	    
+       </div> 
+      </div>	
+        <!-- <div class="page-container">
+            <!-- BEGIN CONTENT --
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY --
+                <div class="page-content">
+                    <!-- 添加开始 --
+					<form action="{:U('life_help_log_save')}" id="form_sample_2" class="form-horizontal" method="post">
+                    	<!-- 开始 --
+                    	<input type="hidden" class="form-control " name="help_log_id" value="{$help_log_data.help_log_id}"/>
+                    	<input type="hidden" name="communist_no" value="{$help_log_data[communist_no]}" id="workers"/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="portlet light bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm bg-color-green">
+                                                    <i class="iconfont">&#xe650;</i>
+                                                </div>
+                                            </div>
+                                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME.session('team'));</php></span>
+                                        </div>
+                                        <div class="tools">
+                                            <a href="" class="reload"> </a>
+                                            <a href="" class="collapse"> </a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body right">
+                                    	<div class="row p5-editor-move">
+	                                        <eq name="team" value="1">
+		                                		<div class="form-group  mt-5 col-md-6 ">
+		                                            <div class="row">
+		                                                <label class="control-label col-md-4 pl-0 lh-30 lh-30">姓名：<span class="required">  </span>
+		                                                </label>
+		                                                <div class="col-md-6 p5-form-control pl-0 lh-40">
+	                                                        {$measures_data.measures_name}
+		                                                </div>
+		                                            </div>
+		                                        </div>
+												<div class="form-group  mt-5 col-md-6 ">
+													<div class="row">
+														<label class="control-label col-md-4 pr-25 lh-30 lh-30">所属队伍：	<span class="required">  </span>
+														</label>
+														<div class="col-md-6 p5-form-control pl-0 lh-40">
+															{$measures_data.measures_team}
+														</div>
+													</div>
+												</div>
+												<div class="form-group  mt-5 col-md-6 ">
+													<div class="row">
+														<label class="control-label col-md-4 pl-0 lh-30 lh-30">负责人：	<span class="required">  </span>
+														</label>
+														<div class="col-md-6 p5-form-control pl-0 lh-40">
+															{$measures_data.measures_leader}
+														</div>
+													</div>
+												</div>
+		                                	<else/>
+		                                		<div class="form-group  mt-5 col-md-6 ">
+		                                            <div class="row">
+		                                                <label class="control-label col-md-4 pl-0 lh-30 lh-30">帮扶人：<span class="required">  </span>
+		                                                </label>
+		                                                <div class="col-md-6 p5-form-control pl-0 lh-40">
+	                                                        {$measures_data.measures_help}
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="form-group  mt-5 col-md-6 ">
+		                                            <div class="row">
+		                                                <label class="control-label col-md-4 pl-0 lh-30 lh-30">帮扶时间：<span class="required">  </span>
+		                                                </label>
+		                                                <div class="col-md-6 p5-form-control pl-0 lh-40">
+	                                                        {$measures_data.measures_help_time}
+		                                                </div>
+		                                            </div>
+		                                        </div>
+											</eq>
+	                                        <div class="form-group  mt-5 col-md-12 ">
+	                                            <div class="row">
+		                                            <label class="control-label col-md-2  pl-0 lh-30 lh-30">联系电话：
+		                                              <span class="required">  </span>
+		                                            </label>
+		                                            <div class="col-md-3 p5-form-control pl-0 lh-40">
+		                                                {$measures_data.measures_phone}
+		                                            </div>
+	                                        	</div>
+											</div>
+											<div class="form-group  mt-8 col-md-6 ">
+	                                            <div class="row">
+		                                            <label class="control-label col-xs-4 pr-20 lh-30 lh-30">帮扶对象：
+		                                              <span class="required">  </span>
+		                                            </label>
+		                                            <div class="col-md-6 p5-form-control pl-0 lh-40">
+		                                            	{$measures_data.measures_genre}
+		                                            </div>
+	                                        	</div>
+											</div>
+	                                        <div class="form-group  mt-5 col-md-6 ">
+	                                        	<eq name="measures_data.measures_genre" value="1">
+	                                        	<div class="row" id="village">
+													<label class="control-label col-md-4 pr-35 lh-30 lh-30">选择村:
+														<span class="required">  </span> 
+													</label>
+													<div class="col-md-6 p5-form-control pl-0 lh-40">
+															
+													</div>
+												</div>	
+
+	                                        	<else/>
+	                                        	<div class="row" id="households" >
+													<label class="control-label col-md-4 pr-35 lh-30 lh-30">选择户:
+														<span class="required">  </span> 
+													</label>
+													<div class="col-md-6 p5-form-control pl-0 lh-40">
+															
+													</div>
+												</div>
+	                                        	</eq>
+												
+
+											</div>
+											<div class="form-group  mt-5 col-md-6 ">
+	                                            <div class="row">
+	                                                <label class="control-label col-md-4 pr-25 lh-30 lh-30">帮扶措施：<span class="required">  </span>
+	                                                </label>
+	                                                <div class="col-md-6 p5-form-control pl-0 lh-40">
+	                                                        {$measures_data.measures_type}
+	                                                </div>
+	                                            </div>
+	                                        </div>
+											<div class="row">
+						                        <div class="col-md-12 mb-30">
+						                            <a type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20" onclick="history.go(-1)">取消</a>
+						                        </div>
+						                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 结束 --
+					 </form>
+                </div>
+            </div>
+        </div> -->
+     </block>
+	<block name="js">
+		<script>
+		function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+		function change_type(){
+			var type =$('#help_log_type option:selected').val();
+			if(type == 1){
+				$("#village").show();
+				$("#households").hide();
+			} else {
+				$("#village").hide();
+				$("#households").show();
+			}
+			
+		}
+		</script>
+			<script>
+			laydate.render({
+				elem: '#commu_time',
+				type: 'datetime'
+			}); 
+		</script>
+        <script >
+            var um = UM.getEditor('editor');
+           /* laydate.render({
+    		    elem: '#time',
+    		  });*/
+
+        </script>
+        <script >
+	     /*帮扶党员多选*/
+		 $('#worker').change(function(){
+		 	var v =$("#worker").select2("val");
+				$("#workers").val(v);
+		 });
+			
+		</script>
+		<script >
+			$(document).ready(function(){
+				$(".multiSelect").select2();
+				$("#btnSave").click(function(){
+					var v =$("#worker").select2("val");
+					$("#workers").val(v);
+					$("#form_sample_2").submit();//myform表单的id
+				});
+			});
+		</script>
+		<script>
+			var FormValidation = function () {
+				var handleValidation2 = function() {
+					var form2 = $('#form_sample_2');
+					var error2 = $('.alert-danger', form2);
+					var success2 = $('.alert-success', form2);
+					form2.validate({
+						errorElement: 'span', //default input error message container
+						errorClass: 'help-block help-block-error', // default input error message class
+						focusInvalid: false, // do not focus the last invalid input
+						ignore: "",  // validate all fields including form hidden input
+						rules: {
+							help_log_name: {
+								required: true
+							},help_log_time: {
+								required: true,
+								digits: true
+							}, help_log_measures: {
+								date:true,
+								required: true
+							// }, help_idnumber: {
+							// 	required: true
+							// }, help_nativeplace: {
+							// 	required: true
+							}/* ,communist_no:{
+								required: true
+							} */
+						},
+
+						invalidHandler: function (event, validator) { //display error alert on form submit
+							success2.hide();
+							error2.show();
+							App.scrollTo(error2, -200);
+						},
+
+						errorPlacement: function (error, element) { // render error placement for each input type
+							var icon = $(element).parent('.input-icon').children('i');
+							icon.removeClass('fa-check').addClass("fa-warning");
+							icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+						},
+
+						highlight: function (element) { // hightlight error inputs
+							$(element)
+								.closest('.form-group').removeClass("has-success").addClass('has-error'); // set error class to the control group
+						},
+
+						unhighlight: function (element) { // revert the change done by hightlight
+
+						},
+
+						success: function (label, element) {
+							var icon = $(element).parent('.input-icon').children('i');
+							$(element).closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+							icon.removeClass("fa-warning").addClass("fa-check");
+						},
+
+						submitHandler: function (form) {
+							success2.show();
+							error2.hide();
+							form[0].submit(); // submit the form
+						}
+					});
+				}
+				var handleWysihtml5 = function() {
+					if (!jQuery().wysihtml5) {
+
+						return;
+					}
+
+					if ($('.wysihtml5').size() > 0) {
+						$('.wysihtml5').wysihtml5({
+							"stylesheets": ["../assets/global/plugins/bootstrap-wysihtml5/wysiwyg-color.css"]
+						});
+					}
+				}
+				return {
+					//main function to initiate the module
+					init: function () {
+						handleWysihtml5();
+						handleValidation2();
+					}
+				};
+			}();
+			jQuery(document).ready(function() {
+				FormValidation.init();
+			});
+			</script>
+	</block>

@@ -1,0 +1,55 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+	    <div class="page-content-wrapper">
+	        <div class="page-content">
+	            <div class="portlet light  bordered">
+	                <div class="portlet-title">
+	                    <div class="caption">
+	                        <div class="cont-col1">
+	                            <div class="label label-sm bg-color-green2">
+	                                <i class="iconfont">&#xe64b;</i>
+	                            </div>
+	                        </div>
+	                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+	                    </div>
+	                </div>
+	                <div class="portlet-body">
+	                    <div class="scroller p5-right-table-scroller" data-always-visible="1" data-rail-visible1="1">
+	                        <table id="client_table" class="table" data-toggle="table"
+	                               data-url=""
+	                               data-height="320" data-search="true"
+	                               data-page-size='25' data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
+	                               data-show-export="false" data-detail-view="false" data-detail-formatter="detailFormatter"
+	                               data-minimum-count-columns="2" data-show-pagination-switch="false" data-pagination="true" data-id-field="id"
+	                               data-page-list="[10, 25, 50, 100, ALL]">
+	                            <thead>
+	                                <tr>
+	                                    <th data-align="center" data-sortable="true">编号</th>
+	                                    <th data-align="center" data-sortable="true">党支部</th>
+	                                    <th data-align="center" data-sortable="true">是否设置</th>
+	                                    <th data-align="center" data-sortable="true">添加人</th>
+	                                    <th data-align="center" data-sortable="true">操作</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <foreach name="party_list" item="list">
+	                                    <tr>
+	                                        <td>{$list.num}</td>
+	                                        <td>{$list.party_name}</td>
+	                                        <td>{$list.is_record}</td>
+	                                        <td>{$list.add_user}</td>
+	                                        <td>{$list.operate}</td>
+	                                    </tr>
+	                                </foreach>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js"></block>

@@ -1,0 +1,114 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+		<div class="page-container">
+			<div class="page-content-wrapper">
+				<div class="page-content">
+					<!-- END PAGE BAR -->
+					<!-- END PAGE HEADER-->
+					<div class="tab-pane" id="tab_2">
+						<div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-gift"></i> 工作计划
+								</div>
+							</div>
+							<div class="portlet-body form">
+								
+								<form action="{:U('Oa/oa_workplan_reassign_do_save')}" id="signupForm" class="form-horizontal" method="post">
+									<input id="workplan_id" name="workplan_id" type="hidden" value="{$workplan_row.workplan_id}">
+									<div class="form-body">
+										<h3 class="form-section">工作计划</h3>
+										<div class="row">
+											<div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">执行人:</label>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control" name="workplan_arranger_man" lay-search>
+                                                            <option value="0">请选择</option>
+                                                            <php>echo getCommunistSelect($workplan_row['workplan_arranger_man']);</php>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+										</div>
+										<!--/row-->
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label col-md-3">备注:</label>
+													<div class="col-md-9">
+														<textarea rows="5" cols="50" name="memo">{$workplan_row.memo}</textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--/row-->
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label col-md-3">原执行人:</label>
+													<div class="col-md-9">
+														<label class="control-label">{$workplan_row.workplan_arranger_man}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--/row-->
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label col-md-3">计划标题:</label>
+												 	<div class="col-md-9">
+														<label class="control-label">{$workplan_row.workplan_title}</label>
+													</div> 
+												</div>
+											</div>
+										</div>
+										<!--/row-->
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label col-md-3">预计开始时间:</label>
+													<div class="col-md-9">
+														<label class="control-label">{$workplan_row.workplan_expectstart_time}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--/row-->
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label col-md-3">工作计划内容:</label>
+													<div class="col-md-9">
+													{$workplan_row.workplan_content}												
+													</div>
+													<!-- <div class="col-md-10">
+														<label class="control-label">{$workplan_row.workplan_content}</label>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-actions right">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn green">提交</button>
+														<a type="button" class="btn default" href="{:U('Oa/oa_workplan_index')}">返回</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</block>
+	<block name="js"></block>

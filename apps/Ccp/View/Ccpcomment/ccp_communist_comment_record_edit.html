@@ -1,0 +1,169 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('ccp_communist_comment_record_save')}" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" name="meeting_minutes_id" value="{$data.meeting_minutes_id}" />
+                            <input type="hidden" name="party_no" <neq name='data.party_no' value=''> value="{$data.party_no}"
+                            <else/> value="{$party_no}" </neq> />
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>评议记录标题：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="meeting_id" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                                <option value="0">请选择 </option>
+                                                <php>echo getCommentSelect($data['meeting_id'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>添加人：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <neq name="data.add_staff" value="">
+                                                    <input type="text" class="  form-control " name="add_staff" readonly value="{$data.add_staff}" />
+                                                <else/>
+                                                    <input type="hidden" class="  form-control " name="add_staff" readonly value="<php>echo session('staff_no')</php>" />
+                                                    <input type="text" class="  form-control "  readonly value="<php>echo getStaffInfo(session('staff_no'))</php>" />
+                                                </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>会议记录：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="meeting_minutes_content" placeholder="" class="layui-textarea">{$data.meeting_minutes_content}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>意见建议：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="meeting_minutes_feedback" placeholder="" class="layui-textarea">{$data.meeting_minutes_feedback}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>整改方案：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="meeting_minutes_improvement" placeholder="" class="layui-textarea">{$data.meeting_minutes_improvement}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</block>
+<block name="js">
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use([ 'form', 'laydate'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form;
+        form.render(null, 'component-form-group');
+        var url =  '../../../statics/layuiadmin/json/getArea.html'; //数据请求地址
+        var province = "广东省"; //编辑需要的省
+        var city = "广州市"; //编辑需要的市
+        var district = "天河区"; //编辑需要的县/区
+        getJSON(url,$("select[name='province']").closest("div"));
+        form.on('select(state)', function(data){
+            $that = $(data.elem);
+            urls = url+"?id="+data.value;
+            getJSON(urls,$that.closest("div").next());
+        });
+        function getJSON(urls,even){
+            $.getJSON(urls, function(json){
+                var pid = 0;
+                var name = even.find("select").attr("name");
+                var select = "<select name=\"" + name + "\" lay-filter=\"state\">";
+                select += "<option value=\"0\">请选择 </option>";
+                $(json).each(function(){
+                    select += "<option value=\"" + this.id + "\"";
+                    if(province == this.value || city == this.value || district == this.value){
+                        select += " selected=\"selected\" ";
+                        pid = this.id;
+                    }
+                    select += ">" + this.value + "</option>";
+                });
+                select += "</select>";
+                even.html(select);
+                var nextName = even.next().find("select").attr("name");
+                even.next().html("<select name=\"" + nextName + "\" lay-filter=\"state\"><option value=\"0\">请选择 </option></select>");
+                form.render('select');
+                if(pid != 0){
+                    getJSON(url+"?id="+pid,even.next());
+                }
+            });
+        }
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+    })
+
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: "{:U('System/public/layedit_upload')}" //接口url
+              , type: 'post' //默认post
+            }
+        });
+        layedit.build('notes_content'); //建立编辑器
+    });
+    //时间选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //时间选择器
+        //时间选择器
+        laydate.render({
+            elem: '#test4'
+            ,type: 'time'
+        });
+        //日期时间范围
+        laydate.render({
+            elem: '#test10_add'
+            ,type: 'datetime'
+            ,range: true
+        });
+    })
+</script>
+</block>

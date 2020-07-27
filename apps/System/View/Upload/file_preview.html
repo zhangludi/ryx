@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文件预览</title>
+<meta name="keywords" content="森普软件后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<meta name="description" content="森普软件是一个完全响应式，基于Bootstrop3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+	<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/animate.css" >
+	<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/style_admin.css" >
+<!-- 图片点击放大用的样式 -->
+	<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/lightbox/css/screen.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/lightbox/css/lightbox.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp-jnwsb-v1.css" >
+</head>
+<body class="skin-simpro pace-done">
+	<div id="wrapper" class="skin-jnwsb" style="height: 400px;">
+		<!--        <div class="row">
+           <div class="col-lg-12">
+               <div class="ibox float-e-margins">
+                   <div class="ibox-content"> -->
+		<!-- <div class="col-lg-9 animated fadeInRight">
+                        <div class="row wrapper border-bottom white-bg page-heading">
+                            <div class="col-lg-12" id="img"> -->
+		<eq name="tt_table" value="">文件不存在或已删除！</eq>
+		<volist name="tt_table" id="tt"> 
+		<neq name="tt.upload_path" value=''>
+		<div class="file-box">
+			<div class="file">
+				<div class="icon" style="overflow: hidden; height: 100px">
+					<if condition="strpos($tt['upload_path'],doc) eq true"> <i class="fa fa-file"></i> <elseif condition="strpos($tt['upload_path'],xls) eq true" /> <i class="fa fa-bar-chart-o"></i> <elseif condition="strpos($tt['upload_path'],rar) eq true" /> <img class="img-responsive" src="__UPLOAD__/images/iconfont-rar.png" alt="image" style="text-align: center"></img> <elseif condition="strpos($tt['upload_path'],zip) eq true" /> <img class="img-responsive" src="__UPLOAD__/images/iconfont-zip.png" alt="image" style="text-align: center"></img> <elseif condition="strpos($tt['upload_path'],jpg) eq true" /> <img class="img-responsive" src="__UPLOAD__/{$tt['upload_path']}" alt="image"></img> <elseif condition="strpos($tt['upload_path'],png) eq true" /> <img class="img-responsive" src="__UPLOAD__/{$tt['upload_path']}" alt="image"></img> <elseif condition="strpos($tt['upload_path'],gif) eq true" /> <img class="img-responsive" src="__UPLOAD__/{$tt['upload_path']}" alt="image"></img> <elseif
+						condition="strpos($tt['upload_path'],jpeg) eq true" /> <img class="img-responsive" src="__UPLOAD__/{$tt['upload_path']}" alt="image"></img> <elseif condition="strpos($tt['upload_path'],bmp) eq true" /> <img class="img-responsive" src="__UPLOAD__/{$tt['upload_path']}" alt="image"></img> <elseif condition="strpos($tt['upload_path'],mp4) eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video> <elseif condition="strpos($tt['upload_path'],mp3) eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video> <elseif condition="strpos($tt['upload_path'],avi) eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video> <elseif condition="strpos($tt['upload_path'],rmvb) eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video> <elseif condition="strpos($tt['upload_path'],flv) eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video> <elseif condition="strpos($tt['upload_path'],'3gp') eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video><elseif condition="strpos($tt['upload_path'],'mp4') eq true" /> <video controls="" name="media">
+						<source src="__UPLOAD__/{$tt['upload_path']}">
+					</video> <else /> <i class="fa fa-file"></i> </if>
+				</div>
+				<div class="file-name" style="overflow: hidden; height: 100px">
+					{$tt['upload_source']} <br> 
+					<small>添加时间：{$tt['add_time']}</small> 
+					<!-- <a href="{:U('Upload/upload_file_del',array('id'=>$tt['upload_id']))}" class="btn btn-danger btn-xs" onclick=" if(!confirm('确认删除？')){return false;}">删除</a> -->
+					<a type="button"  class="btn btn-danger btn-xs" onclick="file_del({$tt.upload_id})">删除</a>
+					<!-- <a href="{:U('Upload/download_file',array('id'=>$tt['upload_id']))}" download class="btn btn-danger btn-xs" >下载</a> -->
+					 <a href="__UPLOAD__/{$tt['upload_path']}" download class="btn btn-danger btn-xs" >下载</a> 
+				</div>
+			</div>
+		</div>
+		</neq> 
+		
+		</volist>
+		
+	</div>
+	<!--     </div>
+                </div>
+                </div> -->
+	<input id="abc" type="hidden" name="id" value="{$idstr}" />
+</body>
+	<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="__STATICS__/plugins/lightbox/js/lightbox.js"></script>
+<script >
+//确定按钮的弹层
+function file_del(id){
+	
+	 if(!confirm('确认删除？')){return false;}
+	 
+	$.get("{:U('Upload/upload_file_del')}",{id:id},function(result){
+		
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引  
+    	parent.layer.close(index);
+	  });
+	} 
+
+</script>
+</html>

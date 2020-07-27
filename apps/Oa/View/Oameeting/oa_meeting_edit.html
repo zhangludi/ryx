@@ -1,0 +1,318 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+    #js-grid-juicy-projects2{
+        margin-left: 0% !important;
+    } 
+    #js-grid-juicy-projects {
+        margin-left: 0% !important;
+    }
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"> <php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php></div>
+                <form action="{:U('oa_meeting_do_save')}" method="post" class="form-horizontal" onsubmit="return form_check()">
+                    <div class="layui-card-body layui-form">
+                        <div class="layui-row">
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>会议名称：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="meeting_name" value="{$row['meeting_name']}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-40 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>开始时间：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="meeting_start_time" value="{$row['meeting_start_time']}" autocomplete="off" class="layui-input" placeholder="选择日期" id="meeting_start_time" lay-verify='required'>
+                                     </div>
+                                    <span class="fcolor-red fsize-18 lh-40 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>结束时间：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="meeting_end_time" value="{$row['meeting_end_time']}" autocomplete="off" class="layui-input" placeholder="选择日期" id="meeting_end_time" lay-verify='required'>
+                                     </div>
+                                    <span class="fcolor-red fsize-18 lh-40 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>会议地点：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="meeting_addr" value="{$row['meeting_addr']}" autocomplete="off" class="layui-input" >
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>组织部门：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="party_no"  >
+                                            <php>echo getPartySelect($row[party_no])</php>
+                                        </select>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong class="multline-over-h line-clamp1">主持人：</strong></div>
+                                    <div class="layui-col-xs7 input-group fsize-14 fcolor-65 pull-left">
+                                        <input type="text" id="meeting_host_name" name="meeting_host_name" value="{$row['meeting_host_name']}" readonly autocomplete="off" class="layui-input" lay-verify='required' style="width:53%;display: inline;" >
+                                        <button type="button" onclick="select_receive_user('meeting_host')" class="layui-btn pull-right">选择人员</button>
+                                        <!-- <input type="text" class="sp-pick-list" id="idcard_no"> -->
+                                        <input type="hidden" id="meeting_host_no" name="meeting_host_no" value="{$row['meeting_host']}"  >
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-40 pl-5">*</span>
+                                </div>
+                            </div>
+
+
+
+                            <!-- <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>主持人：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <input type="text" id="meeting_host_name" name="meeting_host_name" value="{$row['meeting_host_name']}" readonly autocomplete="off" class="layui-input" lay-verify='required' >
+                                        <input type="hidden" id="meeting_host_no" name="meeting_host_no" value="{$row['meeting_host']}" autocomplete="off" class="layui-input"  >
+                                    </div>
+                                    <div class="layui-col-xs1 fsize-14 fcolor-65 lh-35 pl-10">
+                                        <button type="button" onclick="select_receive_user('meeting_host')" class="layui-btn">选择人员</button>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>会议类型：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="meeting_type" >
+                                             <php> echo getBdTypeSelect("meeting_type",'',$row['meeting_type'],$meeting_type);</php>
+                                        </select>
+                                     </div>
+                                </div>
+                            </div>
+                            <eq name="is_integral" value="1">
+                            <div class="layui-col-xs4 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>会议积分：</strong></div>
+                                     <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <input type="text" name="meeting_integral" value="{$row['meeting_integral']}" onkeyup="value=value.replace(/[^\d.]/g,'')" autocomplete="off" class="layui-input" />
+                                     </div>
+                                </div>
+                            </div>
+                            </eq>
+                            <neq name="row.meeting_type" value="2005">
+                                <div class="layui-col-xs4 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>对应考勤机：</strong></div>
+                                         <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <select name="machine_no"  >
+                                                <php> echo getMachineSelect($row["machine_no"]);</php>
+                                            </select>
+                                         </div>
+                                    </div>
+                                </div>
+                            </neq>
+                            
+                            <!-- <neq name="row.meeting_type" value="2005">
+                                <div class="layui-col-xs4 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong> &nbsp;</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35" id="Odiv">
+                                            <input id='is_camera' type="checkbox" title="是否为远程会议" lay-skin="primary" <neq name="row.meeting_camera">checked</neq> name="is_camera" value='1' />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs4 mt-10" id='camera_div'>
+                                    <div class="layui-row" >
+                                        <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>摄像头编号：</strong></div>
+                                         <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <input type="text" name="meeting_camera" value="{$row['meeting_camera']}" autocomplete="off" class="layui-input"  >
+                                         </div>
+                                    </div>
+                                </div>
+                            </neq> -->
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35"><strong>会议简介：</strong></div>
+                                    <div class="layui-col-xs10 fsize-14 fcolor-65 lh-35">
+                                         <textarea name="memo" placeholder="请输入简介" maxlength="225" class="layui-textarea">{$row['memo']}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs1 text-r fsize-14 fcolor-65 lh-35"><strong class="multline-over-h line-clamp1">参会人员：</strong></div>
+                                    <div class="layui-col-xs10 input-group fsize-14 fcolor-65 pull-left">
+                                        <textarea id="meeting_communist_name" readonly class="form-control text-l" maxlength="800" name="meeting_communist_name" rows="5" placeholder="这个文本域的最大长度为225个字符." lay-verify='required' style="width:85%;display: inline;">{$row['meeting_communist_name']}</textarea>
+                                        <input type="hidden" name='meeting_communist_no' id='meeting_communist_no' value="{$row['meeting_communist_no']}">
+                                        <input type="hidden" name='status' value="{$row['status']}">
+                                        <input type="hidden" name="meeting_no"  value="{$row['meeting_no']}">
+                                        <button type="button" onclick="select_meeting_user('meeting_communist')" class="layui-btn pull-right">选择人员</button>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-40 pl-5">*</span>
+                                </div>
+                            </div>
+                            <!-- <div class="layui-col-xs12 mt-20">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35"><strong>参会人员：</strong></div>
+                                    <div class="layui-col-xs10 fsize-14 fcolor-65 lh-35">
+                                        <textarea id="meeting_communist_name" readonly class="form-control text-l" maxlength="800" name="meeting_communist_name" rows="5" placeholder="这个文本域的最大长度为225个字符." lay-verify='required'>{$row['meeting_communist_name']}</textarea>
+                                        <input type="hidden" name='meeting_communist_no' id='meeting_communist_no' value="{$row['meeting_communist_no']}">
+                                        <input type="hidden" name='status' value="{$row['status']}">
+                                        <input type="hidden" name="meeting_no"  value="{$row['meeting_no']}">
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-40 pl-5">*</span>
+                                    <div class="layui-col-xs1 fsize-14 fcolor-65 lh-35 pl-10">
+                                        <button type="button" onclick="select_meeting_user('meeting_communist')" class="layui-btn">选择人员</button>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs1 text-r fsize-14 fcolor-65 lh-35"><strong>会议图片：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <button type="button" class="layui-btn" id="party_propagate" onclick="uploader_file('oa','1','meetting_thumb','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                        <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="meetting_thumb_old" name="meetting_thumb_old" value="{$row.meetting_thumb}" style="width: 60px">
+                                        <input type="hidden" id="meetting_thumb" name="meetting_thumb" value="{$row.meetting_thumb}" style="width: 60px">
+                                        <input type="hidden" class="form-control" id="meetting_img" name="meetting_img" value="{$row.meetting_thumb}">
+                                        <div id="js-grid-juicy-projects2" style="height: 100px;">
+                                            <neq name="row.meetting_thumb" value="">
+                                                <php>echo getUploadHtml($row['meetting_thumb']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <!-- <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button> -->
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+function layer_colse() {
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+}
+layui.use([ 'form', 'laydate','formSelects'], function() {
+    var $ = layui.jquery
+            , admin = layui.admin
+            , element = layui.element
+            , layer = layui.layer
+            , laydate = layui.laydate
+            , form = layui.form
+            , formSelects = layui.formSelects;
+    form.render(null, 'component-form-group');
+    laydate.render({
+        elem: '#LAY-component-form-group-date'
+    });
+})
+function form_check(){
+    var meeting_start_time = $("input[name='meeting_start_time']").val();
+    var meeting_end_time = $("input[name='meeting_end_time']").val();
+    if(meeting_start_time > meeting_end_time){
+        alert("会议结束时间要大于会议开始时间");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+// var index = parent.layer.getFrameIndex(window.name);
+// parent.layer.iframeAuto(index);//自适应弹窗高度
+//layer弹层关闭
+function cancel() {
+    window.history.back(-1);
+}
+laydate.render({
+    elem: '#meeting_start_time'
+    ,type: 'datetime'
+    ,format: 'yyyy-MM-dd HH:mm'
+});
+laydate.render({
+    elem: '#meeting_end_time'
+    ,type: 'datetime'
+    ,format: 'yyyy-MM-dd HH:mm'
+});
+
+$("#camera_div").hide();
+
+$('#Odiv').click(function(){
+    if($('#is_camera').is(':checked')){  
+        $("#camera_div").show();
+    }else {
+        $("#camera_div").hide();
+    }
+})
+
+function select_meeting_user(field_name) {
+    var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name+"&group=1";
+    layer.open({
+        type: 2,
+        title: '选择参会人员',
+        maxmin: true,
+        offset: '10px',
+        shadeClose: true, //点击遮罩关闭层
+        area : ['620px' , '425px'],
+        content: url,
+        success:function(){
+            layerAuto();
+        }//iframe的url
+    });
+}
+function select_receive_user(field_name){
+    var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name+"&hide=1&group=1";
+    layer.open({
+        type: 2,
+        title: '选择联系人',
+        maxmin: true,
+        offset: 20+'px',
+        shadeClose: true, //点击遮罩关闭层
+        area : ['620px' , '422px'],
+        content: url //iframe的url
+    });
+}
+function choose_communist(communist, communist_name, field_name) {
+    $("input[name='" + field_name + "']").val(communist);
+    $("textarea[name='" + field_name + "_name']").text(communist_name);
+}
+function submit_val() {
+    var party_form = $("#party_form").val();
+    $("#party_hidden").val(party_form);
+    var communist_form = $("#communist_form").val();
+    $("#communist_hidden").val(communist_form);
+    var machine_form = $("#machine_form").val();
+    $("#machine_hidden").val(machine_form);
+    var type_form = $("#machine_form").val();
+    $("#communist_hidden1").val(type_form);
+}
+lay('.layer-date').each(function(){
+      laydate.render({
+        elem: this
+        ,trigger: 'click'
+        ,type: 'datetime'
+      });
+    }); 
+</script>
+</block>

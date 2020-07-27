@@ -1,0 +1,669 @@
+/*ipam_edu_index
+    edu页css公共页
+*/
+/*
+    头部样式
+*/
+.ipam_home_public_background {
+  background-attachment: fixed;
+}
+.public_content {
+  background: #ffffff;
+}
+.public_content .public_content_special {
+  width: 1200px;
+  height: 480px;
+  background: #ffffff;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+}
+.public_content .public_content_special .public_content_special_top {
+  display: flex;
+  padding: 32px;
+  height: 263px;
+  box-sizing: border-box;
+}
+.public_content .public_content_special .public_content_special_top .special_left {
+  width: 383px;
+  height: 215px;
+  background: #ff5252;
+  border-radius: 10px;
+}
+.public_content .public_content_special .public_content_special_top .special_right {
+  flex: 1;
+  margin: 5px 0 0 30px;
+}
+.public_content .public_content_special .public_content_special_top .special_right h3 {
+  font-size: 36px;
+  font-family: SourceHanSansSC-Medium;
+  font-weight: 500;
+  color: #212121;
+  margin: 5px 0 20px 0;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_schedule {
+  margin-top: 30px;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_schedule p {
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #212121;
+  line-height: 22px;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_schedule .layui-progress {
+  margin: 10px 0;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_class {
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #666666;
+  line-height: 22px;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_class .special_classes {
+  margin-right: 10px;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_class .special_classes span {
+  margin-left: 5px;
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #666666;
+  line-height: 22px;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_class .special_classes i {
+  margin-right: 3px;
+}
+.public_content .public_content_special .public_content_special_top .special_right .special_class a:hover {
+  color: #FF594B;
+}
+.public_content .public_content_special .public_content_special_video {
+  height: 217px;
+  background: url('../images/ipam_edu_bgvideo.png');
+  background-size: 1200px 217px;
+  position: relative;
+  padding: 0 15px 0 30px;
+  box-sizing: border-box;
+  display: flex;
+}
+.public_content .public_content_special .public_content_special_video .special_video_start {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 58%;
+  top: 6%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left {
+  margin-top: 8%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_tit {
+  font-size: 14px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 50px;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_module_icon {
+  margin-right: 40px;
+  padding-left: 10px;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_module_icon .special_video_left_module_icons {
+  display: block;
+  float: left;
+  margin-right: 13px;
+  position: relative;
+  transform: skew(-27deg);
+  width: 26px;
+  height: 41px;
+  background: rgba(0, 0, 0, 0.13);
+  border-radius: 16px;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_module_icon .special_video_left_module_icons img {
+  position: absolute;
+  left: 28%;
+  top: 33%;
+  transform: skew(25deg);
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_module_icon .special_video_left_module_icons .last {
+  left: 7px;
+  top: 13px;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_num {
+  margin-right: 70px;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_left_num p {
+  text-align: center;
+  font-size: 48px;
+  font-family: SourceHanSansSC-Bold;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 30px;
+  margin-top: 11%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_left .special_video_border {
+  width: 1px;
+  height: 33px;
+  background: #ffba30;
+  position: absolute;
+  left: 140%;
+  top: 54%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_list {
+  flex: 1;
+  margin: 6.5% 0 0 3.5%;
+  position: relative;
+  overflow: hidden;
+}
+.public_content .public_content_special .public_content_special_video .special_video_list li {
+  float: left;
+  margin-left: 1%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_list li p {
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 16px;
+  margin-bottom: 5%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_btn {
+  position: absolute;
+  left: 44%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+}
+.public_content .public_content_special .public_content_special_video .special_video_btn div {
+  font-size: 16px;
+  font-family: 宋体;
+  font-weight: 600;
+  background-color: #ff8638;
+  border-radius: 50%;
+}
+.public_content .public_content_special .public_content_special_video .special_video_btn div:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.public_content .public_content_topic {
+  margin-top: 70px;
+}
+.public_content .public_content_topic .public_topic_title {
+  text-align: center;
+}
+.public_content .public_content_topic .public_topic_title h3 {
+  font-size: 36px;
+  font-family: SourceHanSansSC-Medium;
+  font-weight: 500;
+  color: #212121;
+}
+.public_content .public_content_topic .public_topic_title p {
+  width: 765px;
+  font-family: SourceHanSansSC-Light;
+  font-weight: 300;
+  color: #666666;
+  line-height: 27px;
+  margin: 2% auto 0;
+}
+.public_content .public_content_topic .public_topic_title p span {
+  font-size: 18px;
+  color: #376BF5;
+}
+.public_content .public_content_topic .public_topic_title_btn {
+  width: 200px;
+  height: 48px;
+  display: inline-block;
+  line-height: 48px;
+  text-align: center;
+  background: linear-gradient(90deg, #ff3032, #ff5a2d);
+  border-radius: 24px;
+  cursor: pointer;
+  color: #fff;
+  margin: 1% auto 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+}
+.public_content .public_content_topic #Dialg {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2840px;
+  z-index: 999999;
+}
+.public_content .public_content_topic #Dialg .Learn_interest {
+  width: 1044px;
+  height: 600px;
+  border-radius: 10px;
+  background: url(../images/edu_notes_bg.png);
+  margin: 654px auto;
+  padding: 0 45px;
+  box-sizing: border-box;
+  position: relative;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_tit {
+  height: 98px;
+  border-bottom: 1px solid #DEDEDE;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_tit b {
+  font-size: 32px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #212121;
+  line-height: 93px;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_tit span {
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #9e9e9e;
+  line-height: 93px;
+  margin-left: 10px;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_tit img {
+  width: 18px;
+  height: 18px;
+  margin-top: 3%;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list {
+  margin-top: 30px;
+  display: flex;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list .Learn_interest_lists {
+  flex: 1;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list h4 {
+  font-size: 14px;
+  font-family: SourceHanSansSC-Normal;
+  font-weight: 400;
+  color: #9e9e9e;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list .Learn_interest_btn {
+  margin-top: 10px;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list .Learn_interest_btn a {
+  height: 32px;
+  display: inline-block;
+  line-height: 32px;
+  padding: 0 6%;
+  border: 1px solid #DEDEDE;
+  border-radius: 16px;
+  font-size: 16px;
+  font-family: SourceHanSansSC-Light;
+  font-weight: 400;
+  color: #212121;
+  margin: 0 3% 4% 0;
+  box-sizing: border-box;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list .Learn_interest_btn .Learn_interest_btn_active {
+  background: linear-gradient(90deg, #ff3032, #ff5a2d);
+  color: #fff;
+  border: 1px solid #ff5a2d;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .Learn_interest_list .Learn_interest_btn .Learn_interest_btn_not {
+  border: 0;
+}
+.public_content .public_content_topic #Dialg .Learn_interest .showDialgStart {
+  width: 200px;
+  height: 48px;
+  cursor: pointer;
+  line-height: 48px;
+  color: #fff;
+  text-align: center;
+  display: block;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #ff3032, #ff5a2d);
+  border-radius: 24px;
+}
+.public_content .public_content_topic .public_topic_customized {
+  height: 594px;
+  width: 100%;
+  background: url(../images/edu_01_03.png);
+  position: relative;
+}
+.public_content .public_content_topic .public_topic_customized .customized {
+  width: 624px;
+  height: 338px;
+  background: #ffffff;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  position: absolute;
+  bottom: 17%;
+  padding: 24px 18px;
+  /*进度条颜色*/
+}
+.public_content .public_content_topic .public_topic_customized .customized .customized_tit h3 {
+  font-size: 20px;
+  font-family: SourceHanSansSC-Bold;
+  font-weight: bold;
+  color: #212121;
+  margin-top: 5%;
+}
+.public_content .public_content_topic .public_topic_customized .customized .customized_tit p {
+  font-size: 14px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #666666;
+  margin-top: 3%;
+}
+.public_content .public_content_topic .public_topic_customized .customized .customized_tit a {
+  width: 111px;
+  height: 28px;
+  background: rgba(55, 107, 245, 0.13);
+  border-radius: 14px;
+  font-size: 14px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #376bf5;
+  line-height: 28px;
+  text-align: center;
+}
+.public_content .public_content_topic .public_topic_customized .customized .special_right_progress li {
+  list-style: none;
+  width: 48%;
+  background: #f5f5f5;
+  border-radius: 10px;
+  float: left;
+  margin: 4px;
+}
+.public_content .public_content_topic .public_topic_customized .customized .special_right_progress .special_right_progress_tit {
+  padding-top: 14px;
+  padding-left: 19px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 23px;
+}
+.public_content .public_content_topic .public_topic_customized .customized .special_right_progress .special_right_progress_tit .special_right_progress_tit_study {
+  font-size: 12px;
+  font-family: SourceHanSansSC-Light;
+  font-weight: 300;
+  color: #212121;
+  line-height: 22px;
+  margin-bottom: 2%;
+}
+.public_content .public_content_topic .public_topic_customized .customized .special_right_progress .special_right_progress_tit img {
+  margin-top: -3px;
+}
+.public_content .public_content_topic .public_topic_customized .customized .special_right_progress .layui-progress {
+  position: relative;
+  height: 6px;
+  border-radius: 20px;
+  background-color: #e2e2e2;
+  width: 87%;
+  margin: 0 auto;
+  margin-top: 7px;
+  margin-bottom: 2%;
+}
+.public_content .public_content_topic .public_topic_customized .customized .bg-color-ff4040 {
+  background-color: #FF4040 !important;
+}
+.public_content .public_content_topic .public_topic_customized .customized .bg-color-376BF5 {
+  background-color: #376BF5 !important;
+}
+.public_content .public_content_topic .public_topic_customized .customized .bg-color-A144FE {
+  background-color: #A144FE !important;
+}
+.public_content .public_content_topic .public_topic_customized .customized .bg-color-FE9C44 {
+  background-color: #FE9C44 !important;
+}
+.public_content .public_content_topic .public_topic_customized .customized .special_right_progress_con {
+  padding-top: 4px;
+  padding-left: 19px;
+  width: 230px;
+  overflow: hidden;
+  height: 25px;
+  font-size: 12px;
+  color: #212121;
+  line-height: 22px;
+}
+.public_content .public_content_topic .public_topic_list {
+  margin: 50px 14px;
+  border: 1px solid #fff;
+  text-align: center;
+  margin-top: 8%;
+}
+.public_content .public_content_topic .public_topic_list span {
+  width: 144px;
+  height: 144px;
+  border-radius: 10px;
+  margin-right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.public_content .public_content_topic .public_topic_list span p {
+  margin-top: 8px;
+}
+.public_content .public_content_topic .public_topic_list .topic_list_hover {
+  background-color: #fff;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.08);
+}
+.public_content .public_content_topic .public_topic_list .topic_list_f5f5 {
+  background: #F5F5F5;
+}
+.public_content .public_content_notes {
+  margin-top: 30px;
+  width: 1200px;
+  height: 567px;
+  background: url(../images/edu_notes_bg.png);
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 26px 24px;
+  box-sizing: border-box;
+}
+.public_content .public_content_notes .public_notes_title {
+  height: 60px;
+}
+.public_content .public_content_notes .public_notes_title a {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 100px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #212121;
+}
+.public_content .public_content_notes .public_notes_title a:hover {
+  background: linear-gradient(90deg, #ff3032, #ff5a2d);
+  color: #fff;
+  border-radius: 16px;
+}
+.public_content .public_content_notes .public_notes_title .notes_active {
+  background: linear-gradient(90deg, #ff3032, #ff5a2d);
+  color: #fff;
+  border-radius: 16px;
+}
+.public_content .public_content_notes table thead {
+  border: 1px solid #DEDEDE;
+}
+.public_content .public_content_notes table thead th {
+  font-size: 20px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #666666;
+}
+.public_content .public_content_notes table tbody {
+  height: 400px;
+  border: 1px solid #F0F0F0;
+}
+.public_content .public_content_notes table tbody td {
+  font-size: 20px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #9e9e9e;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: right;
+  vertical-align: bottom;
+  position: relative;
+}
+{
+  width: 16px;
+  height: 16px;
+  background: #ff4733;
+  box-shadow: 0px 4px 12px 0px rgba(255, 71, 51, 0.62);
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.dotDialg {
+  width: 330px;
+  height: 240px;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 99;
+}
+.dotDialg .dotDialg_tit {
+  width: 330px;
+  height: 36px;
+  line-height: 36px;
+  background: #333333;
+  opacity: 0.87;
+  border-radius: 10px 10px 0px 0px;
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: left;
+  padding-left: 3%;
+  box-sizing: border-box;
+  position: relative;
+}
+.dotDialg .dotDialg_tit .closedotDialg {
+	width: 25px !important;
+    height: 25px !important;
+    line-height: 25px;
+    background-color: #C0C0C0 !important;
+    position: absolute;
+    right: 4%;
+    top: 5%;
+    font-size: 16px;
+    cursor: pointer;
+}
+.dotDialg .dotDialg_list {
+  margin: 20px 16px;
+}
+.dotDialg .dotDialg_list .dotDialg_time {
+  margin-top: 3%;
+  font-size: 14px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #9e9e9e;
+  line-height: 24px;
+}
+.dotDialg .dotDialg_list .dotDialg_notes {
+  width: 220px;
+  height: 59px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #212121;
+  line-height: 24px;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 2% 9% 0 7%;
+}
+.dotDialg .dotDialg_list a {
+  font-size: 18px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #ff4040;
+}
+.public_content .public_content_article {
+  padding: 70px 0;
+}
+.public_content .public_content_article .public_article_list {
+  margin-top: 30px;
+}
+.public_content .public_content_article .public_article_list img {
+  display: block;
+}
+.public_content .public_content_article .public_article_list h3 {
+  font-size: 28px;
+  font-family: MicrosoftYaHei-Bold;
+  font-weight: bold;
+  color: #212121;
+}
+.public_content .public_content_article .public_article_list p {
+  font-size: 16px;
+  font-family: MicrosoftYaHei;
+  font-weight: 400;
+  color: #9e9e9e;
+  width: 481px;
+  height: 71px;
+  padding: 27px 0;
+  border-bottom: 1px solid #ccc;
+}
+.public_content .public_content_article .public_article_list li {
+  font-size: 18px;
+  font-family: MicrosoftYaHei;
+  font-weight: 400;
+  color: #666666;
+  line-height: 30px;
+  padding-left: 20px;
+  position: relative;
+}
+.public_content .public_content_article .public_article_list li .public_article_dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 43%;
+}
+.public_content .public_content_article .public_article_list .public_article_more {
+  font-size: 18px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 600;
+  color: #ff4040;
+  float: right;
+}
+#dates {
+  border-left: 1px solid #F0F0F0;
+}
+#dates span {
+  font-size: 14px;
+  display: inline-block;
+  width: 164px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  border-right: 1px solid #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
+  font-size: 20px;
+  font-family: SourceHanSansSC-Regular;
+  font-weight: 400;
+  color: #9e9e9e;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: right;
+  vertical-align: bottom;
+  position: relative;
+}
+#dates span.today {
+  color: #00ADB5;
+}
+
+

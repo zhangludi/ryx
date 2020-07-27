@@ -1,0 +1,252 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+	<style type="text/css">
+		.hr-color-green {
+		    border-color: #88ba24 !important;
+		}
+		.hr-color-blue {
+		    border-color: #15a0e6 !important;
+		}
+		.prosess-item-pic-img {
+		    border-radius: 50% !important;
+		}
+		#js-grid-juicy-projects{
+		    margin-left: 0% !important;
+		}
+		#js-grid-juicy-projects2{
+		    margin-left: 0% !important;
+		} 
+		#admin-offcanvas {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        #admin-offcanvas::-webkit-scrollbar {
+            display: none;
+        }
+	</style>
+</block>
+<block name="body" >
+    <div class="layui-fluid" id="admin-offcanvas" <if condition="$url_no neq ''"> style="padding:0px;"</if> >
+		<div class="layui-row layui-col-space15" >
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+					<div class="layui-card-body">
+						<input type="hidden" name="approval_status" id="approval_status" value="{$approval_status}">
+						<input type="hidden" name="node_count" id="node_count" value="{$node_count}">
+						<div class="layui-row">
+							<section class="layui-col-md12">
+								<article class="layui-card">
+									<div class="prosess-item">
+										<volist name="node_list" id="node">
+											<div class="prosess-item-pic">
+				  								<img src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" class="prosess-item-pic-img 
+				  								<eq name='approval_list.node_id' value='$node[node_id]'> hr-color-green <else/><eq name='i' value='1'> hr-color-blue </eq> <eq name='node.status' value='21'> hr-color-blue </eq> <neq name='node.status' value='1'> hr-color-gray </neq> </eq>
+				  								">
+											</div>
+										</volist>
+										<div class="prosess-item-pic">
+			  								<img src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" class="prosess-item-pic-img hr-color-gray">
+										</div>
+									</div>
+									<div class="steps"></div>
+								</article>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md12" >
+				<div class="layui-card layui-form">
+					<div class="layui-card-header"> 审批发起基本信息</div>
+					<div class="layui-card-body">
+						<div class="layui-row">
+							<div class="layui-col-xs6">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>审批标题：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35">{$approval_list.approval_name}</div>
+								</div>
+							</div>
+							<neq name="approval_list.approval_content" value="">
+								<div class="layui-col-xs6">
+									<div class="layui-row">
+										<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>审批内容：</strong></div>
+										<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35">{$approval_list.approval_content}</div>
+									</div>
+								</div>
+							</neq>
+							<neq name="approval_list.approval_attach" value="">
+							<div class="layui-col-xs6">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>审批附件：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35 ">
+										<div id="js-grid-juicy-projects2" class="cbp" style="height:100px">
+											<php>echo getUploadHtml($approval_list['approval_attach'],'40','100',1,'');</php>
+										</div>
+									</div>
+								</div>
+							</div>
+							</neq>
+							<div class="layui-col-xs6">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>发起人姓名：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35 ">
+										{$approval_list.apply_man_name}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs6">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>发起时间：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35">{$approval_list.approval_time}</div>
+								</div>
+							</div>
+							<div class="layui-col-xs6">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>发起人岗位：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35"><span>{$approval_list.apply_man_post}</span></div>
+								</div>
+							</div>
+							<div class="layui-col-xs6">
+								<div class="layui-row">
+									<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>发起人部门：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35">{$approval_list.apply_man_party}</div>
+								</div>
+							</div>
+							<neq name='approval_list.approva_attach' value=''>
+								<div class="layui-col-xs6">
+									<div class="layui-row">
+										<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+										<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35"><php>echo getUploadHtml($approval_list['approva_attach'],'40');</php></div>
+									</div>
+								</div>
+							</neq>
+							<div class="layui-col-xs12">
+								<div class="layui-row pull-right">
+									<in name="staff_no" value="$approval_list[node_staff]">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1" onclick="log_add('同意')">同意</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="log_add('退回')">退回</button>
+                                    </in>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header"> 审批流转信息</div>
+					<div class="layui-card-body">
+						<div class="layui-row layui-col-space10">
+							<div class="layui-col-xs1 ml-70"></div>
+							<div class="layui-col-xs9">
+								<ul class="layui-timeline">
+									<volist name="log_list" id="log">
+										<li class="layui-timeline-item">
+											<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+											<div class="layui-timeline-content layui-text">
+												<h3 class="layui-timeline-title fcolor-65">{$log.log_time}</h3>
+												<p class="fcolor-66">
+													{$log.log_staff_name}
+													审核了申请单 
+													审核结果：【{$log.log_type}】
+													意见：{$log.log_content}
+												</p>
+											</div>
+										</li>
+									</volist>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<if condition="$url_no eq ''">
+				<div class="layui-col-xs12">
+					<div class="layui-footer" style="text-align: right">
+		                <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+		            </div>
+			    </div> 
+			</if>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function layer_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+	function  log_add(type){
+		layer.open({
+			type: 2,
+			title: '填写流转意见',
+			maxmin: false,
+			shadeClose: true, //点击遮罩关闭层
+			area : ['450px' , '270px'],
+			content: "{:U('Oa/Oaapproval/oa_approval_log_edit')}?log_type="+type+"&node_id={$approval_list.node_id}&url_no={$url_no}",
+			success:function(){
+				layerAuto();
+			}
+		});
+	};
+	$(function() {
+		initStep();
+	});
+	function initStep() {
+		var approval_status = $('#approval_status').val();
+		var node_count = $('#node_count').val();
+		var step = parseInt(node_count)+1;
+		if(approval_status == '21'){
+			var change_step = step;
+		} else {
+			<volist name="node_list" id="node" key = 'k'>
+				<if condition="$approval_node_id eq $node['node_id']">
+					var change_step = {$k};
+				</if>
+			</volist>
+		}
+		$(".steps").step({
+			stepNames: [
+				<volist name="node_list" id="node">
+				'{$node.node_name}',
+				</volist>
+				'结束'
+			],
+
+			initStep: change_step
+		})
+	}
+	function previousStep() {
+		$(".steps").step("previous");
+	}
+
+	function nextStep() {
+		$(".steps").step("next");
+	}
+
+	function gotoStep(step) {
+		$(".steps").step("goto", step)
+	}
+	$("#example-basic").steps({
+		headerTag: "h3",
+		bodyTag: "section",
+		transitionEffect: "slideLeft",
+		autoFocus: true
+	});
+	function  log_add(type){
+		layer.open({
+			type: 2,
+			title: '填写流转意见',
+			maxmin: false,
+			shadeClose: true, //点击遮罩关闭层
+			area : ['450px' , '270px'],
+			content: "{:U('Oa/Oaapproval/oa_approval_log_edit')}?log_type="+type+"&node_id={$approval_list.node_id}&url_no={$url_no}",
+			success:function(){
+				layerAuto();
+			}
+		});
+	};
+</script>
+</block>

@@ -1,0 +1,73 @@
+/*
+Error: File to import not found or unreadable: compass/reset.
+        on line 3 of ../base/_base.scss
+        from line 4 of sp_online.scss
+
+1: @charset "utf-8";
+2: 
+3: //base
+4: @import "../base/base";
+5: 
+6: //helper
+7: @import "../helper/helper";
+8: 
+
+Backtrace:
+../base/_base.scss:3
+sp_online.scss:4
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/import_node.rb:67:in `rescue in import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/import_node.rb:44:in `import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/import_node.rb:28:in `imported_file'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/import_node.rb:37:in `css_import?'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `block in with_base'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:135:in `with_frame'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `with_base'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:329:in `block (2 levels) in visit_import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:329:in `map'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:329:in `block in visit_import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:88:in `block in with_import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:135:in `with_frame'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:88:in `with_import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:326:in `visit_import'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `block in with_base'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:135:in `with_frame'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/stack.rb:79:in `with_base'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:162:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:52:in `map'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/base.rb:36:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:161:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/visitors/perform.rb:10:in `visit'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/root_node.rb:36:in `css_tree'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/engine.rb:390:in `_render_with_sourcemap'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/engine.rb:308:in `render_with_sourcemap'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:209:in `each'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/plugin.rb:82:in `update_stylesheets'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/exec/sass_scss.rb:51:in `process_result'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/exec/base.rb:52:in `parse'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/lib/sass/exec/base.rb:19:in `parse!'
+F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.6/bin/scss:13:in `<top (required)>'
+F:/shaoyue/program/Ruby24-x64/bin/scss:23:in `load'
+F:/shaoyue/program/Ruby24-x64/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: compass/reset.\A         on line 3 of ../base/_base.scss\A         from line 4 of sp_online.scss\A \A 1: @charset \"utf-8\";\A 2: \A 3: //base\A 4: @import \"../base/base\";\A 5: \A 6: //helper\A 7: @import \"../helper/helper\";\A 8: "; }

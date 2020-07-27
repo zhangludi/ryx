@@ -1,0 +1,374 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid layui-form">
+	<form action="{:U('oa_workplan_info_do_save')}" id="signupForm" class="form-horizontal" method="post">
+		<input id="workplan_id" name="workplan_id" type="hidden" value="{$workplan_row.workplan_id}">
+		<input type="hidden" name="is_arranger" value="{$is_arranger}">
+		<input id="flag" name="flag" type="hidden"> 
+			<input type="hidden" name="is_my" value="{$is_my}">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body ">
+						<div class="layui-row">
+							<div class="layui-card-header">任务详情</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审核人：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_arranger_man}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>执行人：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_executor_man}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>计划标题：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										[{$workplan_row.workplan_id}]{$workplan_row.workplan_title}
+									</div>
+								</div>
+							</div>
+							
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>计划内容：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_content}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>当前状态：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<span style="color:{$status_color}">{$workplan_row.status_name}</span>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>预计开始时间：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_expectstart_time}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>预计结束时间：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_expectend_time}
+									</div>
+								</div>
+							</div>
+							<gt name="status" value="11">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>实际开始时间：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_start_time}
+									</div>
+								</div>
+							</div>
+							</gt>
+							<if condition=" ($workplan_row.status eq 31) OR ($workplan_row.status eq 32)">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>实际结束时间：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.workplan_end_time}
+									</div>
+								</div>
+							</div>
+							</if>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										{$workplan_row.memo}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<neq name="workplan_nowork" value="1"> 
+			<switch name="workplan_row.status"> 
+				<case value="21">
+					<neq name="is_arranger" value="1">
+						<div class="layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-body layui-form">
+								<div class="layui-card-header">工作进度总结</div>
+									<div class="layui-row">
+										<div class="layui-col-xs12 mt-10">
+											<div class="layui-row">
+												<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35 text-r"><strong>进度/完成/中止总结：</strong></div>
+												<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+												<textarea id='content' name="planlog_summary" placeholder="这个文本域的最大长度为255个字符" class="layui-textarea">{$workplan_row.planlog_summary}</textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</neq> 
+				</case>
+				<case value="31">
+					<eq name="is_arranger" value="1">
+						<div class="layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-body layui-form">
+								<div class="layui-card-header">审核指导意见</div>
+									<div class="layui-row">
+										<div class="layui-col-xs12 mt-10">
+											<div class="layui-row">
+												<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>审核/驳回意见：</strong></div>
+												<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+												<textarea id='content' name="workplan_edit" placeholder="这个文本域的最大长度为255个字符" class="layui-textarea">{$workplan_row.workplan_edit}</textarea>
+												</div>
+											</div>
+										</div>
+										<div class="layui-col-xs12 mt-10">
+											<div class="layui-row">
+												<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>工作评分：</strong></div>
+												<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+												<input type="text" name="workplan_audit_score" placeholder="如果工作有延期，评分上限是80" lay-verify="required" autocomplete="off" class="layui-input" value="{$workplan_row.workplan_audit_score}">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</eq>
+				</case>
+				<case value="71">
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-body">
+								<div class="layui-card-header">延期申请</div>
+								<div class="layui-row">
+									<div class="layui-col-xs12 mt-10">
+										<div class="layui-row">
+											<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>延期时间：</strong></div>
+											<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+											<input type="text" name="workplan_delay_time" placeholder="开始日期" lay-verify="required" autocomplete="off" class="layui-input" value="{$workplan_row.workplan_delay_time}">
+											</div>
+										</div>
+									</div>
+									<div class="layui-col-xs12 mt-10">
+										<div class="layui-row">
+											<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>延期原因：</strong></div>
+											<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+											{$workplan_row.workplan_delay_content}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<neq name="is_arranger" value="1">
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-body">
+								<div class="layui-card-header">工作进度总结</div>
+								<div class="layui-row">
+									<div class="layui-col-xs12 mt-10">
+										<div class="layui-row">
+											<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>工作进度总结：</strong></div>
+											<div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+											<textarea id='content' name="planlog_summary" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$workplan_row.planlog_summary}</textarea>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					</neq>
+				</case>
+			</switch>
+		</neq> 
+		<div class="layui-col-md12">
+			<div class="layui-card-body text-r">
+				<div class="layui-card-body">
+					<div class="layui-btn-container">
+						<switch name="workplan_row.status"> 
+							<case value="11"> 
+								<neq name="is_arranger" value="1">
+									<a onclick="setFlag('start')" class="layui-btn layui-btn-normal layui-btn-sm" >开始计划</a>
+								</neq> 
+							</case>
+							<case value="21"> 
+								<neq name="is_arranger" value="1">
+								<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="add_report()">申请延期</a>
+								<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="setFlag('stop')">中止任务</a>
+								<eq name="is_my" value="1">
+									<a onclick="setFlag('audit')" class="layui-btn layui-btn-normal layui-btn-sm" >工作完成</a>
+								<else />
+									<a onclick="setFlag('finish')" class="layui-btn layui-btn-normal layui-btn-sm" >工作完成</a>
+								</eq>
+								<a onclick="setFlag('summary')" class="layui-btn layui-btn-normal layui-btn-sm" >当日工作总结</a>
+								</neq> 
+							</case>
+							<case value="31"> 
+								<eq name="is_arranger" value="1">
+									<a class="layui-btn layui-btn-normal layui-btn-normal layui-btn-sm" onclick="setFlag('reject')">驳回重做</a>
+									<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="setFlag('audit')">工作审核</a>
+								</eq> 
+							</case> 
+							<case value="71"> 
+								<eq name="is_arranger" value="1">
+									<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="reject_adjourned()">驳回延期</a>
+									<a class="layui-btn layui-btn-normal layui-btn-sm " onclick="setFlag1('agree')">同意延期</a>
+								<else />
+									<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="setFlag('summary')">当日工作进度总结</a>
+								</eq> 
+							</case> 
+							<case value="51"> 
+								<neq name="is_arranger" value="1">
+									<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="setFlag('continue')">开始计划</a>
+								</neq> 
+							</case> 
+							<case value="52"> 
+								<neq name="is_arranger" value="1">
+								<a class="layui-btn  layui-btn-normal layui-btn-sm" onclick="setFlag('continue')">开始计划</a>
+								</neq> 
+							</case> 
+						</switch> 
+						<a onclick="layer_colse()" class="layui-btn layui-btn-sm layui-btn-primary">取消</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-body layui-form">
+				<div class="layui-card-header">工作计划历程</div>
+					<div class="layui-row">
+						<volist name="workplan_log_list" id="vo">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs12 fsize-14 fcolor-65 lh-35"><strong>
+									<neq name='vo.communist_avatar' value=''>
+	                                    <img src="{$vo.communist_avatar}" width="40" height="40"> 
+	                                <else/>
+	                                    <img src="__STATICS__/public/images/default_photo.jpg" width="40" height="40">
+	                                </neq>
+									{$vo.staff_name} &nbsp;{$vo.add_date}</strong></div>
+								<div class="layui-col-xs12 fsize-14 fcolor-65 lh-35">
+									{$vo.plan_info}
+								</div>
+							</div>
+						</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div id="add_report_con" style="display:none" class="layui-col-md12 test-layer">
+	<div class="layui-card">
+		<form action="{:U('oa_workplan_adjourned')}" method="post" class="container-fluid right mr-10b">
+			<div class="layui-card-body layui-form">
+				<input  name="is_my" type="hidden" value="{$is_my}">
+				<input id="workplan_id" name="workplan_id" type="hidden" value="{$workplan_row.workplan_id}">
+				<div class="layui-row">
+					<div class="layui-col-xs12 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>延期时间：</strong></div>
+							<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+								<input id="end" type="text" name="adjourned_time" placeholder="选择日期" lay-verify="required" autocomplete="off" class="layui-input" >
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs12 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35"><strong>延期原因：</strong></div>
+							<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+								<textarea name="adjourned_content" placeholder="这个文本域的最大长度为400个字符." class="layui-textarea"></textarea>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="layui-col-xs5">
+		            <div class="layui-footer" style="text-align: right;width: 70%;margin-left: 13%">
+		                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+		                <a onclick="layer_colse2()" class="layui-btn layui-btn-primary mr-40">取消</a>
+		            </div>
+			    </div> 
+			</div>
+		</form>
+	</div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+layui.use([ 'form', 'laydate','layedit'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			var layedit = layui.layedit;
+			laydate.render({
+				elem: '#end'
+				,type: 'datetime'
+				//,range: true
+			});
+	})
+	function add_report() {
+		layer.open({
+			type : 1,
+			title : '申请工作计划延期',
+			maxmin : true,
+			offset : window.parent.document.body.scrollTop + 'px',
+			// btns : 1,
+			// btn : ['确定', '取消'],
+			shadeClose : true, //点击遮罩关闭层
+			area : [ '600px', '370px' ],
+			content : $('#add_report_con')
+		});
+	}
+	function setFlag(f) {
+		$("#flag").val(f);
+		$('#signupForm').submit();
+		alert('操作成功！');
+		parent.location.reload();
+		layer_colse();
+	}
+
+	function setFlag1(f) {
+		$("#flag").val(f);
+		$('#signupForm').submit();
+		alert('操作成功！');
+		layer_colse();
+	}
+
+	function layer_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+	function layer_colse2() {
+		layer.closeAll('page'); //关闭所有页面层
+	}
+</script>
+</block>

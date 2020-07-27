@@ -1,0 +1,490 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+	    <div class="page-content-wrapper">
+	        <div class="page-content">
+	            <div class="row">
+	                <div class="col-xs-12">
+	                    <div class="portlet light bordered">
+	                        <div class="portlet-title">
+	                            <div class="caption">
+	                                <div class="cont-col1">
+	                                    <div class="label label-sm bg-color-green2">
+	                                        <i class="iconfont">&#xe602;</i>
+	                                    </div>
+	                                </div>
+	                                <span class="bold ">基本信息</span>
+	                            </div>
+	                            <div class="tools">
+	                                <a href="" class="reload"> </a>
+	                                <a href="" class="collapse"> </a>
+	                            </div>
+	                        </div>
+	                        <div class="portlet-body">
+	                            <div class="row">
+	                                <div class="row">
+		                                <div class="col-md-8">
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>党员编号：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0">
+		                                                <span class="di-b lh-35">{$communist.communist_no}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>党员姓名：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_name}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>性别：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b"><if condition="$communist.communist_sex eq 0 ">女<else/>男</if></span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>党员生日：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_birthday}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>身份证号：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_idnumber}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>学历：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_diploma}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>毕业学校：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_school}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>民族：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_nation}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>职称：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b"><php>echo getBdCodeInfo($communist['communist_level'], 'communist_level_code')</php></span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-xs-6 mt-5">
+		                                        <div class="row">
+		                                            <div class="col-xs-4 pr-0 text-r lh-35">
+		                                                <b>籍贯：</b>
+		                                            </div>
+		                                            <div class="col-xs-8 pl-0 lh-35">
+		                                                <span class="di-b">{$communist.communist_paddress}</span>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="col-md-3" id='dowebok'>
+		                                    <div class="col-xs-12" id="'dowebok'">
+		                                    	<neq name='communist.communist_avatar' value=''>
+			                                        <img src="__ROOT__/{$communist.communist_avatar}" height="198px" width="142px">
+			                                    </neq>
+		                                    </div>
+		                                </div>
+		                            </div>
+	                            </div><!-- end -->
+	                        </div><!-- end -->
+	                    </div><!-- end -->
+	                </div><!-- end -->
+	            </div>
+				<div class="row">
+				    <div class="col-xs-12">
+				        <div class="portlet light bordered">
+				            <div class="portlet-title">
+				                <div class="caption">
+				                    <div class="cont-col1">
+				                        <div class="label label-sm bg-color-red">
+				                            <i class="iconfont">&#xe657;</i>
+				                        </div>
+				                    </div>
+				                    <span class="bold ">联系方式</span>
+				                </div>
+				                <div class="tools">
+				                    <a href="" class="reload"> </a>
+				                    <a href="" class="collapse"> </a>
+				                </div>
+				            </div>
+				            <div class="portlet-body">
+				                <div class="row">
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                            <div class="col-xs-4 pr-0 text-r lh-35">
+				                                <b>党员电话：</b>
+				                            </div>
+				                            <div class="col-xs-8 pl-0">
+				                                <span class="di-b lh-35">{$communist.communist_tel}</span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                            <div class="col-xs-4 pr-0 text-r lh-35">
+				                                <b>党员手机：</b>
+				                            </div>
+				                            <div class="col-xs-8 pl-0 lh-35">
+				                                <span class="di-b">{$communist.communist_mobile}</span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <!-- 结束 -->
+				                   <!-- 开始 -->
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>邮箱：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.communist_email}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                   <!-- 结束 -->
+				                   <!-- 开始 -->
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>QQ号：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.communist_qq}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                   <!-- 结束 -->
+				                   <!-- 开始 -->
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>虚拟网号码：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.communist_vlan}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>现住址：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.communist_address}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				               </div><!-- end -->
+				           </div><!-- end -->
+				       </div><!-- end -->
+				   </div><!-- end -->
+				</div>
+				<div class="row">
+				    <div class="col-xs-12">
+				        <div class="portlet light bordered">
+				            <div class="portlet-title">
+				                <div class="caption">
+				                    <div class="cont-col1">
+				                        <div class="label label-sm bg-color-blue">
+				                            <i class="iconfont">&#xe746;</i>
+				                        </div>
+				                    </div>
+				                    <span class="bold ">
+				                            党内信息
+				                    </span>
+				                </div>
+				                <div class="tools">
+				                    <a href="" class="reload"> </a>
+				                    <a href="" class="collapse"> </a>
+				                </div>
+				            </div>
+				            <div class="portlet-body">
+				            	<div class="row">
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                            <div class="col-xs-4 pr-0 text-r lh-35">
+				                                <b>党员积分：</b>
+				                            </div>
+				                            <div class="col-xs-8 pl-0">
+				                                <span class="di-b lh-35">{$communist.communist_integral}分</span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                            <div class="col-xs-4 pr-0 text-r lh-35">
+				                                <b>本支部排名：</b>
+				                            </div>
+				                            <div class="col-xs-8 pl-0 lh-35">
+				                                <span class="di-b"> <neq name="$communist['party_ranking']" value="">第{$communist.party_ranking}名&nbsp;&nbsp;<a href="{:U('Ccp/Ccpintegral/ccp_communist_integral_index',array('type'=>'2','communist_no'=>$communist['communist_no']))}">查看排名</a><else/>无排名</neq></span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <!-- 结束 -->
+				                    <!-- 开始 -->
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                            <div class="col-xs-4 pr-0 text-r lh-35">
+				                                <b>本系统排名：</b>
+				                            </div>
+				                            <div class="col-xs-8 pl-0 lh-35">
+				                                <span class="di-b"><neq name="$staf['ranking']" value="">第{$communist.ranking}名&nbsp;&nbsp;<a href="{:U('Ccp/Ccpintegral/ccp_communist_integral_index',array('type'=>'1','communist_no'=>$communist['communist_no']))}">查看排名</a><else/>无排名</neq></span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div><!-- end -->
+				                <div class="row">
+				                    <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>所属党支部：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0">
+				                               <span class="di-b lh-35">
+				                                   {$communist.party_no}
+				                                   <a onclick="quit({$communist.communist_no},'党员关系转移')" class="btn btn-sm blue btn-outline bor-ra-2 mr-25 w-90">
+				                                       党员关系转移
+				                                   </a>
+				                               </span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>所属职务：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.post_no}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>来源：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               {$communist_source}
+				                           </div>
+				                       </div>
+				                   </div>
+				                   <div class="col-xs-6">
+				                       <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>正式入党时间：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.communist_entrytime}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                            <div class="col-xs-4 pr-0 text-r lh-35">
+				                                <b>指纹（人脸）数量：</b>
+				                            </div>
+				                            <div class="col-xs-8 pl-0 lh-35">
+				                                <span class="di-b">{$communist.bio_num}</span>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="col-xs-6">
+				                        <div class="row">
+				                           <div class="col-xs-4 pr-0 text-r lh-35">
+				                               <b>备注：</b>
+				                           </div>
+				                           <div class="col-xs-8 pl-0 lh-35">
+				                               <span class="di-b">{$communist.memo}</span>
+				                           </div>
+				                       </div>
+				                   </div>
+				                </div><!-- end -->
+				            </div><!-- end -->
+				        </div><!-- end -->
+				    </div><!-- end -->
+				</div>
+				<neq name='dev_log_count' value=''>
+					<div class="row">
+					    <div class="col-xs-12">
+					        <div class="portlet light bordered">
+					            <div class="portlet-title">
+					                <div class="caption">
+					                    <div class="cont-col1">
+					                        <div class="label label-sm bg-color-green2">
+					                            <i class="iconfont">&#xe719;</i>
+					                        </div>
+					                    </div>
+					                    <span class="bold ">党员发展历程</span>
+					                </div>
+					            </div>
+					            <div class="portlet-body">
+					                <div id="log_typ">
+					                    <!-- 历程开始 -->
+					                    <volist name="dev_log_list" id="vo">
+				                            <ul class="client-info-list ml-20">
+				                                <li class="client-info-dian pl-40" >
+						                             <span class="fcolor-99">
+						                                 <i><img src="__STATICS__/public/images/demopage/thumb-3.jpg" width="40"></i>
+						                                 <php>echo getCommunistInfo($vo['add_staff'])</php>
+						                                 <span class="fsize-12">{$vo.add_time}</span>
+						                             </span>
+				                                </li>
+				                                <li class="pl-45">
+						                            <span class="font-blue fsize-16">
+						                                <i class="iconfont fcolor-green2">&#xe64b;</i> {$vo.log_content}
+						                            </span>
+				                                </li>
+				                            </ul>
+					                    </volist>
+					                </div>
+					            </div><!-- end -->
+					        </div><!-- end -->
+					    </div><!-- end -->
+					</div>
+				</neq>
+				<neq name='communist_log_count' value=''>
+					<div class="row">
+					    <div class="col-xs-12">
+					        <div class="portlet light bordered">
+					            <div class="portlet-title">
+					                <div class="caption">
+					                    <div class="cont-col1">
+					                        <div class="label label-sm bg-color-green2">
+					                            <i class="iconfont">&#xe715;</i>
+					                        </div>
+					                    </div>
+					                    <span class="bold ">党员历程</span>
+					                </div>
+					            </div>
+					            <div class="portlet-body">
+					                <div id="log_typ">
+					                    <!-- 历程开始 -->
+					                    <volist name="log_list" id="vo">
+				                            <ul class="client-info-list">
+				                                <li class="client-info-dian pl-40">
+		                                            <span class="fcolor-99">
+		                                                <i><img src="__STATICS__/public/images/demopage/thumb-3.jpg" width="40"></i>
+		                                                <php>echo getCommunistInfo($vo['add_staff'])</php>
+		                                                <span class="fsize-12">{$vo.add_time}</span>
+		                                            </span>
+				                                </li>
+				                                <li class="pl-45"> {$vo.log_content}  </li>
+				                            </ul>
+					                    </volist>
+					                </div>
+					            </div><!-- end -->
+					        </div><!-- end -->
+					    </div><!-- end -->
+					</div>
+				</neq>
+				<div class="row">
+					<div class="col-md-12 mb-30">
+						<a type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20" onclick="history.go(-1)">返回</a>
+					</div>
+				</div>
+	       </div><!-- end -->
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    $("#log_types").change(function () {
+	        var log_types = $("#log_types").val();
+	        var communist_no = {$communist.communist_no
+	    }
+	        ;
+	        $.get("{:U('ccp_communist_info_table')}", {communist_no: communist_no, log_types: log_types}, function (data) {
+	            $("#log_typ").html(data);
+	        });
+	    });
+	</script>
+	<script>
+	    var um = UM.getEditor('editor');
+	</script>
+	<script>
+	    function quit(communist_no,title) {
+	    	status = "change";
+	    	var href = "{:U('Ccpcommunistchange/ccp_communist_change_edit')}?status="+status+"&communist_no="+communist_no;
+	        layer.open({
+	            type: 2,
+	            title: title,
+	            maxmin: false,
+	            shadeClose: true, //点击遮罩关闭层
+	            area: ['450px', '420px'],
+	            offset: window.parent.document.body.scrollTop + 10 + 'px',
+	            content: href,
+	            success:function(){
+                	layerAuto();
+                }
+	        });
+	    };
+	    function communist_status(communist_no){
+	        layer.open({
+	            type: 2,
+	            title: '状态修改',
+	            maxmin: true,
+	            offset: window.parent.document.body.scrollTop+100+'px',
+	            shadeClose: true, //点击遮罩关闭层
+	            area : ['500px' , '500px'],
+	            content: "{:U('Ccp/Ccp/ccp_communist_develop_status/communist_no/"+communist_no+"')}",
+	            success:function(){
+                	layerAuto();
+                }
+	        });
+	    }
+	    var viewer = new Viewer(document.getElementById('dowebok'), {
+	        url: 'data-original'
+	    });
+	</script>
+</block>

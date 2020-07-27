@@ -1,0 +1,30 @@
+.html,body{height: 100%}
+.w-15{width: 15px;}
+.w-1145{width: 1145px;}
+.h-300{height: 300px}
+.pt-65{padding-top: 65px}
+.color-82{color: #828282}
+.color-4d{color: #4d4d4d}
+.notice_body_center{
+    width:1680px;
+    margin:0 auto;
+}
+.notice_info{
+    width:1680px;
+    box-shadow: 0 0 10px 0 rgba(10,2,4,0.34);
+    background: #fff;
+    border-radius: 7px;
+}
+.notice_info_title{
+    width:1145px;
+    color: #111;
+    font-size: 42px;
+    margin:0 auto;
+    text-align: center;
+}
+.guide_notice_body{
+    height: calc(100% - 140px);
+    overflow: auto;
+    background-image:  url("../../sp_guide/images/gov-print-bg.jpg");
+    background-size: cover;
+}

@@ -1,0 +1,172 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<input name="is_arranger" type=hidden value="{$is_arranger}" id="is_arranger"> 
+						<input name="is_partyplan" type=hidden value="{$is_partyplan}">
+						<div class="layui-col-xs1 text-r lh-40">
+							完成程度：
+						</div>
+						<div class="layui-col-xs2 ">
+							<select id="select_status" lay-verify="" lay-search>
+								<option value="0">请选择</option>
+								{:getStatusSelect('workplan_status',$post_info['select_status'])}
+									</select>
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+								时间类型：
+						</div>
+						<div class="layui-col-xs2 ">
+							<select id="date_type" lay-verify="" lay-search>
+								<option value="0">请选择</option>
+								<option value="1"<eq name="post_info[date_type]" value="1">selected</eq>>开始时间</option>
+							</select>
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+							关键词：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="id" id="plan_info" autocomplete="off" placeholder="请输入关键词">
+						</div>
+						<div class="layui-col-xs2 pull-right">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+							<neq name="is_audit" value="1">
+							<a class="layui-btn table-add " style="text-decoration: none;" href="{:U('oa_workplan_edit',array('is_arranger'=>$is_arranger))}">添加</a>
+							</neq>
+						</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	var is_arranger = $("#is_arranger").val();
+	layui.use(['element','form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+		form.on('submit(component-form-element)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		if(is_arranger == 1){
+			var url = "{:U('oa_workplan_index_data')}?is_arranger={$is_arranger}";
+		} else {
+			var url = "{:U('oa_workplan_index_data')}";
+		}
+		table.render({
+			elem: '#test'
+			,url:  url
+			,cellMinWidth: 80
+			,height:'full-200'
+			, id : 'ztreedata'
+			,cols: [[
+				{field:'workplan_id',width:80, title:'编号',align: 'center', unresize: true, sort: true}
+				,{field:'workplan_title', title:'工作标题',align: 'left'}
+				,{field:'workplan_executor_man',width:130, title:'执行人',align: 'center'}
+				<eq name="is_arranger" value="1">
+				,{field:'workplan_arranger_man', width:130,title:'审核人',align: 'center'}
+				</eq>
+				,{field:'status_name', title:'完成程度',width:100,align: 'center'}
+				,{field:'workplan_start_time',width:210, title:'开始时间',align: 'center'}
+				,{field:'workplan_end_time',width:210, title:'完成时间',align: 'center'}
+				,{field:'operate', width:180, title:'操作',align: 'center'}
+			]]
+			,page: true
+		});
+		var $ = layui.$, active = {
+	        reload: function(){
+	            var select_status = $("#select_status").val();
+				var time_range = $("#start").val();
+				var date_type = $("#date_type").val();
+				var plan_info = $("#plan_info").val();
+		      	table.reload('ztreedata', {
+			        page: {
+			          curr: 1 
+			        }
+			        ,where: {
+			        	"status": select_status,
+			        	"date_type": date_type,
+			        	"plan_info": plan_info,
+			        	"time_range":time_range
+			        }
+		      	});
+	        }
+	    };
+	    $('.layui-form .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'del'){
+				layer.confirm('确认删除该数据吗？', function(index){
+	              	window.location='{:U("oa_workplan_do_del")}?workplan_id='+data.workplan_id+'';
+              	});
+			}else if(obj.event === 'edit'){
+				window.location='{:U("oa_workplan_edit")}?workplan_id='+data.workplan_id+'';
+			}else if(obj.event === 'audit' || obj.event === 'starting' || obj.event === 'start' || obj.event === 'info'){
+				var is_arranger = $("#is_arranger").val();
+				if (is_arranger) {
+					var url = "{:U('oa_workplan_info')}?workplan_id=" + data.workplan_id + "&is_arranger=" + is_arranger;
+				} else {
+					var url = "{:U('oa_workplan_info')}?workplan_id=" + data.workplan_id;
+				}
+				layer.open({
+					type: 2,
+					title:'工作计划详情',
+					area:['1000px', '450px'],
+					content: url//这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+				});
+			}
+		});
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#start',
+			range: true
+		});
+	})
+
+	function workplan_info(workplan_id){
+		var is_arranger = $("#is_arranger").val();
+		if(is_arranger){
+			var url = "{:U('oa_workplan_info')}?workplan_id="+workplan_id+"&is_arranger="+is_arranger;
+		}else{
+			var url = "{:U('oa_workplan_info')}?workplan_id="+workplan_id;
+		}
+		layer.open({
+			type: 2,
+			title: '工作计划详情',
+			maxmin: false,
+			offset: window.parent.document.body.scrollTop+20+'px',
+			shadeClose: true, //点击遮罩关闭层
+			area : ['800px' , '400px'],
+			content: url,
+			success:function(){
+            	layerAuto();
+            }//iframe的url
+		});
+	}
+</script>
+</block>

@@ -1,0 +1,233 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="题目信息的录入"> 题目信息的录入</div>
+                <form id="form_sample_2" action="{:U('Lifevote/life_vote_subject_do_save')}" method="post" class="form-horizontal" onsubmit="return form_check()">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" name="subject_id" value="{$questions.subject_id}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>开始时间：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <input type="text" id="start" placeholder="yyyy-mm-dd" name="subject_starttime" value="{$questions.subject_starttime}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>结束时间：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+                                       
+                                     <input type="text" id="end" name="subject_endtime" value="{$questions.subject_endtime}" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" lay-verify='required'>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>题目内容：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="subject_content" value="{$questions['subject_content']}" autocomplete="off" placeholder="输入题目内容" class="layui-input" lay-verify='required'></div>
+                                </div>
+                            </div>
+                            <div id="a_list">
+                                <div id="a">
+                                {$que_list_a}
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <textarea name="memo" placeholder="输入备注" class="layui-textarea">{$questions.memo}</textarea></div>
+                                </div>
+                            </div>
+                            
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+    
+</block>
+<block name="js">
+    <script>
+        $('#questions_type_data').hide();
+        layui.use([ 'form', 'laydate'], function() {
+            var $ = layui.jquery
+			, admin = layui.admin
+			, element = layui.element
+			, layer = layui.layer
+			, laydate = layui.laydate
+			, form = layui.form;
+            form.render(null, 'component-form-group');
+            form.on('select(state)', function(data){
+                var type = data.value;
+                $("#type").val(type);
+                if(type == 1){ 
+                    $("#a_list").show();
+                    $("#b_list").hide(); 
+                    $("#c_list").hide(); 
+                }else if(type == 2){
+                    $("#a_list").hide();
+                    $("#b_list").show(); 
+                    $("#c_list").hide();
+                }else if(type == 3){
+                    $("#a_list").hide();
+                    $("#b_list").hide(); 
+                    $("#c_list").show();
+                } 
+            });
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'date'
+				 trigger: 'click'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'date'
+				 trigger: 'click'
+            });
+        })
+    </script>
+    
+    <script>
+    $(document).ready(function(){
+        var type = $("#type").val();
+        if(type == 1){ 
+            $("#a_list").show();
+            $("#b_list").hide(); 
+            $("#c_list").hide(); 
+        }else if(type == 2){
+            $("#a_list").hide();
+            $("#b_list").show(); 
+            $("#c_list").hide();
+        }else if(type == 3){
+            $("#a_list").hide();
+            $("#b_list").hide(); 
+            $("#c_list").show();
+        }
+    });
+    function buttonfun(){
+        var type = $("#type").val();
+        if(type == 1){
+            var type_n = 'a';
+        }else if(type ==2){
+            var type_n = 'b';
+        }else if(type ==3){
+            var type_n = 'c';
+        }
+        var num = $("#num_no_"+type_n).val();
+        var num_no = Number(num)+1;
+
+        $("#num_no_"+type_n).val(num_no);
+        var nu = '';
+        switch(num_no){
+            case 3:nu = "C";break;
+            case 4:nu = "D";break;
+            case 5:nu = "E";break;
+            case 6:nu = "F";break;
+            case 7:nu = "G";break;
+            case 8:nu = "H";break;
+            case 9:nu = "I";break;
+            case 10:nu = "J";break;
+            case 11:nu = "K";break;
+            case 12:nu = "L";break;
+            case 13:nu = "M";break;
+            case 14:nu = "N";break;
+            case 15:nu = "O";break;
+        }
+        if(num_no > 15){
+            layer.msg('选项过多！！');
+            return ;
+        }
+        var a = "<div class='layui-col-xs12 mt-10' id="+type_n+"_"+num_no+"><div class='layui-row'><div class='layui-col-xs2 text-r fsize-14 fcolor-65 lh-35'><strong>"+nu+"：</strong></div>";
+        var b = " <div class='layui-col-xs8 fsize-14 fcolor-65 lh-35'><input type='text' name='questions_item_"+type_n+"_"+num_no+"' placeholder='请输入选项' value='' autocomplete='off' class='layui-input'>";
+        var c = "</div></div></div>";
+        var zong = a+b+c;
+        $("#"+type_n).append(zong);
+        
+        if(type == 1){
+            var selvol = "<div class='layui-col-xs2 fsize-14 fcolor-65 lh-35' id='a_q_"+num_no+"'> <input type='radio' placeholder='请输入选项' name='questions_answer_a' value="+nu+" title="+nu+"> </div>";
+        }else if(type ==2){
+            var selvol = "<div class='layui-col-xs2 fsize-14 fcolor-65 lh-35' id='b_q_"+num_no+"'> <input type='checkbox' placeholder='请输入选项' name='questions_answer_b[]' title='"+nu+"' value='"+nu+"'></div>";
+        }else if(type ==3){
+            var type_n = 'c';
+        }
+        
+        $("#single_"+type_n).append(selvol);
+        layui.form.render();
+    }
+    function buttondel(){
+        
+        var type = $("#type").val();
+        
+        if(type == 1){
+            var type_n = 'a';
+        }else if(type ==2){
+            var type_n = 'b';
+        }else if(type ==3){
+            var type_n = 'c';
+        }
+        var num = $("#num_no_"+type_n).val();
+    
+         if(num >2){
+            $("#"+type_n+"_"+num).remove();      //移除最后一行,并且保留前两行
+            $("#"+type_n+"_q_"+num).remove();      //移除最后一行,并且保留前两行
+            var num = Number(num)-1;
+            $("#num_no_"+type_n).val(num);  
+            layui.form.render();
+        }else{
+            layer.msg('无可删除项！！');
+            return ;
+        } 
+    }
+    
+    function form_check(){
+        var subject_starttime = $("input[name='subject_starttime']").val();
+        var subject_endtime = $("input[name='subject_endtime']").val();
+        if(subject_starttime >= subject_endtime){
+            alert("投票结束时间要大于投票开始时间");
+            return false;
+        } else {
+            return true;
+        }
+    } 
+    
+    laydate.render({ 
+      elem: '#start'
+      ,type: 'datetime'
+    })
+    laydate.render({ 
+      elem: '#end'
+      ,type: 'datetime'
+
+    })
+
+</script>
+</block>

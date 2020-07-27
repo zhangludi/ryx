@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/life/css/life_volunteer_integral.css" />
+	<style>
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    		background-size: 100% 100%;}
+	.bg-color-integral{
+		background: #ffffff url('__STATICS__/apps/page_wechat/images/images_life/life_volunteer_integral.png') no-repeat top center;
+		background-size: contain;
+	}
+	</style>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/> -->
+<style>
+header ul li {height: 45px}
+header ul li.active{ display: block; }
+.aui-icon-roundadd{font-size: 40px !important;margin-top:8px}
+.aui-nav {
+position: inherit;
+}
+/* .h0{height:0px!important} */
+.pt-0{padding-top:0px!important}
+.aui-bar {
+ min-height: 0px!important
+}
+.fcolor-white {color:#fff!important}
+.fsize-24{font-size:24px!important} 
+
+
+.aui-nav{height: 4rem;}
+.aui-nav .aui-bar-tab{height: 4rem;background:rgb(255, 255, 255);}
+.aui-border-tb:after {border-top: 1px solid rgb(200, 200, 200);border-bottom: 1px solid rgb(171, 8, 9);}
+.aui-nav .aui-bar-tab li p{width: 100%;line-height: 0.5rem;color:#333;font-size: 0.5rem;}
+.aui-nav .aui-bar-tab li .img2{display: none;}
+
+.aui-nav .aui-bar-tab .active-info p{display: none;}
+.aui-nav .aui-bar-tab .active-info .img1{display: none;}
+.aui-nav .aui-bar-tab .active-info .img2{display: inline-block;}
+.aui-border-tb:after{border-top: 1px solid #f3f3f3;}
+
+p{color:#ccc}
+
+.wh-24em{width: 1.2rem !important;height: 1.2rem !important;}
+.wh-33em{width: 1.65rem !important;height: 1.65rem !important;}
+
+.w-18em{width: 0.9rem !important;}
+.w-95b{width:95%;}
+.w-169em{width: 8.45rem;}
+
+.h-100b{height:100%;}
+.h-49em{height: 2.45rem !important;}
+.h-18em{height: 0.9rem !important;}
+.h-17em{height: 0.85rem;}
+
+.p-0{padding: 0 !important;}
+
+.mt-14em{margin-top: 0.7rem !important;}
+.mt-3m{margin-top:-4px}
+.mt-2em{margin-top: 0.1rem !important;}
+
+.ml-8em{margin-left: 0.4rem !important;}
+
+.mr-8em{margin-right: 0.4rem !important;}
+
+.m-14em-auto-12em{margin: 0.7rem auto 0.6rem !important;}
+
+.f-18em{font-size: 0.9rem !important;}
+
+.color_ff{color:#fff;}
+
+.bt-1-f9{border-top: 1px solid #f1f1f1;}
+
+
+
+</style>
+</head>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+	    <ul>
+	    	<li class="h-45">
+	    		<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+	    		<div class="aui-title f-w">积分</div>
+	    	</li>
+	    </ul>
+    </div>
+    <div  class="bg-color-integral ">
+    	<div class="mb-12em h-167em">
+			<div class="pt-20em pl-12em pr-12em pb-20em bb-1-ff9033 box-1-1-ffc96d">
+				<p class="text-align f-60em lh-60em h-60em color-white"><span class="f-14em color-white mr-8em">积分</span><span id="integral" class="f-w">{$integral_info.change_integral}分</span></p>
+			</div>
+			<div class="h-14em lh-14em pt-25em">
+				<p class="pull-left w-50b text-r f-10em color-white br-1-ff pr-15em" onclick="openParty()">党支部排名：<span id="party_ranking" class="f-14em f-w">{$integral.ranking}</span></p>
+				<p class="pull-left w-50b text-l f-10em color-white br-1-ff pl-15em" onclick="openInfo()">系统排名：<span id="ranking" class="f-14em f-w">{$integral.party_ranking}</span></p>
+			</div>
+		</div>
+		<div class="mt-25em ">
+			<p class="h-32em f-14em lh-26em over-h pl-12em pr-12em color-33 f-w pt-5em"><span class="pull-left w-33b text-align">说明</span><span class="pull-left w-33b text-align">时间</span><span class="pull-left w-33b text-align">所获得的积分</span></p>
+			<volist name="integral_info.log_list" id="list">
+				<p class="h-32em f-10em lh-35em over-h pl-12em pr-12em color-75 bg-color-f1f1f1">
+					<span class="pull-left w-33b text-align">{$list.memo}</span>
+					<span class="pull-left w-33b text-align">{$list.add_time}</span>
+					<span class="pull-left f-14em w-33b text-align color-ff9743">{$list.change_integral}</span>
+				</p>
+			</volist>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_volunteer_integral.js"></script>
+</body>
+</html>

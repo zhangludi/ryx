@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>党建矩阵</title>
+		<!-- aui核心css -->
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+		<!-- end -->
+		<!--公用css-->
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+		<!-- end -->
+		<!-- 本项目公共css -->
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+		<!-- end -->
+		<!--本页面css-->
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/hr/css/hr_matrix.css" />
+		<style>
+		 header{
+	    	background:transparent !important;
+	    }
+	    .back{
+	    	background-color:#ff4730!important;
+	    }
+		</style>
+	</head>
+	<body>
+	<!--头部-->
+	<header class="aui-bar aui-bar-nav aui-bar-info pt-25em bg-color-linear po-fix top-0em z-index-max">
+	    <ul>
+	    	<li class="h-45em">
+	    		<a class="aui-pull-left mt-15em" onclick="window.history.go(-1);" >
+			        <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back.png" alt="返回" />
+			    </a>
+	    		<div class="aui-title f-w">党建矩阵</div>
+	    		<!-- 消息通知 -->
+	    		<img class="pull-right w-20em h-20em mr-15em mt-12em" src="__STATICS__/apps/page_wechat/public/images/notice.png"  onclick="openMessage()"/>
+	    	</li>
+	    </ul>
+    </header>
+	<div class="w-100b h-187em bg-color-linear pt-70em">
+		
+    <div class="m-a f-10em color-fff va-jz w-35b" style="width: 40%;">
+    	<img class="di-ib w-8em h-8em mr-5em" src="../../../statics/public/images/max_ss.png" />
+    	山东省以下所有党支部
+    </div>
+	<!--搜索框-->
+		<div class="mt-15em pl-12em pr-12em " id="search1">
+			<input id="keywork1" class="bor-ra-8em w-100b bg-color-whiter f-14em color-ccc h-32em lh-32em pl-20em" type="text" placeholder="根据支部名称、所在层级搜索支部"/>
+
+		</div>
+		
+	</div>
+	<div class="h-48em lh-48em clearfix pl-12em pr-12em bg-color-whiter">
+		<div class="pull-left f-14em color-21">当前：<span class="f-14em color-21 current">{$party_code_name}</span>
+		</div>
+		<div class="pull-right f-12em color-9e">点击下方切换</div>
+	</div>
+	<!--所有区域-->
+	<div class="mt-20em">
+		<div class="f-12em color-9e pl-12em">所有区域</div>
+		<ul class="clearfix ml-12em mr-12em mt-10em" id="tabBox2">
+			<volist name="code_list" id="code">
+				<li  onclick="ccp_code({$code.code_no});" class="mr-12em b-eb bg-color-whiter pull-left f-12em color-21 mb-12em p-max <if condition="$code['code_no'] == $party_code">back</if>">{$code.code_name}</li>
+			</volist>
+		</ul>
+	</div>
+	<!--矩阵数据-->
+	<div>
+		<ul class="over-h mt-20em pb-20em" id="list">
+			<volist name="party_list" id="party" empty="暂无数据">
+				<li class="w-100b bb-1-eb h-48em lh-48em f-16em color-21 bg-color-whiter pl-12em"  onclick="partyInfo({$party.party_no})">{$party.party_name}</li>
+			</volist>
+		</ul>
+	</div>
+	<!--结束-->
+	</body>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+	<!-- 本页面js -->
+	<script type="text/jscript" src="__STATICS__/apps/page_wechat/hr/js/hr_matrix.js"></script>
+	<!-- end -->
+	<script type="text/javascript">
+		$('#keywork1').keyup(function(){
+			var keywork = $('#keywork1').val();
+		})
+		function ccp_code(id){
+			location.href="{:U('Wechat/Ccp/ccp_party_index')}?party_code="+id;
+		}
+		function partyInfo(party_no){
+			location.href="{:U('Wechat/Ccp/ccp_party_info')}?party_no="+party_no;
+		}
+		function openMessage(){
+			location.href="{:U('Wechat/Oa/alert_msg_index')}";
+		}
+	</script>
+	<!--end-->
+</html>

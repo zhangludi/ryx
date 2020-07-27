@@ -1,0 +1,87 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+				 <form id="form_sample_2" action="{:U('Ccpstaff/hr_dept_do_save')}" method="post" class="form-horizontal">
+				<div class="layui-card-body layui-form">
+					<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>上级部门：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input name="dept_no" type="hidden" value="{$dept_row.dept_no}">
+									<select name="dept_pno" lay-filter="state" lay-search="">
+										<option value="0">--请选择--</option>
+										{:getDeptSelect($dept_row[dept_pno])}
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>部门主管：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<select id="dept_no" name="dept_manager"  lay-search="">
+										{:getStaffSelect($dept_row[dept_manager])}
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+						
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>部门名称：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text" name="dept_name" placeholder="部门名称" autocomplete="off" class="layui-input" value="{$dept_row.dept_name}">
+								</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>部门简介：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<textarea name="memo" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$dept_row.memo}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<!--下拉多选js结束-->
+<script>
+	layui.use([ 'form', 'laydate'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			
+		
+
+	})
+
+</script>
+</block>

@@ -1,0 +1,24 @@
+<div class="index_content_lunbo po-re">
+    <!--384 760-->
+    <div class="bd po-re">
+        <ul>
+            <foreach name="ad_list" item="list">
+                <li class="over-h">
+                    <a href="{$list.ad_url}">
+			            <img src="{$list.ad_img}" class="w-all" />
+			            <span>{$list.ad_title}</span>
+			        </a>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="hd center-text po-ab">
+        <ul>
+        	<foreach name="ad_list" item="list">
+            <li></li>
+            </foreach>
+        </ul>
+    </div>
+    <a class="prev left-0" href="javascript:void(0)">&lt;</a>
+    <a class="next right-0" href="javascript:void(0)">&gt;</a>
+</div>

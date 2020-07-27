@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+//layout
+@import "../layouts/layouts";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//component
+@import "../objects/_title";
+@import "../components/function_cards";
+
+$function_card-w: 25%;
+$function_card-h: 594px;
+$function_card-space: 10px;
+$function_img-size: 200px;
+$function_txt-col: #e0f7ff;
+$function_txt-size: 42px;
+
+.bg{
+  background: url('../../images/guide-bg.jpg');
+  background-size: cover;
+}
+
+.function{
+  padding-top: 70px;
+  .function_card{
+    width: $function_card-w;
+    height: $function_card-h;
+    margin: $function_card-space;
+
+    .card_img{
+
+      @include img-objfit($function_img-size, $function_img-size, scale-down);
+
+      box-sizing: content-box;
+      padding-top: 144px;
+      padding-bottom: 74px;
+    }
+
+    .card_title{
+      font-size: $function_txt-size;
+      color: $function_txt-col;
+    }
+  }
+}
+
+.function_card-org1{
+  background-image: $linear-org1;
+}
+.function_card-org2{
+  background-image: $linear-org2;
+}
+.function_card-org3{
+  background-image: $linear-org3;
+}

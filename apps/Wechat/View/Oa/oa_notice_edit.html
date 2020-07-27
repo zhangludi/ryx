@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice_edit.css" />
+
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <style>
+    	.w-9em{width: 0.45rem !important;}
+    	.h-19em{height: 0.95rem !important;}
+		.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    		background-size: 100% 100%;}
+    </style>
+</head>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+		<ul>
+			<li class="h-45em">
+				<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+				<div class="aui-title">发起公告</div>
+			</li>
+		</ul>
+	</div>
+	<!--选择人与标题-->
+<form action="{:U('Oa/oa_notice_do_save')}" id="forms" method="post" enctype="multipart/form-data">	
+	<div class="mt-8em mb-12em pl-12em pr-12em bg-color-whiter">
+		<pre class="pt-15em pb-15em f-12em lh-15em color-99 bb-1-df m-0" onclick="openPerson()">查看范围 <span class="pl-12em" id="notice_name"></span> <input type='hidden' id='notice_no' name='notice_communist'  />    <i class="pull-right iconfont f-15em lh-15em color-ff3032 p-0"></i></pre>
+		<pre class="pt-15em pb-15em f-12em lh-15em color-99 m-0">标 题 <input class="di-i w-220em pl-12em f-12em lh-15em h-15em color-33 b-0" type="text"  name="notice_title"/><i class="pull-right iconfont f-15em lh-15em color-ff3032 p-0"></i></pre>
+	</div>
+	<!--结束-->
+	<!--内容-->
+	<div class="p-12em mb-12em bg-color-whiter">
+		<textarea class="w-100b h-150em f-15em lh-18em color-b3" name="notice_content" id="" placeholder="编辑你的公文内容"></textarea>
+	</div>
+	<!--附件-->
+	<div class="bb-1-df mb-50em">
+		<div class="pl-12em pr-12em pt-15em pb-15em bg-color-whiter">
+			<p class="f-12em color-99 mb-12em lh-20em">
+				<span class="f-15em lh-20em color-33 mr-12em">选择附件</span>
+				<input type="file" multiple="multiple" capture="camera" id="open_photo" name="file">
+			</p>
+		</div>	
+	</div>
+	<div class="w-100b h-50em po-fix bottom-0 bg-color-whiter">
+		<div class="m-a mt-8em w-350em h-34em f-14em lh-36em color-white text-align grad bor-ra-7" onclick='sub()'>发送</div>
+	</div>
+</from>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice_edit.js"></script>
+<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+<script>
+function openPerson(){
+	location.href="{:U('Wechat/Ccp/ccp_communist_choice')}";
+}
+$(function(){
+	$("#notice_name").text(D.getItem("communist_names"));
+	$("#notice_no").val(D.getItem("communist_nos"));
+	D.clear();
+})
+function sub(){
+	$('#forms').submit();
+}
+</script>
+</body>
+</html>

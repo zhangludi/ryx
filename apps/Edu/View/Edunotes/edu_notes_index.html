@@ -1,0 +1,160 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('notes_type'));</php>"><php>echo getFunctionInfo(ACTION_NAME.session('notes_type'));</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                            	<div class="layui-col-xs1 text-r lh-40">
+	                                    分类：
+	                                </div>
+	                                <div class="layui-col-xs2 ">
+	                                    <select name="notes_type" id="notes_type" lay-filter="aihao" lay-search="" lay-verify='required'>
+											<option value="">请选择</option>
+											<php>echo getBdTypeSelect('notes_type','',$notes_type,$notes_type);</php>
+                                        </select>
+	                                </div>
+	                                <div class="layui-col-xs1 text-r lh-40">
+	                                    标题：
+	                                </div>
+	                                <div class="layui-col-xs2 ">
+	                                    <input class="layui-input" name="keyword" id="keywords" autocomplete="off" placeholder="请输入标题">
+	                                </div>
+	                                <div class="layui-col-xs1 center-text lh-40 text-r">
+	                                    时间：
+	                                </div>
+	                                <div class="layui-col-xs3">
+	                                    <input type="text" class="layui-input "  lay-filter="myTable" autocomplete="off" id="time" placeholder="yyyy-mm-dd">
+	                                </div>
+	                                <div class="layui-col-xs2 pull-right">
+	                                	<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo"></table>
+								<input type="hidden" id="notes_types" value="{$notes_type}" />								
+	                            <script type="text/html" id="operate">
+	                                <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+	                                <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+	                                <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("edu_notes_index_data",array("notes_type"=>$notes_type))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'notes_id',width:80, title: '编号', sort: true}
+	                    , {field: 'notes_title', title: '标题'}
+	                    , {field: 'notes_type',width:90,  title: '分类'}
+	                    , {field: 'add_staff', width:100 ,title: '添加党员'}
+	                    , {field: 'add_time', width:150 , title: '操作时间'}
+	                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+	                ]]
+	                , page: true
+	            });
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+			        console.log(obj)
+			    });
+			    //监听工具条
+			    table.on('tool(demo)', function(obj){
+			        var data = obj.data;
+			        var idcard_no = data.idcard_no;
+			        if(obj.event === 'del'){
+		              	layer.confirm('确认删除该数据吗？', function(index){
+			              	window.location='{:U("Edunotes/edu_notes_del")}?notes_id='+data.notes_id+'';
+		              	});
+		          	} else if(obj.event === 'edit'){
+						var notes_type = $('#notes_types').val();
+		          		var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('Edunotes/edu_notes_edit')}?notes_id="+data.notes_id+'&notes_type='+notes_type,
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+		          	}else if(obj.event === 'detail'){
+		          		var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('Edunotes/edu_notes_info')}?notes_id="+data.notes_id+'',
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+		          	}
+		      	});
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+			            var notes_type = $('#notes_type').val();
+						if(!notes_type){
+							
+							var notes_type = $('#notes_types').val();
+						}
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time,
+					        	"notes_type":notes_type,
+					        }
+				      	});
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>

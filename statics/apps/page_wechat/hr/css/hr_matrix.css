@@ -1,0 +1,138 @@
+/*——————————————————————————————本页面公用—————————————————————————————————————————*/
+/*width-height类*/
+.wh-24em{width: 1.2rem;height: 1.2rem;}
+
+/*width类*/
+.w-2px{width: 2px;}
+.w-6em{width: 0.3rem;}
+.w-8em{width: 0.4rem;}
+.w-7em{width: 0.35rem;}
+.w-52em{width: 2.6rem;}
+.w-74em{width: 3.7rem;}
+.w-105em{width: 5.25rem;}
+.w-236em{width: 11.8rem;}
+.w-4em{width: 0.2rem;}
+.w-104em{width:5.2rem;}
+/*height类*/
+.h-8em{height: 0.4rem;}
+.h-37em{height: 7.25rem;}
+.h-4em{height: 0.2rem;}
+.h-12em{height: 0.6rem;}
+.h-14em{height: 0.7rem;}
+.h-17em{height: 0.85rem;}
+.h-18em{height: 0.9rem;}
+.h-22em{height: 1.1rem;}
+.h-52em{height: 2.6rem;}
+.h-100b{height: 100%;}
+.h-104em{height: 5.2rem;}
+.h-187em{height:7.87rem;}
+/*top类*/
+.top-2em{top:0.05rem;}
+
+/*line-height类*/
+.lh-22em{line-height: 1.1rem !important;}
+.text-justify{text-align: justify !important;}
+/*padding类*/
+.pt-6em{padding-top: 0.3rem;}
+/*padding类*/
+.pt-16em{padding-top:0.8rem;}	
+.pb-16em{padding-bottom:0.8rem;}
+.pl-16em{padding-left:0.83rem;}
+.pr-16em{padding-right:0.83rem;}
+/*margin类*/
+.ml-3em{margin-left: 0.15rem;}
+.ml-1mpx{margin-left: -1px;}
+.mb-2px{margin-bottom: 2px;}
+.mt-4em{margin-top: 0.2rem;}
+.mt-14em{margin-top:0.7rem;}
+.mt-6em{margin-top:0.33rem;}
+
+/*color类*/
+.color-ff5a2d{color: #ff5a2d;}
+.color-ffb767{color: #ffb767;}
+.color-9e{color: #9e9e9e;}
+.color-0095ff{color:#0095ff;}
+.color-21{color:#212121;}
+.color-ff3132{color:#ff3132}
+/*background类*/
+.bg-color-f9{background: #f9f9f9}
+.bg-color-ff562d{background: #ff562d;}
+.bg-color-fda906{background: #fda906;}
+.bg-color-2da4ff{background: #2da4ff;}
+.bg-color-757575{background: #757575;}
+.bg-color-ffb767{background: #ffb767;}
+.bg-color-ff3132{background-color: #ff3132;}
+.bg-color-f5{background: #f5f5f5}
+.color-ff4242{color:#ff4242;}
+.color-2f87ff{color:#2f87ff;}
+.color-ccc{color:#cccccc;}
+.pl-20em{padding-left:1rem !important;}
+.p-max{padding:0.43rem 1rem}
+.bor-ra-8em{border-radius: 0.8rem !important;}
+.b-eb{
+	border-radius: 3rem;
+    border: solid 0.03rem #ebebeb;}
+.bg-color-linear{background:linear-gradient(90deg,rgba(255,66,66,1),rgba(255,48,50,1),rgba(255,90,45,1));}
+.bb-1-eb{border-bottom: 1px solid #ebebeb;}
+/*蓝色*/
+.bg-color-2f87ff{background-color: #2f87ff;}
+/*橘色*/
+.bg-color-ff7e00{background-color: #ff7e00;}
+.bor-ra-1em{border-radius: 0.25rem}
+.bg-color-fafafa{background: #fafafa;}
+.bb-1-eb{border-bottom: 1px solid #ebebeb;}
+.hr-border-radius{
+	border-radius: 0.25rem 0.25rem 0rem 0rem;
+}
+/*
+#tabBigBox{width:100%;height: 1.7rem;}
+#tabBox2{background: #fff;overflow: hidden;position: fixed;top: 0;}
+#tabBox2 li{float: left;border-right: 1px solid #eeeeee;text-align: center;position: relative;}
+#tabBox2 li a{display: block;margin: 0 auto;color: #757575;padding: 0 1rem;}
+#tabBox2 li .active{display: none;width: 2rem;height: 1px;position: absolute;bottom: -0.25rem;left: 50%;background: #ff3032;margin-left: -1rem;}
+#tabBox2 .tabBox2-active a{color: #ff3032;}
+#tabBox2 .tabBox2-active .active{display: block;}
+*/
+
+/* 垂直居中 */
+.va-jz{
+	display: flex;
+    align-items:Center; 
+}
+.w-33b{width: 33.33%;}
+
+.lh-15em{line-height: 0.75rem !important;}
+/*——————————————————————————————页面其他样式—————————————————————————————————————————*/
+.tabBox2-active{
+	color:#fff !important;
+	background:linear-gradient(90deg,rgba(255,66,66,1),rgba(255,48,50,1),rgba(255,90,45,1)) !important;
+}
+#list li:last-child{
+	border-bottom:none !important;
+}
+.z-index-1{z-index: 1 !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

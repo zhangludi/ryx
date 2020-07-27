@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice_person.css"/>
+</head>
+<style>
+body{
+	height:auto;
+}
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;}
+
+</style>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+	    <ul>
+	    	<li class="h-45em">
+	    		<div class="aui-title f-w">选择人员</div>
+	    		<a class="pull-right f-12em f-w pr-12em" onclick="submit_communist()">
+			      	 确定
+			    </a>
+	    	</li>
+	    </ul>
+	</div>
+
+	<div class="">
+		<div class="over-h pt-14em pb-8em bb-1-df" id="selectBox">
+			<div class="w-100b pull-left text-align f-14em lh-14em color-75 f-w br-1-df">选择部门</div>
+		</div>
+		<form id="party_from" action="{:U('Ccp/ccp_communist_choice')}" method="post">
+			<ul class="pl-12em pr-12em" id="departmentBox">
+				<volist name="party_list" id="list">
+					<li class="over-h">
+						<p class="f-14em lh-14em color-33 f-w pt-16em pb-16em"><i class="f-12em lh-14em color-99 p-0 iconfont mr-8em">&#xe87d;</i>{$list.party_name}</p>
+						<ul class="over-h pl-15em">
+							 <volist name="list.lists" id="p_list">
+							 	
+								<li class="pull-left w-100b f-14em lh-14em color-75 pt-15em pb-15em">
+									<span class="pull-left">{$p_list.party_name}</span>
+									<input class="pull-right w-16em h-16em bor-ra-3" type='checkbox'  value="{$p_list.party_no}" name="party_no[]"/>
+								</li>
+							</volist>
+						</ul>
+					</li>
+				</volist>
+				<div class="over-h pt-20em">
+					<div class="pull-left w-170em h-32em b-1-ff3638 color-ff3638 text-align f-14em lh-34em bor-ra-3" onclick="cancel()">取消</div>
+					<div class="pull-right w-170em h-32em grad color-white text-align f-14em lh-36em bor-ra-3" id="determine">确定</div>
+				</div>
+			</ul>
+		</form>
+		<div id="personnelBox">
+			<div>
+				<ul class="pl-12em pr-12em pt-10em">
+					<volist name="communist_list" id="list">
+						<li class="over-h">
+							<img class="pull-left w-40em h-40em bor-ra-100b mr-12em mb-10em" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" alt="" />
+							<div class="pull-left w-270em">
+								<p class="f-16em lh-16em color-33 f-w pt-5em pb-8em">{$list.communist_name}</p>
+								<p class="f-16em lh-16em color-75 pb-12em">{$list.party_no}</p>
+							</div>
+							<div class="pull-right w-16em h-16em mt-20em mr-12em" id="communist_list">
+								<div class="pull-left w-16em h-16em b-1-df bor-ra-3 di-n"></div>
+								<input type='checkbox' class="pull-left w-16em h-16em bor-ra-3 communist_nos"  data-names="{$list.communist_name}"  value={$list.communist_no} name="communist_no" />
+							</div>
+						</li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+	</div>
+<!--结束-->
+<input type="hidden" id="pinyin" /> 
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__STATICS__/plugins/js.cookie.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice_person.js"></script>
+<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+<script type="text/javascript">
+$('#departmentBox').hide();
+$('#departmentBox>li>ul').hide();
+$('#selectBox>div').click(function(){
+	$('#selectBox>div').removeClass('select');
+	$(this).addClass('select');
+	$('#personnelBox').hide();
+	$('#departmentBox').show();
+})
+$('#departmentBox>li').click(function(){
+	$('#departmentBox>li>ul').hide();
+	$('#departmentBox>li>p>i').html('&#xe87d;');
+	$(this).find('p>i').html('&#xe780;');
+	$(this).find('ul').show();
+});
+$('#determine').click(function(){
+	$('#selectBox>div').removeClass('select');
+	$('#personnelBox').show();
+	$('#departmentBox').hide();
+	$('#departmentBox>li>p>i').html('&#xe87d;');
+})
+
+function cancel(){
+	$('#personnelBox').show();
+	$('#departmentBox').hide();
+}
+
+$('#determine').click(function(){
+	$('#party_from').submit();
+})
+
+
+function submit_communist(){
+	var communist_names = '';
+	var communist_nos = '';
+	$("#communist_list input[type=checkbox]:checked").each(function(){
+		if(communist_names){
+			communist_names += ","+$(this).data('names');
+		}else{
+			communist_names = $(this).data('names');
+		}
+		if(communist_nos){
+			communist_nos += ","+$(this).val();
+		}else{
+			communist_nos = $(this).val()
+		}
+	});
+	D.setItem('communist_nos',communist_nos);
+	D.setItem('communist_names',communist_names)
+	window.history.go(-1);
+}
+</script>
+</body>
+</html>
+
+
+
+

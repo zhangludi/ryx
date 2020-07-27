@@ -1,0 +1,102 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                    <form id="form_sample_2" action="{:U('att_machine_do_save')}" method="post" class="form-horizontal">
+                        <div class="layui-card-body layui-form">
+                            <input type="hidden" class="form-control" name="cat_id" value="{$cat_data.cat_id}">
+                            <input type="hidden" class="form-control" name="material_cat" value="{$material_cat}">
+                            <div class="layui-row">
+                            	<div class="layui-row">
+                                    <div class="layui-col-xs12 mt-10">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>考勤机号：</strong></div>
+                                            <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="machine_no" value="{$row['machine_no']}" placeholder="请输入考勤机号" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                            <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-xs12 mt-10">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>考勤机名称：</strong></div>
+                                            <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="machine_name" value="{$row['machine_name']}" placeholder="请输入考勤机名称" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                            <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>考勤机所属部门：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                             <select lay-filter="aihao" lay-search="" name="party_no">
+                                                <php>echo getPartySelect($row["party_no"]);</php>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-xs12 mt-10">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>考勤机地点：</strong></div>
+                                            <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="machine_addr" value="{$row['machine_addr']}" placeholder="请输入考勤机地点" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                            <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>考勤机类型：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <select name="machine_type" lay-filter="aihao" lay-search="" >
+                                              	<option value="1" <eq name="row.machine_type" value="1">selected</eq> >会议签到</option>
+                                                <option value="2" <eq name="row.machine_type" value="2">selected</eq> >考勤签到</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+    <script>
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+            
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+    </script>
+</block>

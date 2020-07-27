@@ -1,0 +1,106 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  portlet-fit">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                        <div class="pull-right text-right pr-10 ">
+                            <a href="{:U('Syssql/sys_sqlexport_json')}" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-100 mb-20">
+                                <i class="fa fa-download"></i>更新基础文件
+                            </a>
+                        </div>
+                        <div class="pull-right text-right pr-10 ">
+                            <a onclick="one_repair()" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-100 mb-20">
+                                <i class="fa fa-download"></i>一键修复
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="table" class="table-scrollable">
+                            <table id="client_table" class="table table-hover"
+                                   data-toggle="table"
+                                   data-url="{:U('Syssql/sys_sqlfield_check')}"
+                                   data-height=""
+                                   data-search="false"
+                                   data-show-refresh="false" data-show-toggle="false"
+                                   data-show-columns="false" data-show-export="false"
+                                   data-detail-view="false" data-detail-formatter="detailFormatter"
+                                   data-minimum-count-columns="2" data-page-size="25"
+                                   data-show-pagination-switch="false" data-pagination="true"
+                                   data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]">
+                                <thead>
+                                <tr>
+                                    <th data-field="num" data-align="center" data-sortable="true">序号</th>
+                                    <th data-field="type_name" data-align="center" data-sortable="true">类型</th>
+                                    <th data-field="table" data-align="center" data-sortable="true">表名</th>
+                                    <th data-field="field" data-align="center" data-sortable="true">字段名</th>
+                                    <th data-field="key" data-align="center" data-sortable="true" hidden="true"></th>
+                                    <th data-field="type" data-align="center" data-sortable="true" hidden="true"></th>
+                                    <th data-field="comment" data-align="center" data-sortable="true" hidden="true"></th>
+                                    <th data-field="sql" data-align="center" data-sortable="true" hidden="true"></th>
+                                    <th data-field="msg" data-align="center" data-sortable="true">原因</th>
+                                    <th data-field="operate" data-align="center" data-sortable="true">操作</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        $(function () {
+            //隐藏列
+            $('#client_table').bootstrapTable('hideColumn', 'key');
+            $('#client_table').bootstrapTable('hideColumn', 'type');
+            $('#client_table').bootstrapTable('hideColumn', 'comment');
+            $('#client_table').bootstrapTable('hideColumn', 'sql');
+        }); 
+        function one_repair(that) {
+            if(that == undefined){
+                var checkdata = $("#client_table").bootstrapTable('getData');
+            } else {
+                //获取选中行索引 
+                var index = $(that).parent().parent().data('index'); 
+                 //获取选中行数据对象 
+                var result = $('#client_table').bootstrapTable('getData')[index]; 
+                var checkdata = new Array();
+                checkdata[0] = result;
+            }
+            if(checkdata != ''){
+                $.ajax({
+                    url:"{:U('System/Syssql/sys_mysql_field_repair')}",
+                    type:'post',
+                    async:false,
+                    data:{'data':checkdata},
+                    success: function (data) {
+                        if(data.code == 1){
+                            alert(data.msg);
+                            setTimeout(location.reload(true),8000);
+                            //location.reload(true);
+                            // location.href = "{:U('System/Syssql/sys_mysql_field_repair')}";
+                        }else{
+                            layer.msg(data.msg, {icon: 5,time: 2000});
+                        }
+                    }
+                })
+            }else{
+                layer.msg('暂无需要修复的内容', {icon: 5,time: 2000});
+            }
+        }
+    </script>
+</block>

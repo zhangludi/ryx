@@ -1,0 +1,157 @@
+
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_learn_videoInfo.css">
+<body class="ipam_home_public_background">
+<div class="public_content clearfix">
+    <div class="pull-left con_videoInfo_left">
+        <div class="clearfix con_videoInfo">
+            <div class="pull-left con_videoInfo_tit">{$material_info.material_title}</div>
+            <div class="pull-right con_videoInfo_type">{$material_info.material_topic}</div>
+        </div>
+        <div class="con_videoInfo_photo pt-20">
+            <video poster="{$material_info.material_thumb}"  style="object-fit:fill;width: 800px;height: 400px;" id="material_vedio" controls="controls" src="{$material_list.material_vedio}"></video>
+        </div>
+        <!-- 学习人员 -->
+        <div class="Learner">
+            <div class="clearfix">
+                <div class="pull-left Learner_shu"></div>
+                <div class="pull-left Learner_people">学习人员
+                    <span>（共<neq name="material_info.log_list_count" value="">{$material_info.log_list_count}<else/>0</neq>人）</span>
+                </div>
+                <div class="pull-right edu_arrow">
+                    <!--<a class="abtn aleft" href="#left" title="左移"></a>
+                    <a class="abtn aright" href="#right" title="右移"></a>-->
+                </div>
+            </div>
+            
+            <div class="scrolllist" id="s1"> 
+                    <a class="abtn aleft" href="#left" title="左移"></a>
+                <div class="imglist_w">
+                <ul class="imglist">
+                <volist name="material_info.log_list" id="log">
+                  <li> 
+                    <a href="#">
+                        <img width="64" height="64" alt="" src="{$log.communist_avatar}" />
+                    </a>
+                    <p>{$log.communist_name}</p>
+                  </li>
+                </volist>
+                </ul>
+                </div>
+                <a class="abtn aright" href="#right" title="右移"></a>
+            </div>
+        </div>
+        <div class="con_videoInfo_notes">
+            <form action="{:U('Edu/set_edu_note')}" id="forms" method="post" >
+                <input type='hidden' id="material_id" name="material_id" value="{$material_info.material_id}" />
+                <input type='hidden' id="type" name="type" value="1" />
+                <input type="hidden" id="period_score" name="period_score" value="{$material_info.period_score}">
+                <input type="hidden" id="material_duration" name="material_duration" value="{$material_info.material_duration}">
+                <input type="hidden" id="integral_video" name="integral_video" value="{$material_info.integral_video}">
+                <div class="clearfix">
+                    <div class="pull-left Learner_shu"></div>
+                    <div class="pull-left Learner_people">视频笔记</div>            
+                </div>
+                <textarea name="notes_content" class="con_videoInfo_input" placeholder="请输入："></textarea>
+                <div class="clearfix">
+                    <div class="pull-right sibmit" style="cursor:pointer">提交笔记</div>
+                </div>
+            </form>
+            <!-- 视频笔记结束 -->
+            <!-- 以往笔记 -->
+            <div class="con_videoInfo_past_notes">
+                <div class="clearfix">
+                    <div class="pull-left Learner_shu"></div>
+                    <div class="pull-left Learner_people">以往笔记</div>            
+                </div>
+                <div class="past_notes_line"></div>
+                <div class="past_notes_con">
+                <volist name="material_info.notes_list" id="notes">
+                    <a href="{:U('ipam_note_info',array('notes_id'=>$notes['notes_id']))}">
+                    <li>
+                        <div class="past_notes_time">{$notes.add_time}</div>
+                        <div class="past_notes_tit">{$notes.notes_content}</div>
+                    </li>
+                    </a>
+                </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- 右侧 -->
+  <div class="pull-right con_videoInfo_right">
+      <!-- 文章简介 -->
+        <div class="con_videoInfo_Intro">
+            <div class="add_title">视频简介</div>
+            <div class="add_line"></div>
+            <div class="add_Introduction">{$material_info.material_desc}</div>
+            <div class="add_time">上传时间：{$material_info.add_time}</div>
+            <!-- <div class="add_scan">浏览量：1240次</div> -->
+        </div>
+      <div class="videoInfo_right_about">
+            <div class="add_title">相关专题视频</div>
+            <div class="add_line"></div>
+            <volist name="material_list" id="list">
+            <a href="{:U('Edu/ipam_material_videoInfo',array('material_id'=>$list['material_id']))}">
+            <li class="clearfix">
+                <div class="pull-left">
+                    <img src="{$list.material_thumb}" width="156px" height="88px">
+                </div>
+                <div class="pull-left ml-10">
+                    <div class="videoInfo_right_about_tit">{$list.material_title}</div>
+                   <!--  <div class="videoInfo_right_about_scan">浏览量：1240次</div> -->
+                </div>
+            </li>
+            </a>
+            </volist>
+       </div>
+   </div>
+</div>
+<script src="__STATICS__/apps/page_portal/portal/js/ipam_home_public.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/slider.js"></script> 
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/edu_learn_videoInfo.js"></script> 
+<script>
+$('.sibmit').click(function(){
+    $("#forms").submit();
+})
+//注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
+layui.use('element', function () {
+  var element = layui.element;
+});
+$(function(){
+    var material_duration = $('#material_duration').val();
+    var material_id = $('#material_id').val();
+    var integral_video = $('#integral_video').val();
+    var integral_article = $('#integral_article').val();
+    var period_score = $('#period_score').val();
+    var material_type = $('#material_type').val();
+    var is_has = $("#is_has").val();
+    if(material_duration){
+        var video_time = material_duration*60000;
+        setTimeout(function(){
+            $.ajax({
+                url: "{:U('set_integral')}",
+                type: "post",
+                data:{'material_id':material_id,'integral_video':integral_video,'material_type':material_type},
+                async:false,
+                success: function(msg) {
+                    console.log(msg);
+                    if(msg){
+                        if(material_type == 1){
+                            alert('恭喜您获得'+integral_article+'积分，'+period_score+'个学习时长！！！');
+                        } else {
+                            alert('恭喜您获得'+integral_video+'积分，'+period_score+'个学习时长！！！');
+                        }
+                    } else {
+                        alert('您今天已经学习这篇资料了，去看看其他资料吧');
+                    }
+                }
+            });
+        },video_time)
+    }
+})
+</script>
+</script>
+
+</body>
+</html>

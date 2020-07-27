@@ -1,0 +1,79 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <form action="{:U('System/Sysuser/sys_user_data_access_do_save')}" method="post">
+            <input name="staff_no" type="hidden" value="{$staff_data.staff_no}"/>
+            <div class="layui-col-md12 mt-10">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <table class="p5-table " width="100%">
+                            <tbody class="bg-color-gray1">
+                            <tr class="h-45 center">
+                                <td><b>工号：</b>{$staff_data.staff_no}</td>
+                                <td><b>姓名：</b>{$staff_data.staff_name}</td>
+                                <td><b>部门：</b>{$dept_name}</td>
+                                <td><b>岗位：</b>{$post_name}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="layui-card-body layui-form">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="input-group">
+                                    <ul class="icheck-inline">
+                                        <volist name="auth_type_list" id="list">
+                                            <eq name="list.function_id" value="0">
+                                                <div class="p5-day ml-80">
+                                                    <span class="fsize-16">{$list.memo}</span>
+                                                </div>
+                                                <li class="mt-10 ml-120">
+                                                   <input type="checkbox" name="type_no[]" value="{$list.type_code}" lay-skin="primary" <volist name="auth_lt" id="lt"><eq name="lt.type_no" value="$list.type_code">checked</eq></volist>>{$list.type_name}
+                                                </li>
+                                            </eq>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="text-align: right">
+                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="cancel();">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script>
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        });
+        function cancel(){
+            parent.layer.closeAll();
+        }
+    </script>
+</block>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+   	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_public_v2.1.1.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>    
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_home.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+</head>
+<style>
+   	body{
+   		margin:0px;background:#fff;
+   	}
+	header ul li{
+		display: block; !important;
+	}
+	#article_title_no{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+<body>
+	<header class="aui-bar aui-bar-nav aui-bar-info ">
+	    <!-- <ul>
+	    	<li class="h-45em active">
+	    		<div class="aui-title f-w"><php>echo '党员投稿'</php></div>
+	    	</li>
+	    	</li><a href="">添加</a></li>	
+	    </ul> -->
+	    <ul>
+            <li class="h-45">
+                <a class="aui-pull-left" href="javascript:history.back(-1)">
+					<span class="aui-iconfont aui-icon-left"></span>返回
+				</a>
+                <div id="title" class="aui-title f-w">党员投稿</div>
+                <a class="f-12em color-white f-w pull-right pr-12em" href="{:U('Oa/oa_article_edit')}" >
+                	添加
+                </a>
+            </li>
+        </ul>
+    </header>
+	<!--党政动态开始-->
+	<section class="pl-8em pr-8em">
+		<!--列表开始-->	
+		<div class="mt-12em">
+			<ul id="list1">
+				<volist name="article_data" id="data">
+					<li class="mb-12em over-h" >
+						<a href="{:U('Oa/oa_article_info', array('article_id' => $data['article_id']))}">
+							<div class="pull-left w-120em h-90em">
+								<img class=" w-120em h-90em bor-ra-3" src="{$data.article_thumb}">
+							</div>
+							<div class="pull-left over-h w-230em ml-8em">
+								<div class="pull-left w-6em h-12em mt-39em mr-8em"><img src="__STATICS__/apps/page_wechat/public/aui2/img/dl-icon.png"></div>
+			                    <div class="pull-left w-216em mt-12em">
+			                        <div  class="f-16em color-33 f-w" id="article_title_no"><span>{$data.article_title}</span></div>
+			                        <div class="pull-left color-a4 f-14em pt-5em">{$data.add_time}</div>
+			                      <!--   <div class="pull-right color-a4 f-14em pt-5em">2188浏览</div>  -->
+			                    </div>
+		               		</div>
+		               	</a>
+					</li>
+				</volist>
+			</ul>
+		</div>
+	</section>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-list-swipe.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/bd_index.js"></script>
+<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+<script type="text/javascript">
+	$('#wrap').css('height',($(window).height()-1))
+	
+</script>
+<script type="text/javascript">
+	function openNewCms(cat_id){
+		location.href="{:U('Wechat/Cms/cms_article_list')}?cat_id="+cat_id;
+	}
+</script>
+
+</html>

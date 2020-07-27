@@ -1,0 +1,91 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">
+				<div class="layui-col-xs9">
+						{:getFunctionInfo(ACTION_NAME)}
+				</div>
+				
+				</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs2 pull-right">
+							<a class="layui-btn table-add " href="{:u('Ccpstaff/hr_dept_edit')}" >添加</a>
+						</div>
+
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-f60 layui-btn-xs" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-del layui-btn-xs"  lay-event="del">删除</a>
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+	<script>
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('hr_dept_index')}"
+			,cellMinWidth: 80
+			,height:'full-155'
+			,cols: [[
+				{field:'dept_no', title:'部门编号', unresize: true, sort: true}
+				,{field:'dept_name', title:'部门名称'}
+				,{field:'dept_manager', title: '部门主管',align: 'center', sort: true}
+				,{field:'operate', title:'操作', width:'20%',align: 'center' ,toolbar: '#barDemo'}
+			]]
+			,page: false
+		});
+		//监听工具条
+	    table.on('tool(demo)', function(obj){
+	        var data = obj.data;
+	        var idcard_no = data.idcard_no;
+	        if(obj.event === 'del'){
+              	layer.confirm('确认删除该数据吗？', function(index){
+	              	window.location='{:U("Ccpstaff/hr_dept_do_del")}?dept_no='+data.dept_no+'';
+                    layer.close(index);
+              	});
+          	} else if(obj.event === 'edit'){
+          		window.location='{:U("Ccpstaff/hr_dept_edit")}?dept_no='+data.dept_no+'';
+                layer.close(index);
+          	}
+      	});
+		
+	});
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+		form.on('submit(component-form-element)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#test1',
+			range: true
+		});
+	})
+	//添加按钮的点击事件
+	
+	
+</script>
+</block>

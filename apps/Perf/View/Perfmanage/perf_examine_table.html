@@ -1,0 +1,54 @@
+
+<table class="table table-striped table-advance" id="table">
+	<tbody>
+		<tr>
+			<td class="view-message left"></td>
+			<td colspan="4" class="view-message center">
+				<div class="row">
+					<div class="col-md-11">
+						<span class="fsize-30">党员KPI考核标准</span>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="view-message left"></td>
+			<td colspan="4" class="view-message text-center fcolor-333">
+				<span class="fsize-24">
+                	考核人：{$communist_name}&nbsp;考核周期：{$Yer}年{$time}月
+                </span>
+			</td>
+		</tr>
+		<tr>
+			<table class="table table-bordered ">
+				<tbody>
+					<tr>
+						<td class="view-message center">序号</td>
+						<td class="view-message center">参考项</td>
+						<td class="view-message center">比重</td>
+						<td class="view-message center">考核方式</td>
+						<td class="view-message center">考核周期</td>
+						<td class="view-message center">责任人</td>
+						<td class="view-message center">绩效得分</td>
+					</tr>
+						<foreach name="communist_info" item="communist" >
+							<if condition="$communist.item_name neq ''">
+							<tr>
+								<td class="view-message center">{$key+1}</td>
+								<td class="view-message center">{$communist.item_name}</td>
+								<td class="view-message center">{$communist.item_proportion}</td>
+								<td class="view-message center">{$communist.type_name}</td>
+								<td class="view-message center">{$communist.cycle_name}</td>
+								<td class="view-message center">{$communist.communist_name}</td>
+								<td class="view-message center">{$communist.assess_score}</td>
+							</tr>
+							</if>
+						</foreach>
+					<tr>
+						<td colspan="8" class="view-message center">绩效合计：<eq name="communist_info.per_sum" value=''>0<else/>{$communist_info.per_sum}</eq></td>
+					</tr>
+				</tbody>
+			</table>
+		</tr>
+	</tbody>
+</table>

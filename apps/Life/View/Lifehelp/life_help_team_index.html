@@ -1,0 +1,150 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            队伍名称：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入专题名称">
+	                        </div>
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                           队伍类型：
+	                        </div>
+	                        <div class="layui-col-xs3">
+	                            <!-- <input type="text" class="layui-input" name="time" id="time" placeholder="yyyy-mm-dd"> -->
+	                            <select id="help_team_type" name="help_team_type" lay-filter="aihao" lay-search="">
+                                            <!-- <volist name="topic_data" id="list"> -->
+                                                <!-- <option value="{$list.topic_id}" <eq name="list.topic_id" value="$topic_id">selected</eq>
+                                                >{$list.topic_title}</option> -->
+                                            <!-- </volist> -->
+                                    <option value="">请选择</option>
+									<php> echo getBdTypeSelect('team_type','',''); </php>
+                                </select>
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                           <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                            <!-- <a class="layui-btn table-add " href=search"{:U('life_plan_edit')}" >添加</a> -->
+	                             <a class="layui-btn table-add" data-type="add" style="text-decoration: none;" title="添加">添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="demo"  lay-filter="demo"></table>
+	                     <script type="text/html" id="operate">
+                            <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                            <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                        </script>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("life_help_team_index_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'help_team_id', width:80 ,title: '编号', sort: true}
+	                    , {field: 'help_team_name', title: '队伍名称'}
+	                    , {field: 'help_team_head',  title: '负责人'}
+	                    , {field: 'help_team_type',  title: '队伍类型'}
+	                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 250}
+	                    
+	                ]]
+	                , page: true
+	            });
+			    
+			     //监听工具条
+			    table.on('tool(demo)', function(obj){
+			        var data = obj.data;
+			        var idcard_no = data.idcard_no;
+			        if(obj.event === 'detail'){
+			        	var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('life_help_team_info')}?help_team_id="+data.help_team_id+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+		          	} else if(obj.event === 'del'){
+		              	layer.confirm('确认删除该数据吗？', function(index){
+			              	window.location='{:U("life_help_team_del")}?help_team_id='+data.help_team_id+'';
+		                    layer.close(index);
+		              	});
+		          	} else if(obj.event === 'edit'){
+		          		var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('life_help_team_edit')}?help_team_id="+data.help_team_id+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+		          	}
+		      	});
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var help_team_type = $('#help_team_type').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"help_team_type": help_team_type,
+					        }
+				      	});
+			        },
+			        add: function(){
+	                	var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('life_help_team_edit')}",
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+	            	}
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+			    
+	        });
+	        //点击左侧树的事件
+	        
+	    })
+	</script>
+	
+</block>

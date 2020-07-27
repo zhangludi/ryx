@@ -1,0 +1,427 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	  <div class="layui-row layui-col-space15">
+	    <div class="layui-col-md12">
+	        <div class="layui-card layui-form">
+	          <div class="layui-card-header">  考试试卷</div>
+	          <div class="layui-card-body">
+	              <div class="layui-row">
+              		<div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考试时间：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.exam_date}</span></div>
+                        </div>
+                    </div>
+                 	<div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考试范围：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.exam_party}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>对应群体：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.exam_group}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>资料标签：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.exam_data_r}</span></div>
+                        </div>
+                    </div>
+                    <eq name="is_integral" value="1">
+	                <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>积分：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.exam_integral}</span></div>
+                        </div>   
+                    </div>
+                    </eq>
+                     <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考试状态：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.exam_status}</span></div>
+                        </div>   
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>专题：</strong></div>
+                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                {$exam.exam_topic}
+                            </div>
+                            <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>参考人数：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.count}</span></div>
+                        </div>   
+                    </div>
+	               <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考题类型：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$exam.is_simulation}</span></div>
+                        </div>   
+                    </div>
+	            </div>
+	          </div>
+	      </div>
+	    </div>
+	    
+
+         <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>">专题考试</div>
+                <div class="layui-form layui-card-body fitheight">
+                    <div class="layui-row layui-col-space5">
+                        
+                        <div class="layui-col-xs3 pull-right" >
+                            <eq name="exam['status']" value="11">
+                            <a class="layui-btn table-add "   style="text-decoration: none;" title="添加">添加</a>
+                            </eq>
+                        </div>
+                        <input type="hidden" id="exam_id" name="exam_id" value="{$exam_id}">
+                    </div>
+                    <table class="layui-table" id="demo"  lay-filter="demo">
+
+                    </table>
+                    <script type="text/html" id="operate">
+                        
+                    </script>
+                </div>
+            </div>
+        </div> 
+	                  
+        <neq name="exam['status']" value="11">
+          <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>">考试人员列表</div>
+                <div class="layui-form layui-card-body fitheight">
+                    <div class="layui-row layui-col-space5">
+                       
+                    </div>
+                    <table class="layui-table" id="demo2"  lay-filter="demo">
+							
+                    </table>
+                    <script type="text/html" id="operate">
+                        
+                        
+                    </script>
+                </div>
+            </div>
+        </div> 
+       </neq>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-footer" style="text-align: right">
+                    <!-- <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button> -->
+                    <!-- <a type="reset" class="layui-btn layui-btn-primary mr-40" href="{:U('edu_exam_index')}">返回</a> -->
+                    <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                </div>
+            </div>
+        </div>
+	  </div>
+	</div>
+
+	<!-- <div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<div class="cont-col1">
+								<div class="label label-sm bg-color-green">
+									<i class="iconfont">&#xe61c;</i>
+								</div>
+							</div>
+							<span class="bold ">考试试卷</span>
+							<span class="caption-helper"></span>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<input type="hidden" name="exam_id" id="exam_id" value="{$exam.exam_id}">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-xs-2 pr-0 text-r lh-35">
+											<b>考试时间：</b>
+									</div>
+									<div class="col-xs-8 pl-0 lh-35">
+											<span class="di-b">{$exam.exam_date}</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-2 pr-0 text-r lh-35">
+											<b>考试范围：</b>
+									</div>
+									<div class="col-xs-8 pl-0 lh-35">
+											<span class="di-b">{$exam.exam_party}</span>
+									</div>
+								</div>
+								<div class="row">
+										<div class="col-xs-2 pr-0 text-r lh-35 ">
+										<b>积分：</b>
+										</div>
+										<div class="col-xs-8 pl-0 lh-35">
+											<span class="di-b">{$exam.exam_integral}</span>
+										</div>
+								</div>
+								<div class="row">
+										<div class="col-xs-2 pr-0 text-r lh-35 ">
+										<b>考试状态：</b>
+										</div>
+										<div class="col-xs-8 pl-0 lh-35">
+											<span class="di-b">{$exam.exam_status}</span>
+										</div>
+								</div>
+								<div class="row">
+										<div class="col-xs-2 pr-0 text-r lh-35">
+										<b>参考人数：</b>
+										</div>
+										<div class="col-xs-8 pl-0 lh-35">
+											<span class="di-b">{$exam.count}</span>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<div class="cont-col1">
+								<div class="label label-sm bg-color-red">
+									<i class="iconfont">&#xe696;</i>
+								</div>
+							</div>
+							<span class="bold ">专题考试</span>
+							<span class="caption-helper"></span>
+						</div>
+						<span class="pull-right lh-3em fcolor-99"></span>
+					</div>
+					<div class="pull-right text-right p-0 ">
+						<eq name="exam['status']" value="11">
+							<a onclick="exam_add()" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-90 mr-10">
+								<i class="iconfont">&#xe674;</i>添加
+							</a>
+						</eq>
+					</div>
+					<div class="portlet-body">
+                        <table id="client_table"></table>
+					</div>
+				</div>
+				<neq name="exam['status']" value="11">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <div class="cont-col1">
+                                    <div class="label label-sm bg-color-red">
+                                        <i class="iconfont">&#xe620;</i>
+                                    </div>
+                                </div>
+                                <span class="bold ">已考试人员名单</span>
+                                <span class="caption-helper"></span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <table id="client_tables"></table>
+                        </div>
+                    </div>
+                </neq>
+			</div>
+		</div>
+	</div> -->
+</block>
+<block name="js">
+	<script>
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: '{:U("edu_exam_questions_data",array("is_contain"=>1,"exam_id"=>$exam_id))}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'questions_id',width:60, title: '序号'}
+                        , {field: 'questions_title', title: '名称'}
+                        , {field: 'questions_item',  title: '选项'}
+                        , {field: 'questions_answer', width:100 , title: '正确答案'}
+                        , {field: 'questions_score', width:60, title: '分值'}
+                        , {field: 'operate', title: '操作',width: 80}
+                        
+                    ]]
+                    , page: false
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+                //监听工具条
+                table.on('tool(demo)', function(obj){
+                    var data = obj.data;
+                    var idcard_no = data.idcard_no;
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除该数据吗？', function(index){
+                            window.location='{:U("Edunotes/edu_notes_del")}?notes_id='+data.notes_id+'';
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        window.location='{:U("Edunotes/edu_notes_edit")}?notes_id='+data.notes_id+'';
+                        layer.close(index);
+                    }
+                });
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keyword = $('#keywords').val();
+                        var time = $('#time').val();
+                        var notes_type = $('#notes_type').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "keyword": keyword,
+                                "start":time,
+                                "notes_type":notes_type,
+                            }
+                        });
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+            //点击左侧树的事件
+            
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+        // 设置ztree 列表和右侧列表一样高度
+        $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>
+    <script>
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo2'
+                    , url: '{:U("edu_exam_communist_data",array("status"=>$status,"exam_id"=>$exam_id))}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'communist_no', title: '编号'}
+                        , {field: 'communist_name', title: '人名'}
+                        , {field: 'party_name',  title: '所属组织'}
+                        , {field: 'log_score',  title: '分值'}
+                        , {field: 'add_time', title: '参加时间'}
+                        , {field: 'operate', title: '操作',width: 180}
+                        
+                    ]]
+                    , page: false
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+                //监听工具条
+                table.on('tool(demo)', function(obj){
+                    var data = obj.data;
+                    var idcard_no = data.idcard_no;
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除该数据吗？', function(index){
+                            window.location='{:U("Edunotes/edu_notes_del")}?notes_id='+data.notes_id+'';
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        window.location='{:U("Edunotes/edu_notes_edit")}?notes_id='+data.notes_id+'';
+                        layer.close(index);
+                    }
+                });
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keyword = $('#keywords').val();
+                        var time = $('#time').val();
+                        var notes_type = $('#notes_type').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "keyword": keyword,
+                                "start":time,
+                                "notes_type":notes_type,
+                            }
+                        });
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+            //点击左侧树的事件
+            
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+        // 设置ztree 列表和右侧列表一样高度
+        $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>
+    <script>
+        
+       $(".table-add").click(function () {
+            var exam_id = $("#exam_id").val();
+            layer.open({
+                type: 2,
+                area:['800px', '400px'],
+                content: '{:U("edu_exam_questions")}?exam_id='+exam_id+'' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+            });
+
+        });
+    </script>
+</block>

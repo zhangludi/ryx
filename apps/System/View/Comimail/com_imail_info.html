@@ -1,0 +1,77 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <div class="layui-card-body layui-form">
+                    <div class="layui-row">
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>主题：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    {$imail_data.imail_title}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>收件人：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    {$imail_data.imail_receivers}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>内容：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    {$imail_data.imail_content}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    <neq name="imail_data.imail_attach" value="">
+                                        <php>echo getUploadHtml($imail_data['imail_attach'],'40');</php>
+                                    </neq>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>发件人：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                    <php> echo getStaffInfo($imail_data[imail_sender]);</php>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12">
+                            <div class="layui-row pull-right">
+                               <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use([ 'form', 'laydate','layedit'], function() {
+        var form = layui.form;
+        var layedit = layui.layedit
+            ,$ = layui.jquery;
+    })
+</script>
+</block>

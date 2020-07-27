@@ -1,0 +1,166 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15 layui-collapse" lay-filter="more">
+	   <form action="{:U('Ccpcommunistchange/ccp_communist_change_save')}" id="form_sample_2" onsubmit="return check()" method="post"   >
+		<input type="hidden" name="status" value="{$status}" />
+		<input type="hidden" name="type" value="{$type}" />
+        <div class="layui-col-md12">
+            <div class="layui-card layui-colla-item">
+                <div class="layui-colla-title">原支部信息</div>
+                <div class="layui-card-body layui-colla-content layui-form layui-show">
+                    <div class="layui-row">
+                    	<div class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                	<select name="communist_no" id="communistno" lay-filter="communistno"  lay-verify='required' lay-search>
+										<foreach name="communist_list" item="list">
+											<option value="{$list.communist_no}" <eq name="communist_info.communist_no" value="$list.communist_no">selected</eq>>{$list.communist_no}-{$list.communist_name}</option>
+										</foreach>
+									</select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>转移类型：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                	<if condition="$status eq mobile">
+                                		<select name="change_type" id="change_type" lay-filter="change_type" lay-search="" lay-verify='required'>
+											<php>echo getBdTypeSelect('mobile_type');</php>
+										</select>
+									<else/>
+										<select name="change_type" id="change_type" lay-filter="change_type" lay-search="" lay-verify='required'>
+											<php>echo getBdTypeSelect('change_type');</php>
+										</select>
+									</if>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>原支部：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                	<input type="hidden" name="old_party" id="old_party_no" autocomplete="off" class="layui-input" >
+                                	<input type="text" name="old_party_name" id="old_party_name" autocomplete="off" class="layui-input" lay-verify='required'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card layui-colla-item">
+                <div class="layui-colla-title">支部调整</div>
+                <div class="layui-card-body layui-colla-content layui-form layui-show">
+                    <div class="layui-row">
+                    	<div class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党支部：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35" id="party_no"> 
+                                	<select name="new_party" lay-filter="aihao" lay-search="" lay-verify='required'>
+										<php>echo getPartySelect($communist_info['party_no'])</php>
+									</select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>申请原因：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                	<textarea name="memo" placeholder="请输入申请原因" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12">
+				            <div class="layui-footer" style="text-align: right">
+				                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+				                <button type="button" class="layui-btn layui-btn-primary" onclick="layer_colse()">取消</button>
+				            </div>
+					    </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    	</form>
+    </div>
+</div>		
+</block>
+<block name="js">
+<script>
+	$('#inheres').on('ifChanged', function(event){
+		$("#inhere").toggle();
+		$("#add").toggle();
+	});
+	layui.use([ 'form', 'laydate'], function() {
+        var $ = layui.jquery
+		, admin = layui.admin
+		, element = layui.element
+		, layer = layui.layer
+		, laydate = layui.laydate
+		, form = layui.form;
+        form.render(null, 'component-form-group');
+        form.on('select(communistno)', function(data){
+            var communist_no = $('#communistno').val();
+            $.post("{:U('Ccpcommunistchange/ccp_communist_party_ajax')}",{communist_no:communist_no},function(result){
+                if(result)
+                {
+                    $('#old_party_no').val(result.party_no);
+                    $('#old_party_name').val(result.party_name);
+                }
+            });     
+        });
+        form.on('select(change_type)', function(data){
+            var transfer = $('#change_type').val();
+            if (transfer == 1 || transfer == 3){
+                $('#party_no').html("<select name='new_party' lay-filter='aihao' lay-search='' lay-verify='required'><php>echo getPartySelect($communist_info['party_no'])</php></select>");
+                $('#partymp').addClass("select2");
+            }else{
+                $('#party_no').html("<input name='new_party' id='new_party' class='form-control '>");
+            } 
+            layui.form.render();  
+        });
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+    })
+
+	function layer_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+    $(document).ready(function(){
+    	var communist_no = $('#communistno').val();
+    	$.post("{:U('Ccpcommunistchange/ccp_communist_party_ajax')}",{communist_no:communist_no},function(result){
+            if(result)
+            {
+                $('#old_party_no').val(result.party_no);
+                $('#old_party_name').val(result.party_name);
+//                alert($('#old_party_no').val());
+            }
+        });
+    });
+
+
+    function check(){
+        var communist_no = $('#communistno').val();
+        $.ajax({
+            url: "{:U('Ccpcommunistchange/check_communist')}",
+            data: {'communist_no':communist_no,'type':1},
+            type: "post",
+            async:false,
+            success: function(msg) {
+                console.log(msg);
+                if(msg){
+                    alert('当前党员,转移未结束');
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+    }
+</script>
+</block>

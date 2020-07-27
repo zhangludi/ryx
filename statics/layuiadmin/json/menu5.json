@@ -1,0 +1,187 @@
+{
+  "code": 0
+  ,"title":"官方演示页"
+,"msg": ""
+,"data": [{
+  "name": "component"
+,"title": "组件"
+,"icon": "layui-icon-component"
+,"list": [{
+    "name": "grid"
+  ,"title": "栅格"
+  ,"list": [{
+      "name": "list"
+    ,"title": "等比例列表排列"
+    ,"jump":"./views/official/component/grid/list.html"
+    },{
+      "name": "mobile"
+    ,"title": "按移动端排列"
+    ,"jump":"./views/official/component/grid/mobile.html"
+    },{
+      "name": "mobile-pc"
+    ,"title": "移动桌面端组合"
+    ,"jump":"./views/official/component/grid/mobile-pc.html"
+    },{
+      "name": "all"
+    ,"title": "全端复杂组合"
+    ,"jump":"./views/official/component/grid/all.html"
+    },{
+      "name": "stack"
+    ,"title": "低于桌面堆叠排列"
+    ,"jump":"./views/official/component/grid/stack.html"
+    },{
+      "name": "speed-dial"
+    ,"title": "九宫格"
+    ,"jump":"./views/official/component/grid/speed-dial.html"
+    }]
+  }, {
+    "name": "button"
+  ,"title": "按钮"
+  ,"jump":"./views/official/component/button/index.html"
+  }, {
+    "name": "form"
+  ,"title": "表单"
+  ,"list": [{
+      "name": "element"
+    ,"title": "表单元素"
+    ,"jump":"./views/official/component/form/element.html"
+    },{
+      "name": "group"
+    ,"title": "表单组合"
+    ,"jump":"./views/official/component/form/group.html"
+    }]
+  }, {
+    "name": "nav"
+  ,"title": "导航"
+  ,"jump":"./views/official/component/nav/index.html"
+  }, {
+    "name": "tabs"
+  ,"title": "选项卡"
+  ,"jump":"./views/official/component/tabs/index.html"
+  }, {
+    "name": "progress"
+  ,"title": "进度条"
+  ,"jump":"./views/official/component/progress/index.html"
+  }, {
+    "name": "panel"
+  ,"title": "面板"
+  ,"jump":"./views/official/component/panel/index.html"
+  }, {
+    "name": "badge"
+  ,"title": "徽章"
+  ,"jump":"./views/official/component/badge/index.html"
+  }, {
+    "name": "timeline"
+  ,"title": "时间线"
+  ,"jump":"./views/official/component/timeline/index.html"
+  }, {
+    "name": "anim"
+  ,"title": "动画"
+  ,"jump":"./views/official/component/anim/index.html"
+  }, {
+    "name": "auxiliar"
+  ,"title": "辅助"
+  ,"jump":"./views/official/component/auxiliar/index.html"
+  }, {
+    "name": "layer"
+  ,"title": "通用弹层"
+  ,"list": [{
+      "name": "list"
+    ,"title": "功能演示"
+    ,"jump":"./views/official/component/layer/list.html"
+    },{
+      "name": "special-demo"
+    ,"title": "特殊示例"
+    ,"jump":"./views/official/component/layer/special-demo.html"
+    },{
+      "name": "theme"
+    ,"title": "风格定制"
+    ,"jump":"./views/official/component/layer/theme.html"
+    }]
+  }, {
+    "name": "laydate"
+  ,"title": "日期时间"
+  ,"jump":"./views/official/component/laydate/index.html"
+  }, {
+    "name": "table"
+  ,"title": "表格"
+  ,"jump":"./views/official/component/table/index.html"
+  }, {
+    "name": "laypage"
+  ,"title": "分页"
+  ,"jump":"./views/official/component/laypage/index.html"
+  }, {
+    "name": "upload"
+  ,"title": "上传"
+  ,"jump":"./views/official/component/upload/index.html"
+  }, {
+    "name": "carousel"
+  ,"title": "轮播"
+  ,"jump":"./views/official/component/carousel/index.html"
+  }, {
+    "name": "laytpl"
+  ,"title": "模板引擎"
+  ,"jump":"./views/official/component/laytpl/index.html"
+  }, {
+    "name": "flow"
+  ,"title": "流加载"
+  ,"jump":"./views/official/component/flow/index.html"
+  }, {
+    "name": "util"
+  ,"title": "工具"
+  ,"jump":"./views/official/component/util/index.html"
+  }, {
+    "name": "code"
+  ,"title": "代码修饰"
+  ,"jump":"./views/official/component/code/index.html"
+  }, {
+    "name": "layim"
+  ,"title": "即时聊天"
+  ,"jump": "./views/official/senior/im/"
+  }]
+}, {
+  "name": "template"
+,"title": "模板"
+,"icon": "layui-icon-template"
+,"list": [{
+    "name": "user"
+  ,"title": "用户相关"
+  ,"spread": true
+  ,"list": [{
+      "name": "reg"
+    ,"title": "注册"
+    ,"jump":"./views/official/user/reg.html"
+    },{
+      "name": "login"
+    ,"title": "登入"
+    ,"jump":"./views/official/user/login.html"
+    },{
+      "name": "forget"
+    ,"title": "忘记密码"
+    ,"jump":"./views/official/user/forget.html"
+    }]
+  }, {
+    "name": "tips"
+  ,"title": "提示页面"
+  ,"spread": true
+  ,"list": [{
+      "name": "404"
+    ,"title": "404"
+    ,"jump":"./views/official/template/tips/404.html"
+    },{
+      "name": "error"
+    ,"title": "错误提示"
+    ,"jump":"./views/official/template/tips/error.html"
+    }]
+  }]
+}, {
+  "name": "app"
+,"title": "应用"
+,"icon": "layui-icon-app"
+,"list": [{
+    "name": "message"
+  ,"title": "消息中心"
+  ,"jump":"./views/official/app/message/index.html"
+  }]
+}]
+}

@@ -1,0 +1,105 @@
+<div  class="public_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div class="public_content_left study_slide">
+      {:W('Leftmenu/ipam_home_slide', array(2,'4'))}
+      </div>
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right news_content">
+        <!--学习笔记开始-->
+        <div class="public_content_right_l pr-10 pull-left w-630 hr-sr-gray2">
+            <div class="public_card">
+                <div class="public_card_title bg-img-card fcolor-white">
+                    <span class="fsize-18 pl-15">扶贫</span> 
+                    <!-- <a href="javascript:;" class="fcolor-white">更多</a> -->
+                </div>
+                <ul class="public_card_text_content" id="content">
+                    <!-- <li class="w-all mr-5 pt-15 pb-15 hr-sb-f5f5f5">
+                        <a href="./ipam_home_study_note_detail.html">
+                            <div class=" hr-s-dfdfdf h-all pull-left w-100 mr-15">
+                                <div class="w-all h-all over-h">
+                                    <img src="../upload/page_portal/index_book1.jpg" class="di-b h-all center-block" alt="图书图片">
+                                </div>
+                            </div>
+                            <div class="public_card_text_lr_txt">
+                                <div class="mb-20"><img src="../statics/apps/page_portal/images/study_note_icon.png" class="mr-5" alt="">参加党章党规的学习笔记</div>
+                                <div class="public_card_text_lr_txt_content fcolor-99">作者：胡中慧</div>
+                                <div class="public_card_text_lr_txt_content fcolor-99">地点：济宁市 鱼台县 XXX村</div>
+                                <div class="public_card_text_lr_txt_content fcolor-99">时间：2017-12-12</div>
+                                <div class="mt-20">
+                                    <span class="w-100 h-30 lh-30 pull-right fsize-14 public_button_stroke-red">笔记详情</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li> -->
+                    
+                </ul>
+            </div>
+            <div id="news_page"></div>
+        </div>
+        <div class="public_content_right_r pull-right w-280 slide_r_news">
+            {:W('Article/hotspot_issues')}
+            {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+            {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+        </div>
+        <!--学习笔记结束-->
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix">
+
+    </div>
+</div>
+<script>
+    var count = {$count};
+    var type = {$type};
+    //分页
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        //完整功能
+        if (count === 0) {
+            alert('暂无数据');
+        } else {
+            laypage.render({
+                elem: 'news_page'
+                ,count: count
+                ,theme: '#ff3032'
+                ,first: '首页'
+                ,last: '尾页'
+                ,limit: 10
+                ,layout: ['count', 'prev', 'page', 'next', 'skip']
+                ,jump: function(obj){
+
+                    $.ajax({
+                        type : "post",
+                        url : "{:U('Index/Life/gethelpList')}",
+                        data :{ type:type,page:obj.curr, pagesize:obj.limit},
+                        datatype: "json",
+                        success: function (data) {
+                            $('#content').html(data.content);
+                            // 查看详情验证登陆
+                            $(".see-details").click(function (e) {
+                       	    	var flag = false;
+                       	    	 $.ajax({
+                       	             type: "POST",
+                       	             url: "{:U('Index/check_login')}",
+                       	             async:false,
+                       	             success: function(data){
+                       	            	 flag = data;
+                       	             }
+                       	         });
+                       	    	 if(flag == true){
+                       	    		 location.href = "{:U('Index/Index/login')}";
+                       	    		 return false;
+                       	    	 } else {
+                       	    		 return true;
+                       	    	 }
+                       	    });
+                        }
+                    });
+                   
+                }
+            });
+        }
+
+    });
+</script>

@@ -1,0 +1,134 @@
+<div  class="public_content bg-color-gray9">
+  <!--左侧导航区开始-->
+  <div class="public_content_left career_slide">
+  {:W('Leftmenu/ipam_home_slide', array(2,'2'))}
+  </div>
+  <!--左侧导航区结束-->
+  <!--右侧内容区开始-->
+  <div class="public_content_right">
+    <!--高层动态开始-->
+    <div class="public_content_right_l pull-left w-620">
+     <!--  <h2 class="po-re text-l hr-sb-gray2 pb-15 fcolor-11 fsize-28">
+        <span class="special_tip">问卷</span>
+      </h2> -->
+      
+      <div class="po-re h-130 mt-10">
+        <img src="__STATICS__/apps/page_portal/images/special_exam_bg_ques.jpg" class="di-b center-ver-hor" alt="背景图片">
+        <div class=" w-all boxsize-b center-ver-hor pl-25 pr-25 fsize-14 center-text fcolor-fffbc7">
+          <p class="fcolor-ffdbdb">{$survey_list.survey_title}</p>
+          <!-- <p>恭喜你获得10积分</p> -->
+        </div>
+      </div> 
+      <div class="boxsize-b p-20">
+       <!--  <p class="exam_ques_topic">（一）单选题：只有一个正确选项</p>
+        <div class="exam_ques">
+          <p>1.中华人民共和国哪一年成立（）</p>
+          <p class="exam_ques_option_active"><i class="exam_ques_option"></i>A.1949年</p>
+          <p><i class="exam_ques_option"></i>B.1999年</p>
+          <p><i class="exam_ques_option"></i>C.1994年</p>
+          <p class="exam_ques_res">
+            <span class="exam_ques-sel">已选答案：A</span>
+            <span>正确答案: <span class="exam_ques_right">B</span></span>
+          </p>
+        </div> -->
+        <form action="{:U('ipam_survey_save')}" id="forms" method="post" enctype="multipart/form-data">	
+			<input type="hidden" name="survey_id" value="{$survey_list.survey_id}" />
+			<volist name="questions_list" id="list" key="k">
+				<div class="bor-ra-7 box-sha-5-ed over-h bg-color-whiter mb-12em">
+						<ul class="pl-12em pr-20em pt-12em">
+							<p class="mt-10">
+								<span>{$k}.</span>
+								{$list.questions_title}
+							</p>
+							
+							<p class="mt-10">
+						
+						<volist name="list.questions_item" id="item">
+							<li class="f-12em color-33 pb-15em lh-15em ">
+							<eq name="list.type" value='1'>
+								<input type="radio" name="questions_arr[{$list.questions_id}][]"
+										defaultVal="null" property="null"
+										value="<php>echo substr($item,0,1);</php>" />	
+							<else />
+								<input type="checkbox"
+										name="questions_arr[{$list.questions_id}][]" defaultVal="null"
+										property="null" value="<php>echo substr($item,0,1);</php>" />	
+							</eq>
+								<span>{$item}</span>
+							</li>
+						</volist>	
+						</p>
+					</ul>
+					
+				</div>
+			</volist>
+     		
+     		<div class="pull-right mt-100">
+                <div class="m-10em bor-ra-3 over-h box-4-df m-a" onclick="openSub();">
+		            <span class="exam_btn exam_btn_pn mr-15">
+                        <a href="javascript:;" class="fcolor-white">提交</a>
+                    </span>
+		        </div>
+                </div> 
+     	</from>
+        
+        <!--表单区开始-->
+       <!--  <div>
+          <div class="mt-20">
+            <div class="pull-left mr-20">
+              <p class="pull-left w-160 fcolor-99 fsize-16 lh-42 text-r mr-15">你的手机号：</p>
+              <div class="mt-5 pull-left">
+                <input type="text" class="fsize-16 ipam_input w-150 h-30">
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="">
+              <p class="pull-left w-80 fcolor-99 fsize-16 lh-42 text-r mr-15">性别：</p>
+              <select name="" id="" class="ipam_input w-90 h-30 mt-5">
+                <option value="">男</option>
+                <option value="">女</option>
+              </select>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="mt-20">
+            <div class="pull-left fcolor-99 fsize-16 lh-42 text-r mr-15">多久看一次活动专区：</div>
+            <select name="" id="" class="ipam_input w-160 h-30 mt-5">
+              <option>一天</option>
+              <option>两天</option>
+              <option>三天</option>
+            </select>
+          </div>
+          <div class="mt-20">
+            <p class="pull-left w-160 fcolor-99 fsize-16 lh-42 text-r mr-15">你正在使用的品牌：</p>
+            <select name="" id="" class="ipam_input w-160 h-30 mt-5">
+              <option>品牌一</option>
+              <option>品牌二</option>
+              <option>品牌三</option>
+            </select>
+          </div>
+          <div class="w-130 h-35 mt-30 ml-auto mr-auto">
+            <a href="./ipam_home_career_question_result.html" class="di-b public_button_stroke-red w-130 h-35 lh-33">提交</a>
+          </div>
+        </div> -->
+        <!--表单区结束-->
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="public_content_right_r pl-20 hr-sl-gray2 pull-right w-280 slide_r_news">
+    {:W('Article/hotspot_issues')}
+            {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+            {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+    </div>
+    <!--高层动态结束-->
+  </div>
+  <!--右侧内容区结束-->
+  <div class="clearfix"></div>
+</div>
+<script type="text/javascript">
+function openSub(){
+	$('#forms').submit();
+}
+
+</script>

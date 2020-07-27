@@ -1,0 +1,24 @@
+
+
+
+
+
+.grad{
+  background: -webkit-linear-gradient(left, #ff4d4d , #ff3032 , #ff5a2d); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #ff4d4d , #ff3032 , #ff5a2d); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #ff4d4d , #ff3032 , #ff5a2d); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #ff4d4d , #ff3032 , #ff5a2d); /* 标准的语法 */
+}
+
+.box-4-df{box-shadow: 0 0 4px 0 #dfdfdf;}
+
+/*-------banner-------*/
+.aui-slide-page-wrap{bottom: -8px !important;height: 6px !important;line-height: 6px !important;}
+.aui-slide-page-dot{width: 6px !important;height: 6px !important;background: #dfdfdf !important;margin-top: 0 !important;transition: all 0.3s !important;}
+.aui-slide-page-active{width: 10px !important;border-radius: 6px !important;
+background: -webkit-linear-gradient(#ff5a2d, #ff3032) !important; /* Safari 5.1 - 6.0 */
+background: -o-linear-gradient(#ff5a2d, #ff3032) !important; /* Opera 11.1 - 12.0 */
+background: -moz-linear-gradient(#ff5a2d, #ff3032) !important; /* Firefox 3.6 - 15 */
+background: linear-gradient(#ff5a2d, #ff3032) !important; /* 标准的语法 */
+box-shadow: 0 0 1px 0 #ff5a2d !important;
+}

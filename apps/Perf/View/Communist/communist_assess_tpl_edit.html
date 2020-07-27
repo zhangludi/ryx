@@ -1,0 +1,131 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> 编辑模板</div>
+                <form id="form_sample_2" action="{:U('communist_assess_tpl_do_save')}" method="post" class="form-horizontal">
+                	<input type="hidden" id="template_id" name="template_id" value="{$template_id}">
+                    <div class="layui-card-body layui-form">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>考核标题：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="template_name" value="{$template_data.template_name}"  autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-14 lh-35 pl-5">* </span>
+                                </div>
+                            </div>
+                            <eq name="template_type" value="communist">
+                             <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>考核人员：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody"> 
+                                  	<select name="template_communist" xm-select="communist_manager_select" xm-select-skin="danger" lay-verify='required' xm-select-search>
+                                       <php> echo getCommunistSelect($template_data['template_relation_no']);</php>
+                                    </select>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <else/>
+        
+                   			<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>考核部门：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody"> 
+                                  	<select name="template_party" xm-select="party_manager_select" xm-select-skin="danger" lay-verify='required' xm-select-search>
+                                        <php>echo getPartySelect($template_data['template_relation_no']);</php>
+                                    </select>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                           </eq>
+                          
+                            <input type="hidden" id="template_type" name="template_type" value="{$template_type}">
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+
+<block name="js">
+<script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+	<script>
+	 layui.use([ 'form', 'laydate','formSelects'], function() {
+	        var $ = layui.jquery
+	                , admin = layui.admin
+	                , element = layui.element
+	                , layer = layui.layer
+	                , laydate = layui.laydate
+	                , form = layui.form
+	        		, formSelects = layui.formSelects;
+	        form.render(null, 'component-form-group');
+	        laydate.render({
+	            elem: '#LAY-component-form-group-date'
+	        });
+	    })
+	  
+		$("#partychange").change(function() {
+			var val = $("#partychange").val();
+			var text = $("#partychange option:selected").text();
+			$.get("{:U('get_assess_partyselect_ajax')}", {
+				select_no : val,
+				type : 'party'
+			}, function(data) {
+				if (data == "success") {
+					var partyname = $("#partyname").val();
+					var partyno = $("#partyno").val();
+					if (partyno == "") {
+						var newpartyno = val;
+						var newpartyname = text;
+					} else {
+						var newpartyno = partyno + "," + val;
+						var newpartyname = partyname + "," + text;
+					}
+					$("#partyname").val(newpartyname);
+					$("#partyno").val(newpartyno);
+				} else {
+					layer.msg("该支部已设置考核模板");
+				}
+			});
+		});
+		$("#communist_change").change(function() {
+			var val = $("#communist_change").val();
+			var text = $("#communist_change option:selected").text();
+			$.get("{:U('get_assess_partyselect_ajax')}", {
+				select_no : val,
+				type : 'communist'
+			}, function(data) {
+				if (data == "success") {
+					var partyname = $("#partyname").val();
+					var partyno = $("#partyno").val();
+					if (partyno == "") {
+						var newpartyno = val;
+						var newpartyname = text;
+					} else {
+						var newpartyno = partyno + "," + val;
+						var newpartyname = partyname + "," + text;
+					}
+					$("#partyname").val(newpartyname);
+					$("#partyno").val(newpartyno);
+				} else {
+					layer.msg("该党员已设置考核模板");
+				}
+			});
+		});
+	</script>
+</block>

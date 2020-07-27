@@ -1,0 +1,495 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+	#js-grid-juicy-projects {
+	    margin-left: 0% !important;
+	}
+	#js-grid-juicy-projects2 {
+	    margin-left: 0% !important;
+	}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space15">
+    	<form action="{:U('Ccpcommunist/ccp_communist_do_save')}" id="form_sample_2" onsubmit="return check()" class="form-horizontal" method="post">
+			<input type="hidden" name="communist" value="{$communist.communist}">
+			<input type="hidden" name="type" value="{$type}">
+	        <div class="layui-col-md12">
+	            <div class="layui-card ">
+	                <div class="layui-card-header"> 基本信息</div>
+	                <div class="layui-card-body layayui-formui-form">
+	                    <div class="layui-row">
+	                    	<input name="recruit_no" value="{$communist.recruit_no}" type="hidden" />
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员编号：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_no" value="{$communist.communist_no}" id="communist_no" placeholder="编号将自动生成"  autocomplete="off" class="layui-input" readonly  /></div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员姓名：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><input type="text" name="communist_name" value="{$communist.communist_name}" autocomplete="off" class="layui-input" lay-verify="required" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>性别：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65  ">
+	                                    <input type="radio" name="communist_sex" value="1" title="男"<eq name="communist.communist_sex" value="1">checked</eq> >
+	                                    <input type="radio" name="communist_sex" value="0" title="女" <neq name="communist.communist_sex" value="1">checked</neq> >
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>民族：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="communist_nation" lay-filter="aihao" lay-search="" >
+                                            <php>echo getBdCodeSelect('communist_nation_code',$communist['communist_nation'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>身份证号：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_idnumber" id="communist_idnumber" value="{$communist.communist_idnumber}" autocomplete="off"  class="layui-input" maxlength="18" lay-verify="required|identity" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>出生日期：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_birthday" id="communist_birthday" value="{$communist.communist_birthday}" autocomplete="off" class="layui-input" lay-verify="date|required" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>籍贯：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_paddress" value="{$communist.communist_paddress}" autocomplete="off" class="layui-input" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>现住址：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_address" value="{$communist.communist_address}" autocomplete="off"  class="layui-input" ></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>学历：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="communist_diploma" lay-filter="aihao" lay-search="" >
+											<option value="">--请选择--</option>
+                                            <php>echo getBdCodeSelect('diploma_level_code',$communist['communist_diploma']);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>毕业学院：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_school" value="{$communist.communist_school}" autocomplete="off"  class="layui-input" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>专业：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_specialty" value="{$communist.communist_specialty}" autocomplete="off"  class="layui-input" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+							<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>年龄分布：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<select name="age_distribute" >
+											<option value="">--请选择--</option>
+											<php>echo getBdCodeSelect('age_distribute_code',$communist['age_distribute'])</php>
+										</select>
+									</div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs8 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>上传一寸照片：</strong></div>
+	                                <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"> 
+										<input type="hidden" id="sore" name="sore" value="{$communist.communist_avatar}" />
+										<input id="ad_img" type="hidden" name="communist_avatar" value="{$communist.communist_avatar}" />
+										<button type="button" class="layui-btn" id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img','sore','js-grid-juicy-projects','2','0','{$communist.communist_no}')"><i class="layui-icon"></i>上传文件</button>
+										<span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为1:1,图片大小不要超过1M</span>
+										<div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+											<neq name="communist.communist_avatar" value="">
+												<div class="cbp-item graphic" id="photo">
+					                                <div class="cbp-caption">
+					                                    <div class="cbp-caption-defaultWrap">
+					                                        <img src="{$communist.communist_avatar}"> </div>
+					                                    <div class="cbp-caption-activeWrap">
+					                                        <div class="cbp-l-caption-alignCenter">
+					                                            <div class="cbp-l-caption-body">
+					                                                <a href="{$communist['communist_avatar']}" class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase">查看大图</a>
+					                                            </div>
+					                                        </div>
+					                                    </div>
+					                                </div>
+					                            </div>
+											</neq>
+										</div>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <eq name='type' value='3'>  
+		                        <div class="layui-col-xs6 mt-10">
+		                            <div class="layui-row">
+		                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+		                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+											<input type="hidden" id="source_name" name="source_name" value=""/>
+			                                <input type="hidden" id="missive_attach" name="log_attach" value="" style="width: 60px">
+
+											<button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','missive_attach','source_name','js-grid-juicy-projects2','2','1')"><i class="layui-icon"></i>上传文件</button>
+											<div id="js-grid-juicy-projects2" class="cbp" style="height:100px">
+												<neq name="communist.log_attach" value="">
+													<php>echo getUploadHtml($communist['log_attach'],'40');</php>
+												</neq>
+											</div>
+		                                </div>
+		                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+		                            </div>
+		                        </div>
+							</eq>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="layui-col-md12 mt-10">
+	            <div class="layui-card">
+	                <div class="layui-card-header">联系方式</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <!-- <div class="layui-col-xs6 mt-10"> -->
+	                            <!-- <div class="layui-row"> -->
+	                                 <!-- <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员电话：</strong></div> -->
+	                                <!-- <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">  -->
+	                                	<!-- <input type="text" name="communist_tel" value="{$communist.communist_tel}" maxlength="11" autocomplete="off" class="layui-input"/> -->
+	                                <!-- </div> -->
+	                            	<!-- <span class="fcolor-red fsize-18 lh-35 pl-5"></span> -->
+	                            <!-- </div> -->
+	                        <!-- </div> -->
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员手机：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_mobile" value="{$communist.communist_mobile}" autocomplete="off" class="layui-input" maxlength="11" lay-verify="phone" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>邮箱：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_email" value="{$communist.communist_email}" autocomplete="off" class="layui-input" lay-verify="email" /></div>
+	                                <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>QQ号：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_qq" value="{$communist.communist_qq}" autocomplete="off"  class="layui-input" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="layui-col-md12 mt-10">
+	            <div class="layui-card">
+	                <div class="layui-card-header">党内信息</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党支部：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+
+	                                	<select lay-filter="aihao" lay-search="" name="party_no" >
+											<php>echo getPartySelect($communist['party_no']);</php>
+										</select>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员状态：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<select id="single" name="status" lay-filter="aihao" lay-search="">
+											<php>echo getStatusSelect('communist_status',$communist['status'],$communist['status_nos'])</php>
+										</select>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>职务：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<select name="post_no" xm-select="post_no" xm-select-skin="danger" xm-select-search>
+											<php>echo getPartydutySelect($communist[post_no]);</php>
+										</select>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <neq name='type' value='3'>
+								<div class="layui-col-xs6 mt-10">
+	                                <div class="layui-row">
+	                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员荣誉：</strong></div>
+	                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+	                                        <select name="communist_honor" xm-select="communist_honor" xm-select-skin="danger" xm-select-search>
+	                                            <php>echo getBdCodeSelect('communist_honor_code',$communist['communist_honor'])</php>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</neq>
+							<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>申请入党时间：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_applytime" id='communist_applytime' value="{$communist.communist_applytime}" autocomplete="off" lay-verify='date|required'  class="layui-input" />
+	                                </div>
+	                                <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <neq name="type" value="3">
+	                        	<div class="layui-col-xs6 mt-10">
+		                            <div class="layui-row">
+		                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>转正时间：</strong></div>
+		                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_ccp_date" id='communist_ccp_date' value="{$communist.communist_ccp_date}" autocomplete="off" lay-verify='date|required'  class="layui-input" />
+		                                </div>
+		                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+		                            </div>
+		                        </div>
+							</neq>
+							<if condition="$type eq 3">
+								
+								<div class="layui-col-xs6 mt-10">
+		                            <div class="layui-row">
+		                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>预计提示：</strong></div>
+		                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="communist_remindtime" id='communist_remindtime' value="{$communist.communist_remindtime}" autocomplete="off" lay-verify='required'  class="layui-input" />
+		                                </div>
+		                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+		                            </div>
+		                        </div>
+		                        <div class="layui-col-xs6 mt-10">
+		                            <div class="layui-row">
+		                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>状态变更为：</strong></div>
+		                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+		                                	<select  name="communist_remindstatus"  lay-filter="aihao" multiple="" lay-search="">
+												<php>echo getStatusSelect('communist_status',$status,$communist['status_nos'])</php>
+											</select>
+		                                </div>
+		                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+		                            </div>
+		                        </div>
+							</if>
+							<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>党员标签：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+										<select name="communist_label" xm-select="communist_label" xm-select-skin="danger" xm-select-search>
+											<php>echo getBdCodeSelect('communist_label_code',$communist['communist_label'])</php>
+										</select>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+							<div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>来源：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<php>echo getBdCodeInfo($type,'communist_source_code')</php></label> 
+	                                	<eq name="communist.communist_source" value="3">
+                                		<input type="hidden" value="{$communist.communist_source}" name="communist_source">
+	                                	<else/>
+	                                	<input type="hidden" name="communist_source" value="{$type}"/>
+	                                	</eq>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+	                                <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+	                                    <textarea name="memo" class="layui-textarea" maxlength="225">{$communist.memo}</textarea>
+	                                </div>
+	                                <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs12">
+								<div class="layui-row">
+									<label class="control-label layui-col-xs4">
+										<eq name="type" value="2">请备注由什么支部转入！</eq>
+										<eq name="type" value="4">请备注由什么支部流入！</eq>
+									</label>
+								</div>
+							</div>
+
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="text-align: right">
+                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                    </div>
+                </div>
+            </div>
+	    </form>
+    </div>
+</div>
+
+</block>
+<block name="js">
+<script>
+//计算两个地点的距离
+function getDistance(lon_n,lat_n){
+	var map = api.require('bMap');
+	if(lon == 'undefined'){
+	 	getLocation();
+	}
+	//alert('lon:'+lon)
+	map.getDistance({
+	    start: {
+	        lon: lon,
+	        lat: lat
+	    },
+	    end: {
+	        lon: lon_n,
+	        lat: lat_n
+	    }
+	}, function(ret) {
+	    if (ret.status) {
+	       distance_n = ret.distance;
+	       // alert(distance_n)
+	    }
+	});
+}
+
+
+function layer_colse() {
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+}
+layui.use([ 'form', 'laydate','formSelects'], function() {
+    var $ = layui.$
+    , admin = layui.admin
+    , element = layui.element
+    , layer = layui.layer
+    , laydate = layui.laydate
+    , form = layui.form
+    , formSelects = layui.formSelects;
+    form.render();
+    date=new Date();
+    laydate.render({
+		elem: '#communist_ccp_date',
+		max:date.toLocaleString()
+	});
+	laydate.render({
+		elem: '#communist_applytime',
+		max:date.toLocaleString()
+	});
+	laydate.render({
+		elem: '#communist_entrytime'
+	});
+	laydate.render({
+		elem: '#communist_positivetime'
+	});
+	laydate.render({
+		elem: '#communist_birthday',
+		max:'date'
+	});
+	laydate.render({
+		elem: '#communist_graduationdate'
+	});
+	laydate.render({
+		elem: '#start'
+	});
+	laydate.render({
+		elem: '#communist_remindtime'
+	});
+
+});
+</script>
+<script>
+$("#single").change(function(){
+	$('#warning').hide();
+	$('#status').hide();
+	$res = $(this).val();
+	if($res == '1'){
+		$('#warning').show();
+		$('#status').show();				
+	} 
+});
+$("#communist_idnumber").blur(function(){
+	var idnumber = $("#communist_idnumber").val();	
+	var birthday = "";
+	if((idnumber != null && idnumber != "" ) && !isNaN(idnumber)){
+		if(idnumber.length == 15){
+			birthday = "19"+idnumber.substr(6,6);
+		} else if(idnumber.length == 18){
+			birthday = idnumber.substr(6,8);
+		}
+
+		birthday = birthday.replace(/(.{4})(.{2})/,"$1-$2-");
+	}
+	$("#communist_birthday").val(birthday);
+	
+});
+
+function check(){
+	var communist_idnumber = $('#communist_idnumber').val();
+	var communist_applytime = $('#communist_applytime').val();
+	var communist_ccp_date = $('#communist_ccp_date').val();
+	var communist_no = $('#communist_no').val();
+	$.ajax({
+		url: "{:U('ccp_communist_check_idnumber')}",
+		data: {'communist_idnumber':communist_idnumber,'communist_no':communist_no},
+		type: "post",
+		async:false,
+		success: function(msg) {
+			console.log(msg);
+			if(msg){
+				alert('身份证号已存在，请重新编辑');
+				event.preventDefault();
+				return false;
+			}
+		}
+	});
+
+  	if(communist_applytime && communist_ccp_date){ 
+  		var start = new Date(communist_applytime.replace("-", "/").replace("-", "/"));
+		var end = new Date(communist_ccp_date.replace("-", "/").replace("-", "/"));
+		if(end<start){
+			alert('申请入党时间必须早于入党时间');  
+			event.preventDefault();
+			return false;  
+		} else{
+			return true;
+		}
+  	}
+}
+</script>
+</block>

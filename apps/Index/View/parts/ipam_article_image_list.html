@@ -1,0 +1,8 @@
+<foreach name="article_list" item="list">
+    <li class="over-h">
+        <a href="{:U('News/ipam_news_detail',array('article_id' => $list['article_id']))}">
+            <img src="{$list.images_url}"/>
+            <span>{$list.article_title}</span>
+        </a>
+    </li>
+</foreach>

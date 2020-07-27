@@ -1,0 +1,113 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('oa_theoretical_centre_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="centre_id" value="{$centre.centre_id}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>所属组织：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="party_no" lay-search id="party_no" lay-verify='required'>
+                                            <php>echo getPartySelect($centre['party_no'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="event_name" value="{$centre.event_name}" placeholder="请输入姓名" autocomplete="off" class="layui-input" lay-verify='required' maxlength="50"></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>职务：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="event_post" value="{$centre.event_post}" placeholder="请输入职务" autocomplete="off" class="layui-input" maxlength="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>类型：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+										<select name="event_type" lay-search id="event_type" '>
+											<option value='1'>婚庆事宜</option>
+											<option value='2'>丧事事宜</option>
+										</select>
+										</div>
+                                    </div>
+                                </div>
+                            </div>
+							<div id="content">
+								<div class="layui-row">
+									<div class="layui-col-xs12 mt-10">
+										<div class="layui-row">
+											<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>类型：</strong></div>
+											<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="event_post" value="{$centre.event_post}" placeholder="请输入职务" autocomplete="off" class="layui-input" maxlength="100"></div>
+										</div>
+									</div>
+								</div>
+							
+							</div>
+							
+							
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use([ 'form', 'laydate'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form;
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+    })
+
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: "{:U('System/public/layedit_upload')}" //接口url
+              , type: 'post' //默认post
+            }
+        });
+        layedit.build('centre_content'); //建立编辑器
+    });
+</script>
+</block>

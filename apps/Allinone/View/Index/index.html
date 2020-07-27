@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+	<link rel="stylesheet" href= "__STATICS__/apps/page_allinone/apps/sp_login/css/style.css">
+	<link rel="stylesheet" href= "__STATICS__/apps/page_allinone/public/css/sp_public.css">
+</head>
+<body class="bg">
+   <header class="title clearfix" style="text-align: center;width: 1650px;" >
+    <img src="__STATICS__/apps/page_allinone/public/images/allinone_icon.png" alt="智慧党建自助服务终端" style="vertical-align:middle; width: 13%"> 
+    <span class="pl-10 pt-50" style="font-size: 92px; font-weight:600; color: #2b2b2b;vertical-align:middle;">{$web_name}一体机</span>
+	</header>
+<div class="index_con clearfix">
+	<a class="index_news" href="{:U('News/party_news_index',array('cat_id'=>36))}"></a>
+	<a class="index_platform" href="{:U('News/party_news_index',array('cat_id'=>37))}"></a>
+	<!--社区服务-->
+	<a class="index_service" href="{:U('Index/community_service')}"></a>
+	<!--民生服务-->
+	<a class="index_livelihood" href="{:U('Index/livelihood_service')}"></a>
+</div>
+
+</body>
+<!--jqery-->
+<script src="__STATICS__/apps/page_allinone/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_allinone/apps/public/js/index.js"></script>
+
+</html>

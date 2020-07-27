@@ -1,0 +1,108 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <form action="{:U('ccp_party_duty_do_save')}" id="signupForm" onsubmit="return check();" class="p5-editor-add"  method="post">
+                    <div class="layui-card-body layui-form">
+                        <div class="layui-row">
+							<input name="post_no" id="post_no" type="hidden" value="{$post_row.post_no}">
+                        	<!-- <div class="layui-col-xs12 mt-10"> -->
+                                <!-- <div class="layui-row"> -->
+                                    <!-- <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>职务编号：</strong></div> -->
+                                    <!-- <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">  -->
+                                    	<!-- <if condition="$post_row.post_no neq ''"> -->
+											 	<!-- <input name="post_no" type="hidden" value="{$post_row.post_no}"> -->
+												<!-- {$post_row.post_no} -->
+										<!-- <else/> -->
+											<!-- <input type="text" name="post_no" value="{$post_row.post_no}" autocomplete="off" class="layui-input" lay-verify='required|number'> -->
+										<!-- </if> -->
+                                    <!-- </div> -->
+                                    <!-- <if condition="$post_row.post_no eq ''"> -->
+                                    	<!-- <span class="fcolor-red fsize-18 lh-35 pl-5">*</span> -->
+                                	<!-- </if> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>职务名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    	<input type="text" id="post_name" name="post_name" value="{$post_row.post_name}" autocomplete="off" class="layui-input" lay-verify='required'>
+                                   	</div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <textarea name="memo" class="layui-textarea">{$post_row.memo}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</block>
+<block name="js">
+
+<script>
+function layer_colse() {
+	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	parent.layer.close(index);
+}
+$('#is_recruit').on('ifChanged', function(event){
+	$("#isrecruit").toggle();
+	$("#div").hide();
+});
+layui.use([ 'form', 'laydate'], function() {
+	var $ = layui.jquery
+			, admin = layui.admin
+			, element = layui.element
+			, layer = layui.layer
+			, laydate = layui.laydate
+			, form = layui.form;
+	form.render(null, 'component-form-group');
+	laydate.render({
+		elem: '#LAY-component-form-group-date'
+	});
+});
+function check(){
+	var post_name = $('#post_name').val();
+	var post_no = $('#post_no').val();
+	$.ajax({
+		url: "{:U('check_party_duty_name')}",
+		data: {'post_no':post_no,'post_name':post_name},
+		type: "post",
+		async:false,
+		success: function(msg) {
+			console.log(msg);
+			if(msg){
+				alert('职务名称已存在，请重新编辑');
+				event.preventDefault();
+				return false;
+				alert(2);
+			}else{
+				return true;
+				alert(1);
+			}
+		}
+	});	
+}
+</script>
+</block>

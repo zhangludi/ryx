@@ -1,0 +1,216 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md3">
+	            <div class="layui-card">
+	                <form class="layui-form">
+	                    <div class="layui-card-header" style="position: relative;">
+	                    	<span title="党员列表">党员列表</span>
+	                    	<a href="{:U('Edumaterial/edu_material_cat_index')}" title="" style="text-decoration: none;">
+	                    		
+	                    	</a>
+	                    </div>
+	                    <div class="layui-card-body" style="overflow-y:auto">
+	                        <div class="over-h-tree">
+	                            <ul id="treeDemo" class="ztree ztree-demo">
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	        <div class="layui-col-md9">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                                <div class="layui-col-xs1 center-text lh-40 text-r">
+	                                    时间：
+	                                </div>
+	                                <div class="layui-col-xs3">
+	                                   	<select id="month_change"  xm-select="party_manager_select" xm-select-skin="danger" xm-select-search>
+                                            <php>echo getdatelist($month);</php>
+                                        </select>
+                                        <input type="hidden" id="month" value="{$month}">
+										<input type="hidden" id="communist_no">
+										<input type="hidden" id="template_id" value="{$template_id}">
+	                                </div>
+	                                <div class="layui-col-xs3 pull-right">
+	                                	<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                                	
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+	                            </table>
+	                            <script type="text/html" id="operate">
+	                                
+	                                
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div> 
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url:"{:U('communist_assess_entering_data')}?communist_no={$communist_no}&group={$template_type}"+"&template_id={$template_id}"
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'item_id', width: 80, title: '编号', sort: true}
+	                    , {field: 'item_name', title: '考核项'}
+	                    , {field: 'item_proportion', width: 80, title: '比重'}
+	                    , {field: 'cycle_name',  title: '考核周期'}
+	                    , {field: 'communist_name',  title: '负责人'}
+	                    , {field: 'operate', width: 160, title: '分值'}
+	                ]]
+	                , page: false
+	            });
+
+			   
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time
+					        }
+				      	});
+			        },add: function(){
+			            var month = $('#month_change').val();
+			        	var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('assess_item_list')}?communist_no={$communist_no}&item_type=2&month="+month,
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	        //点击左侧树的事件
+	        var setting = {
+	            view: {
+	                showLine: false,
+	            },
+	            data: {
+	                key: {
+	                    title: "t"
+	                },
+	                simpleData: {
+	                    enable: true
+	                }
+	            },
+	            callback: {
+	                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                        layui.use('table', function () {
+                            var table = layui.table;
+                            var time = $('#time').val();
+                            table.render({
+                                elem: '#demo'
+                                , url: "{:U('communist_assess_entering_data')}?communist_no="+node.id+"&group={$template_type}"+"&template_id={$template_id}&start="+time
+                                , height: 'full-160'
+                                , cols: [[
+                                    {field: 'item_id', width: 80, title: '编号', sort: true}
+				                    , {field: 'item_name', title: '考核项'}
+				                    , {field: 'item_proportion', width: 80, title: '比重'}
+				                    , {field: 'cycle_name',  title: '考核周期'}
+				                    , {field: 'communist_name',  title: '负责人'}
+				                    , {field: 'operate', width: 160, title: '分值'}
+                                ]]
+                                , page: true
+                            });
+                        });
+	                }
+	            }
+	        };
+
+	        var zNodes = [
+	        	<volist name="communist_list" id="list" key = 'k'>
+	            	{id:"{$list.party_no}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if> },
+	            </volist>
+	        ];
+//curSelectedNode
+	        $(document).ready(function () {
+	            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	        });
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+    <script>
+        
+        function sub(assess_id,thisa,communist_id){
+			var time=$("#month_change").val();
+			var entering_score=thisa.value;
+			if(entering_score!=""){
+				$(thisa).attr("disabled",true)
+				$(thisa).parent().next().find("input").attr("disabled",false);
+				$.get("{:U('pf_entering_doadd')}",{time:time,assess_id:assess_id,entering_score:entering_score,communist_id:communist_id},function(e){
+				})
+			}
+		}
+
+		function query(variable){
+			var entering_score=$(variable).val();
+			if(entering_score==""){
+				return false;
+			}
+			var item_id=$(variable).prev().val();
+			var communist_no=$(variable).next().val();
+			var entering_group="{$template_type}";
+			var entering_date=$("#month").val();
+			var data={assess_score:entering_score,item_id:item_id,assess_relation_no:communist_no,assess_relation_type:entering_group,assess_cycle:entering_date}
+			$.post("{:U('Perf/communist_assess_entering_add')}",data,function(e){
+				 if(e=="success"){
+					$(variable).attr("disabled","disabled")
+				}else{
+					alert("请稍后再试")
+				} 
+			}) 
+		}
+    </script>
+</block>

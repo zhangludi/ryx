@@ -1,0 +1,107 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                            	<div class="layui-col-xs5 mt-10">
+                                    	<span class="pl-5b" style="color: red;" >一级考核项不计入考核分数，需要添加下级考核项</span>
+                                	</div>
+	                                <div class="layui-col-xs3 pull-right">
+	                                    <a class="layui-btn table-add " href="javascript:add('')" style="text-decoration: none;" title="添加">考核项设置</a>
+	                                    <input type="hidden" value="{$template_id}" id="template_id" />
+										<input type="hidden" value="{$template_type}" id="template_type" />
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+									
+	                            </table>
+	                            <script type="text/html" id="operate">
+	                                
+	                                
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div> 
+   </block>
+	<block name="js">
+        <script>
+	        function add(item_id){
+	        	if(item_id){
+	        		alert('建议不要修改考核方式，会造成数据错误');
+	        	}
+	        	var template_type = $("#template_type").val();
+	        	var template_id = $("#template_id").val();
+	        	var url = "{:U('communist_assess_tpl_item_edit')}?item_id="+item_id+"&group="+template_type+"&template_id="+template_id;
+				layer.open({
+					type: 2,
+					area: ['600px', '500px'],
+					title:"考核项设置",
+					fixed: false, //不固定
+					maxmin: true,
+					content: url
+				});
+
+			}
+		 </script>
+		 	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("communist_assess_tpl_item_data",array("template_id"=>$template_id,"group"=>$template_type))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'item_id', width: 80, title: '编号', sort: true}
+	                    , {field: 'item_name', title: '考核项标题'}
+	                    , {field: 'item_pid_name', title: '上级考核项'}
+	                    , {field: 'item_proportion',  title: '考核比重'}
+	                    , {field: 'cycle_name',  title: '考核周期'}
+	                    , {field: 'communist_name', width:100 , title: '负责人'}
+	                    , {field: 'add_time', width: 200, title: '添加时间'}
+	                    , {field: 'operate', width: 230, title: '操作', align: 'center'}
+	                ]]
+	                , page: false
+	            });
+
+	            //监听表格复选框选择
+			    
+	        });
+	        //点击左侧树的事件
+	       
+	       
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+	</block>

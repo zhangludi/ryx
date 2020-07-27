@@ -1,0 +1,195 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md3">
+	            <div class="layui-card">
+	                <form class="layui-form">
+	                    <div class="layui-card-header">
+	                    	<span title="民情栏目">民情栏目</span>
+	                    	<a href="/index.php/Life/Lifecondition/life_condition_cat_index.html" title="民情栏目添加" style="text-decoration: none" class="pull-right"><i class="layui-icon" style="color: #f60;position: relative;top: 0px;font-size: 20px;"></i></a>
+	                    </div>
+	                    <div class="layui-card-body">
+	                        <div class="over-h-tree">
+	                            <ul id="treeDemo" class="ztree ztree-demo">
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	        <div class="layui-col-md9">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                                <div class="layui-col-xs1 text-r lh-40">
+	                                    提交人：
+	                                </div>
+	                                <div class="layui-col-xs3 ">
+	                                    <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入提交人">
+
+	                                </div>
+	                                <div class="layui-col-xs1 center-text lh-40 text-r">
+	                                    状态：
+	                                </div>
+	                                <div class="layui-col-xs3">
+	                                    <select name="status" id="status" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                            	<option value="">请选择</option>
+												<php>echo getStatusSelect('condition_status');</php>
+                                        </select>
+	                                </div>
+	                                <div class="layui-col-xs3 pull-right">
+	                                	<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                                    <!-- <a class="layui-btn table-add " href="{:U('Edumaterial/edu_material_edit')}" style="text-decoration: none;" title="添加">添加</a> -->
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+	                            </table>
+	                            <script type="text/html" id="operate">
+	                                
+	                                
+	                                <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("life_condition_index_data",array("status"=>$status,"cat_id"=>$cat_id))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'condition_id', width: 100, title: '编号', sort: true}
+	                    , {field: 'condition_title', title: '民情简介',minWidth: 160}
+	                    , {field: 'condition_personnel', width: 100, title: '提交人'}
+	                    , {field: 'condition_personnel_mobile', width: 140, title: '提交人电话'}
+	                    , {field: 'status', width: 100, title: '状态'}
+	                    , {field: 'add_time', width: 150, title: '提交时间'}
+	                    , {field: 'operate', width: 140, title: '操作'}
+	                ]]
+	                , page: true
+	            });
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+					console.log(obj)
+			    });
+			    //监听工具条
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var status  = $('#status').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"status":status,
+					        	"keyword": keyword,
+					        }
+				      	});
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	        //点击左侧树的事件
+	        var setting = {
+	            view: {
+	                showLine: false,
+	            },
+	            data: {
+	                key: {
+	                    title: "t"
+	                },
+	                simpleData: {
+	                    enable: true
+	                }
+	            },
+	            callback: {
+	                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                        layui.use('table', function () {
+                            var table = layui.table;
+                            table.render({
+                                elem: '#demo'
+                                , url: '{:U("life_condition_index_data")}?type_no='+node.id+''
+                                , height: 'full-160'
+                                , cols: [[
+                                    {field: 'condition_id', width: 100, title: '编号', sort: true}
+				                    , {field: 'condition_title', title: '民情简介',minWidth: 160}
+				                    , {field: 'condition_personnel', width: 100, title: '提交人'}
+				                    , {field: 'condition_personnel_mobile', width: 140, title: '提交人电话'}
+				                    , {field: 'status', width: 100, title: '状态'}
+				                    , {field: 'add_time', width: 180, title: '提交时间'}
+				                    , {field: 'operate', width: 140, title: '操作'}
+                                ]]
+                                , page: true
+                            });
+                        });
+	                }
+	            }
+	        };
+
+	        var zNodes = [
+	        	<volist name="type_list" id="list" key = 'k'>
+	            	{id:"{$list.cat_id}", name:"{$list.cat_name}", t:"{$list.cat_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+	            </volist>
+	        ];
+
+	        $(document).ready(function () {
+	            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	        });
+	    })
+	</script>
+	<script>
+		function  delegate(condition_id){
+			var ef = "{:U('Lifecondition/life_condition_edit')}?condition_id="+condition_id;
+			layer.open({
+				type: 2,
+				title: '任务指派',
+				shadeClose: true, //点击遮罩关闭层
+				area : ['500px','350px'],
+				content: ef,
+				success:function(){
+                	layerAuto();
+                }
+			});
+		};
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>
+

@@ -1,0 +1,132 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<div class="cont-col1">
+										<div class="label label-sm bg-color-green">
+											<i class="iconfont">&#xe61c;</i>
+										</div>
+									</div>
+									<span class="bold ">考卷信息</span>
+									<span class="caption-helper"></span>
+								</div>
+								<div class="tools">
+									<a href="" class="reload"> </a>
+									<a href="" class="collapse"> </a>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="row">
+									<div class="col-md-4 col-xs-4">
+										<div class="row">
+											<div class="col-xs-4 pr-0 text-r lh-35">
+													<b>考试名称：</b>
+											</div>
+											<div class="col-xs-8 pl-0 lh-35">
+													<span class="di-b">{$data.exam.exam_title}</span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4 pr-0 text-r lh-35">
+													<b>考试时间：</b>
+											</div>
+											<div class="col-xs-8 pl-0 lh-35">
+													<span class="di-b">{$data.exam.exam_date}</span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4 pr-0 text-r lh-35">
+													<b>考试时长：</b>
+											</div>
+											<div class="col-xs-8 pl-0 lh-35">
+													<span class="di-b">{$data.exam.exam_time} 分钟</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-xs-4">
+										<div class="row">
+											<div class="col-xs-4 pr-0 text-r lh-35">
+													<b>考试人：</b>
+											</div>
+											<div class="col-xs-8 pl-0 lh-35">
+													<span class="di-b">{$data.exam.communist_name}</span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4 pr-0 text-r lh-35">
+													<b>总分：</b>
+											</div>
+											<div class="col-xs-8 pl-0 lh-35">
+													<span class="di-b">{$data.exam.exam_point} 分</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<div class="cont-col1">
+										<div class="label label-sm bg-color-red">
+											<i class="iconfont">&#xe620;</i>
+										</div>
+									</div>
+									<span class="bold ">试题答案详细</span>
+									<span class="caption-helper"></span>
+								</div>
+								<div class="tools">
+									<a href="" class="reload"> </a>
+									<a href="" class="collapse"> </a>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="scroller" data-always-visible="1" data-rail-visible1="1">
+									<foreach name="data['questions_list']" item="list">
+										<ul class="client-info-list ml-20">
+												<li class="client-info-dian pl-40" >
+													<span class="fcolor-99">
+														<i>{$list.num}</i>
+														<span class="font-green fsize-16"> {$list.questions_title}</span>
+													</span>
+												</li>
+												<li li class="pl-45">
+													<span class=" ml-20">{$list.questions_item}</span>
+												</li>
+												<li li class="pl-45">
+													<span class="fsize-14 ml-20">正确答案:	{$list.questions_answer}</span>
+													<span class="font-red fsize-16 ml-20">您的选择: {$list.my_questions_item}</span>
+													<eq name="list['answer']" value="1">
+														<img class="ml-10 mb-5" src="__STATICS__/public/images/yes.png" width="20px">
+													<else/>
+														<img class="ml-10 mb-5" src="__STATICS__/public/images/wrong.png" width="20px">
+													</eq>
+													<span class="font-red fsize-16 ml-20"></span>
+												</li>
+											</ul>
+									</foreach>
+								</div>
+								<span class="fsize-24 ml-20">实际得分:	{$data.branch.log_score} 分</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script>
+    </script>
+</block>

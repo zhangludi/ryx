@@ -1,0 +1,253 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                        <li class="nav-item  active open">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-diamond"></i>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="ui_tabs_accordions_navs.html" class="nav-link ">
+                                    </a>
+                                </li>
+                                <li class="nav-item  active open">
+                                    <a href="ui_timeline.html" class="nav-link ">
+                                        <span class="selected"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="ui_tree.html" class="nav-link ">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light portlet-fit bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-microphone font-green"></i>
+                                        <span class="caption-subject bold font-green uppercase">审批流程图</span>
+                                    </div>
+                                    <div class="actions">
+										<button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown">打印
+										<!-- <i class="fa fa-angle-down"></i> -->
+										</button>
+                                    </div>
+                                </div>
+                                <div id="printme" class="portlet-body">
+                                    <div class="timeline">
+                                        <!-- 时间轴 -->
+                                        <!-- 最后一个节点写成固定节点 -->
+                                        <div class="timeline-item">
+	                                            <div class="timeline-badge">
+		                                            <img class="timeline-badge-userpic" src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" >
+	                                            </div>    
+	                                            <div class="timeline-body">
+	                                                <div class="timeline-body-arrow"> </div>
+	                                                <div class="timeline-body-head">
+	                                                    <div class="timeline-body-head-caption">
+	                                                        <!--<a href="javascript:;" class="timeline-body-title font-blue-madison">{$missive_row.missive_communist_name}</a>-->
+                                                           <span class="timeline-body-title font-blue-madison">拟稿人：{$missive_row.missive_communist_name}</span>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="timeline-body-content">
+	                                                    <span class="timeline-body-time font-grey-cascade">最后更新时间:{$missive_row.update_time}</span>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+                                        <!-- 时间轴结束 -->
+                                    <!-- 最后一个节点写成固定节点 -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <neq name="status1" value='2'>
+                                           		<div class="timeline-icon">
+                                                    <i class="icon-user-following font-green-haze"></i>
+                                                </div>
+                                            <else/>
+                                            	<img class="timeline-badge-userpic" src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" >
+                                           	</neq>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <div class="timeline-body-arrow"> </div>
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <!--<a href="javascript:;" class="timeline-body-title font-blue-madison">{$missive_row.vetting_communists_name}</a>-->
+                                                    <span class="timeline-body-title font-blue-madison">审核人：{$missive_row.vetting_communists_name}</span>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+                                                <span class="timeline-body-time font-grey-cascade">最后更新时间:{$missive_row.vetting_last_time}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 时间轴结束 -->
+                                    <!-- 最后一个节点写成固定节点 -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <neq name="status2" value='4'>
+                                           		<div class="timeline-icon">
+                                                    <i class="icon-user-following font-green-haze"></i>
+                                                </div>
+                                            <else/>
+                                            	<img class="timeline-badge-userpic" src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" >
+                                           	</neq>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <div class="timeline-body-arrow"> </div>
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <span class="timeline-body-title font-blue-madison">复核人：{$missive_row.review_communists_name}</span>
+                                                    <!--<a href="javascript:;" class="timeline-body-title font-blue-madison">{$missive_row.countersign_communists_name}</a>-->
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+                                                <span class="timeline-body-time font-grey-cascade">最后更新时间:{$missive_row.review_last_time}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 时间轴结束 -->
+                                    <!-- 最后一个节点写成固定节点 -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                           <neq name="status3" value='6'>
+                                           		<div class="timeline-icon">
+                                                    <i class="icon-user-following font-green-haze"></i>
+                                                </div>
+                                            <else/>
+                                            	<img class="timeline-badge-userpic" src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" >
+                                           	</neq>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <div class="timeline-body-arrow"> </div>
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <span class="timeline-body-title font-blue-madison">会签人：{$missive_row.countersign_communists_name}</span>
+                                                    <!--<a href="javascript:;" class="timeline-body-title font-blue-madison">{$missive_row.ausstellung_communists_name}</a>-->
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+
+                                                <span class="timeline-body-time font-grey-cascade">最后更新时间:{$missive_row.countersign_last_time}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 时间轴结束 -->
+                                    <!-- 最后一个节点写成固定节点 -->
+                                    <!-- 时间轴结束 -->
+                                    <!-- 最后一个节点写成固定节点 -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <neq name="status4" value='8'>
+                                           		<div class="timeline-icon">
+                                                    <i class="icon-user-following font-green-haze"></i>
+                                                </div>
+                                            <else/>
+                                            	<img class="timeline-badge-userpic" src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" >
+                                           	</neq>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <div class="timeline-body-arrow"> </div>
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <span class="timeline-body-title font-blue-madison">签发人：{$missive_row.ausstellung_communists_name}</span>
+                                                    <!--<a href="javascript:;" class="timeline-body-title font-blue-madison">{$missive_row.ausstellung_communists_name}</a>-->
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+
+                                                <span class="timeline-body-time font-grey-cascade">最后更新时间:{$missive_row.ausstellung_last_time}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 时间轴结束 -->
+                                    <!-- 最后一个节点写成固定节点 -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <neq name="missive_row.status" value='9'>
+                                           		<div class="timeline-icon">
+                                                    <i class="icon-user-following font-green-haze"></i>
+                                                </div>
+                                            <else/>
+                                            	<img class="timeline-badge-userpic" src="__STATICS__/apps/page_public/media/users/avatar80_1.jpg" >
+                                           	</neq>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <div class="timeline-body-arrow"> </div>
+                                            <div class="timeline-body-head">
+                                                <div class="timeline-body-head-caption">
+                                                    <a href="javascript:;" class="timeline-body-title font-blue-madison">结束</a>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-body-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 时间轴结束 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </block>
+	<block name="js">
+        <script >
+        function  communist_select(log_id,node_post,node_staff,num){
+			if(node_post == ""){
+				node_post = "-1";
+			}
+        	layer.open({
+                type: 2,
+                title: '选择审批人',
+                fix: false, //不固定
+                offset: "50%",
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['480px' , '270px'],
+                content: "{:U('Oa/Oaapproval/oa_approval_communist_list/log_id/"+log_id+"/node_post/"+node_post+"/first_node/"+num+"/node_staff/"+node_staff+"')}",
+                success:function(){
+                	layerAuto();
+                }
+            });
+        };
+        </script>
+		<!-- 页面打印开始 -->
+		<script type="text/javascript" src="http://html2canvas.hertzen.com/build/html2canvas.js"></script> 
+		<script >  
+			function printById(id) {  
+				html2canvas(document.getElementById(id), {
+					allowTaint : true,  
+					taintTest : false,  
+					onrendered : function(canvas) {  
+						canvas.id = "mycanvas";  
+						//document.body.appendChild(canvas);  
+						//生成base64图片数据  
+						var dataUrl = canvas.toDataURL();  
+						var newImg = document.createElement("img");  
+						newImg.src = dataUrl;  
+						/* document.body.appendChild(newImg);  */  
+						/* window.open(newImg.src); */  
+						var printWindow = window.open(newImg.src);  
+							// printWindow.document.write();   
+							 printWindow.document.write('<img height="950px" src="'+newImg.src+'" />')  
+							 printWindow.print();  
+					}
+				});
+			}
+		</script>
+	</block>

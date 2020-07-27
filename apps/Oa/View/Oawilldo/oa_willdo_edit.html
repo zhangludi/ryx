@@ -1,0 +1,158 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<form id="form_sample_2" action="{:U('oa_willdo_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+					<div class="layui-card-body layui-form">
+						<input id="willdo_id" name="willdo_id" type="hidden" value="{$willdo_row.willdo_id}">
+	                    <input id="willdo_cycle" type="hidden" value="{$willdo_row.willdo_cycle}">
+	                    <input id="willdo_operdate" type="hidden" value="{$willdo_row.willdo_operdate}">
+	                    <input id="willdo_num" type="hidden" value="{$willdo_row.willdo_num}">
+	                    <input type="hidden" name="alert_date" id="workers"/>
+						<div class="layui-row">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务标题：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+										<input type="hidden" name="willdo_no" value='{$willdo_no}'>
+										<input type="text" name="willdo_title" value='{$willdo_row.willdo_title}' placeholder="任务标题" autocomplete="off" class="layui-input" lay-verify="required">
+									</div>
+									<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务内容：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+										<!-- <textarea  class="layui-textarea" id="LAY_demo1" name="willdo_content" style="display: none">{$willdo_row.willdo_content}</textarea> -->
+										<script id="editor" name="willdo_content" type="text/plain" style="height:350px;width:100%">{$willdo_row.willdo_content}</script>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务时间：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										<input type="text" name="willdo_start_time" value='{$willdo_row.willdo_start_time}' placeholder="" autocomplete="off" id="starttime" class="layui-input" lay-verify="required">
+										
+									</div>
+									<div class="layui-col-xs1 center-text fsize-14 fcolor-65 lh-35"><strong>到</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35">
+										
+										<input type="text" name="willdo_end_time" value='{$willdo_row.willdo_end_time}' placeholder="" autocomplete="off" id="endtime" class="layui-input" lay-verify="required">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务周期：</strong></div>
+									<div class="layui-col-xs1 fsize-14 fcolor-65 lh-35">
+										<select id='willdo_cycle' name='willdo_cycle' lay-filter="test" lay-search>
+											{:getTypeSelect('willdo_type')}
+										</select>
+									</div>
+									<div class="layui-col-xs1 text-r fsize-14 fcolor-65 lh-35">&nbsp;</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>是否提醒：</strong></div>
+									<div class="layui-col-xs1 fsize-14 fcolor-65 lh-35" id="is_alert">
+										<input type="checkbox" name="is_alert"  title="是" <eq name="willdo_row.is_alert" value="1">checked</eq> lay-skin="primary">
+									</div>
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35" id="alert_title"><strong>提醒时间：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35" id="alert_input">
+										<input type="text" name="willdo_time_type" value='{$willdo_row.willdo_time_type}' placeholder="" autocomplete="off" id="willdo_time_type" class="layui-input" >
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+										<textarea name="memo" placeholder="请输入" class="layui-textarea">{$willdo_row.memo}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+	var is_check = $("input[name='is_alert']").is(':checked');
+	if(is_check){
+		$("#alert_title").show();
+    	$("#alert_input").show();
+	} else {
+		$("#alert_title").hide();
+    	$("#alert_input").hide();
+	}
+	layui.use([ 'form', 'laydate','layedit'], function() {
+		var form = layui.form;
+		var layedit = layui.layedit
+			,$ = layui.jquery;
+		var index = layedit.build('LAY_demo1');  
+	})
+	layui.use('layedit', function(){
+		 var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: "{:U('System/public/layedit_upload')}" //接口url
+              , type: 'post' //默认post
+            }
+        });
+        layedit.build('demoedit'); //建立编辑器
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		laydate.render({
+			elem: '#starttime'
+			,type: 'time'
+			//,range: true
+		});
+		laydate.render({
+			elem: '#endtime'
+			,type: 'time'
+			//,range: true
+		});
+		laydate.render({
+			elem: '#willdo_time_type'
+			,type: 'date'
+			//,range: true
+		});
+		layedit.build('willdo_content'); //建立编辑器
+	})
+	$('#is_alert').on('click', function(event){
+		var is_check = $("input[name='is_alert']").is(':checked');
+		if(is_check){
+			$("#alert_title").show();
+        	$("#alert_input").show();
+		} else {
+			$("#alert_title").hide();
+        	$("#alert_input").hide();
+		}
+    });
+</script>
+</block>

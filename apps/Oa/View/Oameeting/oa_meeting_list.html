@@ -1,0 +1,738 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<link href="__STATICS__/apps/page_index/css/sp_public_mobile.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/zTreeStyle.css" type="text/css">
+<link href="__STATICS__/apps/page_index/css/style2.css" rel="stylesheet" type="text/css">
+<style>
+	.article_over_three{
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+	}
+		/*整体部分*/ 
+	::-webkit-scrollbar
+	{
+		width: 0.1rem !important;
+		height: 0.1rem !important;
+	}
+	/*滑动轨道*/ 
+	::-webkit-scrollbar-track
+	{
+		border-radius: 0px;
+		background: none;
+	}
+	/*滑块*/
+	::-webkit-scrollbar-thumb
+	{
+		border-radius: 0.1rem;
+		-webkit-box-shadow: inset 0 0 0.06rem rgba(0,0,0,.2);
+		background-color: rgba(255,255,255,.75)
+	}
+	/*滑块效果*/ 
+	::-webkit-scrollbar-thumb:hover
+	{
+		border-radius: 0.1rem;
+		-webkit-box-shadow: inset 0 0 0.06rem rgba(0,0,0,.2);
+		background-color: rgba(85, 85, 85, 0.4);
+	}
+	.layui-laypage .layui-laypage-skip {
+	    height: 30px;
+	    line-height: 30px;
+	    color: #000;
+	}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid layui-form" >
+<div class="layui-row  layui-col-space5" style="background: #fff;">
+	<div class="list_c clearfix">
+		
+		<div class="pull-left box_l">
+			<div class="f-32em-cur color-ef311e wryh_blod box_l_tit">党组织列表</div>
+			<div class="clearfix tree_box">
+				<div class="pull-left tree_box_l" style="margin-left: 0.16rem;margin-top: 0.1rem;">
+					<img src="__STATICS__/apps/page_index/img/pd1_icon1.png">
+				</div>
+				<div class="pull-left">
+					<!-- ztree -->
+					<ul id="tree" class="ztree" style="width: 3.5rem !important; overflow:auto;"></ul>
+				</div>
+				
+			</div>
+		</div>
+		<div class="pull-right box_r">
+			<div class="box_r_1 clearfix">
+				<div class="pull-left f-44em-cur f-w color-33 tit" id="party_name"></div>
+				<div class="pull-right more" onclick="more()">更多</div>
+			</div>
+			<div class="box_r_2 clearfix">
+				<div class="pull-left left" style="height: 3.9rem;">
+					<div class="clearfix">
+						<div class="icon pull-left mt-08em-cur"></div>
+						<div class="f-24em-cur color-33 pull-left ml-13em-cur">组织简介</div>
+					</div>
+					<img style="width:100%;" class="m-a mt-1em-cur dis-in" src="__STATICS__/apps/page_index/img/count_tu1.png" alt="" id="party_avator">
+					<div class="m-a text-l mt-1em-cur lh-3-cur text-2-cur f-20em-cur color-999 article_over_three" id="memo" ></div>
+				</div>
+				<div class="pull-left center" style="margin-left: 0.18rem;">
+					<li class="clearfix">
+						<div class="pull-left text-align">
+							<div class="f-24em-cur color-333 mt-35em-cur">实开次数（总）</div>
+							<div class="f-48em-cur color-ff4330 f-w mt-35em-cur" id="attended">0</div>
+							<div class="f-48em-cur color-ff4330 f-w mt-35em-cur" id="attended_year">0</div>
+						</div>
+						<div class="pull-right ml-04em-cur text-align">
+							<div class="f-17em-cur color-999 this_month mt-07em-cur f-w" onclick="year()" id="year" style="cursor: pointer;">本年</div>
+							<div class="f-17em-cur color-999 mt-2em-cur f-w" onclick="month()" id="month" style="cursor: pointer;">本月</div>
+						</div>
+					</li>
+					<li class="clearfix mt-31em-cur" style="margin-top:0.23rem">
+						<div class="pull-left text-align">
+							<div class="f-24em-cur color-333 mt-35em-cur">应开次数（总）</div>
+							<div class="f-48em-cur color-66 f-w mt-35em-cur" id="shoulded">0</div>
+							<div class="f-48em-cur color-66 f-w mt-35em-cur" id="shoulded_year">0</div>
+						</div>
+						<div class="pull-right ml-04em-cur text-align">
+							<div class="f-17em-cur color-999 this_month mt-07em-cur f-w" onclick="year2()" id="year2" style="cursor: pointer;">本年</div>
+							<div class="f-17em-cur color-999 mt-2em-cur f-w" onclick="month2()" id="month2" style="cursor: pointer;">本月</div>
+						</div>
+					</li>
+				</div>
+				<div class="pull-right right" style="width: 43%;height: 3.9rem;">
+					<li class="" style="margin-left: 0.3rem;">
+						<div class="clearfix">
+							<div class="icon pull-left mt-08em-cur"></div>
+							<div class="f-24em-cur color-33 pull-left ml-13em-cur">支部大会</div>
+						</div>
+						<div class="f-16em-cur color-66 mt-25em-cur">本月实开
+							<span class="f-24em-cur color-ef311e f-w" id="attended_2001"> 0 </span>次
+						</div>
+						<div class="f-16em-cur color-66 mt-18em-cur">本月应开
+							<span class="f-24em-cur color-66 f-w" id="shoulded_2001"> 0 </span>次
+						</div>
+					</li>
+					<li class="" style="padding-left: 0.65rem">
+						<div class="clearfix">
+							<div class="icon pull-left mt-08em-cur"></div>
+							<div class="f-24em-cur color-33 pull-left ml-13em-cur">支委会议</div>
+						</div>
+						<div class="f-16em-cur color-66 mt-25em-cur">本月实开
+							<span class="f-24em-cur color-ef311e f-w" id="attended_2002"> 0 </span>次
+						</div>
+						<div class="f-16em-cur color-66 mt-18em-cur">本月应开
+							<span class="f-24em-cur color-66 f-w" id="shoulded_2002"> 0 </span>次
+						</div>
+					</li>
+					<li class="" style="margin-left: 0.3rem;">
+						<div class="clearfix">
+							<div class="icon pull-left mt-08em-cur"></div>
+							<div class="f-24em-cur color-33 pull-left ml-13em-cur">党小组会</div>
+						</div>
+						<div class="f-16em-cur color-66 mt-25em-cur">本月实开
+							<span class="f-24em-cur color-ef311e f-w" id="shoulded_2003"> 0 </span>次
+						</div>
+						<div class="f-16em-cur color-66 mt-18em-cur">本月应开
+							<span class="f-24em-cur color-66 f-w" id="attended_2003"> 0 </span>次
+						</div>
+					</li>
+					<li class=""  style="padding-left: 0.65rem">
+						<div class="clearfix">
+							<div class="icon pull-left mt-08em-cur"></div>
+							<div class="f-24em-cur color-33 pull-left ml-13em-cur">党课</div>
+						</div>
+						<div class="f-16em-cur color-66 mt-25em-cur">本月实开
+							<span class="f-24em-cur color-ef311e f-w" id="attended_2004"> 0 </span>次
+						</div>
+						<div class="f-16em-cur color-66 mt-18em-cur">本月应开
+							<span class="f-24em-cur color-66 f-w" id="shoulded_2004"> 0 </span>次
+						</div>
+					</li>
+				</div>
+			</div>			
+			<div class="box_r_3 clearfix">
+				<div class="pull-left left">
+					<div class="clearfix mt-2em-cur ml-02em-cur">
+						<div class="icon pull-left mt-08em-cur"></div>
+						<div class="f-24em-cur color-33 pull-left ml-13em-cur"> 三会一课情况</div>
+					</div>
+					<div id="echarts_l" style="width: 4.3rem;height: 4.3rem;margin-top: 0.1rem;"></div>
+				</div>
+				<div class="pull-left center" style="width: 4.1rem;">
+					<div class="clearfix mt-2em-cur ml-02em-cur">
+						<div class="icon pull-left mt-08em-cur"></div>
+						<div class="f-24em-cur color-33 pull-left ml-13em-cur"> 会议类型分析</div>
+					</div>
+					<div id="echarts_c" style="width: 4.3rem;height: 4.8rem;margin-top: -0.3rem;"></div>
+					
+				</div>
+				<div class="pull-right right" >
+					<div class="clearfix mt-2em-cur ml-02em-cur">
+						<div class="icon pull-left mt-08em-cur"></div>
+						<div class="f-24em-cur color-33 pull-left ml-13em-cur"> 支部会议类型分析</div>
+					</div>
+					<div id="echarts_r" style="width: 4.3rem;height: 4.5rem;margin-top:0rem;"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>	
+</div>
+</div>
+<input type="hidden" id="party_me_num" value="{$party_me_num}">	
+<input type="hidden" id="party_name_num" value="{$party_name_num}">	
+</block>	
+<block name="js">		
+	<!--echarts-->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_index/js/jquery.ztree.core.js"></script>
+	<!-- <script src="__STATICS__/apps/page_index/js/party_list_count.js" type="text/javascript"></script>	 -->
+	
+		<script>
+		/**————————————————————————————————适配——————————————————————————————————————**/
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+				// 手机旋转事件,大部分手机浏览器都支持 onorientationchange 如果不支持，可以使用原始的 resize
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function() {
+					//clientWidth: 获取对象可见内容的宽度，不包括滚动条，不包括边框
+					var clientWidth = docEl.clientWidth;
+					if (!clientWidth) return;
+					docEl.style.fontSize = 100 * (clientWidth / 1920) + 'px';
+				};
+
+			recalc();
+			//判断是否支持监听事件 ，不支持则停止
+			if (!doc.addEventListener) return;
+			//注册翻转事件
+			win.addEventListener(resizeEvt, recalc, false);
+
+		})(document, window);
+
+		//
+
+	function more(){
+		var party_no = $("#party_no").val();
+		if(party_no==''){
+			party_no = 1;
+		}
+		window.location.href = "{:U('Oameeting/oa_meeting_index')}?party_no="+party_no+"";
+
+	}
+
+	$("#attended").hide();
+	$("#shoulded").hide();
+	function year(){
+		$("#year").addClass('this_month');
+		$("#month").removeClass('this_month');
+		$("#attended").hide();
+		$("#attended_year").show();
+	}
+	function month(){
+		$("#month").addClass('this_month');
+		$("#year").removeClass('this_month');
+		$("#attended_year").hide();
+		$("#attended").show();
+
+	}
+
+	function year2(){
+		$("#year2").addClass('this_month');
+		$("#month2").removeClass('this_month');
+		$("#shoulded_year").show();
+		$("#shoulded").hide();
+
+	}
+	function month2(){
+		$("#month2").addClass('this_month');
+		$("#year2").removeClass('this_month');
+		$("#shoulded_year").hide();
+		$("#shoulded").show();
+	}
+
+
+		metting_data();
+		function metting_data(){
+			var party_no = {$party_no};
+			$.get("{:U('oa_meeting_list_data')}",{party_no:party_no},function(data){
+				$("#party_no").val(data.party_no);
+				$("#party_name").text(data.party_name);
+				$('#memo').text(data.memo);
+				$('#party_avator').attr('src',data.party_avatar);
+				$('#memo').attr('title',data.memo);
+				$('#shoulded').text(data.shoulded);
+				$('#attended').text(data.attended);
+
+				$('#shoulded_year').text(data.new_shoulded);
+				$('#attended_year').text(data.new_attended);
+
+				$('#shoulded_2001').text(data.shoulded_2001);
+				$('#attended_2001').text(data.attended_2001);
+
+				$('#shoulded_2002').text(data.shoulded_2002);
+				$('#attended_2002').text(data.attended_2002);
+
+				$('#shoulded_2003').text(data.shoulded_2003);
+				$('#attended_2003').text(data.attended_2003);
+
+				$('#shoulded_2004').text(data.shoulded_2004);
+				$('#attended_2004').text(data.attended_2004);
+			})
+
+		}
+		
+		/**————————————————————————————————ztree插件——————————————————————————————————————**/
+		var zTree;
+		var demoIframe;
+		var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onClick: function (a, b, node) {
+					var party_no = node.id;
+					$.get("{:U('oa_meeting_list_data')}",{party_no:party_no},function(data){
+						$("#party_no").val(data.party_no);
+						$("#party_name").text(data.party_name);
+						$('#memo').text(data.memo);
+						$('#party_avator').attr('src',data.party_avatar);
+						$('#memo').attr('title',data.memo);
+						$('#shoulded').text(data.shoulded);
+						$('#attended').text(data.attended);
+
+						$('#shoulded_year').text(data.new_shoulded);
+						$('#attended_year').text(data.new_attended);
+
+						$('#shoulded_2001').text(data.shoulded_2001);
+						$('#attended_2001').text(data.attended_2001);
+
+						$('#shoulded_2002').text(data.shoulded_2002);
+						$('#attended_2002').text(data.attended_2002);
+
+						$('#shoulded_2003').text(data.shoulded_2003);
+						$('#attended_2003').text(data.attended_2003);
+
+						$('#shoulded_2004').text(data.shoulded_2004);
+						$('#attended_2004').text(data.attended_2004);
+					})
+				}
+			}
+		};
+
+		var zNodes = [ 
+			<volist name="party_list" id="party" key="k">     
+			  {id: {$party.party_no}, pId: {$party.party_pno},name: "{$party.party_name}",<if condition='$k eq 1'>open:true</if>},
+			</volist>
+		];
+
+		$(document).ready(function () {
+          var t = $("#tree");
+          t = $.fn.zTree.init(t, setting, zNodes);
+          demoIframe = $("#testIframe");
+          demoIframe.bind("load", loadReady);
+          var zTree = $.fn.zTree.getZTreeObj("tree");
+          zTree.selectNode(zTree.getNodeByParam("id", 1));
+        });
+        function loadReady() {
+          var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
+            htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
+            maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
+            h = demoIframe.height() >= maxH ? minH : maxH;
+          if (h < 530) h = 530;
+          demoIframe.height(h);
+        }
+
+		//图表
+		/**————————————————————————————————左上 1——————————————————————————————————————**/
+		var dom = document.getElementById("echarts_l");
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = null;
+		option = {
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					lineStyle: {
+						color: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 0,
+							y2: 1,
+							colorStops: [{
+								offset: 0,
+								color: 'rgba(255,255,255,0)' // 0% 处的颜色
+							}, {
+								offset: 0.5,
+								color: 'rgba(255,255,255,1)' // 100% 处的颜色
+							}, {
+								offset: 1,
+								color: 'rgba(255,255,255,0)' // 100% 处的颜色
+							}],
+							global: false // 缺省为 false
+						}
+					},
+				},
+
+			},
+			grid: {
+				top: '10%',
+				left: '10%',
+				right: '3%',
+				bottom: '23%',
+				// containLabel: true
+			},
+			xAxis: [{
+				type: 'category',
+				boundaryGap: false,
+				axisLine: { //坐标轴轴线相关设置。数学上的x轴
+					show: true,
+					lineStyle: {
+						color: 'rgba(255,255,255,0.4)'
+					},
+				},
+				axisLabel: { //坐标轴刻度标签的相关设置
+					rotate: 65,
+					textStyle: {
+						color: '#333',
+						margin: 15,
+					}
+				},
+				axisTick: {
+					show: false,
+				},
+				data: ["{$party_name_num[0]}", "{$party_name_num[1]}", "{$party_name_num[2]}", "{$party_name_num[3]}"],
+			}],
+			yAxis: [{
+				type: 'value',
+				min: 0,
+				// max: 140,
+				splitNumber: 4,
+				splitLine: {
+					show: true,
+					lineStyle: {
+						color: '#dedede'
+					}
+				},
+				axisLine: {
+					show: false,
+				},
+				axisLabel: {
+					show: true,
+					margin: 10,
+					textStyle: {
+						color: '#999',
+
+					},
+				},
+				axisTick: {
+					show: false, //刻度
+				},
+			}],
+			series: [{
+				name: '总量',
+				type: 'line',
+				smooth: true, //是否平滑曲线显示
+				// symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
+				showAllSymbol: true,
+				// symbol: 'image://./static/images/guang-circle.png',
+				symbolSize: 8,
+				lineStyle: {
+					normal: {
+						color: "#ff9c07", // 线条颜色
+					},
+					borderColor: '#ff9c07'
+				},
+				label: {
+					show: true,
+					position: 'top',
+					textStyle: {
+						color: '#ff9c07',
+						fontSize: 14,
+						fontWeight: 'bold'
+					}
+				},
+				itemStyle: {
+					normal: {
+						color: "#ff9c07",
+						borderColor: "#ff9c07",
+						borderWidth: 2
+					}
+				},
+				tooltip: {
+					show: true
+				},
+				areaStyle: { //区域填充样式
+					normal: {
+						//线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(255,224,178,1)'
+							},
+							{
+								offset: 1,
+								color: 'rgba(255,224,178,1)'
+							}
+						], false),
+						//  shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
+						// shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+					}
+				},
+				data: [{$party_me_num[0]}, {$party_me_num[1]}, {$party_me_num[2]}, {$party_me_num[3]}]
+			}]
+		};
+		if (option && typeof option === "object") {
+			myChart.setOption(option, true);
+			window.onresize = function() {
+				myChart.resize();
+			}
+		}
+		
+		/**————————————————————————————————饼状图——————————————————————————————————————**/
+		var dom = document.getElementById("echarts_c");
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = null;
+		app.title = '环形图';
+
+		var colorList = ['#ff3738', '#2f99d7', '#fcd241', '#f8a53f'];
+		option = {
+			tooltip: {
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+		
+				top: 18,
+				textStyle: {
+					color: "#666"
+				},
+				itemWidth: 5,
+				itemHeight: 5,
+				itemGap: 5,
+				data: ["支部大会", "支委会议", "党小组会", "党课"]
+			},
+			series: [{
+				name: '来源',
+				type: 'pie',
+				radius: ['35%', '65%'],
+				avoidLabelOverlap: false,
+				itemStyle: {
+					normal: {
+						color: function(params) {
+							return colorList[params.dataIndex]
+						}
+					}
+				},
+				label: {
+					normal: {
+						show: false,
+						position: 'center'
+					},
+					emphasis: {
+						show: false,
+						textStyle: {
+							fontSize: '10', //不显示中间
+							fontWeight: 'bold',
+							// fontFamily:'shs-Regular'
+						}
+					}
+				},
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{
+						value: {$type_list[0]['num']},
+						name: "支部大会"
+					},
+					{
+						value: {$type_list[1]['num']},
+						name: "支委会议"
+					},
+					{
+						value: {$type_list[2]['num']},
+						name: "党小组会"
+					},
+					{
+						value: {$type_list[3]['num']},
+						name: "党课"
+					}
+				]
+			}]
+		};;
+		if (option && typeof option === "object") {
+			myChart.setOption(option, true);
+			//echarts 缩放
+			window.addEventListener("resize", function() {
+				myChart.resize();
+			});
+		}
+
+		/**————————————————————————————————柱状图——————————————————————————————————————**/
+		var dom = document.getElementById("echarts_r");
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = {
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'shadow'
+				}
+			},
+			legend: {
+				data: ['支部大会', '支委会议', '党小组会', '党课'],
+				align: 'left',
+				top: 10,
+				right: 10,
+				textStyle: {
+					color: "#666"
+				},
+				itemWidth: 5,
+				itemHeight: 5,
+				itemGap: 5
+			},
+			grid: {
+				top: '20%',
+				left: '5%',
+				right: '0%',
+				bottom: '3%',
+				containLabel: true
+			},
+			xAxis: [{
+				type: 'category',
+				data: ["{$party_name_num[0]}",
+					"{$party_name_num[1]}",
+					"{$party_name_num[2]}",
+					"{$party_name_num[3]}"
+				],
+				axisLine: {
+					show: true,
+					lineStyle: {
+						color: "#fff",
+						width: 1,
+						type: "solid"
+					}
+				},
+				axisTick: {
+					show: false,
+				},
+				axisLabel: {
+					rotate: 56,
+					show: true,
+					textStyle: {
+						color: "#333",
+					}
+				},
+			}],
+			yAxis: [{
+				type: 'value',
+				axisLabel: {
+					formatter: '{value}'
+				},
+				axisTick: {
+					show: false,
+				},
+				axisLine: {
+					show: false,
+					lineStyle: {
+						color: "#999",
+						width: 1,
+						type: "solid"
+					},
+				},
+				splitLine: {
+					lineStyle: {
+						color: "#dedede",
+					}
+				}
+			}],
+			series: [{
+				name: '支部大会',
+				type: 'bar',
+				data: [{$party_meeting_num[2001][0]}, {$party_meeting_num[2002][0]}, {$party_meeting_num[2003][0]}, {$party_meeting_num[2004][0]}],
+				barWidth: 8, //柱子宽度
+				barGap: 0, //柱子之间间距
+				itemStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: '#ff3738'
+						}, {
+							offset: 1,
+							color: '#ff3738'
+						}]),
+						opacity: 1,
+					}
+				}
+			}, {
+				name: '支委会议',
+				type: 'bar',
+				data: [{$party_meeting_num[2001][1]}, {$party_meeting_num[2002][1]}, {$party_meeting_num[2003][1]}, {$party_meeting_num[2004][1]}],
+				barWidth: 8,
+				barGap: 0,
+				itemStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: '#f8a53f'
+						}, {
+							offset: 1,
+							color: '#f8a53f'
+						}]),
+						opacity: 1,
+					}
+				}
+			}, {
+				name: '党小组会',
+				type: 'bar',
+				data: [{$party_meeting_num[2001][2]}, {$party_meeting_num[2002][2]}, {$party_meeting_num[2003][2]}, {$party_meeting_num[2004][2]}],
+				barWidth: 8,
+				barGap: 0,
+				itemStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: '#fcd241'
+						}, {
+							offset: 1,
+							color: '#fcd241'
+						}]),
+						opacity: 1,
+					}
+				}
+			}, {
+				name: '党课',
+				type: 'bar',
+				data: [{$party_meeting_num[2001][3]}, {$party_meeting_num[2002][3]}, {$party_meeting_num[2003][3]}, {$party_meeting_num[2004][3]}],
+				barWidth: 8,
+				barGap: 0,
+				itemStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: '#2f99d7'
+						}, {
+							offset: 1,
+							color: '#2f99d7'
+						}]),
+						opacity: 1,
+					}
+				}
+			}]
+		};
+		if (option && typeof option === "object") {
+			myChart.setOption(option, true);
+			//echarts 缩放
+			window.addEventListener("resize", function() {
+				myChart.resize();
+			});
+		}
+
+	
+	</script>
+</block>
+</html>

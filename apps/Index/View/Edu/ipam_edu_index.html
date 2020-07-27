@@ -1,0 +1,744 @@
+  <link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+   <!--首页日历样式-->
+  <link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index_common.css">
+  <div class="public_content">
+    <!-- 头部 -->
+    <div class="public_content_special">
+      <div class="public_content_special_top">
+        <div class="special_left">
+          <a href="javascript:;"><img src="{$topic_list[0]['topic_img']}" alt="" style="width:383px;height:215px"></a>
+        </div>
+        <div class="special_right">
+          <a onclick="topic_title_href('{$topic_list[0][topic_id]}')">
+            <h3>{$topic_list[0]['topic_title']}</h3>
+          </a>
+          <p style="font-size:14px;font-family:SourceHanSansSC-Light;font-weight:300;color:#212121;line-height:22px;">
+            {$topic_list[0]['memo']}</p>
+          <!-- 学习进度 -->
+          <div class="special_schedule">
+            <p
+              style="font-size:16px;font-family:SourceHanSansSC-Regular;font-weight:400;color:linear-gradient(90deg,#FFBA30,#FF5A2D);line-height:22px;">
+              学习进度: <span>{$topic_list[0]['percent']['rate']}%</span></p>
+            <!-- 进度条 -->
+            <div class="layui-progress">
+              <div class="layui-progress-bar layui-bg-orange" lay-percent="{$topic_list[0]['percent']['rate']}%"></div>
+            </div>
+          </div>
+          <div class="special_class">
+            <a href="javascript:;"><span class="special_classes"><img
+                  src="__STATICS__/apps/page_portal/portal/images/edu_icon1.png"><span>文章学习</span></span></a>
+            <a href="javascript:;"><span class="special_classes"><img
+                  src="__STATICS__/apps/page_portal/portal/images/edu_icon2.png"><span>视频学习</span></span></a>
+            <a href="javascript:;"><span class="special_classes"><img
+                  src="__STATICS__/apps/page_portal/portal/images/edu_icon3.png"><span>学习笔记</span></span></a>
+            <a href="javascript:;"><span class="special_classes"><img
+                  src="__STATICS__/apps/page_portal/portal/images/edu_icon4.png"><span>考试中心</span></span></a>
+          </div>
+        </div>
+      </div>
+      <!-- 视频 -->
+      <div class="public_content_special_video">
+        <div class="special_video_start">
+          <a href="javascript:;"><img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_video.png" alt="播放"></a>
+        </div>
+        <div class="special_video_left">
+          <div class="special_video_left_module pull-left">
+            <div class="special_video_left_tit">
+              所学模块
+            </div>
+            <div class="special_video_left_module_icon clearfix">
+              <span class="special_video_left_module_icons">
+                <img src="__STATICS__/apps/page_portal/portal/images/edu_icon(1).png" alt="">
+              </span>
+              <span class="special_video_left_module_icons">
+                <img src="__STATICS__/apps/page_portal/portal/images/edu_icon(2).png" alt="">
+              </span>
+              <span class="special_video_left_module_icons">
+                <img src="__STATICS__/apps/page_portal/portal/images/edu_icon(3).png" alt="">
+              </span>
+              <span class="special_video_left_module_icons">
+                <img src="__STATICS__/apps/page_portal/portal/images/edu_icon(4).png" alt="">
+              </span>
+            </div>
+          </div>
+          <div class="special_video_left_num pull-left" style="position: relative;">
+            <div class="special_video_left_tit">
+              学习专题数
+
+            </div>
+            <p>
+              <span style="font-weight: 600">{$count_topic}</span>
+              <span style="font-size: 16px;font-family: SourceHanSansSC-Regular;">篇</span>
+              <div class="special_video_border pull-left"></div>
+            </p>
+          </div>
+          <div class="special_video_left_num pull-left">
+            <div class="special_video_left_tit">
+              学习天数
+            </div>
+            <p>
+              <span style="font-weight: 600">{$times}</span>
+              <span style="font-size: 16px;font-family: SourceHanSansSC-Regular;">天</span>
+            </p>
+          </div>
+        </div>
+        <div class="special_video_list">
+          <ul style="width:2000px;position:absolute;left:0px;top:0px;">
+            
+            <volist name="topic_list" id="vo" key="k" >
+              <eq name="k" value="1">
+                <li style="margin-top: 1%" onclick="topic_info('{$vo.topic_id}')">
+                  <p style="display: none">{$vo.topic_title}</p>
+                  <img src="{$vo.topic_img}" alt="" style="width:180px;height:102px;">
+                </li>
+                <else />
+                <li onclick="topic_info('{$vo.topic_id}')">
+                  <p>{$vo.topic_title}</p>
+                  <img src="{$vo.topic_img}" alt="" style="width:180px;height:102px;">
+                </li>
+              </eq>
+            </volist>
+            <!-- <li>
+              <p>全国两会重要指标</p>
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_small03.jpg" alt="">
+            </li>
+           
+            <li>
+              <p>三严三实</p>
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_small01.jpg" alt="">
+            </li>
+            <li>
+              <p>三严三实5</p>
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_small01.jpg" alt="">
+            </li> -->
+          </ul>
+        </div>
+
+        <div class="special_video_btn">
+          <div class="video_btn_right" style="margin-bottom: 35%;"> &gt;</div>
+          <div class="video_btn_left">&lt;</div>
+        </div>
+      </div>
+    </div>
+    <!-- 个性化定制专题 -->
+    <div class="public_content_topic">
+      <div class="public_topic_title">
+        <h3>专题个性化定制</h3>
+        <p class="public_topic_title_msg">您还未定制您的专属学习方案，您只需完成几个简单的选项即可开启您属于您的个性化专属学习方案</p>
+      </div>
+      <a id="showDialg" class="public_topic_title_btn">开启个性化学习</a>
+      <a href="{:U('Edu/ipam_customization_index')}" id="showDialgIn" class="showDialgIn public_topic_title_btn" style="display: none;">进入定制化学习</a>
+      <!-- Dialg个性化定制 -->
+      <div id="Dialg" style="display: none">
+        <div class="Learn_interest">
+          <div class="Learn_interest_tit clearfix">
+            <b>请选择您的学习兴趣</b>
+            <span>每一项只可选择一个类型，可随时修改</span>
+            <img src="__STATICS__/apps/page_portal/portal/images/edu_mask_close.png" alt="" class="pull-right" id="CloseDialg">
+          </div>
+          <div class="Learn_interest_list">
+            <div class="Learn_interest_Llist Learn_interest_lists" style="margin-right: 4%;">
+              <h4>党支部类型</h4>
+              <div class="Learn_interest_btn">
+                <volist name="party_list" id="vo">
+                  <a href="javascript:;">{$vo.code_name}</a>
+                </volist> 
+                <!-- <a href="javascript:;">社区党支部</a>
+                <a href="javascript:;" class="Learn_interest_btn_active">学院高校</a>
+                <a href="javascript:;">国有与集体企业</a>
+                <a href="javascript:;">非公有制经济</a>
+                <a href="javascript:;">事业单位</a>
+                <a href="javascript:;">流动党员</a>
+                <a href="javascript:;">党和国家机关</a>
+                <a href="javascript:;" ">离退休干部职工</a>
+                <a href="javascript:;">社会组织</a> -->
+              </div>
+            </div>
+            <div class="Learn_interest_Rlist Learn_interest_lists">
+              <div>
+                <h4>党员类型</h4>
+                <div class="Learn_interest_btn">
+                  <volist name="data_group" id="vo">
+                  <a href="javascript:;" onclick="data_group('{$vo.group_id}')">{$vo.group_title}</a>
+                  </volist>
+                </div>
+              </div>
+              <div style="margin-top: 6%;">
+                <h4>学习喜好</h4>
+                <div class="Learn_interest_btn">
+                  <volist name="data_label" id="vo">
+                  <a href="javascript:;" onclick="data_label('{$vo.group_id}')">{$vo.group_title}</a>
+                </volist>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="showDialgStart">开启个性化学习</a>
+        </div>
+      </div>
+
+      <!--  定制化学习-->
+      <div class="public_topic_customized" style="display: none">
+        
+      </div>
+      <!-- 列表展示 -->
+      <div class="public_topic_list  clearfix">
+        <div>
+          <span class="pull-left topic_list_hover">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon001.jpg" alt="">
+              <p>书记讲话</p>
+            </a>
+          </span>
+          <span class="pull-left"></span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon002.jpg" alt="">
+              <p>乡村部落</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon003.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon004.jpg" alt="">
+              <p>学院高校</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon005.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_hover">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon006.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left"></span>
+        </div>
+        <div>
+          <span class="pull-left"></span>
+          <span class="pull-left topic_list_hover">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon007.jpg" alt="">
+              <p>书记讲话</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon008.jpg" alt="">
+              <p>乡村部落</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon009.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_hover">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon010.jpg" alt="">
+              <p>学院高校</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon011.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon012.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_hover">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon013.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+        </div>
+        <div>
+          <span class="pull-left"></span>
+          <span class="pull-left"></span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon014.jpg" alt="">
+              <p>书记讲话</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon015.jpg" alt="">
+              <p>乡村部落</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon016.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon017.jpg" alt="">
+              <p>学院高校</p>
+            </a>
+          </span>
+          <span class="pull-left topic_list_f5f5">
+            <a href="javascript:;">
+              <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon005.jpg" alt="">
+              <p>社区党支部</p>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 学习笔记 -->
+    <div class="public_content_notes">
+      <!-- 标题 -->
+      <div class="public_notes_title">
+        <div class="pull-left"
+          style="font-size:36px;font-family:SourceHanSansSC-Medium;font-weight:500;color:rgba(33,33,33,1);">学习笔记</div>
+        <div class="pull-left" style="margin: 2% 0 0 5%;">
+          <a href="javascript:;" class="notes_active" onclick="notes_actice(11)" id="notes_w">文章笔记</a>
+          <a href="javascript:;" onclick="notes_actice(21)" id="notes_s">视频笔记</a>
+          <a href="javascript:;" onclick="notes_actice(2)" id="notes_h">会议笔记</a>
+          <a href="javascript:;" onclick="notes_actice(3)" id="notes_r">日常笔记</a>
+        </div>
+      </div>
+       <!-- 日历 -->
+      <div id="hmonthdivtime"></div>
+     <!-- 日历结束 -->
+                
+    
+    </div>
+
+
+
+    <!-- 学习实况 -->
+    <div class="public_content_article">
+      <div class="public_article_title"
+        style="font-size:36px;font-family:SourceHanSansSC-Medium;font-weight:500;color:rgba(33,33,33,1);">学习实况</div>
+      <div class="public_article_list clearfix">
+        <div class="pull-left"><img src="{$article_data[0]['article_thumb']}" alt="学习实况" style="width:459px;height:326px;"> </div>
+        <div class="pull-left" style="margin-left: 9px;">
+          <img src="{$article_data[1]['article_thumb']}" alt="学习实况" style="margin-bottom: 4%;width:222px;height:159px;">
+          <img src="{$article_data[2]['article_thumb']}" alt="学习实况" style="width:222px;height:159px;">
+        </div>
+        <div class="pull-right" style="margin: 5px 0 0 10px;">
+          <h3>{$article_data[0]['article_title']}</h3>
+          <p>
+           {$article_data[0]['article_description']}
+            <a class="detials" style="color:#9C834A;">详细>></a>
+          </p>
+          <ul style="margin-top: 10px;padding-bottom: 40px;">
+            <li>
+              <i class="public_article_dot"></i>
+              {$article_data[1]['article_title']}
+            </li>
+            <li>
+              <i class="public_article_dot"></i>
+              {$article_data[2]['article_title']}
+            </li>
+            <li>
+              <i class="public_article_dot"></i>
+              {$article_data[3]['article_title']}
+            </li>
+          </ul>
+          <a href="{:U('News/ipam_news_list',array('id'=>19))}" class="public_article_more">更多文章</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/jquery.vm-carousel.js"></script>
+
+  <script src="__STATICS__/apps/page_portal/portal/js/ipam_home_public.js"></script>
+   <!--日历插件js-->
+  <script src="__STATICS__/apps/page_portal/portal/js/calendar.js"></script>
+  <script type="text/javascript">
+    function data_group(group_id){
+      localStorage.setItem('data_group',group_id);
+      // $(this).addClass('Learn_interest_btn_active');
+    }
+    function data_label(group_id){
+      localStorage.setItem('data_label',group_id);
+    }
+    $.ajax({
+          url:"{:U('Edu/edu_customization_show')}",
+          data:{},
+          type:"post",
+          async:false,
+          success:function(data){
+            console.log(data);
+            
+            $(".public_topic_customized").html(`<div class="customized">
+              <div class="customized_tit clearfix">
+                <img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_icon010.jpg" alt="" class="pull-left">
+                <div class="pull-left" style="margin-left: 2%">
+                  <h3>${data.communist_name}</h3>
+                  <p>${data.party_name}</p>
+                </div>
+                <a class="pull-right">积分:2054</a>
+              </div>
+              <!-- 进度条 -->
+              <div class="clearfix special_right_progress" style="margin-top: $()%;">
+                <li>
+                  <div class="clearfix special_right_progress_tit">
+                    <div class="special_right_progress_tit_study">文章学习</div>
+                    <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_icon1.png"></div>
+                    <div class="pull-left ml-5">${data.article.learn_rate}%</div>
+                  </div>
+                  <div class="layui-progress">
+                    <div class="layui-progress-bar bg-color-ff4040" lay-percent="${data.article.learn_rate}%"></div>
+                  </div>
+                  <div class="special_right_progress_con">共${data.article.num}篇文章，已学习${data.article.learn}篇</div>
+                </li>
+                <li>
+                  <div class="clearfix special_right_progress_tit">
+                    <div class="special_right_progress_tit_study">视频学习</div>
+                    <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_icon2.png"></div>
+                    <div class="pull-left ml-5">${data.video.learn_rate}%</div>
+                  </div>
+                  <div class="layui-progress">
+                    <div class="layui-progress-bar bg-color-376BF5" lay-percent="${data.video.learn_rate}%"></div>
+                  </div>
+                  <div class="special_right_progress_con">共${data.video.num}部视频，已学习${data.video.learn}部</div>
+                </li>
+                <li>
+                  <div class="clearfix special_right_progress_tit">
+                    <div class="special_right_progress_tit_study">笔记</div>
+                    <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_icon3.png"></div>
+                    <div class="pull-left ml-5">${data.notes.learn_rate}%</div>
+                  </div>
+                  <div class="layui-progress">
+                    <div class="layui-progress-bar bg-color-A144FE" lay-percent="${data.notes.learn_rate}%"></div>
+                  </div>
+                  <div class="special_right_progress_con">已写笔记${data.notes.learn}次</div>
+                </li>
+                <li>
+                  <div class="clearfix special_right_progress_tit">
+                    <div class="special_right_progress_tit_study">考试</div>
+                    <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_icon4.png"></div>
+                    <div class="pull-left ml-5">${data.exam.learn_rate}%</div>
+                  </div>
+                  <div class="layui-progress">
+                    <div class="layui-progress-bar bg-color-FE9C44" lay-percent="${data.exam.learn_rate}%"></div>
+                  </div>
+                  <div class="special_right_progress_con">共${data.exam.num}次考试，已考试${data.exam.learn}次</div>
+                </li>
+
+              </div>
+            </div>`)
+            var str =
+              `${data.communist_name}党员您好：您已定制学习了<span>${data.edu_time}</span>天，其中包含<b>${data.article.num}</b>篇文章、<b>${data.video.num}</b>部视频、撰写<b>${data.notes.num}</b>篇笔记、完成<b>${data.exam.num}</b>次考试，请继续加油努力</p>`;
+            if(data!=2){
+              $('#Dialg').hide()
+              $('#showDialg').hide()
+              $('#showDialgIn').show()
+              $('.public_topic_title_msg').html(str)
+              $('.public_topic_customized').show()
+              $('.public_topic_list').hide()
+            }
+          }
+    })
+    // 个性化定制显示隐藏
+    $('#showDialg').click(function () {
+      $('#Dialg').show()
+    })
+    $('#CloseDialg').click(function () {
+      $('#Dialg').hide()
+    })
+    // 改变个性化定制
+    
+    $('.showDialgStart').click(function () {
+      var data_group = localStorage.getItem('data_group');
+      var data_label = localStorage.getItem('data_label');
+      $.ajax({
+        url:"{:U('Edu/edu_customization_save')}",
+        data:{'data_group':data_group,'data_label':data_label},
+        type:"post",  
+        async:false,
+        success:function(data){
+          switch(data){
+            case 1:
+              alert('定制成功');
+              window.location.href="{:U('Edu/ipam_edu_index')}"
+              break;
+          }
+        }
+      })
+      
+    })
+
+    // 笔记内容显示隐藏
+    $('.red_dot').parent().click(function () {
+      $('.dotDialg').show()
+    })
+    $('.closedotDialg').click(function () {
+      $('.dotDialg').hide()
+    })
+
+    // 获取当前月
+    var moday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 写出每月的总天数，把天数定义给一个数组
+    var d = new Date();
+    var month = d.getMonth() + 1; //当前的月份
+    var days = d.getDate(); //当前月的号数
+    var years = d.getFullYear(); //当前的年份
+    var run = years % 4; // 2月份的天数必须得区分今年是不是闰年
+    if (run != 0) {
+      moday[1] = 28;
+    } else {
+      moday[1] = 29;
+    }
+    var date = new Date();
+    date.setDate(1); //设置当前月的某一天。  日历都是星期日在第一位，星期六在最后一位：
+    var momatch = [0, 1, 2, 3, 4, 5, 6]; //这个存的是当前月的一号前面有多少空位，周日没有， 周一一个以此类推
+    var dangqian = momatch[date.getDay()];
+
+    var dates = document.getElementById("dates");
+    for (i = 1; i <= parseInt(dangqian); i++) {
+      dates.innerHTML += '<span>' + '&nbsp;' + '</span>';
+    }
+    var preAll = parseInt(moday[month - 1] + dangqian); //当前月1号前面的空白个数+这个月总天数
+    for (i = parseInt(dangqian + 1); i <= preAll; i++) {
+      if (i % 7 == 1 && i != 1) {
+        dates.innerHTML += '<br>'; //每七个是一行
+      }
+      if (i == (days + dangqian)) {
+        //给今天添加类名,方便设置样式  days是当前号数加上前面的空白天数就是i
+        dates.innerHTML += '<span class="today">' + parseInt(i - dangqian) + '</span>';
+      } else {
+        dates.innerHTML += '<span>' + parseInt(i - dangqian) + '</span>';
+      }
+    }
+    for (i = preAll; i < (parseInt(preAll / 7) + 1) * 7; i++) {
+      dates.innerHTML += '<span>' + '&nbsp;' + '</span>'; //补全表格的空余部分
+    }
+  
+  </script>
+  <script>
+    //注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
+    layui.use('element', function () {
+      var element = layui.element;
+    });
+  </script>
+  <script>
+    function topic_title_href(topic_id){
+      window.location.href="{:U('Edu/ipam_material_list')}?topic_id="+topic_id+"";
+
+    }
+    function topic_info(topic_id){
+      window.location.href="{:U('Edu/ipam_material_list')}?topic_id="+topic_id+"";
+
+    }
+
+  </script>
+  <script>
+  notes_actice(11);
+/*
+ * 选择月份
+ */
+    function setMonthStyle(dom){
+      $(".calendar-months li").removeClass("months-cur");
+      $(dom).addClass("months-cur");
+      $("#selectMonIndex").val($(dom).index());//设置选中月下标
+      var v = $(dom).html();//获取选择月份
+      if(v.length==3)
+        v = v.substring(0,2);
+      else
+        v = v.substring(0,1);
+      v = v-1;
+      $("#selectMonth").val(v);//改变选择月
+      var index = $(dom).index();//获取月份li对应索引
+      var selectYear = $("#hidyear" + index).val();//获得选择年
+      $("#selectYear").val(selectYear);//改变选择年
+      $("#pcalyear").html(selectYear+ "年");//改变显示年
+      setDisDate();//变更显示日期
+      setCalendar();//变更日历
+    }
+
+    /*
+ * 选择日期
+ */
+  function setDayStyle(dom){
+    $(".week-day-b li").removeClass("duty-cur");
+    $(dom).addClass("duty-cur");
+    var v = dom.firstChild.innerHTML;//获取点击结点日期
+    
+    $("#selectDay").val(v);//改变当前选择日期
+    setDisDate();//改变显示日期
+    var myDate = new Date();
+    var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+
+    var month = myDate.getMonth()+1;
+    if(month!=11 || month!=12){
+      month= "0"+month;
+    }
+    if(v.length==1){
+      v = "0"+v;
+    }
+    var _time = year+"-"+month+'-'+v;
+    $.ajax({
+      url:"{:U('Edu/ipam_edu_notes_list')}",
+      data:{'notes_actice_type':notes_actice_type1,'time':_time},
+      type:"post",
+      async:false,
+      success:function(data){
+          // console.log(data);
+          // console.log(data.length);
+          var arr = "";
+          if(data.length>=2){
+            for(var i=0;i<data.length;i++){;
+              if(i==1){
+                  arr += '<div class="clearfix" style="margin: 4% 0 7%">'+
+                '<div class="dotDialg_time pull-left">'+data[i].time_add+'</div>'+
+                ' <div class="dotDialg_notes pull-right">'+data[i].notes_title+'</div>'+
+                ' </div>';
+              }else{
+                 arr += '<div class="clearfix">'+
+                '<div class="dotDialg_time pull-left">'+data[i].time_add+'</div>'+
+                ' <div class="dotDialg_notes pull-right">'+data[i].notes_title+'</div>'+
+                ' </div>';
+              }
+              
+            }
+          }else if(data.length==1){
+            for(var i=0;i<1;i++){;
+              if(i==1){
+                  arr += '<div class="clearfix" style="margin: 4% 0 7%">'+
+                '<div class="dotDialg_time pull-left">'+data[i].time_add+'</div>'+
+                ' <div class="dotDialg_notes pull-right">'+data[i].notes_title+'</div>'+
+                ' </div>';
+              }else{
+                 arr += '<div class="clearfix"  style="margin-bottom: 28%;">'+
+                '<div class="dotDialg_time pull-left">'+data[i].time_add+'</div>'+
+                ' <div class="dotDialg_notes pull-right">'+data[i].notes_title+'</div>'+
+                ' </div>';
+              }
+              
+            }
+          }
+          
+          if(data.length !=0){
+            $(dom).append(
+              ' <div class="dotDialg" style="">'+
+              '<div class="dotDialg_tit">'+data[0].add_time+' (共'+data.length+'篇)'+
+              '<span class="closedotDialg">X</span>'+   
+              '</div>'+
+              ' <div class="dotDialg_list">'+
+              arr
+              +
+              '<a href="{:U("edu/ipam_note_list")}">更多笔记</a>'+
+              '</div>'+
+              ' </div>'
+            )
+            $(".closedotDialg").click(function(){
+              $('.dotDialg').addClass('di-n');
+              return false;
+            })
+          }
+        
+      }
+    })
+  }
+
+  //获取笔记类型
+  var notes_actice_type = '';
+  function notes_actice(notes_actice_type){
+    switch(notes_actice_type) {
+      case 11://文章
+          $("#notes_w").addClass('notes_active');
+          $("#notes_s").removeClass("notes_active");
+          $("#notes_r").removeClass("notes_active");
+          $("#notes_h").removeClass("notes_active");
+        break;
+      case 21://视频
+          $("#notes_s").addClass('notes_active');
+          $("#notes_w").removeClass("notes_active");
+          $("#notes_r").removeClass("notes_active");
+          $("#notes_h").removeClass("notes_active");
+        break;
+      case 2://会议
+          $("#notes_h").addClass('notes_active');
+          $("#notes_s").removeClass("notes_active");
+          $("#notes_r").removeClass("notes_active");
+          $("#notes_w").removeClass("notes_active");
+        break;
+      case 3://日常
+          $("#notes_r").addClass('notes_active');
+          $("#notes_s").removeClass("notes_active");
+          $("#notes_w").removeClass("notes_active");
+          $("#notes_h").removeClass("notes_active");
+        break;
+    };
+    localStorage.setItem('notes_actice_type',notes_actice_type);
+    notes_actice_type1 = localStorage.getItem('notes_actice_type');
+    var add_time_month = "";
+    $.ajax({
+      url:'{:U("Edu/ipam_edu_notes_data")}',
+      data:{'notes_actice_type':notes_actice_type1},
+      type:"get",
+      async:false,
+      success:function(data){
+        add_time_month = data;
+      }
+    });
+    localStorage.setItem('add_time_month',add_time_month);
+    setCalendar(add_time_month)
+  }
+
+  </script>
+  <script>
+    var page_flag = sessionStorage.getItem("page_flag");
+    if (page_flag == null) {
+      page_flag = 'home';
+    }
+    $("#" + page_flag).addClass("public_header_active");
+    $(".logins").click(function (e) {
+      location.href = "{:U('Index/Index/login')}";
+    });
+    layui.use('layer', function () {});
+    /* 登录点击事件开始 */
+    /* header 点击事件开始 */
+    $(".ipam_home_public_header_nav_horizontal li").click(function () {
+      $(this).css("background", "#fafafa");
+      $(this).children("a").css("color", "#d10000");
+      var id = $(this).attr("id");
+      sessionStorage.setItem("page_flag", id);
+      $(".public_header_nav_horizontal li").each(function () {
+        $(this).removeClass("public_header_active");
+      })
+    });
+    // 查看详情验证登陆
+    $(".see-detials").click(function (e) {
+      var flag = false;
+      $.ajax({
+        type: "POST",
+        url: "/Index/Index/check_login.html",
+        async: false,
+        success: function (data) {
+          flag = data;
+        }
+      });
+      if (flag == true) {
+        location.href = "{:U('Index/Index/login')}";
+        return false;
+      } else {
+        return true;
+      }
+    })
+  </script>

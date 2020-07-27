@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+@import "../components/function_cards";
+
+.function{
+  justify-content: space-between;
+}
+.function_card{
+  width: 400px;
+  height: 250px;
+  line-height: 250px;
+  font-size: 48px;
+  color: $red;
+  font-family: "方正正准黑简体" ,SansSerif;
+  background: url('../../images/online-card-bg.png') no-repeat center/ auto;
+}

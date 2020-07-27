@@ -1,0 +1,147 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('oa_theoretical_centre_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="centre_id" value="{$centre.centre_id}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>所属组织：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="party_no" lay-search id="party_no" lay-verify='required'>
+                                            <php>echo getPartySelect($centre['party_no'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="centre_title" value="{$centre.centre_title}" placeholder="请输入标题" autocomplete="off" class="layui-input" lay-verify='required' maxlength="50"></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>关键字：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="centre_keyword" value="{$centre.centre_keyword}" placeholder="请输入关键字" autocomplete="off" class="layui-input" maxlength="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>来源：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="centre_source" value="{$centre.centre_source}" placeholder="请输入来源" autocomplete="off" class="layui-input"  maxlength="100"></div>
+                                        <!-- <span class="fcolor-red fsize-18 lh-35 pl-5">*</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>描述：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="centre_description" placeholder="请输入文章描述,最长字符225" maxlength="225" class="layui-textarea">{$centre.centre_description}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>内容：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 ">
+                                        <script id="editor" name="centre_content" type="text/plain" style="height:350px;width:100%">{$centre.centre_content}</script>
+                                        <!-- <textarea id="centre_content" name="centre_content">{$centre.centre_content}</textarea> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
+
+                                    <input type="hidden" id="source_name" name="source_name" value="" />
+                                    <input type="hidden" id="centre_thumb" name="centre_thumb" value="{$centre.centre_thumb}" style="width: 60px">
+                                    <input type="hidden" class="form-control" id="centre_img" name="centre_img" value="{$centre.centre_thumb}">
+
+                                    <button type="button" class="layui-btn" onclick="uploader_file('cms','1','centre_thumb','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                    <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                    <div id="js-grid-juicy-projects2" style="height:100px">
+                                        <neq name="centre.centre_thumb" value="">
+                                            <php>echo getUploadHtml($centre['centre_thumb']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+
+                                    <input type="hidden" id="source_name2" name="source_name2" value="" />
+                                    <input type="hidden" id="centre_attach" name="centre_attach" value="{$centre.centre_attach}" >
+
+                                    <button type="button" class="layui-btn" onclick="uploader_file('cms','1','centre_attach','source_name2','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                    <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                        <neq name="centre.centre_attach" value="">
+                                            <php>echo getUploadHtml($centre['centre_attach']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use([ 'form', 'laydate'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form;
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+    })
+
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: "{:U('System/public/layedit_upload')}" //接口url
+              , type: 'post' //默认post
+            }
+        });
+        layedit.build('centre_content'); //建立编辑器
+    });
+</script>
+</block>

@@ -1,0 +1,368 @@
+/* line 32, ../../sass/layouts/_layouts.scss */
+.l-flex-center {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* line 36, ../../sass/layouts/_layouts.scss */
+.l-margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 40, ../../sass/layouts/_layouts.scss */
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1720px;
+}
+
+/* line 45, ../../sass/layouts/_layouts.scss */
+.l-right {
+  float: right;
+}
+
+/* line 49, ../../sass/layouts/_layouts.scss */
+.l-flex-justify {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  justify-content: space-between;
+}
+
+/* line 27, ../../sass/components/_function_cards.scss */
+.function {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* line 30, ../../sass/components/_function_cards.scss */
+.function_card {
+  border-radius: 10px;
+  text-align: center;
+}
+/* line 34, ../../sass/components/_function_cards.scss */
+.function_card a {
+  color: inherit;
+}
+/* line 37, ../../sass/components/_function_cards.scss */
+.function_card .function_text {
+  color: inherit;
+}
+/* line 40, ../../sass/components/_function_cards.scss */
+.function_card .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 45, ../../sass/components/_function_cards.scss */
+.function_card .card_title {
+  text-align: center;
+}
+
+/* line 50, ../../sass/components/_function_cards.scss */
+.function_card-gray {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #ebebeb, #fff);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-gray a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-gray .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-gray .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-gray .card_title {
+  text-align: center;
+}
+/* line 53, ../../sass/components/_function_cards.scss */
+.function_card-gray .function_text {
+  color: inherit;
+}
+
+/* line 57, ../../sass/components/_function_cards.scss */
+.function_card-red {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #ff204d, #ff6745);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-red a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-red .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-red .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-red .card_title {
+  text-align: center;
+}
+
+/* line 61, ../../sass/components/_function_cards.scss */
+.function_card-org {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #ff7200, #ffaa01);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-org a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-org .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-org .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-org .card_title {
+  text-align: center;
+}
+
+/* line 65, ../../sass/components/_function_cards.scss */
+.function_card-green1 {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #00b778, #0cdd9f);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-green1 a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-green1 .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-green1 .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-green1 .card_title {
+  text-align: center;
+}
+
+/* line 69, ../../sass/components/_function_cards.scss */
+.function_card-green2 {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #14b800, #51ed0e);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-green2 a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-green2 .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-green2 .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-green2 .card_title {
+  text-align: center;
+}
+
+/* line 73, ../../sass/components/_function_cards.scss */
+.function_card-blue {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #3c78f2, #54affe);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-blue a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-blue .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-blue .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-blue .card_title {
+  text-align: center;
+}
+
+/* line 80, ../../sass/components/_function_cards.scss */
+.l-function-wrap {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* line 20, ../../sass/objects/_title.scss */
+.title {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-top: 200px;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+/* line 27, ../../sass/objects/_title.scss */
+.title-icon {
+  width: 118px;
+  height: 118px;
+  object-fit: contain;
+}
+
+/* line 31, ../../sass/objects/_title.scss */
+.title-txt {
+  width: 930px;
+  height: 130px;
+  object-fit: contain;
+}
+
+/* line 35, ../../sass/objects/_title.scss */
+.title_photo {
+  position: absolute;
+  right: 64px;
+  top: 48px;
+}
+
+/* line 41, ../../sass/objects/_title.scss */
+.title_pic-box {
+  float: left;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: solid 4px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+/* line 51, ../../sass/objects/_title.scss */
+.title_picture {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* line 55, ../../sass/objects/_title.scss */
+.title_name {
+  float: left;
+  line-height: 48px;
+  color: #fff;
+  font-size: 24px;
+  opacity: .8;
+}
+
+/* line 19, ../../sass/sp_guide/sp_guide.scss */
+.bg {
+  background: url("../../sp_guide/images/guide-bg.jpg");
+  background-size: cover;
+}
+
+/* line 24, ../../sass/sp_guide/sp_guide.scss */
+.function {
+  flex-flow: row wrap;
+}
+/* line 27, ../../sass/sp_guide/sp_guide.scss */
+.function .function_card {
+  width: 25%;
+  height: 230px;
+  margin: 10px;
+  box-shadow: 0 12px 5px rgba(0, 0, 0, 0.1);
+}
+/* line 33, ../../sass/sp_guide/sp_guide.scss */
+.function .function_card .card_img {
+  width: 150px;
+  height: 120px;
+  object-fit: scale-down;
+  box-sizing: content-box;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+/* line 41, ../../sass/sp_guide/sp_guide.scss */
+.function .function_card .card_title {
+  font-size: 32px;
+  color: rgba(255, 255, 255, 0.8);
+}
+/* line 48, ../../sass/sp_guide/sp_guide.scss */
+.function .function_card-gray .card_title {
+  color: #666;
+}

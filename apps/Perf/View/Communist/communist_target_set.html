@@ -1,0 +1,139 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEADER-->
+                        <!-- 左侧开始 -->
+					<div class="row">
+                        <div class="col-sm-3">
+							<div class="portlet light  bordered">
+                            <!-- 小标题 -->
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm bg-color-green2">
+                                            <i class="iconfont">&#xe64b;</i>
+                                        </div>
+                                    </div>
+                                    <span class="bold ">党组织列表</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <!-- 小标题结束 -->
+                                <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1">
+                                    <div class="tree-sidebar">
+                                        <ul id="treeDemo" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						</div>
+                        <!-- 左侧结束 -->
+                        <!-- 右侧开始 -->
+                        <div class="col-sm-9">
+                        	<div class="portlet light  bordered">
+                                <!-- 小标题 -->
+                                   <div class="portlet-title">
+                                       <div class="pull-right mt-5">
+                                    </div>
+                                </div>
+                                <!-- 小标题结束 -->
+                                <div class="portlet-body">
+                                    <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1">
+                                        <ul class="p5-local-right">
+                                        	<form>
+                                            <li class="active iteam">
+                                                <!-- 表格开始 -->
+                                                <div id="table">
+                                                <table id="client_table" class="table" data-toggle="table" data-url="{:U('communist_target_set_data',array('group'=>party))}" data-height="450" data-search="ture" data-show-refresh="true" data-show-toggle="ture" data-show-columns="ture" data-show-export="ture" data-detail-view="false" data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-show-pagination-switch="false" data-pagination="false" data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]">
+													<thead>
+														<tr>
+															<th data-field="assess_id" data-align="center" data-sortable="true">序号</th>
+															<th data-field="assess_name" data-align="center" data-sortable="true">考核项</th>
+															<th data-field="proportion" data-align="center" data-sortable="true">比重</th>
+															<th data-field="type_name" data-align="center" data-sortable="true">考核方式</th>
+															<th data-field="cycle_name" data-align="center" data-sortable="true">考核周期</th>
+															<th data-field="communist_name" data-align="center" data-sortable="true">负责人</th>
+															<th data-field="operate" data-align="center" data-sortable="true">目标设定</th>
+														</tr>
+													</thead>
+												</table>
+												</div>
+                                                <!-- 表格结束 -->
+                                                <div class="clearfix mt-50 text-right">
+                                                	<button type="button" class="btn btn-sm blue w-75 bor-ra-2 mr-10" id="submits">保存修改</button>
+                                                	<button type="reset" class="btn btn-sm default w-75 bor-ra-2">重置</button></div>
+                                            </li>
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 右侧结束 -->
+                    <!-- 整个部分结束 -->
+                    <div class="clearfix col-xs-12" style="height: 15px"></div>
+                    </div><!-- row结束 -->
+
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+      </block>
+	<block name="js">
+		<script>
+			$(function(){
+				$("#submits").click(function(){
+					var data="";
+					$("input[type='hidden']").each(function(){
+						data+=this.value+","+$(this).next().val()+"|";
+					})
+					$.get("{:U(pf_target_lock_doadd)}",{data:data},function(data){
+						if(data==0){
+							alert("保存成功");
+						}else{
+							alert("保存失败");
+						}
+					})
+				})
+			})
+		</script>
+		<script>
+			  var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick//绑定回调函数
+            },
+            view: {
+                showIcon: false
+            }
+        };
+		//$('#client_table').bootstrapTable('refresh',{url:"{:U('pf_assess_set_index_data')}?party_no="+party_no+"&group='party'"});
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            <volist name="category_list" id="list">
+            { id:"{$list.party_no}",pId:{$list.party_pno}, name:"["+"{$list.party_no}"+"]"+"{$list.party_name}",open:true},
+			</volist>
+        ];
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+        function onClick(e, treeId, treeNode) {
+			$("#add").css("display","block");
+			var party_no=treeNode.id;
+			$("#party").val(party_no)
+			$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_target_set_data')}?party_no="+party_no+"&group=party"});
+        }
+		</script>
+	</block>

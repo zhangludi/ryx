@@ -1,0 +1,187 @@
+<style type="text/css">
+    .w-295{width:295px;}
+    .study_online_video_list{
+        display: table-cell;
+        height: 210px;
+        padding: 6px;
+    }
+
+</style>
+<div  class="public_content study_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div class="public_content_left study_slide">
+     {:W('Leftmenu/ipam_home_slide', array(1,'1'))}
+    </div>
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right study_content_right">
+        <!--视频学习开始-->
+        <div>
+            <div class="public_content_right_l pull-left w-600 over-h">
+                <div class="public_card">
+                    <div class="public_card_title bg-img-card fcolor-white">
+                        <span class="fsize-18 pl-15">视频学习</span> /
+                        <a href="{:U('ipam_material_list',array('type'=>21))}" class="fcolor-white">更多</a>
+                    </div>
+                    <div class="study_topic_content mt-15 w-600 h-340 po-re over-h">
+                        <a class="see-details" href="{:U('ipam_material_info',array('material_id'=>$material_list[0][material_id]))}">
+                            <img src="{$material_list[0].material_thumb}" class=" w-all di-b center-ver" alt="视频图片">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="public_content_right_r pull-right w-320 over-h">
+                <!--课件排行开始-->
+                <div>
+                    <div class="public_card_title">
+                        <span class="fsize-16">课件排行</span>
+                        <a href="javascript:;" class="fcolor-99">&nbsp;更多&nbsp;>></a>
+                    </div>
+                    <ul class=" over-h mt-15">
+                    <volist name="material_list" id="vo" offset="1" length='5'>
+                        <li class="mb-10">
+                            <a class="see-details" href="{:U('ipam_material_info',array('material_id'=>$vo[material_id]))}">
+                                <div class="di-ib w-100 h-60 over-h po-re pull-left mr-10">
+                                    <img src="{$vo.material_thumb}" class="di-ib w-all center-ver" alt="">
+                                </div>
+
+                                <p class="di-i fsize-14 fcolor-33 line-overf">{$vo.material_title}</p>
+                                <div class="clearfix"></div>
+                            </a>
+                        </li>
+                        </volist>
+                        
+                    </ul>
+                </div>
+                <!--课件排行结束-->
+            </div>
+            <div class="clearfix"></div>
+            <!--视频列表开始-->
+            <div class="mt-30 mb-10">
+                <img src="__STATICS__/apps/page_portal/images/study_online_icon_vedio.png" class="va-b mr-5" alt="">
+                <span class="fsize-16 fcolor-33 mr-30">视频列表</span>
+            </div>
+            <div>
+            <volist name="material_list" id="vob" offset="6" length='13'>
+                <div class="study_topic_content_box boxsize-b w-220 h-200 pull-left mr-10 mb-10 hr-s-f1f1f1 over-h">
+                    <a class="see-details" href="{:U('ipam_material_info',array('material_id'=>$vob[material_id]))}" class="di-b">
+                        <div class="h-150 w-all over-h po-re">
+                            <img src="{$vob.material_thumb}" class="w-all di-b center-ver-hor" alt="考试中心图片">
+                        </div>
+                        <div>
+                            <p class="fsize-14 fcolor-33 p-5 line-overf">{$vob.material_title}</p>
+                        </div>
+                    </a>
+                </div>
+                </volist>
+              
+                <div class="clearfix"></div>
+            </div>
+            <!--视频列表结束-->
+        </div>
+        <!--视频学习结束-->
+        <!--文章学习开始-->
+        <div class="mt-25">
+            <div class="public_content_right_l pull-left w-600 over-h">
+                <div class="public_card">
+                    <div class="public_card_title bg-img-card fcolor-white">
+                        <span class="fsize-18 pl-15">文章学习</span> /
+                        <a href="{:U('ipam_material_list',array('type'=>11))}" class="fcolor-white">更多</a>
+                    </div>
+                    <div class="study_topic_content mt-20 w-600 h-340 po-re over-h">
+                        <ul class="public_card_text_content">
+                        <volist name="article_list" id="voc" offset="0" length='4' key="k">
+                            <li 
+                                <if condition="$k eq 1" >
+                                class="public_card_text_lr w-295 boxsize-b mr-5 mb-10" 
+                                <elseif condition="$k eq 2"/>
+                                class="public_card_text_lr w-295 boxsize-b mb-10" 
+                                <elseif condition="$k eq 3"/>
+                                class="public_card_text_lr w-295 boxsize-b mr-5" style="float: left;"
+                                <else />
+                                class="public_card_text_lr w-295 boxsize-b "
+                                </if> >
+                                <a class="see-details" href="{:U('ipam_material_info',array('material_id'=>$voc[material_id]))}">
+                                    <div class="public_card_text_lr_img h-all pull-left w-110 mr-10 hr-s-dfdfdf">
+                                        <div class="w-all h-all over-h po-re">
+                                            <img src="{$voc.material_thumb}" class="di-b h-all center-ver-hor" alt="图书图片">
+                                        </div>
+                                    </div>
+                                    <div class="public_card_text_lr_txt po-re">
+                                        <p class="mb-15 fsize-16 txt-overh">{$voc.material_title}</p>
+                                        <p class="public_card_text_lr_txt_content fcolor-99">{$voc.material_title}</p>
+                                        <div class="po-ab bottom-10 right-10">
+                                            <img src="__STATICS__/apps/images/career_poverty_browse.png" alt="">
+                                            <span class=" ">1201</span>
+                                            <span class="">次浏览</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            </volist>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="public_content_right_r pull-right w-320 over-h">
+                <!--文章排行开始-->
+                <div class="study_online_articaltop">
+                    <div class="public_card_title">
+                        <span class="fsize-16">文章排行</span>
+                        <a href="javascript:;" class="fcolor-99">&nbsp;更多&nbsp;>></a>
+                    </div>
+                    <ul class="public_card_content over-h mt-20 decimal_ul">
+                        <li class="lh-35 po-re">
+                            <a class="see-details" href="{:U('ipam_material_info',array('material_id'=>$article_list[6][material_id]))}">
+                                <div class="public_card_text_lr_img hr-s-dfdfdf pull-left h-80 w-54 mr-15">
+                                    <div class="w-all h-all over-h">
+                                        <img src="{$article_list[6].material_thumb}" class="di-b h-all center-block" alt="图书图片">
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <p class="fsize-14 fcolor-33">{$article_list[6].material_title}</p>
+                                    <p class="fsize-12 fcolor-808080 pre-wrap lh-20 line-overf" style="white-space: pre-wrap">近日，德州市德州市德州市宁津县以“控制总量、优化······</p>
+                                </div>
+                            </a>
+                        </li>
+                         <volist name="article_list" id="vod" offset="7" length='8'>
+                        <li class="lh-35 po-re">
+                            <a class="see-details" href="{:U('ipam_material_info',array('material_id'=>$vod[material_id]))}">{$vod.material_title}</a>
+                        </li>
+                        </volist>
+                        
+                    </ul>
+                </div>
+                <!--文章排行结束-->
+            </div>
+            <div class="clearfix"></div>
+            <!--视频列表开始-->
+            <div class="study_artical mt-15">
+                <div class="mb-10">
+                    <img src="__STATICS__/apps/images/study_online_icon_vedio.png" class="va-b mr-5" alt="">
+                    <span class="fsize-18 fcolor-33 mr-30">文章列表</span>
+                </div>
+                <div class="di-tb w-all">
+                 <volist name="article_list" id="voe" offset="14" length='5'>
+                    <div class="public_hover_shadow study_online_video_list w-200    ">
+                        <a href="{:U('ipam_material_info',array('material_id'=>$voe[material_id]))}">
+                            <div class="public_card_text_lr_img h-160 w-all">
+                                <div class="w-all h-all over-h">
+                                    <img src="{$voe.material_thumb}" class="di-b h-all center-block" style="width: 100%;" alt="文章图片q">
+                                </div>
+                            </div>
+                            <p class="fsize-12 m-10">{$voe.material_title}</p>
+                        </a>
+                    </div>
+                    </volist>
+                
+                </div>
+            </div>
+            <!--视频列表结束-->
+        </div>
+        <!--文章学习结束-->
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>

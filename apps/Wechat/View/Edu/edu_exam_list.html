@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title>考试中心</title>
+<!-- aui核心css -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css" />
+<!-- end -->
+<!-- aui下拉 -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css" />
+<!-- end -->
+<!--aui轮播-->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<!--end-->
+<!--公用css-->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css" />
+<!-- end -->
+<!-- 本项目公共css -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css" />
+<!-- end -->
+<!--本页面css-->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_exam.css" />
+<!--end-->
+<style>
+    .z-index-max {
+        z-index: 1000;
+    }
+</style>
+
+<style>
+    header {
+        background-color: #fff !important;
+        line-height: 3rem !important;
+    }
+
+    header .test {
+        color: #ff4040;
+    }
+
+    .aui-title {
+        padding-top: 1rem !important;
+        width: 10rem !important;
+        left: 4rem !important;
+    }
+
+    .title_list {
+        /* padding-top: 10px; */
+    }
+
+    .title_list ul {
+        display: flex;
+        justify-content: space-between;
+        height: 1.5rem;
+    }
+
+    .title_list .title_lists {
+        font-family: SourceHanSansSC-Regular;
+        font-size: 0.7rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.9rem;
+        height: 1rem;
+        letter-spacing: 0.04rem;
+        color: #212121;
+    }
+
+    .title_list .title_lists_active {
+        font-size: 0.8rem;
+        letter-spacing: 0.05rem;
+        color: #ff4040;
+        line-height: 0.8rem;
+        position: relative;
+    }
+
+    .title_list .title_lists_active::after {
+        content: '';
+        width: 1.2rem;
+        height: 0.1rem;
+        position: absolute;
+        bottom: -0.000001rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ff4040;
+        background-blend-mode: normal,
+            normal;
+        border-radius: 0.05rem;
+    }
+</style>
+<script type="text/javascript">
+
+
+
+
+    
+</script>
+</head>
+
+<body class="bg-color-f9">
+<header class="aui-bar aui-bar-nav aui-bar-info pt-25em">
+    <ul>
+        <li class="h-45em">
+            <a class="pull-left mt-15em pl-12em" href="javascript:history.back(-1)">
+                <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back_info.png" alt="返回" />
+            </a>
+            <div class="aui-title">
+                <div class="title_list">
+                    <ul class="clearfix">
+                        <li class="title_lists pull-left title_lists_active">模拟</li>
+                        <li class="title_lists pull-left">正式</li>
+                        <li class="title_lists pull-left">已参加</li>
+                    </ul>
+                </div>
+            </div>
+           <!--  <a class="pull-right f-12em f-w pr-12em test" onclick="openMyexam('edu_exam_my_header')">
+                我的考试
+            </a> -->
+        </li>
+    </ul>
+</header>
+<div class="content">
+    <!--模拟考试-->
+    <div class="model_tests item-content">
+        <ul class="model_tests_list">
+            <volist name="exam_data3" id="list">
+            <li><a href="{:U('Edu/edu_exam_info',array('exam_id'=>$list['exam_id'],'moni'=>1))}">
+                <p class="model_tests_list_tit">
+                    {$list.exam_title}
+                </p>
+                <div class="model_tests_list_bot">
+                    <span class="model_tests_list_time">时长：{$list.exam_time}分钟 / {$list.questions_num}大题</span>
+                    <span class="model_tests_list_status not_red">未参加</span>
+                </div></a>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <!-- 正式 -->
+    <div class="item-content model_tests" style="display: none">
+        <ul class="model_tests_list">
+           <volist name="exam_data1" id="list">
+            <li><a href="{:U('Edu/edu_exam_info',array('exam_id'=>$list['exam_id'],'zhengshi'=>1))}">
+                <p class="model_tests_list_tit">
+                    {$list.exam_title}
+                </p>
+                <div class="model_tests_list_bot">
+                    <span class="model_tests_list_time">时长：{$list.exam_time}分钟 / {$list.questions_num}大题</span>
+                    <span class="model_tests_list_status not_red">未参加</span>
+                </div></a>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <!-- 已参加 -->
+    <div class="model_join item-content">
+        <ul class="model_join_list">
+            <volist name="exam_data2" id="list">
+            <li>
+                <a href="{:U('Edu/edu_exam_info',array('exam_id'=>$list['exam_id']))}">
+                    <p>{$list.exam_title}</p>
+                </a>
+                <div class="model_join_list_bot">
+                    <span class="model_join_list_time">时长：{$list.exam_time}分钟 总分：{$list.score}分 {$list.questions_num}大题</span>
+                    <a href="javascript:;" class="model_join_list_status not_red"><span>{$list.log_score}分</span></a>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<!--结束-->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<!-- api核心js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<!-- end -->
+<!-- aui下拉刷新js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<!-- end -->
+<!--aui轮播-->
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<!--end-->
+<!-- 项目公共js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- end -->
+<!-- 本页面js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/edu/js/edu_exam.js"></script>
+<!-- end -->
+<script type="text/javascript">
+    // apiready = function () {
+    //  changecolor() //根据配置文件改变头部颜色
+    //  api.openFrame({
+    //      name: 'edu_exam',
+    //      url: '../edu_exam.html',
+    //      rect: {
+    //          y: ($('header').height() / 45 * 70),
+    //      },
+    //      bounces: false,
+    //  });
+
+    //  if (userAgent()) { //系统小于4.4修改Y轴高度
+    //      api.setFrameAttr({
+    //          name: 'edu_exam',
+    //          rect: {
+    //              y: 45
+    //          }
+    //      });
+    // 我的考试
+    function openMyexam(winName) {
+        api.openWin({
+            name: winName,
+            url: './header/' + winName + '.html'
+        });
+    }
+    // 考试详情
+    function openExamList(winName) {
+        api.openWin({
+            name: winName,
+            url: './' + winName + '.html'
+        });
+    }
+    //返回首页
+    function goBlack() {
+        api.closeWin({});
+    }
+    // header栏切换
+    $('.title_list ul li').click(function () {
+        $('li').removeClass('title_lists_active')
+        var num = $(this).index() //获取触发事件的索引
+        //通过索引 找到切换项
+        $('.content .item-content') //找到所有div
+            .eq(num) //找到单个item;
+            .css('display', 'block') //更改css样式
+            .siblings()
+            .css('display', 'none')
+        $(this).addClass('title_lists_active')
+    })
+</script>
+<!--end-->
+</body>
+
+</html>

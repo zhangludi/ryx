@@ -1,0 +1,200 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <form class="layui-form">
+                    <div class="layui-card-header" style="position: relative;">
+                        <span>党组织列表</span>
+                    </div>
+                    <div class="layui-card-body" style="overflow-y:auto">
+                        <div class="over-h-tree">
+                            <ul id="treeDemo" class="ztree ztree-demo">
+
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                        <div class="layui-form layui-card-body fitheight">
+                            <div class="layui-row layui-col-space5">
+                                <div class="layui-col-xs1 text-r lh-40">名称：</div>
+                                <div class="layui-col-xs3 ">
+                                    <input class="layui-input" id="centre_title" autocomplete="off" placeholder="请输入名称">
+                                </div>
+                                <div class="layui-col-xs3 pull-right">
+                                	<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+		                            <a class="layui-btn table-add" data-type="add" >添加</a>
+                                </div>
+                            </div>
+                            <input type="hidden" id="party_no">
+                            <table class="layui-table" id="demo"  lay-filter="demo">
+                            </table>
+                            <script type="text/html" id="operate">
+	                            <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+	                            <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+	                            <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+	                        </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+layui.use(['element','form'], function() {
+	var $ = layui.$
+		, admin = layui.admin
+		, element = layui.element
+		, form = layui.form
+		, router = layui.router();
+	form.render();
+	// 默认显示的 表格
+	layui.use('table', function () {
+		var table = layui.table;
+		table.render({
+			elem: '#demo'
+			, url: '{:U("Oacust/oa_theoretical_centre_index_data")}'
+			, height: 'full-160'
+			, id: 'ztreedata'
+			, cols: [[
+				{field: 'centre_id', width: 80, title: '编号', sort: true}
+				, {field: 'centre_title', title: '标题',minWidth: 160}
+				, {field: 'centre_thumb', width: 80, title: '缩略图'}
+				, {field: 'add_staff', title: '添加人'}
+				, {field: 'add_time' , title: '添加时间'}
+				, {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+			]]
+			, page: true
+		});
+		//监听表格复选框选择
+		table.on('checkbox(demo)', function(obj){
+			console.log(obj)
+		});
+		//监听工具条
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			var idcard_no = data.idcard_no;
+			if(obj.event === 'detail'){
+				var index = layer.open({
+				   type: 2,
+				   title: false,
+				   end:false,
+				   closeBtn: 0,
+				   shift: 1,
+				   content: "{:U('Oacust/oa_theoretical_centre_info')}?centre_id="+data.centre_id,
+				   area: ['300px', '300px']
+				});
+				layer.full(index);
+			} else if(obj.event === 'del'){
+				layer.confirm('确认删除该数据吗？', function(index){
+					window.location='{:U("Oacust/oa_theoretical_centre_del")}?centre_id='+data.centre_id+'';
+					layer.close(index);
+				});
+			} else if(obj.event === 'edit'){
+				var index = layer.open({
+				   type: 2,
+				   title: false,
+				   end:false,
+				   closeBtn: 0,
+				   shift: 1,
+				   content: "{:U('Oacust/oa_theoretical_centre_edit')}?centre_id="+data.centre_id+"&cat_id="+data.article_cat,
+				   area: ['300px', '300px']
+				});
+				layer.full(index);
+			}
+		});
+		var $ = layui.$, active = {
+			reload: function(){
+				var centre_title = $('#centre_title').val();
+				var party_no = $('#party_no').val();
+				table.reload('ztreedata', {
+					page: {
+					  curr: 1 
+					}
+					,where: {
+						"centre_title": centre_title,
+						"party_no":party_no
+					}
+				});
+			},
+			add: function(){
+				var index = layer.open({
+					type: 2,
+					title: false,
+					end:false,
+					closeBtn: 0,
+					shift: 1,
+					area : ['800px' , '400px'],
+					content: "{:U('oa_theoretical_centre_edit')}",
+				});
+				layer.full(index);
+			}
+		};
+		$('.layui-form .layui-btn').on('click', function(){
+			var type = $(this).data('type');
+			active[type] ? active[type].call(this) : '';
+		});
+	});
+	//点击左侧树的事件
+	var setting = {
+		view: {
+			showLine: false,
+		},
+		data: {
+			key: {
+				title: "t"
+			},
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+				var party_no = $("#party_no").val();
+				var centre_title = $("#centre_title").val();
+				val(node.id);
+				layui.use('table', function () {
+					var table = layui.table;
+					table.render({
+						elem: '#demo'
+						, url: '{:U("Oacust/oa_theoretical_centre_index_data")}?party_no='+party_no+"&centre_title="+centre_title
+						, height: 'full-160'
+						, cols: [[
+							{field: 'centre_id', width: 80, title: '编号', sort: true}
+							, {field: 'centre_title', title: '标题',minWidth: 160}
+							, {field: 'centre_thumb', width: 80, title: '缩略图'}
+							, {field: 'add_staff', width: 120, title: '添加人'}
+							, {field: 'add_time', width: 160, title: '添加时间'}
+							, {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+						]]
+						, page: true
+					});
+				});
+			}
+		}
+	};
+	var zNodes = [
+		<volist name="party_list" id="list" key = 'k'>
+		{id: {$list.party_no}, pId: {$list.party_pno}, name: "{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+		</volist> 
+	];
+	$(document).ready(function () {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	});
+})
+// 设置ztree 列表和右侧列表一样高度
+$(".over-h-tree").css("height",($(window).height() - 95));
+</script>
+</block>

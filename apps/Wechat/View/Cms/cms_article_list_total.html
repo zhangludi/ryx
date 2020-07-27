@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>党务动态</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_home.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/cms/css/cms_partyWork.css" />
+<style>
+header{
+ 	background: url("__STATICS__/apps/page_wechat/images/images_cms/cms_news_bg.png") no-repeat !important; 
+	background-size: 100% 100% !important;	
+}
+</style>
+</head>
+<body class="bg-color-whiter">
+	<!--头部-->
+	<header class="aui-bar aui-bar-nav aui-bar-info pt-25em bg-color-whiter border-3em-de po-fix z-index-max top-0em">
+	    <ul>
+	       <li class="h-100em">
+		       	<a class="pull-left mt-15em pl-12em" href="{:U('Index/index')}">
+			        <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/images/images_cms/cms_back.png" alt="返回" />
+			    </a>
+				<div class="aui-title f-w color-21">党务动态</div>
+	      </li>
+	    </ul>
+	</header>
+	<div id="tabBigBox" class="">
+		<ul id="tabBox2" class="z-index-max" style="width: 1000px;">
+			<volist name="cat_list" id="list">
+			<li id="{$list.cat_id}" <if condition="$list['cat_id'] == $cat_id ">class="mt-5em mb-5em tabBox2-active" <else/>class="mt-5em mb-5em" </if> onclick="active({$list.cat_id},this)">
+		    	<a name="#tab2">{$list.cat_name}</a>
+		    	<span class="active"></span>
+			</li>
+			</volist>
+		</ul>
+	</div>
+	<input type="hidden" id="cat_id" value="{$cat_id}">
+	<div class="aui-load-container mt-100em" id="content">
+		<div class="aui-load-wrap">
+			<div class="aui-loading-dot"></div>
+			<div class="aui-loading-circle"></div>
+			<div class="aui-loading-title"></div>
+		</div>
+		<div class="aui-content">
+			<div class="pl-15em clearfix mb-12mem" id="article">
+			
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<!-- api核心js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<!-- end -->
+<!-- aui下拉刷新js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<!-- end -->
+<!-- 项目公共js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- end -->
+<!-- 本页面js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/cms/js/cms_partyWork_list.js"></script>
+<!-- end -->
+<script type="text/javascript">
+function openNewCms(cat_id){
+	location.href="{:U('Wechat/Cms/cms_article_list')}?cat_id="+cat_id;
+}
+function cms_menu(){
+	$(".menu_more_con").removeClass('di-n');
+	$(".aui-bar").addClass('di-n');
+	$("#tabBigBox").addClass('di-n');
+	$('#content').addClass('di-n');
+}
+function active(cat_id,This){
+	$('#tabBox2 li').removeClass('tabBox2-active');
+	$(This).addClass('tabBox2-active');
+	$('#article').html('');
+	$.ajax({
+		url: "{:U('cms_article_list_total_data')}",
+		data: {'cat_id':cat_id},
+		type: "post",
+		async:false,
+		success: function(data) {
+			$('#article').html(data.content);
+		}
+	});
+};
+function menu_active(cat_id,This){
+	$('#tabBox2 li').removeClass('tabBox2-active');	
+	var index = $('#menu_more ul li').index(This);	
+	$('#'+cat_id).addClass('tabBox2-active');
+	$(".menu_more_con").addClass('di-n');
+	$(".aui-bar").removeClass('di-n');
+	$("#tabBigBox").removeClass('di-n');
+	$('#content').removeClass('di-n');
+	$('#article').html('');
+	$.ajax({
+		url: "{:U('cms_article_list_total_data')}",
+		data: {'cat_id':cat_id},
+		type: "post",
+		async:false,
+		success: function(data) {
+			$('#article').html(data.content);
+		}
+	});
+	var o_ww=$('#tabBox2 li').eq(index).width()*index;
+	$('#tabBox2').css('left',-o_ww);
+	//getCmsArticleList($(This).attr('id'));//运行 （获取党建矩阵列表） 函数
+}
+var cat_id=$('#cat_id').val();
+$.ajax({
+	url: "{:U('cms_article_list_total_data')}",
+	data: {'cat_id':cat_id},
+	type: "post",
+	async:false,
+	success: function(data) {
+		$('#article').html(data.content);
+	}
+});
+$('#tabBox2').css('left',0);
+var xxx = [];
+if($('#tabBox2').css('left')=='0px'){
+	//event.preventDefault();
+}
+//------------------------------------------------------------
+var tabBox = document.getElementById("tabBox2");
+tabBox.addEventListener("touchmove",function(evt){
+	evt.preventDefault();
+	var touch=evt.touches[0];
+	var xx=parseInt(touch.clientX);
+	xxx.push(xx);
+	var leftNum = $('#tabBox2').css('left').substring(0,($('#tabBox2').css('left').length-2));
+	var changeNum = (xxx[xxx.length-1]-xxx[xxx.length-2]);
+	$('#tabBox2').css('left',leftNum-(-changeNum));
+},false)
+document.addEventListener("touchend",function(evt){
+	xxx = [];
+	if($('#tabBox2').css('left').substring(0,($('#tabBox2').css('left').length-2))>0){
+		$('#tabBox2').css('left',0);
+	}
+	if($('#tabBox2').css('left').substring(0,($('#tabBox2').css('left').length-2))<$(window).width()-$('#tabBox2').outerWidth(true)){
+		$('#tabBox2').css('left',($(window).width()-$('#tabBox2').outerWidth(true)));
+	}
+},false)
+</script>
+</html>

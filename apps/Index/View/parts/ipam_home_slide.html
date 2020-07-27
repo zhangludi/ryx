@@ -1,0 +1,27 @@
+<ul class="public_nav_vertical">
+    <li>
+        <div class="public_nav_vertical_title po-re">
+            <img src="__STATICS__/{$menu.image}" class="po-ab top-30b" alt="新闻图标">
+            <a href="javascript:;" class="pull-left ml-25">{$menu.name}</a>
+        </div>
+        <dl class="public_nav_vertical_child">
+            <foreach name="type_list" item="list">
+                <if condition="$list['checked'] eq 1">
+                    <dd class="child_click_dd">
+                        <a  href="{$list.url}">
+                            {$list.type_name}
+                            <i class="child_click_i"></i>
+                        </a>
+                    </dd>
+                <else/>
+                    <dd>
+                        <a  href="{$list.url}">
+                            {$list.type_name}
+                            <i class="child_click_i"></i>
+                        </a>
+                    </dd>
+                </if>
+            </foreach>
+        </dl>
+    </li>
+</ul>

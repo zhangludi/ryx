@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_community_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_gov/sp_gov_online.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_guide/sp_guide_data.css">
+</head>
+<style type="text/css">
+    .function{
+      -webkit-box-pack: flex-start;
+      -webkit-justify-content: flex-start;
+      -ms-flex-pack: flex-start;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .function-card{
+        margin: .50rem;         
+    }
+</style>
+<body class="page-bg">
+<section class="content">
+    <p class=" shade content_title">在线办事</p>
+    <div class="function">
+        <foreach name="cat_list" item="list">
+            <div class="function-card"><a href="{:U('ipam_gov_list', array('cat_id' => $list['cat_id']))}">{$list.cat_name}</a></div> 
+        </foreach>
+    </div>
+</section>
+<!--jqery-->
+<script src="__STATICS__/public/js/jquery.min.js"></script>
+<!--公共js-->
+<script src="__STATICS__/apps/page_allinone/js/public/sp_community_public.js"></script>
+</body>
+</html>

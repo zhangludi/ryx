@@ -1,0 +1,26 @@
+<div class="public_card ">
+    <div class="public_card_title bg-img-card fcolor-white">
+        <span class="fsize-18 pl-15">{$type_name}</span> /
+        <a href="{:U('Index/Meeting/ipam_meeting_list', array('type_no' => $meeting_type))}" class="fcolor-white">更多</a>
+    </div>
+    <div>
+        <!--新闻开始-->
+        <ul>
+            <foreach name="meeting_list" item="list">
+                <li class="hr-sb-gray2 h-120 pb-15 pt-15">
+                    <a  class='see-details' href="{:U('Meeting/ipam_meeting_detail', array('type_no' => $meeting_type, 'meeting_no' => $list['meeting_no']))}" class="di-b h-all see-details">
+                        <div class=" pull-left h-all h-120 w-160 over-h mr-10">
+                            <img src="{$list.meetting_thumb}" class="di-b h-all center-block">
+                        </div>
+                        <div>
+                            <div class="fcolor-11">{$list.meeting_name}</div>
+                            <p class="fsize-14 fcolor-808080 mt-15 line-overf h-40">{$list.memo}</p>
+                            <div class="fsize-12 fcolor-b3b3b3 mt-15"><span class="mr-30">时间：{$list.add_time} </span><span>地点：{$list.meeting_addr}</span></div>
+                        </div>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+        <!--新闻结束-->
+    </div>
+</div>

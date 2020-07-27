@@ -1,0 +1,123 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid " >
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="layui-row">
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    <div class="layui-col-xs1 text-r lh-40">
+                                        模板名称：
+                                    </div>
+                                    <div class="layui-col-xs3 ">
+                                        <input class="layui-input" name="template_name" id="template_name" autocomplete="off" placeholder="请输入模板名称">
+                                    </div>
+                                    <div class="layui-col-xs3 pull-right">
+                                        <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+                                        <a class="layui-btn table-add " style="text-decoration: none;" title="添加" onclick="tpl_edit()">添加</a>
+                                    </div>
+                                </div>
+                                <table class="layui-table" id="demo"  lay-filter="demo">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: '{:U("oa_approval_template_list_data")}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'template_no', width: 100, title: '模板编号', sort: true}
+                        , {field: 'template_name', title: '模板名称'}
+                        , {field: 'add_staff', title: '添加人'}
+                        , {field: 'add_time', width: 180, title: '添加时间'}
+                        , {field: 'operate', width: 265, title: '操作'}
+                    ]]
+                    , page: false
+                });
+
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var template_name = $('#template_name').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "template_name": template_name
+                            }
+                        });
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+    </script>
+    <script >
+        function data_del(){
+            if(!confirm('确认删除？')){return false;};
+        }
+        function  tpl_edit(tpl_no){
+            layer.open({
+                type: 2,
+                title: '模板编辑',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['700px' , '364px'],
+                content: "{:U('Oa/Oaapproval/oa_approval_template_edit')}?template_no="+tpl_no,
+                success:function(){
+                    layerAuto();
+                }
+            });
+        };
+        function  tpl_info(tpl_no){
+            layer.open({
+                type: 2,
+                title: '审批流程图',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['700px' , '270px'],
+                content: "{:U('Oa/Oaapproval/oa_approval_template_info')}?template_no="+tpl_no,
+                success:function(){
+                    layerAuto();
+                }
+            });
+        };
+        </script>
+</block>

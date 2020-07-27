@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+//base
+@import "../base/base";
+
+//helper
+@import "../helper/helper";
+
+//layout
+@import "../layouts/layouts";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//obj
+@import "../objects/foldbox";
+
+.bg{
+  @include bg("../../images/gov-print-bg.jpg");
+}
+
+.detail_content{
+  width: 1680px;
+}
+
+.detail_right{
+  width: 1285px;
+  height:785px;
+  background: #fff;
+}
+
+.hide-y{
+  width: 340px;
+  height:785px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(10,2,4,0.34);
+  border-radius: 10px;
+}
+
+.detail_left{
+  width: 358px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.detail_table{
+  width: 100%;
+  margin-top: 30px;
+  border: solid 1px #dfdfdf;
+}
+
+.detail_thead{
+  color: #333;
+  height: 70px;
+  line-height: 70px;
+  background: #f9f9f9;
+
+  .thead_item{
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+.detail_tbody{
+  .tbody_row{
+    height: 70px;
+    line-height: 70px;
+  }
+
+  .tbody_item{
+    font-size: 18px;
+    text-align: center;
+    border: solid 1px #dfdfdf;
+    border-top: none;
+  }
+
+  .tbody_item-blue{
+    @extend .tbody_item;
+    color: #0093c3;
+  }
+}

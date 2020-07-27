@@ -1,0 +1,204 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME.session('cat'))}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<input id="is_audit" name="is_audit" type="hidden" value="{$is_audit}">
+						<eq name="is_audit" value="1">
+							<eq name="is_man" value="1">
+								<div class="layui-col-xs1 text-r lh-40">
+									部门：
+								</div>
+								<div class="layui-col-xs2 ">
+									<select id="select_dept" lay-verify="" lay-search>
+										<option value="0">请选择</option>
+										{:getDeptSelect($dept_no)}
+									</select>
+								</div>
+							</eq>
+							<div class="layui-col-xs1 text-r lh-40">
+								提交人：
+							</div>
+							<div class="layui-col-xs2 ">
+								<select id="select_staff" lay-verify="" lay-search>
+										<option value="0">请选择</option>
+										{:getStaffSelect($add_staff)}
+								</select>
+							</div>
+						</eq>
+						<div class="layui-col-xs1 text-r lh-40">
+							类型：
+						</div>
+						<div class="layui-col-xs2 ">
+							<select id="select_type" lay-verify="" lay-search>
+								<option value="0">请选择</option>
+								{:getTypeSelect('worklog_type','',$worklog_type,$worklog_type)}
+							</select>
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+								状态：
+						</div>
+						<div class="layui-col-xs2 ">
+							<select id="select_status" lay-verify="" lay-search>
+								<option value="">请选择</option>
+                                <option value="2" <eq name="select_status" value="2">selected</eq> >未审核</option>
+                                <option value="1" <eq name="select_status" value="1">selected</eq>>已审核</option>
+							</select>
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+							日期：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" id="start" autocomplete="off" placeholder="请选择日期">
+						</div>
+					</div>
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							关键字：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="id" id="worklog_info" autocomplete="off" placeholder="请输入关键字">
+						</div>
+
+						<div class="layui-col-xs8 text-r">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+							<neq name="is_audit" value="1">
+							<a class="layui-btn table-add " data-type="add" style="text-decoration: none;" href="{:U('Oawork/oa_worklog_edit')}?worklog_type={$worklog_type}">添加</a>
+							</neq>
+						</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo">
+					</table>
+					<script type="text/html" id="operate">
+                        <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                        <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                    </script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+		,admin = layui.admin
+		,element = layui.element
+		,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+	});
+	layui.use('table', function(){
+		var table = layui.table
+			,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('Oawork/oa_worklog_index_data',array('worklog_type'=>$worklog_type))}"
+			,cellMinWidth: 80
+			,height:'full-200'
+			, id: 'ztreedata'
+			,cols: [[
+				{field:'worklog_id', title:'编号',width:80,align: 'center', sort: true}
+				,{field:'worklog_title', title:'标题'}
+				,{field:'worklog_type', width:115,title:'总结类型' }
+				,{field:'add_staff', title:'提交人',width:120 }
+				,{field:'worklog_date', title:'提交时间',width:130}
+				,{field:'status', width:120, title:'审核状态',align: 'center'}
+				,{field:'worklog_audit_man',width:140, title:'审核人'}
+				,{field:'operate', title:'操作',width:120,align: 'center'}
+
+				//, {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+			]]
+			,page: true
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'del'){
+				layer.confirm('确认删除该数据吗？', function(index){
+	              	window.location='{:U("oa_worklog_do_del")}?worklog_id='+data.worklog_id+'';
+              	});
+			}else if(obj.event === 'edit'){
+				window.location='{:U("oa_worklog_edit")}?worklog_id='+data.worklog_id+'';
+			}else if(obj.event === 'info'){
+				layer.open({
+					type: 2,
+					title:'日报详情',
+					area:['800px', '400px'],
+					content: '{:U("oa_worklog_info")}?worklog_id='+data.worklog_id //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+				});
+			}
+		});
+		var $ = layui.$, active = {
+	        reload: function(){
+	            var select_dept = $("#select_dept").val();
+				var select_staff = $("#select_staff").val();
+				var select_type = $("#select_type").val();
+				var select_status = $("#select_status").val();
+				var time_range = $("#start").val();
+				var worklog_info = $("#worklog_info").val();
+		      	table.reload('ztreedata', {
+			        page: {
+			          curr: 1 
+			        }
+			        ,where: {
+			        	"dept_no": select_dept,
+			        	"add_staff":select_staff,
+			        	"worklog_type":select_type,
+			        	"select_status":select_status,
+			        	"start":time_range,
+			        	"worklog_info":worklog_info
+			        }
+		      	});
+	        }// ,
+	        // add: function(){
+	        // 	var index = layer.open({
+         //            type: 2,
+         //            title: false,
+         //            end:false,
+         //            closeBtn: 0,
+         //            shift: 1,
+         //            area : ['800px' , '400px'],
+         //            content: "",
+         //        });
+         //        layer.full(index);
+	        // }
+	    };
+	    $('.layui-form .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		});
+	});
+	
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#start',
+			range: true
+		});
+	})
+	
+	//全屏窗口
+	function popinfo(worklog_id){
+		var index = layer.open({
+			type: 2,
+			title: false,
+			end:false,
+			closeBtn: 0,
+			shift: 1,
+			area : ['800px' , '400px'],
+			content: "{:U('oa_worklog_info')}?worklog_id="+worklog_id,
+		});
+		layer.full(index);
+	}
+	
+</script>
+</block>

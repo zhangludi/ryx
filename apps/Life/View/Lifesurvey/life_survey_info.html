@@ -1,0 +1,157 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css">
+    <style type="text/css">
+        .layui-input-block {
+            min-height: 10px !important;
+        }
+    </style>
+</block>
+<block name="body">
+    <div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card layui-form">
+              <div class="layui-card-header">  调查问卷</div>
+              <div class="layui-card-body">
+                  <div class="layui-row">
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>问卷标题：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$survey.survey_info.survey_title}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>问卷发布部门：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$survey.survey_info.party_name}</span></div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="民意问卷">民意问卷</div>
+                <input type="hidden" id="survey_id" name="survey_id" value="{$survey_id}">
+                <div class="layui-form layui-card-body fitheight">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs3 pull-right" >
+                            <a class="layui-btn table-add " href="{:U('life_survey_questions_edit',array('survey_id'=>$survey_id))}" style="text-decoration: none;" title="添加">添加</a>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="demo"  lay-filter="demo">
+                        <thead class="flip-content">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>题目</th>
+                                    <th>选项</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="survey['questions_list']" id="questions">
+                                    
+                                    <tr>
+                                        <td>{$i}</td>
+                                        <td>{$questions.questions_title}</td>
+                                        <td class="numeric">{$questions.questions_item}</td>
+                                        <td class="numeric">
+                                            <a class="layui-btn  layui-btn-xs layui-btn-f60"  href="{:U('life_survey_questions_edit',array('survey_id'=>$survey_id,'questions_id'=>$questions['questions_id']))}" ">
+                                                <i class="fa fa-info"></i> 修改
+                                            </a>  
+                                            <a class="layui-btn layui-btn-del layui-btn-xs" onclick="if(!confirm(' 确认删除本题？')){return false;}"  href="{:U('Life/Lifesurvey/life_survey_questions_del')}?questions_id={$questions.questions_id}&survey_id={$survey.survey_info.survey_id}" >
+                                                <i class="fa fa-trash-o"></i> 删除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </volist>   
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       <div class="layui-col-md12 result_show_div">
+            <div class="layui-card">
+                <div class="layui-card-header" title="投票结果展示">投票结果展示</div>
+                <div class="layui-form layui-card-body fitheight">
+                    <div class="layui-row layui-col-space5">
+                    </div>
+                    <table class="layui-table" id="demo"  lay-filter="demo">
+                        <div class="portlet-body">
+                            <volist name="survey['questions_list']" id="vo">
+                                <h4 class="form-section mt-10">题目： {$vo.questions_title}</h4>
+                                <h4 class="form-section mt-10">选项：<span class="label label-sm bg-color-green2">{$vo.questions_item_str}</span></h4>
+                                <h4 class="form-section mt-20">选项投票数：</h4>
+                                <volist name="vo.item" id="vo1" key="key">
+                                    <div class="row">
+                                        <div class=" col-md-6 mt-10 mb-10 ml-30">
+                                            <label class="control-label" for="form_control_1">{$key} : {$vo1.answer_item}  <span class="control-label ml-10" style="color:brown;">投票数:{$vo1.count}</span></label>
+                                        </div>
+                                    </div>
+                                </volist>
+                            </volist>
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <neq name="communist_list" value="">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="投票人员">投票人员</div>
+                    <div class="layui-form layui-card-body fitheight">
+                        <table class="layui-table" id="demo"  lay-filter="demo">
+                            <thead class="flip-content">
+                                    <tr>
+                                        <th>党员</th>
+                                        <th>时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <foreach name="communist_list" item="list">
+                                        <tr>
+                                            <th>{$list.communist_name}</th>
+                                            <th>{$list.add_time}</th>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                </neq>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="text-align: right">
+                            <a type="reset" href="{:U('life_survey_index')}" class="layui-btn layui-btn-primary mr-40">返回</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</block>
+<block name="js">
+    <script>
+        function exam_add(questions_id){
+        	var survey_id = $("#survey_id").val();
+        	if(questions_id == ""){
+        		var url = "{:U('Life/Lifesurvey/life_survey_questions_edit')}?survey_id="+survey_id;
+        	}else{
+        		var url = "{:U('Life/Lifesurvey/life_survey_questions_edit')}?survey_id="+survey_id+"&questions_id="+questions_id;
+        	}
+			layer.open({
+					type: 2,
+					title: '问题编辑',
+					maxmin: false,
+					offset: window.parent.document.body.scrollTop+100+'px',
+					shadeClose: true, //点击遮罩关闭层
+					area : ['800px' , '400px'],
+					content: url,
+					success:function(){
+	                	layerAuto();
+	                }//iframe的url
+				});
+		}
+    </script>
+</block>

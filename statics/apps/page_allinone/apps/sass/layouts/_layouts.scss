@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+$content-w: 1720px;
+
+//flex布局方式 水平垂直居中
+@mixin l-flex($align, $justify){     //l-*   l:布局样式
+  display: -moz-box; // OLD - Firefox 19- (buggy but mostly works)
+  display: -webkit-box;; // OLD - iOS 6-, Safari 3.1-6
+  display: -webkit-flex; // Safari
+  display: -ms-flexbox; // Safari
+  display: flex;
+  -webkit-box-align: $align;
+  -webkit-align-items: $align;
+  -ms-flex-align: $align;
+  align-items: $align;
+  -webkit-box-pack: $justify;
+  -webkit-justify-content: $justify;
+  -ms-flex-pack: $justify;
+  justify-content: $justify;
+}
+
+//margin方式 水平居中
+@mixin l-margin-center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin l-flex-center{
+  @include l-flex(center, center);
+}
+
+.l-flex-center{
+  @include l-flex(center, center);
+}
+
+.l-margin-center{
+  @include l-margin-center;
+}
+
+.content{
+  @include l-margin-center;
+  width: $content-w;
+}
+
+.l-right{
+  float: right;
+}
+
+.l-flex-justify{
+  @include l-flex(center, space-between)
+}

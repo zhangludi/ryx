@@ -1,0 +1,199 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+				<form id="myform" action="{:U('sys_user_do_save')}"  class="p5-editor-add" method="post" onsubmit="return check()">
+				<input type="hidden" name="user_id" id="user_id" value="{$list.user_id}">
+				<input type="hidden" name="user_role" id="workers"/>
+				<div class="layui-card-body layui-form">
+					<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>选择部门：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								<if condition="$list.user_id neq ''">
+									<label class="control-label"><php>{:getDeptInfo(getStaffInfo($list['user_relation_no'],'staff_dept_no'))}
+									</label>
+									<else/>
+									<select id="dept_no" name="party_no" lay-filter="dept_no" lay-search="">
+										<option value="">请选择</option>
+										{:getDeptSelect()}
+									</select>
+								</if>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>选择工作人员：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<if condition="$list.user_id neq ''">
+										<label class="control-label">{$list.communist_name}</label>
+										<else/>
+										<select id="user_relation_nos" name="user_relation_no" lay-filter="" lay-search="" lay-verify="required">
+											<option value="">请选择</option>
+											
+										</select>
+									</if>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>选择角色：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+										<select name="user_role" lay-filter="" lay-search="" lay-verify="required">
+											{:getRoleSelect($list[user_role])}
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>负责党支部：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+										<select name="charge_party" xm-select="charge_party_select" xm-select-skin="danger" xm-select-search >
+                                            {:getPartySelect($list['charge_party'])}
+                                        </select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>用户名：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<if condition="$list.user_name neq ''">
+										<input type="hidden" name="user_name" value="{$list.user_name}">
+										<label class=" control-label ">{$list.user_name}</label>
+									<else/>
+										<input type="text" name="user_name" id="user_name" placeholder="用户名" lay-verify="required" autocomplete="off" class="layui-input">
+									</if>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>密码：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="password" name="user_pwd" placeholder="密码" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>确认密码：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="password" name="user_rpwd" placeholder="确认密码" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>有效期：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="text" name="period_validity" id="period_validity" lay-verify="" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" value="{$list.period_validity}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<textarea name="" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$list.memo}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<eq name="tab" value="1">
+									<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="index();">返回</button>
+									<else/>
+									<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+									</eq>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+<script>
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+	function index() {
+		parent.location.href = "{:U('Index/index')}";
+    }
+	layui.use([ 'form', 'laydate'], function() {
+		var $ = layui.jquery
+		, admin = layui.admin
+		, element = layui.element
+		, layer = layui.layer
+		, laydate = layui.laydate
+		, form = layui.form
+		, formSelects = layui.formSelects;
+		form.on('select(dept_no)', function(data){
+			var dept_no = data.value;
+			$.get("{:U('get_staff_select')}",{dept_no:dept_no},function(html){
+				$("#user_relation_nos").html(html);
+				form.render('select');
+			})
+		});
+		formSelects.render();
+		laydate.render({
+			elem: '#period_validity'
+			//,type: 'time'
+		});
+	})
+
+</script>
+<script>
+	function check(){
+		var user_name = $('#user_name').val();
+		var user_id = $('#user_id').val();
+		if(user_id == '' || user_id == null){
+			$.ajax({
+				url: "{:U('sys_user_repetition')}",
+				data: {'user_name':user_name},
+				type: "post",
+				async:false,
+				success: function(msg) {
+					console.log(msg);
+					if(msg==0){
+						alert('用户名重复');
+						event.preventDefault();
+						return false;
+					}else{
+						return true;
+					}
+					
+				}
+			});
+		} else {
+			return true;
+		}
+	}
+</script>
+</block>

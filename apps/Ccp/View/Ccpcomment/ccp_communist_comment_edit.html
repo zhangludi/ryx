@@ -1,0 +1,129 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+</style>
+</block>
+<block name="body">
+    <div class="layui-fluid " >
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="layui-row">
+                    <div class="layui-col-xs12">
+                        <form class="container-fluid right" id="form_table" method="post" action="{:U('ccp_communist_comment_do_save')}">
+                        <input type="hidden" value="" name="json" id="json" />
+                        <input type="hidden" value="{$comment_no}" name="comment_no" />
+                        <input type="hidden" value="{$row.party_no}" name="party_no" />
+                        <div class="layui-card">
+                            <neq name="type" value="show">  
+                            <div class="layui-card-header" title="民主评议编辑">民主评议编辑 <span style="color: red;">（点击对应积分进行修改）</span></div>
+                            <else/>                   
+                            <div class="layui-card-header" title="民主评议详情">民主评议详情</div>
+
+                            </neq>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    <div class="layui-col-xs1 center-text lh-40 text-r">
+                                       评议标题：
+                                    </div>
+                                    <div class="layui-col-xs3">
+                                        <neq name="type" value="show">
+                                            <input type="text" id="communist_no" class="form-control layer-date " required name="comment_title" value="{$row.comment_title}">
+                                        <else/>
+                                            <span class="di-b lh-40">{$row.comment_title}</span>
+                                        </neq>
+                                    </div>
+                                    <div class="layui-col-xs1 center-text lh-40 text-r">
+                                       时间：
+                                    </div>
+                                    <div class="layui-col-xs3">
+                                        <neq name="type" value="show">
+                                            <input type="text" id="time" class="form-control layer-date " required name="comment_date" value="{$row.comment_date}">
+                                            <else/>
+                                            <span class="di-b lh-40">{$row.comment_date}</span>
+                                        </neq>
+                                    </div>
+                                    <div class="layui-col-xs3 pull-right" >
+                                        <neq name="type" value="show">    
+                                        <a class="layui-btn" onclick="savedata()">保存</a>
+                                        </neq>
+                                        <a type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</a>
+                                    </div>
+                                </div>
+                                <table class="layui-table" id="demo" name="demo" lay-filter="demo">
+                                </table>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    function savedata() {
+        var data = JSON.stringify(layui.table.cache.ztreedata);
+        $("#json").val(data);
+        $("#form_table").submit();
+    }
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("ccp_communist_comment_details_data",array("party_no"=>$row[party_no],"comment_no"=>$comment_no))}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'communist_no', width:100 ,title: '党员编号'}
+                    , {field: 'communist_name', title: '姓名'}
+                    , {field: 'party_name',  title: '所属支部'}
+                    , {field: 'post_name',  title: '职务'}
+                    <neq name="type" value="show">  
+                    , {field: 'details_test_score',width:180, title: '测评得分',edit: 'text'}
+                    , {field: 'details_party_score',width:180, title: '支部评分',edit: 'text'}
+                    , {field: 'details_total_score',width:180, title: '综合评分',edit: 'text'}
+                    <else/>
+                    , {field: 'details_test_score',  title: '测评得分'}
+                    , {field: 'details_party_score',  title: '支部评分'}
+                    , {field: 'details_total_score',  title: '综合评分'}
+                    </neq>
+                    
+                ]]
+                , page: false
+            });
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        //点击左侧树的事件
+    })
+    //时间选择器
+    laydate.render({
+        elem: '#time'
+        ,type: 'date'
+    });
+</script>
+</block>

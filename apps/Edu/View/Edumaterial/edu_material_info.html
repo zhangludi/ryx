@@ -1,0 +1,268 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+	  	<div class="layui-row layui-col-space15">
+	  		 <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>">学习资料</div>
+                    <div class="layui-form layui-card-body fitheight">
+                        <div class="layui-row layui-col-space5">
+                           <div class="portlet-body">
+								<input type="hidden" name="material_id" id="material_id" value="{$material_data.material_id}">
+								<input type="hidden" id="material_integral" value="{$material_data.material_integral}">
+								<input type="hidden" id="integral_time" value="{$material_data.material_duration_integral_time}">
+								<eq name="material_data.material_vedio" value="">
+									<div class="row">
+										<div class="col-xs-12">
+			                                <div class="center-text">
+			                                    <span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib" style="text-align:center;">{$material_data.material_title}</span>
+			                                    <div class="center-text fcolor-99">
+			                                        <span class="mr-10">日期：{$material_data.add_time}</span>
+			                                        <span class="mr-10">作者：{$material_data.add_staff}</span>
+			                                        <!-- <span class="mr-10">文章来源：森普官网</span> -->
+			                                    </div>
+			                                    
+			                                </div>
+			                                 
+			                                 <div class="text">
+			                                       	<span class="di-b">{$material_data.material_description}</span>
+			                                       	{$material_data.material_content}
+			                                    </div>
+			                                
+			                                {$material_data.material_thumb}
+			                                <neq name="material_data.material_attach" value="">
+												<div id="js-grid-juicy-projects2" class="cbp">
+										<!-- 			{$material_data.material_attach} -->
+													 <!-- <php>echo getUploadHtml($material_data['material_attach'],100,100,1,'')</php>  -->
+												</div>
+											</neq>
+			                            </div>
+		                            </div>
+								</eq>
+								<neq name="material_data.material_vedio" value="">
+									<div class="col-xs-3 pr-0 text-r lh-35">
+				                    </div>
+	                              	<div class="col-xs-8 pl-0 lh-35">
+	                                 	<span class="di-b">{$material_data.material_title}</span>
+	                              	</div>
+									<div class="row">
+										<!-- 开始 -->
+				                        <div class="col-md-7 col-xs-5 center lh-35">
+				                        	<neq name="material_data.material_vedio" value="">
+												{$material_data.material_vedio}
+			                        		<else/>
+												{$material_data.material_thumb}
+											</neq>
+				                        </div>
+				                        <!-- 结束 -->
+				                        <!-- 开始 -->
+				                        <div class="col-md-4 col-xs-4">
+				                        	<div class="row">
+				                            
+				                            </div>
+				                            <div class="row">
+				                              <div class="col-xs-4 pr-0 text-r lh-35">
+				                               		<b>描述：</b>
+				                              </div>
+				                              <div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$material_data.material_desc}</span>
+				                              </div>
+				                            </div>
+				                            <div class="row">
+				                              	<div class="col-xs-4 pr-0 text-r lh-35 ">
+				                                	<b>时长：</b>
+				                              	</div>
+				                              	<div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$material_data.material_duration} 分钟</span>
+				                              	</div>
+				                            </div>
+				                            <div class="row">
+				                              	<div class="col-xs-4 pr-0 text-r lh-35 ">
+				                                	<b>添加时间：</b>
+				                              	</div>
+				                              	<div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$material_data.add_time}</span>
+				                              	</div>
+				                            </div>
+				                            <!-- <eq name="is_integral" value="1">
+				                            <div class="row">
+				                              	<div class="col-xs-4 pr-0 text-r lh-35 ">
+				                                	<b>积分：</b>
+				                              	</div>
+				                              	<div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$material_data.material_duration_integral} 分</span>
+				                              	</div>
+				                            </div>
+				                            </eq> -->
+				                        </div>
+									</div><!-- end -->
+								</neq>
+							</div><!-- end -->
+                        </div>
+                        <table class="layui-table" id="demo2"  lay-filter="demo">
+							
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+			<!--新增 开始 -->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="学习人员详情">学习人员列表</div>
+                    <div class="layui-form layui-card-body fitheight">
+                        <div class="layui-row layui-col-space5">
+                           <a class="layui-btn" data-type="reload" onclick="export_duty()" lay-filter="searchFilter" style="text-decoration: none;margin-left:30px;" title="导出">导出</a>
+						   &nbsp;&nbsp;&nbsp;&nbsp;
+						   <span class="bold lh-35">共有{$communist_count}位党员参与学习</span>
+                        </div>
+                        <table class="layui-table" id="demo2"  lay-filter="demo">
+							<div class="portlet-body">
+							<div class="scroller" style="height:auto !important;" data-always-visible="1" data-rail-visible1="1">
+								<div class="col-md-12 col-xs-12 left lh-35">
+									<span class="bold lh-35"><!-- 共有n位党员参加学习 --></span>
+								</div>
+								<!-- 学习人员列表 样式修改 -->
+								<style type="text/css">
+									.notes_container{
+										padding-top:5px;padding-bottom:5px;
+										border-bottom:1px solid #D0D0C8;
+									}
+									.notes_container .notes_job{
+										font-size:17px;font-weight:bold;
+										position:absolute;top:45%;height:30px;
+									}
+									.notes_row{
+										float:left !important;
+										margin-left: 10%;
+										border-left:0px solid #D0D0C8;
+									}
+									.notes_row .row_div{
+										min-height:120px;
+										border-bottom:0px dashed #E7E7D9;
+									}
+									.left_right{margin:5px 0;}
+									.notes_left{
+										position:absolute;top:50%;margin-top:-60px;height:120px;
+										text-align:center;
+									}
+									.notes_left .notes_avatar{width:50px;height:50px;border-radius:20px !important;}
+									.notes_right{
+										min-height:120px;
+										border-left:0px dashed #E7E7D9;
+										float:right;
+										font-size:18px;
+										overflow: hidden;
+										white-space: nowrap;
+										text-overflow: ellipsis;
+									}
+									.notes_right .notes_title{}
+									.notes_right .notes_time{}
+								</style>
+								<volist name="notes_list" id="item" key="k">
+									<div class="col-md-12 col-xs-12 left notes_container"
+										<php>if($k == count($notes_list)) echo 'style="border-bottom:0px;"';</php>
+									>
+										<div class="col-md-2 col-xs-2 left notes_job">
+											职位：{$item.post_name}
+										</div>
+										<div class="col-md-10 col-xs-10 notes_row">
+											<volist name="item.communist" id="communist" key="c">
+												<div class="col-md-12 col-xs-12 row_div" 
+													<php>if($c == count($item['communist'])) echo 'style="border-bottom:0px;"';</php>
+												>
+													<div class="col-md-2 col-xs-2 left notes_left left_right">
+														<img src="{$communist.avatar}" class="notes_avatar" />
+														<br />
+														{$communist.name}{$c}<br />共{$communist.notes_count}篇
+													</div>
+													<div class="col-md-10 col-xs-10 left notes_right left_right">
+														<eq name="communist.notes_count" value="0">
+															<div class="col-md-12 col-xs-12 left lh-30">
+																	<span class="col-md-6 col-xs-6 left">
+																		未写学习笔记
+																	</span>
+																</div>
+														<else />
+															<foreach name="communist.notes" item="note" key="n">
+																	<div class="col-md-12 col-xs-12 left lh-30 notes_title" style="font-size:14px;">
+																		[{$note.time}]&nbsp;[学习笔记]&nbsp;&nbsp;
+																		<a href='{:U("Edunotes/edu_notes_info")}?notes_id={$note.id}'>
+																			{$note.title}
+																		</a>
+																	</div>
+															</foreach>
+														</eq>
+													</div>
+													<div style="clear:both;">
+													</div>
+												</div>
+											</volist>
+										</div>
+										<div style="clear:both;">
+										</div>
+									</div>
+								</volist>
+	                            </div>
+							</div>	
+                        </table>
+                    </div>
+                </div>
+            </div>
+			<!--新增 结束 -->
+            <div class="layui-form-item">
+				<div class="layui-input-block">
+					<div class="layui-footer" style="text-align: right">
+						<!-- <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button> -->
+						<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+					</div>
+				</div>
+			</div>
+	  	</div>
+	</div>
+</block>
+<block name="js">
+	<script >
+		function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+		var myPlayer = videojs('my-video');
+		videojs("my-video").ready(function(){
+			var myPlayer = this;
+			myPlayer.play();
+		});
+	</script>
+       <script>
+       function exam_add(questions_id){
+	       	var exam_id = $("#exam_id").val();
+	       	if(questions_id == ""){
+	       		var url = "{:U('Cms/Cms/cms_exam_questions_edit')}?exam_id="+exam_id;
+	       	}else{
+	       		var url = "{:U('Cms/Cms/cms_exam_questions_edit')}?exam_id="+exam_id+"&questions_id="+questions_id;
+	       	}
+			layer.open({
+					type: 2,
+					title: '选择联系人',
+					maxmin: false,
+					offset: window.parent.document.body.scrollTop+20+'px',
+					shadeClose: true, //点击遮罩关闭层
+					area : ['800px' , '400px'],
+					content: url,
+					success:function(){
+	                	layerAuto();
+	                }//iframe的url
+				});
+		}
+       function exports(){
+	       	var material_id = $("#material_id").val();
+	       	location.href="{:U('edu_material_info_export')}?material_id="+material_id;
+		}
+		//导出浏览人员及其职务
+		function export_duty(){
+	       	var material_id = $("#material_id").val();
+			location.href="{:U('edu_material_duty_export')}?material_id="+material_id;
+		}
+       </script>
+</block>

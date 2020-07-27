@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{:getFunctionInfo(ACTION_NAME)}</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta content="{:getConfig('web_description')}" name="description" />
+<meta content="{:getConfig('web_keywords')}" name="keywords" />
+<link rel="shortcut icon" href="__ROOT__/favicon.ico" />
+<!--ztree样式开始-->
+<link rel="stylesheet" href="__STATICS__/plugins/ztree/zTreeStyle/zTreeStyle.css">
+<!--ztree样式结束-->
+<!--jqery 步骤条开始-->
+<link rel="stylesheet" href="__STATICS__/plugins/jqery-steps/css/jquery.steps.css">
+<!--jqery 步骤条结束-->
+<!--ystep 步骤条开始-->
+<link rel="stylesheet" href="__STATICS__/plugins/ystep/css/ystep.css">
+<!--ystep 步骤条结束-->
+<!--layuicss 开始-->
+<link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+<!--layui css 结束-->
+<!--森普公共样式开始-->
+<link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+<!--森普公共样式结束-->
+<!--admin css 党建版-->
+<link rel="stylesheet" href="__STATICS__/public/css/sp_theme_button_red.css">
+<!--admin css 党建版  结束-->
+<style>
+	.layui-colla-title{
+		background: #fff;
+	}
+</style>
+</head>
+<body class="bg-color-f2">
+<!--<link rel="stylesheet" href="sp_demo/style/sp_public_icon.css">-->
+
+<div class="layui-fluid">
+<div class="layui-row layui-col-space15 layui-collapse layui-form" lay-filter="more">
+	<div class="layui-col-md12">
+		<div class="layui-card layui-colla-item">
+			<div class="layui-colla-title">  基本信息</div>
+			<div class="layui-card-body layui-colla-content layui-show">
+				<div class="layui-row">
+					<div class="layui-col-xs8">
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+							<input name="recruit_no" value="{$staff.recruit_no}" type="hidden" />
+							<input type="hidden" name="staff" value="{$staff.staff_no}">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>编号：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+								{$staff.staff_no}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> {$staff.staff_name}</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>性别：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 ">
+									<if condition="$staff.staff_sex eq 0 ">女<else/>男</if>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>民族：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 ">
+									{$staff.staff_nation}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>出生日期：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">{$staff.staff_birthday}</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>身份证号：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">{$staff.staff_idnumber}</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>籍贯：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">{$staff.staff_paddress}</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>现住址：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> {$staff.staff_address}</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>学历：</strong></div>
+	                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> {$staff.staff_diploma}</div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>毕业院校：</strong></div>
+	                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> {$staff.staff_school}</div>
+	                        </div>
+	                    </div>
+						<div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>专业：</strong></div>
+	                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> {$staff.staff_specialty}</div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>职务：</strong></div>
+	                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+								{$staff.staff_post_no}
+								</div>
+	                        </div>
+	                    </div>
+						<div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>部门：</strong></div>
+	                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> {$staff.staff_dept_no}</div>
+	                        </div>
+	                    </div>
+					</div>
+					<div class="layui-col-xs4">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>&nbsp;</strong></div>
+								<neq name='staff.staff_avatar' value=''>
+	                                <img src="{$staff.staff_avatar}" height="198px" width="142px">
+	                            <else/>
+	                            	<img src="__STATICS__/public/images/default_photo.jpg" height="198px" width="142px">
+	                            </neq>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-col-md12">
+		<div class="layui-card layui-colla-item">
+			<div class=" layui-colla-title">联系方式</div>
+			<div class="layui-card-body layui-colla-content ">
+				<div class="layui-row">
+					<div class="layui-col-xs8">
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>电话：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+									{$staff.staff_tel}
+
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>手机：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+									{$staff.staff_mobile}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>邮箱：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+									{$staff.staff_email}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>QQ号：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+									{$staff.staff_qq}
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+        <div class="layui-input-block">
+            <div class="layui-footer" style="text-align: right">
+            	<eq name="type" value="1">
+            	<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+            	<else/>
+                <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                </eq>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+<script>
+function layer_colse() {
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+}
+layui.use([ 'form', 'laydate'], function() {
+	var $ = layui.$
+			, admin = layui.admin
+			, element = layui.element
+			, layer = layui.layer
+			, laydate = layui.laydate
+			, form = layui.form;
+
+	form.render(null, 'component-form-group');
+
+	laydate.render({
+		elem: '#LAY-component-form-group-date'
+	});
+})
+//时间选择器
+layui.use('laydate', function() {
+	var laydate = layui.laydate;
+
+	//时间选择器
+	//时间选择器
+	laydate.render({
+		elem: '#staff_birthday'
+	});
+	//日期时间范围
+	laydate.render({
+		elem: '#test10_add'
+		,type: 'datetime'
+		,range: true
+	});
+})
+
+//上传文件
+layui.use('upload', function(){
+	var upload = layui.upload;
+
+	//指定允许上传的文件类型
+	upload.render({
+		elem: '#test3'
+		,url: '/upload/'
+		,accept: 'file' //普通文件
+		,done: function(res){
+			console.log(res)
+		}
+	});
+});
+
+//监听折叠
+layui.use(['element'], function() {
+	var element = layui.element;
+	var layer = layui.layer;
+	element.on('collapse(more)', function(data){
+//            layer.msg('展开状态：'+ data.show);
+	});
+});
+
+</script>
+<script>
+	layui.use([ 'form', 'laydate'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			
+		form.on('submit(component-form-demo1)', function(data){
+			$.ajax({
+				url:"{:U('Ccpstaff/hr_staff_do_save')}",
+				type:'POST',
+				data:data.field,
+				success: function (data) {
+					if(data.status == 1){
+						layer.msg(data.msg, {
+							icon: 6
+							,time: 2000
+						});
+						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						parent.layer.close(index); //再执行关闭
+						window.parent.location.reload(); //刷新父页面
+					}else{
+						layer.msg(data.msg, {
+						  icon: 5
+						  ,time: 2000
+						});
+					}
+				}
+			})
+			return false;
+		});
+
+	})
+
+</script>
+</html>

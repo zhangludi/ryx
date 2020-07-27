@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+$font-sizes: (
+  s1: 12px,
+  s2: 14px,
+  def: 16px,
+  l1: 18px,
+  l2: 24px,
+  l3: 32px,
+  l4: 36px,
+  l5: 28px,
+  l6: 20px,
+);
+
+//font-size
+@function font-sizes($font-size){
+  @if not map_has_key($font-sizes, $font-size) {
+    @warn "'#{$white}' is not found in font-sizes";
+    @return null;
+  }
+  @else {
+    @return map_get($font-sizes, $font-size);
+  }
+}
+@mixin font-sizes( $font-size: 16px ){
+  font-size: font-sizes( $font-size );
+}

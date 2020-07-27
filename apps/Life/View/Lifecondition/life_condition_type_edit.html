@@ -1,0 +1,135 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content bgcolor-white">
+				<div class="portlet light ">
+					<div class="row">
+						<div class="clearfix">
+							<form action="{:U('Lifecondition/life_condition_type_edit_save')}" method="post" id="form_sample_2">
+								<input type="hidden" class=" form-control" value="condition_type" name="type_group">
+								<div class="form-group mt-5 col-xs-12 mb-15">
+									<div class="row">
+										<label class="control-label col-xs-4 pl-0 lh-30 pl-50">任务类型名称： </label>
+										<div class="col-xs-7 p5-form-control pl-0 ">
+											<input type="text" class=" form-control" value="" name="type_name" placeholder="填写类型名称">
+										</div>
+									</div>
+								</div>
+								<div class="form-group mt-5 col-xs-12 mb-15">
+									<div class="row">
+										<label class="control-label col-xs-4 pl-0 lh-30 pl-50">任务类型编号： </label>
+										<div class="col-xs-7 p5-form-control pl-0 ">
+											<input type="text" class=" form-control" value="" name="type_no" placeholder="填写类型编号">
+										</div>
+									</div>
+								</div>
+								<div class="form-group mt-5 col-xs-12 mb-15">
+									<div class="row">
+										<label class="control-label col-xs-4 pl-0 lh-30 pl-50">任务类型code： </label>
+										<div class="col-xs-7 p5-form-control pl-0 ">
+											<input type="text" class=" form-control" value="" name="type_code" placeholder="填写类型code">
+										</div>
+									</div>
+								</div>
+								<div class="form-group mt-5 col-xs-12 mb-15">
+									<div class="row">
+										<label class="control-label col-xs-4 pl-0 lh-30 pl-50">任务类型简介： </label>
+										<div class="col-xs-7 p5-form-control pl-0 ">
+											<input type="text" class=" form-control" value="" name="memo" placeholder="填写类型简介">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<button type="submit" id="btnSave" class="btn btn-sm blue w-75 bor-ra-2 mr-35 pull-right">提交</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script>
+           var FormValidation = function () {
+               var handleValidation2 = function() {
+                   var form2 = $('#form_sample_2');
+                   var error2 = $('.alert-danger', form2);
+                   var success2 = $('.alert-success', form2);
+                   form2.validate({
+                       errorElement: 'span', //default input error message container
+                       errorClass: 'help-block help-block-error', // default input error message class
+                       focusInvalid: false, // do not focus the last invalid input
+                       ignore: "",  // validate all fields including form hidden input
+                       rules: {
+                           type_name: {
+                               minlength: 2,
+                               required: true
+                           },
+                           type_no: {
+                               minlength: 2,
+                               required: true
+                           },
+                           type_code: {
+                               minlength: 2,
+                               required: true
+                           }
+                       },
+
+                       invalidHandler: function (event, validator) { //display error alert on form submit
+                           success2.hide();
+                           error2.show();
+                           App.scrollTo(error2, -200);
+                       },
+
+                       errorPlacement: function (error, element) { // render error placement for each input type
+                           var icon = $(element).parent('.input-icon').children('i');
+                           icon.removeClass('fa-check').addClass("fa-warning");
+                           icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+                       },
+
+                       highlight: function (element) { // hightlight error inputs
+                           $(element)
+                               .closest('.form-group').removeClass("has-success").addClass('has-error'); // set error class to the control group
+                       },
+
+                       unhighlight: function (element) { // revert the change done by hightlight
+
+                       },
+
+                       success: function (label, element) {
+                           var icon = $(element).parent('.input-icon').children('i');
+                           $(element).closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+                           icon.removeClass("fa-warning").addClass("fa-check");
+                       },
+                   });
+               }
+               var handleWysihtml5 = function() {
+                   if (!jQuery().wysihtml5) {
+
+                       return;
+                   }
+
+                   if ($('.wysihtml5').size() > 0) {
+                       $('.wysihtml5').wysihtml5({
+                           "stylesheets": ["../assets/global/plugins/bootstrap-wysihtml5/wysiwyg-color.css"]
+                       });
+                   }
+               }
+               return {
+                   //main function to initiate the module
+                   init: function () {
+
+                       handleWysihtml5();
+                       handleValidation2();
+                   }
+               };
+           }();
+           jQuery(document).ready(function() {
+               FormValidation.init();
+           });
+	</script>
+</block>

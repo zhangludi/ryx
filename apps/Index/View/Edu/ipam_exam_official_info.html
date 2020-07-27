@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords"
+    content="智慧党建,基层党建,企业党建,非公党建,机关党建,智慧党建系统,智慧党建平台,智慧组工,党建大数据,智慧党群,企业党群,党建云平台,党建APP开发,党建系统,互联网+党建,智慧党建开发商">
+  <meta name="description"
+    content="此站为森普信息集团旗下的智慧党建云平台演示站，森普信息集团致力于为各党组织提供从策划、内容、展厅、运营的一站式服务。同时，利用7大终端,8大平台,100多项功能，全面满足智慧党建云平台的个性需求。咨询:400-677-0389。    								    								    								">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="content-Type" content="text/html;charset=utf-8">
+  <title>正式考试详情</title>
+  <!--公共样式-->
+  <link rel="stylesheet" href="../../../statics/plugins/layui/css/layui.css">
+  <link rel="stylesheet" href="../../../statics/public/css/sp_public.css">
+  <link rel="stylesheet" href="../../../statics/apps/page_portal/css/ipam_home_public.css">
+  <link rel="stylesheet" href="../../../statics/apps/page_portal/css/ipam_home_publicv0.0.2.css">
+  <link rel="stylesheet" href="../../../statics/apps/page_portal/css/ipam_home_public_edu_index.css">
+  <!--页面自定义样式-->
+   <link rel="stylesheet" href="css/edu_exam_official_info.css">
+</head>
+
+<body class="ipam_home_public_background">
+  <!--头部开始-->
+  <div class="public_header">
+    <div class="ipam_home_public_title">
+      <img src="../../../statics/apps/page_portal/images/index_bg_txt.png" class="public_title_img" alt="森普智慧党建云平台">
+    </div>
+    <ul class="ipam_home_public_header_nav_horizontal">
+      <div class="menu_bg2">
+        <li id="home">
+          <a href="#">首页</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="news">
+          <a href="../../ipam_news_index.html">新闻中心</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="topic">
+          <a href="./ipam_special_index.html">专题专栏</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="edu">
+          <a href="../../ipan_edu_index.html">学习中心</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="org_mien">
+          <a href="./ipam_org_mien_index.html">支部风采</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="life">
+          <a href="./ipam_life_index.html">民生平台</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="meeting">
+          <a href="./ipam_meeting_index.html">会议中心</a>
+          <div class="ipam_home_public_header_nav_triangle"></div>
+        </li>
+        <li id="user" class="logins logins_btn">
+          <a href="javascript:;" class="fsize-18">
+            <img class="" src="../../../statics/apps/page_portal/images/party_home_index_icon_login.png">
+            点击登录
+          </a>
+        </li>
+      </div>
+    </ul>
+  </div>
+  <!--头部结束-->
+  <!-- 内容开始 -->
+  <div class="public_content clearfix">
+  	<div class="clearfix">
+  		<div class="pull-left con_exam_official_tit white-space">学习“全国宣传思想工作会议精神”试题全国宣传思想工作会议精神</div>
+  		<div class="pull-left exam_official_type">正式考试</div>
+  		<div class="pull-left exam_total_score">总分：60</div>
+  	</div>
+  	
+  	
+  <!---------------------------左侧------------------------------------->
+  <div class="pull-left exam_official_l">
+  	<!--剩余时间-->
+  	<div class="content_time_num clearfix">
+			<div id="timer" class="pull-left">
+				<div class="false">
+					<span class="over_time">剩余时间 </span>
+					<!--<span class="time minute">20</span>:
+					<span class="time second">00</span>-->
+				</div>
+			</div>
+			<div class="pull-right"></div>
+			<!--<div class="content_num pull-right">
+				<span class="num questioned">&nbsp;</span>&nbsp;/
+				<span class="question_sum"></span>
+			</div>-->
+	</div>
+  	
+  	<div class="content_main">
+			<div class="content_class">
+				<div class="content_class_tit clearfix">
+					<div class="content_class_tit_left pull-left">
+						<i></i>
+						<span class="questions_type"></span>
+					</div>
+					<div class="content_class_tit_right pull-right next" id="nextQuestion">
+						<a href="javascript:;">下一题</a>
+					</div>
+					<div class="content_class_tit_right pull-right submitQuestions" style="display: none" onclick="setEduExamQuestions()">
+						<a href="javascript:;">提交试卷</a>
+					</div>
+				</div>
+				<div class="quiz">
+					<div class="content_classes slide active-slide">
+						<ul class="list-unstyled question">
+							<p class="question_title"></p>
+							<div id="question_list"></div>
+						</ul>
+						<div class="content_class_answer pull-right">
+							<img src="" alt="">
+							<!--<a href="javascript:;">查看解析</a>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content_class answer_analysis" style="display:none">
+				<div class="content_class_tit clearfix">
+					<div class="content_class_tit_left pull-left">
+						<i></i>
+						<span>答案解析</span>
+					</div>
+				</div>
+				<div class="content_classes">
+					<p class="correct_answer">正确答案：<span class="xuanxiang">B</span></p>
+					<div class="content_classes_msg"><span class="answer_true"></span><span class="answer_memo"></span></div>
+				</div>
+			</div>
+		</div>
+		
+  </div>
+  <!-- 右侧 答题卡-------------------------------------------------------->
+  <div class="pull-right exam_official_r">
+  	<div class="clearfix exam_official_r_dtk">
+  		<div class="pull-left"><img src="img/icon_dtk.png"></div>
+  		<div class="pull-left title">答题卡</div>
+  	</div>
+  	<div class="answer_sheet_line"></div>
+
+  	<div class="edu_choice_question">选择题</div>
+			<!--<div class="f-12em color-9e icon_regular text-align m-a w-180em">总分:&nbsp;&nbsp;<span id="exam_point"></span>&nbsp;&nbsp;&nbsp;共<span id="questions_num"></span>道题</div>-->
+			<!-- 选择题 -->
+			<div class="mt-30em">				
+				<div class="list list1 clearfix" id="answerCard">
+					<ul>
+					</ul>
+				</div>
+			</div>
+
+  </div>
+    
+    
+    
+  </div>
+  <!-- 内容区域结束 -->
+<!-- 考试得分遮罩层 -->
+<section>
+	<div class="edu_score_mask di-n">
+		<div class="bullet_box">
+			<img style="width: 589px;overflow: hidden;" src="img/defen.png">
+			<div class="Total_score">本次考试所得总分：</div>
+			<div class="Total_score_fs">90<span>分</span></div>
+			<div class="clearfix correct_rate">
+				<div class="pull-left">
+					<div class="box">正确率：50%</div>
+					<div class="box">答题数：20</div>
+				</div>
+				<div class="pull-right">
+					<div class="box">用时：50%</div>
+					<div class="box">积分：0</div>
+				</div>
+			</div>
+			<div class="clearfix edu_analysis">
+				<div class="learning_analysis pull-left" onclick="edu_analysis()">学习分析</div>
+				<div class="edu_answer_analysis pull-right">答案解析</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</section>
+
+	<!-- 学习分析遮罩层 -->
+	<section>
+	<div class="edu_analysis_mask">
+		<div class="analysis_box">
+			<div class="point_tit">积分获取</div>
+			<div class="point_close"><img src="img/edu_close.png"></div>
+			<div class="point_four clearfix">
+				<ul>
+				<li>
+					<div class="point_how">16<span>/20</span></div>
+					<div class="point_type">文章积分</div>
+				</li>
+				<li>
+					<div class="point_how">16<span>/20</span></div>
+					<div class="point_type">视频积分</div>
+				</li>
+				<li>
+					<div class="point_how">16<span>/20</span></div>
+					<div class="point_type">笔记积分</div>
+				</li>
+				<li>
+					<div class="point_how">16<span>/20</span></div>
+					<div class="point_type">考试积分</div>
+				</li>
+			</ul>
+			</div>
+			<div class="point_sha"></div>
+			<!--积分排行-->
+			<div class="edu_ranking">
+				<div class="ranking_l"><img src="img/edu_left.png"></div>
+				<div class="ranking_r"><img src="img/edu_right.png"></div>
+				<div class="point_tit1">积分排行</div>
+				<div class="point_list clearfix">
+					<ul>
+						<li class="clearfix">
+							<div class="pull-left">名次</div>
+							<div class="pull-left point_rate">用户</div>
+							<div class="pull-left point_score" style="margin-left: -10px;">得分</div>
+						</li>
+						<li class="clearfix">
+							<div class="pull-left point_number1">1</div>
+							<div class="pull-left point_rate">专题完成率：60.5%</div>
+							<div class="pull-left point_score">67</div>
+						</li>
+						<li class="clearfix">
+							<div class="pull-left point_number2">2</div>
+							<div class="pull-left point_rate">专题完成率：60.5%</div>
+							<div class="pull-left point_score">67</div>
+						</li>
+						<li class="clearfix">
+							<div class="pull-left point_number3">3</div>
+							<div class="pull-left point_rate">专题完成率：60.5%</div>
+							<div class="pull-left point_score">67</div>
+						</li>
+						<li class="clearfix">
+							<div class="pull-left point_number">4</div>
+							<div class="pull-left point_rate">专题完成率：60.5%</div>
+							<div class="pull-left point_score">67</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</section>
+	<!-- 学习分析遮罩层end -->
+	
+  <!--footer开始-->
+  <div class="public_footer">
+    <div class="public_footer_header center-text">
+      <span>友情链接：</span>
+      <ul class="di-ib">
+        <li><a href='http://www.baidu.com'>中国共产党新闻网</a> </li>
+        <li><a href='/Index/Index/index.html##' target='_blank'>中国共产党新闻网</a></li>
+        <li><a href='/Index/Index/index.html##' target='_blank'>中国共产党新闻网</a></li>
+        <li><a href='/Allinone/Index/index.html' target='_blank'>党建自助服务终端</a></li>
+        <li><a href='/Wechat/Index/index.html' target='_blank'>智慧党建微信平台</a></li>
+        <li><a href='/System/Index/sp_guide.html' target='_blank'>登录管理后台</a></li>
+      </ul>
+    </div>
+    <ul class="public_footer_content">
+      <li>
+        <span>互联网新闻信息服务许可证1012006001</span>
+        <span>增值电信业务经营许可证B2-20100025</span>
+      </li>
+      <li>
+        <span>信息网络传播视听节目许可证0104065</span>
+        <span>广播电视节目制作经营许可证（广媒）字第172号</span>
+      </li>
+      <li>
+        <span>网络文化经营许可证 京网文[2014]2108-308号</span>
+        <span>网络出版服务许可证（京）字258号</span>
+      </li>
+      <li>
+        <span>京ICP证000006号</span>
+        <span>京公网安备11000002000008号</span>
+      </li>
+      <li>
+
+        <span>技术支持：
+          <a href="http://www.simpro.cn/" target="_blank">森普软件</a>
+        </span>
+        <span>
+          <a href="http://www.dangjian.co/" target="_blank">智慧党建</a>
+        </span>
+        <span>
+          <a>联系方式： 400-677-0389</a>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <!--footer结束-->
+  <!--公共js开始-->
+  <script src="../../../statics/public/js/jquery.min.js"></script>
+  <!--layui js-->
+  <script type="text/javascript" src="../../../statics/plugins/layui/layui.js"></script>
+  <!--自定义js-->
+  <script src="../../../statics/apps/page_portal/js/ipam_home_public.js"></script>
+  <!--分页-->
+  <script type="text/javascript" src="js/toPage.js"></script> 
+  <!--本页面js-->
+  <script type="text/javascript" src="js/edu_exam_official_info.js"></script> 
+  <script>
+    //注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
+    layui.use('element', function () {
+      var element = layui.element;
+    });
+  </script>
+  <script>
+    var page_flag = sessionStorage.getItem("page_flag");
+    if (page_flag == null) {
+      page_flag = 'home';
+    }
+    $("#" + page_flag).addClass("public_header_active");
+    $(".logins").click(function (e) {
+      location.href = "{:U('Index/Index/login')}";
+    });
+    layui.use('layer', function () {});
+    /* 登录点击事件开始 */
+    /* header 点击事件开始 */
+    $(".ipam_home_public_header_nav_horizontal li").click(function () {
+      $(this).css("background", "#fafafa");
+      $(this).children("a").css("color", "#d10000");
+      var id = $(this).attr("id");
+      sessionStorage.setItem("page_flag", id);
+      $(".public_header_nav_horizontal li").each(function () {
+        $(this).removeClass("public_header_active");
+      })
+    });
+    // 查看详情验证登陆
+    $(".see-details").click(function (e) {
+      var flag = false;
+      $.ajax({
+        type: "POST",
+        url: "/Index/Index/check_login.html",
+        async: false,
+        success: function (data) {
+          flag = data;
+        }
+      });
+      if (flag == true) {
+        location.href = "{:U('Index/Index/login')}";
+        return false;
+      } else {
+        return true;
+      }
+    })
+  </script>
+</body>
+
+</html>

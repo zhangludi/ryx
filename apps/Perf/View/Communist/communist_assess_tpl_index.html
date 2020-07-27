@@ -1,0 +1,130 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php>
+	                </div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-col-xs2 pull-right">
+		                	<input name="template_type" value="{$template_type}" id="template_type" type="hidden" />
+			                <a class="layui-btn table-add" href="{:U('communist_assess_tpl_edit')}?template_type={$template_type}">添加</a>
+						</div>
+	                    <table class="layui-table" id="demo" lay-filter="demo"></table>
+                        <script type="text/html" id="operate">
+                            <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">录入</a>
+                            <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                        </script>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+  </block>
+<block name="js">
+       
+		<script>
+		var template_type = $("#template_type").val();
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            if(template_type == "communist"){
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("communist_assess_tpl_index_data",array("template_type"=>"communist"))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'template_id', width: 80, title: '编号', sort: true}
+	 	                    , {field: 'template_name', title: '模板标题',minWidth: 160}
+	 	                 	, {field: 'template_relation_no', width: 400, title: '考核人员'}
+	 	                    , {field: 'add_time', width: 120, title: '添加时间'}
+	 	                    , {field: 'template_item', width: 120, title: '设置考核项'}
+	 	                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+	                ]]
+	                , page: true
+	            });
+	            }else{
+	            	 table.render({
+	 	                elem: '#demo'
+	 	                , url: '{:U("communist_assess_tpl_index_data",array("template_type"=>"party"))}'
+	 	                , height: 'full-160'
+	 	                , id: 'ztreedata'
+	 	                , cols: [[
+	 	                	{field: 'template_id', width: 80, title: '编号', sort: true}
+	 	                    , {field: 'template_name', title: '模板标题',minWidth: 160}
+	 	                 	, {field: 'template_relation_no', width: 400, title: '考核部门'}
+	 	                    , {field: 'add_time', width: 120, title: '添加时间'}
+	 	                    , {field: 'template_item', width: 120, title: '设置考核项'}
+	 	                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+	 	                ]]
+	 	                , page: true
+	 	            });
+               }
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+			        console.log(obj)
+			    });
+			    //监听工具条
+			    table.on('tool(demo)', function(obj){
+			        var data = obj.data;
+			        var template_type = $("#template_type").val();
+			        if(template_type ==  "communist"){
+			        	 if(obj.event === 'detail'){
+				        	window.location='{:U("perf_entering")}?template_id='+data.template_id+'&template_type=communist&communist_no='+data.number_no;
+			          	} else if(obj.event === 'del'){
+			              	layer.confirm('确认删除该数据吗？', function(index){
+				              	window.location='{:U("communist_party_tpl_delete")}?template_id='+data.template_id+'&template_type=communist';
+			              	});
+			          	} else if(obj.event === 'edit'){
+			          		window.location='{:U("communist_assess_tpl_edit")}?template_id='+data.template_id+'&template_type=communist';
+			          	}
+			        }else{
+			        	 if(obj.event === 'detail'){
+				        	window.location='{:U("communist_assess_entering")}?template_id='+data.template_id+'&template_type=party&party_no='+data.number_no;
+			          	} else if(obj.event === 'del'){
+			              	layer.confirm('确认删除该数据吗？', function(index){
+				              	window.location='{:U("communist_party_tpl_delete")}?template_id='+data.template_id+'&template_type=party';
+			              	});
+			          	} else if(obj.event === 'edit'){
+			          		window.location='{:U("communist_assess_tpl_edit")}?template_id='+data.template_id+'&template_type=party';
+			          	}
+			        }
+			       
+		      	});
+			  //搜索获取搜索shuju
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time
+					        }
+				      	});
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	    })
+	</script>
+</block>

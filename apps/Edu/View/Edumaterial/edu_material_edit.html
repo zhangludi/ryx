@@ -1,0 +1,264 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('edu_material_do_save')}" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="material_id" value="{$material_data.material_id}">
+                        <input type="hidden" class="form-control" name="material_cat" value="{$material_cat}">
+                        <input type="hidden" name="cat_id" value="{$cat_id}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="material_title" value="{$material_data.material_title}" autocomplete="off" class="layui-input" placeholder="请输入标题" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>来源：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="material_sourcs" placeholder="请输入来源"  value="{$material_data.material_sourcs}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>资料类型：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="material_cat"  id="edu_material_cat" lay-filter="aihao" lay-verify='required'>
+                                            <volist name="materialcat" id="list">
+                                                <option value="{$list.cat_id}"  data-type="{$list.cat_type}" <eq name="list.cat_id"  value="$cat_id">selected</eq> >{$list.cat_name}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>专题类型：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="material_topic"  lay-filter="" lay-verify='required'>
+                                            {$topic_data}
+                                            <volist name="topic_data" id="list">
+                                                <option value="{$list.topic_id}" <eq name="list.topic_id"  value="$material_topic">selected</eq>
+                                                >{$list.topic_title}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>时长分值：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="period_score"  lay-filter="" lay-search="" lay-verify='required'>
+											<option value="1" <eq name="material_data.period_score" value="1">selected</eq>>1</option>
+											<option value="2" <eq name="material_data.period_score" value="2">selected</eq>>2</option>
+											<option value="3" <eq name="material_data.period_score" value="3">selected</eq>>3</option>
+											<option value="4" <eq name="material_data.period_score" value="4">selected</eq>>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>学习时长：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="material_duration" value="{$material_data.material_duration}" onkeyup="value=value.replace(/[^\d.]/g,'')"  placeholder="请输入学习时长，以分钟为单位" class="layui-input" lay-verify='required'></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>对应群体：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="material_group" xm-select="period_score1" xm-select-skin="danger" xm-select-search>
+                                                <php> echo getGroupSelect(1,$material_data['material_group'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>资料标签：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="material_data"  xm-select="period_score22" xm-select-skin="danger" xm-select-search>
+                                                <php> echo getGroupSelect(2,$material_data['material_data'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row" id="video_length">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>视频时长：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="video_duration" value="{$material_data.video_duration}"  autocomplete="off" placeholder="请输入视频时长，以分钟为单位"  class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" ></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row" id="video_upload">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>视频：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+                                            <input type="text" name="material_vedio" id="material_vedio" value="{$material_data.material_vedio}" placeholder="请输入视频名称及后缀或点击上传视频" autocomplete="off" class="layui-input" >
+                                            <input type="hidden" id="source_name" name="source_name" value="" >
+                                            <button type="button" class="layui-btn" onclick="uploader_file('edu','1','material_vedio','source_name','js-grid-juicy-projects3','2','0')"><i class="layui-icon"></i>上传视频</button>
+                                             <span class="fcolor-red fsize-14 lh-35 pl-5">建议大小不要超过50M，上传视频请不要修改上方视频编号</span>
+                                        </div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>文章描述：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="material_desc" placeholder="请输入文章描述,最长字符225" maxlength="225" class="layui-textarea">{$material_data.material_desc}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>文章内容：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 ">
+                                        <!-- <textarea id="article_content" name="material_content">{$material_data.material_content}</textarea> -->
+                                        <script id="editor" name="material_content" type="text/plain" style="height:350px;width:100%">{$material_data.material_content}</script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
+
+                                    <input type="hidden" id="source_name" name="source_name" value="" />
+                                    <input type="hidden" id="material_thumb_old" name="material_thumb_old" value="{$material_data.material_thumb}" style="width: 60px">
+                                    <input type="hidden" id="material_thumb" name="material_thumb" value="{$material_data.material_thumb}" style="width: 60px">
+                                    <input type="hidden" class="form-control" id="material_img" name="material_img" value="{$material_data.material_thumb}">
+                                    
+                                    <button type="button" class="layui-btn" id="material_thumb" onclick="uploader_file('edu','1','material_thumb','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                     <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                    <div id="js-grid-juicy-projects2" style="height:100px">
+                                        <neq name="material_data.material_thumb" value="">
+                                            <php>echo getUploadHtml($material_data['material_thumb']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+
+                                    <input type="hidden" id="source_name2" name="source_name2" value="" />
+                                    <input type="hidden" id="article_thumb_old2" name="article_thumb_old2" value="" style="width: 60px">
+                                    <input type="hidden" id="material_attach" name="material_attach" value="{$material_data.material_attach}" style="width: 60px">
+                                    <input type="hidden" class="form-control" id="material_img2" name="material_img2" value="{$material_data.material_attach}">
+
+                                    <button type="button" class="layui-btn" id="material_attach" onclick="uploader_file('edu','1','material_attach','source_name2','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                    <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                        <neq name="material_data.material_attach" value="">
+                                            <php>echo getUploadHtml($material_data['material_attach']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script>
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+                
+            var cat_id = $('input[name="cat_id"]').val();
+            if(cat_id!=2){
+                $('#video_length').hide();
+                $('#video_upload').hide();
+            }
+            form.on('select(aihao)', function(data){
+                var video = data;
+                var select_option_index = data.elem.selectedIndex;
+                var select_option = data.elem[select_option_index];
+                var type = $(select_option).data('type')
+                if(type==21){
+                    $('#video_length').show();
+                    $('#video_upload').show();
+                    $('input[name=video_duration]').attr('lay-verify','required');
+                    $('input[name=material_vedio]').attr('lay-verify','required');
+                    //$('#video_upload').attr('lay-verify','required');
+                    //$('#video_length').attr('lay-verify','required');      
+                }else{
+                    $('#video_length').hide();
+                    $('#video_upload').hide(); 
+                    $('input[name=video_duration]').removeAttr('lay-verify');
+                    $('input[name=material_vedio]').removeAttr('lay-verify');
+                }
+
+            });
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+
+        layui.use('layedit', function(){
+            var layedit = layui.layedit;
+            layedit.set({
+                uploadImage: {
+                    url: "{:U('System/public/layedit_upload')}" //接口url
+                  , type: 'post' //默认post
+                }
+            });
+            layedit.build('article_content'); //建立编辑器
+        });
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'time'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'datetime'
+                ,range: true
+            });
+        })
+    </script>
+</block>

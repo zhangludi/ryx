@@ -1,0 +1,128 @@
+/*智慧党建2.0*/
+.w-118em{width: 5.9rem;}
+.w-33b{width: 33.33%;}
+.w-97em{width:7.18rem;}
+
+.h-73em{height:4.08rem;}
+.h-18em{height: 0.9rem;}
+.h-98em{height: 4.9rem;}
+
+.h-556em{height:2.5rem;}
+.ml-13em{margin-left:0.65rem;}
+.pt-44em{padding-top: 2.2rem;}
+
+.lh-15em{line-height: 0.75rem !important;}
+.bb-3em-e6{border-bottom: 0.03rem solid #e6e6e6;}
+.color-fe9776{color: #fe9776 !important;}
+.color-9e{color:#9e9e9e}
+.color-ff3032{color:#ff3032}
+
+.br-1-df{border-right: 1px solid #dfdfdf;}
+
+.bb-1-df{border-bottom: 1px solid #dfdfdf !important;}
+
+.bor-ra-10em{border-radius: 0.5rem;}
+.z-index-max{
+    z-index:1000!important;
+}
+/*tab切换*/
+.oa_con{
+	width:94%;
+	margin-left:3%;	
+}
+#tab{
+	background: -webkit-linear-gradient(left, #ff5a2d, #ff3032, #ff5a2d); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #ff5a2d, #ff3032, #ff5a2d); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #ff5a2d, #ff3032, #ff5a2d); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #ff5a2d, #ff3032, #ff5a2d); /* 标准的语法 */
+}
+#tab li a{
+	display: block;
+	width: auto;
+	line-height: 0.8rem;
+	color: #fff !important;
+	font-weight: 600 !important;
+	margin-top: 0.7rem !important;
+	border-right: 1px solid rgba(250,250,250,.5);
+}
+.aui-tab-item.aui-active{
+	border: 0;
+	color: #fff;
+	background-image: url('../../../../statics/images/images_oa/oa-border.png');
+	background-repeat: no-repeat;
+	background-position: center 2rem;
+	background-size: 40% 2px;
+}
+
+/*字体渐变*/
+.shade{
+	background-image: -webkit-gradient(linear, left center, right center, from(rgba(252, 152, 118, 1)), to(rgba(254, 192, 115, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+    
+.w-52em{width: 2.6rem;}
+.h-52em{height: 2.6rem;}
+
+.pl-12em{padding-left: 0.6rem;}
+.pr-12em{padding-right: 0.6rem;}
+.pt-4em{padding-top: 0.2rem;}
+.pt-8em{padding-top: 0.4rem;}
+.pb-12em{padding-bottom: 0.6rem;}
+
+.ml-8em{margin-left: 0.4rem;}
+.mr-6em{margin-right: 0.3rem;}
+.mr-8em{margin-right: 0.4rem;}
+.mt-12em{margin-top: 0.6rem;}
+.mb-12em{margin-bottom: 0.6rem;}
+
+.color-b3{color: #b3b3b3;}
+.color-ffba66{color: #ffba66;}
+
+.bg-color-f9{background: #f9f9f9 !important;}
+.bg-color-ff3032{background: #ff3032;}
+
+.bb-1-dfdfdf{border-bottom: 1px solid #dfdfdf;}
+    
+    
+/*——————————————————————————————滑动样式—————————————————————————————————————————*/
+#tabBigBox{width:100%;height: 1.7rem;}
+#tabBox2{
+	overflow: hidden;
+	position: fixed;
+	left: 0;
+}
+#tabBox2 li{
+	float: left;
+	/*border-right: 1px solid #eeeeee;*/
+	text-align: center;
+	position: relative;
+	font-size: 0.8rem;
+	color:#666
+	}
+#tabBox2 li a{
+	display: block;
+	margin: 0 auto;
+	color: #757575;
+	padding: 0 1rem;
+}
+#tabBox2 li .active{
+	display: none;
+	width: 2rem;
+	height: 1px;
+	position: absolute;
+	bottom: -0.25rem;
+	left: 50%;
+	background: #ff3032;
+	margin-left: -1rem;
+	font-weight: bold;
+}
+#tabBox2 .tabBox2-active a{color: #ff3032;font-weight: bold;}
+#tabBox2 .tabBox2-active .active{display: block;}
+    
+.di-nn ul{
+    display:none;
+}

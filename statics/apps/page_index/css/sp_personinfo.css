@@ -1,0 +1,200 @@
+/*zy 2018/10/25 个人信息详情页面*/
+
+.sp-header-title {
+	font-size: 16px;
+	color: #444;
+	padding-left: 5px;
+	vertical-align: middle;
+}
+
+.sp-card-body {
+	position: relative;
+	height:calc(100vh - -34px);
+}
+
+.sp-card-body-center {
+	background: url(../images/person.png) no-repeat;
+	margin: 32px auto;
+	position: relative;
+	background-size: 305px 490px;
+	width: 305px;
+	height: 490px;
+}
+
+.sp-right-icon {
+	position: absolute;
+	text-align: center;
+	color: #444;
+	font-size: 16px;
+	padding-left: 8px;
+	height: 38px;
+	line-height: 38px;
+}
+
+.sp-card-body-right1 {
+	background: url(../images/triangle_icon6.png) no-repeat;
+	background-position: -11px -7px;
+	width: 132px;
+	right: 20px;
+	top: 23px;
+}
+
+.sp-card-body-right2 {
+	background: url(../images/triangle_icon6.png) no-repeat;
+	background-position: -11px -7px;
+	width: 132px;
+	right: -18px;
+	top: 93px;
+}
+
+.sp-card-body-right3 {
+	background: url(../images/triangle_icon6.png) no-repeat;
+	background-position: -11px -7px;
+	width: 132px;
+	right: -18px;
+	top: 165px;
+}
+
+.sp-card-body-left1 {
+	background: url(../images/triangle_icon6.png) no-repeat;
+	background-position: -11px -7px;
+	width: 132px;
+	left: -44px;
+	top: 164px;
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	/* IE 9 */
+	-moz-transform: rotate(180deg);
+	/* Firefox */
+	-webkit-transform: rotate(180deg);
+	/* Safari 和 Chrome */
+	-o-transform: rotate(180deg);
+	/* Opera */
+}
+
+.sp-card-body-left1-txt {
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	/* IE 9 */
+	-moz-transform: rotate(180deg);
+	/* Firefox */
+	-webkit-transform: rotate(180deg);
+	/* Safari 和 Chrome */
+	-o-transform: rotate(180deg);
+	/* Opera */
+	display: block;
+}
+
+.sp-card-body-left2 {
+	background: url(../images/triangle_icon6.png) no-repeat;
+
+	background-position: -11px -7px;
+	width: 132px;
+	left: -21px;
+	top: 93px;
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	/* IE 9 */
+	-moz-transform: rotate(180deg);
+	/* Firefox */
+	-webkit-transform: rotate(180deg);
+	/* Safari 和 Chrome */
+	-o-transform: rotate(180deg);
+	/* Opera */
+}
+
+.sp-card-body-left3 {
+	background: url(../images/triangle_icon6.png) no-repeat;
+
+	background-position: -11px -7px;
+	width: 132px;
+	left: -1px;
+	top: 25px;
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	/* IE 9 */
+	-moz-transform: rotate(180deg);
+	/* Firefox */
+	-webkit-transform: rotate(180deg);
+	/* Safari 和 Chrome */
+	-o-transform: rotate(180deg);
+	/* Opera */
+}
+
+.sp-card-body-left-content1 {
+	padding: 20px 25px 20px 25px;
+	background: #fff5f5;
+	right: 30px;
+	position: absolute;
+	top: 20px;
+	border-radius: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	width:245px;
+}
+.sp-card-body-left-content2 {
+	padding: 20px 25px 20px 25px;
+	background: #fff5f5;
+	left: 30px;
+	position: absolute;
+	top: 20px;
+	border-radius: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	width:245px;
+}
+
+.sp-card-body-left-content1-title {
+	font-size: 18px;
+	color: #ff5656;
+	font-weight:900;
+}
+.sp-card-body-left-content1-title{
+	color: #ff6600;
+}
+.sp-card-body-left-content1-txt {
+	font-size: 14px;
+	padding-top: 10px;
+	color: #444;
+}
+
+.sp-card-body-left-content1-txt-txt {
+	color: #999;
+}
+
+.sp-card-body-left-content1-triangle {
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-right: 30px solid #fff5f5;
+	border-bottom: 20px solid transparent;
+	position: absolute;
+	right: 243px;
+	top: 100px;
+}
+.sp-card-body-left-content2-triangle {
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-left: 30px solid #fff5f5;
+	border-bottom: 20px solid transparent;
+	position: absolute;
+	right: -26px;
+	top: 100px;
+}
+.sp-card-body-left-content3{
+	top:420px;
+}
+.sp-card-body-left-content1-txt-icon{
+	color:#ff6600;
+	padding-right:10px;
+	font-weight:600;
+}
+.sp-card-body-left-content3-triangle{
+	  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-left: 30px solid #fff5f5;
+  border-bottom: 20px solid transparent;
+  position: absolute;
+  right: -26px;
+	margin-top:20px;
+}

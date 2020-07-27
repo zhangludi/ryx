@@ -1,0 +1,103 @@
+.bg {
+    background: url("../images/bg.jpg");
+    background-size: cover;
+}
+.back{
+	width: 156px;
+    height: 64px;
+    margin-top: 95px;
+    margin-left: 99px;
+}
+.title-txt {
+    width: 1123px;
+    height: 209px;
+}
+.title {
+   width: 1123px;
+    height: 209px;
+    margin: 0 auto;
+    margin-top: 130px;
+}
+.index_icon{
+	width: 98px;
+    height: 110px;
+	}
+.live_con_bg{
+	margin: 0 auto;
+    width: 1415px;
+    margin-top: 5px;
+    height: 522px;
+    background: #fff;
+    border-radius: 16px;
+   box-shadow:0px 2px 28px 0px rgba(0, 0, 0, 0.16);
+}
+.hand_con{
+	position: relative;
+    width: 1500px;
+    margin: 0 auto;
+    margin-top: 110px;
+}
+.hand_con li{
+	float: left;
+	text-align: center;
+	list-style: none;
+	width: 468px;
+    height: 522px;
+    border-right: 1px solid #ccc;
+	
+}
+.hand_con li:last-child{
+	 border-right:none !important;
+}
+.hand_con li img{
+	padding-top: 72px;
+}
+.hand_con li div{
+	text-align: center;
+	width:468px;
+	height:39px;
+	font-size:40px;
+	font-weight:400;
+	color:rgba(33,33,33,1);
+	line-height:132px;
+}
+/*底部*/
+.live_footer{
+	margin-top: 48px;
+}
+.back_bg{
+	width:280px;
+	height:90px;
+	line-height: 90px;
+	text-align: center;
+	background:rgba(255,171,0,0.8);
+	border-radius:20px;
+}
+.back_bg img{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+    margin-right: 30px;
+    margin-left: 50px;
+}
+.back_bg div{
+	color:#fff;
+	font-size: 40px;
+	cursor: pointer;
+}
+.back_live{
+	width: 260px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+}
+.back_live img{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+    margin-right: 20px;
+}
+.back_live div{
+	color:#000;
+	font-size: 40px;
+}

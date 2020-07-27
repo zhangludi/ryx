@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+@import "../layouts/layouts";
+@import "../variables/size";
+@import "../variables/font-size";
+@import "../variables/color";
+
+@mixin img-objfit($width, $height, $obj-fit){
+  width: $width;
+  height: $height;
+  object-fit: $obj-fit;
+}
+
+.c-page-title{
+  width: $w-all;
+  height: $page_title-h;
+  background: url('../../images/page-title-bg.jpg') no-repeat center/ 100% auto;
+}
+//标题内容区
+.c-page-title_content{
+  display: table;
+  width: $content-w;
+  height: inherit;
+  text-align: center;
+  vertical-align: middle;
+}
+.c-page-title_group{
+  display: inline-block;
+  height: inherit;
+}
+//标题图标及文字
+.c-page-title_icon{
+  @include img-objfit($page-title_icon-w, $page-title_txt-h, contain);
+}
+.c-page-title_txt{
+  @include img-objfit($page-title_txt-w, $page-title_txt-h, contain);
+}
+.c-page-title_btn{
+  position: relative;
+  //float: right;
+  width: $page-title_btn-w;
+  height: $page-title_btn-h;
+  font-size: 24px;
+  color: #ff582d;
+  font-weight: bold;
+  line-height: $page-title_btn-h;
+  border-radius: 0 6px 6px 0;
+  text-align: center;
+  background: #f8e6e5;
+  justify-self: flex-end;
+}
+
+.c-page-title_btn a{
+  color: inherit;
+  font-weight: inherit;
+}
+.c-page-title_btn:before{
+  content: '';
+  position: absolute;
+  left: -61px;
+  border-width: 28px 34px 28px 28px;
+  border-style: solid;
+  border-color: transparent #f8e6e5 transparent transparent;
+}
+
+.c-page-title_photo{
+  border: solid 4px transparent;
+  background: rgba(255, 255, 255, .68);
+  border-radius: 50px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  @include reds(fir);
+}
+
+.l-page-title_photo{
+  width: 200px;
+  height: 60px;
+  @include font-sizes(l5);
+}
+
+.c-page-title_pic-box{
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  margin-right: 6px;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.c-page-title_picture{
+  @include img-objfit(52px, 52px, contain)
+}
+
+.c-page-title_name{
+  display: inline-block;
+  @include reds(fir);
+}

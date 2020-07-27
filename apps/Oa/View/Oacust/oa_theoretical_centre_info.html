@@ -1,0 +1,59 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+   	<div class="layui-fluid">
+	    <div class="layui-row  layui-col-space5">
+	    <form action="{:U('cms_centre_status')}" method="post" class="form-horizontal">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"><php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php></div>
+	                <div class="layui-card-body">
+	                    <div class="portlet-body">
+	                        <div class="center-text">
+	                            <span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$centre.centre_title}</span>
+	                            <div class="center-text fcolor-99">
+	                                <span class="mr-10">日期：{$centre.add_time}</span>
+	                                <span class="mr-10">作者：{$centre.add_staff}</span>
+	                                <span class="mr-10">文章来源：上传添加</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-row">
+	                            {$centre.centre_content}
+	                        </div>
+	                        <neq name="centre.centre_attach" value="">
+		                        <hr>
+		                        <div class="layui-row">
+	                               <div class="layui-col-xs6 mt-10">
+		                                <div class="layui-row">
+		                                    <div class="layui-col-xs2 text-l fsize-14 fcolor-65 lh-35"><strong>下载附件：</strong></div>
+		                                    <div id="js-grid-juicy-projects" class="cbp" style="height:60px">
+		                                            <php>echo getUploadHtml($centre['centre_attach'],'','',1,0);</php>
+		                                    </div>
+		                                </div>
+		                            </div> 
+		                        </div>
+	                        </neq>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="text-align: right">
+                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                    </div>
+                </div>
+            </div>
+	    </form>
+	    </div>
+	</div>
+</block>
+<block name="js">
+
+<script type="text/javascript">
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+</script>
+</block>

@@ -1,0 +1,93 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+	    <div class="page-content-wrapper">
+	        <div class="page-content">
+	            <div class="portlet light  bordered">
+	                <div class="portlet-title">
+	                    <div class="caption">
+	                        <div class="cont-col1">
+	                            <div class="label label-sm bg-color-green2">
+	                                <i class="iconfont">&#xe64b;</i>
+	                            </div>
+	                        </div>
+	                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+	                        <span class="caption-helper"></span>
+	                    </div>
+	                    <div class="pull-right text-right p-0 ">
+							<a class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-70" href="{:U('life_vote_edit')}"> <i class="iconfont">&#xe674;</i>添加</a>
+						</div>
+	                </div>
+	                
+	                <div id="table" class="scroller p5-right-table-scroller" data-always-visible="1" data-rail-visible1="1">
+	                    <table id="client_table" class="table table-condensed table-striped"
+	                           data-toggle="table"
+	                           data-url="{:U('life_vote_index_data')}"
+	                           data-height=""
+	                           data-search="false"
+	                           data-show-refresh="false" data-show-toggle="false"
+	                           data-show-columns="false" data-show-export="false"
+	                           data-detail-view="false" data-detail-formatter="detailFormatter"
+	                           data-minimum-count-columns="2" data-page-size="100"
+	                           data-show-pagination-switch="false" data-pagination="true"
+	                           data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]" >
+	                        <thead>
+								<tr>
+									<th data-field="num" >编号</th>
+									<th data-field="vote_theme">主题</th>
+									<th data-field="vote_starttime" >开始时间</th>
+									<th data-field="vote_endtime" >结束时间</th>
+									<th data-field="operate">操作</th>
+								</tr>
+							</thead>
+	                    </table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    var start = {
+	        elem: '#start',
+	        format: 'YYYY-MM-DD ',
+	        istime: true,
+	        istoday: false,
+	        choose: function (datas) {
+	            end.min = datas; //开始日选好后，重置结束日的最小日期
+	            end.start = datas //将结束日的初始值设定为开始日
+	        }
+	    };
+	    var end = {
+	        elem: '#end',
+	        format: 'YYYY-MM-DD ',
+	        min: laydate.now(),
+	        max: '2099-06-16 23:59:59',
+	        istime: true,
+	        istoday: false,
+	        choose: function (datas) {
+	            start.max = datas; //结束日选好后，重置开始日的最大日期
+	        }
+	    };
+	    laydate(start);
+	    laydate(end);
+	</script>
+	<script>
+	    function data_access(user_relation_no) {
+	        var index = parent.layer.open({
+	            type: 2,
+	            title: '数据权限分配',
+	            offset: ['60px', (window.screen.width - 230) / 2 - 400 + 230],
+	            shadeClose: true, //点击遮罩关闭层
+	            content: "{:U('System/Sysuser/sys_user_data_access')}?communist_no=" + user_relation_no,
+	            area: ['700px', '500px'],
+	            maxmin: true,
+	            success: function (layero, index) {
+	                //layer.iframeAuto(index);
+	            }
+	        });
+	    }
+	</script>
+</block>

@@ -1,0 +1,22 @@
+<div class="public_card_title bg-img-card fcolor-white">
+    <span class="fsize-18 pl-15">{$cat_info.cat_name}</span> /
+    <a href="{:U('News/ipam_news_list',array(id=>$cat_info['cat_id']))}" class="fcolor-white">更多</a>
+</div>
+<div class="mr-15 mt-15">
+    <ul>
+        <foreach name="article_list" item="top_val" >
+            <li class="news_list_card mb-10 h-140 po-re w-all " >
+                <a href="{:U('Index/News/ipam_news_detail', array('article_id' => $top_val['article_id']))}" class="news_list_card_a">
+                    <div class="w-180 h-130 pull-left over-h ">
+                        <img src="{$top_val.article_thumb}"  class="h-all w-170 h-120" alt="{$top_val.article_title}">
+                    </div>
+                    <div class="news_list_txt p-10">
+                        <p class="news_list_title">{$top_val.article_title}</p>
+                        <p class='mt-0 fsize-14 fcolor-808080  article_height_over'>{$top_val.article_description}</p>
+                        <p class="mt-30 fsize-14 fcolor-66 po-ab bottom-20  w-75b"><span class="public_button_stroke-ff6669 h-20 w-90 lh-20 fsize-14 mr-10">{$top_val.add_staff_name}</span> <span>{$top_val.add_time} </span><span class="pull-right">{$top_val.article_view}人浏览</span></p>
+                    </div>
+                </a>
+            </li>
+        </foreach>
+    </ul>
+</div>

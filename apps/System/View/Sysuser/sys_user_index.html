@@ -1,0 +1,162 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							状态
+						</div>
+						<div class="layui-col-xs2" lay-filter="component-form-element">
+							<select id="status" lay-verify="">
+								<option value="">请选择</option>
+								<option value="1">可用</option>
+								<option value="2">不可用</option>
+							</select>
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+							用户角色
+						</div>
+						<div class="layui-col-xs2" lay-filter="component-form-element">
+							<select id="user_role" lay-verify="">
+								<option value="">请选择</option>
+								{:getRoleSelect()}
+							</select>
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+							查询
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="id" id="user_name" autocomplete="off" placeholder="昵称/用户名">
+						</div>
+						<div class="layui-col-xs2 text-r">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+							<a class="layui-btn" data-type="add"  lay-filter="searchFilter" style="text-decoration: none;" title="查询">添加</a>
+						</div>
+					</div>
+					<table class="layui-table" id="demo"  lay-filter="demo"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	function edit(user_id){
+		var index = layer.open({
+           type: 2,
+           title: false,
+           end:false,
+           closeBtn: 0,
+           shift: 1,
+           content: "{:U('sys_user_edit')}?user_id="+user_id+"",
+           area: ['300px', '300px']
+    	});
+    	layer.full(index);
+	}
+	layui.use(['element','form'], function() {
+        var $ = layui.$
+        , admin = layui.admin
+        , element = layui.element
+        , form = layui.form
+        , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: "{:U('Sysuser/sys_user_index_data')}"
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+	                {field:'user_id',width:100, title:'编号', sort: true}
+					,{field:'user_name', title:'用户名'}
+					,{field:'user_role', title: '用户角色'}
+					,{field:'status',width:80,title: '状态'}
+					,{field:'add_staff', title:'操作人'}
+					,{field:'last_login_time', title:'最后登录时间',width:150}
+					,{field:'update_time', title:'操作时间',width:150}
+					,{field:'operate', title:'操作',align: 'center',width:240}
+                ]]
+                , page: true
+            });
+
+            var $ = layui.$, active = {
+                reload: function(){
+                    var user_name = $("#user_name").val();
+					var user_role = $("#user_role").val();
+					var status = $("#status").val();
+                    table.reload('ztreedata', {
+                        page: {
+                          curr: 1 
+                        }
+                        ,where: {
+                            "user_name": user_name,
+                            "user_role": user_role,
+                            "status": status,
+                        }
+                    });
+                },
+                add: function(){
+                	var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('sys_user_edit')}",
+                       area: ['300px', '300px']
+                	});
+                	layer.full(index);
+            	}
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+	    });
+	});
+
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+		form.on('submit(component-form-element)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#test1',
+			range: true
+		});
+	})
+	function data_access(user_relation_no) {
+        var index = parent.layer.open({
+            type: 2,
+            title: '数据权限分配',
+            offset: ['60px', (window.screen.width - 230) / 2 - 400 + 230],
+            shadeClose: true, //点击遮罩关闭层
+            content: "{:U('System/Sysuser/sys_user_data_access')}?staff_no=" + user_relation_no,
+            area: ['700px', '500px'],
+            maxmin: true,
+            success: function (layero, index) {
+                //layer.iframeAuto(index);
+            }
+        });
+    }
+</script>
+</block>

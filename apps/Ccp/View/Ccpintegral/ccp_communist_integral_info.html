@@ -1,0 +1,97 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <div class="layui-card-body layui-form">
+                    <div class="layui-row">
+                        <div class="pull-right layui-col-md3">
+                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1" onclick="add_score('{$communist_no}')">手动调整积分</button>
+                            <input type="hidden" id="year" value="{$is_year}">
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="pull-right layui-col-md10">
+                            <div class="layui-row">
+                                <div class="layui-col-md3">
+                                    <div class="color-demo" data-original-title="Click to view demos for this color" data-toggle="modal" data-target="#demo_modal_red-thunderbird">
+                                        <div style="cursor:default;" class="color-view bg-red-thunderbird bg-font-red-thunderbird bold uppercase"><h3>当前积分：{$communist_data.integral} 分</h3></div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md3 ml-40 mt-60">
+                                     <a  style="cursor:default;" class="label label-default fsize-24"> 本支部排名 {$communist_data.party_ranking}</a>
+                                </div>
+                                <div class="layui-col-md3 ml-40 mt-60">
+                                     <a  style="cursor:default;" class="label label-default fsize-24"> 本系统排名 {$communist_data.ranking} 名</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md10 pl-15b">
+                            <table class="layui-table" id="demo"  lay-filter="demo"> </table>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="text-align: right">
+                                <button type="reset" class="layui-btn layui-btn-primary mr-50" onclick="layer_colse();">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+        , admin = layui.admin
+        , element = layui.element
+        , form = layui.form
+        , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("ccp_communist_integral_info_data")}?communist_no={$communist_no}&is_year={$is_year}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'memo',width:'30%', title: '积分变动项'}
+                    , {field: 'add_time',width:'30%',  title: '积分变动时间'}
+                    ,{field: 'change_integral',width:'15%',  title: '积分变动数'}
+                    ,{field: 'cause',width:'25%',  title: '原因'}
+                ]]
+                , page: true
+            });
+        });
+    });
+
+    function add_score(communist_no){
+        var year = $('#year').val();
+        layer.open({
+            type: 2,
+            title: '变动积分',
+            maxmin: false,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['600px', '420px'],
+            offset: window.parent.document.body.scrollTop + 10 + '%',
+            content: "{:U('Ccp/Ccpintegral/ccp_integral_add_score/log_relation_type/2/log_relation_no/"+communist_no+"/year/"+year+"')}"
+        });
+    };
+</script>
+</block>

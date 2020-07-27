@@ -1,0 +1,216 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid " >
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                    <form class="layui-form">
+                        <div class="layui-card-header">
+                            <span title="党组织列表">党组织列表</span>
+                        </div>
+                        <div class="layui-card-body" style="overflow-y:auto">
+                            <div class="over-h-tree">
+                                <ul id="treeDemo" class="ztree ztree-demo">
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-col-md9">
+                <div class="layui-row">
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    <div class="layui-col-xs1 center-text lh-40 text-r">
+                                        标题：
+                                    </div>
+                                    <div class="layui-col-xs3">
+                                        <input type="text" class="layui-input" id="keywords" placeholder="请输入标题">
+                                    </div>
+                                    <div class="layui-col-xs3 pull-right">
+                                        <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+                                        <a id="add" data-type="add" class="layui-btn table-add" style="text-decoration: none;">添加</a>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="party_no" >
+                                <table class="layui-table" id="demo"  lay-filter="demo">
+                                </table>
+                                <script type="text/html" id="operate">
+                                    <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                                    <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                                    <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+<script>
+    $().ready(function(){
+        $("#add").hide();
+    });
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("ccp_communist_comment_record_data")}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'meeting_minutes_id', width: '10%', title: '编号', sort: true}
+                    , {field: 'meeting_minutes_title', width:'32%' , title: '标题'}
+                    , {field: 'add_staff', width:'15%' ,title: '添加人'}
+                    , {field: 'add_time', title: '添加时间', width:'18%'}
+                    //, {field: 'operate', title: '操作',align: 'center', width:'25%'}
+                     , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: '25%'}
+                ]]
+                , page: true
+            });
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            table.on('tool(demo)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'detail'){
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('ccp_communist_comment_record_info')}?meeting_minutes_id="+data.meeting_minutes_id+"",
+                       area: ['300px', '300px']
+                    });
+                    layer.full(index);
+                } else if(obj.event === 'del'){
+                    layer.confirm('确认删除该数据吗？', function(index){
+                        window.location='{:U("ccp_communist_comment_record_del")}?meeting_minutes_id='+data.meeting_minutes_id+'';
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'edit'){
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('ccp_communist_comment_record_edit')}?meeting_minutes_id="+data.meeting_minutes_id+"",
+                       area: ['300px', '300px']
+                    });
+                    layer.full(index);
+                }
+            });
+            var $ = layui.$, active = {
+                reload: function(){
+                    var keyword = $('#keywords').val();
+                    table.reload('ztreedata', {
+                        page: {
+                          curr: 1 
+                        }
+                        ,where: {
+                            "keyword": keyword,
+                        }
+                    });
+                },
+                add: function(){
+                    var party_no = $('#party_no').val();
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('ccp_communist_comment_record_edit')}?party_no="+party_no+"",
+                       area: ['300px', '300px']
+                    });
+                    layer.full(index);
+                }
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        //点击左侧树的事件
+        var setting = {
+            view: {
+                showLine: false,
+            },
+            data: {
+                key: {
+                    title: "t"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                    $("#add").show();
+                    $("#party_no").val(node.id);
+                    layui.use('table', function () {
+                        var table = layui.table;
+                        table.render({
+                            elem: '#demo'
+                            , url: '{:U("ccp_communist_comment_record_data")}?party_no='+node.id+''
+                            , height: 'full-160'
+                            , cols: [[
+                                {field: 'meeting_minutes_id', width: '10%', title: '编号', sort: true}
+                                , {field: 'meeting_minutes_title', width:'32%' , title: '标题'}
+                                , {field: 'add_staff', width:'15%' ,title: '添加人'}
+                                , {field: 'add_time', title: '添加时间', width:'18%'}
+                                // , {field: 'operate', title: '操作',align: 'center', width:'25%'}
+                                , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: '25%'}
+                            ]]
+                            , page: true
+                        });
+                    });
+                }
+            }
+        };
+
+        var zNodes = [
+            <volist name="party_list" id="list" key = 'k'>
+                {id:"{$list.party_no}", pId:"{$list.party_pno}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+            </volist>
+        ];
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+    })
+</script>
+<script>
+    //时间选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //常规用法
+        laydate.render({
+            elem: '#time',
+            range: true
+        });
+    })
+    // 设置ztree 列表和右侧列表一样高度
+    $(".over-h-tree").css("height",($(window).height() - 95));
+</script> 
+    
+</block>

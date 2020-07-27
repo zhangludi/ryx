@@ -1,0 +1,128 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+				<form action="{:U('com_imail_do_save')}" id="form_sample_2" class="editor-add" method="post">
+					<div class="layui-card-body layui-form">
+						<div class="layui-row">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>主题：</strong></div>
+									<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text" name="imail_title" placeholder="请输入主题" lay-verify="required" autocomplete="off" class="layui-input" value="{$imail_data.imail_title}">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>收件人：</strong></div>
+										<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+										<input id="missive_receiver_name" type="text" class="layui-input"  value="{$notice_info.communist_name}" name="missive_receiver_name" disabled required/> 
+										<input type="hidden" class="form-control"  value="{$missive_info.missive_receiver}" id="missive_receiver_no"  name="missive_receiver_no" /> 
+										</div>
+										<div class="layui-col-xs2 text-r">
+											<a class="layui-btn" onclick="select_receive_user('missive_receiver')" >选择人员</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>邮件内容：</strong></div>
+	                                <div class="layui-col-xs8 fsize-14 fcolor-65 ">
+	                                    <!-- <textarea id="demoedit" name="imail_content" disabled style="display: none;">{$.imail_content}</textarea> -->
+	                                    <script id="editor" name="imail_content" type="text/plain" style="height:350px;width:100%">{$imail_data.imail_content}</script>
+	                                </div>
+	                            </div>
+	                        </div>
+							<div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+	                                <input type="hidden" id="source_name" name="source_name" value=""/>
+	                                <input type="hidden" id="article_thumb_old" name="article_thumb_old" value="" style="width: 60px">
+	                                <input type="hidden" id="missive_attach" name="missive_attach" value="{$missive_info.missive_attach}" style="width: 60px">
+	                                <input type="hidden" class="form-control" id="article_img" name="article_img" value="{$missive_info.missive_attach}">
+	                                <button type="button" class="layui-btn" id="article_thumb" onclick="uploader_file('system','1','missive_attach','source_name','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+									<div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+										<neq name="missive_info.missive_attach" value="">
+											<php>echo getUploadHtml($missive_info['missive_attach'],'40');</php>
+										</neq>
+									</div>
+	                            </div>
+	                        </div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>拟稿人：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35 childrenBody">
+									{:getStaffInfo($_SESSION['staff_no'])}
+									</div>
+									<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>所在部门：</strong></div>
+									<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35 childrenBody">
+									{:getDeptInfo(getStaffInfo($_SESSION['staff_no'],'staff_dept_no'))}
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+	                            <div class="layui-input-block">
+	                                <div class="layui-footer" style="text-align: right">
+	                                    <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+	                                    <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+	                                </div>
+	                            </div>
+	                        </div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+	function change_status(val){
+		$("input[name='status']").val(val);
+	}
+	function select_receive_user(field_name){
+		var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name+"";
+		layer.open({
+				type: 2,
+				title: '选择联系人',
+				maxmin: true,
+				offset: window.parent.document.body.scrollTop+20+'px',
+				shadeClose: true, //点击遮罩关闭层
+				area : ['620px' , '422px'],
+				content: url //iframe的url
+			});
+	}
+	layui.use([ 'form', 'laydate','layedit'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			var layedit = layui.layedit;
+            layedit.set({
+                uploadImage: {
+                    url: "{:U('System/public/layedit_upload')}" //接口url
+                  , type: 'post' //默认post
+                }
+            });
+			var index = layedit.build('demoedit');  
+	})
+
+</script>
+</block>

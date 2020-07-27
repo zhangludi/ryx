@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+.content-boxs{
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.content_box{
+  background: #fff;
+}
+.content_box-large{
+  width: 1136px;
+}
+.content_box-small{
+  width: 520px;
+}
+.article{
+  margin-bottom: 40px;
+}
+.content_box .article:nth-last-child(1){
+  margin-bottom: 0;
+}
+.serve-intro{
+  line-height: 30px;
+  font-size: 18px;
+  color: #666;
+}
+.serve-active{
+  margin-top: 40px;
+}
+.article_content{
+  margin-top: 20px;
+}
+.article_content .active-item:nth-last-child(1){
+  margin-bottom: 0;
+}
+.active-item{
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.item_img{
+  float: left;
+  object-fit: cover;
+  margin-right: 20px;
+}
+.item_img-size{
+  width: 240px;
+  height: 130px;
+}
+.item-title{
+  font-size: 22px;
+  color: #333;
+}
+.item-content{
+  @include multi-text-overflow(2);
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 30px;
+  color: #666;
+}
+.item-time{
+  margin-top: 14px;
+  font-size: 16px;
+  color: #999;
+}
+.volunteer_num{
+  font-size: 16px;
+  margin-left: 10px;
+}
+.volunteer_item{
+  float: left;
+  width: 90px;
+  margin:30px 10px 0 10px;
+}
+.people_photo{
+  border-radius: 50%;
+  overflow: hidden;
+}
+.people_name{
+  font-size: 16px;
+  margin-top: 10px;
+  color: #333;
+  text-align: center;
+}

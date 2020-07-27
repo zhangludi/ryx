@@ -1,0 +1,235 @@
+.bg {
+    background: url("../images/bg.jpg");
+    background-size: cover;
+}
+.back{
+	width: 156px;
+    height: 64px;
+    margin-top: 95px;
+    margin-left: 99px;
+}
+.back1{position: absolute;left: 455px;}
+.title-txt {
+   width: 563px;
+    height: 74px;
+}
+.title {
+   width: 563px;
+    height: 74px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.index_icon{
+	width: 98px;
+    height: 110px;
+	}
+
+.hand_con{
+	position: relative;
+	width: 1740px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+/* 垂直居中 */
+.va-jz{
+	display: flex;
+    align-items:Center; 
+}
+
+
+/*底部*/
+.live_footer{
+	margin-top: 48px;
+}
+.back_bg{
+	width:280px;
+	height:90px;
+	line-height: 90px;
+	text-align: center;
+	background:rgba(255,171,0,0.8);
+	border-radius:20px;
+}
+.back_bg img{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+    margin-right: 30px;
+    margin-left: 50px;
+}
+.back_bg div{
+	color:#fff;
+	font-size: 40px;
+	cursor: pointer;
+}
+.back_live{
+	width: 260px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+}
+.back_live img{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+    margin-right: 20px;
+}
+.back_live div{
+	color:#fff;
+	font-size: 40px;
+}
+
+/*内容样式*/
+.style_tit{
+	height:70px;
+	display: flex;
+    align-items:Center; 
+}
+.style_tit div{
+	font-size:40px;
+	color:#000;
+	margin-left: 15px;
+}
+.sp_service_three_con{
+	margin-top: 20px;
+}
+.sp_service_three_con li{
+	list-style: none;
+	display: flex;
+    align-items:Center; 
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+/*党务*/
+.ser_party{
+	width:357px;
+	height:148px;
+	background:linear-gradient(-30deg,rgba(212,38,31,1),rgba(239,59,35,1));
+	box-shadow:0px 0px 10px 0px rgba(10,2,4,0.34);
+	border-radius:16px;
+}
+.ser_party img{
+	width: 47px;
+	height: 47px;
+	margin-left: 87px;
+    margin-right: 34px;
+}
+.ser_party div{
+	font-size:48px;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	line-height:157px;
+}
+/*政务*/
+.ser_government{
+	width:357px;
+height:148px;
+background:rgba(0,129,196,1);
+border-radius:16px;
+}
+.ser_government img{
+	width: 47px;
+	height: 47px;
+	margin-left: 87px;
+    margin-right: 34px;
+}
+.ser_government div{
+	font-size:48px;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	line-height:157px;
+}
+/*财务*/
+.ser_finance{
+	width:357px;
+height:148px;
+background:rgba(120,165,29,1);
+border-radius:16px;
+}
+.ser_finance img{
+	width: 47px;
+	height: 47px;
+	margin-left: 87px;
+    margin-right: 34px;
+}
+.ser_finance div{
+	font-size:48px;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	line-height:157px;
+}
+/*列表展示*/
+.ser_party_list{
+	margin-top: 5px;
+	width:1298px;
+	margin-bottom: 30px;
+	height: 100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(10,2,4,0.2);
+	border-radius:16px;
+}
+.ser_government_list{
+	margin-top: 5px;
+	width:1298px;
+	margin-bottom: 30px;
+	height: 100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(10,2,4,0.2);
+	border-radius:16px;
+}
+.ser_finance_list{
+	margin-top: 5px;
+	width:1298px;
+	margin-bottom: 30px;
+	height: 100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(10,2,4,0.2);
+	border-radius:16px;
+}
+.ser_party_list_tit{
+	margin-top: 20px;
+	margin-left: 20px;
+	display: flex;
+    align-items:Center; 
+}
+.ser_party_list_tit1{
+	font-size:32px;
+	font-weight:bold;
+	color:rgba(219,0,37,1);
+}
+.ser_party_line{
+	width:1296px;
+	height:1px;
+	background:rgba(0,0,0,1);
+	opacity:0.13;
+	margin-top: 20px;
+}
+.ser_party_con{
+	margin-top: 20px;
+}
+.ser_party_con li{
+	margin-bottom: 30px;
+}
+.ser_dotted{
+	padding-bottom: 20px;
+    border-bottom: 1px dotted #ccc;
+}
+.ser_party_tit{
+	width:700px;
+	overflow: hidden;
+	font-size:28px;
+	font-family:SourceHanSansSC-Regular;
+	font-weight:400;
+	color:rgba(33,33,33,1);
+}
+.ser_party_titp{
+	margin-top: 10px;
+    width: 1176px;
+    font-size: 18px;
+    font-family: SourceHanSansSC-Normal;
+    font-weight: 400;
+    color: rgba(102,102,102,1);
+    line-height: 32px;
+    overflow: hidden;
+}
+.mt-56m{margin-top: -56px;}

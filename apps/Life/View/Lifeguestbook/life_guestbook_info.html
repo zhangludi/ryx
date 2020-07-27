@@ -1,0 +1,81 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card layui-form">
+              <div class="layui-card-header">  民情详情</div>
+              <div class="layui-card-body">
+                  <div class="layui-row">
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.communist_name}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>联系方式：</strong></div>
+                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.communist_phone}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>支部名称：</strong></div>
+                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.party_name}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>提交时间：</strong></div>
+                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.add_time}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>留言详情：</strong></div>
+                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.guestbook_content}</span></div>
+                        </div>
+                    </div>
+                    <eq name="data.status" value='1'>
+						<form action="{:U('life_guestbook_do_save')}"  method="post" class="form-horizontal">
+							<input type='hidden' name='party_no' value='{$data.party_no}'/>
+							<input type='hidden' name='guestbook_id' value='{$data.guestbook_id}'/>
+							<div class="layui-col-xs12 mt-10">
+		                        <div class="layui-row">
+		                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>回复内容：</strong></div>
+		                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35">
+		                            	<textarea name="memo" class="layui-textarea" maxlength="225"></textarea>
+		                            </div>
+		                        </div>
+		                    </div>
+							<div class="layui-col-xs4 pull-right mt-50">
+								<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                    			<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+							</div>
+						</form>
+                    <else/>
+	                    <div class="layui-col-xs12 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>回复人：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.staff_no}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs12 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>回复内容：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.memo}</span></div>
+	                        </div>
+	                    </div>
+                        <div class="layui-footer" style="text-align: right">
+	                        <button type="button" onclick="history.go(-1);" class="layui-btn layui-btn-primary mr-40">返回</button>
+                        </div>
+                    </eq>
+                </div>
+             </div>
+          </div>
+        </div>
+</block>
+<block name="js">
+</block>

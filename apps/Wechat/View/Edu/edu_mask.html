@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>开启学习计划</title>
+    <!-- aui核心css -->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <!-- end -->
+    <!--aui轮播-->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>
+    <!--end-->
+    <!-- 公司公共css -->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <!-- end -->
+    <!-- 本项目公共css -->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css"/>
+    <!--轮播图-->
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/swiper.min.css"/>    
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_mask.css"/>
+</head>
+<body>
+<section class="po-fix w-100b h-100b top-0em left-0em bg-color-000 z-index-mask">
+	<div class="po-ab bottom-0em w-100b bg-color-whiter edu_mask_radius h-97b" style="overflow-y: auto;">
+		<div class="mask_close clearfix pt-16em" onclick="window.history.go(-1);">
+		<img class="w-12em h-12em pull-right pr-16em" src="__STATICS__/apps/page_wechat/images/images_edu/mask_close.png">
+		</div>
+		<div class="f-20em color-21 icon_medium text-align m-a w-180em">定制您的个性化学习</div>
+		<div class="f-12em color-9e icon_regular text-align m-a w-180em">每一项至少选择一个选项</div>
+		<!--党支部-->
+		<div class="party_branch mt-30em">
+			<div class="clearfix">
+				<div class="pull-left w-8em ml-25em mt-8em h-8em background-ff4733 box-mask-sha bor-ra-50b"></div>
+				<div class="pull-left f-16em color-21 ml-12em">党支部</div>
+			</div>
+			<div id="list1" class="pl-40em mr-50em">
+				<volist name="data.zuzhi" id="list">
+					<li onclick="code_party({$list.code_id})" class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">{$list.code_name}</li>
+				</volist >
+				
+				<!-- <li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">社区党支部</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">学院高校</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">国有与集体企业</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">非公有制经济</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">社会组织</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">事业单位</li> -->
+			</div>
+		</div>
+		<!--党员-->
+		<div class="party_member">
+			<div class="clearfix pt-30em">
+				<div class="pull-left w-8em ml-25em mt-8em h-8em background-ff9600 box-member-sha bor-ra-50b"></div>
+				<div class="pull-left f-16em color-21 ml-12em">党员</div>
+			</div>
+			<div id="list2" class="pl-40em mr-69em">
+				<volist name="data.qunti" id="list">
+					<li  onclick="group_party({$list.group_id})" class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">{$list.group_title}</li>
+				</volist>
+				<!-- <li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">老年党员</li>
+					<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">离退休党员</li> -->
+			</div>
+		</div>
+		<div class="party_edu mt-30em">
+			<div class="clearfix pt-30em">
+				<div class="pull-left w-8em ml-25em mt-8em h-8em background-fb1fff box-edu-sha bor-ra-50b"></div>
+				<div class="pull-left f-16em color-21 ml-12em">学习种类
+					<span class="f-12em color-9e"></span>
+				</div>
+			</div>
+			<div id="list3" class="pl-40em mr-69em">
+				<volist name="data.biaoqian" id="list">
+					<li onclick="data_party({$list.group_id})" class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">{$list.group_title}</li>
+				</volist>
+				<!-- <li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">党史</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">新闻</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">会议</li>
+				<li class="bor-ra-7em border-666 lh-28em h-28em f-12em pl-16em pr-16em color-21 mt-12em">书记讲话</li> -->
+				
+			</div>
+		</div>
+		<!--获取专属学习-->		
+		<div class="exc_edu exc_edu_bg mt-120em m-a lh-34em h-34em w-230em" onclick="openExc_edu()">
+
+			<form id="form_sample_2" action="{:U('Edu/edu_mask_save')}" method="post" class="form-horizontal">
+				<input type="hidden" id="material_group" name="material_group" >
+				<input type="hidden" id="material_data" name="material_data" >
+				<p onclick="submit_t()" class="color-fff f-15em  text-align">获取专属学习</p>
+			</form>
+		</div>
+		
+	</div>
+</section>
+<script>
+	function submit_t(){
+		var material_group = $('#material_group').val();
+		var material_data = $('#material_data').val();
+		if(!material_group){
+			alert('党员选择不能为空');
+		}else{
+			if(!material_data){
+				alert('种类选择不能为空');
+			}else{
+				$("#form_sample_2").submit();
+			}
+		}
+	}
+	// function code_party(id){
+	// 	$("#material_group").val(id);
+	// }
+	function group_party(id){
+		$("#material_group").val(id);
+
+	}
+	function data_party(id){
+		$("#material_data").val(id);
+	}
+</script>
+	
+
+	
+	
+	
+
+    <!-- jquery js -->
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+	<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/swiper-3.4.2.min.js"></script>
+    <!-- 公司公共apijs -->
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+	<!-- end -->
+    <!--aui轮播-->
+    <script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+    <!--圆形进度条插件-->
+    <script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/circleChart.min.js"></script>
+    <!-- 本项目公共js -->
+	<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+	<!-- end -->
+	<!-- 主要js配置文件 -->
+	<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/config.js"></script>
+	<!-- end -->
+	<!-- 页面 js -->
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/edu/js/edu_mask.js"></script>
+	<!-- end -->
+	<script type="text/javascript">
+	
+
+	</script>
+</body>
+</html>

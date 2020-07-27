@@ -1,0 +1,944 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 微软雅黑;
+}
+
+ul li,
+a {
+    text-decoration: none;
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+/*
+    公共样式开始
+*/
+.bg-color-white {
+    background-color: #fff;
+}
+
+.bg-color-gray9 {
+    background-color: #f9f9f9;
+}
+
+.bg-color-44 {
+    background-color: #444;
+}
+
+.bg-image-linear_brown {
+    background-image: linear-gradient(#8a7363, #2e1112);
+}
+
+.bg-color-ff9776 {
+    background-color: #ff9776;
+}
+
+.bg-color-f9f9f9 {
+    background-color: #f9f9f9;
+}
+
+.bg-color-11 {
+    background-color: #111;
+}
+
+.bg-color-linear_red {
+    background-image: linear-gradient(0deg, rgba(255, 76, 77, 1) 0%, rgba(255, 133, 122, 1) 100%);
+}
+
+.bg-color-ff3032 {
+    background-color: #ff3032;
+}
+
+.bg-color-fff-op9 {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.bg-color-linear_blue {
+    background-image: linear-gradient(0deg, rgba(147, 77, 240, 1) 0%, rgba(173, 115, 250, 1) 100%);
+}
+
+.bg-color-mask {
+    background: linear-gradient(rgba(255, 255, 255, .2), rgba(0, 0, 0, .2));
+}
+
+.bg-img-card {
+    background: url("../../../public/images/public_card_title.png") no-repeat;
+}
+
+.fcolor-black {
+    color: #000;
+}
+
+.fcolor-11 {
+    color: #111111;
+}
+
+.fcolor-b3b3b3 {
+    color: #b3b3b3;
+}
+
+.fcolor-4e4e4e {
+    color: #4e4e4e;
+}
+
+.fcolor-808080 {
+    color: #808080;
+}
+
+.fcolor-cd0606 {
+    color: #cd0606;
+}
+
+.fcolor-f00 {
+    color: #f00;
+}
+
+.fcolor-e60616 {
+    color: #e60616;
+}
+
+.fcolor-d10000 {
+    color: #d10000;
+}
+
+.fcolor-ff5a00 {
+    color: #ff5a00;
+}
+
+.fcolor-fd483d {
+    color: #fd483d;
+}
+
+.fcolor-f33 {
+    color: #ff3032;
+}
+
+.fcolor-cc0000 {
+    color: #c00;
+}
+
+.fcolor-ff9776 {
+    color: #ff9776;
+}
+
+.fcolor-fffbc7 {
+    color: #fffbc7;
+}
+
+.fcolor-ff4c4d {
+    color: #ff4c4d;
+}
+
+.fcolor-ff6669 {
+    color: #ff6669;
+}
+
+.fcolor-ffdbdb {
+    color: #ffdbdb;
+}
+
+.fcolor-ff573d {
+    color: #ff573d;
+}
+
+.fcolor-85c622 {
+    color: #85c622;
+}
+
+.fcolor-934df0 {
+    color: #934df0;
+}
+
+.fcolor-ffe0e0 {
+    color: #ffe0e0;
+}
+
+.fcolor-307eff {
+    color: #307eff;
+    ;
+}
+
+.fcolor-3096ff {
+    color: #3096ff;
+    ;
+}
+
+.m-10 {
+    margin: 10px;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}
+
+.ml-6 {
+    margin: 0 5px;
+}
+
+.p-15 {
+    padding: 15px;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.p-45 {
+    padding: 45px;
+}
+
+.p-0-10 {
+    padding: 0 10px;
+}
+
+.w-4 {
+    width: 4px;
+}
+
+.w-20 {
+    width: 20px;
+}
+
+.w-32 {
+    width: 32px;
+}
+
+.w-46 {
+    width: 46px;
+}
+
+.w-50 {
+    width: 50px;
+}
+
+.w-65 {
+    width: 65px;
+}
+
+.w-78 {
+    width: 78px;
+}
+
+.w-54 {
+    width: 54px;
+}
+
+.w-56 {
+    width: 56px;
+}
+
+.w-70 {
+    width: 70px;
+}
+
+.w-84 {
+    width: 84px;
+}
+
+.w-90 {
+    width: 90px;
+}
+
+.w-99m {
+    width: 99%;
+}
+
+.w-126 {
+    width: 126px;
+}
+
+.w-135 {
+    width: 135px;
+}
+
+.w-146 {
+    width: 146px;
+}
+
+.w-174 {
+    width: 174px;
+}
+
+.w-182 {
+    width: 182px;
+}
+
+.w-205 {
+    width: 205px;
+}
+
+.w-214 {
+    width: 214px;
+}
+
+.w-225 {
+    width: 225px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.w-336 {
+    width: 336px;
+}
+
+.w-385 {
+    width: 382px;
+}
+
+.w-540 {
+    width: 540px;
+}
+
+.w-770 {
+    width: 770px;
+}
+
+.w-780 {
+    width: 780px;
+}
+
+.w-830 {
+    width: 830px;
+}
+
+.w-840 {
+    width: 840px;
+}
+
+.w-880 {
+    width: 880px;
+}
+
+.w-870 {
+    width: 870px;
+}
+
+.w-875 {
+    width: 875px;
+}
+
+.w-900 {
+    width: 900px;
+}
+
+.w-1030 {
+    width: 1030px;
+}
+
+.w-1200 {
+    width: 1200px;
+}
+
+.h-32 {
+    height: 32px;
+}
+
+.h-46 {
+    height: 46px;
+}
+
+.h-56 {
+    height: 56px;
+}
+
+.h-120 {
+    height: 120px;
+}
+
+.h-130 {
+    height: 130px;
+}
+
+.h-140 {
+    height: 140px;
+}
+
+.h-150 {
+    height: 150px;
+}
+
+.h-160 {
+    height: 160px;
+}
+
+.h-170 {
+    height: 170px;
+}
+
+.h-176 {
+    height: 176px;
+}
+
+.h-180 {
+    height: 180px;
+}
+
+.h-190 {
+    height: 190px;
+}
+
+.h-200 {
+    height: 200px;
+}
+
+.h-210 {
+    height: 210px;
+}
+
+.h-220 {
+    height: 220px;
+}
+
+.h-230 {
+    height: 230px;
+}
+
+.h-232 {
+    height: 232px;
+}
+
+.h-245 {
+    height: 245px;
+}
+
+.h-280 {
+    height: 280px;
+}
+
+.h-300 {
+    height: 300px;
+}
+
+.h-310 {
+    height: 310px;
+}
+
+.h-320 {
+    height: 320px;
+}
+
+.h-330 {
+    height: 330px;
+}
+
+.h-340 {
+    height: 340px;
+}
+
+.h-350 {
+    height: 350px;
+}
+
+.h-360 {
+    height: 360px;
+}
+
+.h-400 {
+    height: 400px;
+}
+
+.h-420 {
+    height: 420px;
+}
+
+.h-490 {
+    height: 490px;
+}
+
+.h-500 {
+    height: 500px;
+}
+
+.h-600 {
+    height: 600px;
+}
+
+.h-all {
+    height: 100%;
+}
+
+.lh-31 {
+    line-height: 31px;
+}
+
+.lh-33 {
+    line-height: 33px;
+}
+
+.lh-42 {
+    line-height: 42px;
+}
+
+.mt-44 {
+    margin-top: 44px;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.hr-st-ebebeb {
+    border-top: solid 1px #ebebeb;
+}
+
+.hr-s-ebebeb {
+    border: solid 1px #ebebeb;
+}
+
+.hr-s-f1f1f1 {
+    border: solid 1px #f1f1f1;
+}
+
+.hr-s-ff6669 {
+    border: solid 1px #ff6669;
+}
+
+.hr-ib-fff {
+    border-bottom: solid 1px transparent;
+    border-image: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, .3) 60%, rgba(0, 0, 0, .2)) 10 3 stretch;
+}
+
+.hr-s-ff3131 {
+    border: solid 1px #ff3131;
+}
+
+.hr-s-ff3032 {
+    border: solid 1px #ff3032;
+}
+
+.hr-s-ff9776 {
+    border: solid 1px #ff9776;
+}
+
+.hr-s-ffc2c3 {
+    border: solid 1px #ffc2c3;
+}
+
+.hr-s-ffcccd {
+    border: solid 1px #ffcccd;
+}
+
+.hr-s-fff1 {
+    border: solid 1px rgba(255, 255, 2555, .1);
+}
+
+.hr-sr-b3b3b3 {
+    border-right: solid 1px #b3b3b3;
+}
+
+.hr-sr-faf8f7 {
+    border-right: solid 1px #faf8f7;
+}
+
+.hr-s-dfdfdf {
+    border: solid 1px #dfdfdf;
+}
+
+.hr-st-dfdfdf {
+    border-top: solid 1px #dfdfdf;
+}
+
+.hr-sb-dfdfdf {
+    border-bottom: solid 1px #dfdfdf;
+}
+
+.hr-sr-dfdfdf {
+    border-right: solid 1px #dfdfdf;
+}
+
+.hr-sl-dfdfdf {
+    border-left: solid 1px #dfdfdf;
+}
+
+.hr-sb-f5f5f5 {
+    border-bottom: solid 1px #f5f5f5;
+}
+
+.hr-sb-ff3032 {
+    border-bottom: solid 1px #ff3032;
+}
+
+.hr-sb2-ff3032 {
+    border-bottom: solid 2px #ff3032;
+}
+
+.hr-sb-eee {
+    border-bottom: solid 1px #eee;
+}
+
+.border-collapse {
+    border-collapse: collapse;
+}
+
+.di-fl {
+    display: flex;
+}
+
+.di-tb {
+    display: table;
+}
+
+.di-tc {
+    display: table-cell;
+}
+
+.top-50m {
+    top: 50px;
+}
+
+.left-50bm {
+    left: -50%;
+}
+
+.shadow_gray {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+}
+
+.font-st {
+    font-family: 宋体;
+}
+
+.fsize-48 {
+    font-size: 48px;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
+}
+
+/* 多行文本溢出 */
+.line-overf {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-line-clamp: 2;
+}
+
+/* 单行文本溢出 */
+.txt-overh {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tabel-fixed {
+    table-layout: fixed;
+}
+
+.font-nor {
+    font-weight: normal;
+}
+
+.boxsize-b {
+    box-sizing: border-box;
+}
+
+.list-disc-in {
+    list-style: disc inside;
+}
+
+/* 垂直居中样式开始 */
+.center-ver {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 水平居中样式开始 */
+.center-hor {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 水平垂直居中样式开始 */
+.center-ver-hor {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-just {
+    text-align: justify;
+}
+
+/*
+    公共样式结束
+*/
+/*
+    背景图样式开始
+*/
+.ipam_home_public_background {
+    font-size: 16px;
+    overflow: auto;
+    background: url("../images/backgroung.jpg") no-repeat;
+    background-size: 100%;
+    height: 100%;
+}
+
+.ipam_home_public_title {
+    width: 1200px;
+    margin: 62px auto 64px auto;
+    text-align: center;
+}
+
+/*
+    背景图样式结束
+*/
+/* 蒙板样式开始 */
+/* .public_mask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(255, 255, 255, .2), rgba(0, 0, 0, .2));
+} */
+/* 蒙板样式结束 */
+/*
+    头部开始
+*/
+.ipam_home_public_header_nav_horizontal {
+    width: 1200px;
+    font-size: 16px;
+    height: 76px;
+    line-height: 76px;
+    /* background: #fff; */
+    display: table;
+    margin: 0 auto;
+    padding: 0 36px;
+    color: #808080;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: url("../images/party_home_index_menu.png") no-repeat;
+    display: flex;
+    justify-content: flex-end;
+    background-size: 100%;
+}
+.ipam_home_public_header_nav_horizontal li {
+    display: table-cell;
+    table-layout: fixed;
+    position: relative;
+    /* width: calc( (100% - 12px) / 7 ); */
+    width: 115px;
+    text-align: center;
+    cursor: pointer;
+    _zoom: 1;
+    background: none !important;
+}
+
+.ipam_home_public_header_nav_horizontal li a {
+    display: block;
+    color: #fff;
+    font-size: 16px;
+}
+
+.menu_bg2 {
+    width: 100%;
+    height: 70px;
+    background: url("../images/menu_bg2.png") no-repeat !important;
+    -webkit-animation: menubg2 1.75s steps(1) infinite;
+    display: flex;
+    justify-content: flex-end;
+    background-size: 100;
+}
+
+.ipam_home_public_title {
+    font-family: "黑体";
+    font-size: 54px;
+    font-weight: 600;
+    display: block;
+    /*渐变背景*/
+    background-image: -webkit-linear-gradient(left, #f47920, #f47920, red, #ffd400);
+    color: transparent;
+    /*文字填充色为透明*/
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    /*背景剪裁为文字，只将文字显示为背景*/
+    background-size: 80%;
+    /*背景图片向水平方向扩大一倍，这样background-position才有移动与变化的空间*/
+    /* 动画 */
+    animation: masked-animation 4s infinite linear;
+}
+
+@keyframes menubg2 {
+    5% {
+        background-position: 0 -75px;
+    }
+
+    10% {
+        background-position: 0 -150px;
+    }
+
+    15% {
+        background-position: 0 -225px;
+    }
+
+    20% {
+        background-position: 0 -300px;
+    }
+
+    25% {
+        background-position: 0 -375px;
+    }
+
+    30% {
+        background-position: 0 -450px;
+    }
+
+    35% {
+        background-position: 0 -525px;
+    }
+
+    40% {
+        background-position: 0 -600px;
+    }
+
+    45% {
+        background-position: 0 -675px;
+    }
+
+    50% {
+        background-position: 0 -750px;
+    }
+
+    55% {
+        background-position: 0 -825px;
+    }
+
+    60% {
+        background-position: 0 -900px;
+    }
+
+    65% {
+        background-position: 0 -975px;
+    }
+
+    70% {
+        background-position: 0 -1050px;
+    }
+
+    75% {
+        background-position: 0 -1125px;
+    }
+
+    80% {
+        background-position: 0 -1200px;
+    }
+
+    85% {
+        background-position: 0 -1275px;
+    }
+
+    90% {
+        background-position: 0 -1350px;
+    }
+
+    95% {
+        background-position: 0 -1425px;
+    }
+
+    100% {
+        background-position: 0 -1500px;
+    }
+
+}
+
+/*
+    头部结束
+*/
+/*
+    内容区样式开始
+*/
+.public_content {
+    /* box-sizing: border-box; */
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 36px;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-top: 16px;
+}
+
+/*
+    内容样式结束
+*/
+/*
+    footer样式开始
+*/
+.public_footer {
+    /*height: 224px;*/
+    border-top: solid 4px #c20c0c;
+    background: #f5f5f5 url("../images/index_footer.png") no-repeat top 65% right 18%;
+}
+
+.public_footer .public_footer_header {
+    height: 44px;
+    vertical-align: middle;
+    background: #dbdbdb;
+    color: #1f1f1f;
+}
+
+.public_footer .public_footer_header>span {
+    font-family: "PingFang SC Bold";
+    line-height: 44px;
+}
+
+.public_footer .public_footer_header li {
+    display: inline-block;
+    border-right: solid 1px #b1b1b1;
+    padding: 0 26px;
+}
+
+.public_footer .public_footer_header li a {
+    font-family: "PingFang SC Medium";
+    color: #1f1f1f;
+}
+
+.public_footer_content {
+    box-sizing: border-box;
+    padding: 36px 0 44px 0;
+}
+
+.public_footer .public_footer_content li {
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+    color: #757575;
+}
+
+.public_footer .public_footer_content li span:nth-child(1) {
+    padding: 0 6px;
+    border-right: solid 1px #757575;
+}
+
+.public_footer .public_footer_content li:nth-last-child(1) span {
+    border: none;
+}
+
+/*
+    footer样式结束
+*/

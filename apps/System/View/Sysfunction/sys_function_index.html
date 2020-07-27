@@ -1,0 +1,176 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">
+				<div class="layui-col-xs9">
+						{:getFunctionInfo(ACTION_NAME)}
+				</div>
+				
+				</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+					<div class="layui-col-xs12 text-r">
+							<button class="layui-btn table-add " >添加</button>
+						</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-f60 layui-btn-xs" lay-event="child">子模块</a>
+						<a class="layui-btn layui-btn-f60 layui-btn-xs" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-del layui-btn-xs"  lay-event="del">删除</a>
+						{{#  if(d.status == 1){ }}
+							<a class="layui-btn layui-btn-del layui-btn-xs"  lay-event="disable">停用</a>
+						{{#  } else{ }}
+							<a class="layui-btn layui-btn-f60 layui-btn-xs"  lay-event="enable">启用</a>
+						{{#  } }}
+						
+					</script>
+					<script type="text/html" id="user_status">
+						
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('sys_function_index')}"
+			,cellMinWidth: 80
+			,height:'full-155'
+			,cols: [[
+				{field:'function_id', title:'菜单ID',align: 'center', unresize: true, sort: true}
+				,{field:'function_name', title:'菜单名称'}
+				,{field:'function_code', title: '菜单编码',align: 'center', sort: true}
+				,{field:'status_name', title:'状态',align: 'center'}
+				,{field:'operate', title:'操作', width:'20%',align: 'center' ,toolbar: '#barDemo'}
+			]]
+			,page: false
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'child'){
+				window.location='{:U("sys_function_edit")}?function_id='+data.function_id+'&add=1';
+			}else if(obj.event === 'edit'){
+				window.location='{:U("sys_function_edit")}?function_id='+data.function_id+'&edit=1';
+			}else if(obj.event === 'del'){
+				layer.confirm('确认删除？子级菜单也将被删除！', function(index){
+						obj.del();
+						$.ajax({
+							url:"{:U('sys_function_do_del')}",
+							type:'get',
+							data:{'function_id':data.function_id,'type':'2'},
+							success: function (data) {
+								if(data.status == 1){
+									layer.msg(data.msg, {
+									  icon: 6
+									  ,time: 2000
+									});
+									location.reload();
+								}else{
+									layer.msg(data.msg, {
+									  icon: 5
+									  ,time: 2000
+									});
+								}
+							}
+						})
+						layer.close(index);
+						location.reload();
+					});
+			}else if(obj.event === 'disable'){
+				layer.confirm('确认停用？子级菜单也将被停用！', function(index){
+						obj.del();
+						$.ajax({
+							url:"{:U('sys_function_do_del')}",
+							type:'get',
+							data:{'function_id':data.function_id},
+							success: function (data) {
+								if(data.status == 1){
+									layer.msg(data.msg, {
+									  icon: 6
+									  ,time: 2000
+									});
+									location.reload();
+								}else{
+									layer.msg(data.msg, {
+									  icon: 5
+									  ,time: 2000
+									});
+								}
+							}
+						})
+						layer.close(index);
+						location.reload();
+					});
+			}else if(obj.event === 'enable'){
+				layer.confirm('确认启用？子级菜单也将被启用！', function(index){
+						obj.del();
+						$.ajax({
+							url:"{:U('sys_function_do_del')}",
+							type:'get',
+							data:{'function_id':data.function_id,'type':'1'},
+							success: function (data) {
+								if(data.status == 1){
+									layer.msg(data.msg, {
+									  icon: 6
+									  ,time: 2000
+									});
+									location.reload();
+								}else{
+									layer.msg(data.msg, {
+									  icon: 5
+									  ,time: 2000
+									});
+								}
+							}
+						})
+						layer.close(index);
+						location.reload();
+					});
+			}
+		});
+	});
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+		form.on('submit(component-form-element)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#test1',
+			range: true
+		});
+	})
+	//添加按钮的点击事件
+	$(".table-add").click(function () {
+		layer.open({
+			type: 2,
+			title:'{:getFunctionInfo(ACTION_NAME)}',
+			area:['1000px', '450px'],
+			content: "{:u('sys_function_edit',array('add'=>1))}" //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+		});
+	})
+	
+</script>
+</block>

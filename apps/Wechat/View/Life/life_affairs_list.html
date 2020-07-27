@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>党务动态</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_home.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/cms/css/cms_partyWork.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+header ul li{
+	display: block; !important;
+}
+section {
+	display: block !important;
+}
+</style>
+</head>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-info">
+<ul>
+	<li>
+		<a class="aui-pull-left" href="{:U('Index/index')}">
+			<span class="aui-iconfont aui-icon-left"></span>首页
+		</a> 		
+		<div class="aui-title icon_medium f-16em">三务公开</div>
+	</li>
+</ul>
+</header>
+<div class="aui-load-container" style="padding-top:3.7rem;">
+	<div class="aui-content">
+		<div class="mt-12em pl-8em pr-8em">
+			<ul>
+			<volist name="affairs_info" id="affairs">
+				<li class="mb-12em over-h bb-3em-e6 pb-10em" >
+				<a href="{:U('Life/life_affairs_info', array('article_id' => $affairs['article_id']))}">
+					<div class="pull-left w-120em h-90em">
+						<img class=" w-120em h-90em bor-ra-3" src="{$affairs.article_thumb}">
+					</div>
+					<div class="pull-left over-h w-230em ml-8em">
+					   <div class="pull-left w-216em mt-12em">
+					        <div class="f-16em color-33 f-w">{$affairs.article_title}</div>
+					        <div class="pull-left color-a4 f-11em pt-5em">{$affairs.add_staff}</div>
+					        <div class="pull-right color-a4 mt-5em f-11em">{$affairs.add_time}</div>
+	                    </div>
+	                </div>
+	            </a>
+				</li>
+			</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/jscript" src="js/cms_partyWork_list1.js"></script>
+<script type="text/javascript">
+</script>
+</html>

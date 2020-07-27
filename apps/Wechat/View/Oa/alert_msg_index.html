@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice.css" />
+
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+	.w-9em{width: 0.45rem !important;}
+	.h-19em{height: 0.95rem !important;}
+	.article_over_one{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    background-size: 100% 100%;}
+</style>
+</head>
+<body>
+<div class="aui-bar aui-bar-nav aui-bar-info ">
+    <ul>
+    	<li class="h-45em">
+    		<a class="aui-pull-left" href="{:U('Wechat/Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>返回
+			</a> 
+    		<div class="aui-title f-w">消息提醒</div>
+    	</li>
+    </ul>
+</div>
+<ul class="bb-1-dfdfdf" id="tabBox2">
+	<li id="name1" <eq name="status" value="1"> class="mt-5em mb-5em tabBox2-active" <else/>class="mt-5em mb-5em " </eq>   ><a href="{:U('Oa/alert_msg_index',array('status'=>1))}">未读</a><span class="active"></span></li>
+	<li id="name2" <eq name="status" value="2"> class="mt-5em mb-5em tabBox2-active" <else/>class="mt-5em mb-5em " </eq>><a href="{:U('Oa/alert_msg_index',array('status'=>2))}" >已读</a><span class="active"></span></li>
+</ul>
+<div class="ml-8em mr-8em mt-12em bg-color-whiter" id="listBox">
+	<volist name="alert_list" id="list">
+		<div class="over-h bb-1-dfdfdf" >
+			<a href="{:U('Oa/alert_msg_info',array('alert_id'=>$list['alert_id']))}">
+				<div class="pull-left w-100b pb-10em pl-10">
+					<p class="over-h pt-15em"><i class="pull-left mr-6em"></i><span class="pull-left f-15em color-33 article_over_one w-200">{$list.alert_man}</span><span class="pull-right h-15em text-align f-10em lh-15em color-ffba66">{$list.add_time}</span></p>
+					<p class="f-12em color-33 pt-4em">{$list.alert_title}</p>
+				</div>
+			</a>
+		</div>
+	</volist>
+</div>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice.js"></script>
+</body>
+</html>

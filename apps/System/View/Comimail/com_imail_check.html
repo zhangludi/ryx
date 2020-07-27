@@ -1,0 +1,49 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <!-- BEGIN PAGE TITLE-->
+                    <h3 class="page-title"><php>echo getFunctionInfo(ACTION_NAME);</php>
+                        <small>用于修改或添加文章类型</small>
+                    </h3>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN VALIDATION STATES-->
+                            <div class="portlet light portlet-fit portlet-form bordered">
+                                <div class="portlet-body">
+                                    
+                                    <form action="{:U('com_imail_check_save')}" method="post" class="form-horizontal">
+                                        <div class="form-body">
+                                        	<input type="hidden" class="form-control" name="imail_id" value="{$imail_id}">
+                                            <div class="alert alert-danger display-hide">
+                                                <button class="close" data-close="alert"></button>你输入有错误。请检查下面输入是否正确。</div>
+                                            <div class="alert alert-success display-hide">
+                                                <button class="close" data-close="alert"></button>您的表单验证成功！</div>
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><span class="required"> * </span>备注</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="memo" class="form-control" value="" /> </div>
+                                            </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button type="submit" class="btn green">提交</button>
+                                                    <button type="button" class="btn grey-salsa btn-outline">取消</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </block>
+	<block name="js"></block>

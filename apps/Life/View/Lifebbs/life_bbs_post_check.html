@@ -1,0 +1,193 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+		<div class="page-container">
+			<div class="page-content-wrapper">
+				<div class="page-content">
+					<div class="portlet light portlet-fit portlet-form bordered" id="tab_2">
+						<div class="portlet-body">
+							<form action="{:U('life_bbs_post_check_save')}" id="form" method="post" class="form-horizontal">
+								<div class="form-body">
+									<div class="row">
+										<div class="alert alert-danger display-hide">
+											<button class="close" data-close="alert"></button>你输入有错误。请检查下面输入是否正确。
+										</div>
+										<div class="alert alert-success display-hide">
+											<button class="close" data-close="alert"></button>您的表单验证成功！
+										</div>
+										<input type="hidden" class="form-control" id="status" name="status" value="">
+										<input type="hidden" class="form-control" name="post_id" value="{$bbs_data.post_id}">
+										<!--row-->
+										<div class="form-group  mt-5 col-sm-12 ">
+											<div class="row">
+				                              <div class="col-xs-4 pr-0 text-r lh-35">
+				                               		<b>主题：</b>
+				                              </div>
+				                              <div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$bbs_data.post_theme}</span>
+				                              </div>
+				                            </div>
+				                            <div class="row">
+				                              <div class="col-xs-4 pr-0 text-r lh-35">
+				                               		<b>内容：</b>
+				                              </div>
+				                              <div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$bbs_data.post_content}</span>
+				                              </div>
+				                            </div>
+				                            <div class="row">
+				                              	<div class="col-xs-4 pr-0 text-r lh-35 ">
+				                                	<b>提交人：</b>
+				                              	</div>
+				                              	<div class="col-xs-8 pl-0 lh-35">
+				                                 	<span class="di-b">{$bbs_data.communist_name}</span>
+				                              	</div>
+				                            </div>
+											<!--row-->
+											<div class="form-group  mt-5 col-sm-12 ">
+												<div class="row">
+													<label class="control-label col-sm-2 pr-0">审批意见
+														<span class="required">  </span>
+													</label>
+													<div class="col-sm-9">
+														<div class="input-icon right">
+															<i class="fa"></i>
+															<textarea id="maxlength_textarea" name="post_auth_opinion" class="  form-control " maxlength="800" rows="4" placeholder="这个文本域的最大长度为225个字符.">{$bbs_data.post_auth_opinion}</textarea>
+														</div>
+													</div>
+												</div>
+											</div> 
+											<!--row-->
+										<div class="col-md-12">
+											<button type="button" onclick="btnsave(2);" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">驳回</button>
+											<button type="button" onclick="btnsave(1);" class="btn btn-sm blue w-75 bor-ra-2 mr-10 pull-right">通过</button>
+										</div>
+									 </div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	 </block> 
+	<block name="js">
+		<script>
+			function btnsave(status){
+				$("#status").val(status);
+				$("#form").submit();
+			}
+		</script>
+		<!-- layer -->
+		<script>
+			var FormValidation = function () {
+				var handleValidation2 = function() {
+					var form2 = $('#form_sample_2');
+					var error2 = $('.alert-danger', form2);
+					var success2 = $('.alert-success', form2);
+					form2.validate({
+						errorElement: 'span', //default input error message container
+						errorClass: 'help-block help-block-error', // default input error message class
+						focusInvalid: false, // do not focus the last invalid input
+						ignore: "",  // validate all fields including form hidden input
+						rules: {
+							article_title: {
+								minlength: 2,
+								required: true
+							},
+							article_keyword: {
+								minlength: 2,
+								required: true
+							},
+							/* 模版验证样式 */
+							/*name: {
+								minlength: 2,
+								required: true
+							},
+							email: {
+								required: true,
+								email: true
+							},
+							email: {
+								required: true,
+								email: true
+							},
+							url: {
+								required: true,
+								url: true
+							},
+							number: {
+								required: true,
+								number: true
+							},
+							digits: {
+								required: true,
+								digits: true
+							},
+							creditcard: {
+								required: true,
+								creditcard: true
+							},*/
+							/* 模版验证样式 */
+						},
+
+						invalidHandler: function (event, validator) { //display error alert on form submit              
+							success2.hide();
+							error2.show();
+							App.scrollTo(error2, -200);
+						},
+
+						errorPlacement: function (error, element) { // render error placement for each input type
+							var icon = $(element).parent('.input-icon').children('i');
+							icon.removeClass('fa-check').addClass("fa-warning");  
+							icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+						},
+
+						highlight: function (element) { // hightlight error inputs
+							$(element)
+								.closest('.form-group').removeClass("has-success").addClass('has-error'); // set error class to the control group   
+						},
+
+						unhighlight: function (element) { // revert the change done by hightlight
+							
+						},
+
+						success: function (label, element) {
+							var icon = $(element).parent('.input-icon').children('i');
+							$(element).closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+							icon.removeClass("fa-warning").addClass("fa-check");
+						},
+
+						submitHandler: function (form) {
+							success2.show();
+							error2.hide();
+							form[0].submit(); // submit the form
+						}
+					});
+				}
+				var handleWysihtml5 = function() {
+					if (!jQuery().wysihtml5) {
+						
+						return;
+					}
+
+					if ($('.wysihtml5').size() > 0) {
+						$('.wysihtml5').wysihtml5({
+							"stylesheets": ["../assets/global/plugins/bootstrap-wysihtml5/wysiwyg-color.css"]
+						});
+					}
+				}
+				return {
+					//main function to initiate the module
+					init: function () {
+
+						handleWysihtml5();
+						handleValidation2();
+					}
+				};
+			}();
+			jQuery(document).ready(function() {
+				FormValidation.init();
+			});
+		</script>
+</block>

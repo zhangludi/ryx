@@ -1,0 +1,38 @@
+{
+  "code": 0
+,"msg": ""
+  ,"title":"特色示例页"
+,"data": [
+  {
+  "name": "template"
+,"title": "模板"
+,"icon": "layui-icon-home"
+,"list": [{
+    "name": "user"
+  ,"title": "登录"
+  ,"spread": false
+  ,"jump":"./views/sp_cust/sp_istore_login.html"
+  },{
+    "name": "user"
+  ,"title": "注册"
+  ,"spread": false
+  ,"jump":"./views/sp_cust/sp_istore_register.html"
+  },{
+    "name": "user"
+  ,"title": "忘记密码"
+  ,"spread": false
+  ,"jump":"./views/official/user/forget.html"
+  },{
+    "name": "user"
+  ,"title": "404"
+  ,"spread": false
+  ,"jump":"./views/official/template/tips/404.html"
+  },{
+    "name": "user"
+  ,"title": "页面不存在"
+  ,"spread": false
+  ,"jump":"./views/official/template/tips/error.html"
+  }
+ ]
+}]
+}

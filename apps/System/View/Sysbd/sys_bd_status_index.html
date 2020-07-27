@@ -1,0 +1,185 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid " >
+	<div class="layui-row layui-col-space10">
+		<div class="layui-col-md3">
+			<div class="layui-card">
+				<form class="layui-form">
+					<div class="layui-card-header">分组</div>
+					<div class="layui-card-body" style="overflow: auto;">
+						<div class="over-h-tree">
+							<ul id="treeDemo" class="ztree ztree-demo">
+
+							</ul>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="layui-col-md9">
+			<div class="layui-row">
+				<div class="layui-col-xs12">
+					<div class="layui-card">
+						<div class="layui-card-header">基础资料列表</div>
+						<div class="layui-form layui-card-body fitheight">
+							<div class="layui-row layui-col-space5">
+								
+								<div class="layui-col-xs2 pull-right">
+									<!-- <button class="layui-btn" >查询</button> -->
+									<button class="layui-btn table-add " >添加</button>
+								</div>
+
+							</div>
+							<table class="layui-hide" id="ztreedata"  lay-filter="demo">
+
+							</table>
+							
+								<script type="text/html" id="barDemo">
+									<a class=" layui-btn layui-btn-f60 layui-btn-xs" lay-event="edit">编辑</a>
+									<a class="layui-btn  layui-btn-xs layui-btn-del" lay-event="del">删除</a>
+								</script>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use(['element','form'], function() {
+		var $ = layui.$
+				, admin = layui.admin
+				, element = layui.element
+				, form = layui.form
+				, router = layui.router();
+		form.render();
+
+
+//            默认显示的 表格
+		layui.use('table', function () {
+			var table = layui.table;
+			table.render({
+				elem: '#ztreedata'
+				, url: '{:U("sys_bd_status_index_data")}'
+				, height: 'full-155'
+				, cols: [[
+					{field: 'num',  title: '序号', sort: true}
+					, {field: 'status_no',  title: '状态编号'}
+					, {field: 'status_name',  title: '状态名称', sort: true}
+					, {field: 'status_value',  title: '状态值', sort: true}
+					, {field: 'operate', title: '操作', align: 'center', toolbar: '#barDemo'}
+				]]
+				, page: true
+			});
+			table.on('tool(demo)', function(obj){
+				var data = obj.data;
+				if(obj.event === 'del'){
+					$.ajax({
+							url:"{:U('sys_bd_status_do_del')}",
+							type:'get',
+							data:{'status_id':data.status_id},
+							success: function (data) {
+								alert('操作成功！');
+								location.reload();
+								// if(data.status == 1){
+								// 	alert('操作成功！');
+								// 	location.reload();
+								// }else{
+								// 	alert('操作失败！');
+								// 	location.reload();
+								// }
+							}
+						})
+						location.reload();
+				}else if(obj.event === 'edit'){
+					layer.open({
+						type: 2,
+						title:'{:getFunctionInfo(ACTION_NAME)}',
+						area:['1000px', '450px'],
+						content: '{:U("sys_bd_status_edit")}?status_id='+data.status_id //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+					});
+				}
+			});
+		});
+		
+		//点击左侧树的事件
+		var setting = {
+			view: {
+				showLine: false,
+
+			},
+
+			data: {
+				key: {
+					title: "t"
+				},
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+//                    if (node.pId != null&&node.urltree!=null) {
+						layui.use('table', function () {
+							var table = layui.table;
+							table.render({
+								elem: '#ztreedata'
+								, url: '{:U("sys_bd_status_index_data")}?group_id='+node.id
+								, height: 'full-155'
+								, cols: [[
+									{field: 'num',  title: '序号', sort: true}
+									, {field: 'status_no',  title: '状态编号'}
+									, {field: 'status_name',  title: '状态名称', sort: true}
+									, {field: 'status_value',  title: '状态值', sort: true}
+									, {field: 'operate', title: '操作', align: 'center', toolbar: '#barDemo'}
+								]]
+								, page: true
+							});
+						});
+//                    }
+
+				}
+			}
+		};
+
+		var zNodes = [
+			<volist name="group_list" id="list">
+			{ id:"{$list.group_id}",pId:"{$list.group_pid}", name:"["+"{$list.group_id}"+"]"+"{$list.group_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia.png",open:true},
+			</volist>
+		];
+
+		$(document).ready(function () {
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		});
+	})
+	//添加按钮的点击事件
+	$(".table-add").click(function () {
+		layer.open({
+			type: 2,
+			title:'{:getFunctionInfo(ACTION_NAME)}',
+			area:['1000px', '450px'],
+			content: "{:u('sys_bd_status_edit')}" //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+		});
+	})
+</script>
+<script>
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+
+		//常规用法
+		laydate.render({
+			elem: '#test1'
+		});
+	})
+</script>
+<script>
+	$(".over-h-tree").css("height",($(window).height() - 95));
+</script>
+</block>

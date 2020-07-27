@@ -1,0 +1,416 @@
+/*ipam_edu_index
+    edu页css公共页
+*/
+/*
+    头部样式
+*/
+
+
+.ipam_home_public_background {
+  background-size: cover;
+}
+
+// 内容
+.public_content {
+  background: #ffffff;
+
+  .public_content_special {
+    width: 1200px;
+    height: 480px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+
+    .public_content_special_top {
+      display: flex;
+      padding: 32px;
+      height: 263px;
+      box-sizing: border-box;
+
+      .special_left {
+        width: 383px;
+        height: 215px;
+        background: rgba(255, 82, 82, 1);
+        border-radius: 10px;
+      }
+
+      .special_right {
+        flex: 1;
+        margin: 5px 0 0 30px;
+
+        h3 {
+          font-size: 36px;
+          font-family: SourceHanSansSC-Medium;
+          font-weight: 500;
+          color: rgba(33, 33, 33, 1);
+          margin: 5px 0 20px 0;
+        }
+
+        .special_schedule {
+          margin-top: 30px;
+
+          p {
+            font-size: 16px;
+            font-family: SourceHanSansSC-Regular;
+            font-weight: 400;
+            color: rgba(33, 33, 33, 1);
+            line-height: 22px;
+          }
+
+          .layui-progress {
+            margin: 10px 0;
+          }
+        }
+
+        .special_class {
+          font-size: 16px;
+          font-family: SourceHanSansSC-Regular;
+          font-weight: 400;
+          color: #666666;
+          line-height: 22px;
+
+          .special_classes {
+            margin-right: 10px;
+
+            span {
+              margin-left: 5px;
+              font-size: 16px;
+              font-family: SourceHanSansSC-Regular;
+              font-weight: 400;
+              color: rgba(102, 102, 102, 1);
+              line-height: 22px;
+            }
+
+            i {
+              margin-right: 3px;
+            }
+          }
+
+          a {
+            &:hover {
+              color: #FF594B;
+            }
+          }
+        }
+      }
+    }
+
+    .public_content_special_video {
+      height: 217px;
+      background: url('../images/ipam_edu_bgvideo.png');
+      background-size: 1200px 217px;
+      position: relative;
+      padding: 0 30px;
+      box-sizing: border-box;
+      display: flex;
+
+      .special_video_start {
+        position: absolute;
+        transform: translateX(-50%);
+        left: 58%;
+        top: 6%;
+      }
+
+      .special_video_left {
+        margin-top: 8%;
+
+        .special_video_left_tit {
+          font-size: 14px;
+          font-family: SourceHanSansSC-Regular;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 1);
+          line-height: 50px;
+        }
+
+        .special_video_left_module_icon {
+          margin-right: 40px;
+          padding-left: 10px;
+
+          .special_video_left_module_icons {
+            display: block;
+            // background: rgba(0, 0, 0, 0.3);
+            float: left;
+            margin-right: 13px;
+            position: relative;
+            transform: skew(-27deg);
+            width: 26px;
+            height: 41px;
+            background: rgba(0, 0, 0, 0.13);
+            // opacity: 0.13;
+            border-radius: 16px;
+
+            img {
+              position: absolute;
+              left: 28%;
+              top: 33%;
+              transform: skew(25deg);
+            }
+
+            .last {
+              left: 7px;
+              top: 13px;
+            }
+          }
+        }
+
+        .special_video_left_num {
+          margin-right: 70px;
+
+          p {
+            text-align: center;
+            font-size: 48px;
+            font-family: SourceHanSansSC-Bold;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 30px;
+            margin-top: 11%;
+          }
+        }
+
+        .special_video_border {
+          width: 1px;
+          height: 33px;
+          background: rgba(255, 186, 48, 1);
+          position: absolute;
+          left: 140%;
+          top: 54%;
+        }
+      }
+
+      .special_video_btn {
+        position: absolute;
+        left: 44%;
+        top: 69%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+
+        div {
+          font-size: 16px;
+          font-family: 宋体;
+          font-weight: 600;
+          background-color: #ff8638;
+          border-radius: 50%;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, .5);
+            border-radius: 50%;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .special_video_right {
+        flex: 1;
+      }
+    }
+  }
+
+
+  // 个性化专题
+  .public_content_topic {
+    margin-top: 70px;
+
+    .public_topic_title {
+      text-align: center;
+
+      h3 {
+        font-size: 36px;
+        font-family: SourceHanSansSC-Medium;
+        font-weight: 500;
+        color: rgba(33, 33, 33, 1);
+      }
+
+      p {
+        width: 765px;
+        font-family: SourceHanSansSC-Light;
+        font-weight: 300;
+        color: rgba(102, 102, 102, 1);
+        line-height: 27px;
+        margin: 2% auto;
+      }
+
+      a {
+        width: 200px;
+        height: 48px;
+        display: inline-block;
+        line-height: 48px;
+        text-align: center;
+        background: linear-gradient(90deg, rgba(255, 48, 50, 1), rgba(255, 90, 45, 1));
+        border-radius: 24px;
+        cursor: pointer;
+        color: #fff;
+      }
+    }
+
+    .public_topic_list {
+      margin: 50px 14px;
+      border: 1px solid #fff;
+      text-align: center;
+
+      span {
+        width: 144px;
+        height: 144px;
+        border-radius: 10px;
+        margin-right: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          margin-top: 8px;
+        }
+      }
+
+      .topic_list_hover {
+        background-color: #fff;
+        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.08);
+      }
+
+      .topic_list_f5f5 {
+        background: #F5F5F5;
+      }
+    }
+
+  }
+
+  // 学习笔记
+  .public_content_notes {
+    margin-top: 30px;
+    width: 1200px;
+    height: 567px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 26px 24px;
+    box-sizing: border-box;
+
+    .public_notes_title {
+      height: 60px;
+
+      a {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 100px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        font-size: 14px;
+        font-family: SourceHanSansSC-Regular;
+        font-weight: 400;
+        color: rgba(33, 33, 33, 1);
+
+        &:hover {
+          background: linear-gradient(90deg, rgba(255, 48, 50, 1), rgba(255, 90, 45, 1));
+          color: #fff;
+          border-radius: 16px;
+        }
+      }
+
+      .notes_active {
+        background: linear-gradient(90deg, rgba(255, 48, 50, 1), rgba(255, 90, 45, 1));
+        color: #fff;
+        border-radius: 16px;
+      }
+    }
+
+    table {
+      thead {
+        border: 1px solid #DEDEDE;
+
+        th {
+          font-size: 20px;
+          font-family: SourceHanSansSC-Regular;
+          font-weight: 400;
+          color: rgba(102, 102, 102, 1);
+        }
+      }
+
+      tbody {
+        height: 400px;
+        border: 1px solid #F0F0F0;
+
+        td {
+          font-size: 20px;
+          font-family: SourceHanSansSC-Regular;
+          font-weight: 400;
+          color: rgba(158, 158, 158, 1);
+          padding: 10px;
+          box-sizing: border-box;
+          text-align: right;
+          vertical-align: bottom;
+          position: relative;
+
+          .red_dot {
+            width: 16px;
+            height: 16px;
+            background: rgba(255, 71, 51, 1);
+            box-shadow: 0px 4px 12px 0px rgba(255, 71, 51, 0.62);
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+          }
+        }
+      }
+    }
+  }
+
+  // 学习实况
+  .public_content_article {
+    padding: 70px 0;
+
+    .public_article_list {
+      margin-top: 30px;
+      img {
+        display: block;
+      }
+      h3 {
+        font-size: 28px;
+        font-family: MicrosoftYaHei-Bold;
+        font-weight: bold;
+        color: rgba(33, 33, 33, 1);
+      }
+      p {
+        font-size: 16px;
+        font-family: MicrosoftYaHei;
+        font-weight: 400;
+        color: rgba(158, 158, 158, 1);
+        width: 481px;
+        height: 71px;
+        padding: 27px 0;
+        border-bottom: 1px  solid #ccc;
+      }
+      li{
+        font-size:18px;
+        font-family:MicrosoftYaHei;
+        font-weight:400;
+        color:rgba(102,102,102,1);
+        line-height: 30px;
+        padding-left: 20px;
+        position: relative;
+        .public_article_dot{
+          display: inline-block;
+          width:8px;
+          height:8px;
+          background:rgba(217,217,217,1);
+          border-radius:50%;
+          position: absolute;
+          left: 0;
+          top: 43%;
+        }
+      }
+      .public_article_more{
+        font-size:18px;
+        font-family:SourceHanSansSC-Regular;
+        font-weight:600;
+        color:rgba(255,64,64,1);
+        float: right;
+      }
+    }
+  }
+}

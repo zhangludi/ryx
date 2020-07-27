@@ -1,0 +1,92 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs11 text-r">
+							<button class="layui-btn table-add " onclick="role_edit()">添加</button>
+						</div>
+					</div>
+					<table class="layui-hide" id="demo" lay-filter="demo"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+layui.use(['element','form'], function() {
+    var $ = layui.$
+    , admin = layui.admin
+    , element = layui.element
+    , form = layui.form
+    , router = layui.router();
+    form.render();
+    // 默认显示的 表格
+    layui.use('table', function () {
+        var table = layui.table;
+        table.render({
+            elem: '#demo'
+            , url: "{:U('Sysauth/sys_role_index_data')}"
+            , height: 'full-160'
+            , id: 'ztreedata'
+            , cols: [[
+                {field:'role_id', title:'角色编号',align: 'center', width:100, sort: true}
+				,{field:'role_name', title:'角色名'}
+				,{field:'role_type', title: '角色类型'}
+				,{field:'add_staff', title:'操作人'}
+				,{field:'update_time', title:'操作时间' }
+				,{field:'statusname', title:'状态' }
+				,{field:'operate', title:'操作',align: 'center', width:180}
+            ]]
+            , page: false
+        });
+      
+        $('.layui-form .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+});
+
+layui.use([ 'form'], function(){
+	var $ = layui.$
+			,admin = layui.admin
+			,element = layui.element
+			,form = layui.form;
+	form.render()
+	form.render(null, 'component-form-element');
+	form.on('submit(component-form-element)', function(data){
+		layer.msg(JSON.stringify(data.field));
+		return false;
+	});
+});
+//时间选择器
+layui.use('laydate', function() {
+	var laydate = layui.laydate;
+	//常规用法
+	laydate.render({
+		elem: '#test1',
+		range: true
+	});
+})
+function role_edit(role_id) {
+	 layer.open({
+		type: 2,
+		offset: window.parent.document.body.scrollTop+10+'%',
+		title: '新增角色信息',
+		maxmin: false,
+		shadeClose: true, //点击遮罩关闭层
+		area: ['800px', '380px'],
+		content: "{:U('System/Sysauth/sys_role_edit')}?role_id="+role_id
+	});
+}
+
+</script>
+</block>

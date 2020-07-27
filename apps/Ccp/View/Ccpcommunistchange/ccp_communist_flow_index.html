@@ -1,0 +1,186 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body"> 
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <form class="layui-form">
+                    <div class="layui-card-header" style="position: relative;">
+                        <span>党组织列表</span>
+                    </div>
+                    <div class="layui-card-body" style="overflow-y:auto">
+                        <div class="over-h-tree">
+                            <ul id="treeDemo" class="ztree ztree-demo">
+
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="党员流动">党员流动</div>
+                        <div class="layui-form layui-card-body fitheight">
+                            <div class="layui-row layui-col-space5">
+                                <div class="layui-col-xs12 ">
+	                                <input type="hidden" value="{$type}" id="type"  />
+	                                <switch name="type">
+										<case value="mobile_join">
+		                                   	<div class="layui-col-xs2 pull-right">
+												<a  href='javascript:void(0);'data-type="add"  party_no=""  class="layui-btn table-add ">党员添加</a>
+		                                    </div>
+												
+										</case><break/>
+										<case value="mobile_out">
+		                                     <div class="layui-col-xs2 pull-right">
+												<a  onclick="quit(this)"class="layui-btn table-add add"  >党员流动</a>
+		                                    </div>
+										</case><break/>
+									</switch>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="demo"  lay-filter="demo">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script >
+$().ready(function(){
+    $(".add").css("visibility","hidden");
+});
+ layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: "{:U('Ccpcommunistchange/ccp_communist_flow_index_data')}?type={$type}"
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'change_id', width: 100, title: '编号', sort: true}
+                    , {field: 'communist_name', title: '姓名',width: 100}
+                    , {field: 'communist_mobile',width: 140, title: '手机号'}
+                    , {field: 'old_party',width: 120, title: '原属组织'}
+                    , {field: 'new_party', width: 120, title: '现属组织'}
+                    , {field: 'change_type', width: 100, title: '转移类型'}
+                    , {field: 'memo', width: 160, title: '转出说明'}
+                    , {field: 'update_time', width: 150, title: '转出时间'}
+                    , {field: 'change_audit_status', width: 100, title: '状态'}
+                    , {field: 'operate', width: 180, title: '操作'}
+                ]]
+                , page: true
+            });
+            var $ = layui.$, active = {
+                add: function(){
+                    var party_no = $('#party').val();
+                    var index = layer.open({
+                        type: 2,
+                        title: false,
+                        end:false,
+                        closeBtn: 0,
+                        shift: 1,
+                        area : ['800px' , '400px'],
+                        content: "{:U('Ccp/Ccpcommunist/ccp_communist_edit')}?type=4",
+                    });
+                    layer.full(index);
+                }
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        //点击左侧树的事件
+        var setting = {
+            view: {
+                showLine: false,
+            },
+            data: {
+                key: {
+                    title: "t"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                	$('.add').attr('party_no',node.id);
+					$(".add").css("visibility","visible");
+                    var type = $('#type').val();
+                    layui.use('table', function () {
+                        var table = layui.table;
+                        table.render({
+                            elem: '#demo'
+                            , url: '{:U("Ccpcommunistchange/ccp_communist_flow_index_data")}?party_no='+node.id+'&type='+type+''
+                            , height: 'full-160'
+                            , cols: [[
+                                {field: 'change_id', width: 100, title: '编号', sort: true}
+			                    , {field: 'communist_name', title: '姓名',width: 100}
+			                    , {field: 'communist_mobile',width: 140, title: '手机号'}
+			                    , {field: 'old_party',width: 120, title: '原属组织'}
+			                    , {field: 'new_party', width: 120, title: '现属组织'}
+			                    , {field: 'change_type', width: 100, title: '转移类型'}
+			                    , {field: 'memo', width: 160, title: '转出说明'}
+			                    , {field: 'update_time', width: 150, title: '转出时间'}
+			                    , {field: 'change_audit_status', width: 100, title: '状态'}
+			                    , {field: 'operate', width: 180, title: '操作'}
+                            ]]
+                            , page: true
+                        });
+                    });
+                }
+            }
+        };
+        var zNodes = [
+            <volist name="party_list" id="list" key = 'k'>
+                {id:"{$list.party_no}", pId:"{$list.party_pno}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+            </volist>
+        ];
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+    })
+    $(".over-h-tree").css("height",($(window).height() - 95));
+</script>
+<script >
+//关系转出添加
+function quit(obj) {
+	var status = "mobile";
+	var party_no = $(obj).attr('party_no');
+	var type = $('#type').val();
+	var href = "{:U('Ccpcommunistchange/ccp_communist_flow_edit')}?status="+status+"&party_no="+party_no+"&type="+type;
+	layer.open({
+		type: 2,
+		title: '状态改变',
+		maxmin: false,
+		shadeClose: false, //点击遮罩关闭层
+		offset: window.parent.document.body.scrollTop+10+'px',
+		area : ['500px' , '450px'],
+		content: href,
+		success:function(){
+        	layerAuto();
+        }
+	});
+};
+
+</script>
+</block>

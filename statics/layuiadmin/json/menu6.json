@@ -1,0 +1,18 @@
+{
+  "code": 0
+,"msg": ""
+  ,"title":"v4说明"
+,"data": [
+  {
+    "name": "template",
+    "title": "原版说明",
+    "icon": "layui-icon-home",
+    "jump": "./views/manual/official.html"
+  },{
+    "name": "template",
+    "title": "修改说明",
+    "icon": "layui-icon-home",
+    "jump":"./views/manual/simpro.html"
+  }
+ ]
+}

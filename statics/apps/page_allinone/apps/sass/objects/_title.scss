@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+$title_icon-size : 118px;
+$title_txt-h : 130px;
+$title_txt-w : 930px;
+$title-space-t: 200px;
+$title-space-b: 80px;
+$title_photo-r: 64px;
+$title_photo-t: 48px;
+$title_photo-w: 48px;
+$photo-border-w: 4px;
+$title_photo-size: $title_photo-w - 2 * $photo-border-w;
+
+@mixin img-objfit($width, $height, $obj-fit){
+  width: $width;
+  height: $height;
+  object-fit: $obj-fit;
+}
+
+.title{
+  @include l-flex-center;
+  padding-top: $title-space-t;
+  padding-bottom: $title-space-b;
+  position: relative;
+}
+
+.title-icon{
+  @include img-objfit($title_icon-size, $title_icon-size, contain);
+}
+
+.title-txt{
+  @include img-objfit($title-txt-w, $title-txt-h, contain);
+}
+
+.title_photo{
+  position: absolute;
+  right: $title_photo-r;
+  top: $title_photo-t;
+}
+
+.title_pic-box{
+  float: left;
+  width: $title_photo-w;
+  height: $title_photo-w;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: solid $photo-border-w rgba(255, 255, 255, .2);
+  overflow: hidden;
+}
+
+.title_picture{
+  @include img-objfit($title_photo-size, $title_photo-size ,cover);
+}
+
+.title_name{
+  float: left;
+  line-height: $title_photo-w;
+  @include whites(default);
+  @include font-sizes(l2);
+  opacity: .8;
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>   
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+</head>
+<style>
+header ul li{
+	display: block; !important;
+}
+img {
+    display: inline-block;
+}
+</style>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>	    		
+    		<div class="aui-title icon_medium f-16em">学习</div>
+    	</li>
+    </ul>
+</header>
+<!-- <section>
+    <div class="w-100b h-98em bg-color-fb4747 po-ab top-0em"></div>
+</section> -->
+
+<footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="background: #f4f4f4;">
+    <ul class="aui-bar-tab h-49em">
+    	<li id="tabbar1" onclick="randomSwitchBtn(this,'1')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage1.png" class="fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">首页</p>
+        </li>
+        <li id="tabbar2" onclick="randomSwitchBtn(this,'2')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/super_market1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/super_market2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">超市</p>
+        </li>
+        <li id="tabbar3" onclick="randomSwitchBtn(this,'3')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">学习</p>
+        </li>
+        <li id="tabbar4" class="active-info" onclick="randomSwitchBtn(this,'4')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">服务</p>
+        </li>
+        <li id="tabbar5" onclick="randomSwitchBtn(this,'5')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">我的</p>
+        </li>
+    </ul>
+</footer>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_wechat/edu/laydate/laydate.js"></script> 
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/bd_index.js"></script>
+<script type="text/javascript">
+function randomSwitchBtn(tag,type) {
+	if($(tag).hasClass('active-info')){
+		return ;
+	}
+	var eFootLis = $api.domAll('#aui-footer li'),
+ 	eHeaderLis = $api.domAll('header li'),
+ 	index = 0;
+	for (var i = 0,len = eFootLis.length; i < len; i++) {
+		if( tag == eFootLis[i] ){
+		 	index = i;
+		}else{
+			 $api.removeCls(eFootLis[i], 'active-info');
+			 $api.removeCls(eHeaderLis[i], 'active');
+		}
+	}
+	$api.addCls( eFootLis[index], 'active-info');
+	$api.addCls( eHeaderLis[index], 'active');
+	switch(type){
+	    case '1':
+	    	location.href="{:U('Wechat/Index/index')}";
+	    	;break;
+	    case '2':
+	    	location.href="{:U('Wechat/Index/store_index')}";
+	    	;break;
+	    case '3':
+	    	location.href="{:U('Wechat/Edu/edu_index')}";
+	    	;break;
+		case '4':
+			location.href="{:U('Wechat/Life/life_index')}";
+			;break;
+	    default:
+	    	location.href="{:U('Wechat/Ccp/ccp_communist_info')}";
+	    	;break;
+	}
+}
+</script>
+
+</html>

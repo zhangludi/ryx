@@ -1,0 +1,113 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                        <div class="layui-form layui-card-body fitheight" style="padding-bottom: 45px;">
+                            <table class="layui-table" id="demo"  lay-filter="demo">
+                            </table>
+                            <script type="text/html" id="operate">
+                                {{# if(d.gc_lng == "" || d.gc_lat){}}
+                                <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                                <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                                {{#}else{}}
+                                <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">设置</a>
+                                {{#}}}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("ccp_party_map_data")}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'num', width: 80, title: '编号', sort: true}
+                    , {field: 'party_name', title: '党支部'}
+                    , {field: 'is_record', title: '是否设置',width: 120}
+                    , {field: 'add_user', title: '添加人',width: 160}
+                    , {field: 'operate', title: '操作',width: 120}
+                    ,/* {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}*/
+                ]]
+                ,page:false
+            });
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            table.on('tool(demo)', function(obj){
+                var data = obj.data;
+                var idcard_no = data.idcard_no;
+                if(obj.event === 'detail'){
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                        content: "{:U('ccp_party_map_set')}?party_no="+data.party_no+"&page_type=edit",
+                    });
+                    layer.full(index);
+                } else if(obj.event === 'del'){
+                    layer.confirm('确认删除该数据吗？', function(index){
+                        window.location='{:U("ccp_party_map_do_del")}?party_no='+data.party_no+'';
+                    });
+                } else if(obj.event === 'edit'){
+                   var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('ccp_party_map_set')}?party_no="+data.party_no+"&page_type=info",
+                    });
+                    layer.full(index);
+                }
+
+
+            });
+        });
+        var active = {
+            add: function(){
+                var index = layer.open({
+                   type: 2,
+                   title: false,
+                   end:false,
+                   closeBtn: 0,
+                   shift: 1,
+                   content: "{:U('Ccpcommunist/ccp_party_edit')}",
+                   area: ['300px', '300px']
+                });
+            layer.full(index);
+            }
+        }
+        $('#LAY-component-layer-list .layadmin-layer-demo .layui-btn').on('click', function(){
+          var type = $(this).data('type');
+          active[type] && active[type].call(this);
+        });
+    })
+</script>
+</block>

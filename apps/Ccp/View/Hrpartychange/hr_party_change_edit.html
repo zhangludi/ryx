@@ -1,0 +1,110 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+		<form action="{:U('Hrpartychange/hr_party_change_do_save')}" id="myform" onsubmit="return check_file()"  method="post">
+			<input name="change_id" type="hidden" value="{$change_log_info.change_id}">
+       <input name="party_no" type="hidden" value="{$party_no}">
+       <input name="code_no" type="hidden" value="{$code_no}">
+       <input name="change_time" type="hidden" value="{$change_time}">
+       <input name="type" type="hidden" value="{$change_log_info.type}">
+       <input name="change_type" type="hidden" value="{$change_type}">
+	  <div class="layui-row layui-col-space15">
+	    <div class="layui-col-md12">
+	        <div class="layui-card layui-form">
+	          <div class="layui-card-header">编辑/添加</div>
+	          <div class="layui-card-body">
+	              <div class="layui-row">
+                 	<div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>组织名称：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_name}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>上级组织：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_pno}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>党支部分级：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$party_row.party_level_code}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$code_name}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>换届时间：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$change_time}</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+
+                            <input type="hidden" id="source_name2" name="source_name2" value="" />
+                            <input type="hidden" id="article_thumb_old2" name="article_thumb_old2" value="" style="width: 60px">
+                            <input type="hidden" id="change_file" name="change_file" value="{$change_log_info.change_file}" style="width: 60px">
+                            <input type="hidden" class="form-control" id="material_img2" name="material_img2" value="{$change_log_info.change_file}">
+
+                            <button type="button" class="layui-btn" id="change_file" onclick="uploader_file('ccp','1','change_file','source_name2','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+                            <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                <neq name="change_log_info.change_file" value="">
+                                    <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                </neq>
+                            </div>
+                        </div>
+                    </div>
+	            </div>
+	          </div>
+	      </div>
+	    </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-footer" style="text-align: right">
+                	<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="history.go(-1);">返回</button>
+                </div>
+            </div>
+        </div>
+    </form>
+	  </div>
+	</div>
+</block>
+<block name="js">
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+        // 设置ztree 列表和右侧列表一样高度
+        $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>
+    <script>
+        
+       function check_file(){
+	    	var file_upload = $("input[name='change_file']").val();
+	    	if(file_upload == '' || file_upload == null){
+	    		alert('请上传附件！');
+	    		return false;
+	    	} else {
+	    		return true;
+	    	}
+	   }
+    </script>
+</block>
+
+	                                  

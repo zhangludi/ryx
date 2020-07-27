@@ -1,0 +1,189 @@
+
+<!--内容区开始-->
+<div  class="public_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div class="public_content_left career_slide">
+    {:W('Leftmenu/ipam_home_slide', array(2, '4'))}
+    </div>
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right">
+        <!--扶贫政策开始-->
+        <div class="public_card">
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="fsize-18 pl-15">扶贫政策</span> /
+                <a href="{:U('ipam_help_list',array('type'=>13))}" class="fcolor-white">更多</a>
+            </div>
+            <div class="mt-15">
+                <!--左侧轮播开始-->
+                <div class="swiper-container pull-left w-620 po-re h-320 over-h">
+                    <div class="swiper-wrapper">
+                     	<volist name="article_data" id="avo" offset="0" length='5'>
+                        <div class="swiper-slide w-260 h-320 po-re over-h">
+                            <img src="{$avo.article_thumb}" class="di-b w-all" alt="书籍图片">
+                            <div class="public_mask"></div>
+                            <div class="w-all po-ab bottom-20 fsize-20 center-text fcolor-white">{$avo.article_title}</div>
+                        </div>
+                        </volist>
+                        
+                    </div>
+                </div>
+                <!--左侧轮播结束-->
+                <!--右侧书籍开始-->
+                <div class="pull-right w-300">
+                    <ul class="public_card_text_content">
+                    <volist name="article_data" id="bvo" offset="4" length='2'>
+                        <li class="public_card_text_lr w-300 boxsize-b mr-5">
+                            <a href="{:U('ipam_help_info',array('cat_id'=>$bvo[article_id]))}">
+                                <div class="public_card_text_lr_img h-all pull-left w-110 mr-10 hr-s-dfdfdf">
+                                    <div class="w-all h-all over-h po-re">
+                                        <img src="{$bvo.article_thumb}" class="di-b h-all center-ver-hor" alt="图书图片">
+                                    </div>
+                                </div>
+                                <div class="public_card_text_lr_txt po-re" title="{$bvo.article_title}">
+                                    <p class="mb-15 fsize-16 txt-overh">{$bvo.article_title}</p>
+                                    <p class="public_card_text_lr_txt_content fcolor-99 article_over_five">{$bvo.article_description}</p>
+                                    <div class="po-ab bottom-10 right-10">
+                                        <img src="../statics/apps/page_portal/images/career_poverty_browse.png" alt="">
+                                      <!--   <span class=" ">120</span>
+                                        <span class="">次浏览</span> -->
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                       </volist>
+                    </ul>
+                </div>
+                <!--右侧书籍结束-->
+            </div>
+        </div>
+        <!--扶贫政策结束-->
+        <!--政策列表开始-->
+        <div class=" mt-25">
+            <span class="fsize-18 pl-15">政策列表</span>
+            <!--文章区开始-->
+            <div class="study_artical mt-15 di-tb w-all">
+            <volist name="article_data" id="cvo" offset="0" length='6'>
+                <div class="career_poverty_item" style="width:15%" title="{$cvo.article_title}">
+                    <div class="public_hover_shadow h-232 bg-color-gray3">
+                        <a class='see-details' href="{:U('ipam_help_info',array('cat_id'=>$cvo[article_id]))}">
+                            <div class="public_card_text_lr_img h-190 w-all">
+                                <div class="w-all h-all over-h">
+                                    <img src="{$cvo.article_thumb}" class="di-b w-all center-block" alt="文章图片">
+                                </div>
+                            </div>
+                            <p class="fsize-12 m-10 fcolor-33 article_over_two">{$cvo.article_title}</p>
+                        </a>
+                    </div>
+                </div>
+                </volist>
+               
+            </div>
+        </div>
+        <!--政策列表结束-->
+        <!--扶贫活动动态开始-->
+        <div class=" mt-25">
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="fsize-18 pl-15">扶贫活动动态</span> /
+                <a href="{:U('ipam_help_list',array('type'=>17))}" class="fcolor-white">更多</a>
+            </div>
+            <div class="mr-15 mt-15">
+                <ul>
+                 <volist name="ae_data" id="dvo" offset="0" length='5'>
+                    <li class="public_word_lr_two mt-15 w-all" title="{$dvo.article_title}">
+                        <a class='see-details' href="{:U('ipam_help_info',array('cat_id'=>$dvo[article_id]))}">
+                            <div class="public_word_lr_two_img">
+                                <img src="{$dvo.article_thumb}" alt="新闻图片">
+                            </div>
+                            <div class="public_word_lr_two_content">
+                                <div class="public_word_lr_two_content_title">{$dvo.article_title}</div>
+                                <div class="public_word_lr_two_content_date fsize-12">{$dvo.add_time}</div>
+                                <p class="fsize-12 article_height_over">{$dvo.article_description}</p>
+                            </div>
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        <!--扶贫活动动态结束-->
+        <!--扶贫一对一开始-->
+        <div class=" mt-25">
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="fsize-18 pl-15">扶贫一对一</span>
+                <a href="javascript:;" class="fcolor-white"></a>
+            </div>
+            <div class=" mt-15">
+                <!--<table class="w-all fcolor-33 center-text">-->
+                    <!--<tbody class="">-->
+                        <!--<tr>-->
+                            <!--<td class="w-310">山东省济南市高新区舜华委员<span class="fcolor-f33">高杉晋助</span></td>-->
+                            <!--<td class="w-100 ">帮扶</td>-->
+                            <!--<td class="w-310"><span class="fcolor-3096ff">王庄村全体村民</span>解决停水问题</td>-->
+                            <!--<td class="text-r">【2017-12-12  13:00:59】</td>-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <ul>
+                 <volist name="help_data" id="hvo" offset="0" length='4'>
+                    <li class=" list-disc-in mt-15 di-tb center-text">
+                        <a class='see-details' href="javascript:;" class="fcolor-33 ">
+                            <span class="ml-15m di-tc w-210">
+                   						{$hvo.party_name_short} 
+                                <span class="fcolor-f33">{$hvo.communist_name}</span>
+                            </span>
+                            <span class="di-tc w-78 career_poverty_help">帮扶</span>
+                            <span class="di-ib text-l w-400 txt-overh">
+                                <span class="fcolor-3096ff ml-30">{$hvo.help_name}</span>
+                                	解决{$hvo.difficulty_content}
+                            </span>
+                            <span class="pull-right di-tc text-r">【{$hvo.update_time}】</span>
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        <!--扶贫动态结束-->
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>
+
+<script>
+  var mySwiper = new Swiper('.swiper-container', {
+      watchSlidesProgress: true,
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      loop: true,
+      loopedSlides: 5,
+      autoplay: true,
+      on: {
+          progress: function(progress) {
+              for (i = 0; i < this.slides.length; i++) {
+                  var slide = this.slides.eq(i);
+                  var slideProgress = this.slides[i].progress;
+                  modify = 1;
+                  if (Math.abs(slideProgress) > 1) {
+                      modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+                  }
+                  translate = slideProgress * modify * 130 + 'px';
+                  scale = 1 - Math.abs(slideProgress) / 5;
+                  zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+                  slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+                  slide.css('zIndex', zIndex);
+                  slide.css('opacity', 1);
+                  if (Math.abs(slideProgress) > 3) {
+                      slide.css('opacity', 0);
+                  }
+              }
+          },
+          setTransition: function(transition) {
+              for (var i = 0; i < this.slides.length; i++) {
+                  var slide = this.slides.eq(i);
+                  slide.transition(transition);
+              }
+          }
+      }
+  });
+</script>

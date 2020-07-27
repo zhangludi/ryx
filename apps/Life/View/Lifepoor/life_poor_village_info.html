@@ -1,0 +1,289 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+    	<form action="{:U('life_poor_village_save')}" id="form_sample_2" class="form-horizontal" method="post">
+		<input type="hidden" name="poor_village_id" value="{$poor_village_data.poor_village_id}">
+	        <div class="layui-col-md12">
+	            <div class="layui-card">
+	                <div class="layui-card-header"> 基本信息</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>村名称：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<span>
+	                                		{$poor_village_data.poor_village_name}
+	                                	</span>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                         <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>负责人：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <span>
+	                                		{$poor_village_data.poor_village_charge}
+	                                	</span></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                      
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>是否为贫困村：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<span>
+	                                		<eq name="poor_village_data.is_poor" value='2'>否</eq>
+	                                		<eq name="poor_village_data.is_poor" value='1'>是</eq>
+	                                	</span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>联系电话：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <span>
+	                                		{$poor_village_data.poor_village_phone}
+	                                	</span></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>村简介：</strong></div>
+	                                <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+	                                    <span>
+	                                		{$poor_village_data.poor_village_keywork}
+	                                	</span>
+	                                </div>
+	                                <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                         <div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>基本信息：</strong></div>
+	                                <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35">
+	                                    <span>
+	                                		{$poor_village_data.poor_village_content}
+	                                	</span>
+	                                </div>
+	                                <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="layui-col-md12 mt-10">
+	            <div class="layui-card">
+	                <div class="layui-card-header">人口信息</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>总户数：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<span>
+	                                		{$poor_village_data.boor_num}
+	                                	</span>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>总人口数：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<span>
+	                                		{$poor_village_data.man_num}
+	                                	</span>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+							<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>贫困人口数：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<span>
+	                                		{$poor_village_data.poor_man_num}
+	                                	</span>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                       
+	                        <!-- <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>困难程度：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<select name="help_type" xm-select="post_no" xm-select-skin="danger">
+											<php>echo getBdTypeSelect('lifehelp_type','',$poor_village_data['help_type'])</php>
+										</select>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div> -->
+
+	                        <!-- <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶党员：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<select id="single" name="status" lay-filter="aihao" lay-search="">
+											<option value="">请选择</option>
+											 <php>echo getCommunistSelect($poor_village_data[communist_no]);</php>
+										</select>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div> -->
+	                        
+	                       
+	                    </div>
+	                </div>
+	                <div class="layui-col-md12 mt-10">
+	            <div class="layui-card">
+	                <div class="layui-card-header">收入信息</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>农民人均纯收入（元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<span>
+	                                		{$poor_village_data.percapita_income}
+	                                	</span>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>村级集体收入（万元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<span>
+	                                		{$poor_village_data.poor_village__all}
+	                                	</span>
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+			        <div class="layui-form-item">
+		             
+		        </div>
+		    </div>
+		    <div class="layui-card">
+		                <div class="layui-card-header">贫困户展示</div>
+		                <div class="layui-card-body layui-form">
+		                	<div class="layui-form layui-card-body">
+		                    <div class="layui-row layui-col-space5">
+		                        <div class="layui-col-xs2 pull-right">
+		                        </div>
+		                    </div>
+		                    <!-- 查询结束 -->
+		                    <table class="layui-table" id="demo"  lay-filter="demo"></table>
+		                     <script type="text/html" id="operate">
+	                            
+	                        </script>
+		                </div>
+			        </div>
+			    </div>
+			       <div class="layui-input-block">
+		                    <div class="layui-footer" style="text-align: right">
+		                        
+		                       <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+		                    </div>
+		                </div>
+		            </div>
+	    </form>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+ function layer_colse() {
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+}
+layui.use([ 'form', 'laydate','formSelects'], function() {
+    var $ = layui.$
+            , admin = layui.admin
+            , element = layui.element
+            , layer = layui.layer
+            , laydate = layui.laydate
+            , form = layui.form
+            , formSelects = layui.formSelects;
+    form.render(null, 'component-form-group');
+
+    laydate.render({
+        elem: '#LAY-component-form-group-date'
+    });
+});
+
+ 
+</script>
+<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("life_poor_village_info_data",array("poor_village_id"=>$poor_village_id))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'poor_household_id', width:80 ,title: '编号', sort: true}
+	                    , {field: 'poor_household_name', title: '户主姓名'}
+	                    , {field: 'poor_household_identity',  title: '户主证件号',width:200}
+	                    , {field: 'poor_village_type',  title: '所属村'}
+	                    , {field: 'poor_status', title: '脱贫状态'}
+	                    , {field: 'poor_village_property', title: '贫困户属性'}
+	                    
+	                ]]
+	                , page: false
+	            });
+			    
+			     //监听工具条
+			    table.on('tool(demo)', function(obj){
+			        var data = obj.data;
+			        var idcard_no = data.idcard_no;
+			        if(obj.event === 'detail'){
+			        	window.location='{:U("life_poor_household_info")}?poor_household_id='+data.poor_household_id+'';
+	                    layer.close(index);
+		          	} else if(obj.event === 'del'){
+		              	layer.confirm('确认删除该数据吗？', function(index){
+			              	window.location='{:U("life_poor_household_del")}?poor_household_id='+data.poor_household_id+'';
+		                    layer.close(index);
+		              	});
+		          	} else if(obj.event === 'edit'){
+		          		window.location='{:U("life_poor_household_edit")}?poor_household_id='+data.poor_household_id+'';
+	                    layer.close(index);
+		          	}
+		      	});
+		  		
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+			    
+	        });
+	        //点击左侧树的事件
+	        
+	    })
+	</script>
+</block>

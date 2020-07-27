@@ -1,0 +1,28 @@
+<foreach name="meeting_list" item="list">
+    <if condition="$list['num'] eq 1">
+        <li class="po-re h-180 over-h mb-20">
+            <a  class='see-details' href="{:U('Meeting/ipam_meeting_detail', array('type_no' => $meeting_type, 'meeting_no' => $list['meeting_no']))}">
+                <div>
+                    <img src="{$list.meetting_thumb}" class="w-all di-b center-ver">
+                </div>
+                <div class="di-tb po-ab bottom-0 h-50">
+                    <p class="di-tc w-70 va-m center-text bg-color-ff3032 fcolor-white font-bold">NO.{$list.num}</p>
+                    <p class="di-tc va-m fcolor-66 p-0-10 bg-color-fff-op9">{$list.meeting_name}</p>
+                </div>
+            </a>
+        </li>
+    <else/>
+        <li class="h-78 over-h mb-20 di-tb">
+            <a  class='see-details' href="{:U('Meeting/ipam_meeting_detail', array('type_no' => $meeting_type, 'meeting_no' => $list['meeting_no']))}">
+                <div class="di-tc po-re w-100 over-h">
+                    <img src="{$list.meetting_thumb}" class="w-all di-b center-ver">
+                </div>
+                <div class="di-tc">
+                    <p class="meeting_list_title pull-right ">NO.{$list.num} <span class="fcolor-f33">/</span></p>
+                    <div class="clearfix"></div>
+                    <p class="p-0-10 fsize-14 fcolor-66 article_over_two">会议名称：{$list.meeting_name}</p>
+                </div>
+            </a>
+        </li>
+    </if>
+</foreach>

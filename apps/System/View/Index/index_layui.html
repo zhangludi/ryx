@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><php>echo getConfig('web_name');</php>-总后台管理系统</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- <include file="./public/header/link.html"> -->
+	<link rel="stylesheet" href="__STATICS__/layuiadmin/style/admin.css" media="all">
+	<link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+	<!--框架样式-->
+	<link rel="stylesheet" href="__STATICS__/public/css/sp_theme_button_red.css" media="all">
+	<!--森普公共样式-->
+	<link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+	<!-- 登录 -->
+	<link rel="stylesheet" href="__STATICS__/layuiadmin/style/login.css" media="all">
+	<!--框架样式修改版党建版-->
+	<link rel="stylesheet" id="change_theme" href="__STATICS__/public/css/sp_theme_red.css" media="all">
+	<script>
+		/^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+	</script>
+</head>
+
+<body class="layui-layout-body">
+	<div id="LAY_app">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="menu_bg2"></div>
+				<div class="layui-logo1 text-l">
+					<img id="sp_index_logo" src="__STATICS__/layuiadmin/style/res/index_header_logo.png" alt="">
+					<strong id="sp_index_title">
+						<php>echo getConfig('web_name');</php>
+						<!-- 站点名称 -->
+					</strong>
+				</div>
+				<div class="pull-right">
+					<!--头部中间0级菜单-->
+					<ul class="zero-level pull-left">
+						<volist name="functionList" id="list">
+							<li onclick="zeroLevel(this)" class="pull-left pl-20 pr-20">
+								<a class="zero-level-item" href="javascript:;">{$list.function_name}</a>
+							</li>
+						</volist>
+					</ul>
+					<ul class="layui-nav  pull-left" lay-filter="layadmin-layout-right">
+						<!-- 消息中心开始 -->
+						<li class="layui-nav-item" lay-unselect>
+							<a lay-href="{:U('Bd/bd_alertmsg_list')}" layadmin-event="message" lay-text="消息中心">
+								<i class="layui-icon layui-icon-notice"></i>
+								<!-- 如果有新消息，则显示小圆点 -->
+								<span class="layui-badge-dot"></span>
+							</a>
+						</li>
+						<!-- 消息中心结束 -->
+						<!-- 用户资料开始 -->
+						<li class="layui-nav-item" lay-unselect>
+							<a href="javascript:;">
+								<cite><php>echo getStaffInfo(session('staff_no'),'communist_name')</php></cite>
+							</a>
+							<dl class="layui-nav-child">
+								<dd style="text-align: center;">
+									<a href="<php>echo getConfig('web_url')</php>">首页</a>
+								</dd>
+								<hr>
+								<dd style="text-align: center;">
+									<a href="{:U('Public/logout')}">退出</a>
+								</dd>
+							</dl>
+						</li>
+						<!-- 用户资料结束 -->
+						<!-- 版本信息开始 -->
+						<li class="layui-nav-item layui-hide-xs" lay-unselect>
+							<a href="javascript:;" layadmin-event="about">
+								<i class="layui-icon layui-icon-more-vertical"></i>
+							</a>
+						</li>
+						<!-- 版本信息结束 -->
+						<!-- 快捷板块开始 -->
+						<li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+							<a href="javascript:;" layadmin-event="more">
+								<i class="layui-icon layui-icon-more-vertical"></i></a>
+						</li>
+						<!-- 快捷板块结束 -->
+					</ul>
+				</div>
+			</div>
+			<!-- 侧边菜单开始 -->
+			<volist name="functionList" id="list" key="k">
+				<div class="layui-side layui-side-menu top-80 <neq name='k' value='1'>di-n</neq>">
+					<div class="layui-side-scroll">
+						<div class="layui-side-menu-top">{$list.function_name}
+							<!-- 一级菜单名称 -->
+						</div>
+						<ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+							<eq name="list.is_child" value="1">
+								<volist name="list.function_child" id="list2">
+									<eq name="list2.is_child" value="1">
+										<li data-name="home" class="layui-nav-item">
+											<a href="javascript:;" lay-tips="主页" lay-direction="2">
+												<i class="layui-icon layui-icon-home"></i>
+												<cite>{$list2.function_name}
+													<!-- 二级菜单名称 -->
+												</cite>
+											</a>
+											<volist name="list2.function_child" id="list3">
+												<neq name="list3.is_child" value="1">
+													<dl class="layui-nav-child">
+														<dd data-name="console" class="">
+															<a lay-href="{$list3.href}">{$list3.function_name}
+																<!-- 三级菜单名称 -->
+															</a>
+														</dd>
+													</dl>
+												</neq>
+											</volist>
+										</li>
+									</eq>
+									<neq name="list2.is_child" value="1">
+										<li data-name="home" class="layui-nav-item">
+											<a lay-href="{$list2.href}" lay-tips="说明" lay-direction="2">
+												<i class="layui-icon layui-icon-home"></i>
+												<cite>{$list2.function_name}
+													<!-- 二级菜单名称 -->
+												</cite>
+											</a>
+										</li>
+									</neq>
+								</volist>
+							</eq>
+						</ul>
+					</div>
+				</div>
+			</volist>
+			<!--侧边菜单结束-->
+			<!-- 页面标签 -->
+			<div class="layadmin-pagetabs" id="LAY_app_tabs">
+				<div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+				<div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+				<div class="layui-icon layadmin-tabs-control layui-icon-down">
+					<ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+						<li class="layui-nav-item" lay-unselect>
+							<a href="javascript:;"></a>
+							<dl class="layui-nav-child layui-anim-fadein">
+								<dd layadmin-event="closeThisTabs">
+									<a href="javascript:;">关闭当前标签页</a>
+								</dd>
+								<dd layadmin-event="closeOtherTabs">
+									<a href="javascript:;">关闭其它标签页</a>
+								</dd>
+								<dd layadmin-event="closeAllTabs">
+									<a href="javascript:;">关闭全部标签页</a>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+				<div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+					<ul class="layui-tab-title" id="LAY_app_tabsheader">
+						<li lay-id="<php> echo U(getConfig('default_main'));</php>" class="layui-this">
+							<i class="layui-icon layui-icon-home"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 主体内容 -->
+			<div class="layui-body" id="LAY_app_body">
+				<div class="layadmin-tabsbody-item layui-show">
+					<iframe src="<php> echo U(getConfig('default_main'));</php>" frameborder="0" class="layadmin-iframe"></iframe>
+				</div>
+				<div class="sp-footer">© 2014-2015
+					<a href="http://www.simpro.cn/">SimPro Co.,Ltd &nbsp;</a>
+				</div>
+			</div>
+			<!-- 辅助元素，一般用于移动设备下遮罩 -->
+			<div class="layadmin-body-shade" layadmin-event="shade"></div>
+		</div>
+	</div>
+	<!-- <include file="./public/footer/script.html"> -->
+	<script src="__STATICS__/plugins/jquery.min.js"></script>
+	<script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+	<script>
+		layui.config({
+			base: '__STATICS__/plugins/' //静态资源所在路径
+		}).extend({
+			index: 'lib/index' //主入口模块
+		}).use('index');
+	</script>
+	<script>
+		function zeroLevel(_this) {
+			$(".layui-side-menu").hide();
+			$(".layui-side-menu").eq($(_this).index()).show();
+		}
+	</script>
+	<script>
+		//默认第一个显示
+		$(".zero-level>li").eq(0).addClass("zero-bg-active");
+		$(".zero-level>li").click(function () {
+			$(this).siblings().removeClass("zero-bg-active");
+			$(this).addClass("zero-bg-active");
+		})
+	</script>
+</body>
+
+</html>

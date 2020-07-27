@@ -1,0 +1,232 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" title="党费添加">党费添加</div>
+				<div class="layui-card-body layui-form">
+					<form action="{:U('ccp_dues_do_save')}" id="form_validation"  class="form-horizontal" method="post">
+					<div class="layui-row">
+					
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳人员姓名：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
+									<select name="communist_no" lay-verify="required" lay-search="">
+                                        <php>echo getCommunistSelect('',$party_no_auth);</php>
+                                    </select>
+								</div>
+							</div>
+						</div>
+					
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>在职情况：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
+									<select name="pp_status" lay-verify="required" lay-search="">
+                                        <option  value="1">在职</option>
+										<option  value="2">退休</option>
+                                    </select>
+								</div>
+							</div>
+						</div>
+							<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳党费基数：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
+									<input type="text" name="party_free" value="" lay-verify="required" placeholder="请填写数字" class="layui-input" />
+								</div>
+							</div>
+						</div>
+						<input type="hidden" value="0.005" name="party_free_status">
+						<input type="hidden" value="0" name="dues_amount">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>应缴金额：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text"  name="party_should_free"  autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder="请填写数字" lay-verify="required">
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>实际应缴费用：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text"  name="party_real_free"  autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder="请填写数字" lay-verify="required">
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>差额：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text"  name="party_difference"  autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder="请填写数字" lay-verify="required">
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+					
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳日期：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text" name="dues_time" date  autocomplete="off" class="layui-input" value="" placeholder="请填写缴纳日期" lay-verify="required" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳月份：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<input type="text" name="dues_month" date  autocomplete="off" class="layui-input" value="" placeholder="请填写缴纳日期" lay-verify="required" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<textarea name="memo" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea" maxlength="225">{$dept_row.memo}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" type="submit" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<button type="button"  id="close" class="layui-btn layui-btn-primary mr-40">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<SCRIPT type="text/javascript">
+	layui.use([ 'form', 'laydate'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form;
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+	
+        });
+    })
+	laydate.render({elem: "input[name='dues_time']"});
+	laydate.render({elem: "input[name='dues_month']",type: 'month'});
+</SCRIPT>
+<script type="text/javascript">
+	$('#close').click(function() {
+		var index = parent.layer.getFrameIndex(window.name);
+		parent.layer.close(index);
+	});
+</script>
+<script type="text/javascript" >
+    $("#form_validation").validate({
+	    	
+    });
+	function check(amount){
+		var reg = '^[0-9]+(.[0-9]{1,2})\?$'; 
+		  	var r = (amount.value).match(reg);             
+		  	if(r==null){
+		  		alert('请填写正确格式的金额！');
+		  		amount.value='';
+		  	}
+	}
+</script>
+
+<script type="text/javascript" >
+//根据缴纳基数+在职情况，获取应缴纳费用
+  $( "input[name='party_free']" ).blur(function(){
+		var  party_should_free;
+	var pp_status = $( "select[name='pp_status']" ).val();
+	var party_free = parseInt($( "input[name='party_free']" ).val());
+	   	console.log(party_free);
+
+	
+	if(pp_status == 1){
+
+		switch (true){
+			case party_free<3000:
+			party_should_free =  party_free*0.0005;
+			$( "input[name='party_free_status']" ).val('0.0005')			
+			break;
+			case party_free>=3000:
+			case party_free<5000:
+			party_should_free =  party_free*0.01;
+			$( "input[name='party_free_status']" ).val('0.01')			
+
+			break;
+			case party_free>=5000:
+			case party_free<10000:
+			party_should_free =  party_free*0.015;
+			$( "input[name='party_free_status']" ).val('0.015')			
+
+			break;
+			case party_free>=10000:
+			party_should_free =  party_free*0.02;
+			$( "input[name='party_free_status']" ).val('0.02')			
+
+			break;
+		}
+		
+
+	}else if(pp_status == 2){
+			   //	console.log(2);
+
+		switch (true){
+			case party_free<5000:
+			party_should_free =  party_free*0.0005;
+						$( "input[name='party_free_status']" ).val('0.0005')			
+
+			break;
+			case party_free>=10000:
+			party_should_free =  party_free*0.01;
+						$( "input[name='party_free_status']" ).val('0.01')			
+
+			break;
+		}
+		
+
+
+	}
+	
+	
+		var party_free = $( "input[name='party_should_free']" ).val(party_should_free);
+
+	
+	
+		
+   });
+</script>
+
+<script type="text/javascript" >
+//根据缴纳基数+在职情况，获取应缴纳费用
+  $( "input[name='party_real_free']" ).blur(function(){
+		var party_should_free = parseInt($( "input[name='party_should_free']" ).val());
+		var party_real_free = parseInt($( "input[name='party_real_free']" ).val());
+	    var party_difference = party_should_free - party_real_free;
+		$( "input[name='party_difference']" ).val(party_difference);
+		$( "input[name='dues_amount']" ).val(party_real_free);
+
+   });
+</script>
+
+</block>

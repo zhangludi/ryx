@@ -1,0 +1,117 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.$type);</php>"> <php>echo getFunctionInfo(ACTION_NAME.$type);</php>
+	                </div>
+	                <div class="layui-form layui-card-body">
+	                	<div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                          		  时间：
+	                        </div>
+	                        <div class="layui-col-xs3">
+	                            <input type="text" class="layui-input"  autocomplete="off" name="start_time" id="start_time" placeholder="添加时间范围" />
+	                        </div>
+	                        <div class="layui-col-xs2 pull-right">
+								<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                        </div>
+
+	                    </div>
+	                  <table class="layui-table" id="demo"  lay-filter="demo">
+					  </table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+        
+  </block>
+<block name="js">
+<script>
+	laydate.render({
+		elem: '#start_time'
+		,range: true
+	});
+	layui.use(['element','form'], function() {
+		var $ = layui.$
+				, admin = layui.admin
+				, element = layui.element
+				, form = layui.form
+				, router = layui.router();
+		form.render();
+		// 默认显示的 表格
+		layui.use('table', function () {
+			var table = layui.table;
+			table.render({
+				elem: '#demo'
+				, url: '{:U('supervise_chat_data',array('type'=>$type))}'
+				, height: 'full-160'
+				, id: 'ztreedata'
+				, cols: [[
+					<if condition="$type eq '1'" >
+					{field: 'chat_id', width: 80, title: '编号', sort: true}
+					, {field: 'communist_no', title: '党员姓名',minWidth: 100}
+					, {field: 'update_staff', width: 120, title: '审核人'}
+					, {field: 'status_name', width: 180, title: '状态'}
+					, {field: 'add_time',title: '添加时间'}
+					, {field: 'update_time', title: '审核时间'}
+					, {field: 'operate', align: 'center',width: 180, title: '操作'}
+					<else/>
+					{field: 'chat_id', width: 80, title: '编号', sort: true}
+					, {field: 'party_manager_name', title: '支部负责人',minWidth: 120}
+					, {field: 'party_nome', width: 180, title: '党组织'}
+					, {field: 'update_staff', width: 120, title: '审核人'}
+					, {field: 'status_name', width: 100, title: '状态'}
+					, {field: 'add_time', title: '添加时间'}
+					, {field: 'update_time', title: '审核时间'}
+					, {field: 'operate', align: 'center',width: 180, title: '操作'}
+				
+					</if>
+					
+					]]
+				, page: true
+			});
+		   
+			var $ = layui.$, active = {
+					reload: function(){
+						 var start = $("#start_time").val();
+						 var template_type = "{$type}";
+						table.reload('ztreedata', {
+							page: {
+							  curr: 1 
+							}
+							,where: {
+								"start": start,
+								"type":template_type,
+							}
+						});
+					}
+				};
+			//监听表格复选框选择
+			table.on('checkbox(demo)', function(obj){
+				console.log(obj)
+			});
+			$('.layui-form .layui-btn').on('click', function(){
+				var type = $(this).data('type');
+				active[type] ? active[type].call(this) : '';
+			});
+		   
+		});
+	})
+	
+	function chat_hear($type,$chat_id,$notice_communist) {
+		layer.open({
+			type : 2,
+			title : '约谈详情',
+			offset : window.parent.document.body.scrollTop + 10 + 'px',
+			maxmin : false,
+			shadeClose : true, //点击遮罩关闭层
+			area : [ '600px', '530px' ],
+			content : "{:U('supervise_chat_hear')}?type="+$type+"&chat_id="+$chat_id+"&notice_communist="+$notice_communist,
+		});
+	};
+</script>
+</block>

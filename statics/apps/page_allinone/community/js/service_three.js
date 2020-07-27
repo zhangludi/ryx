@@ -1,0 +1,18 @@
+$(".ser_party").click(function(){
+	//$(".ser_government_list").addClass("di-n");
+	$(".ser_party_list").removeClass("di-n");
+	$(".ser_government_list").addClass("di-n");
+	$(".ser_finance_list").addClass("di-n");
+});
+$(".ser_government").click(function(){
+	//政务
+	$(".ser_party_list").addClass("di-n");
+	$(".ser_government_list").removeClass("di-n");
+	$(".ser_finance_list").addClass("di-n");
+});
+$(".ser_finance").click(function(){
+	//财务
+	$(".ser_party_list").addClass("di-n");
+	$(".ser_government_list").addClass("di-n");
+	$(".ser_finance_list").removeClass("di-n");
+});

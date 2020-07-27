@@ -1,0 +1,117 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <form id="form_sample_2" action="{:U('oa_notes_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+						<div class="layui-card-body layui-form">
+							<div class="layui-row">
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务标题：</strong></div>
+										<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+											<input type="text" name="notes_title" value='{$notes_info.notes_title}' placeholder="请输入任务标题" autocomplete="off" class="layui-input" lay-verify="required">
+										</div>
+										<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+									</div>
+								</div>
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>任务内容：</strong></div>
+										<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+											<!-- <textarea  class="layui-textarea" id="LAY_demo1"  name="notes_content">{$notes_info.notes_content}</textarea> -->
+											<script id="editor" name="notes_content" type="text/plain" style="height:350px;width:100%">{$notes_info.notes_content}</script>
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>是否提醒：</strong></div>
+										<div class="layui-col-xs1 fsize-14 fcolor-65 lh-35" id="is_alert">
+											<input type="checkbox" name="is_alert" title="是" <eq name="notes_info.is_alert" value="1">checked</eq> lay-skin="primary">
+										</div>
+										<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35" id="alert_title"><strong>提醒时间：</strong></div>
+										<div class="layui-col-xs3 fsize-14 fcolor-65 lh-35" id="alert_input">
+											<input type="text" name="alert_time" value='{$notes_info.alert_time}' placeholder="请选择日期" autocomplete="off" id="alert_time" class="layui-input" >
+										</div>
+									</div>
+								</div>
+								<input type="hidden" name="notes_id" value="{$notes_info.notes_id}" />
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+										<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+											<textarea name="memo" placeholder="请输入备注" class="layui-textarea">{$notes_info.memo}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+	var is_check = $("input[name='is_alert']").is(':checked');
+	if(is_check){
+		$("#alert_title").show();
+    	$("#alert_input").show();
+	} else {
+		$("#alert_title").hide();
+    	$("#alert_input").hide();
+	}
+	layui.use([ 'form', 'laydate','layedit'], function() {
+		var form = layui.form;
+		var layedit = layui.layedit
+			,$ = layui.jquery;
+	})
+	layui.use('layedit', function(){
+		var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: "{:U('System/public/layedit_upload')}" //接口url
+              , type: 'post' //默认post
+            }
+        });
+        layedit.build('LAY_demo1'); //建立编辑器
+	});
+	$('#is_alert').on('click', function(event){
+		var is_check = $("input[name='is_alert']").is(':checked');
+		if(is_check){
+			$("#alert_title").show();
+        	$("#alert_input").show();
+		} else {
+			$("#alert_title").hide();
+        	$("#alert_input").hide();
+		}
+    });
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		laydate.render({
+			elem: '#alert_time'
+			,type: 'datetime'
+			//,range: true
+		});
+	})
+</script>
+</block>

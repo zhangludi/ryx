@@ -1,0 +1,85 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+	    <div class="page-content-wrapper">
+	        <div class="page-content">
+	            <div class="portlet light  bordered">
+	                <div class="portlet-title">
+	                    <div class="caption">
+	                        <div class="cont-col1">
+	                            <div class="label label-sm bg-color-green2">
+	                                <i class="iconfont">&#xe64b;</i>
+	                            </div>
+	                        </div>
+	                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+	                        <span class="caption-helper"></span>
+	                    </div>
+	                </div>
+	                <div class="tab-pane active">
+	                    <div class="portlet-body form">
+	                        <form action="{:U('Life/life_vote_do_save')}"  class="form-horizontal" method="post" onsubmit="return form_check()">
+	                            <input type="hidden" name="vote_id" value="{$vote.vote_id}">
+	                            <div class="form-body">
+	                                <div class="form-group">
+	                                    <label class="col-md-3 control-label">开始时间： <span class="required"> * </span>
+	                                    </label>
+	                                    <div class="col-md-6">
+	                                        <input type="text" class="form-control layer-date" name="vote_starttime" value="{$vote.vote_starttime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <label class="col-md-3 control-label">结束时间： <span class="required"> * </span>
+	                                    </label>
+	                                    <div class="col-md-6">
+	                                        <input type="text" class="form-control layer-date" name="vote_endtime" value="{$vote.vote_endtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+	                                    </div>
+	                                </div>
+									<div class="form-group">
+	                                    <label class="col-md-3 control-label ">投票主题：</label>
+	                                    <div class="col-md-6">
+	                                        <input type="text" class="form-control" required name="vote_theme" value="{$vote.vote_theme}">
+	                                    </div>
+	                                </div>
+	                                
+	                                <div class="form-group">
+	                                    <label class="control-label col-md-3">备注：&nbsp&nbsp&nbsp</label>
+	                                    <div class="col-md-6">
+	                                        <textarea name="vote_content" class="form-control" rows="3" >{$vote.vote_content}</textarea>
+	                                    </div>
+	                                </div>
+	                                <div class="form-actions text-right">
+	                                    <div class="row">
+	                                        <div class="col-md-offset-3 col-md-9">
+	                                            <button type="submit" class="btn btn-sm blue w-75 bor-ra-2 pull-right mr-20">提交</button>
+	                                            <a type="button" class="btn btn-sm default w-75 bor-ra-2 mr-10 pull-right" onclick="history.go(-1);">取消</a>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	
+function form_check(){
+    var meeting_start_time = $("input[name='meeting_start_time']").val();
+    var meeting_end_time = $("input[name='meeting_end_time']").val();
+    if(meeting_start_time >= meeting_end_time){
+        alert("投票结束时间要大于投票开始时间");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+</script>
+
+
+</block>

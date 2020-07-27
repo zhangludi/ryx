@@ -1,0 +1,80 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <form action="{:U('att_meeting_do_save')}" id="form_sample_2" method="post">
+        <!-- 开始 -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="portlet light ">
+                    <div class="portlet-body right">
+                            <div class="row p5-editor-move">
+                                    <div class="row">
+                                        <div class="col-xs-offset-1 col-xs-10">
+                                        <table class="table table-bordered table-hover  table-striped" width="600" id="meeting_table">
+                                            <thead>
+                                                <tr class="info">
+                                                <th width="100">会议名称</th>
+                                                <th width="100">会议时间</th>
+                                                <th width="120">会议类型</th>
+                                                <th width="100">主持人</th>
+                                                <th>签到情况</th>
+                                                <th>详情</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <foreach name="row" item="v">
+                                            <tr>
+                                                <td>{$v.meeting_name}</td>
+                                                <td>{$v.meeting_start_time}</td>
+                                                <td>{$v.meeting_type_name}</td>
+                                                <td>{$v.meeting_host_name}</td>
+                                                <td>{$v.shoulded_info}</td>
+                                                <td>{$v.operate}</td>
+                                            </tr>
+                                            </foreach>
+                                            </tbody>
+                                        </table>                                         
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 文本域结束 -->
+                        </div>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-12 mb-30">-->
+                                <!--<button onclick="cancel()" type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">关闭</button>-->
+                                <!---->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    <!-- 添加结束 -->
+    <!-- 表单内容 -->
+    </form>                                 
+</block>  
+<block name="js">
+	<script>
+//            var index = parent.layer.getFrameIndex(window.name);
+//		parent.layer.iframeAuto(index);//自适应弹窗高度
+//		function cancel(){
+//			parent.layer.closeAll();
+//		}
+	</script>
+     <script type="text/javascript">
+         function att_info(meeting_no) {
+             layer.open({
+                 type : 2,
+                 title : '会议列表',
+                 offset : window.parent.document.body.scrollTop + 50 + 'px',
+                 shadeClose : true, //点击遮罩关闭层
+                 area: ['950px', '450px'],
+                 fixed: true,
+                 scrollbar: true,
+                 fixed: true,
+                 content: "{:U('Rc/rc_meeting_info')}?meeting_no="+meeting_no+"",
+             });
+
+         }
+    </script>
+</block>  

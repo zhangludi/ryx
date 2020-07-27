@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_learn.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/> -->
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+
+
+
+header ul li {height: 45px}
+header ul li.active{ display: block; }
+.aui-icon-roundadd{font-size: 40px !important;margin-top:8px}
+.aui-nav {
+position: inherit;
+}
+/* .h0{height:0px!important} */
+.pt-0{padding-top:0px!important}
+.aui-bar {
+ min-height: 0px!important
+}
+.fcolor-white {color:#fff!important}
+.fsize-24{font-size:24px!important} 
+
+
+.aui-nav{height: 4rem;}
+.aui-nav .aui-bar-tab{height: 4rem;background:rgb(255, 255, 255);}
+.aui-border-tb:after {border-top: 1px solid rgb(200, 200, 200);border-bottom: 1px solid rgb(171, 8, 9);}
+.aui-nav .aui-bar-tab li p{width: 100%;line-height: 0.5rem;color:#333;font-size: 0.5rem;}
+.aui-nav .aui-bar-tab li .img2{display: none;}
+
+.aui-nav .aui-bar-tab .active-info p{display: none;}
+.aui-nav .aui-bar-tab .active-info .img1{display: none;}
+.aui-nav .aui-bar-tab .active-info .img2{display: inline-block;}
+.aui-border-tb:after{border-top: 1px solid #f3f3f3;}
+
+p{color:#ccc}
+
+.wh-24em{width: 1.2rem !important;height: 1.2rem !important;}
+.wh-33em{width: 1.65rem !important;height: 1.65rem !important;}
+
+.w-18em{width: 0.9rem !important;}
+.w-95b{width:95%;}
+.w-169em{width: 8.45rem;}
+
+.h-100b{height:100%;}
+.h-49em{height: 2.45rem !important;}
+.h-18em{height: 0.9rem !important;}
+.h-17em{height: 0.85rem;}
+
+.p-0{padding: 0 !important;}
+
+.mt-14em{margin-top: 0.7rem !important;}
+.mt-3m{margin-top:-4px}
+.mt-2em{margin-top: 0.1rem !important;}
+
+.ml-8em{margin-left: 0.4rem !important;}
+
+.mr-8em{margin-right: 0.4rem !important;}
+
+.m-14em-auto-12em{margin: 0.7rem auto 0.6rem !important;}
+
+.f-18em{font-size: 0.9rem !important;}
+
+.color_ff{color:#fff;}
+
+.bt-1-f9{border-top: 1px solid #f1f1f1;}
+
+
+
+</style>
+</head>
+<body class="bg-color-fc">
+<!--列表-->
+<div class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li class="h-45em">
+    		<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+    		<div class="aui-title f-w">在线党校</div>
+    	</li>
+    </ul>
+</div>
+<div class="aui-load-container">
+	<div class="aui-load-wrap">
+		<div class="aui-loading-dot"></div>
+		<div class="aui-loading-circle"></div>
+		<div class="aui-loading-title"></div>
+	</div>
+	<div class="aui-content">
+		<div class="pt-12em">
+			<div id="list" class="over-h">
+				<eq name="type" value="21">
+				<!--视频-->
+					<volist name="material_list" id="v_list">
+						<div class="w-50b pull-left mb-12em"  onclick="openNewVideo({$v_list.material_id})">
+							<div class="w-170em h-160em center-block bg-color-whiter bor-ra-7 over-h pb-10em box-sha-5-ed">
+								<div class="w-158em h-88em m-6em po-re">
+									<img class="w-100b h-100b bor-ra-4" src="{$v_list.material_thumb}" alt="" />
+									<div class="w-100b h-100b bg-color-rgba-0003 po-ab top-0 bor-ra-7">
+										<img class="w-50em h-50em po-ab top-50b left-50b ml-25mem mt-25mem" src="__STATICS__/apps/page_wechat/images/images_edu/edu_play.png" alt="" />
+									</div>
+								</div>
+								<p class="f-10em color-88 over-h lh-14em pb-5em"><span class="pull-left f-14em color-33 pl-12em">{$v_list.material_title}</span><!-- <span class="pull-right pr-5em"><u>详情</u></span> --></p>
+								<p class="f-10em color-b3 pl-12em">{$v_list.add_time}</p>
+							</div>
+						</div>
+					</volist>
+				<else/>
+				<!--文章-->
+					<volist name="material_list" id="m_list">
+						<div class="w-33b pull-left mb-12em" onclick="openNewWin({$m_list.material_id})">
+							<div class="w-110em h-130em center-block bg-color-whiter bor-ra-7 over-h pb-10em box-sha-5-ed">
+								<div class="w-97em h-69em m-6em">
+									<img class="w-100b h-100b bor-ra-4" src="{$m_list.material_thumb}" alt="" />
+								</div>
+								<p class="f-12em color-33 text-align lh-14em pb-8em">{$m_list.material_title}</p>
+								<p class="f-10em color-88 text-align lh-10em pb-8em"><i class="iconfont f-10em color-88">&#xe87c;</i><span class="pl-5em pr-15em">{$v_list.read_num}次</span></p>
+								<p class="f-10em color-b3 text-align lh-10em">{$m_list.add_time}</p>
+							</div>
+						</div>
+					</volist>
+				</eq>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/edu/js/edu_learn_list_list.js"></script>
+<script type="text/javascript">
+function openNewVideo(id){
+	location="{:U('Wechat/Edu/edu_material_videoInfo')}?material_id="+id;
+}
+function openNewWin(id){
+	location="{:U('Wechat/Edu/edu_material_info')}?material_id="+id;
+}
+</script>
+</html>

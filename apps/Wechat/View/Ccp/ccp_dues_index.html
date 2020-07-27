@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/ccp/css/sp_fa.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/> -->
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+
+
+
+header ul li {height: 45px}
+header ul li.active{ display: block; }
+.aui-icon-roundadd{font-size: 40px !important;margin-top:8px}
+.aui-nav {
+position: inherit;
+}
+/* .h0{height:0px!important} */
+.pt-0{padding-top:0px!important}
+.aui-bar {
+ min-height: 0px!important
+}
+.fcolor-white {color:#fff!important}
+.fsize-24{font-size:24px!important} 
+
+
+.aui-nav{height: 4rem;}
+.aui-nav .aui-bar-tab{height: 4rem;background:rgb(255, 255, 255);}
+.aui-border-tb:after {border-top: 1px solid rgb(200, 200, 200);border-bottom: 1px solid rgb(171, 8, 9);}
+.aui-nav .aui-bar-tab li p{width: 100%;line-height: 0.5rem;color:#333;font-size: 0.5rem;}
+.aui-nav .aui-bar-tab li .img2{display: none;}
+
+.aui-nav .aui-bar-tab .active-info p{display: none;}
+.aui-nav .aui-bar-tab .active-info .img1{display: none;}
+.aui-nav .aui-bar-tab .active-info .img2{display: inline-block;}
+.aui-border-tb:after{border-top: 1px solid #f3f3f3;}
+
+p{color:#ccc}
+
+.wh-24em{width: 1.2rem !important;height: 1.2rem !important;}
+.wh-33em{width: 1.65rem !important;height: 1.65rem !important;}
+
+.w-18em{width: 0.9rem !important;}
+.w-95b{width:95%;}
+.w-169em{width: 8.45rem;}
+
+.h-100b{height:100%;}
+.h-49em{height: 2.45rem !important;}
+.h-18em{height: 0.9rem !important;}
+.h-17em{height: 0.85rem;}
+
+.p-0{padding: 0 !important;}
+
+.mt-14em{margin-top: 0.7rem !important;}
+.mt-3m{margin-top:-4px}
+.mt-2em{margin-top: 0.1rem !important;}
+
+.ml-8em{margin-left: 0.4rem !important;}
+
+.mr-8em{margin-right: 0.4rem !important;}
+
+.m-14em-auto-12em{margin: 0.7rem auto 0.6rem !important;}
+
+.f-18em{font-size: 0.9rem !important;}
+
+.color_ff{color:#fff;}
+
+.bt-1-f9{border-top: 1px solid #f1f1f1;}
+
+
+
+</style>
+</head>
+<body>
+ 	<header class="aui-bar aui-bar-nav aui-bar-info">
+	    <ul>
+	    	<li class="h-45em">
+	    		<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+	    		<div class="aui-title f-w">党费缴纳</div>
+	    	</li>
+	    </ul>
+    </header>
+	<div class="pl-12em pr-12em bg-color-whiter">
+		<p class="text-center pt-40em f-18em color-33">党费缴纳简介</p>
+		<p class="pt-15em f-15em lh-18em color-89">按照党章规定向党组织交纳党费，是共产党员必须具备的起码条件。党费收缴、使用和管理，是党的基层组织建设和党员队伍建设中的一项重要工作。按月领取工资的党员，每月以工资总额中相对固定的、经常性的工资收入（税后）为计算基数，按规定比例交纳党费</p>
+		<neq name="dues_list" value="">
+			<eq name="status" value="1">
+			<p class="text-center pt-40em color-ff3032 f-15em lh-27em"><span class="pr-4em f-27em">{$dues_list}</span>元</p>
+			<p class="text-center pt-10em pb-40em f-15em color-b3">本月应缴纳金额</p>
+			<else/>
+			<p class="text-center pt-40em color-ff3032 f-15em lh-27em"><span class="pr-4em f-27em">本月已缴纳</span></p>
+			</eq>
+		<else/>
+			<p class="text-center pt-40em color-ff3032 f-15em lh-27em"><span class="pr-4em f-27em">本月党费记录未录入，请耐心等待！</span></p>
+		</neq>
+	</div>
+<!-- 	<div class="pl-12em pr-12em bg-color-whiter">
+		<button class="w-100b text-align grad b-0 color-white lh-46em h-44em">缴费</button>
+		<p class="pt-15em f-12em lh-18em color-b3">备注：党费在线缴纳，目前支持微信或支付宝，缴纳明细只显示登入用户每月所在支部的缴费信息</p>
+	</div> -->
+</body>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-pull-refresh.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-slide.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/ccp/js/sp_fa.js"></script>
+</body>
+</html>

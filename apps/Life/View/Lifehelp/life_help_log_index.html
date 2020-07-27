@@ -1,0 +1,87 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+	    <div class="page-content-wrapper">
+	        <div class="page-content">
+	            <div class="portlet light  bordered">
+	                <div class="portlet-title">
+	                    <div class="caption">
+	                        <div class="cont-col1">
+	                            <div class="label label-sm bg-color-green2">
+	                                <i class="iconfont">&#xe64b;</i>
+	                            </div>
+	                        </div>
+	                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+	                        <span class="caption-helper"></span>
+	                    </div>
+	                    <div class="pull-right text-right pr-15 mb-10">
+							<a href="{:U('life_help_log_edit')}" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-70">
+								<i class="iconfont"></i>添加
+							</a>
+						</div>
+	                    
+	                </div>
+	                <div class="portlet-body">
+                        <div class="row right">
+							<div class="form-group col-md-4">
+								<div class="row pull-left">
+									<label class="control-label col-md-4 p-0 lh-35">姓名查询： </label>
+									<div class="col-md-8  p-0">
+										<input type="text" name="help_log_name" value="{$help_log_name}" placeholder="输入姓名" id="help_log_name" class=" form-control w-190" lay-key="1">
+									</div>
+								</div>
+							</div>
+							
+							<div class="pull-right text-right p-0 mr-30 mb-10">
+								<button type="button" class="btn btn-sm blue btn-outline bor-ra-2 w-70" onclick="search()"><i class="iconfont"></i>搜索</button>
+							</div>
+						</div>
+	                    <div class="scroller p5-scroller" data-always-visible="1" data-rail-visible1="1">
+	                        <table id="client_table"
+	                               class="table table-condensed table-striped"
+	                               data-toggle="table"
+	                               data-url="{:U('Lifehelp/life_help_log_index_data')}"
+	                               data-height="550"
+	                               data-page-size='10'
+	                               data-search="false"
+	                               data-show-refresh="false" data-show-toggle="false"
+	                               data-show-columns="false" data-show-export="false"
+	                               data-detail-formatter="detailFormatter"
+	                               data-minimum-count-columns="2"
+	                               data-show-pagination-switch="false" data-pagination="true"
+	                               data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]"
+	                        >
+	                            <thead>
+		                            <tr>
+		                                <th data-field="help_log_id" data-align="center" data-sortable="true" >编号</th>
+		                                <th data-field="help_log_name" data-align="center" data-sortable="true" >姓名</th>
+		                                <th data-field="help_log_tel" data-align="center" data-sortable="true" >联系电话</th>
+		                                <th data-field="help_log_time" data-align="center" data-sortable="true" >帮扶时间</th>
+		                                <th data-field="help_log_no" data-align="center" data-sortable="true" >帮扶对象</th>
+		                                <th data-field="operate" data-align="center" data-sortable="true" >操作</th>
+		                            </tr>
+	                            </thead>
+	                        </table>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    document.getElementById("btn").onclick=function()
+	    {
+	        document.getElementById("link").click();
+	    }
+	</script>
+	<script>
+		//查询
+		function search(){
+			var help_log_name = $("#help_log_name").val();
+			$('#client_table').bootstrapTable('refresh',{url:"{:U('Lifehelp/life_help_log_index_data')}",query:{help_log_name:help_log_name}});
+ 		}
+	</script>
+</block>

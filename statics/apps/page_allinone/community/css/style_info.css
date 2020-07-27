@@ -1,0 +1,134 @@
+.bg {
+    background: url("../images/bg.jpg");
+    background-size: cover;
+}
+.back{
+	width: 156px;
+    height: 64px;
+    margin-top: 95px;
+    margin-left: 99px;
+}
+.back1{position: absolute;left: 455px;}
+.title-txt {
+   width: 563px;
+    height: 74px;
+}
+.title {
+   width: 563px;
+    height: 74px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.index_icon{
+	width: 98px;
+    height: 110px;
+	}
+
+.hand_con{
+	position: relative;
+	width: 1740px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+/* 垂直居中 */
+.va-jz{
+	display: flex;
+    align-items:Center; 
+}
+
+
+/*底部*/
+.live_footer{
+	margin-top: 48px;
+}
+.back_bg{
+	width:280px;
+	height:90px;
+	line-height: 90px;
+	text-align: center;
+	background:rgba(255,171,0,0.8);
+	border-radius:20px;
+}
+.back_bg img{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+    margin-right: 30px;
+    margin-left: 50px;
+}
+.back_bg div{
+	color:#fff;
+	font-size: 40px;
+	cursor: pointer;
+}
+.back_live{
+	width: 260px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+}
+.back_live img{
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+    margin-right: 20px;
+}
+.back_live div{
+	color:#fff;
+	font-size: 40px;
+}
+
+/*内容样式*/
+.style_tit{
+	height:70px;
+	display: flex;
+    align-items:Center; 
+}
+.style_tit div{
+	font-size:40px;
+	color:#000;
+	margin-left: 15px;
+}
+.style_con{
+	margin: 0 auto;
+    width: 1679px;
+    margin-bottom: 20px;
+    height: 100%;
+    padding-bottom: 50px;
+    background: rgba(255,255,255,1);
+    box-shadow: 0px 0px 10px 0px rgba(10,2,4,0.2);
+    border-radius: 16px;
+    margin-top: 32px;
+}
+.style_con_cont{
+	text-indent: 2em;;
+	margin-top: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 22px;
+    font-family: SourceHanSansSC-Regular;
+    font-weight: 400;
+    color: rgba(77,77,77,1);
+    line-height: 45px;
+}
+.style_con_tit{
+	height:100px;
+	font-size:42px;
+	font-family:SourceHanSansSC-Medium;
+	font-weight:bold;
+	color:rgba(33,33,33,1);
+	line-height:60px;
+	padding-top: 61px;
+	text-align: center;
+	
+}
+.style_con_add{
+	padding-left: 317px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-family: SourceHanSansSC-Regular;
+    font-weight: 400;
+    color: rgba(130,130,130,1);
+    padding-right: 300px;
+}

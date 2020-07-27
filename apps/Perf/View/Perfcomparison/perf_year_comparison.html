@@ -1,0 +1,228 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+	<style type="text/css">
+		.page-content-wrapper .page-content {
+		    margin-top: 0;
+		    min-height: 300px !important;
+		    padding: 25px 20px 10px;
+		}
+	</style>
+</block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+					<div class="layui-row layui-col-space10">
+                         <div class="layui-col-md3">
+							<div class="layui-card">
+				                <form class="layui-form">
+				                    <div class="layui-card-header">支部列表</div>
+				                    <div class="layui-card-body" style="overflow-y:auto">
+				                        <div class="over-h-tree">
+				                            <ul id="treeDemo" class="ztree ztree-demo">
+			
+				                            </ul>
+				                        </div>
+				                    </div>
+				                </form>
+				            </div>
+						</div>
+                        <!-- 左侧结束 -->
+                        <!-- 右侧开始 -->
+                         <div class="layui-col-md9">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                           <div class="form-horizontal layui-col-md4">
+									<div class="layui-row">
+										<label class="control-label layui-col-md4 p-0">年度选择： </label>
+										<div class="layui-col-md8  p-0">
+											<input type="text" class="form-control" id="month"  value="{$time}">
+												<input type="hidden" id="party">
+										</div>
+									</div>
+								</div>
+								
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+	                            </table>
+	                            
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+                        
+                    
+                    </div><!-- row结束 -->
+                </div>
+            </div>
+        </div>
+     </block>
+
+	<block name="js">
+	<script>
+	 $(".over-h-tree").css("height",($(window).height()-115));
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , layer = layui.layer
+	                , laydate = layui.laydate
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("perf_year_comparison_data",array("time"=>$time))}'
+	                , height: 'full-180'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'communist_name', width: 90, title: '党员',minWidth: 90, sort: true}
+	                    , {field: '01', title: '1月', width: 60,minWidth: 60}
+	                    , {field: '02', title: '2月', width: 60,minWidth: 60}
+	                    , {field: '03', title: '3月', width: 60,minWidth: 60}
+	                    , {field: '04', title: '4月', width: 60,minWidth: 60}
+	                    , {field: '05', title: '5月', width: 60,minWidth: 60}
+	                    , {field: '06', title: '6月', width: 60,minWidth: 60}
+	                    , {field: '07', title: '7月', width: 60,minWidth: 60}
+	                    , {field: '08', title: '8月', width: 60,minWidth: 60}
+	                    , {field: '09', title: '9月', width: 60,minWidth: 60}
+	                    , {field: '10', title: '10月', width: 70,minWidth: 70}
+	                    , {field: '11', title: '11月', width: 70,minWidth: 70}
+	                    , {field: '12', title: '12月', width: 70,minWidth: 70}
+	                  
+	                ]]
+	                , page: false
+	            });
+
+	            
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time
+					        }
+				      	});
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	    })
+	</script>
+		<script>
+       /*  $(document).ready(function(){ 
+        　　var table_width = $('.table_width').css('width');
+            $('.table_width').parent().parent().css('width',table_width);
+        }); */
+		var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick//绑定回调函数
+            },
+            view: {
+            	showIcon: true,
+                showLine: false,
+            }
+        };
+		//$('#client_table').bootstrapTable('refresh',{url:"{:U('pf_assess_set_index_data')}?party_no="+party_no+"&group='party'"});
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            <volist name="category" id="list">
+            { id:"{$list.party_no}",pId:{$list.party_pno},type:"{$list.is_communistmember}", name:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png",<eq name='list.party_pno' value='0'>open:true</eq>},
+			</volist>
+        ];
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+        function onClick(e, treeId, treeNode) {
+        	var party_no=treeNode.id;
+			$("#party").val(party_no)
+			var time=$("#month").val();
+			var template_id = $("#template_id").val();
+			/* alert(party_no); */
+			//$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_year_comparison_data')}?party_no="+party_no+"&time="+time});
+			 var url_c = "{:U('perf_year_comparison_data')}?party_no="+party_no+"&time="+time; 
+			var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: url_c
+	                , height: 'full-180'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'communist_name', width: 90, title: '党员',minWidth: 90, sort: true}
+	                    , {field: '01', title: '1月', width: 60,minWidth: 60}
+	                    , {field: '02', title: '2月', width: 60,minWidth: 60}
+	                    , {field: '03', title: '3月', width: 60,minWidth: 60}
+	                    , {field: '04', title: '4月', width: 60,minWidth: 60}
+	                    , {field: '05', title: '5月', width: 60,minWidth: 60}
+	                    , {field: '06', title: '6月', width: 60,minWidth: 60}
+	                    , {field: '07', title: '7月', width: 60,minWidth: 60}
+	                    , {field: '08', title: '8月', width: 60,minWidth: 60}
+	                    , {field: '09', title: '9月', width: 60,minWidth: 60}
+	                    , {field: '10', title: '10月', width: 70,minWidth: 70}
+	                    , {field: '11', title: '11月', width: 70,minWidth: 70}
+	                    , {field: '12', title: '12月', width: 70,minWidth: 70}
+	                  
+	                ]]
+	                , page: false
+	            });
+        }
+		</script>
+		<script>
+		//年选择器
+		laydate.render({
+			elem: '#month'
+		 	,type: 'year'
+		  	,done: function(datas){ //选择日期完毕的回调
+				var party=$("#party").val()
+			  //	$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_year_comparison_data')}?party_no="+party+"&time="+datas});
+				  var table = layui.table;
+				  var url_c = "{:U('perf_year_comparison_data')}?party_no="+party+"&time="+datas;
+	            table.render({
+	                elem: '#demo'
+	                , url: url_c
+	                , height: 'full-180'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'communist_name', width: 90, title: '党员',minWidth: 90, sort: true}
+	                    , {field: '01', title: '1月', width: 60,minWidth: 60}
+	                    , {field: '02', title: '2月', width: 60,minWidth: 60}
+	                    , {field: '03', title: '3月', width: 60,minWidth: 60}
+	                    , {field: '04', title: '4月', width: 60,minWidth: 60}
+	                    , {field: '05', title: '5月', width: 60,minWidth: 60}
+	                    , {field: '06', title: '6月', width: 60,minWidth: 60}
+	                    , {field: '07', title: '7月', width: 60,minWidth: 60}
+	                    , {field: '08', title: '8月', width: 60,minWidth: 60}
+	                    , {field: '09', title: '9月', width: 60,minWidth: 60}
+	                    , {field: '10', title: '10月', width: 70,minWidth: 70}
+	                    , {field: '11', title: '11月', width: 70,minWidth: 70}
+	                    , {field: '12', title: '12月', width: 70,minWidth: 70}
+	                  
+	                ]]
+	                , page: false
+	            }); 
+		  	}
+		});
+		</script>
+ 	</block>

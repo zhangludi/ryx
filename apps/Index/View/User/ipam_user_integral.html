@@ -1,0 +1,64 @@
+<div  class="public_content bg-color-gray9">
+    <!--左侧内容区开始-->
+    <div class="bg-color-white w-840 pull-left">
+        <div class="w-205 hr-sr-dfdfdf h-all pull-left">
+            <div class="h-230 po-re hr-sb-dfdfdf">
+                {:W('Leftmenu/communist_avatar')}
+            </div>
+            <div class="">
+                {:W('Leftmenu/personal', array(7))}
+            </div>
+        </div>
+        <div class="w-630 p-15 pull-left boxsize-b">
+            <div class="userinfo_title">
+                <span class="userinfo_title_txt">我的积分</span>
+            </div>
+            <!--积分值开始-->
+            <div>
+                <!--<div class="pull-left mt-40 mr-130">-->
+                    <!--<p class="fsize-14 fcolor-33">今日获得积分：</p>-->
+                    <!--<p class="fcolor-f33"><span class="fsize-20">55.</span><span class="fsize-18">00</span><span class="fsize-20">分</span></p>-->
+                <!--</div>-->
+                <div class="pull-left mt-40">
+                    <p class="fsize-14 fcolor-33">总积分：</p>
+                    <p class="fcolor-f33"><span class="fsize-20">{$total.integral_total}</span><span class="fsize-20">分</span></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!--积分值结束-->
+            <!--积分变动记录开始-->
+            <div class="w-630 h-50 lh-50 fsize-18 bg-color-f9f9f9 mt-35 bor-ra-4 fcolor-ff5a00 pl-5">积分变动记录</div>
+            <!--积分变动记录结束-->
+            <!--积分变动记录开始-->
+            <table class="w-all center-text tabel-fixed mt-25 border-collapse">
+                <thead class="fcolor-33">
+                <tr class="lh-45">
+                    <th class="font-nor">时间</th>
+                    <th class="font-nor">说明</th>
+                    <th class="font-nor">积分（分）</th>
+                </tr>
+                </thead>
+                <tbody class="fcolor-66 fsize-14">
+                    <foreach name="log_list" item="list">
+                        <tr class="lh-45 hr-sb-eee">
+                            <td>{$list.add_time}</td>
+                            <td>{$list.log_name}</td>
+                            <td class="fcolor-fd483d ">{$list.change_integral}</td>
+                        </tr>
+                    </foreach>
+                </tbody>
+            </table>
+            <!--积分变动记录结束-->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--左侧内容区结束-->
+    <!--右侧内容区开始-->
+    <div class="pull-right news_content w-320 bg-color-white p-15 boxsize-b">
+        {:W('Article/hotspot_issues')}
+        {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+        {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>

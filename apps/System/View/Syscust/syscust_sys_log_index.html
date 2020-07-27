@@ -1,0 +1,126 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container ">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-md-12">
+		                    <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <div class="cont-col1">
+		                                    <div class="label label-sm bg-color-green2">
+		                                        <i class="iconfont">&#xe64b;</i>
+		                                    </div>
+		                                </div>
+                                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME.$opinion_type);</php></span>
+                                    </div>
+                                </div>
+                                 <div class="row ml-10">
+                                 <div class="form-group col-md-2 col-sm-2 col-lg-2 ">
+										<div class="row">
+											<label style="text-align:right;" class="control-label col-md-5 col-sm-5 col-lg-5 p-0 lh-35">关键字： </label>
+											<div class="col-md-6 col-sm-6 col-lg-6  p5-bug-search p-0">
+												<input type="text" name="keywords" value="{$keywords}"  class=" form-control layer-date " placeholder="内容或人员" id="keyword">
+											</div>	
+										</div>
+									</div>
+									<div class="form-group col-md-5 col-sm-5 col-lg-5">
+	                                    <div class="row">
+	                                         <label style="text-align:right;" class="control-label col-md-2 p-0 lh-35">时间：</label>
+	                                         <div class="col-md-4 col-sm-4 col-lg-4  p5-bug-search p-0">
+	                                            <input name="start_time" type="text" class="form-control layer-date " placeholder="选择开始日期" id="start_time">  
+	                                         </div>
+	                                         <label style="text-align:center;" class="control-label col-md-1 p-0 lh-35">至</label>
+	                                         <div class="col-md-4 col-sm-4 col-lg-4  p5-bug-search p-0">
+	                                            <input name="end_time" type="text" class="form-control layer-date " placeholder="选择结束日期" id="end_time">  
+	                                         </div>
+	                                    </div>
+		                            </div>
+									<div class="pull-right text-right p-0 mr-15 mb-10">
+										<a  class="btn btn-sm red btn-outline bor-ra-2 w-70" href="{:U('syscust_sys_log_del')}"><i class="iconfont">&#xe62f;</i>清空</a>
+									</div> 
+									<div class="pull-right text-right p-0 mr-15 mb-10">
+										<button type="button" class="btn btn-sm blue btn-outline bor-ra-2 w-70" onclick="search()"><i class="iconfont">&#xe675;</i>查询</button>
+									</div>
+									</div>
+                                <table id="client_table"  data-search="false"
+									data-show-refresh="false" data-show-toggle="false" data-toggle="table"
+									data-show-columns="false" data-show-export="false"
+									data-detail-view="false" data-detail-formatter="detailFormatter"
+									data-side-pagination="server"
+									data-minimum-count-columns="2" data-striped="false"
+									data-show-pagination-switch="false" data-pagination="true"
+									data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]"
+									data-show-footer="false" 
+									data-url="{:U('syscust_sys_log_index_data')}">
+									<thead>
+		                            	<tr>
+	                                      
+	                                      <th data-field="log_id">编号</th>
+	                                      <th data-field="log_newcontent">内容</th>
+	                                      <th data-field="add_time">时间</th>
+	                                      <th data-field="add_communist_name">操作人</th>
+	                                  </tr>
+		                        	</thead>
+								</table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </block>
+	<block name="js">
+	<script>
+	laydate.render({
+		elem: '#start_time',
+		type: 'datetime'
+	});
+	laydate.render({
+		elem: '#end_time',
+		type: 'datetime'
+	});
+	</script>
+		<script>
+		    function nav_edit(opinion_id,opinion_type) {
+		    	
+		        layer.open({
+		            type: 2,
+		            title: '编辑增加',
+		            //offset: ['60px', (window.screen.width - 230) / 2 - 400 + 230],
+		            shadeClose: true, //点击遮罩关闭层
+		            content: "{:U('syscust_opinion_edit')}?opinion_id=" + opinion_id+"&opinion_type="+opinion_type,
+		            area: ['800px', '500px'],
+		            maxmin: true,
+		            success:function(){
+	                	layerAuto();
+	                }
+		        });
+		    }
+		    function del_info() {
+		        layer.open({
+		            type: 2,
+		            title: '详情',
+		            //offset: ['60px', (window.screen.width - 230) / 2 - 400 + 230],
+		            shadeClose: true, //点击遮罩关闭层
+		            content: "{:U('syscust_sys_log_del')}",
+		            area: ['600px', '200px'],
+		            maxmin: true,
+		            success:function(){
+	                	layerAuto();
+	                }
+		        });
+		    }
+		</script>
+		<script>
+  	//查询
+	function search(){
+		var keyword = $("#keyword").val();
+		var start_time=$("#start_time").val();
+        var end_time=$("#end_time").val();
+		$('#client_table').bootstrapTable('refresh',{url:"{:U('syscust_sys_log_index_data')}",query:{start_time:start_time,end_time:end_time,keyword:keyword}});
+  	}
+	</script>
+	</block>

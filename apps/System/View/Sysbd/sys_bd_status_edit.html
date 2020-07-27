@@ -1,0 +1,114 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				
+				<div class="layui-card-body layui-form">
+					<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>状态信息：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input id="status_id" name="status_id" type="hidden" value="{$status_row.status_id}">
+									<input type="text" name="status_name" placeholder="状态信息" autocomplete="off" class="layui-input" value="{$status_row.status_name}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>状态编号：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="status_no" placeholder="状态编号" autocomplete="off" class="layui-input" value="{$status_row.status_no}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>状态值：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="status_value" placeholder="状态值" autocomplete="off" class="layui-input" value="{$status_row.status_value}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>状态颜色：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="status_color" placeholder="状态颜色" autocomplete="off" class="layui-input" value="{$status_row.status_color}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+						
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>状态分组：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<select id="dept_no" name="status_group" lay-filter="state" lay-search="">
+										<option value="0">请选择</option>
+										<volist name="group_list" id="group">
+										<option value="{$group.group_code}" <eq name="group.group_code" value='$status_row.status_group'>selected</eq>>{$group.group_name}</option>
+										</volist>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<textarea name="memo" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$status_row.memo}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<button type="reset" class="layui-btn layui-btn-primary mr-40">重置</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use([ 'form', 'laydate'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			
+		form.on('submit(component-form-demo1)', function(data){
+			$.ajax({
+				url:"{:U('Sysbd/sys_bd_status_do_save')}",
+				type:'POST',
+				data:data.field,
+				success: function (data) {
+					alert('操作成功！');
+					layer_colse();
+					parent.location.reload();
+				}
+			})
+			return false;
+		});
+
+	})
+	function layer_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+</script>
+</block>

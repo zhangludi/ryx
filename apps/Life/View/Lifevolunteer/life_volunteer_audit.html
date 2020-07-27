@@ -1,0 +1,105 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<form action="{:U('life_volunteer_do_save')}" id="form" method="post" class="form-horizontal">
+					<input type="hidden" class="form-control"  name="volunteer_id" value="{$volunteer_data.volunteer_id}">
+					<input type="hidden" class="form-control" id="status" name="status" value="">
+					<div class="layui-card-body layui-form">
+						<div class="layui-row">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$volunteer_data.communist_name}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>组织：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$volunteer_data.party_name}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>时间：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$volunteer_data.add_time}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>申请说明：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$volunteer_data.volunteer_content}
+									</div>
+								</div>
+							</div>
+
+							<neq name='volunteer_data.status' value="1">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审核人：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$volunteer_data.volunteer_audit_man}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审核时间：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$volunteer_data.volunteer_audit_time}
+									</div>
+								</div>
+							</div>
+							</neq>
+							<if condition="$res">
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审批意见：</strong></div>
+										<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+										<textarea name="volunteer_audit_opinion" placeholder="请输入简介,字符最长255个" maxlength="255" class="layui-textarea" <neq name='volunteer_data.status' value="1">disabled</neq>>{$volunteer_data.volunteer_audit_opinion}</textarea>
+										</div>
+									</div>
+								</div>
+                            </if>
+						</div>
+					</div>
+					<div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="text-align: right">
+                            	<if condition=" $res && $volunteer_data['status'] eq 1 ">
+                                	<button class="layui-btn" lay-submit="" onclick="btnsave(2);" lay-filter="component-form-demo1">通过</button>
+                                	<button class="layui-btn" lay-submit="" onclick="btnsave(3);" lay-filter="component-form-demo1">驳回</button>
+                                </if>
+                                <button type="button"  id="close" class="layui-btn layui-btn-primary mr-40">取消</button>
+                            </div>
+                        </div>
+                    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</block>
+<block name="js">
+<script>
+	$('#close').click(function() {
+		var index = parent.layer.getFrameIndex(window.name);
+		parent.layer.close(index);
+	});
+	function btnsave(status){
+		$("#status").val(status);
+		$("#form").submit();
+	}
+</script>
+</block>

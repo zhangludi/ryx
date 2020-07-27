@@ -1,0 +1,243 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <form class="layui-form">
+                    <div class="layui-card-header" style="position: relative;">
+                        <span>党组织列表</span>
+                    </div>
+                    <div class="layui-card-body" style="overflow-y:auto">
+                        <div class="over-h-tree">
+                            <ul id="treeDemo" class="ztree ztree-demo">
+
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                        <div class="layui-form layui-card-body fitheight">
+                            <div class="layui-row layui-col-space5">
+                                <div class="layui-col-xs12 text-right pull-right">
+
+                                    <div class="layui-col-xs1 text-r lh-40">姓名：</div>
+                                    <div class="layui-col-xs2">
+                                        <input class="layui-input" id="communist_name" autocomplete="off" placeholder="请输入姓名">
+                                         <input type="hidden" name="party_no" id='party_no' />
+                                    </div>
+                                    <div class="layui-col-xs1 text-r lh-40">年月：</div>
+                                    <div class="layui-col-xs2">
+                                        <input type="text" class="layui-input " id="start_time" placeholder="请填写日期"  autocomplete="off" value="">
+                                    </div>
+                                    <div class="layui-col-xs5 pull-right">
+                                        <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+                                        
+                                        <a class="layui-btn table-add" style="text-decoration: none;" onclick="free_import()">导入</a>
+                                        <a class="layui-btn table-add" style="text-decoration: none;" onclick="data_export()">导出</a>
+                                        <a class="layui-btn table-add" data-type="add" style="text-decoration: none;" title="添加">添加</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="demo"  lay-filter="demo"></table>
+                            <script type="text/html" id="operate">
+                                {{#if(d.status == '1'){}}
+                                    <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">缴纳</a>
+								{{#}}}
+								<a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="testTrueCon" class="di-n">
+    <div class="portlet-body mt-10">
+        <form action="{:U('ccp_dues_list_import')}" class="form-horizontal" enctype="multipart/form-data" method="post">
+            <div class="form-group layui-col-md12 pull-right mt-10">
+                <a target='_blank' style="text-decoration: none;" href="__UPLOAD__/ccp/tpl_xls/communist_fees.xlsx" class="layui-btn table-add">下载导入模板</a>
+            </div>
+            <div class="layui-col-md12 pull-right  p5-layer-button">
+				<div class="row">
+                    <label class="control-label layui-col-md3 p-0">导入Excel表：</label>
+                    <div class="layui-col-md5">
+                        <input  type="file" name="file_free" />
+                    </div>	
+					<div class="layui-col-md3">
+						<button type="submit" class="layui-btn">提交</button>
+                    </div>	
+                </div>                
+            </div>
+        </form>
+    </div>
+</div>
+
+</block>
+<block name="js"> 
+<script type="text/javascript">
+    function free_import(){
+        layer.open({
+            type: 1,
+            title: "导入党费",
+            offset: 100,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['500px' , '200px'],
+            content: $('#testTrueCon')
+        });
+    }
+</script>
+<script>
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: "{:U('Ccpdues/ccp_dues_list_data')}?party_no={$party_no}"
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+
+                    {field: 'dues_month', width: 100, title: '月份', sort: true}
+                    , {field: 'party_name', title: '支部名称',minWidth: 200}
+                    , {field: 'communist_name',width: 100, title: '姓名'}
+                    , {field: 'dues_amount',width: 120, title: '缴费金额(￥)'}
+                    , {field: 'dues_time', width: 120, title: '缴费时间'}
+                    , {field: 'add_staff_name', width: 130, title: '操作人'}
+                    , {field: 'update_time', width: 160, title: '操作时间'}
+                    , {field: 'status_name', width: 100, title: '状态'}
+                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+                ]]
+                , page: true
+            });
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            table.on('tool(demo)', function(obj){
+                var data = obj.data;
+                var idcard_no = data.idcard_no;
+                if(obj.event === 'del'){
+                    layer.confirm('确认删除该数据吗？', function(index){
+                        window.location='{:U("Ccpdues/ccp_dues_do_del")}?dues_id='+data.dues_id+'';
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'edit'){
+					window.location='{:U("Ccpdues/ccp_dues_status")}?dues_id='+data.dues_id+'';
+				}					
+            });
+            var $ = layui.$, active = {
+                reload: function(){
+                    var communist_name = $('#communist_name').val();
+                    var start_time = $('#start_time').val();
+                    var party_no = $('#party_no').val();
+                    table.reload('ztreedata', {
+                        page: {
+                          curr: 1 
+                        }
+                        ,where: {
+                            "communist_name": communist_name,
+                            "dues_month":start_time,
+                            "party_no":party_no
+                        }
+                    });
+                },
+                add: function(){
+                    var index = layer.open({
+                        type: 2,
+                        title: false,
+                        end:false,
+                        closeBtn: 0,
+                        shift: 1,
+                        area : ['800px' , '400px'],
+                        content: "{:U('ccp_dues_edit')}",
+                    });
+                    layer.full(index);
+                }
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        //点击左侧树的事件
+        var setting = {
+            view: {
+                showLine: false,
+            },
+            data: {
+                key: {
+                    title: "t"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                    $('#party_no').val(node.id);
+                    var communist_name = $('#communist_name').val();
+                    var start_time = $('#start_time').val();
+                    layui.use('table', function () {
+                        var table = layui.table;
+                        table.render({
+                            elem: '#demo'
+                            , url: '{:U("Ccpdues/ccp_dues_list_data")}?party_no='+node.id+'&communist_name='+communist_name+'&start_time'+start_time+''
+                            , height: 'full-160'
+                            , cols: [[
+                                {field: 'dues_month', width: 100, title: '月份', sort: true}
+                                , {field: 'party_name', title: '支部名称',minWidth: 200}
+                                , {field: 'communist_name',width: 100, title: '姓名'}
+                                , {field: 'dues_amount',width: 120, title: '缴费金额(￥)'}
+                                , {field: 'dues_time', width: 120, title: '缴费时间'}
+                                , {field: 'add_staff_name', width: 130, title: '操作人'}
+                                , {field: 'update_time', width: 160, title: '操作时间'}
+                                , {field: 'status_name', width: 100, title: '状态'}
+                                , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+                            ]]
+                            , page: true
+                        });
+                    });
+                }
+            }
+        };
+        var zNodes = [
+            <volist name="party_list" id="list" key = 'k'>
+                {id:"{$list.party_no}", pId:"{$list.party_pno}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+            </volist>
+        ];
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+    })
+    $(".over-h-tree").css("height",($(window).height() - 95));
+</script>
+<script>
+	laydate.render({
+        elem: '#start_time'
+        ,type: 'month'
+	});
+	laydate.render({elem: '#end_time'});
+    function data_export(){ 
+    	location.href="{:U('ccp_dues_list_export')}";
+    }
+</script>
+</block>

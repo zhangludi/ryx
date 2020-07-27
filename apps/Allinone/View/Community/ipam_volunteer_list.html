@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>志愿者服务</title>
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/public/css/sp_public.css">
+     <link rel="stylesheet" href= "__STATICS__/apps/page_allinone/community/css/volunteer.css">
+</head>
+<body class="bg">
+	<!--<div class="con_top clearfix">		
+			<div class="pull-left back">
+				<a href="../sp_service/sp_service.html"><img src="images/fanhui.png"></a>
+			</div>		
+		<div class="pull-right home"><a href="../index.html"><img src="images/home.png"></a></div>
+	</div>-->
+<a onclick="window.history.go(-1);"><div class="back1"><img src="__STATICS__/apps/page_allinone/community/images/back1_bg.png"></div></a>
+<header class="title clearfix" style="text-align: center;width: 1650px;" >
+    <img src="__STATICS__/apps/page_allinone/public/images/allinone_icon.png" alt="智慧党建自助服务终端" style="vertical-align:middle; width: 4.5%"> 
+    <span class="pl-10 pt-50" style="font-size: 48px; font-weight:600; color: #2b2b2b;vertical-align:middle;">{$web_name}一体机</span>
+	</header>
+<div class="con_vol clearfix">
+	<div class="clearfix style_tit">
+		<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/volunteer_bg.png">
+		<div class="pull-left">志愿者服务</div>
+	</div>
+	<div class="pull-left vol_l">
+		<div class="vol_tit clearfix">
+			<div class="pull-left pt-25 pl-20"><img src="__STATICS__/apps/page_allinone/community/images/vol_l.png"></div>
+			<!--<div class="pull-right pt-15 pr-60">
+				<a class="nolink" href="../volunteer_act/vol_act.html"><div class="vol_add">申请活动</div></a>				
+			</div>-->
+		</div>
+		<div class="vol_line"></div>
+		<div class="vol_list clearfix">
+			<volist name="volunteer_activity" id="list">
+			<li>
+				<div class="pull-left"><img src="{$list.activity_thumb}" width="179px" height="136px"></div>
+				<div class="pull-left vol_list_tit ml-40">
+					<a class="nolink">
+						<h1>{$list.activity_title}</h1>
+					</a>
+					<p>{$list.activity_description}</p>
+				</div>
+			</li>
+			</volist>
+			<!-- <li>
+				<div class="pull-left"><img src="__STATICS__/apps/page_allinone/community/images/vol_tu1.jpg"></div>
+				<div class="pull-left vol_list_tit ml-40">
+					<h1>弘扬五四精神 展现志愿风采 青年志愿者典型事迹</h1>
+					<p>2019年4月30日10时30分，纪念五四运动100周年大会在人民大会堂举行。中共中央总书记、国家主席、中央军委主席习近平出席大会并发表重要讲话。五四风雷，激荡百年。</p>
+				</div>
+			</li>
+			<li>
+				<div class="pull-left"><img src="__STATICS__/apps/page_allinone/community/images/vol_tu1.jpg"></div>
+				<div class="pull-left vol_list_tit ml-40">
+					<h1>弘扬五四精神 展现志愿风采 青年志愿者典型事迹</h1>
+					<p>2019年4月30日10时30分，纪念五四运动100周年大会在人民大会堂举行。中共中央总书记、国家主席、中央军委主席习近平出席大会并发表重要讲话。五四风雷，激荡百年。</p>
+				</div>
+			</li> -->
+		</div>
+	</div>
+	<div class="pull-right vol_r">
+		<div class="total"><img src="__STATICS__/apps/page_allinone/community/images/total.png"></div>
+		<div class="total_line"></div>
+		<div class="vol_head">
+			<ul>
+				<volist name="volunteer_communist" id="communist">
+				<li><img src="{$communist.communist_avatar}"><span>{$communist.communist_name}</span></li>
+				</volist>
+				<!-- <li><img src="__STATICS__/apps/page_allinone/community/images/tx.png"><span>张建国</span></li>
+				<li><img src="__STATICS__/apps/page_allinone/community/images/tx.png"><span>张建国</span></li> -->
+			</ul>
+		</div>
+		<!--<a class="nolink" href="../volunteer_vol/volunteer_vol.html"><div class="total_add"><span>申请志愿者</span></div></a>-->
+	</div>
+</div>
+
+
+<script src="__STATICS__/apps/page_allinone/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_allinone/community/js/volunteer.js"></script>
+</body>
+</html>

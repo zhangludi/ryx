@@ -1,0 +1,51 @@
+<div class="public_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div class="public_content_left study_slide">
+        {:W('Leftmenu/ipam_home_slide', array(2,'4'))}
+    </div>
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right news_content">
+        <div class="public_content_right_l pr-10 pull-left w-630 hr-sr-gray2">
+            <!--会议详情区开始-->
+            <div>
+                <!--左侧图片开始-->
+                <div class="w-240 h-180 pull-left mr-20">
+                    <img src="{$helpinfo.article_thumb}" alt="会议图片" class="di-b  w-240 h-180 ">
+                </div>
+                <!--左侧图片结束-->
+                <!--右侧内容区开始-->
+                <div>
+                    <h2 class="fsize-24 fcolor-11">{$helpinfo.article_title}</h2>
+                    <div class="fcolor-33 lh-30 ">
+                        <p class="mt-25">
+                            <!--  <span>笔记地点：</span>
+              <span>山东省 济南市 高新区 齐鲁软件园C座、A-302</span> -->
+                        </p>
+                        <p class="mt-20 fsize-14 fcolor-99">
+                            <span class="pull-left">{$helpinfo.add_time}</span>
+                            <!-- <span class="public_button_stroke-red study_note_button">{$helpinfo.topic_type}</span> -->
+                        </p>
+                    </div>
+                </div>
+                <!--右侧内容区结束-->
+                <div class="clearfix"></div>
+            </div>
+            <!--会议详情区结束-->
+            <p class="public_list_hr"></p>
+            <!--议会内容开始-->
+            <div>
+                <p>
+                    <i class="public_mark_org"></i> 政策内容
+                </p>
+                {$helpinfo.article_content}
+                <!--评论开始-->
+                <!--评论结束-->
+            </div>
+            <!--议会内容结束-->
+        </div>
+        <div class="public_content_right_r pull-right w-280 slide_r_news"></div>
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>

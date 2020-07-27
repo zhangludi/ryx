@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>党务动态</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_home.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/cms/css/cms_partyWork.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+header ul li{
+	display: block; !important;
+}
+section {
+	display: block !important;
+}
+.material_over_point {
+    overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+</style>
+</head>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-info">
+<ul>
+	<li>
+		<a class="aui-pull-left" href="javascript:history.back(-1)">
+			<span class="aui-iconfont aui-icon-left"></span>首页
+		</a> 		
+		<div class="aui-title icon_medium f-16em">文章列表</div>
+	</li>
+</ul>
+</header>
+<div class="aui-load-container" style="padding-top:3.7rem;">
+	<div class="aui-content">
+		<div class="mt-12em pl-8em pr-8em">
+			<ul>
+			<volist name="article_list" id="article">
+				<li class="mb-12em over-h bb-3em-e6 pb-10em" style="position: relative;">
+				<a href="{:U('Cms/cms_article_info', array('article_id' => $article['article_id']))}">
+					<div class="pull-left w-120em h-90em">
+						<img class=" w-120em h-90em bor-ra-3" src="{$article.article_thumb}">
+					</div>
+					<div class="pull-left over-h w-230em ml-8em">
+					   <div class="pull-left w-216em mt-10em">
+					        <div class="f-16em color-33 f-w " style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{$article.article_title}</div>
+					        <div class="" style="position: absolute; bottom: 10%;width: 65%;">
+		                        <div class="pull-left color-a4 f-11em pt-5em" >{$article.add_staff}</div>
+		                        <div class="pull-right color-a4 mt-5em f-11em" >{$article.add_time}</div>
+		                    </div>
+	                    </div>
+	                </div>
+	            </a>
+				</li>
+			</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/jscript" src="js/cms_partyWork_list1.js"></script>
+<script type="text/javascript">
+</script>
+</html>

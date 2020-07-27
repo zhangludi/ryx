@@ -1,0 +1,139 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+  <block name="body">
+    <div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+         <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    
+                                    <div class="layui-col-xs3 pull-right" >
+                                    </div>
+                                </div>
+                                <table class="layui-table" id="demo"  lay-filter="demo">
+                                    <div class="col-xs-12"> 
+                                        <div class="center-text">
+                                            <span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$article_data.article_title}</span>
+                                            <div class="center-text fcolor-99">
+                                                <span class="mr-10">日期：{$article_data.add_time}</span>
+                                                <span class="mr-10">作者：{$article_data.add_staff}</span>
+                                                <!-- <span class="mr-10">文章来源：森普官网</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- <div class="col-xs-12 mt-25">
+                                                <img src="{$article_data.article_thumb}" class="w-50 h-100" />
+                                            </div> -->
+                                            <div class="col-xs-12 fcolor-66">
+                                                {$article_data.article_content}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 fcolor-66">
+                                                <input type="hidden" class="form-control" id="article_img2" name="article_attach" value="{$article_data.article_attach}">
+                                                <neq name="article_data.article_attach" value="">
+                                                    <php>echo getUploadHtml($article_data['article_attach'],'70','100','1','0','1');</php>
+                                                </neq>
+                                            </div>
+                                            <!-- <div class="layui-col-xs12 ">
+                                            <div class="layui-row">
+
+                                                <input type="hidden" id="source_name2" name="source_name2" value=""/>
+                                                <input type="hidden" id="article_attach_old" name="article_attach_old" value="" style="width: 60px">
+                                                <input type="hidden" id="article_attach" name="article_attach" value="{$article.article_attach}" style="width: 60px">
+
+                                                <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                                    <neq name="article_data.article_attach" value="">
+                                                        <php>echo getUploadHtml($article_data['article_attach'],'100','100','1','0','1');</php>
+                                                    </neq>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        </div>
+                                    </div>
+                                
+                                </table>
+                                <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+					<!--页面标题-->
+                    <!--  <div class="row">
+                        <div class="col-xs-12">
+                        	<div class="portlet light bordered">
+                        		 <div class="portlet-title">
+                              <div class="caption">
+                                <div class="cont-col1">
+                                    <div class="label label-sm bg-color-green2">
+                                        <i class="iconfont">&#xe602;</i>
+                                    </div>
+                                </div>
+                                <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                              </div>
+                              <div class="tools">
+                                <a href="" class="reload"> </a>
+                                <a href="" class="collapse"> </a>
+                              </div>
+                            </div> -->
+                    <!-- 页面标题结束-->
+					<!-- 文章内容开始 -->
+                  <!--   <div class="portlet light bordered">
+                        <div class="row"> -->
+                            <!-- 文章标题 -->
+                            <!-- <div class="col-xs-12"> -->
+                                <!-- <div class="center-text">
+                                    <span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$article_data.article_title}</span>
+                                    <div class="center-text fcolor-99">
+                                        <span class="mr-10">日期：{$article_data.add_time}</span>
+                                        <span class="mr-10">作者：{$article_data.add_staff}</span>
+                                        <span class="mr-10">文章来源：森普官网</span>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="row"> -->
+                                    <!-- <div class="col-xs-12 mt-25">
+                                        <img src="{$article_data.article_thumb}" class="w-all h-100" />
+                                    </div> -->
+                                   <!--  <div class="col-xs-12 fcolor-66">
+                                        {$article_data.article_content}
+                                    </div>
+                                </div>
+								<div class="row"> -->
+                                    <!-- <div class="col-xs-12 mt-25">
+                                        <img src="{$article_data.article_thumb}" class="w-all h-100" />
+                                    </div> -->
+                                    <!-- <div class="col-xs-12 fcolor-66">
+										<input type="hidden" class="form-control" id="article_img2" name="article_attach" value="{$article_data.article_attach}">
+                                        <neq name="article_data.article_attach" value="">
+                                        	<php>echo getUploadHtml($article_data['article_attach'],'100','100','0','0');</php>
+										</neq>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </block>  
+    <block name="js">
+        <script type="text/javascript">
+            function layer_colse() {
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                parent.layer.close(index);
+            }
+        </script>
+    </block>

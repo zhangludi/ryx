@@ -1,0 +1,33 @@
+.bg {
+    background: url("../images/bg.jpg");
+    background-size: cover;
+}
+.title-txt {
+    width: 1123px;
+    height: 209px;
+}
+.title {
+   width: 1123px;
+    height: 209px;
+    margin: 0 auto;
+    margin-top: 188px;
+    
+}
+.index_icon{
+	width: 98px;
+    height: 110px;
+	}
+.index_con{
+	position: relative;
+	width: 1510px;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+.index_con a{display: block;width:376px;height:536px;float: left;}
+.index_news{width:376px;height:536px;background-image: url(../images/index_news.png)}
+.index_platform{width:376px;height:536px;background-image: url(../images/index_platform.png);}
+.index_service{width:376px;height:536px;background-image: url(../images/index_service.png)}
+.index_livelihood{width:376px;height:536px;background-image: url(../images/index_livelihood.png)}
+
+

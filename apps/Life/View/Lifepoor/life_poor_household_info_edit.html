@@ -1,0 +1,105 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid layui-form"">
+    <div class="layui-row layui-col-space15">
+    	<form action="{:U('life_poor_household_info_save')}" id="form_sample_2" class="form-horizontal" method="post">
+		<input type="hidden" name="household_id" value="{$household_id}">
+	        <div class="layui-col-md12">
+	            <div class="layui-card">
+	                <div class="layui-card-header">添加成员</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+	                                <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="member_name" id="member_name" value="" placeholder="请输入姓名" autocomplete="off" class="layui-input" lay-verify='required' /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>身份证号：</strong></div>
+	                                <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="member_identity" maxlength="18"  placeholder="请输入身份证号" id="member_identity" value="" autocomplete="off" class="layui-input" lay-verify='required|identity'/></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                       	<div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>性别：</strong></div>
+	                                <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+	                                	<select id="single" name="member_sex" lay-filter="aihao" lay-search=""> 
+		                                	<option value="">请选择</option>
+		                                	<option value="1">男</option>
+		                                	<option value="2">女</option>
+		                                </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>与户主关系：</strong></div>
+	                                <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text" name="member_relation" id="member_relation" value="" placeholder="请输入与户主关系" autocomplete="off" class="layui-input" lay-verify='required' />
+	                                	<!-- <select id="" name="member_relation" lay-filter="aihao" lay-search=""> 
+		                                	<option value="">请选择</option>
+		                                	<option value="1">父女</option>
+		                                	<option value="2">父子</option>
+		                                	<option value="3">夫妻</option>
+		                                </select> -->
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+			        <div class="layui-form-item">
+		                <div class="layui-input-block">
+		                    <div class="layui-footer" style="text-align: right">
+		                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+		                       <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+	    </form>
+    </div>
+</div>
+</block>
+<block name="js">
+<script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+    <script>
+    	function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'date'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'datetime'
+                ,range: true
+            });
+        })
+    </script>
+
+</block>

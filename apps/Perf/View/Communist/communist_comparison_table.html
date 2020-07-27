@@ -1,0 +1,58 @@
+<div id="Broken5" style="height: 323px;width: 100%" alt="对标体系折线图"></div>
+		<!-- 百度图表用的中国地图 -->
+<script>
+			// 对标体系折线图
+		var Broken5 = echarts.init(document.getElementById('Broken5'));
+		Broken5.getDom().style.height = "480px";
+        Broken5.resize(); 
+		option5 = {
+			tooltip: {
+				trigger: 'axis'
+			},
+			grid: {
+		        left: '3%',
+		        right: '4%',
+		        top: '20%',
+		        containLabel: true
+		    },
+			legend: {
+				data:[<volist name="category_list" id="list">
+			'{$list.party_name}',
+				</volist>]
+			},
+			toolbox: {
+				show: false,
+				feature: {
+					dataZoom: {
+						yAxisIndex: 'none'
+					},
+					dataView: {readOnly: false},
+					magicType: {type: ['line', 'bar']},
+					restore: {},
+					saveAsImage: {}
+				}
+			},
+			xAxis:  {
+				type: 'category',
+				boundaryGap: false,
+				data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					formatter: '{value} 分'
+				}
+			},
+			series: [
+				<volist name="category_list" id="list">
+					{
+					name:'{$list.party_name}',
+					type:'line',
+					data: $.parseJSON("{$list.entering_score}"),
+				},
+				</volist>
+			]
+		};
+
+		Broken5.setOption(option5)
+</script>

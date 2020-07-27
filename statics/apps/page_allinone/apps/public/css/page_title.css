@@ -1,0 +1,162 @@
+/* line 32, ../../sass/layouts/_layouts.scss */
+.l-flex-center {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* line 36, ../../sass/layouts/_layouts.scss */
+.l-margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 40, ../../sass/layouts/_layouts.scss */
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1720px;
+}
+
+/* line 45, ../../sass/layouts/_layouts.scss */
+.l-right {
+  float: right;
+}
+
+/* line 49, ../../sass/layouts/_layouts.scss */
+.l-flex-justify {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  justify-content: space-between;
+}
+
+/* line 14, ../../sass/components/page_title.scss */
+.c-page-title {
+  width: 100%;
+  height: 140px;
+  background: url("../../sp_guide/images/page-title-bg.jpg") no-repeat center/100% auto;
+}
+
+/* line 20, ../../sass/components/page_title.scss */
+.c-page-title_content {
+  display: table;
+  width: 1680px;
+  height: inherit;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* line 27, ../../sass/components/page_title.scss */
+.c-page-title_group {
+  display: inline-block;
+  height: inherit;
+}
+
+/* line 32, ../../sass/components/page_title.scss */
+.c-page-title_icon {
+  width: 80px;
+  height: 90px;
+  object-fit: contain;
+}
+
+/* line 35, ../../sass/components/page_title.scss */
+.c-page-title_txt {
+  width: 590px;
+  height: 90px;
+  object-fit: contain;
+}
+
+/* line 38, ../../sass/components/page_title.scss */
+.c-page-title_btn {
+  position: relative;
+  width: 116px;
+  height: 54px;
+  font-size: 24px;
+  color: #ff582d;
+  font-weight: bold;
+  line-height: 54px;
+  border-radius: 0 6px 6px 0;
+  text-align: center;
+  background: #f8e6e5;
+  justify-self: flex-end;
+}
+
+/* line 53, ../../sass/components/page_title.scss */
+.c-page-title_btn a {
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* line 57, ../../sass/components/page_title.scss */
+.c-page-title_btn:before {
+  content: '';
+  position: absolute;
+  left: -61px;
+  border-width: 28px 34px 28px 28px;
+  border-style: solid;
+  border-color: transparent #f8e6e5 transparent transparent;
+}
+
+/* line 66, ../../sass/components/page_title.scss */
+.c-page-title_photo {
+  border: solid 4px transparent;
+  background: rgba(255, 255, 255, 0.68);
+  border-radius: 50px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  color: #ff582d;
+}
+
+/* line 78, ../../sass/components/page_title.scss */
+.l-page-title_photo {
+  width: 200px;
+  height: 60px;
+  font-size: 28px;
+}
+
+/* line 84, ../../sass/components/page_title.scss */
+.c-page-title_pic-box {
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  margin-right: 6px;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+/* line 94, ../../sass/components/page_title.scss */
+.c-page-title_picture {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+/* line 98, ../../sass/components/page_title.scss */
+.c-page-title_name {
+  display: inline-block;
+  color: #ff582d;
+}

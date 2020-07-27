@@ -1,0 +1,380 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+    #js-grid-juicy-projects {
+        margin-left: 0% !important;
+    }
+</style>    
+</block>
+<block name="body">
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+        <div class="layui-card layui-form">
+          <div class="layui-card-header"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+          <div class="layui-card-body">
+              <div class="layui-row">
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>计划标题：</strong></div>
+                        <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$cat_list.partyday_title}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动时间：</strong></div>
+                        <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span> {$cat_list.partyday_time}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动内容：</strong></div>
+                        <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$cat_list.partyday_content}</span></div>
+                    </div>   
+                </div>
+                 <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动要求：</strong></div>
+                        <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$cat_list.partyday_require}</span></div>
+                    </div>   
+                </div>
+                <neq name="cat_list.partyday_attach" value="">
+                    <div class="form-group  mt-5 col-sm-12 ">
+                        <div class="row">
+                            <input type="hidden" class="form-control" id="partyday_attach" name="partyday_attach" value="{$cat_list.partyday_attach}">
+                            <label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><b>附件:</b>
+                            </label>
+                            <div class="col-sm-9 lh-35">
+                                <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                    <php>echo getUploadHtml($cat_list['partyday_attach'],'40','40','1','0');</php>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </neq>
+                <form class="container-fluid right" id="form_table" method="post" action="{:U('ccp_partyday_log_info_save')}">
+                    <input type="hidden" value="" name="json" id="json" />
+                    <input type="hidden" value="{$cat_list.partyday_id}" name="partyday_id" />
+                </form>
+                <div class="pt-10">
+                    <span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">计划跟踪</span>
+                    <div class="pull-right mt-5">
+                        <div class="btn-group">
+                            <eq name="log_status" value="1">
+                                <a href="{:U('ccp_partyday_log_info_status', array('partyday_log_status'=>1,'status_log'=>2,'partyday_id'=>$cat_list[partyday_id]))}" type="button" class="layui-btn">通过
+                           </a>
+                                <a href="{:U('ccp_partyday_log_info_status', array('partyday_log_status'=>1,'status_log'=>3,'partyday_id'=>$cat_list[partyday_id]))}" type="button" class="layui-btn">驳回
+                           </a>
+                            </eq>
+                            <a class="layui-btn table-add " onclick="savedata()"  style="text-decoration: none;" >保存</a>
+                            <!-- <a onclick="history.go(-1);" class="btn btn-sm blue btn-outline bor-ra-2 mr-10 w-70 mr-20">返回</a> -->
+                            <a class="layui-btn layui-btn-primary" onclick="history.go(-1);" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">返回</a>
+                        </div>
+                    </div>
+                    <table id="client_table" class="table"></table>
+                </div>
+                   
+                 
+            </div>
+          </div>
+      </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+    var type = "{$cat_list.partyday_log_status}";
+    $(function() {
+        // 表格高度
+        var scHeight = $("#client_table").parents(".scroller").height();
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+    })
+    // 初始化结束 
+    var TableInit = function() {
+        var oTableInit = new Object();
+        if (type < 2) {
+            oTableInit.Init = function() {
+
+                $("#client_table").bootstrapTable({
+                    url: "{:U('ccp_partyday_log_info_data')}?partyday_id={$cat_list.partyday_id}", //请求后台的URL（*）
+                    method: 'get', //请求方式（*）
+                    toolbar: 'toolbar', //工具按钮用哪个容器
+                    striped: true, //是否显示行间隔色
+                    sortable: true, //是否启用排序
+                    sortOrder: "asc", //排序方式
+                    minimumCountColumns: 2, //最少允许的列数
+                    clickToSelect: true, //是否启用点击选中行
+                    columns: [{
+                        field: 'partyday_log_id',
+                        title: '详情编号',
+                        visible: false
+                    }, {
+                        field: 'party_name',
+                        title: '支部名称',
+                    }, {
+                        field: 'meeting_grade',
+                        title: '三会一课',
+                        editable: {
+                            type: 'text',
+                            title: '三会一课',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+
+                    }, {
+                        field: 'dues_grade',
+                        title: '党费缴纳',
+                        editable: {
+                            type: 'text',
+                            title: '党费缴纳',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+
+                    }, {
+                        field: 'cms_grade',
+                        title: '宣传文稿',
+                        editable: {
+                            type: 'text',
+                            title: '宣传文稿',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'partyday_grade',
+                        title: '工作计划',
+                        editable: {
+                            type: 'text',
+                            title: '工作计划',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'response_grade',
+                        title: '思想动态反应',
+                        editable: {
+                            type: 'text',
+                            title: '综合评分',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'condition_grade',
+                        title: '遵纪守法情况',
+                        editable: {
+                            type: 'text',
+                            title: '遵纪守法情况',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'workable_grade',
+                        title: '支部计划落实',
+                        editable: {
+                            type: 'text',
+                            title: '支部计划落实',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'cultivate_grade',
+                        title: '积极分子培训',
+                        editable: {
+                            type: 'text',
+                            title: '积极分子培训',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'activity_grade',
+                        title: '创新活动',
+                        editable: {
+                            type: 'text',
+                            title: '创新活动',
+                            emptytext: "无",
+                            disabled: false,
+                            validate: function(v) {
+                                var reg = '^[0-9]+(.[0-9]{1,2})\?$';
+                                var r = v.match(reg);
+                                if (r == null) {
+                                    return '请填写正确格式！';
+                                }
+                            }
+                        }
+                    }, {
+                        field: 'total_grade',
+                        title: '合计',
+                    }, {
+                        field: 'average_grade',
+                        title: '平均分',
+                    }, {
+                        field: 'status_name',
+                        title: '状态',
+                    }],
+                    onClickRow: function(row, $element) {},
+                })
+            };
+        } else {
+            oTableInit.Init = function() {
+
+                $("#client_table").bootstrapTable({
+                    url: "{:U('ccp_partyday_log_info_data')}?partyday_id={$cat_list.partyday_id}", //请求后台的URL（*）
+                    method: 'get', //请求方式（*）
+                    toolbar: 'toolbar', //工具按钮用哪个容器
+                    striped: true, //是否显示分页（*）
+                    sortable: true, //是否启用排序
+                    sortOrder: "asc", //排序方式
+                    pageNumber: 1, //初始化加载第一页，默认第一页
+                    pageSize: 10, //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                    search: false, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    strictSearch: false,
+                    showColumns: false, //是否显示所有的列
+                    showRefresh: false, //是否显示刷新按钮
+                    minimumCountColumns: 2, //最少允许的列数
+                    clickToSelect: true, //是否启用点击选中行
+                    height: scHeight, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "key", //每一行的唯一标识，一般为主键列
+                    showToggle: false, //是否显示详细视图和列表视图的切换按钮
+                    cardView: false, //是否显示详细视图
+                    detailView: false,
+                    showExport: true, //是否显示导出
+                    exportDataType: "basic", //basic', 'all', 'selected'.
+                    showFooter: false, //合计  最下多一行
+                    columns: [{
+                        field: 'partyday_log_id',
+                        title: '党组织编号',
+                        visible: false
+                    }, {
+                        field: 'party_name',
+                        title: '支部名称',
+                    }, {
+                        field: 'meeting_grade',
+                        title: '三会一课',
+                    }, {
+                        field: 'dues_grade',
+                        title: '党费缴纳',
+                    }, {
+                        field: 'cms_grade',
+                        title: '宣传文稿',
+
+                    }, {
+                        field: 'partyday_grade',
+                        title: '工作计划',
+
+                    }, {
+                        field: 'response_grade',
+                        title: '思想动态反应',
+                    }, {
+                        field: 'condition_grade',
+                        title: '遵纪守法情况',
+                    }, {
+                        field: 'workable_grade',
+                        title: '支部计划落实',
+                    }, {
+                        field: 'cultivate_grade',
+                        title: '积极分子培训',
+                    }, {
+                        field: 'activity_grade',
+                        title: '创新活动',
+                    }, {
+                        field: 'total_grade',
+                        title: '合计',
+                    }, {
+                        field: 'average_grade',
+                        title: '平均分',
+                    }, {
+                        field: 'status_name',
+                        title: '状态',
+                    }],
+                    onClickRow: function(row, $element) {},
+                })
+            };
+        }
+        //得到查询的参数
+        oTableInit.queryParams = function(params) {
+            var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit, //页面大小
+                offset: params.offset, //页码
+                departmentname: $("#txt_search_departmentname").val(),
+                statu: $("#txt_search_statu").val()
+            };
+            return temp;
+        };
+        return oTableInit;
+    };
+    </script>
+    <script>
+    function savedata() {
+        var data = $('#client_table').bootstrapTable('getData');
+        var str = JSON.stringify(data);
+        $("#json").val(str);
+        $("#form_table").submit();
+    }
+    </script>
+    <script>
+    function gethttp() {
+        var context = document.getElementById("client_table").innerHTML;
+        //alert(context);
+        $("#jshttp").val(context);
+        $("#form_email").submit();
+    }
+    </script>
+</block>

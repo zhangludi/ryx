@@ -1,0 +1,47 @@
+<div  class="public_content bg-color-gray9">
+    <!--左侧内容区开始-->
+    <div class="bg-color-white w-840 pull-left">
+        <div class="w-205 hr-sr-dfdfdf h-all pull-left">
+            <div class="h-230 po-re hr-sb-dfdfdf">
+                {:W('Leftmenu/communist_avatar')}
+            </div>
+            <div class="">
+                {:W('Leftmenu/personal', array(6))}
+            </div>
+        </div>
+        <div class="w-630 p-15 pull-left boxsize-b">
+            <div class="userinfo_title">
+                <span class="userinfo_title_txt">我的帮扶</span>
+            </div>
+            <!--积分变动记录开始-->
+            <table class="w-all center-text mt-25 fcolor-33 hr-s-dfdfdf border-collapse" border="5">
+                <thead class="fsize-14">
+                <tr class="lh-45">
+                    <th>时间</th>
+                    <th>标题</th>
+                    <!--<th>文稿类型</th>-->
+                </tr>
+                </thead>
+                <tbody class="fcolor-66 fsize-12">
+                    <foreach name="help_list" item="list">
+                        <tr class="lh-45">
+                            <td>{$list.add_time}</td>
+                            <td >{$list.title}</td>
+                        </tr>
+                    </foreach>
+                </tbody>
+            </table>
+            <!--积分变动记录结束-->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--左侧内容区结束-->
+    <!--右侧内容区开始-->
+    <div class="pull-right news_content w-320 bg-color-white p-15 boxsize-b">
+        {:W('Article/hotspot_issues')}
+        {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+        {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>

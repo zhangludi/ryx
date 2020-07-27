@@ -1,0 +1,89 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid layui-form">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                    <form id="form_sample_2" action="{:U('life_help_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+                        <div class="layui-card-body layui-form">
+                            <input type="hidden" class="form-control " name="help_id" value="{$help_data.help_id}"/>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+                                            <strong>姓名：</strong>
+                                        </div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+                                           {$help_data.help_name}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>性别：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <eq name="help_data.help_sex" value="1">男</eq> 
+                                            <eq name="help_data.help_sex" value="2">女</eq> 
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>是否为干部：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+                                             <eq name="help_data.help_cadres" value="1">是</eq>
+                                             <eq name="help_data.help_cadres" value="2">否</eq>
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+                                            <strong>联系方式：</strong>
+                                        </div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+                                            {$help_data.help_mobile}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <div class="layui-footer" style="text-align: right">
+                                            <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+    <block name="js">
+    <script>
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            })
+        });
+    </script>
+    </block>

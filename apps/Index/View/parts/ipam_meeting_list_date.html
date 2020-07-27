@@ -1,0 +1,34 @@
+<div class="metting_right_block1">
+    <div class="va-jz line5">
+        <img class="mr-10em icon6" src="__STATICS__/apps/page_index/images/rili.png">
+    </div>
+    <!--切换-->
+    <div class="slideTxtBox">
+    <div class="prev"></div>
+    <div class="hd">
+        <ul>
+            <volist name="date_num" id="vo" key='k'>
+                <li>{$vo}</li>
+            </volist>
+        </ul>
+    </div>
+    <div class="bd">
+        <ul>
+            <volist name="meeting_name_arr3" id="vo">
+               <li>{$vo.meeting_name}</li>
+            </volist>
+        </ul>
+        <ul>
+            <volist name="meeting_name_arr2" id="vo">
+                <li>{$vo.meeting_name}</li>
+            </volist>
+        </ul>
+        <ul>
+            <volist name="meeting_name_arr1" id="vo">
+                <li>{$vo.meeting_name}</li>
+            </volist>
+        </ul>
+    </div>
+    <div class="next"></div>
+    </div>
+</div>

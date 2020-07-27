@@ -1,0 +1,111 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+            <neq name='Think.get.mode' value='2'>
+                <div class="page-content">
+                </neq>
+                    <div class="tab-pane" id="tab_2">
+                       <div class="portlet light bordered right">
+	                     <div class="portlet-title">
+                            <div class="caption">
+                                <div class="cont-col1">
+                                    <div class="label label-sm bg-color-blue">
+                                        <i class="iconfont">&#xe652;</i>
+                                    </div>
+                                </div>
+                                <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                                <span class="caption-helper"></span>
+                            </div>
+                         </div>
+                         <form id="signupForm"  method="post" action="{:U('oa_approval_do_save')}" class="form-horizontal">
+                             <input type="hidden" name="approval_table_name" value="{$Think.get.table_name}">
+                             <input type="hidden" name="approval_table_field" value="{$Think.get.table_field}">
+                             <input type="hidden" name="approval_table_field_value" value="{$Think.get.field_value}">
+                             <input type="hidden" name="approval_title" value="{$Think.get.mode}">
+                             <input type="hidden" name="mode" value="{$Think.get.approval_title}">
+	                         <div class="form-group  col-md-12 mt-5 mb-15">
+	                         	<div class="row">
+		                        	<label class="control-label col-md-3 pl-0 lh-30">审批标题：</label>
+		                        	<div class="col-md-4 pl-0">
+		                            	<input type="text" name="approval_name" class="form-control" value="{$communist_list.communist_name}发起的{$template_list.template_name}" required> 
+		                         	</div>
+	                         	</div>
+	                         </div>
+	                         <div class="form-group  col-md-12 mt-5 mb-15">
+	                         	<div class="row">
+		                        	<label class="control-label col-md-3 pl-0 lh-30">审批模板：</label>
+		                        	<div class="col-md-4 pl-0">
+		                         		<select name="approval_template" lay-search class="  form-control  select2">
+		                         			<php> echo getOaApprovalTplSelect($template_list['template_no']);</php>
+		                         		</select>
+		                         	</div>
+	                         	</div>
+	                         </div>
+                             <!-- <div class="form-group col-md-12 mt-10">
+                                 <div class="row">
+                                     <label class="control-label col-md-3 pl-0 mt-5">审批内容：</label>
+                                     <div class="col-md-6 pl-0">
+                                         可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少
+                                         <textarea name="approval_content"  data-required="1" id="maxlength_textarea" class="form-control " maxlength="800" rows="5" placeholder="这个文本域的最大长度为225个字符.">{$party_row.memo}</textarea>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-12 mt-10">
+                                 <div class="row">
+                                     <label class="control-label col-md-3 pl-0 mt-5">审批附件：</label>
+                                    <div class="col-md-6  pl-0" >
+		                               <input type="hidden" id="approval_attach" name="approval_attach" value="" style="width: 60px">
+		                               <a href="javascript:void(0);" target="_self" onclick="uploader_file('oa','1','approval_attach','','js-grid-juicy-projects','2','1')" class="btn btn-sm btn-success layer-demolist">点击选择文件</a>
+										<div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+											<neq name="missive_info.missive_attach" value="">
+												<php>echo getUploadHtml($imail_data['imail_attach'],'40');</php>
+											</neq>
+										</div>
+                                     </div>
+                                 </div>
+                             </div> -->
+                             <div class="form-group col-md-6 mt-5 mb-15">
+                                 <div class="row">
+                                     <label class="control-label col-md-6 pl-0 lh-30">发起人姓名：</label>
+                                     <label class="control-label col-md-6 pl-0 lh-30" style="text-align:left;">{$communist_list.communist_name}</label>
+                                 </div>
+                             </div>
+                             <div class="form-group mt-5 col-md-6 mb-15">
+                                 <div class="row">
+                                     <label class="control-label col-md-3 pl-0 lh-30">发起人岗位：</label>
+                                     <label class="control-label col-md-6 pl-0 lh-30" style="text-align:left;">{$communist_list.communist_post}</label>
+                                 </div>
+                             </div>
+                             <div class="form-group  mt-5 col-md-12 ">
+                                 <div class="row">
+                                     <label class="control-label col-md-3 pl-0 lh-30">申请时间：</label>
+                                     <label class="control-label col-md-6 pl-0 lh-30" style="text-align:left;"><php> echo date('Y-m-d'); </php></label>
+                                 </div>
+                             </div>
+                             <div class="form-actions right">
+                                 <div class="row">
+                                     <div class="col-md-9">
+                                         <div class="row">
+                                             <div class="col-md-offset-3 col-md-9 text-right">
+                                                 <button type="submit" class="btn green">提交</button>
+                                                 <button type="button" class="btn default" onclick='history.back();'>返回</button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </form>
+	                 </div>
+	               </div>
+	      <neq name='Think.get.mode' value='2'>
+            	</div>
+        	</div>
+        </neq>
+    </block>
+<block name="js">
+        <script>
+		$("#signupForm").validate(); 
+		</script>
+</block>

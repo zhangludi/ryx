@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>三会一课-会议签到</title>
+<meta name = "format-detection" content = "telephone=no">
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-flex.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_attmeeting_signIn.css"/>
+<style>
+	header{background:transparent !important;}
+	.color-21{color:#212121 !important;}
+</style>
+</head>
+<body class="bg-color-f5">
+<section class="po-re">
+	<img class="w-100b h-179em" src="__STATICS__/apps/page_wechat/public/aui2/img/oa_info_bg.jpg">
+</section>
+<!-- 头部 -->
+<section class="z-index-max po-ab top-0em w-100b">	 	
+ 	<header class="aui-bar aui-bar-nav aui-bar-info pt-25em">
+	    <ul>
+	    	<li class="h-45em">
+	    		<a class="pull-left mt-15em pl-12em" href="javascript:history.back(-1)">
+			       <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back.png" alt="返回" />
+			    </a>
+	    		<div id="title" class="aui-title f-w">会议详情</div>
+	    	</li>
+	    </ul>
+	</header>
+	 <!-- 标题 -->
+	<div class="oa_con pl-5em pr-5em">
+		<div id="meeting_name" class="f-24em lh-30em pt-10em color-fff f-w">{$meeting_info.meeting_name}</div>
+		<div class="clearfix mt-20em pb-5em">
+			<div class="pull-left">
+				<div class="va-jz">
+					<img class="di-i w-14em h-14em" src="__STATICS__/apps/page_wechat/public/aui2/img/oa_time.png">
+					<span class="meeting_start_time f-12em color-fff pl-8em">{$meeting_info.meeting_start_time}</span>
+				</div>
+				<div class="va-jz mt-10em">
+					<img class="di-i w-14em h-14em" src="__STATICS__/apps/page_wechat/public/aui2/img/oa_add.png">
+					<span id="meeting_addr" class="f-12em color-fff pl-8em">{$meeting_info.meeting_addr}</span>
+				</div>
+			</div>
+			<div class="pull-right va-jz">
+				<img class="di-i w-14em h-14em" src="__STATICS__/apps/page_wechat/public/aui2/img/oa_people.png">
+				<span id="communist_num" class="f-12em color-fff pl-8em">{$meeting_info.communist_num}</span>
+			</div>
+		</div>
+	</div>
+	 <!-- 内容 -->	    	 	 	
+	<div class="oa_con bor-ra-10em bg-color-whiter p-15em mb-20em pb-20em">
+	  	<!-- 会议信息 -->	   
+	 	<div class="clearfix">
+	 		<img class="pull-left w-140em h-82em" id="meetting_thumb" src="{$meeting_info.meetting_thumb}">
+	 		<div class="pull-right">
+	 			<div class="color-21 f-16em f-w">会议信息:</div>
+	 			<div class="f-12em color-21">开始时间:
+	 				<span class="meeting_start_time color-9e">{$meeting_info.meeting_start_time}</span>
+	 			</div>
+	 			<div class="f-12em color-21">结束时间:
+	 				<span class="meeting_end_time color-9e">{$meeting_info.meeting_end_time}</span>
+	 			</div>
+	 			<div class="f-12em color-21">支部:
+	 				<span class="party_name color-9e">{$meeting_info.party_name}</span>
+	 			</div>
+	 			<div class="f-12em color-21">主持:
+	 				<span class="meeting_host_name color-9e">{$meeting_info.host_name}</span>
+	 			</div>
+	 		</div>
+	 	</div>
+	 	<!--video-->
+		<div class="mt-8em mb-8em bg-color-whiter">
+			<notempty name="meeting_info.meeting_video">
+				<video id="video" class="w-100b h-150em" controls="controls" autoplay="autoplay" src="{$meeting_info['meeting_video'][0]}"></video>
+			</notempty>
+			<!--<video id="video" class="w-100b h-200em" controls="controls" autoplay="autoplay"></video>-->
+		</div>
+	 	<!-- 会议主题-->	   
+		<div class="f-18em color-21 mt-15em">会议主题:</div>
+		<div class="memo f-14em color-21 mt-10em text-j text-ind over-h">{$meeting_info.memo}</div>
+	 	<!-- 展示全文-->	
+		<div class="expand_text color-ff3032 f-12em w-40b m-a text-align di-n" style="margin-top:0.5rem;" onclick="expand_text()">
+			<span class="mr-5em">展示全文</span>
+			<img class="di-i w-12em h-12em mb-2mem" src="__STATICS__/apps/page_wechat/public/aui2/img/oa_zhankai.png">
+		</div>
+		<!-- 收起-->	
+		<div class="expand_stop color-ff3032 f-12em w-40b m-a text-align di-n" style="margin-top:0.5rem;" onclick="expand_stop()">
+		 	<span class="mr-5em">收起</span>
+		 	<img class="di-i w-12em h-12em mb-2mem" src="__STATICS__/apps/page_wechat/public/aui2/img/oa_shouqi.png">
+		</div>
+	</div>
+	<if condition="$meeting_info['status'] eq '11' || $meeting_info['status'] eq '21'"> 
+	<neq name="meeting_info.checked" value="0">
+	<form action="{:U('Oa/edu_notes_do_save')}" id="forms" method="post" enctype="multipart/form-data">	
+		<input type='hidden' name="material_id" value="{$meeting_info.meeting_no}"  />
+		<div  class=" oa_con bor-ra-10em bg-color-whiter p-15em mb-10em">
+	        <div id="notes" class="bg-color-whiter p-12em mb-8em mt-8em">
+				<textarea id="textarea" name="notes_content" class="h-100em f-15em lh-18em color-33 bor-ra-3" rows="10" placeholder="会议怎么样，赶快总结一下吧~" onpropertychange="myFunction(this)" oninput="myFunction(this)" ></textarea>
+			</div>
+			<!--添加图片-->		
+			<!-- <div class="pl-12em pr-12em pt-15em pb-8em bg-color-whiter bb-1-df" id="thumb">
+				<p class="f-12em color-99 mb-5em">
+					<span class="f-15em color-33 mr-12em">选择图片</span>
+					已添加<span id="num">0</span>张
+					<i id="ico_add" class="iconfont f-20em pull-right lh-20em color-b3 p-0" onclick="open_uploud_1('add_upload_list')">&#xe6df;</i>
+				</p>
+				<ul id="add_upload_list" class="mb-5em clearfix">
+					
+				</ul>
+			</div> -->
+		</div>
+	</form>
+	</neq>
+	<!--结束-->
+	<!--定位-->
+ 	<!-- <p class="p-12em f-12em color-99 mb-8em">
+ 		<i class="iconfont f-12em p-0 color-99">&#xe879;</i>
+ 		<span id="info_address" class="" onclick="getLocation()"></span>
+ 	</p> -->
+	<!-- 点我签到-->	
+	<div class=" mb-20em">
+		<neq name="meeting_info.checked" value="0">
+		<div class="submit_bg1" id="button">
+    	 	<span class="f-16em color-fff" onclick="save();">提交总结</span>
+    	</div>
+		<else/>
+		<div class="submit_bg" id="sign">
+    	 	<img class="di-i w-20em h-18em mb-2mem over-h" src="__STATICS__/apps/page_wechat/public/aui2/img/qiandao.png">
+    	 	<span class="f-16em color-fff ml-3em" onclick="sign({$meeting_info.meeting_no})">点我签到</span>
+    	</div>
+		</neq>
+	</div>
+	</if>
+</section>
+<!--签到成功弹框-->	
+<section class="succ_mask po-fix top-0em w-100b h-100b bg-color-000 z-index-mask di-n">	
+	<div class="succ_bg">
+		<div class="mt-25em f-18em color-21 m-a text-align">
+			<img class="di-i w-17em h-17em mb-2mem" src="__STATICS__/apps/page_wechat/public/aui2/img/succ.png">
+			签到成功
+		</div>
+		<div class="f-14em color-66 w-220em m-a mt-10em lh-25em">签到完成后，可以点击“知道了”按钮继续写会议总结哦！</div>
+		<div class="succ_line"></div>
+		<div class="succ_ok f-16em color-21 w-50em m-a f-w h-16em lh-16em pt-12em">知道了</div>
+	</div>
+</section>	
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-alert.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/formatDate.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- <script type="text/jscript" src="__STATICS__/apps/page_wechat/oa/js/oa_attmeeting_signIn.js"></script> -->
+<script>
+//签到
+function sign(meeting_no){
+	location.href="{:U('Wechat/Oa/set_oa_meeting_sign')}?meeting_no="+meeting_no;
+}
+//提交
+function save(){
+	$('#forms').submit();
+}
+if($(".memo").height()>150){
+	$(".memo").height(150);
+	$(".memo").addClass('oa_gradient');//渐变
+	$('.expand_text').removeClass("di-n");
+}else{
+	$(".memo").height('100%');						
+	$(".memo").removeClass('oa_gradient');//渐变
+	$('.expand_text').addClass("di-n");
+}
+function expand_text(){
+	$(".memo").removeClass('over-h');	
+	$(".memo").height('100%');
+	$('.expand_text').addClass("di-n");
+	$(".expand_stop").removeClass("di-n");
+	$(".memo").removeClass('oa_gradient');//渐变
+}
+//收起
+function expand_stop(){
+	$('.expand_text').removeClass("di-n");
+	$(".expand_stop").addClass("di-n");
+	$(".memo").addClass('over-h');	
+	$(".memo").height(150);	
+	$(".memo").addClass('oa_gradient');//渐变
+}
+</script>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-flex.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>	
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_attmeeting_signIn.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice.css" />
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+	<style>
+	.article_over_one{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;}
+	</style>
+</head>
+<body class="bg-color-f9">
+<div class="aui-bar aui-bar-nav aui-bar-info">
+	<ul>
+		<li class="h-45em">
+			<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+		<eq name="meeting_info.checked" value="0">
+			<div id="title" class="aui-title f-w">会议签到</div>
+		<else/>
+			<div id="title" class="aui-title f-w">会议详情</div>
+		</eq>
+			
+		</li>
+	</ul>
+</div>
+
+<div class="p-12em bg-color-whiter mb-8em">
+	<div class="over-h">
+        <eq name="meeting_info.meetting_thumb" value="" >
+       		<img class="w-118em h-98em bor-ra-3 pull-left mr-12em" src="__STATICS__/apps/page_wechat/public/aui2/img/pic-list.png">
+        <else/>
+        	<img class="w-118em h-98em bor-ra-3 pull-left mr-12em" src="{$meeting_info.meetting_thumb}">
+        </eq>
+        <div class="w-220em pull-left">
+            <div class="h-18em mt-8em">
+                <div class="pull-left f-16em color-33 lh-18em f-w">{$meeting_info.meeting_name}</div>
+            </div>
+            <div class="f-12em color-fe9776 mt-8em lh-12em">{$meeting_info.add_time}</div>
+            <div class="f-12em color-33 mt-8em lh-12em">{$meeting_info.meeting_addr}</div>
+            <div class="f-10em color-33 mt-8em lh-10em">{$meeting_info.memo}</div>
+        </div>
+    </div>
+    <div class="mt-10em f-12em lh-13em pb-15em color-33 over-h">
+        <p class="pull-left w-33b text-align br-1-df">主持:<span class="ml-5em color-99">{$meeting_info.host_name}</span></p>
+        <p class="pull-left w-33b text-align br-1-df">部门:<span class="ml-5em color-99">{$meeting_info.party_name}</span></p>
+        <p class="pull-left w-33b text-align">人数:<span class="ml-5em color-99">{$meeting_info.communist_num}</span></p>
+    </div>
+</div>
+<neq name="meeting_info['meeting_video'][0]">
+	<video id="video" class="w-100b h-150em" controls="controls" autoplay="autoplay" src="{$meeting_info['meeting_video'][0]}"></video>
+</neq>
+<neq name="meeting_notes" value="">
+	<div class="bb-1-dfdfdf" id="name1">
+		<p class="f-12em color-99 mb-12em mt-5 ml-12em">
+		</p	>
+		<div class="bt-1-dfdfdf">
+			<div class="pl-12em pr-12em pt-15em pb-15em bg-color-whiter">
+				<p class="f-12em color-99">
+					<span class="f-15em color-33 mr-12em">会议笔记</span>
+				</p>
+			</div>	
+		</div>
+	</div>
+	<div class="ml-8em mr-8em mt-12em bg-color-whiter" id="listBox">
+		<volist name="meeting_notes" id="notes">
+			<div class="over-h bb-1-dfdfdf" >
+				<a href="{:U('Edu/edu_notes_info', array('notes_id' => $notes['notes_id']))}">
+					<div class="pull-left w-100b pb-10em">
+						<p class="over-h pt-15em">
+							<i class="pull-left mr-6em"></i>
+							<span class="pull-left f-15em ml-8em color-33 article_over_one w-200">{$notes.notes_title}</span>
+							<span class="pull-right h-15em text-align f-10em lh-15em color-ffba66 mr-8em">{$notes.add_time}</span>
+							<p class="f-12em color-33 pt-4em ml-8em"> 添加人：{$notes.add_communist_name}</p>
+						</p>
+					</div>
+				</a>
+			</div>
+		</volist>
+	</div>
+<else/>
+<form action="{:U('Oa/edu_notes_do_save')}" id="forms" method="post" enctype="multipart/form-data">	
+	<input type='hidden' value="{$meeting_info.meeting_no}" name="material_id"/>
+	<neq name="meeting_info.checked" value="0">
+	<div id="" class="bg-color-whiter p-12em mb-8em">
+		<textarea name="notes_content" class="h-150em f-15em lh-18em color-33 bor-ra-3" rows="10" placeholder="请输入您的会议心得" onpropertychange="myFunction(this)" required oninput="myFunction(this)" >{$notes_list.notes_content}</textarea>
+	</div>
+	</neq>
+	<div class="over-h bottom-0 w-100b h-44em bg-color-whiter">
+		<eq name="meeting_info.checked" value="0">
+			<div class="pull-left w-100b h-44em  bor-1-ff3032 color-ff3032 f-14em lh-46em text-align" onclick="sign({$meeting_info.meeting_no});">签到</div>
+		<else/>
+			<div class="pull-left w-100b h-44em bg-shade f-14em lh-46em text-align color-white" onclick="sava();">提交</div>
+		</eq>
+	</div>
+</form>
+</neq>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/formatDate.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script>
+//签到
+function sign(meeting_no){
+	location.href="{:U('Wechat/Oa/set_oa_meeting_sign')}?meeting_no="+meeting_no;
+}
+//提交
+function sava(){
+	$('#forms').submit();
+}
+</script>
+</body>
+</html> -->

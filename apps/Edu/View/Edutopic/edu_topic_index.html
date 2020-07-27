@@ -1,0 +1,148 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            专题名称：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入专题名称">
+	                        </div>
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            时间：
+	                        </div>
+	                        <div class="layui-col-xs3">
+	                            <input type="text" class="layui-input" autocomplete="off" name="time" id="time" placeholder="yyyy-mm-dd">
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <button class="layui-btn" onclick="search()">查询</button>
+	                            <!-- <a class="layui-btn table-add " href="{:U('edu_topic_edit')}" >添加</a> -->
+	                            <a id="group" class="layui-btn table-add" data-type="add"  style="text-decoration: none;"  >添加</a>
+	                        </div>
+	                    </div>
+	                    <table class="layui-table" id="ztreedata"  lay-filter="demo"></table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+<script>
+layui.use(['element','form'], function() {
+	var $ = layui.$
+	, admin = layui.admin
+	, element = layui.element
+	, form = layui.form
+	, router = layui.router();
+	form.render();
+	// 默认显示的 表格
+	layui.use('table', function () {
+		var table = layui.table;
+		table.render({
+			elem: '#ztreedata'
+			, url: '{:U("edu_topic_index_data")}'
+			, height: 'full-160'
+			, cols: [[
+				{field: 'topic_id', width: 80, align: 'center',  title: '编号', sort: true}
+				,{field:'topic_title', title:'专题名称'}
+				,{field:'status', title:'状态', width:80}
+				,{field:'add_staff', title: '添加人'}
+				,{field:'update_time', title:'更改时间'}
+				,{field: 'operate', width:160 ,  title: '操作',align: 'center'}
+			]]
+			, page: true
+		});
+	}); 
+	var $ = layui.$, active = {
+		add: function(){
+			var index = layer.open({
+			   type: 2,
+			   title: false,
+			   end:false,
+			   closeBtn: 0,
+			   shift: 1,
+			   content: "{:U('edu_topic_edit')}",
+			   area: ['300px', '300px']
+			});
+			layer.full(index);
+		}
+	};
+	$('.layui-form .layui-btn').on('click', function(){
+		var type = $(this).data('type');
+		active[type] ? active[type].call(this) : '';
+	});
+
+})
+
+function edit(topic_id){
+	var index = layer.open({
+	   type: 2,
+	   title: false,
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('edu_topic_edit')}?topic_id="+topic_id+"",
+	   area: ['300px', '300px']
+	});
+	layer.full(index);
+}
+function pern_deiv(topic_id) {
+	layer.open({
+		type: 2,
+		area:['1000px', '550px'],
+		content: '{:U("edu_topic_edit")}?topic_id='+topic_id //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+		
+	});
+}
+//时间选择器
+layui.use('laydate', function() {
+	var laydate = layui.laydate;
+	
+	//常规用法
+	laydate.render({
+		elem: '#time',
+		range: true
+	});
+	
+})
+function search(){
+	var keyword = $('#keywords').val();
+	var start = $('#time').val();
+	var url;
+	if(keyword == ''&& start == ''){
+		url = '{:U("edu_topic_index_data")}';
+	} else if(keyword != ''&& start == ''){
+		url = '{:U("edu_topic_index_data")}?keyword='+keyword+'';
+	} else if(keyword == ''&& start != ''){
+		url = '{:U("edu_topic_index_data")}?start='+start+'';
+	} else {
+		url = '{:U("edu_topic_index_data")}?keyword='+keyword+'&start='+start+''
+	}
+	layui.use('table', function () {
+		var table = layui.table;
+		table.render({
+			elem: '#ztreedata'
+			, url: url
+			, height: 'full-160'
+			, cols: [[
+				{field: 'topic_id', width: 80,  title: '编号', sort: true}
+				,{field:'topic_title', title:'专题名称'}
+				,{field:'status', title:'状态'}
+				,{field:'add_staff', title: '添加人'}
+				,{field:'update_time', title:'更改时间'}
+				,{field: 'operate',  title: '操作'}
+			]]
+			, page: true
+		});
+		
+	});
+}
+</script>
+</block>

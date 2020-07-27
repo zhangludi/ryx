@@ -1,0 +1,8 @@
+<foreach name="meeting_list" item="list">
+    <li>
+        <a class="see-details" href="{:U('Meeting/ipam_meeting_detail', array('type_no' => $meeting_type, 'meeting_no' => $list['meeting_no']))}">
+            <span class="w-75b over-h di-ib txt-overh">{$list.meeting_name}</span>
+            <span class="pull-right">{$list.meeting_people}人</span>
+        </a>
+    </li>
+</foreach>

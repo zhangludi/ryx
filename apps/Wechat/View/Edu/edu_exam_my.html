@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_exam.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/> -->
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;
+	}
+
+
+
+	header ul li {height: 45px}
+header ul li.active{ display: block; }
+.aui-icon-roundadd{font-size: 40px !important;margin-top:8px}
+.aui-nav {
+    position: inherit;
+}
+/* .h0{height:0px!important} */
+.pt-0{padding-top:0px!important}
+.aui-bar {
+     min-height: 0px!important
+}
+.fcolor-white {color:#fff!important}
+.fsize-24{font-size:24px!important} 
+
+
+.aui-nav{height: 4rem;}
+.aui-nav .aui-bar-tab{height: 4rem;background:rgb(255, 255, 255);}
+.aui-border-tb:after {border-top: 1px solid rgb(200, 200, 200);border-bottom: 1px solid rgb(171, 8, 9);}
+.aui-nav .aui-bar-tab li p{width: 100%;line-height: 0.5rem;color:#333;font-size: 0.5rem;}
+.aui-nav .aui-bar-tab li .img2{display: none;}
+
+.aui-nav .aui-bar-tab .active-info p{display: none;}
+.aui-nav .aui-bar-tab .active-info .img1{display: none;}
+.aui-nav .aui-bar-tab .active-info .img2{display: inline-block;}
+.aui-border-tb:after{border-top: 1px solid #f3f3f3;}
+
+p{color:#ccc}
+
+.wh-24em{width: 1.2rem !important;height: 1.2rem !important;}
+.wh-33em{width: 1.65rem !important;height: 1.65rem !important;}
+
+.w-18em{width: 0.9rem !important;}
+.w-95b{width:95%;}
+.w-169em{width: 8.45rem;}
+
+.h-100b{height:100%;}
+.h-49em{height: 2.45rem !important;}
+.h-18em{height: 0.9rem !important;}
+.h-17em{height: 0.85rem;}
+
+.p-0{padding: 0 !important;}
+
+.mt-14em{margin-top: 0.7rem !important;}
+.mt-3m{margin-top:-4px}
+.mt-2em{margin-top: 0.1rem !important;}
+
+.ml-8em{margin-left: 0.4rem !important;}
+
+.mr-8em{margin-right: 0.4rem !important;}
+
+.m-14em-auto-12em{margin: 0.7rem auto 0.6rem !important;}
+
+.f-18em{font-size: 0.9rem !important;}
+
+.color_ff{color:#fff;}
+
+.bt-1-f9{border-top: 1px solid #f1f1f1;}
+
+
+
+</style>
+</head>
+<body class="bg-color-f9">
+<header class="aui-bar aui-bar-nav aui-bar-info ">
+    <ul>
+       <li class="h-45em">
+       		<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+    		<div class="aui-title f-w">我的考试</div>
+    	</li>
+    </ul>
+</header>
+<div class="pl-12em pr-12em pt-8em">
+	<volist name="exam_data" id="list">
+		<div class="w-100b h-80em over-h box-4-df bg-color-whiter bor-ra-4 po-re mb-8em join" onclick="openEexam({$list.exam_id});">
+			<div class="pull-left w-60em h-72em m-4em"><img class="w-100b h-100b" src="{$list.exam_thumb}" alt="" /></div>
+			<div class="pull-left w-270em m-4em">
+				<p class="f-15em lh-15em color-black pt-25em pb-10em f-w">{$list.exam_title}</p>
+				<div class="over-h">
+					<div class="f-10em lh-12em color-75 pull-left w-33b"><span>考试时长：</span><span>{$list.exam_time}</span></div>
+					<div class="f-10em lh-12em color-75 pull-left w-33b"><span>总分：</span><span>{$list.score}分</span></div>
+					<div class="f-10em lh-12em color-75 pull-left w-33b">共{$list.questions_num}个大题</div>
+				</div>
+		</div>
+			<span class="po-ab top-0 right-0 f-10em lh-16em h-16em color-white bg-color-1b8cff pl-5em pr-5em">已参加</span>
+		</div>
+	</volist>
+</div>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/edu/js/edu_exam_my.js"></script>
+<script type="text/javascript">
+function openEexam(id){
+location.href="{:U('Wechat/Edu/edu_exam_info')}?type=1&exam_id="+id;
+}
+</script>
+
+</body>
+</html>

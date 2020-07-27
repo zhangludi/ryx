@@ -1,0 +1,257 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+	#js-grid-juicy-projects {
+    	margin-left: 0% !important;
+	}
+</style>
+</block>
+<block name="body">
+	<div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card layui-form">
+              <div class="layui-card-header"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+              <div class="layui-card-body">
+                  <div class="layui-row">
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>计划标题：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$cat_list.partyday_title}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动时间：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span> {$cat_list.partyday_time}</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动内容：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$cat_list.partyday_content}</span></div>
+                        </div>   
+                    </div>
+                     <div class="layui-col-xs12 mt-10">
+                        <div class="layui-row">
+                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动要求：</strong></div>
+                            <div class="layui-col-xs9 fsize-14 fcolor-65 lh-35"><span>{$cat_list.partyday_require}</span></div>
+                        </div>   
+                    </div>
+                    <neq name="cat_list.partyday_attach" value="">
+							<div class="form-group  mt-5 col-sm-12 ">
+								<div class="row">
+									<input type="hidden" class="form-control" id="partyday_attach"
+										name="partyday_attach" value="{$cat_list.partyday_attach}">
+									<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+										<b>附件：</b>
+									</label>
+									<div class="col-sm-9 lh-35">
+										<div id="js-grid-juicy-projects" class="cbp"
+											style="height: 100px">
+											<php>echo
+											getUploadHtml($cat_list['partyday_attach'],'40','40','1','0');</php>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							</neq>
+							<form action="{:U('ccp_partyday_check_save')}" method="post"
+								id="form_sample_2" class="editor-add">
+								<!-- 文本域开始 -->
+								 
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>三会一课情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="meeting_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="meeting_content" disabled>{$partyday_log.meeting_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="meeting_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="支三会一课打分." style="width:100px;"
+												name="meeting_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.meeting_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>党费缴纳情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="dues_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="dues_content" disabled>{$partyday_log.dues_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="dues_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="党费缴纳打分." style="width:100px;"
+												name="dues_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.dues_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>宣传稿件情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="cms_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="cms_content" disabled>{$partyday_log.cms_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="cms_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="宣传稿件打分." style="width:100px;"
+												name="cms_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.cms_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>执行党日工作计划情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="partyday_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="partyday_content" disabled>{$partyday_log.partyday_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="partyday_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="执行党日工作计划打分." style="width:100px;"
+												name="partyday_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.partyday_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>员工思想动态反应：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="response_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="response_content" disabled>{$partyday_log.response_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="response_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="员工思想动态打分." style="width:100px;"
+												name="response_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.response_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>党员遵纪守法情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="condition_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="condition_content" disabled>{$partyday_log.condition_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="condition_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="支党员遵纪守法打分." style="width:100px;"
+												name="condition_grade"  onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.condition_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>支部计划落实情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="workable_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="workable_content" disabled>{$partyday_log.workable_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="workable_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="支部计划落实打分." style="width:100px;"
+												name="workable_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.workable_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>积极分子培训情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="cultivate_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="cultivate_content" disabled>{$partyday_log.cultivate_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="cultivate_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="积极分子培训打分." style="width:100px;"
+												name="cultivate_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.cultivate_grade}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group  mt-5 col-sm-12 ">
+									<div class="row">
+										<label class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+											<b>创新活动情况：</b>
+										</label>
+										<div class="col-sm-6 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="activity_content" class="  form-control "
+												maxlength="500" rows="2" placeholder="这个文本域的最大长度为500个字符."
+												name="activity_content" disabled>{$partyday_log.activity_content}</textarea>
+										</div>
+										<div class="col-sm-2 lh-35">
+											<!-- 可以改变rows="x"的大小，和maxlength="x"的数字大小来控制文本框的大小和字符的多少 -->
+											<textarea id="activity_grade" class="  form-control "
+												maxlength="20" rows="2" placeholder="创新活动打分." style="width:100px;"
+												name="activity_grade" onkeyup="value=value.replace(/[^\d.]/g,'')" >{$partyday_log.activity_grade}</textarea>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xs-12 pull-right">
+									<input id="partyday_id" type="hidden" class="form-control"  value="{$cat_list.partyday_id}" name="partyday_id" />
+									<input id="partyday_log_id" type="hidden" class="form-control"  value="{$partyday_log.partyday_log_id}" name="partyday_log_id" /> 
+									<input id="type" type="hidden" class="form-control"  value="1" name="type" /> 
+									<!-- <button type="button" onclick="history.go(-1);"
+										class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">取消</button> -->
+									<!-- <button type="submit"
+										class="btn btn-sm blue w-75 bor-ra-2 mr-10 pull-right">提交</button> -->
+										 
+										 <button type="button" onclick="history.go(-1);" class="layui-btn pull-right mr-20 layui-btn-primary">返回</button>
+										 <button type="submit"
+										class="layui-btn pull-right mr-20">提交</button>
+								</div>
+							</form>
+					       </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			</div>
+</block>
+<block name="js"></block>

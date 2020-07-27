@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+//base
+@import "../base/base";
+
+//helper
+@import "../helper/helper";
+
+//layout
+@import "../layouts/layouts";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//obj
+@import "../objects/foldbox";
+
+.bg{
+  @include bg("../../images/gov-print-bg.jpg");
+}
+
+.detail_content{
+  width: 1680px;
+}
+
+.detail_right{
+  width: 1285px;
+  height:785px;
+  background: #fff;
+}
+
+.hide-y{
+  width: 340px;
+  height:785px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(10,2,4,0.34);
+  border-radius: 10px;
+}
+
+.detail_left{
+  width: 358px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.org_article-txt{
+  margin-top: 30px;
+  font-size: 18px;
+  color: #666;
+  line-height: 30px;
+}
+
+.org-mix{
+  width: 290px;
+  height: 94px;
+  padding: 20px;
+  background: #edeef0;
+  border-radius: 10px;
+  color: #333;
+}
+
+.org-mix_txt-wrap{
+  text-align: right;
+}
+
+.org-mix_txt-red{
+  font-size: 28px;
+  color: #df0025;
+  margin-top: 10px;
+}
+
+.org_member{
+  height: 260px;
+  overflow-y: hidden;
+}
+
+.org_member_item{
+  width: 84px;
+  height: 120px;
+  margin: 8px;
+}
+
+.org_member_img{
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img{
+    @include img-objfit(84px, 84px, contain)
+  }
+}
+
+.org_member_name{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.l-org_member{
+  @include l-flex(center, flex-start);
+  flex-flow: wrap;
+}

@@ -1,0 +1,90 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">
+					<div class="layui-col-xs3 text-l">
+						{:getFunctionInfo(ACTION_NAME)}
+					</div>
+				</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							名称：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input"  id="blogroll_name" autocomplete="off" placeholder="请输入名称">
+						</div>
+						<div class="layui-col-xs3 pull-right">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" >查询</a>
+							<a class="layui-btn table-add" onclick="blogroll_edit()" style="text-decoration: none;"  >添加</a>
+						</div>
+					</div> 
+					<table class="layui-hide" id="demo" lay-filter="demo"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>		
+</block>
+<block name="js">
+<script>
+ function blogroll_edit(blogroll_id) {
+    layer.open({
+        type: 2,
+        title: '导航编辑',
+        content: "{:U('bd_blogroll_edit')}?blogroll_id=" + blogroll_id,
+        area:['650px', '450px'],
+    });
+}
+layui.use(['element','form'], function() {
+    var $ = layui.$
+    , admin = layui.admin
+    , element = layui.element
+    , form = layui.form
+    , router = layui.router();
+    form.render();
+    // 默认显示的 表格
+    layui.use('table', function () {
+        var table = layui.table;
+        table.render({
+            elem: '#demo'
+            , url: "{:U('bd_blogroll_index_data')}"
+            , height: 'full-160'
+            , id: 'ztreedata'
+            , cols: [[
+                {field:'blogroll_id', title:'序号',width:'10%', sort: true}
+				,{field:'blogroll_name', title:'名称',width:'20%'}
+				,{field:'blogroll_url', title: '地址',width:'20%'}
+				,{field:'add_staff', title:'添加人',width:'20%'}
+                ,{field:'status_name', title:'状态',width:'10%'}
+				,{field: 'operate' ,align: 'center',width:'20%', title: '操作'}
+            ]]
+            , page: false
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var blogroll_name = $('#blogroll_name').val();
+                table.reload('ztreedata', {
+                    page: {
+                      curr: 1 
+                    }
+                    ,where: {
+                        "blogroll_name": blogroll_name,
+                    }
+                });
+            }
+        };
+        $('.layui-form .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+})
+$(".over-h-tree").css("height",($(window).height() - 95));
+</script>
+</block>

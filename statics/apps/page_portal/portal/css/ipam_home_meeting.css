@@ -1,0 +1,146 @@
+/* 最新会议标题开始 */
+.meeting_list_header{
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #d10000;
+}
+.meeting_list_header:before{
+    content: "";
+    display: inline-block;
+    width: 64px;
+    height: 6px;
+    margin-right: 16px;
+    background: url('../images/circleline_gray.png');
+}
+.meeting_list_header:after{
+    content: "";
+    display: inline-block;
+    width: 64px;
+    height: 6px;
+    margin-left: 16px;
+    background: url('../images/circleline_gray.png');
+    transform: rotate(180deg);
+}
+/* 最新会议标题结束 */
+
+/* 网站全局滑过样式开始 */
+.study_content_video:hover, .study_artical_imgbox:hover{
+    background: #fff;
+    box-shadow: 0 0 5px 0 rgba(0 ,0 ,0 ,0.14) ;
+}
+/* 网站全局滑过样式结束 */
+.meeting_carousel_topic{
+    width: 280px;
+    margin: 20px auto;
+    margin-bottom: 0;
+}
+.meeting_carousel_point li{
+    display: inline-block;
+    background-color: #999;
+    transition: width .5s ease-out;
+}
+.meeting_carousel_point li.on{
+    background: #ff3032;
+    transition: width .5s ease-out;
+}
+.meeting_carousel_topic li{
+    width: 10px;
+    height: 10px;
+    margin: 0 10px;
+}
+.meeting_carousel_topic li.on{
+    width: 70px;
+    height: 10px;
+}
+.meeting_carousel_center{
+    position: absolute;
+    bottom: 10px;
+    right: 16px;
+}
+.meeting_carousel_center li{
+    width: 4px;
+    height: 4px;
+    margin: 0 6px;
+}
+.meeting_carousel_center li.on{
+    width: 24px;
+    height: 4px;
+}
+/* 参会人员盒子样式开始 */
+.meeting_attendee{
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+/* 参会人员盒子样式结束 */
+/* 会议列表签单头像样式开始 */
+.meeting_photo{
+    display: inline-block;
+}
+.meeting_photo_style{
+    width: 72px;
+    height: 90px;
+    margin: 10px 6px 0 0;
+}
+/* 会议列表签单头像样式结束 */
+.meeting_photo_name{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+.meeting_photo_img{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+/* 指纹签到样式开始 */
+.meeting_sign-in_fingermark, .meeting_sign-in_phone{
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin-left: 2px;
+}
+/* 指纹签到样式结束 */
+.meeting_sign-in_fingermark{
+    background: url("../../../../upload/page_portal/meeting_sign-in_fingermark.png");
+}
+/* 手机签到样式开始 */
+.meeting_sign-in_phone{
+    background: url("../../../../upload/page_portal/meeting_sign-in_phone.png");
+}
+/* 手机签到样式结束 */
+/*议会内容样式开始*/
+.meeting_list_detail{
+    font-size: 14px;
+    line-height: 24px;
+    text-indent: 28px;
+}
+/*议会内容样式结束*/
+
+/* 会议列表红色三角形标记样式开始 */
+.meeting_list_article_right:before{
+    border-width: 6px 6px 6px 12px;
+    top: 3px;
+}
+.meeting_list_article_right:after{
+    border-width: 6px 6px 6px 2px;
+    top: 3px;
+}
+/* 会议列表红色三角形标记样式结束 */
+/* 会议首页列表标题样式开始 */
+.meeting_list_title{
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+/* 会议首页列表标题样式结束 */
+/* 分页样式开始 */
+.meeting_content .layui-laypage a,.meeting_content .layui-laypage span{
+    margin: 0 -1px 5px 5px;
+    padding: 0 8px;
+}
+/* 分页样式结束 */

@@ -1,0 +1,177 @@
+@charset "UTF-8";
+/* line 28, ../../sass/layouts/_layouts.scss */
+.l-flex-center {
+    display: -moz-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/* line 32, ../../sass/layouts/_layouts.scss */
+.l-margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* line 36, ../../sass/layouts/_layouts.scss */
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1720px;
+}
+
+/* line 41, ../../sass/layouts/_layouts.scss */
+.l-right {
+    float: right;
+}
+
+/* line 28, ../../sass/objects/_title.scss */
+.title {
+    display: -moz-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 200px;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+/* line 35, ../../sass/objects/_title.scss */
+.title-icon {
+    width: 118px;
+    height: 118px;
+    object-fit: contain;
+}
+
+/* line 39, ../../sass/objects/_title.scss */
+.title-txt {
+    width: 1218px;
+    height: 110px;
+    object-fit: contain;
+}
+
+/* line 43, ../../sass/objects/_title.scss */
+.title_info {
+    position: absolute;
+    right: 64px;
+    top: 48px;
+}
+
+/* line 49, ../../sass/objects/_title.scss */
+.title_mix {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+/* line 54, ../../sass/objects/_title.scss */
+.title_pic-box {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: solid 4px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    text-align: center;
+}
+/* line 23, ../../sass/objects/_title.scss */
+.title_pic-box .title_picture {
+    object-position: center;
+}
+/* line 56, ../../sass/objects/_title.scss */
+.title_pic-box .title_picture {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+/* line 61, ../../sass/objects/_title.scss */
+.title_online-box {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: solid 4px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    text-align: center;
+    background: #bd2200;
+    border-color: #bd2200;
+}
+/* line 23, ../../sass/objects/_title.scss */
+.title_online-box .title_picture {
+    object-position: center;
+}
+/* line 65, ../../sass/objects/_title.scss */
+.title_online-box .title_picture {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+/* line 70, ../../sass/objects/_title.scss */
+.title_name {
+    float: left;
+    line-height: 48px;
+    color: #fff;
+    font-size: 24px;
+    opacity: .8;
+}
+
+/* line 28, ../../sass/layouts/_layouts.scss */
+.l-flex-center {
+    display: -moz-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/* line 32, ../../sass/layouts/_layouts.scss */
+.l-margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* line 36, ../../sass/layouts/_layouts.scss */
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1720px;
+}
+
+/* line 41, ../../sass/layouts/_layouts.scss */
+.l-right {
+    float: right;
+}
+.bg {
+    background: url("../../sp_login/images/bg.png");
+    background-size: cover;
+}
+

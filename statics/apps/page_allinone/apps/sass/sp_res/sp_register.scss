@@ -1,0 +1,106 @@
+@charset "utf-8";
+
+//base
+@import "../base/base";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//layout
+@import "../layouts/layouts";
+
+//helper
+@import "../helper/helper";
+
+//objects
+@import "../objects/button";
+@import "../objects/input";
+
+$content-w: 984px;
+$content-h: 826px;
+$content-space-t: 146px;
+$input-h: 50px;
+$getCode-l: 236px;
+
+.bg{
+  @include bg("../../images/bg.jpg");
+}
+
+.content{
+  background: rgba(255, 255, 255, .9);
+  border-radius: 10px;
+}
+
+.register-title{
+  color: $red1;
+  @include font-sizes(l4);
+  font-weight: bold;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.input-wrap{
+  height: $input-h;
+  padding: 10px 0;
+}
+
+.register-label{
+  display: inline-block;
+  width: 312px;
+  text-align: right;
+  color: #666;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.register_input{
+  @include input;
+  height: $input-h;
+  width: 370px;
+}
+
+.get-code{
+  width: 134px;
+  height: $input-h;
+  line-height: $input-h;
+  color: #fff;
+  margin-left: $getCode-l;
+}
+.register_input-code{
+  @include input;
+  height: $input-h;
+  width: 320px;
+}
+
+.register_agree{
+  margin-left: $getCode-l;
+  margin-top: 30px;
+}
+
+.register-submit{
+  display: block;
+  width: 456px;
+  margin-top: 40px;
+}
+
+.register_tip{
+  font-size: 14px;
+  color: #999;
+}
+
+.register_tip-red{
+  @extend .register_tip;
+  color: red;
+}
+
+.agree-protocol{
+  color: #0093c3;
+  text-decoration: none;
+}
+
+.l-content{
+  width: $content-w;
+  height: $content-h;
+  margin-top: $content-space-t;
+}

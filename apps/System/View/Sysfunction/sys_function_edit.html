@@ -1,0 +1,143 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+				<form id="form_sample_2" action="{:U('sys_function_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+					<div class="layui-card-body layui-form">
+						<div class="layui-row">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>所属模块：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="hidden" name="edit" value="{$edit}"/>
+										<input type="hidden" name="add" value="{$add}"/>
+										<input type="hidden" name="function_oldid" value="{$function_id}"/>
+										<select name="function_pid" lay-filter="state" lay-search="">
+											<option value="0">创建新模块</option>
+											<volist name="function_list" id="list">
+											<option value ="{$list.function_id}" <eq name="function_data.function_pid" value="$list.function_id">selected</eq><eq name="function_pid" value="$list.function_id">selected</eq>>{$list.function_name}{$list.function_id}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>所属菜单：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<select id="dept_no" name="group_code"  lay-search="">
+											{:getBdCodeSelect('function_code',$function_data['group_code'])}
+										</select>
+									</div>
+								</div>
+							</div> -->
+							<div class="layui-col-xs12 mt-10">
+							
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>菜单ID：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+										<input type="text" name="function_id" placeholder="基础资料排序" autocomplete="off" class="layui-input" value="{$function_id}">
+									</div>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>功能名称：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="text" name="function_name" placeholder="功能名称" autocomplete="off" class="layui-input" value="{$function_data.function_name}">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>连接地址：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="text" name="function_url" placeholder="连接地址" autocomplete="off" class="layui-input" value="{$function_data.function_url}">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>编码：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="text" name="function_code" placeholder="编码" autocomplete="off" class="layui-input" value="{$function_data.function_code}">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>类型：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="radio" name="function_type" value="1" title="功能" <eq name="function_data.function_type" value="1">checked</eq>>
+									<input type="radio" name="function_type" value="0" title="菜单" <neq name="function_data.function_type" value="1">checked</neq>>
+									</div>
+								</div>
+							</div><div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>图标：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="text" name="function_icon" placeholder="图标" autocomplete="off" class="layui-input" value="{$function_data.function_icon}">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>排序：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="number" name="function_order" placeholder="排序" autocomplete="off" class="layui-input" value="{$function_data.function_order}">
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>是否启用：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<input type="radio" name="status" value="1" title="是" <eq name="function_data.status" value="1">checked</eq>>
+									<input type="radio" name="status" value="0" title="否" <eq name="function_data.status" value="0">checked</eq>>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea name="memo" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$function_data.memo}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-input-block">
+									<div class="layui-footer" style="text-align: right">
+										<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+										<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use([ 'form', 'laydate'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+	})
+
+</script>
+</block>

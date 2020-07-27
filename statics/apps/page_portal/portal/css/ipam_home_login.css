@@ -1,0 +1,28 @@
+.login_box{
+    margin: 50px auto;
+}
+.login_box p{
+    display: table;
+    table-layout: fixed;
+}
+.login_box p .login_lbl,.login_box p .login_input{
+    display: table-cell;
+}
+/* 登录页标题开始 */
+.login_title{
+    font-family: 黑体;
+    color: #bb0000;
+}
+.login_lbl:after{
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 13px;
+    border-radius: 6px;
+    background: #ff3032;
+    margin: 0 13px;
+}
+.login_btn{
+    background: linear-gradient(90deg ,#ff4d4d, #ff3032, #ff4530);
+    color: #fff;
+}

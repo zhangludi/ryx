@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>人员列表</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_learn_look.css"/>
+<style>
+.aui-load-container{
+	height:auto!important;
+}
+.aui-bar {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: #3498db;
+    color: #ffffff;
+    display: block;
+    min-height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+    text-align: center;
+}
+header ul li{
+	display: block; !important;
+}
+</style>
+</head>
+<body class="bg-color-whiter">
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>
+    		<a class="aui-pull-left" href="javascript:history.back(-1)">
+				<span class="aui-iconfont aui-icon-left"></span>返回
+			</a> 		
+    		<div class="aui-title icon_medium f-16em">人员列表</div>
+    	</li>
+    </ul>
+</header>
+<div class="aui-load-container" style="margin-top: 68px;">
+	<div class="aui-content">
+		<div>
+			<ul id="personnelBox" class="pl-12em pr-12em">	
+				<volist name="communist_info" id="communist">
+				<li confirm="flase" class="over-h bb-1-df pt-10em" communistNo="{$communist.communist_no}" >
+					<img class="pull-left w-31em h-31em bor-ra-100b mr-12em mb-10em" src="{$communist.communist_avatar}" alt="" />
+					<div class="pull-left w-270em">
+						<p class="f-14em color-21 pt-8em pb-8em name">{$communist.communist_name}</p>
+					</div>
+				</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-tap.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jQuery.Hz2Py-min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss_rongCloud2.js"></script>
+<script type="text/javascript" src="js/edu_learn_look.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>

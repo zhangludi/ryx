@@ -1,0 +1,129 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">
+				<div class="layui-col-xs9">
+						{:getFunctionInfo(ACTION_NAME)}
+				</div>
+				
+				</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs2 pull-right">
+							<!-- <button class="layui-btn table-add " >一键修复</button> -->
+							<a class="layui-btn table-add " href="{:U('Syssql/sys_sqlexport_json')}" style="text-decoration: none;" title="更新基础文件">更新基础文件</a>
+						</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-del layui-btn-xs" lay-event="edit">修复</a>
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('Syssql/sys_sqlfield_check')}"
+			,cellMinWidth: 80
+			,height:'full-155'
+			,cols: [[
+				{field:'num', title:'序号',align: 'center', unresize: true, sort: true}
+				,{field:'type_name', title:'类型',align: 'center'}
+				,{field:'table', title: '表名',align: 'center', sort: true}
+				,{field:'field', title:'字段名',align: 'center', unresize: true, sort: true}
+				,{field:'msg', title:'原因',align: 'center'}
+				,{field:'operate', title: '操作',align: 'center', toolbar: '#barDemo'}
+			]]
+			,page: false
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			var checkdata = new Array();
+            checkdata[0] = data;
+			if(obj.event === 'edit'){
+				$.ajax({
+                    url:"{:U('System/Syssql/sys_mysql_field_repair')}",
+                    type:'post',
+                    async:false,
+                    data:{'data':checkdata},
+                    success: function (data) {
+                        if(data.code == 1){
+                            alert(data.msg);
+                            setTimeout(location.reload(true),8000);
+                            //location.reload(true);
+                            // location.href = "{:U('System/Syssql/sys_mysql_field_repair')}";
+                        }else{
+                            layer.msg(data.msg, {icon: 5,time: 2000});
+                        }
+                    }
+                })
+			}
+		});
+	});
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+		form.on('submit(component-form-element)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#test1',
+			range: true
+		});
+	})
+	// function one_repair(that) {
+ //        if(that == undefined){
+ //            var checkdata = $("#client_table").bootstrapTable('getData');
+ //        } else {
+ //            //获取选中行索引 
+ //            var index = $(that).parent().parent().data('index'); 
+ //             //获取选中行数据对象 
+ //            var result = $('#client_table').bootstrapTable('getData')[index]; 
+ //            var checkdata = new Array();
+ //            checkdata[0] = result;
+ //        }
+ //        if(checkdata != ''){
+ //            $.ajax({
+ //                url:"{:U('System/Syssql/sys_mysql_field_repair')}",
+ //                type:'post',
+ //                async:false,
+ //                data:{'data':checkdata},
+ //                success: function (data) {
+ //                    if(data.code == 1){
+ //                        alert(data.msg);
+ //                        setTimeout(location.reload(true),8000);
+ //                        //location.reload(true);
+ //                        // location.href = "{:U('System/Syssql/sys_mysql_field_repair')}";
+ //                    }else{
+ //                        layer.msg(data.msg, {icon: 5,time: 2000});
+ //                    }
+ //                }
+ //            })
+ //        }else{
+ //            layer.msg('暂无需要修复的内容', {icon: 5,time: 2000});
+ //        }
+ //    }
+</script>
+</block>

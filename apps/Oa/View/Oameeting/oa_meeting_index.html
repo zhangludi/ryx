@@ -1,0 +1,703 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<link href="__STATICS__/apps/page_index/css/sp_public_mobile.css" rel="stylesheet" type="text/css">
+<link href="__STATICS__/apps/page_index/css/style.css" rel="stylesheet" type="text/css">
+<style>
+.color-ec322a{color: #ec322a;}
+.layui-progress-bar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	max-width: 100%;
+	height: 0.1rem;
+	border-radius: 0.07rem !important;
+	text-align: right;
+	background-color: #5FB878;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+}
+.layui-progress {
+	width: 1.34rem;
+	position: relative;
+	height: 0.1rem;
+	border-radius: 0.07rem !important;
+	background-color: #e7e7e7 !important;
+}
+.sort_title{
+	font-size: 0.24rem;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rem;
+	color: #999999;
+}
+.sort_num{
+	font-size: 0.48rem;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rem;
+	color: #0ccb4f;
+	padding-top: 0.05rem;
+}
+.sort_num2{
+	font-size: 0.48rem;
+	font-weight: bold;
+	font-stretch: normal;
+	letter-spacing: 0rem;
+	color: #ec322a;
+	padding-top: 0.05rem;
+}
+.bg-color-f2f3f5{
+	background: #f2f3f5 !important;
+}
+.pb-1em-cur{padding-bottom:0.15rem;}
+.br-d6{border-right: 1px solid #d6d6d6;}
+.card-shadow{box-shadow:0px 13px 8px -15px #ccc;}
+.list_head_sign{
+	width: 0.2rem;
+	height: 0.19rem;
+	background-color: #ff4330;
+	border-radius: 0.02rem !important;
+	display: inline-block;
+}
+.list_head_text{
+	font-family:'wryh-blod';
+	font-size: 0.22rem;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rem;
+	color: #333333;
+	display: inline-block;
+	margin-bottom: 0.2rem;
+	font-weight: bold;
+}
+.list-card{
+	margin-top: 0.15rem;
+	box-shadow: 0px -17px 8px -20px #ccc;
+}
+/*全部*/
+.sort_all{
+	font-size: 0.2rem;
+	color: #388cff;
+	width: 0.57rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+.sort_all_active{
+	font-size: 0.2rem;
+	color: #388cff;
+	border-bottom: 0.03rem solid #388cff;
+	width: 0.57rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+
+/*进行中*/
+.sort_handle{
+	font-size: 0.2rem;
+	color: #ec322a;
+	width: 0.9rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+.color-handle{
+	color: #ec322a;
+}
+.sort_handle_active{
+	font-size: 0.2rem;
+	color: #ec322a;
+	border-bottom: 0.03rem solid #ec322a;
+	width: 0.9rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+ }
+/*已召开*/
+.sort_convened{
+	font-size: 0.2rem;
+	color: #0ccb4f;
+	width: 0.9rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+.color-convened{
+	color: #0ccb4f;
+}
+.sort_convended_active{
+	font-size: 0.2rem;
+	color: #0ccb4f;
+	border-bottom: 0.03rem solid #0ccb4f;
+	width: 0.9rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+/*未召开*/
+.sort_Notconvened{
+	font-size: 0.2rem;
+	color: #999;
+	width: 0.9rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+.color-Notconvened{
+	color: #999999;
+}
+.sort_Notconvened_active{
+	font-size: 0.2rem;
+	color: #999;
+	border-bottom: 0.03rem solid #999;
+	width: 0.9rem;
+	margin: auto;
+	text-align: center;
+	line-height: 0.4rem;
+	font-family:'wryh-blod';
+	cursor: pointer;
+}
+.header_saeach{
+	width: 3rem;
+	height: 0.53rem;
+	line-height: 0.53rem;
+	border: solid 0.01rem #cbcbcb;
+	background-color: #ffffff;
+	margin-left: 2.5rem;
+	margin-top: -0.12rem !important;
+	border-radius: 0.07rem !important;
+}
+.header_saeach input{
+	margin-left:0.02rem;
+	border:none;
+	line-height:0.33rem;
+	padding-left:0.1rem;
+	width: 2.4rem;
+}
+.header_saeach img{
+	width: 0.35rem
+	height: 0.35rem
+}
+input::-webkit-input-placeholder{
+	color:#cccccc;
+}
+input:-moz-placeholder{
+	color:#cccccc;
+}
+input::-moz-placeholder{
+	color:#cccccc;
+}
+input:-ms-input-placeholder{
+	color:#cccccc;
+}
+.add_btn{
+	width: 1.43rem;
+	height: 0.51rem;
+	line-height: 0.51rem;
+	background-color: #f1372c;
+	border-radius: 0.07rem !important;
+	font-size: 0.22rem;
+	letter-spacing: 0rem;
+	color: #ffffff;
+	text-align: center;
+	float: right;
+	margin-top: -0.1rem;
+	cursor: pointer;
+}
+.list_content{
+	clear: both;
+	border-bottom: 1px solid #d6d6d6;
+	padding-top:0.25rem;
+	padding-bottom:0.15rem;
+}
+.content_left_title{
+	font-weight: bold;
+	width: 0.7rem;
+	height: 0.7rem;
+	font-size: 0.24rem;
+	color: #ffffff;
+	background-image: linear-gradient(0deg, #ff3032 0%, #ff4530 52%, #ff5a2d 100%), linear-gradient( #ff6968, #ff6968);
+	background-blend-mode: normal, normal;
+	border-radius: 0.07rem !important;
+	text-align: center;
+	padding-top: 0.06rem;
+	float: left;
+}
+.content_left_content{
+	padding-left: 0.9rem;
+}
+.content_left_content-1{
+	font-family:'wryh-blod';
+	font-size: 0.24rem;
+	color: #333333;
+}
+.content_left_content-2{
+	font-size: 0.18rem;
+	color: #666666;
+	padding-top: 0.07rem;
+}
+.info_btn{
+	padding: 0.1rem 0.16rem;
+	width: 0.8rem;
+	border-radius: 0.07rem !important;
+	border: solid 0.01rem #388cff;
+	color: #388cff;
+	font-size: 0.18rem;
+	display: inline-block;
+	text-align: center;
+	line-height: 0.2rem;
+	cursor: pointer;
+}
+.edit_btn{
+	padding: 0.1rem 0.16rem;
+	width: 0.8rem;
+	border-radius: 0.07rem !important;
+	border: solid 0.01rem #ec322a;
+	color: #ec322a;
+	font-size: 0.18rem;
+	display: inline-block;
+	text-align: center;
+	line-height: 0.2rem;
+	cursor: pointer;
+}
+.content-right-title{
+	font-size: 0.18rem;
+	color: #999999;
+	padding-bottom: 0.08rem;
+}
+.content-right-text{
+	font-size: 0.18rem;
+	color: #666666;
+}
+.fsize-12em{
+	font-size: 0.18rem;
+	font-family:'wryh-blod';
+}
+.pt-2em{
+	padding-top: 0.2rem;
+}
+.mt-5{
+	margin-top: 0.1rem;
+}
+.ml-2em{
+	margin-left: 0.2rem;
+}
+.ml-2m{
+	margin-left: -0.2rem;
+}
+.pb-0{
+	padding-bottom: 0 !important;
+}
+.status_btn{
+    background: #f60;	
+	padding: 0.1rem 0.16rem;
+	width: 0.8rem;
+	border-radius: 0.07rem !important;
+	border: solid 0.01rem #f60;
+	color: #fff;
+	font-size: 0.18rem;
+	display: inline-block;
+	text-align: center;
+	line-height: 0.2rem;
+	cursor: pointer;
+}
+.layui-laypage .layui-laypage-skip {
+    height: 30px;
+    line-height: 30px;
+    color: #000;
+}
+.record_btn {
+    padding: 0.1rem 0.16rem;
+    width: 1.2rem;
+    border-radius: 0.07rem !important;
+    border: solid 0.01rem #ec322a;
+    color: #ec322a;
+    font-size: 0.18rem;
+    display: inline-block;
+    text-align: center;
+    line-height: 0.2rem;
+    cursor: pointer;
+}
+.party_select option{
+	font-size: 15px;
+}
+.party_select option:hover{
+	font-color: #fff;
+	background-color: #f60;
+}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space5">
+		<div class="w-100b bg-color-f2f3f5">
+			<!--分类开始-->
+			<eq name="type" value="2001,2002,2003,2004">
+			<div class="bg-color-whiter layui-row card-shadow">
+				<volist name="type_list" id="list">
+				<div class="layui-col-lg3 layui-col-md3 pt-1em-cur pb-1em-cur">
+					<div class="text-center">
+						<p class="sort_title">{$list.type_name}</p>
+						<p  <eq name="list.type_no" value="2004">class="sort_num2"<else/>class="sort_num2  br-d6 "</eq>>{$list.end_meeting_count}/{$list.meeting_count}</p>
+					</div>
+				</div>
+				</volist>
+			</div>
+			</eq>
+			<!--分类结束-->
+
+			<!--列表开始-->
+			<div class="bg-color-whiter p-5em list-card pb-0">
+				<div class="list_head">
+					<div class="list_head_sign"></div>
+					<p class="list_head_text wryh_blod">会议列表</p>
+				</div>
+				<div class="layui-row mb-5em-cur">
+					<div class="layui-col-lg3 layui-col-md3">
+						<div class="layui-row">
+							<div class="layui-col-lg3 layui-col-md3">
+								<div class="sort_all_active" id="meeting_status1" onclick="meeting_status(1);">全部</div>
+							</div>
+							<div class="layui-col-lg3 layui-col-md3">
+								<div class="sort_handle" id="meeting_status2" onclick="meeting_status(2);">进行中</div>
+							</div>
+							<div class="layui-col-lg3 layui-col-md3">
+								<div class="sort_convened" id="meeting_status3" onclick="meeting_status(3);">已召开</div>
+							</div>
+							<div class="layui-col-lg3 layui-col-md3">
+								<div class="sort_Notconvened" id="meeting_status4" onclick="meeting_status(4);">未召开</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-lg7 layui-col-md7">
+						<div class="header_saeach" style="margin-left:1.09rem;;display: inline-block;">
+							<input class="" id="meeting_name" autocomplete="off" placeholder="输入会议名称">
+							<img  onClick="reload();" src="__STATICS__/apps/page_index/img/fangdajing.png" style="cursor: pointer;" >
+						</div>
+						<div class="header_saeach" style="margin-left:0.1rem;display: inline-block;">
+							<select class="party_select" lay-filter="aihao" lay-search="" name="party_no" id="party_select_no" style="display: inline;border: none;width: 100%;" onchange="reload()">
+								<option value="">选择支部查询</option>
+								<php>echo getPartySelect($communist['party_no']);</php>
+							</select>
+						</div>
+						<eq name="type" value="2001,2002,2003,2004">
+						<div class="header_saeach" style="margin-left:0.1rem;display: inline-block;">
+							<select class="party_select" lay-filter="aihao" lay-search="" name="meeting_type" id="meeting_type" style="display: inline;border: none;width: 100%;" onchange="reload()">
+								<option value="">选择会议类型</option>
+								<php>echo getBdTypeSelect('meeting_type','','',$type);</php>
+							</select>
+						</div>
+						</eq>
+					</div>
+					<div class="layui-col-lg2 layui-col-md2">
+						<div class="add_btn"  onclick="add_btn({$type});">+添加计划</div>
+					</div>
+				</div>
+				<div id="meeting_content" style="height: 5.6rem;"></div>
+				<div id="meeting_null_content" style="height: 5.6rem; display: none;">
+					<center><img src="__STATICS__/public/images/null_show.png" style="width: 20%;    margin-top: 1.2rem;"><center>
+				</div>
+				<div id="news_page" style="text-align: center;margin-top: 0.2rem;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="type" value="{$type}" />
+<input type="hidden" id="count" value="{$count}" />
+<input type="hidden" id="party_no" value="{$party_no}" />
+<input type="hidden" id="status" value="" />
+</block>
+<block name="js">
+<script src="__STATICS__/apps/page_index/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATICS__/apps/page_index/js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATICS__/apps/page_index/js/list.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$("input").keydown(function(event){
+  if(event.keyCode ==13){
+    reload();
+  }
+});
+//添加
+function add_btn(type){
+	var index = layer.open({
+	   type: 2,
+	   title: false,
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('Oameeting/oa_meeting_edit')}?type="+type+"",
+	   area: ['300px', '300px']
+	});
+	layer.full(index);
+}
+//编辑
+function edit(meeting_no,meeting_type){
+	var index = layer.open({
+	   type: 2,
+	   title: false,
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('Oameeting/oa_meeting_edit')}?meeting_no="+meeting_no+"&type="+meeting_type+'',
+	   area: ['300px', '300px']
+	});
+	layer.full(index);
+}
+//详情
+function info(meeting_no){
+	var index = layer.open({
+	   type: 2,
+	   title: false,
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('Oameeting/oa_meeting_info')}?meeting_no="+meeting_no+"",
+	   area: ['300px', '300px']
+	});
+	layer.full(index);
+}
+function record(meeting_no,type,party_no){
+	var index = layer.open({
+	   type: 2,
+	   title: '会议总结',
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('Oameeting/oa_meeting_info_record')}?meeting_no="+meeting_no+"&type="+type+"&party_no="+party_no+"",
+	   area: ['70%', '90%']
+	});
+}
+//开始
+function status_start(meeting_no,type,party_no){
+	window.location='{:U("Oameeting/oa_meeting_do_start")}?meeting_no='+meeting_no+'&type='+type+'&party_no='+party_no+'';
+}
+//结束
+function status_end(meeting_no,type,$party_no){	
+	window.location='{:U("Oameeting/oa_meeting_do_end")}?meeting_no='+meeting_no+'&type='+type+'&party_no='+party_no+'';
+}
+//删除
+function del(meeting_no,type,$party_no){
+	layer.confirm('确认删除该数据吗？', function(index){
+		window.location='{:U("Oameeting/oa_meeting_do_del")}?meeting_no='+meeting_no+'&type='+type+'&party_no='+party_no+'';
+	})
+}
+var count = $('#count').val();
+var type = $('#type').val();
+var party_no = $("#party_no").val();
+var party_select_no = $("#party_select_no").val();
+var meeting_type = $("#meeting_type").val();
+if(meeting_type){
+	type = meeting_type
+}
+if(party_select_no){
+	party_no = party_select_no
+}
+//分页
+layui.use('laypage', function(){
+	var laypage = layui.laypage;
+	//完整功能
+	laypage.render({
+		elem: 'news_page'
+		,count: count
+		,theme: '#ff3032'
+		,first: '首页'
+		,last: '尾页'
+		,limit: 5
+		,layout: ['count', 'prev', 'page', 'next', 'skip']
+		,jump: function(obj){
+			$.ajax({
+				type : "post",
+				url : "{:U('Oa/Oameeting/oa_meeting_index_data')}",
+				data :{party_no:party_no,meeting_type:type,page:obj.curr, pagesize:obj.limit},
+				datatype: "json",
+				success: function (data) {
+					if(data.meeting_content == null || data.meeting_content == ''){
+						$('#meeting_content').hide();
+						$('#meeting_null_content').show();
+					} else {
+						$('#meeting_content').show();
+						$('#meeting_content').html(data.meeting_content);
+						$('#meeting_null_content').hide();
+					}
+				}
+			});
+		}
+	});
+});
+function meeting_status(num){
+	$("#meeting_status1").removeClass();
+	$("#meeting_status2").removeClass();
+	$("#meeting_status3").removeClass();
+	$("#meeting_status4").removeClass();
+	switch(num) {
+		case 1:
+			$("#meeting_status1").addClass('sort_all_active');
+			$("#meeting_status2").addClass('sort_handle');
+			$("#meeting_status3").addClass('sort_convened');
+			$("#meeting_status4").addClass('sort_Notconvened');	
+			$('#status').val('');			
+		break;
+		case 2:
+			$("#meeting_status1").addClass('sort_all');
+			$("#meeting_status2").addClass('sort_handle_active');
+			$("#meeting_status3").addClass('sort_convened');
+			$("#meeting_status4").addClass('sort_Notconvened');		
+			$('#status').val('21');	
+		break;
+		case 3:
+			$("#meeting_status1").addClass('sort_all');
+			$("#meeting_status2").addClass('sort_handle');
+			$("#meeting_status3").addClass('sort_convended_active');
+			$("#meeting_status4").addClass('sort_Notconvened');	
+			$('#status').val('23');		
+		break;
+		case 4:
+			$("#meeting_status1").addClass('sort_all');
+			$("#meeting_status2").addClass('sort_handle');
+			$("#meeting_status3").addClass('sort_convened');
+			$("#meeting_status4").addClass('sort_Notconvened_active');		
+			$('#status').val('11');	
+		break;
+	}
+	var meeting_name = $('#meeting_name').val();
+	var status = $('#status').val();
+	var type = $('#type').val();
+	var party_no = $("#party_no").val();
+	var party_select_no = $("#party_select_no").val();
+	var meeting_type = $("#meeting_type").val();
+	if(meeting_type){
+		type = meeting_type
+	}
+	if(party_select_no){
+		party_no = party_select_no
+	}	
+	var count = '';
+	$.ajax({
+		type: "post",
+		url: "{:U('Oa/Oameeting/oa_meeting_count_ajax')}",
+		data: {
+			"party_no": party_no,
+			"meeting_type": type,
+			"meeting_name": meeting_name,
+			"status": status
+		},
+		async: false,
+		success: function (res) {
+			count = res.count;
+		}
+	});
+	//分页
+	layui.use('laypage', function(){
+		var laypage = layui.laypage;
+		//完整功能
+		laypage.render({
+			elem: 'news_page'
+			,count: count
+			,theme: '#ff3032'
+			,first: '首页'
+			,last: '尾页'
+			,limit: 5
+			,layout: ['count', 'prev', 'page', 'next', 'skip']
+			,jump: function(obj){
+				$.ajax({
+					type : "post",
+					url : "{:U('Oa/Oameeting/oa_meeting_index_data')}",
+					data :{meeting_name:meeting_name,status:status,party_no:party_no,meeting_type:type,page:obj.curr, pagesize:obj.limit},
+					datatype: "json",
+					success: function (data) {
+						if(data.meeting_content == null || data.meeting_content == ''){
+							$('#meeting_content').hide();
+							$('#meeting_null_content').show();
+						} else {
+							$('#meeting_content').show();
+							$('#meeting_content').html(data.meeting_content);
+							$('#meeting_null_content').hide();
+						}
+					}
+				});
+			}
+		});
+	});
+}
+//查询
+function reload(){	
+	var meeting_name = $('#meeting_name').val();
+	var status = $('#status').val();
+	var type = $('#type').val();
+	var party_no = $("#party_no").val();
+	var party_select_no = $("#party_select_no").val();
+	var meeting_type = $("#meeting_type").val();
+	if(meeting_type){
+		type = meeting_type
+	}
+	if(party_select_no){
+		party_no = party_select_no
+	}
+	var count = '';
+	$.ajax({
+		type: "post",
+		url: "{:U('Oa/Oameeting/oa_meeting_count_ajax')}",
+		data: {
+			"party_no": party_no,
+			"meeting_type": type,
+			"meeting_name": meeting_name,
+			"status": status
+		},
+		async: false,
+		success: function (res) {
+			count = res.count;
+		}
+	});
+	//分页
+	layui.use('laypage', function(){
+		var laypage = layui.laypage;
+		//完整功能
+		laypage.render({
+			elem: 'news_page'
+			,count: count
+			,theme: '#ff3032'
+			,first: '首页'
+			,last: '尾页'
+			,limit: 5
+			,layout: ['count', 'prev', 'page', 'next', 'skip']
+			,jump: function(obj){
+				$.ajax({
+					type : "post",
+					url : "{:U('Oa/Oameeting/oa_meeting_index_data')}",
+					data :{meeting_name:meeting_name,status:status,party_no:party_no,meeting_type:type,page:obj.curr, pagesize:obj.limit},
+					datatype: "json",
+					success: function (data) {
+						if(data.meeting_content == null || data.meeting_content == ''){
+							$('#meeting_content').hide();
+							$('#meeting_null_content').show();
+						} else {
+							$('#meeting_content').show();
+							$('#meeting_content').html(data.meeting_content);
+							$('#meeting_null_content').hide();
+						}
+					}
+				});
+			}
+		});
+	});	
+}
+	
+	
+</script>
+</block>

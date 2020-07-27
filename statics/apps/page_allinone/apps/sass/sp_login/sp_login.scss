@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//helper
+@import "../helper/helper";
+
+//layout
+@import "../layouts/layouts";
+
+//component
+@import "../objects/_title";
+@import "../components/function_cards";
+
+$icon-size : 220px;
+$title_icon-size : 118px;
+$title_txt-h : 130px;
+$title_txt-w : 930px;
+$title_txt-fs : 46px;
+$title-space-t: 200px;
+$title-space-b: 80px;
+$function_card-w: 18%;
+$function_card-h: 510px;
+$function_card-space: 0 28px;
+
+.bg{
+  background: url("../../images/bg.jpg");
+  background-size: cover;
+}
+
+//首页卡片样式
+.function_card{
+  width: $function_card-w;
+  height: $function_card-h;
+  margin: $function_card-space;
+  background: url(../../images/login-card-bg.png) center / 100% 10%;
+  background-size: cover;
+
+  .card_img{
+    @include img-objfit($icon-size, $icon-size, scale-down);
+    margin-top: 100px;
+    background: url(../../images/login-card-icon-bg.png) no-repeat;
+    object-position: center center;
+  }
+
+  .card_title{
+    margin-top: 20px;
+    font-family: "方正正准黑简体" ,SansSerif;
+    font-size: $title_txt-fs;
+    color: $red;
+  }
+}

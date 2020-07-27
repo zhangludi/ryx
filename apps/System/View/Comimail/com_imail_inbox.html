@@ -1,0 +1,111 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							关键字：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="id" id="keywords" autocomplete="off" placeholder="请输入关键字">
+						</div>
+						<div class="layui-col-xs3 pull-right">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+							<!-- <button class="layui-btn table-add " >添加</button> -->
+						</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-del layui-btn-xs"  lay-event="del">删除</a>
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	function info(inbox_id){
+		var index = layer.open({
+           type: 2,
+           title: false,
+           end:false,
+           closeBtn: 0,
+           shift: 1,
+           content: "{:U('com_imail_info')}?inbox_id="+inbox_id+"&type="+1+"",
+           area: ['300px', '300px']
+        });
+        layer.full(index);
+	}
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('com_imail_inbox_data')}"
+			,cellMinWidth: 80
+			,height:'full-155'
+			, id : 'ztreedata'
+			,cols: [[
+				{field:'imail_id', title:'编号',align: 'center', sort: true,width:100}
+				,{field:'imail_title', title:'主题',align: 'left'}
+				,{field:'imail_sender', title: '发件人',align: 'center', sort: true,width:170}
+				,{field:'imail_receivers', title:'收件人',align: 'center',width:170}
+				,{field:'add_time', title:'发送时间',align: 'center',width:160}
+				,{field:'sex', title:'操作',align: 'center' ,toolbar: '#barDemo',width:120}
+			]]
+			,page: true
+		});
+
+		var $ = layui.$, active = {
+	        reload: function(){
+	            var keywords = $('#keywords').val();
+		      	table.reload('ztreedata', {
+			        page: {
+			          curr: 1 
+			        }
+			        ,where: {
+			        	"keywords": keywords
+			        }
+		      	});
+	        }
+	    };
+	    $('.layui-form .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		});
+
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'del'){
+				layer.confirm('确定公示该邮件？', function(index){
+					window.location='{:U("com_imail_do_del")}?inbox_id='+data.inbox_id+'';
+				})
+			}
+		});
+	});
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#test1',
+			range: true
+		});
+	})
+</script>
+</block>

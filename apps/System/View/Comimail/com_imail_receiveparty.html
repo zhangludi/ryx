@@ -1,0 +1,362 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<from id="form1" action="" method="post" runat="server"> 
+	<div class="form-group">
+        <label class="control-label col-md-3">默认</label>
+        <div class="col-md-9">
+            <select multiple="multiple" class="multi-select" id="my_multi_select1" name="my_multi_select1[]">
+                <option>Dallas Cowboys</option>
+                <option>New York Giants</option>
+                <option selected>Philadelphia Eagles</option>
+                <option selected>Washington Redskins</option>
+                <option>Chicago Bears</option>
+                <option>Detroit Lions</option>
+                <option>Green Bay Packers</option>
+                <option>Minnesota Vikings</option>
+                <option selected>Atlanta Falcons</option>
+                <option>Carolina Panthers</option>
+                <option>New Orleans Saints</option>
+                <option>Tampa Bay Buccaneers</option>
+                <option>Arizona Cardinals</option>
+                <option>St. Louis Rams</option>
+                <option>San Francisco 49ers</option>
+                <option>Seattle Seahawks</option>
+            </select>
+        </div>
+    </div>
+	<div class="eoffice ">
+	<div class=" form-group row">
+	<div class="control-label col-sm-3 pr-0" >
+		  <select  size="10" class="form-control" multiple="multiple" id="select1">
+		    <option value="1">选项1</option>
+		    <option value="2">选项2</option>
+		    <option value="3">选项3</option>
+		    <option value="4">选项4</option>
+		    <option value="5">选项5</option>
+		    <option value="6">选项6</option>
+		    <option value="7">选项7</option>
+		  </select>
+		  </div>
+		  
+		<div class="control-label col-sm-3 pr-0" >
+		  <select  size="10"  class="form-control" multiple="multiple" id="select2">
+		  </select>
+		  
+		</div>
+		</div>
+	<!-- 	<span id="add">选中右移</span> <span id="add_all">全部右移</span>
+		<span id="remove">选中左移</span><span id="remove_all">全部左移</span> -->
+		
+		<div class="eoffice_buttonpane">
+		  <div class="button_position fr">
+			    <button onclick="submit_communist()" class="btn btn-xs blue w-75 bor-ra-2 mr-10 pull-right">提交</button>
+			  <div id="cleaner"></div>
+		  </div>
+		</div>
+	</div>
+</from>
+<script src="__STATICS__/plugins/assets/js/jquery-1.10.2.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/jquery.nicescroll.js"></script>
+<script src="__STATICS__/plugins/assets/js/doublebox-bootstrap.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/ztree/js/jquery.ztree.all.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#add").click(function(){
+		
+		$("#select1 option:selected").appendTo("#select2");
+		
+		});
+		
+	$("#add_all").click(function(){
+		
+		$("#select1 option").appendTo("#select2");
+		
+		});
+		
+	$("#remove").click(function(){
+		
+		$("#select2 option:selected").appendTo("#select1");
+		
+		});	
+		
+	$("#remove_all").click(function(){
+		
+		$("#select2 option").appendTo("#select1");
+		
+		});	
+		
+		$("#select1").dblclick(function(){
+			
+		$("#select1 option:selected").appendTo("#select2");	
+			
+			});
+		
+				$("#select2").dblclick(function(){
+			
+		$("#select2 option:selected").appendTo("#select1");	
+			
+			});
+		
+
+	});
+      </script>
+<script>
+//传输文字并添加<a>标签
+	function seletc_communist(a){
+		var word = $(a).text();
+		var communist_no = $(a).val();
+		word = $.trim(word);
+		var has = false;
+			$(".selected_user li").each(function(){
+				if($(this).text() == word){
+				has=true;
+				$(this).remove();
+			}
+			});
+		if(!has){
+			var type = $("#type").val();
+			if(type){
+				$(".selected_user").html("<li value='"+communist_no+"' communist_name='"+word+"'>"+word+"<span class='shanchu'><i class='icon-close'></i></span></li>");
+			 	//$(a).prepend("<a class='selected_tip' href='javascript:void(0)'><i class='icon-check-circle'></i></a> ");
+			}else{
+				$(".selected_user").append ("<li value='"+communist_no+"' communist_name='"+word+"'>"+word+"<span class='shanchu'><i class='icon-close'></i></span></li>");
+				$(a).prepend("<a class='selected_tip' href='javascript:void(0)'><i class='icon-check-circle'></i></a> ");
+			}
+		
+		}else{
+			$(a).children("a").remove();
+		}
+		  change_communist();
+	}; 
+	function change_communist(){
+		var obj_lis = document.getElementById("selected_user").getElementsByTagName("li");
+		var s = '';
+		var name = '';
+		for(i=0;i<obj_lis.length;i++){
+	   			if(s == ""){
+	   				s=obj_lis[i].value;
+	   			}else{
+	   				s += ","+obj_lis[i].value;
+	   			}
+	   			
+	   			if(name == ""){
+	   				name=$(obj_lis[i]).attr('communist_name');
+	   				
+	   			}else{
+	   				name += ","+$(obj_lis[i]).attr('communist_name')
+	   			}
+	    	}
+		$("#communist_nos").val(s);
+		$("#communist_names").val(name);
+	}
+	$(document).ready(function(){
+	  //取消选中、remove <a>标签
+	  $(".selected_user").delegate("li", "click", function(){
+		$(this).remove();
+		var name = $(this).text();
+		//alert(name);
+			$("li#user_list").each(function(){
+			if($.trim($(this).text()) == name){
+			$(this).children("a").remove();
+			}
+		});
+		change_communist();
+	  });
+	  //全选、清空
+	  $(".allselect").click(function(){
+		  	$(".selected_user").children("li").remove();
+		  	$("li#user_list").children("a").remove();
+			$("li#user_list").each(function(){
+				var word = $(this).text();
+		  		var communist_no = $(this).val();
+		  		word = $.trim(word);
+			$(".selected_user").append ("<li value='"+communist_no+"' communist_name='"+word+"'>"+$.trim($(this).text())+"<span class='shanchu'><i class='icon-close'></i></span></li>");
+			$(this).prepend("<a class='selected_tip' href='javascript:void(0)'><i class='icon-check-circle'></i></a> ");
+			});
+			change_communist();
+	  });
+	  $(".allclear").click(function(){
+		  $(".selected_user").children("li").remove();
+		  $("li#user_list").children("a").remove();
+		  change_communist();
+	  });
+	  
+	});
+</script>
+<script type="text/javascript">
+	if("ontouchend" in document) document.write("<script src='__STATICS__/plugins/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="__STATICS__/plugins/assets/js/bootstrap.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/typeahead-bs2.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/jquery-ui-1.10.3.full.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/ace-elements.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/ace.min.js"></script>
+<script type="text/javascript">
+
+	// 选择联系人页面
+		/* 部门 */
+var setting = {
+	view: {
+	   showIcon: false
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	},
+	callback:{
+			onClick:zTreeOnClick
+		},
+	check: {
+		enable:false,
+		autoCheckTrigger:false,
+		chkboxType:{ "Y":"ps", "N":"ps" }
+	}
+};
+var zNodes = [
+			<volist name="party_list" id="list">
+				{ id:{$list.party_no}, pId:{$list.party_pno},name:"{$list.party_name}",open:true},
+			</volist>
+		];
+
+$(document).ready(function(){
+	var t = $("#tree");
+	t = $.fn.zTree.init(t, setting, zNodes);
+});
+function zTreeOnClick(event, treeId, treeNode) {
+	var names=[];
+	var namesone=[];
+	getChildren(names,treeNode);
+};
+//names是一个数组 返回结果数组     treeNode是选中的节点
+function getChildren(names,treeNode){
+	$('#inp').html("");
+	var id = treeNode.id;
+	$.get("{:U('Com/com_imail_receiveUser_data')}",{communist_party_no:id},function(data){
+		$.each(data,function(i,n){
+			$("#inp").append("<li id='user_list' onclick='seletc_communist(this)' value="+data[i]['communist_no']+" communist_name="+data[i]['communist_name']+">"+data[i]['communist_name']+"</li>");
+		});
+	});
+}
+/* 职务 */
+	var setting_role = {
+		view: {
+		   showIcon: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback:{
+				onClick:zTreeOnClick_role
+			},
+		check: {
+			enable:false,
+			autoCheckTrigger:false,
+			chkboxType:{ "Y":"ps", "N":"ps" }
+		}
+	};
+	var zNodes_role = [
+				<volist name="role_list" id="role">
+					{ id:{$role.post_no},name:"{$role.post_name}",open:true},
+				</volist>
+			];
+	
+	$(document).ready(function(){
+		var t = $("#userMeun");
+		t = $.fn.zTree.init(t, setting_role, zNodes_role);
+	});
+	function zTreeOnClick_role(event, treeId, treeNode) {
+		var names=[];
+		var namesone=[];
+		getChildren_role(names,treeNode);
+	};
+	//names是一个数组 返回结果数组     treeNode是选中的节点
+	function getChildren_role(names,treeNode){
+		 $('#inp').html("");
+		var id = treeNode.id;
+		$.get("{:U('Com/com_imail_receiveUser_data')}",{post_no:id},function(data){
+			$.each(data,function(j,y){
+				$("#inp").append("<li id='user_list' onclick='seletc_communist(this)' value="+data[j]['communist_no']+" communist_name="+data[j]['communist_name']+">"+data[j]['communist_name']+"</li>");
+			});
+		}); 
+	}
+	/* 分组 */
+	var setting_group = {
+		view: {
+		   showIcon: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback:{
+				onClick:zTreeOnClick_group
+			},
+		check: {
+			enable:false,
+			autoCheckTrigger:false,
+			chkboxType:{ "Y":"ps", "N":"ps" }
+		}
+	};
+	var zNodes_group = [
+				<volist name="group_list" id="group">
+					{ id:{$group.group_id},name:"{$group.group_name}",open:true},
+				</volist>
+			];
+	
+	$(document).ready(function(){
+		var t = $("#group");
+		t = $.fn.zTree.init(t, setting_group, zNodes_group);
+	});
+	function zTreeOnClick_group(event, treeId, treeNode) {
+		var names=[];
+		var namesone=[];
+		getChildren_group(names,treeNode);
+	};
+	//names是一个数组 返回结果数组     treeNode是选中的节点
+	function getChildren_group(names,treeNode){
+		$('#inp').html("");
+		var id = treeNode.id;
+		$.get("{:U('Com/com_imail_receiveUser_data')}",{group_id:id},function(data){
+			$.each(data,function(k,n){
+				$("#inp").append("<li id='user_list' onclick='seletc_communist(this)' value="+data[k]['communist_no']+" communist_name="+data[k]['communist_name']+">"+data[k]['communist_name']+"</li>");
+			});
+		}); 
+	}
+	
+</script>
+<script>
+	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	function submit_communist(){
+		var communist_names=$("#communist_names").val();
+		var communist_nos=$("#communist_nos").val();
+		var name_arr=communist_names.split(',');
+		var no_arr=communist_nos.split(',');
+		name_arr=first(name_arr);
+		no_arr=first(no_arr);
+		communist_names=name_arr.join(',');
+		communist_nos=no _arr.join(',');
+		this.parent.$("#{$name}_name").val(communist_names);
+		this.parent.$("#{$name}_no").val(communist_nos);
+		parent.layer.close(index);
+	}
+</script>
+<script>
+	function first(args){
+		var str1=[];
+	    for(i=0;i<args.length;i++){
+	        if(str1.indexOf(args[i])<0){
+	        	str1.push(args[i])
+	        }
+	    }
+	    return str1;
+	}
+</script>
+</body>
+</html>

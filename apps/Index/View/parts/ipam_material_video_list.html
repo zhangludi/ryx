@@ -1,0 +1,10 @@
+<foreach name="video_list" item="list">
+    <li>
+        <a class="see-details"  href="{:U('Edu/ipam_material_info', array('material_id' => $list['material_id']))}">
+            <div class="po-re index_content_video_mask">
+                <div class="po-ab">{$list.material_title}</div>
+                <img  style="width:390px;height:198px;" class="di-b" src="{$list.material_thumb}" alt="视频图片">
+            </div>
+        </a>
+    </li>
+</foreach>

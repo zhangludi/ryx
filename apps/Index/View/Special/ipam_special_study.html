@@ -1,0 +1,185 @@
+    <link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_special.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_study.css">
+<div  class="public_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div  class="public_content_left special_slide">
+          	{:W('Leftmenu/ipam_home_slide', array(3,$topic_id))}
+    </div>
+   
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right special_content">
+        <!--简介区开始-->
+        <div class="h-400 hr-s-ffcccd">
+            <div class="over-h w-all">
+                <img src="{$topic_list.topic_img}" class="di-b center-block " style="height:250px; width:100%" alt="广告图片">
+            </div>
+            <div class="p-15">
+                <p class="fsize-14 fcolor-11 font-bold mt-15">{$topic_list.topic_title}简介</p>
+                <p class="fsize-14 fcolor-33 mt-10 lh-26">{$topic_list.memo}</p>
+            </div>
+        </div>
+        <!--简介区开始-->
+        <!--视频课件开始-->
+        <div class=" w-all mt-25">
+            <div class="public_card">
+                <div class="public_card_title bg-img-card fcolor-white">
+                    <span class="fsize-18 pl-15">视频学习</span> /
+                    <a href="{:U('Edu/ipam_material_list',array('type'=>21))}" class="fcolor-white">更多</a>
+                </div>
+                <div class="video_content mt-15 w-610 h-340 po-re over-h pull-left">
+                    <a class='see-details'  href="{:U('Edu/ipam_material_info',array('material_id'=>$edu_material['material_id']))}">
+                        <img src="{$edu_material.material_thumb}" class=" w-all di-b center-ver" alt="{$edu_material.material_title}">
+                    </a>
+                </div>
+                <div class="public_content_right_r pull-right w-320 over-h">
+                    <!--课件排行开始-->
+                    <ul class=" mt-15">
+	                   	<volist name="edu_material_list" id="vo">
+	            		<li class="mb-10">
+	                        <a  class='see-details' href="{:U('Edu/ipam_material_info',array('material_id'=>$vo['material_id']))}">
+	                            <div class="di-ib w-100 h-60 over-h po-re pull-left mr-10">
+	                                <img src="{$vo.material_thumb}" class="di-ib w-all center-ver" alt="{$vo.material_title}">
+	                            </div>
+	                            <p class="di-i fsize-14 fcolor-33 line-overf">{$vo.material_title}</p>
+	                            <div class="clearfix"></div>
+	                        </a>
+	                    </li>
+	                   	</volist>
+                    </ul>
+                    <!--课件排行结束-->
+                </div>
+                <div class="clearfix"></div>
+                <!--视频列表开始-->
+                <div class="mt-30 mb-10">
+                    <img src="__STATICS__/apps/page_portal/images/study_online_icon_vedio.png" class="va-b mr-5" alt="">
+                    <span class="fsize-18 fcolor-33 mr-30">视频列表</span>
+                </div>
+                <div>
+                <volist name="edu_material_data" id="data">
+                    <div class="video_content_box boxsize-b w-225 h-200 pull-left mr-10 mb-10 hr-s-f1f1f1 over-h">
+                        <a  href="{:U('Edu/ipam_material_info',array('material_id'=>$data['material_id']))}" class="di-b see-details">
+                            <div class="h-150 w-all over-h po-re">
+                                <img src="{$data.material_thumb}" class="w-all di-b center-ver-hor" alt="{$data.material_title}">
+                            </div>
+                            <div>
+                                <p class="fsize-14 fcolor-33 p-5 line-overf">{$data.material_title}</p>
+                            </div>
+                        </a>
+                    </div>
+                </volist>
+                    <div class="clearfix"></div>
+                </div>
+                <!--视频列表结束-->
+            </div>
+        </div>
+        <!--视频课件结束-->
+        <!--学习课件开始-->
+        <div class="public_card">
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="fsize-18 pl-15">学习课件</span> /
+                <a href="{:U('Edu/ipam_material_list',array('type'=>11))}" class="fcolor-white">更多</a>
+            </div>
+            <ul class="news_content mt-15 pr-15 over-h">
+            <volist name="edu_material_article" id="j">
+            	<li class="public_word_lr_two mb-15 w-all">
+                    <a class='see-details' href="{:U('Edu/ipam_material_info',array('material_id'=>$j['material_id']))}">
+                        <div class="public_word_lr_two_img w-120">
+                            <img src="{$j.material_thumb}" style="width: 120px;" alt="{$j.material_title}">
+                        </div>
+                        <div class="public_word_lr_two_content">
+                            <div class="public_word_lr_two_content_title fsize-16 fcolor-11">{$j.material_title}</div>
+                            <div class="public_word_lr_two_content_date fsize-12 fcolor-b3b3b3">{$j.add_time}</div>
+                            <p class="fsize-14 fcolor-808080">{$j.material_desc}</p>
+                        </div>
+                    </a>
+                </li>
+            </volist>
+                
+               
+            </ul>
+            <!--两学一做实况开始-->
+            <!--<div class="mt-30 mb-10">-->
+                <!--<img src="../statics/apps/images/study_online_icon_vedio.png" class="va-b mr-5" alt="">-->
+                <!--<span class="fsize-18 fcolor-33 mr-30">两学一做实况</span>-->
+            <!--</div>-->
+            <div class="public_card_title bg-img-card fcolor-white mt-30 mb-15">
+                <span class="fsize-18 pl-15">{$topic_list.topic_title}实况</span> /
+                <a href="{:U('Edu/ipam_material_list',array('type'=>11))}" class="fcolor-white">更多</a>
+            </div>
+            <div class="special_carousel po-re">
+                <div class="bd w-900 over-h center-block">
+                    <ul>
+                    <volist name="material_article_list" id="k">
+                    	<li class="video_content_box boxsize-b w-220 h-180 ml-6 hr-s-f1f1f1 over-h">
+                            <a href="{:U('Edu/ipam_material_info',array('material_id'=>$k['material_id']))}" class="di-b see-details">
+                                <div class="h-130 w-all over-h po-re">
+                                    <img src="{$k.material_thumb}" class="w-all di-b center-ver-hor" alt="{$k.material_title}">
+                                </div>
+                                <p class="fsize-12 fcolor-33 m-10 line-overf">{$k.material_title}</p>
+                            </a>
+                        </li>
+                    </volist>
+                    </ul>
+                </div>
+                <a class="prev center-ver left-0 font-st fsize-30 font-bold" href="javascript:void(0)">&lt;</a>
+                <a class="next center-ver right-0 font-st fsize-30 font-bold" href="javascript:void(0)">&gt;</a>
+            </div>
+            <!--两学一做实况结束-->
+        </div>
+        <!--学习课件结束-->
+        <!--参加考试开始-->
+        <div class="mt-25">
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="pl-15 fsize-18">参加考试</span>　/　<a href="{:U('Index/Edu/ipam_exam_list')}" class="fcolor-white">更多</a>
+            </div>
+            <div class="mt-15">
+            	<volist name="exam_data" id="exam">
+
+                	<div <php>if($exam['is_no']==1){echo "class='video_content_box boxsize-b w-180 h-220 pull-left mb-10 hr-s-f1f1f1 over-h'";}else{echo "class='video_content_box boxsize-b w-180 h-220 pull-left mr-10 mb-10 hr-s-f1f1f1 over-h'";}</php>  onclick="subodiv({$exam.exam_id});"> 
+                        <div class="h-120 over-h po-re">
+                            <img src="{$exam.exam_thumb}" class="w-all di-b center-ver-hor" alt="考试中心图片">
+                        </div>
+                        <p class="center-text fsize-14 fcolor-33 m-5 article_over_one">{$exam.exam_title}</p>
+                        <p class="fsize-12 fcolor-99 lh-18 pl-5 ">时间：{$exam.exam_date}</p>
+                        <p class="fsize-12 fcolor-99 lh-18 pl-5 pb-5">时长：{$exam.exam_time}</p>
+                        <div id="odiv" class="video_content_box_button h-30 hr-st-ebebeb center-text lh-28 fcolor-ff9776 fsize-12">参加考试</div>
+                   	 </div>
+            	</volist>
+            </div>
+        </div>
+        <!--参加考试结束-->
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>
+
+<!--轮播插件js-->
+<script type="text/javascript" src="__STATICS__/plugins/SuperSlide/jquery.SuperSlide.js"></script>
+<!--自定义js-->
+<script>
+    $(".special_carousel").slide({"autoPlay" : true, "effect" : "leftLoop", "mainCell" : ".bd ul", "scroll": "1", "vis": "5"});
+</script>
+<script>
+function subodiv(id){
+
+    var flag = false;
+     $.ajax({
+         type: "POST",
+         url: "{:U('Index/check_login')}",
+                    
+         async:false,
+         success: function(data){
+             flag = data;
+         }
+     });
+     if(flag == true){
+         location.href = "{:U('Index/Index/login')}";
+         return false;
+     } else {
+         location.href="{:U('Edu/ipam_exam_attent')}?exam_id="+id;
+     }
+    
+}
+
+</script>

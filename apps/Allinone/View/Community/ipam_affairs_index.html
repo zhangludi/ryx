@@ -1,0 +1,130 @@
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三务公开</title>    
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/public/css/sp_public.css">
+    <link rel="stylesheet" href= "__STATICS__/apps/page_allinone/community/css/service_three.css">
+</head>
+<body class="bg">
+    <a onclick="window.history.go(-1);"><div class="back1"><img src="__STATICS__/apps/page_allinone/community/images/back1_bg.png"></div></a>
+   <header class="title clearfix" style="text-align: center;width: 1650px;" >
+    <img src="__STATICS__/apps/page_allinone/public/images/allinone_icon.png" alt="智慧党建自助服务终端" style="vertical-align:middle; width: 4.5%"> 
+    <span class="pl-10 pt-50" style="font-size: 48px; font-weight:600; color: #2b2b2b;vertical-align:middle;">{$web_name}一体机</span>
+    </header>
+<div class="hand_con clearfix">
+    <div class="clearfix style_tit">
+        <img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/notes_bg.png">
+        <div class="pull-left">三务公开</div>
+    </div>
+    <div class="sp_service_three_con clearfix">
+        <div class="pull-left mr-30">
+            <li class="ser_party clearfix">
+                <img src="__STATICS__/apps/page_allinone/community/images/dw.png">
+                <div class="">党务</div>
+            </li>
+            <li class="ser_government clearfix">
+                <img src="__STATICS__/apps/page_allinone/community/images/zw.png">
+                <div class="">政务</div>
+            </li>
+            <li class="ser_finance clearfix">
+                <img src="__STATICS__/apps/page_allinone/community/images/cw.png">
+                <div class="">财务</div>
+            </li>
+        </div>
+        <!--党务列表-->
+        <div class="pull-left ser_party_list">
+            <div class="clearfix ser_party_list_tit">
+                <div class="pull-left mr-20">
+                    <img src="__STATICS__/apps/page_allinone/community/images/service_three_tu1.png">
+                </div>
+                <div class="pull-left ser_party_list_tit1">党务数据公开栏</div>
+            </div>
+            <div class="ser_party_line"></div>
+            <div class="ser_party_con">
+                <volist name="affair_list1" id="list">
+                    <a class="nolink" href="{:U('Community/ipam_affairs_info',array('article_id'=>$list['article_id']))}">
+                        <li class="clearfix">
+                            <div class="pull-left mr-20 ml-20 mt-56m"><img src="{$list['article_thumb']}" width="179px" height="136px"></div>
+                            <div class="pull-left ser_dotted">
+                                <div class="ser_party_tit">{$list.article_title}</div>
+                                <div class="ser_party_titp">{$list.article_content}</div>
+                            </div>
+                        </li>
+                    </a>
+                </volist>
+            </div>
+        </div>
+        <!--政务列表-->
+        <div class="pull-left ser_government_list di-n">
+            <div class="clearfix ser_party_list_tit">
+                <div class="pull-left mr-20">
+                    <img src="__STATICS__/apps/page_allinone/community/images/service_three_tu1.png">
+                </div>
+                <div class="pull-left ser_party_list_tit1">政务数据公开栏</div>
+            </div>
+            <div class="ser_party_line"></div>
+            <div class="ser_party_con">
+                <volist name="affair_list2" id="list">
+                    <a class="nolink" href="{:U('Community/ipam_affairs_info',array('article_id'=>$list['article_id']))}">
+                        <li class="clearfix">
+                            <div class="pull-left mr-20 ml-20 mt-56m"><img src="{$list['article_thumb']}"></div>
+                            <div class="pull-left ser_dotted">
+                                <div class="ser_party_tit">{$list.article_title}</div>
+                                <div class="ser_party_titp">{$list.article_content}</div>
+                            </div>
+                        </li>
+                    </a>
+                </volist>
+            </div>
+        </div>
+        <!--财务列表-->
+        <div class="pull-left ser_finance_list di-n">
+            <div class="clearfix ser_party_list_tit">
+                <div class="pull-left mr-20">
+                    <img src="__STATICS__/apps/page_allinone/community/images/service_three_tu1.png">
+                </div>
+                <div class="pull-left ser_party_list_tit1">财务数据公开栏</div>
+            </div>
+            <div class="ser_party_line"></div>
+            <div class="ser_party_con">
+                <volist name="affair_list3" id="list">
+                    <a class="nolink" href="{:U('Community/ipam_affairs_info',array('article_id'=>$list['article_id']))}">
+                        <li class="clearfix">
+                            <div class="pull-left mr-20 ml-20 mt-56m"><img src="{$list['article_thumb']}"></div>
+                            <div class="pull-left ser_dotted">
+                                <div class="ser_party_tit">{$list.article_title}</div>
+                                <div class="ser_party_titp">{$list.article_content}</div>
+                            </div>
+                        </li>
+                    </a>
+                </volist>
+            </div>
+        </div>
+        
+    </div>
+    <!--底部-->
+        <!--<div class="clearfix live_footer">
+            <a href="../sp_service/sp_service.html">
+                <div class="pull-right back_bg">
+                    <img class="pull-left" src="images/back.png">
+                    <div class="pull-left">返回</div>
+                </div>
+            </a>
+            <div class="pull-right back_live">
+                <img class="pull-left" src="images/service_bus.png">
+                <div class="pull-left">社区服务</div>
+            </div>
+        </div>-->
+    
+</div>
+
+
+<script src="__STATICS__/apps/page_allinone/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_allinone/community/js/service_three.js"></script>
+</body>
+</html>
+
+
+

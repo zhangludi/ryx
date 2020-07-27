@@ -1,0 +1,90 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-body layui-form">
+					<form id="form_sample_2" action="{:U('bd_blogroll_do_save')}" method="post" class="form-horizontal">
+	                <input id="blogroll_id" name="blogroll_id" type="hidden" value="{$blogroll_row.blogroll_id}">
+					<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>导航名称：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								<input type="text" name="blogroll_name" placeholder="导航名称" lay-verify="required" autocomplete="off" class="layui-input" value="{$blogroll_row.blogroll_name}" lay-verify="required" />
+								</div>
+								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>链接地址：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+										<input type="text" name="blogroll_url" placeholder="链接地址"  autocomplete="off" class="layui-input" value="{$blogroll_row.blogroll_url}" lay-verify="required" />
+									</div>
+									<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>跳转本系统：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+	                                    <input type="radio" name="blogroll_type" value="2" title="是"<eq name="blogroll_row.blogroll_type" value="2">checked</eq> >
+	                                    <input type="radio" name="blogroll_type" value="1" title="否" <eq name="blogroll_row.blogroll_type" value="1">checked</eq> >
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<textarea name="" name="memo" maxlength="225" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$blogroll_row.memo}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<a type="reset" class="layui-btn layui-btn-primary mr-40" onclick="blogroll_colse()" >取消</a> 
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+    function blogroll_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use([ 'form', 'laydate','formSelects'], function() {
+	    var $ = layui.$
+        , admin = layui.admin
+        , element = layui.element
+        , layer = layui.layer
+        , laydate = layui.laydate
+        , form = layui.form
+        , formSelects = layui.formSelects;
+	    form.render(null, 'component-form-group');
+
+	    laydate.render({
+	        elem: '#LAY-component-form-group-date'
+	    });
+	});
+
+</script>
+</block>

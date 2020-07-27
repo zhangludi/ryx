@@ -1,0 +1,82 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  portlet-fit">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                        <div class="pull-right text-right pr-10 ">
+                            <a href="{:U('Public/dataBackup')}" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-70 mb-20">
+                                <i class="fa fa-download"></i>初始化
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="table" class="table-scrollable">
+                            <table id="client_table" class="table table-hover"
+                                   data-toggle="table"
+                                   data-url=""
+                                   data-height=""
+                                   data-search="false"
+                                   data-show-refresh="false" data-show-toggle="false"
+                                   data-show-columns="false" data-show-export="false"
+                                   data-detail-view="false" data-detail-formatter="detailFormatter"
+                                   data-minimum-count-columns="2" data-page-size="25"
+                                   data-show-pagination-switch="false" data-pagination="true"
+                                   data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]">
+                                <thead>
+                                <tr>
+                                    <th data-field="role_id" data-align="center" data-sortable="true">备份名称</th>
+                                    <th data-field="role_name" data-align="center" data-sortable="true">压缩</th>
+                                    <th data-field="role_type" data-align="center" data-sortable="true">数据大小</th>
+                                    <th data-field="add_communist" data-align="center" data-sortable="true">备份时间</th>
+                                    <th data-field="operate" data-align="center" data-sortable="true">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <foreach name="data" item="vo">
+                                        <tr>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.compress}</td>
+                                            <td>{$vo.size|format_bytess}</td>
+                                            <td>{$vo.time|date='Y-m-d-H:i:s',###}</td>
+                                            <td>
+                                                <a type="button" href="{:U('System/Public/dataRestore')}?time={$vo.time}" class="btn btn-sm blue bor-ra-5"><i class="fa fa-exchange"></i> 还 原</a>
+                                                <a type="button" href="{:U('System/Public/backupDel')}?time={$vo.time}" class="btn btn-sm blue bor-ra-5"><i class="fa fa-trash-o"></i> 删 除</a>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        function role_edit(role_id) {
+             layer.open({
+                type: 2,
+                //offset: window.parent.document.body.scrollTop+10+'px',
+                title: '新增角色信息',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area: ['800px', '380px'],
+                content: "{:U('System/Sysauth/sys_role_edit')}?role_id="+role_id
+            });
+        }
+    </script>
+</block>

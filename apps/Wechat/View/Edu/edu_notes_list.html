@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name = "format-detection" content = "telephone=no">
+<title>学习笔记</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_notes.css" />
+<style>
+#list{
+	display: block;
+}
+.w-4-3em{
+	width: 2.375rem;
+}
+.h-4-3em{
+	height: 2.375rem;
+}
+</style>
+</head>
+<body class="bg-color-f9">
+<div class="po-fix bottom-90em right-20em z-index-mask" onclick="edu_notes_edit()">
+	<img class="w-4-3em h-4-3em" src="__STATICS__/apps/page_wechat/public/images/bianxie.png">
+</div>
+<section class="po-fix top-0em left-0em z-index-max h-70em bg-color-whiter w-100b">
+	<div class="clearfix">
+		<a class="pull-left mt-30em pl-20em" href="javascript:history.back(-1)">
+			<img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back_info.png" alt="返回" />
+		</a>
+		<div class="edu_notes_option pt-15em">
+			<select id="notes_type" onchange="edu_change()" class="w-100em f-w color-21">
+				<option value ="">全部笔记</option>
+				<option value ="1">学习笔记</option>
+				<option value ="2">会议笔记</option>
+				<option value ="3">日常笔记</option>
+				<option value ="4">其他</option>	
+			</select>
+		</div>
+		<div class="this_month pull-right f-12em color-9e mt-30em pr-25em">
+		本月
+		</div>
+	</div>
+	<!-- 日历组件 -->
+	<div class="h-100b w-100b over-h bg-color-whiter bb-1-de">
+		<div id="test2" class="w-100b h-100b mt-10em ml-8em"></div>
+		
+	</div>
+</section>
+	<!-- 内容 -->
+	<!--<div id="testView" class="h-100b"></div>	-->
+<input type="hidden" id="note_time" value="{$note_time}">
+<input type="hidden" id="communist_no" value="{$communist_no}">
+<section class="po-ab top-120em w-100b pb-12em" id="list">
+<!-- 文章样式 -->
+<empty name="notes_list">
+	<h1 class="no_more f-12em color-66 pb-10em w-100b text-center">今天没有学习笔记哦~</h1>
+<else/>
+<volist name="notes_list" id="list">
+	<if condition="$list['material'] eq null">
+	<div class="edu_notes_con mt-12em p-12em clearfix w-100b" >
+		<div class="pull-left mr-8em">
+			<img class="w-32em h-32em" src="__STATICS__/apps/page_wechat/public/images/edu_notes_daily.png" />
+		</div>
+		<a href="{:U('Edu/edu_notes_info',array('notes_id'=>$list['notes_id']))}">
+		<div class="pull-left w-85b over-h">
+			<div class="color-21 f-14em f-w">{$list.notes_title}</div>
+			<div class="f-12em color-a3">{$list.add_time}</div>
+			<div class="icon_regular color-21 f-14em mt-15em">{$list.notes_content}</div>
+		</div>
+		</a>	    			
+	</div>
+	<elseif condition="$list['type_video'] eq 'yes'"/>
+	<div class="edu_notes_con mt-12em mb-12em p-12em clearfix w-100b" >
+		<div class="pull-left mr-8em">
+			<img class="w-32em h-32em" src="__STATICS__/apps/page_wechat/public/images/edu_notes_shipin.png"  />
+		</div>
+		<div class="pull-left w-85b over-h">
+			<a href="{:U('Edu/edu_notes_info',array('notes_id'=>$list['notes_id']))}">
+			<div class="color-21 f-14em f-w">{$list.notes_title}</div>
+			<div class="f-12em color-a3">{$list.add_time}</div>
+			<div class="icon_regular color-21 f-14em mt-15em">{$list.notes_content}</div>
+			</a>
+			<div class="border-3em-de border-radius-25em clearfix mt-15em p-5em">
+				<a href="{:U('Edu/edu_material_videoInfo',array('material_id'=>$list['material_id']))}">
+				<img class="w-281em h-178em over-h m-a" src='{$list.material.material_thumb}' alt=""/>
+				<div class="icon_regular f-16em color-12 f-w">{$list.material.material_title}</div>
+				</a>	
+			</div>
+		</div>
+	</div>
+	<elseif condition="$list['type_video'] eq 'no'"/>
+	<div class="edu_notes_con mt-12em p-12em clearfix w-100b" >
+		<div class="pull-left mr-8em">
+			<img class="w-32em h-32em" src="__STATICS__/apps/page_wechat/public/images/edu_notes_tu1.png" />
+		</div>
+		<div class="pull-left w-85b over-h">
+			<a href="{:U('Edu/edu_notes_info',array('notes_id'=>$list['notes_id']))}">
+			<div class="color-21 f-14em f-w">{$list.notes_title}</div>
+			<div class="f-12em color-a3">{$list.add_time}</div>
+			<div class="icon_regular color-21 f-14em mt-15em">{$list.notes_content}</div>
+			</a>
+			<a href="U('Edu/edu_material_info',array('material_id'=>$list['material_id']))">
+			<div class="border-3em-de border-radius-25em clearfix mt-15em p-8em">
+			    <div class="pull-left w-70b" style="width: 69%;">
+			    	<div class="color-12 f-16em f-w mr-10em">{$list.material.material_title}</div>
+			    	<div class="f-11em color-a4 mt-9em">{$list.topic_type}</div>		
+			    </div>
+			    <div class="pull-left">
+			    	<img class="w-80em h-58em over-h" src='{$list.material.material_thumb}' alt="" />			
+			    </div>		    			
+			</div>
+			</a>
+		</div> 			
+	</div>
+	</if>
+</volist>
+</empty>
+</section>
+<section class="po-ab top-120em w-100b" id="list1">
+
+</section>
+<!--整月日历-->
+<section>
+	<div class="this_month_mask di-n po-fix w-100b h-100b top-0em left-0em bg-color-whiter z-index-mask">
+	<div class="this_month_back po-ab top-35em f-14em left-20em color-66 z-index-max">
+		返回
+	</div>
+	<div id="test3" class="w-100b h-100b mt-20em"></div>
+	</div>		
+</section>
+
+
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_wechat/edu/laydate/laydate.js"></script> 
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/edu/js/edu_notes.js"></script>
+<!-- end -->
+<script type="text/javascript">
+function edu_notes_edit(){
+	location.href="{:U('Wechat/Edu/edu_notes_edit')}";
+}
+
+laydate.render({
+ 	elem: '#test2'
+ 	,lang: 'cn'
+  	,position: 'static'
+ 	,min: -6 //7天前
+  	,max: 0 //7天后
+    ,type: 'date' //默认，可不填
+    ,format: 'd日' //日期组合方式 可任意组合
+	,isInitValue: true //是否允许填充初始值，默认为 true
+	,trigger: 'click' //如果绑定的元素非输入框，则默认事件为：click 采用click弹出
+	,show: true //直接显示
+  	,showBottom: false//是否显示底部栏 	 
+ 	 //控件初始打开的回调
+ 	,ready: function(date){
+ 	   $(".layui-laydate-header").addClass('di-n');//隐藏header
+ 	  	//隐藏5天之外
+ 	  	if($(".layui-laydate-content tr td").hasClass('laydate-disabled')){
+			$('.laydate-disabled').addClass('di-n');					
+		}
+ 	}
+ 	//日期时间被切换后的回调
+	,change: function(value, date, endDate){
+		var this_data=date.year+'-'+date.month+'-'+date.date;
+		$("#note_time").val(this_data);
+	 	$("#test3 #layui-laydate2").remove();
+	 	//监听日期被切换
+	 	lay('#testView').html(value);//切换日期时显示的值			
+  		if($(".layui-laydate-content tr td").hasClass('laydate-disabled')){
+			$('.laydate-disabled').addClass('di-n');//隐藏5天之外
+		}
+		var change_type=$("#notes_type").val();
+		var communist_no = $('#communist_no').val();
+        $.ajax({ 
+            type : "POST", //提交方式 
+            url : "{:U('Wechat/Edu/edu_notes_list_data')}",//路径 
+            data : { "note_time":this_data,"communist_no":communist_no,"notes_type":change_type},//数据，这里使用的是Json格式进行传输 
+            datatype: "json",
+            success : function(data){
+                $('#list').html('');
+                if(data){
+                    $('#list').html(data);
+                }else{
+                    $('#list').html("<h1 class='no_more f-12em color-66 pb-10em w-100b text-center'>今天没有学习笔记哦~</h1>");
+                }
+            }
+        });
+		//getEduNotesList();//获取学习笔记
+	}
+});
+var this_time="";
+var first_day = getCurrentMonthFirst();
+var last_day = getCurrentMonthLast();
+laydate.render({
+ 	elem: '#test3'
+ 	,lang: 'cn'
+  	,position: 'static'
+    ,type: 'date' //默认，可不填
+    ,format: 'M月d日' //日期组合方式 可任意组合
+    ,min: first_day
+	,max: last_day
+	,show: true //直接显示
+	,position: 'static'
+  	,showBottom: false//是否显示底部栏 	
+ 	 //一、控件初始打开的回调
+ 	,ready: function(date){ 	  
+ 	  	lay('#testView').html(1);//切换日期时显示的值	
+ 	 
+ 	}
+ 	//二、日期时间被切换后的回调
+	,change: function(value, date, endDate){
+		$(".this_month_mask").fadeOut(200);
+	    $("#test2 #layui-laydate1").remove();
+	  	var this_time1=date.date+'日'; 
+	  	var this_time2=date.year+'-'+date.month+'-'+date.date;
+	  	$("#note_time").val(this_time2);
+  		var this_time3 = getBeforeDate(this_time2, -6);
+
+	  	var change_type=$("#notes_type").val();
+		var communist_no = $('#communist_no').val();
+        $.ajax({ 
+            type : "POST", //提交方式 
+            url : "{:U('Wechat/Edu/edu_notes_list_data')}",//路径 
+            data : { "note_time":this_time2,"communist_no":communist_no,"notes_type":change_type},//数据，这里使用的是Json格式进行传输 
+            datatype: "json",
+            success : function(data){
+                $('#list').html('');
+                if(data){
+                    $('#list').html(data);
+                }else{
+                    $('#list').html("<h1 class='no_more f-12em color-66 pb-10em w-100b text-center'>今天没有学习笔记哦~</h1>");
+                }
+            }
+        });
+		//在#test3中初始化#test2
+	  	laydate.render({
+		 	elem: '#test2'
+		 	,lang: 'cn'
+		  	,position: 'static'
+		 	,min: this_time3 
+		  	,max: this_time2
+		    ,type: 'date' //默认，可不填
+		    ,format: 'd日' //日期组合方式 可任意组合
+		     //传入Date对象给初始值
+			,value: this_time1 //参数即为：2018-08-20 20:08:08 的时间戳
+			,isInitValue: true //是否允许填充初始值，默认为 true
+			,trigger: 'click' //如果绑定的元素非输入框，则默认事件为：click 采用click弹出
+			,show: true //直接显示
+		  	,showBottom: false//是否显示底部栏
+		 	 //一、控件初始打开的回调
+		 	,ready: function(date){
+		 	 // $(".laydate-day-prev").addClass("laydate-disabled");
+		      //$(".laydate-day-next").addClass("laydate-disabled");
+		 		lay('#testView').html(1);//切换日期时显示的值	
+		 		$("#test2 .layui-laydate-header").addClass('di-n');//隐藏header
+		 	  	//隐藏5天之外
+		 	  	if($(".layui-laydate-content tr td").hasClass('laydate-disabled')){
+					$('.laydate-disabled').addClass('di-n');
+				}
+				var change_type=$("#notes_type").val();
+				//getEduNotesList();//获取学习笔记
+		 	}
+		 	//二、日期时间被切换后的回调
+			,change: function(value, date, endDate){
+				var this_data = date.year+'-'+date.month+'-'+date.date;
+				$("#note_time").val(this_data);
+				$("#test3 #layui-laydate2").remove();
+				//监听日期被切换
+				lay('#testView').html(value);//切换日期时显示的值		
+				$("#test2 .layui-laydate-header").addClass('di-n');//隐藏header 	
+	 	  		if($(".layui-laydate-content tr td").hasClass('laydate-disabled')){
+					$('.laydate-disabled').addClass('di-n');//隐藏5天之外
+				}
+						
+				var change_type=$("#notes_type").val();
+				var communist_no = $('#communist_no').val();
+		        $.ajax({ 
+		            type : "POST", //提交方式 
+		            url : "{:U('Wechat/Edu/edu_notes_list_data')}",//路径 
+		            data : { "note_time":this_data,"communist_no":communist_no,"notes_type":change_type},//数据，这里使用的是Json格式进行传输 
+		            datatype: "json",
+		            success : function(data){
+		                $('#list').html('');
+		                if(data){
+		                    $('#list').html(data);
+		                }else{
+		                    $('#list').html("<h1 class='no_more f-12em color-66 pb-10em w-100b text-center'>今天没有学习笔记哦~</h1>");
+		                }
+		            }
+		        });
+				//getEduNotesList();//获取学习笔记
+			}
+		});
+	}
+});
+
+	
+$('#tabBox4').find('li').click(function(){
+	$('#list').html('');
+	$('#tabBox4').find('li').removeClass('tabBox2-active').find('.active').hide();
+	$(this).addClass('tabBox2-active').find('.active').show();
+	is_num = $(this).attr('num');
+	if(is_num==1){
+		//getEduMaterialVideo();
+	}else if(is_num==2){
+		//getEduMaterial();
+	}else if(is_num==3){
+		//getEduExamList();
+	}else{
+		//getEduNotesList();
+	}
+})
+
+//日历遮罩--------------------------------------------------------------
+$(".this_month").click(function(){
+	$(".this_month_mask").fadeIn(200);
+	$(".this_month_mask").removeClass("di-n");
+	
+	
+});
+$(".this_month_back").click(function(){
+	$(".this_month_mask").fadeOut(200);
+});
+//日历遮罩 日历详情页面---------------------------初始化#test3-----------------------------------
+function edu_change(){
+	var change_type = $("#notes_type").val();
+	var communist_no = $('#communist_no').val();
+	var note_time = $("#note_time").val();
+    $.ajax({ 
+        type : "POST", //提交方式 
+        url : "{:U('Wechat/Edu/edu_notes_list_data')}",//路径 
+        data : { "note_time":note_time,"communist_no":communist_no,"notes_type":change_type},//数据，这里使用的是Json格式进行传输 
+        datatype: "json",
+        success : function(data){
+            $('#list').html('');
+            if(data){
+                $('#list').html(data);
+            }else{
+                $('#list').html("<h1 class='no_more f-12em color-66 pb-10em w-100b text-center'>今天没有学习笔记哦~</h1>");
+            }
+        }
+    });
+}
+</script>
+</body>
+</html>
+

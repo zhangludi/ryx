@@ -1,0 +1,76 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+		<div class="page-content">
+			<div class="portlet-body form">
+				<form action="{:U('oa_approval_communist_do_save')}"  class="form-horizontal" method="post">
+					<!-- hidden -->
+					<input type="hidden" name="log_id" value="{$log_id}">
+					<input type="hidden" name="first_node" value="{$first_node}">
+					<input type="hidden" name="post_no" value="{$post_no}">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="col-xs-2 control-label">岗位：
+							</label>
+							<div class="col-xs-9">
+								<select id="communist_post" lay-search class="form-control select2-multiple"  name="communist_post"  multiple>
+									<optgroup label="请选择审批人员岗位">
+										<option value="">--请选择人员岗位--</option>
+										<php>echo getPartydutySelect($post_no);</php>
+									</optgroup>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">人员：
+							</label>
+							<div class="col-xs-9">
+								<select required id="node_staff" class="form-control select2-multiple" placeholder="请选择审批人员" multiple lay-search>
+									<optgroup label="请选择审批人员">
+									<volist name="communist_list" id="communist">
+										<option <eq name='node_staff' value='$communist[communist_no]'>selected</eq> value="{$communist.communist_no}">{$communist.communist_name}</option>
+									</volist>
+									</optgroup>
+								</select>
+								<input type="hidden" id="range1" name="node_staff"  class="form-control" placeholder="请选择审批人员" value=""  required="">
+							</div>
+						</div>
+					</div>
+					<div class="form-actions text-right" style="background:white;border:0;margin-top:-30px">
+						<!-- <div class="row"> -->
+						<div class="col-xs-offset-3 col-xs-9">
+							<button type="submit" onclick="select_val()" class="btn green">提交</button>
+							<button type="button" class="btn default" id="close">取消</button>
+						</div>
+						<!-- </div> -->
+					</div>
+				</form>
+			</div>
+		</div>
+	</block>
+	<block name="js">
+		<script type="text/javascript">
+		var index = parent.layer.getFrameIndex(window.name);
+		$(function(){
+			parent.layer.iframeAuto(index);//自适应弹窗高度
+		})
+			$('#close').click(function() {
+				parent.layer.close(index);
+			});
+		$("select").on("select2:open", function (e) {
+			parent.layer.iframeAuto(index);
+		});
+		</script>
+		<script type="text/javascript" >
+		  $("#form_validation").validate({
+     	    	
+     	    });
+		</script>
+		<script>
+			function select_val()
+			{
+				var s=$("#node_staff").val();
+				$("#range1").val(s);
+			}
+		</script>
+	</block>

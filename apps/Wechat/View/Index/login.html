@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_v2.1.css"/>
+<link rel="stylesheet" type="text/css" id="skin" href="__STATICS__/apps/page_wechat/public/css/skin/skin-red.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.picker.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.dtpicker.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.poppicker.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/mine_personal.css"/>
+<style>
+.po-fix{
+    bottom:15px;
+}
+.bg-color-white{background:transparent !important}
+</style>
+<body class="login_bg">
+
+<form id="form_table" action="{:U('Index/check_login')}" method="post">
+	<div id="party_login" class="mt-50em pl-20em pr-20em">
+		<div class="color-fff f-w f-40em" style="padding-bottom: 1rem;font-size: 1rem !important;" ><php>echo getConfig('web_name')</php></div>
+		<div id='login-form' class="">
+			<div class="color-fff f-w f-40em">登录</div>
+			<div class="po-re w-80b top-145em left-10em h-44em lh-44em">					
+				<fieldset class="fieldset">
+					<legend class="color-9e pl-1em pr-1em">用户名</legend>
+					<input class="po-ab top-23em b-0 w-100b p-0 ml-20em color-21 f-14em f-w" name='username' id='username' type="text" onfocus="add(this);"onblur="rem(this)" placeholder="请输入用户名">
+				</fieldset>
+			</div>
+			<div class="po-re top-178em w-80b h-40em lh-40em left-10em">		
+				<fieldset class="fieldset">
+					<legend class="color-9e pl-1em pr-1em">密码</legend>
+					<i class="iconfont color-66 show po-ab right-5 z-index-max top-25em f-20em h-40em lh-40em p-0">&#xe8ad;</i>
+					<i class="iconfont color-66 hide po-ab right-5 z-index-max top-25em f-20em h-40em lh-40em p-0">&#xe8ac;</i>			
+					<input type="password" class="po-ab top-25em b-0 w-100b p-0 ml-20em color-21 f-14em f-w" name='password' id='password' maxlength="18" type="password" onfocus="add(this);"onblur="rem(this)" placeholder="请输入密码">
+				</fieldset>
+			</div> 
+		</div>
+		<div class="mt-210em" id="buttonAll">		
+			<div class="grad lh-46em h-42em bor-ra-3 text-align color-white f-16em w-150em m-a" onclick="login()">
+				登录
+			</div>
+			<div class="mt-10em bg-color-whiter b-1-ff3032 lh-46em h-42em bor-ra-3 text-align color-ff3032 f-16em w-150em m-a" onclick="openRegistered()">
+				注册
+			</div>
+			
+			
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/mui/mui.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_H5APPFrame_public.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/mui/mui.picker.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/mui/mui.poppicker.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript">
+function add(obj){
+	$(obj).addClass("bg-color-white");
+}
+function rem(obj){
+	$(obj).removeClass("bg-color-white");
+}
+function login(){
+	if($("#username").val()){
+		if($('#password').val()){
+			$('#form_table').submit();
+		}else(alert('请填写密码'))
+	}else{alert('请填写用户名')}
+	
+}
+function openRegistered(){
+	location.href="{:U('Index/register')}";
+}
+$('.show').click(function(){
+	$('.show').hide();
+	$('.hide').show();
+	$('#password').attr('type','text');
+})
+$('.hide').click(function(){
+	$('.show').show();
+	$('.hide').hide();
+	$('#password').attr('type','password');
+})
+</script>
+</body>
+</html>

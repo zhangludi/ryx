@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_study.css">
+<div>
+    <div class="public_card_title">
+        <span class="fsize-16">热点问题</span>
+        <!--<a href="javascript:;">&nbsp;更多&nbsp;>></a>-->
+    </div>
+    <ol class="public_card_content news_newsranking">
+        <foreach name="article_list" item="list">
+        <li>
+            <a href="{:U('News/ipam_news_detail', array('article_id' => $list['article_id']))}">
+                {$list.article_title}
+            </a>
+        </li>
+        </foreach>
+    </ol>
+</div>

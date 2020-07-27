@@ -1,0 +1,125 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+        <div class="layui-card layui-form">
+          <div class="layui-card-header">志愿者活动详情</div>
+          <div class="layui-card-body">
+              <div class="layui-row">
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动名称：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$activity.activity_title}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动时间：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$activity.activity_starttime}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>组织者：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$activity.activity_organizer}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动地址：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$activity.activity_address}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动起止时间：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$activity.activity_starttime}--{$activity.activity_endtime}</span></div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10" ">
+                    <div class="layui-row" >
+                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动简介：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35" style="margin-bottom: 5rem;"><span>{$activity.activity_description}</span></div>
+                    </div>
+                </div>
+            </div>
+         </div>
+      </div>
+    </div>
+	<neq name="communist" value="">
+	<div class="layui-col-md12">
+        <div class="layui-card layui-form">
+          <div class="layui-card-header">申请人员</div>
+          <div class="layui-card-body">
+              <div class="layui-row">
+                <table class="table table-bordered table-striped table-condensed flip-content">
+					<thead class="flip-content">
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>组织</th>
+						<th>时间</th>
+						<th>申请说明</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<volist name="communist" id="communist">
+						<tr>
+							<td>{$i}</td>
+							<td>{$communist.communist_name}</td>
+							<td class="numeric">{$communist.party_name}</td>
+							<td class="numeric">{$communist.add_time}</td>
+							<td class="numeric">{$communist.apply_desc}</td>
+							<td class="numeric">{$communist.audit_status}</td>
+							<td class="numeric">
+								<eq name="communist.status" value="1">
+									<a class='layui-btn  layui-btn-xs layui-btn-f60' onclick="exam_add({$communist.apply_id},{$activity.activity_id})" target='_self'>
+										<i class='fa fa-info'></i>
+										审核
+									</a>
+								</eq>
+								<a class='layui-btn layui-btn-del layui-btn-xs' onclick="if(!confirm(' 确认删除操作？')){return false;}" href="{:U('life_volunteer_activity_apply_del',array('apply_id'=>$communist['apply_id'],'activity_id'=>$activity['activity_id']))}" target='_self'>删除</a>
+							</td>
+						</tr>
+					</volist>
+					</tbody>
+				</table>  
+                    
+            </div>
+         </div>
+      </div>
+    </div>
+	</neq>
+	<div class="layui-footer" style="text-align: right">
+        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+	</div>
+  </div>
+</div>
+</block>
+<block name="js">
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    function exam_add(apply_id,activity_id){
+    	var url = "{:U('Lifevolunteer/life_volunteer_activity_audit')}?apply_id="+apply_id+"&activity_id="+activity_id;
+		layer.open({
+				type: 2,
+				title: '人员审核',
+				maxmin: false,
+				offset: window.parent.document.body.scrollTop+20+'px',
+				shadeClose: true, //点击遮罩关闭层
+				area : ['800px' , '500px'],
+				content: url,
+				success:function(){
+                	layerAuto();
+                }//iframe的url
+			}); 
+	}
+ </script>
+</block>

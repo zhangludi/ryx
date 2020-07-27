@@ -1,0 +1,55 @@
+
+<link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_community_public.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_guide/sp_guide_notice.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_guide/sp_guide_serve.css">
+<style>
+.w-80{
+	width:86px;
+}
+.h-80{
+	height:86px;
+}
+</style>
+<!--通知公告详情开始-->
+<div class="guide_notice_body">
+    <div class="notice_body_center ">
+        <div class="mt-50 di-ib">
+            <div class="pull-left mt-5"><img class="w-15" src="__STATICS__/apps/page_allinone/images/guide-icon-notice.png" alt=""></div>
+            <div class="color pull-left ml-15 fsize-32">志愿者详情</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="notice_info mt-30">
+            <div class="pt-65 pl-50 pr-50">
+                <p class="notice_info_title">{$volunteer_info.activity_title}</p>
+                <div class="fsize-16 color-82 w-1145 center-block">
+                    <span class="pull-left">时间：{$volunteer_info.add_time}</span>
+                    <span class="pull-right">发布人：{$volunteer_info.add_staff_name}</span>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="fsize-22 color-4d mt-60">
+                    {$volunteer_info.activity_description}
+                </div>
+            </div>
+            <neq name="count" value="">
+	            <div class="pt-65 pl-50 pr-50">
+		            <p class="article_title">志愿者列表</p>
+			        <ul class="volunteer_list">
+			        	<volist name="apply_data" id="apply">
+			             <li class="volunteer_item">
+			                 <img src="{$apply.communist_avatar}" class="people_photo w-80 h-80" alt="人员头像">
+			                 <p class="people_name">{$apply.communist_name}</p>
+			             </li>
+			        	</volist> 
+			        </ul>
+			    </div>
+            </neq>
+        </div>
+    </div>
+</div>
+<!--通知公告详情结束-->
+
+<script src="__STATICS__/public/js/jquery.min.js"></script>
+<!--公共js-->
+<script src="__STATICS__/apps/page_allinone/js/public/sp_community_public.js"></script>
+<!--本页面js-->
+<script src="__STATICS__/apps/page_allinone/js/sp_guide/sp_guide_notice.js"></script>

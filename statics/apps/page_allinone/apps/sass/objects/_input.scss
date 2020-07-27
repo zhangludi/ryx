@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+$height: 50px;
+
+@mixin input{
+  height: $height;
+  padding-left: 16px;
+  font-size: 26px;
+
+  &:hover, &:focus{
+    //border:solid 2px #ff582d;
+    border-style: solid;
+    border-color: #ff582d;
+  }
+  &:focus{
+    outline: none;
+  }
+}
+
+.input{
+  @include input;
+}

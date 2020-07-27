@@ -1,0 +1,127 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+    <block name="body">
+        <!-- 主要内容开始 -->
+         <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEADER-->
+                    <!-- END面包屑 -->
+					<div class="row p5-page-title">
+                        <div class="col-xs-12">
+                            <i class="iconfont font-blue">&#xe67a;</i>
+                            <span class="font-blue"><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                        </div>
+                    </div>
+                    <!-- 页面标题结束-->
+					 <!-- 开始-->
+                    <!-- 左侧开始 -->
+                    <div class="row mb-30">
+                        <div class="col-md-4">
+                            <div class="inbox-sidebar">
+                                <!-- 小标题 -->
+                                <div class="p5-table-title">
+								 <switch name="industry" >
+									<case value="pam">
+                                    <h4><i class="iconfont">&#xe62a;</i>党支部</h4>
+									</case>
+										<default />
+										 <h4><i class="iconfont">&#xe62a;</i>部门列表</h4>
+									</switch>
+                                    <button  id="btns" class="btn btn-sm btn-outline blue bor-ra-2"><i class="iconfont">&#xe674;</i>编辑
+                                    </button><a href="{:U('Ccpcommunist/ccp_party_index')}" id="link"></a>
+                                </div>
+                                <!-- 小标题结束 -->
+                                <div class="tree-sidebar">
+                                   <ul id="treeDemo" class="ztree"></ul>
+                                </div> 
+                            </div>
+                        </div>
+                        <!-- 左侧结束 -->
+						<!-- 右侧开始 -->
+                        <div class="col-md-8">
+                        	<div class="inbox-sidebar">
+                                <!-- 小标题 -->
+                                <div class="p5-table-title">
+                                    <h4><i class="iconfont">&#xe650;</i>人员列表</h4>
+                                   <!-- <button class="btn btn-sm btn-outline blue bor-ra-2"><i class="iconfont">&#xe674;</i>
+                                    添加
+                                    </button>-->
+                                </div>
+                                <!-- 小标题结束 -->
+                               <!-- 表格开始 -->
+                                <table class="table table-condensed table-striped" 
+								data-url="{:U('Report/report_oaworkplan_perf_index_data')}?party_id={$party_id}"
+                                data-toggle="table" 
+                                data-height="450"
+                                data-search="true"
+                                data-show-refresh="true" data-show-toggle="true"
+                                data-show-columns="true" data-show-export="true"
+                                data-detail-view="false" data-detail-formatter="detailFormatter"
+                                data-minimum-count-columns="2"
+                                data-show-pagination-switch="true" data-pagination="true"
+                                data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]"
+								data-page-size="25" 
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th data-field="communist_no" data-align="center" data-sortable="true">人员编号</th>
+                                            <th data-field="communist_name" data-align="center" data-sortable="true">名称</th>
+                                            <th data-field="communist_tel" data-align="center" data-sortable="true">电话</th>
+                                            <th data-field="score" data-align="center" data-sortable="true">绩效分数</th>
+                                            <th data-field="party_name" data-align="center" data-sortable="true">部门</th>
+                                            <th data-field="post_name" data-align="center" data-sortable="true">职位</th>
+                                            <th data-field="operate" data-align="center" data-sortable="true">操作</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <!-- 表格结束 -->
+                                <div class="clearfix mt-50"></div>
+                            </div>
+                        </div>
+                        <!-- 右侧结束 -->
+                    <!-- 整个部分结束 -->
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+    </block>  
+    <block name="js">
+        <script >
+            var zTreeObj;
+               // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+               var setting = {
+					data: {
+						simpleData: {
+							enable: true
+						}
+					},
+					callback: {
+						onClick: onClick//绑定回调函数
+					},
+			   };
+               // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+               var zNodes = [
+						<volist name="party_list" id="list">
+						
+							{ id:"{$list.party_no}",pId:{$list.party_pno},name:"{$list.party_no}"+"-"+"{$list.party_name}",open:true},
+						</volist>
+					];
+               $(document).ready(function(){
+                  zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+               });
+			   function onClick(e, treeId, treeNode) {
+					var party_id = treeNode.id;
+					window.open("{:U('Report/report_oaworkplan_perf_index')}?party_id="+party_id/,'_self');
+				}
+        </script>
+		<script>
+			document.getElementById("btns").onclick=function(){
+    　　		document.getElementById("link").click();
+            }
+		</script>
+    </block>

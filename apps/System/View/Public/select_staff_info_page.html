@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>带弹窗tab标签页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!--layui样式文件-->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+    <!--森普公共样式开始-->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_public.css">
+    <!--森普V4框架公共样式-->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_admin_public.css" media="all">
+    <!--森普V4框架蓝色版-->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_admin_theme_red.css">
+    <!--ztree样式开始-->
+    <link rel="stylesheet" type="text/css" href="__STATICS__/plugins/ztree/css/zTreeStyle/zTreeStyle.css">
+</head>
+<style>
+    .sp_select_popup {
+        height: calc(100% - 40px);
+    }
+</style>
+<body class="bg-color-f2">
+
+    <!--选人弹窗 开始-->
+    <div class="sp_select_popup_box h-108">
+        <!--选人 弹窗部分-->
+        <div class="sp_select_popup pl-10 pr-10">
+            <div class="w-180 hr-s-gray1 pull-left sp_select_popup_left mt-10">
+                <div class="sp_select_popup_left_tab">
+                	<eq name="group" value="1">
+						<a data-toggle="tab" href="#profile2">支部</a>
+					<else/>
+						<a data-toggle="tab" href="#home2">部门</a>
+					</eq>
+                </div>
+                <div class="pull-left sp_select_popup_left_tree">
+                	<eq name="group" value="1">
+                    	<ul id="partyTree" class="ztree ztree-demo"></ul>
+                    <else/>
+                    	<ul id="deptTree" class="ztree ztree-demo"></ul>
+                    </eq>
+                </div>
+            </div>
+            <div class="pull-left sp_select_popup_con">
+                <div class="layui-row sp_select_popup_con_top pt-10 pb-5">
+                    <div class="layui-col-lg10 layui-col-md9 layui-col-xs8">
+                        <input class="layui-input" name="name" id="" placeholder="输入关键字:姓名/身份证查询">
+                    </div>
+                    <div class="layui-col-lg2 layui-col-md3 layui-col-xs4">
+                        <button class="layui-btn pull-right">查询</button>
+                    </div>
+
+                </div>
+                <table class="layui-table" id="ztreedata" lay-filter="test" lay-data="{id: 'idTest'}"></table>
+            </div>
+            <div class="w-180 pull-left sp_select_popup_right">
+                <h4>已选择:</h4>
+                <div class="sp_select_popup_right_list hr-s-gray1">
+                    <div class="sp_select_popup_right_list_box">
+                    <!--<p id="list1" data-index="1" ><a class="tablename">杜超超</a><span class="tableid">'2342354658769860'</span><i class="layui-icon layui-icon-add-circle"></i></p>
+                        <p id="list2" data-index="2" ><a class="tablename">杜超超1</a><span class="tableid">'2342354658769861'</span><i class="layui-icon layui-icon-add-circle"></i></p>-->
+                    </div>
+                    <div class="sp_select_popup_right_list_bot">
+                        <a class="fsize-12 fcolor-99 delete">删除全部</a>
+                    </div>
+                </div>
+                <div class="sp_select_popup_bot">
+                    <button class="layui-btn layui-btn-normal sp_select_popup_sub w-180">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="group" value="{$group}">
+    <div class="clear"></div>
+
+    <!--选人弹窗 结束-->
+    <input type="hidden" id="noId"/>
+    <input type="hidden" id="no"/>
+    <input type="hidden" id="nameId"/>
+    <input type="hidden" id="name"/>
+</body>
+<script type="text/javascript" src="__STATICS__/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js"></script>
+<!--ztree插件-->
+<script type="text/javascript" src="__STATICS__/plugins/ztree/js/jquery.ztree.core.js"></script>
+
+<script>
+
+    layui.use(['form','table'], function () {
+        var table = layui.table;
+        var group = $("input[name='group']").val();
+        if(group == 1){
+        	var url = "{:U('Ccp/Ccpcommunist/ccp_communist_index_data_data')}";
+        } else {
+        	var url = "{:U('Ccp/Ccpstaff/hr_staff_index_data')}";
+        }
+        //默认显示的 表格
+        table.render({
+            id: 'idTest'
+            , elem: '#ztreedata'
+            , url: url
+            , height: 'full-95'
+            , cols: [[
+            	{ type: 'checkbox', fixed: 'left' }
+            	<if condition="$group eq 1" >
+	                ,{field: 'communist_no', width: 100, title: '编号', sort: true}
+	                , {field: 'communist_name', title: '姓名',minWidth: 100}
+	                , {field: 'party_no',width: 150, title: '组织'}
+	            <else/>
+	            	,{field: 'staff_no', width: 100, title: '编号', sort: true}
+	               , {field: 'staff_name', title: '姓名',minWidth: 100}
+	                , {field: 'staff_sex',width: 100, title: '性别'}
+	               , {field: 'staff_dept_no',width: 150, title: '部门'}
+	            </if>
+            ]]
+            , page: true
+        });
+
+        // 部门数据
+		var setting = {
+			view: {
+			   showIcon: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback:{
+				onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+	                // console.log(node.urltree)
+	                var group = $("input[name='group']").val();
+			        if(group == 1){
+			        	var url = "{:U('Ccp/Ccpcommunist/ccp_communist_index_data')}?party_no=";
+			        } else {
+			        	var url = "{:U('Ccp/Ccpstaff/hr_staff_index_data')}?dept_no=";
+			        }
+	                table.render({
+	                    id: 'idTest'
+	                    , elem: '#ztreedata'
+	                    , url: url + node.id
+	                    , height: 'full-95'
+	                    , cols: [[
+	                        { type: 'checkbox', fixed: 'left' }
+			            	<if condition="$group eq 1" >
+				                ,{field: 'communist_no', width: 100, title: '编号', sort: true}
+				                , {field: 'communist_name', title: '姓名',minWidth: 100}
+				                , {field: 'party_no',width: 150, title: '组织'}
+				            <else/>
+				            	,{field: 'staff_no', width: 100, title: '编号', sort: true}
+				               , {field: 'staff_name', title: '姓名',minWidth: 100}
+				                , {field: 'staff_sex',width: 100, title: '性别'}
+				               , {field: 'staff_dept_no',width: 150, title: '部门'}
+				            </if>
+	                    ]]
+	                    , page: true
+	                });
+	            }
+			},
+		};
+		// 部门数据
+		var zNodes_dept = [
+			<volist name="dept_list" id="dept" key = 'dept_k'>
+				{ id:{$dept.dept_no}, pId:{$dept.dept_pno},name:"{$dept.dept_name}",<if condition='$dept_k eq 1'>open:true</if>},
+			</volist>
+		];
+		// 初始化 部门树
+		$(document).ready(function(){
+			var t = $("#deptTree");
+			t = $.fn.zTree.init(t, setting, zNodes_dept);
+		});
+
+		// 组织树
+		var setting_party = {
+			view: {
+			   showIcon: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback:{
+				onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+	                // console.log(node.urltree)
+	                var group = $("input[name='group']").val();
+			        if(group == 1){
+			        	var url = "{:U('Ccp/Ccpcommunist/ccp_communist_index_data')}?party_no=";
+			        } else {
+			        	var url = "{:U('Ccp/Ccpstaff/hr_staff_index_data')}?dept_no=";
+			        }
+	                table.render({
+	                    id: 'idTest'
+	                    , elem: '#ztreedata'
+	                    , url: url + node.id
+	                    , height: 'full-95'
+	                    , cols: [[
+	                        { type: 'checkbox', fixed: 'left' }
+			            	<if condition="$group eq 1" >
+				                ,{field: 'communist_no', width: 100, title: '编号', sort: true}
+				                , {field: 'communist_name', title: '姓名',minWidth: 100}
+				                , {field: 'party_no',width: 150, title: '组织'}
+				            <else/>
+				            	,{field: 'staff_no', width: 100, title: '编号', sort: true}
+				               , {field: 'staff_name', title: '姓名',minWidth: 100}
+				                , {field: 'staff_sex',width: 100, title: '性别'}
+				               , {field: 'staff_dept_no',width: 150, title: '部门'}
+				            </if>
+	                    ]]
+	                    , page: true
+	                });
+	            }
+			},
+			check: {
+				enable:false,
+				autoCheckTrigger:false,
+				chkboxType:{ "Y":"ps", "N":"ps" }
+			}
+		};
+		// 组织树数据
+		var zNodes_party = [
+			<volist name="party_list" id="party" key = 'party_k'>
+				{ id:{$party.party_no} ,pId:{$party.party_pno},name:"{$party.party_name}",<if condition='$party_k eq 1'>open:true</if>},
+			</volist>
+		];
+
+		// 初始化党组织树
+		$(document).ready(function(){
+			var t = $("#partyTree");
+			t = $.fn.zTree.init(t, setting_party, zNodes_party);
+		});
+
+		// 点击checkbox框选择人员信息
+        table.on('checkbox(test)', function (obj) {
+        	var group = $("input[name='group']").val();
+	        if(group == 1){
+	        	var tablename = (obj.data.communist_name); //获取选中行的name
+            	var tableid = (obj.data.communist_no);//获取选中行的身份证号
+	        } else {
+	        	var tablename = (obj.data.staff_name); //获取选中行的name
+            	var tableid = (obj.data.staff_no);//获取选中行的身份证号
+	        }
+            var checkStatus = table.checkStatus('idTest');
+            var tablecheck = (obj.checked); //当前当前复选框状态
+            var checktype = (obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+            var uid = $(this).parent().parent().parent().data('index')//获取选中行的data-index
+            var listid = 'list' + uid//给选中行所对应的右侧p获取相应的id
+            var checkOn = false;
+            if (checktype == 'one') {
+                var tableid2 = $('.sp_select_popup_right_list_box').find('.tableid').text();//判断是否存在该身份证号,如果存在则不添加
+                if (tablecheck == true && tableid2.indexOf(tableid) < 0) {
+                //如果tablecheck是选中状态,且已选择列表没有当前信息
+                    $('.sp_select_popup_right_list_box').append('<p id="' + listid + '" data-index="' + tableid + '" ><a class="tablename">' + tablename + '</a><span class="tableid">' + tableid + '</span><i class="layui-icon layui-icon-add-circle"></i></p>')
+                    //添加右侧列表信息
+                } else if (tablecheck == false && tableid2.indexOf(tableid) > -1 && checkOn == false) {
+                    $('.sp_select_popup_right_list_box').find('p[data-index="'+ tableid +'"]').remove();
+                }
+            } else if(checktype == 'all'){
+                var ids = $('#no').val(); //已经存在的身份证串
+                var tableng = (checkStatus.data.length); //获取选中行数量
+                if (tablecheck == true){ //当点全选时
+                    for (var i = 0; i < tableng; i++) {
+                    	if(group == 1){
+				        	var tablename_box = $('tr[data-index=' + i + ']').find('td[data-field=communist_name]').text(); //循环获取每行的姓名 //获取选中行的name
+			            	var tableid = $('tr[data-index=' + i + ']').find('td[data-field=communist_no]').text();//获取选中行的身份证号
+				        } else {
+				        	var tablename = $('tr[data-index=' + i + ']').find('td[data-field=staff_name]').text(); //获取选中行的name
+			            	var tableid = $('tr[data-index=' + i + ']').find('td[data-field=staff_no]').text(); //获取选中行的身份证号
+				        }
+                        if (ids.search(tableid_box) == -1) {
+                             $('.sp_select_popup_right_list_box').append('<p id="list' + i + '" data-index="' + tableid_box + '" ><a class="tablename">' + tablename_box + '</a><span class="tableid">' + tableid_box + '</span><i class="layui-icon layui-icon-add-circle"></i></p>')
+                             //添加右侧列表信息
+                        }
+                    }
+                } else {
+                    // 获取当前页表格数据
+                    var len = $('tr').find('td[data-field=id]').length;
+                    for (var i = 0; i < len; i++) {
+                    	if(group == 1){
+			            	var tableid_box = $('tr[data-index=' + i + ']').find('td[data-field=communist_no]').text();//获取选中行的身份证号
+				        } else {
+			            	var tableid_box = $('tr[data-index=' + i + ']').find('td[data-field=staff_no]').text(); //获取选中行的身份证号
+				        }
+                        if (ids.search(tableid_box) != -1) {
+                            $('.sp_select_popup_right_list_box').find('p[data-index="'+ tableid_box +'"]').remove();
+                        }
+                    }
+                };
+            };
+            // 获取数据
+            getData();
+        });
+
+        $('.sp_select_popup_right_list_box').on('click', '.layui-icon-add-circle', function () {
+        //删除某一行
+            $(this).parent().remove();
+            // 获取数据
+            getData();
+            table.reload('idTest');
+        });
+    });
+
+    $('.sp_select_popup_right_list_bot a').click(function () { //点击删除全部
+
+        $('.sp_select_popup_right_list_box p').remove();
+        for (var i = 0; i < 2; i++) {
+            $('div.laytable-cell-checkbox').find('div.layui-form-checked').click(); 
+            //取消checked的全部选中状态
+        }
+        $("#name").val('');
+        $("#no").val('');
+    });
+
+    $('.sp_select_popup_sub').click(function () { //将已选择列表中的姓名给添加到文本框中
+
+        $(".sp_select_popup_input").val('');
+        $(".sp_select_popup_list").val('');
+        // parent.$('#'+ $('#noId').val()).val($("#no").val());
+        // parent.$('#'+ $('#nameId').val()).val($("#name").val());
+
+        parent.$("#{$name}_name").val($("#name").val());
+		parent.$("#{$name}_no").val($("#no").val());
+        //关闭选人弹窗
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+
+    $(".sp_select_popup_left_tab a").click(function () {
+        var _index = $(this).index();
+        $(".sp_select_popup_left_tree .ztree-demo").eq(_index).show().siblings().hide();
+        $(this).addClass("active").siblings().removeClass("active");
+    });
+
+    // 获取数据
+    function getData(){
+        var idcardno = '';
+        var idcardnoname = '';
+        $('.sp_select_popup_right_list_box p').each(function () {
+            var pickname = $(this).find('.tablename').text();
+            var pickid = $(this).find('.tableid').text();
+
+            idcardno = idcardno + pickid+',';
+            idcardnoname = idcardnoname + pickname+',';
+        });
+
+        $('#no').val(idcardno.substring(0,idcardno.lastIndexOf(",")));
+        $('#name').val(idcardnoname.substring(0,idcardnoname.lastIndexOf(",")));
+    }
+</script>
+</html>

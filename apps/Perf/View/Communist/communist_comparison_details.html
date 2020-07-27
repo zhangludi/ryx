@@ -1,0 +1,332 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<style type="text/css">
+.layui-card-body{
+	height:auto;overflow-scroll:y;
+}
+.calendar_day_act {
+	background-color: #ec612a;
+	color: #fff;
+	border-radius: 50% !important;
+}
+.calendar_tr{
+	margin-left: 26%;
+}
+.calendar_tr > li {
+    float: left;
+    width: 6%;
+    height: 48.06px;
+    line-height:48px;
+    text-align: center;
+    position: relative;
+}
+</style>
+<div class="page-container">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+			<div class="layui-row layui-col-space10">
+	             <div class="layui-col-md3">
+					<div class="layui-card">
+		                <form class="layui-form">
+		                    <div class="layui-card-header">支部列表</div>
+		                    <div class="layui-card-body" style="overflow-y:auto">
+		                        <div class="over-h-tree" style="height:665px;">
+		                            <ul id="treeDemo" class="ztree ztree-demo">
+		                            </ul>
+		                        </div>
+		                    </div>
+		                </form>
+		            </div>
+				</div>
+	            <div class="layui-col-md9">
+		            <div class="layui-row">
+		                <div class="layui-col-xs12">
+		                    <div class="layui-card">
+		                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+		                        <div class="layui-form layui-card-body fitheight">
+		                           <div class="form-horizontal layui-col-md12">
+										<div class="layui-row">
+											<!-- <label class="control-label layui-col-md4 p-0 lh-35">月份选择： </label>
+											<div class="layui-col-md8  p-0">
+												<select name="month_change" id ="month_change" lay-verify="required" lay-search="">
+		                                          <php>echo getdatelist($month);</php>
+		                                        </select>
+												<input type="hidden" id="month" value="{$month}">
+												
+											</div> -->
+											<input type="hidden" id="party" value="{$assess.party_no}">
+											<input type="hidden" id="month" value="{$month}">
+											<ul class="calendar_tr">
+												<li value="01"  <eq name="month" value='01'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>1月</li>
+												<li value="02" <eq name="month" value='02'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>2月</li>
+												<li value="03" <eq name="month" value='03'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>3月</li>
+												<li value="04" <eq name="month" value='04'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>4月</li>
+												<li value="05" <eq name="month" value='05'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>5月</li>
+												<li value="06" <eq name="month" value='06'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>6月</li>
+												<li value="07" <eq name="month" value='07'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>7月</li>
+												<li value="08" <eq name="month" value='08'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>8月</li>
+												<li value="09" <eq name="month" value='09'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>9月</li>
+												<li value="10"<eq name="month" value='10'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>10月</li>
+												<li value="11" <eq name="month" value='11'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>11月</li>
+												<li value="12" <eq name="month" value='12'> class="calendar_day calendar_day_act" <else/> class="calendar_day"</eq>>12月</li>
+											</ul>
+
+										</div>
+									</div>
+									<div class=""  data-always-visible="1" data-rail-visible1="1" id="Broke">
+		                               <div id="Broken6" style="height: 323px;width: 100%;margin-top:100px" alt="对标体系折线图"></div>
+		                            </div>
+		                            <table class="layui-table" id="demo"  lay-filter="demo">
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+	        	</div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+	$(".calendar_day").on("click",function(){
+		$(this).addClass("calendar_day_act").siblings().removeClass("calendar_day_act");
+		var month=this.value;
+		if(month < 10){
+			month = "0"+month;
+		}
+		var party_no=$("#party").val();
+		$("#month").val(month);
+		$.post("{:U('communist_comparison_details_table')}",{party_no:party_no,month:month,group:"party"},function(e){
+			$("#Broke").html(e);
+			var table = layui.table;
+			var url_c = "{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+month;
+			table.render({
+	                elem: '#demo'
+	                , url: url_c
+	                , height: 'full'
+	                , id: 'ztreedata'
+	                ,totalRow: true
+	                , cols: [[
+	                	{field: 'item_id', width: 80, title: '序号', sort: true, totalRowText: '合计'}
+	                    , {field: 'item_name', title: '考核项',minWidth: 160}
+	                    , {field: 'item_proportion', width: 80, title: '比重', totalRow: true}
+	                    , {field: 'cycle_name', title: '考核周期'}
+	                    , {field: 'communist_name', width: 120, title: '负责人'}
+	                    , {field: 'operate', width: 160, title: '分值', totalRow: true}
+	                ]]
+	                , page: false
+	        });
+		})
+	})
+
+
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , router = layui.router();
+        form.render();
+		// 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("communist_comparison_details_data",array("group"=>party,"month"=>$month,"party_no"=>$assess['party_no']))}'
+                , height: 'full'
+                , id: 'ztreedata'
+                ,totalRow: true
+                , cols: [[
+                	{field: 'item_id', width: 80, title: '序号', sort: true, totalRowText: '合计'}
+                    , {field: 'item_name', title: '考核项',minWidth: 160}
+                    , {field: 'item_proportion', width: 80, title: '比重', totalRow: true}
+                    , {field: 'cycle_name', title: '考核周期'}
+                    , {field: 'communist_name', width: 120, title: '负责人'}
+                    , {field: 'operate', width: 160, title: '分值', totalRow: true}
+                ]]
+                , page: false
+            });
+
+            
+	  		var $ = layui.$, active = {
+		        reload: function(){
+		            var keyword = $('#keywords').val();
+		            var time = $('#time').val();
+			      	table.reload('ztreedata', {
+				        page: {
+				          curr: 1 
+				        }
+				        ,where: {
+				        	"keyword": keyword,
+				        	"start":time
+				        }
+			      	});
+		        }
+		    };
+		    $('.layui-form .layui-btn').on('click', function(){
+			    var type = $(this).data('type');
+			    active[type] ? active[type].call(this) : '';
+			});
+        });
+    })
+// 设置ztree 列表和右侧列表一样高度
+	$(".over-h-tree").css("height",($(window).height()));
+		  var zTreeObj;
+	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）showIcon添加icon，showLine添加箭头
+	var setting = {
+			
+	        view: {
+	        	showIcon: true,
+	            showLine: false,
+	        },
+	    data: {
+	        key: {
+	            title: "t"
+	        },
+	        simpleData: {
+	            enable: true
+	        }
+	    },
+	    callback: {
+	        onClick: onClick//绑定回调函数
+	    }
+	};
+	//$('#client_table').bootstrapTable('refresh',{url:"{:U('pf_assess_set_index_data')}?party_no="+party_no+"&group='party'"});
+	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+	var zNodes = [
+	    <volist name="category_lista" id="list" key = 'k'>
+	    { id:"{$list.party_no}",pId:"{$list.party_pno}", name:"{$list.party_name}",t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png",<eq name='list.party_pno' value='0'>open:true</eq>},
+		</volist>
+	];
+	$(document).ready(function(){
+	    zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	});
+	function onClick(e, treeId, treeNode) {
+		var party_no=treeNode.id
+		$("#party").val(party_no);
+		var month=$("#month").val();
+		
+		$.post("{:U('communist_comparison_details_table')}",{party_no:party_no,month:month,group:"party"},function(e){
+			$("#Broke").html(e);//刷新折线图数据
+			 var table = layui.table;
+	         var url_c = "{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+month;
+			 table.render({
+	                elem: '#demo'
+	                , url: url_c
+	                , height: 'full'
+	                , id: 'ztreedata'
+	                ,totalRow: true
+	                , cols: [[
+	                	{field: 'item_id', width: 80, title: '序号', sort: true, totalRowText: '合计'}
+	                    , {field: 'item_name', title: '考核项',minWidth: 160}
+	                    , {field: 'item_proportion', width: 80, title: '比重', totalRow: true}
+	                    , {field: 'cycle_name', title: '考核周期'}
+	                    , {field: 'communist_name', width: 120, title: '负责人'}
+	                    , {field: 'operate', width: 160, title: '分值', totalRow: true}
+	                ]]
+	                , page: false
+	            });
+			//$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+month});
+		})
+	}
+	$("#month_change").change(function(){
+		var party_no=$("#party").val();
+		$("#month").val(this.value);
+		var month=this.value;
+		$.post("{:U('communist_comparison_details_table')}",{party_no:party_no,month:month,group:"party"},function(e){
+			$("#Broke").html(e)
+			//$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+mothod});
+			var url_c = "{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+month;
+			 table.render({
+                elem: '#demo'
+                , url: url_c
+                , height: 'full'
+                , id: 'ztreedata'
+                ,totalRow: true
+                , cols: [[
+                	{field: 'item_id', width: 80, title: '序号', sort: true, totalRowText: '合计'}
+                    , {field: 'item_name', title: '考核项',minWidth: 160}
+                    , {field: 'item_proportion', width: 80, title: '比重', totalRow: true}
+                    , {field: 'cycle_name', title: '考核周期'}
+                    , {field: 'communist_name', width: 120, title: '负责人'}
+                    , {field: 'operate', width: 160, title: '分值', totalRow: true}
+                ]]
+                , page: false
+            });
+		})
+	})
+	// 对标体系折线图
+	var assess_name={$assess.assess_name};
+	var score={$assess.score};
+	var Broken6 = echarts.init(document.getElementById('Broken6'));
+	Broken6.getDom().style.height = "450px";
+    Broken6.resize(); 
+	option6 = {
+		title: {
+			text: ''
+		},
+		tooltip: {},
+		legend: {
+			data: ['{$assess.party_name}']
+		},
+		radar: [
+			{
+				indicator:assess_name,
+				radius: 120,
+				startAngle: 90,
+				splitNumber: 4,
+				name: {
+					formatter:'【{value}】',
+					textStyle: {
+						color:'red'
+					}
+				}
+			}
+		],
+		series: [
+			{
+				name: '雷达图',
+				type: 'radar',
+				itemStyle: {
+					emphasis: {
+						// color: 各异,
+						lineStyle: {
+							width: 4
+						}
+					}
+				},
+				data: [
+					{
+						value: score,
+						name: '{$assess.party_name}',
+						symbol: 'rect',
+						symbolSize: 5,
+						lineStyle: {
+							normal: {
+								show: true,
+								type: 'dashed',
+								formatter:function(params) {
+									return params.value;
+								}
+							}
+						}
+					},
+				]
+			}
+		]
+	};
+
+	Broken6.setOption(option6);
+	function sumFormatter(data) {
+		field = this.field;
+		return data.reduce(function(sum, row) { 
+			return sum + (+row[field]);
+		}, 0);
+	}
+</script>
+</block>

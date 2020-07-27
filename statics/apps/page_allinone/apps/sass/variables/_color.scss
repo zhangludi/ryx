@@ -1,0 +1,109 @@
+$linear-white: linear-gradient(0deg, #f0f0f0, #fff);
+$linear-gray: linear-gradient(0deg, #ebebeb, #fff);
+$linear-red: linear-gradient(0deg, #ff204d, #ff6745);
+$linear-red1: linear-gradient(90deg, #ff5500, #ff0000);
+$linear-org: linear-gradient(0deg, #ff7200, #ffaa01);
+$linear-green1: linear-gradient(0deg, #00b778, #0cdd9f);
+$linear-green2: linear-gradient(0deg, #14b800, #51ed0e);
+$linear-blue: linear-gradient(0deg, #3c78f2, #54affe);
+$linear-org1: linear-gradient(0deg, #ffaf54, #ffd573);
+$linear-org2: linear-gradient(0deg, #ff9c5a, #ffcd57);
+$linear-org3: linear-gradient(0deg, #ffac4c, #ffba4c);
+$red: #ff5400;
+$red1: #ff582d;
+$orange: #ff3032;
+$orange1: #ff6600;
+$blue: #0093c3;
+$black: #333;
+$gray: #dfdfdf;
+$gray1: #f9f9f9;
+$gray2: #838383;
+$white: #fff;
+//$red1: #ff582d;
+
+$grays:(
+  default: #666,
+  fir: #dfdfdf,
+  sec: #f9f9f9,
+  trd: #838383,
+  four: #661,
+  five: #d6d6d6,
+  six: #b8b8b8,
+  seven: #999,
+  eight: #e8e9eb,
+);
+
+$whites:(
+  default: #fff,
+  fir: #ff1,
+  sec: #ff2,
+  trd: #ff3,
+  four: #ff4
+);
+
+$reds: (
+  default: red,
+  fir: #ff582d,
+  sec: rgba(255, 88, 45, .08),
+);
+
+$oranges: (
+  default: orange,
+  fir: #ff6600,
+);
+
+@function grays($gray){
+  @if not map_has_key($grays, $gray) {
+    @warn "'#{$gray}' is not found in grays";
+    @return null;
+  }
+  @else {
+    @return map_get($grays, $gray);
+  }
+}
+@mixin grays( $gray: #666 ){
+  color: grays( $gray );
+}
+
+//white
+@function whites($white){
+  @if not map_has_key($whites, $white) {
+    @warn "'#{$white}' is not found in whites";
+    @return null;
+  }
+  @else {
+    @return map_get($whites, $white);
+  }
+}
+@mixin whites( $white: #fff ){
+  color: whites( $white );
+}
+
+//red
+@function reds($red){
+  @if not map_has_key($reds, $red) {
+    @warn "'#{$red}' is not found in reds";
+    @return null;
+  }
+  @else {
+    @return map_get($reds, $red );
+  }
+}
+@mixin reds( $red: red ){
+  color: reds( $red );
+}
+
+//orange
+@function oranges($orange){
+  @if not map_has_key($oranges, $orange) {
+    @warn "'#{$orange}' is not found in reds";
+    @return null;
+  }
+  @else {
+    @return map_get($oranges, $orange );
+  }
+}
+  @mixin oranges( $orange: orange ){
+  color: oranges( $orange );
+}
+

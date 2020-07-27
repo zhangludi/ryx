@@ -1,0 +1,142 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				
+				<div class="layui-card-body layui-form">
+					<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>类型名称：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								 <input id="type_id" name="type_id" type="hidden" value="{$type_row.type_id}">
+									<input type="text" name="code_name" placeholder="类型名称" autocomplete="off" class="layui-input" value="{$type_row.code_name}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>类型编号：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="type_no" placeholder="类型编号" autocomplete="off" class="layui-input" value="{$type_row.type_no}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+						
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>选择分组：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<select id="dept_no" name="type_group" lay-filter="state" lay-search="">
+										<option value="0">请选择</option>
+										<volist name="group_list" id="group">
+										<option value="{$group.group_code}" <eq name="group.group_code" value='$type_row.type_group'>selected</eq>>{$group.group_name}</option>
+										</volist>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>类型排序：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="type_order" placeholder="类型排序" autocomplete="off" class="layui-input" value="{$type_row.type_order}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>上级基础资料：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									<select  name="type_pid" lay-filter="" lay-search="" lay-verify="">
+											<option value="">请选择</option>
+											<volist name="type_list" id="type">
+                                                    <option value="{$type.type_id}" <eq name="type.type_id" value='$type_row.type_pid'>selected</eq>>{$type.type_name}</option>
+                                                </volist>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>类型编码</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="type_code" placeholder="类型编码" autocomplete="off" class="layui-input" value="{$type_row.type_code}">
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<textarea name="memo" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea">{$type_row.memo}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<button type="reset" class="layui-btn layui-btn-primary mr-40">重置</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use([ 'form', 'laydate'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			
+		form.on('submit(component-form-demo1)', function(data){
+			$.ajax({
+				url:"{:U('Sysbd/sys_bd_type_do_save')}",
+				type:'POST',
+				data:data.field,
+				success: function (data) {
+					alert('操作成功！');
+					layer_colse();
+					parent.location.reload();
+					// if(data.status == 1){
+					// 	layer.msg(data.msg, {
+					// 		icon: 6
+					// 		,time: 2000
+					// 	});
+					// 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+					// 	parent.layer.close(index); //再执行关闭
+					// 	window.parent.location.reload(); //刷新父页面
+					// }else{
+					// 	layer.msg(data.msg, {
+					// 	  icon: 5
+					// 	  ,time: 2000
+					// 	});
+					// }
+				}
+			})
+			return false;
+		});
+
+	})
+	function layer_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+</script>
+</block>

@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//layout
+@import "../layouts/layouts";
+
+//helper
+@import "../helper/helper";
+
+//objects
+@import "../objects/button";
+@import "../objects/input";
+@import "../objects/title";
+
+$title-h: 86px;
+$input-h: 50px;
+$submit-w: 470px;
+$getCode-l: 140px;
+
+.bg{
+  @include bg("../../images/bg.jpg");
+}
+
+.content{
+  background: rgba(255, 255, 255, .9);
+  border-radius: 10px;
+}
+
+.l-content{
+  width: 736px;
+  height: 440px;
+}
+
+.login_content{
+  padding-top: 40px;
+}
+
+.login_title{
+  height: $title-h;
+  line-height: $title-h;
+  @include font-sizes(l5);
+  border-bottom: solid 1px grays(five);
+  text-align: center;
+}
+.title_item{
+  display: inline-block;
+  line-height: $title-h;
+  padding: 0 30px;
+}
+
+.input-wrap{
+  height: $input-h;
+  padding: 12px 0;
+}
+
+.login_label{
+  display: inline-block;
+  @include grays;
+  @include font-sizes(l6);
+  width: 210px;
+  text-align: right;
+  margin-right: 10px;
+}
+.login_input{
+  width: 360px;
+  height: $input-h;
+}
+
+.title_item-red{
+  @extend .title_item;
+  @include reds(fir);
+  border-bottom: solid 1px reds(fir);
+}
+
+.login_button{
+  display: block;
+  width: $submit-w;
+  margin-top: 40px;
+}
+
+.about-pwd{
+  width: $submit-w;
+  @include grays(six);
+  margin-top: 16px;
+}
+
+.login_register{
+  @include reds(fir);
+  margin-left: 6px;
+}
+
+.login_forget{
+  @include grays(default);
+  text-decoration: none;
+}
+
+.get-code{
+  width: 126px;
+  height: $input-h;
+  line-height: $input-h;
+  color: #fff;
+  margin-left: $getCode-l;
+}
+
+.login_input-short{
+  display: none;
+  width: 310px;
+}

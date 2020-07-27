@@ -1,0 +1,166 @@
+.bg {
+    background: url("../images/bg.jpg");
+    background-size: cover;
+}
+.back1{position: absolute;left: 455px;}
+.style_tit{
+	height:70px;
+	display: flex;
+    align-items:Center; 
+    margin-bottom: 20px;
+}
+.style_tit div{
+	font-size:40px;
+	color:#000;
+	margin-left: 15px;
+}
+.con_top{
+	width: 100%;
+	margin-top: 63px;
+}
+.back{
+	margin-left: 80px;
+	}
+.home{
+	margin-right: 80px;
+	}
+.title-txt {
+   width: 563px;
+    height: 74px;
+}
+.title {
+   width: 563px;
+    height: 74px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+
+/*志愿者主体*/
+.con_vol{
+	padding-top: 50px;
+	width: 1710px;
+	margin: 0 auto;
+	padding-bottom: 20px;
+}
+.vol_l{
+	width:1296px;
+	height:811px;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(10,2,4,0.2);
+	border-radius:16px;
+	margin-left: 5px;
+}
+.vol_r{
+	width:359px;
+	height:811px;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(10,2,4,0.34);
+	border-radius:16px;
+	margin-right: 5px;
+}
+.vol_line{
+	width:1286px;
+	height:1px;
+	background:rgba(0,0,0,1);
+	opacity:0.13;
+}
+.vol_tit{
+	height: 80px;
+	line-break: 80px;
+}
+.vol_add{
+	cursor: pointer;
+	text-align: center;
+    width: 148px;
+    height: 48px;
+    line-height: 48px;
+    border: 1px solid red;
+    border-radius: 6px;
+    color: red;
+}
+.vol_list{
+	width: 1197px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.vol_list li{
+	height: 136px;
+	margin-top: 38px;
+	list-style-type: none;
+}
+.vol_list_tit{
+	width: 947px;
+}
+.vol_list_tit a{
+	color: #000;
+}
+.vol_list_tit a:hover{color: red;}
+.vol_list_tit a:active{color: red;}
+.vol_list_tit h1{
+	margin-top: 0px;
+	font-size: 28px;
+}
+.vol_list_tit p{
+	overflow: hidden;
+	margin-top: 0px;
+	width:947px;
+	height:65px;
+	font-size:18px;
+	font-family:SourceHanSansSC-Normal;
+	font-weight:400;
+	color:rgba(102,102,102,1);
+	line-height:32px;
+}
+.total{
+	padding-top: 10px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+}
+.total_line{
+	width:359px;
+	height:1px;
+	background:rgba(0,0,0,1);
+	opacity:0.13;
+}
+.vol_head{
+	height: 580px;
+}
+.vol_head ul li{
+	margin-top: 25px;
+    margin-right: 25px;
+    float: left;
+    list-style-type: none;
+    width: 80px;
+}
+.vol_head ul li img{
+	width: 80px;
+	height: 80px;
+}
+.vol_head ul li span{
+	width: 80px;
+	text-align: center;
+}
+.total_add{
+	width: 359px;
+	margin: 0 auto;
+}
+
+.total_add span{
+	padding: 10px;
+	cursor: pointer;
+	text-align: center;
+    width: 148px;
+    height: 48px;
+    line-height: 48px;
+    border: 1px solid red;
+    border-radius: 6px;
+    color: red;
+}
+.news_sub img{
+	margin-right: 240px;
+    margin-top:0px;
+   
+    }
+

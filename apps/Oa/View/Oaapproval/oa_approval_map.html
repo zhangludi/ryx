@@ -1,0 +1,205 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-sidebar-wrapper">
+                <!-- BEGIN SIDEBAR -->
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable 高亮侧边栏 style(without borders) -->
+                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                        <li class="nav-item  active open">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-diamond"></i>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="ui_tabs_accordions_navs.html" class="nav-link ">
+                                    </a>
+                                </li>
+                                <li class="nav-item  active open">
+                                    <a href="ui_timeline.html" class="nav-link ">
+                                        <span class="selected"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="ui_tree.html" class="nav-link ">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light portlet-fit bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-microphone font-green"></i>
+                                        <span class="caption-subject bold font-green uppercase">审批流程图</span>
+                                    </div>
+                                    <div class="actions">
+										<button onclick="printById('printme')" type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown">打印
+										<!-- <i class="fa fa-angle-down"></i> -->
+										</button>
+                                    </div>
+                                </div>
+                                <div id="printme" class="portlet-body">
+                                    <div class="timeline">
+                                        <!-- 时间轴 -->
+                                        <volist name="node_list" id="node">
+	                                        <div class="timeline-item">
+	                                            <div class="timeline-badge" onclick="communist_select({$node.log_id},'{$node.node_post}',{$node.node_staff},{$i})">
+	                                            	<eq name="node.node_staff" value="''">
+	                                            		<div class="timeline-icon">
+		                                                    <i class="icon-user-following font-green-haze"></i>
+		                                                </div>
+		                                            <else/>
+		                                            	<img class="timeline-badge-userpic" src="__STATICS__/pages/media/users/avatar80_1.jpg" >
+	                                            	</eq>
+	                                            </div>    
+	                                            <div class="timeline-body" <eq name="node.status" value="1">style="background:#f0f0ce;"</eq>>
+	                                                <div class="timeline-body-arrow"> </div>
+	                                                <div class="timeline-body-head">
+	                                                    <div class="timeline-body-head-caption">
+	                                                        <a href="javascript:;" class="timeline-body-title font-blue-madison"> {$node.node_name}
+		                                                        <!-- <eq name="node.status" value="">
+				                                            		[ 未审核 ]
+					                                            <else/>
+					                                            	<neq name="i" value='1'>[ <php>echo getCommunistInfo($node['log_staff'],'communist_name');</php> {$node.log_type} ]</neq>
+				                                            	</eq> -->
+	                                                        </a>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="timeline-body-content">
+	                                                	<span class="timeline-body-time font-grey-cascade">
+															审批人：<eq name="node.node_staff" value="''">
+				                                            		<a href="javascript:;" onclick="communist_select({$node.log_id},'{$node.node_post}',{$node.node_staff},{$i})"><font color="red">未选择</font></a>
+					                                            <else/>
+					                                            	<php>echo getCommunistInfo($node['node_staff'],'communist_name');</php>
+				                                            	</eq>
+														</span><br/>
+	                                                    <span class="timeline-body-time font-grey-cascade">岗&nbsp;&nbsp;&nbsp;&nbsp;位：<php>echo getPostInfo($node['node_post']);</php></span><br/>
+	                                                    <neq name="i" value='1'>
+		                                                    <span class="timeline-body-time font-grey-cascade">状&nbsp;&nbsp;&nbsp;&nbsp;态：
+		                                                    		<eq name="node.status" value="">
+					                                            		[ 未审核 ]
+						                                            <else/>
+						                                            	<neq name="i" value='1'>[ <php>echo getCommunistInfo($node['log_staff'],'communist_name');</php> {$node.log_type} ]</neq>
+					                                            	</eq>
+		                                                    </span><br/>
+		                                                    <span class="timeline-body-time font-grey-cascade">意&nbsp;&nbsp;&nbsp;&nbsp;见：{$node['log_content']}</span>
+	                                                	</neq>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+                                        </volist>
+                                        <!-- 最后一个节点写成固定节点 -->
+                                        <div class="timeline-item">
+	                                            <div class="timeline-badge">
+	                                            	<div class="timeline-icon">
+		                                            	<i class="icon-user-following font-green-haze"></i>
+		                                            </div>
+	                                            </div>    
+	                                            <div class="timeline-body">
+	                                                <div class="timeline-body-arrow"> </div>
+	                                                <div class="timeline-body-head">
+	                                                    <div class="timeline-body-head-caption">
+	                                                        <a href="javascript:;" class="timeline-body-title font-blue-madison">结束</a>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="timeline-body-content">
+	                                                    <span class="timeline-body-time font-grey-cascade"></span>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+                                        <!-- 时间轴结束 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- END CONTENT -->
+            <!-- BEGIN QUICK SIDEBAR -->
+            <div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
+                <div class="page-quick-sidebar">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> 用户
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane page-quick-sidebar-alerts" id="quick_sidebar_tab_2">
+                            <div class="page-quick-sidebar-alerts-list">
+                                <h3 class="list-heading">常规</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </block>
+	<block name="js">
+        <script type="text/javascript">
+        function  communist_select(log_id,node_post,node_staff,num){
+			if(node_post == ""){
+				node_post = "-1";
+			}
+        	layer.open({
+                type: 2,
+                title: '选择审批人',
+                fix: false, //不固定
+                offset: "50%",
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['480px' , '270px'],
+                content: "{:U('Oa/Oaapproval/oa_approval_communist_list/log_id/"+log_id+"/node_post/"+node_post+"/first_node/"+num+"/node_staff/"+node_staff+"')}",
+                success:function(){
+                	layerAuto();
+                }
+            });
+        };
+        </script>
+		<!-- 页面打印开始 -->
+		<script type="text/javascript" src="http://html2canvas.hertzen.com/build/html2canvas.js"></script> 
+		<script type="text/javascript">  
+			function printById(id) {  
+				html2canvas(document.getElementById(id), {
+					allowTaint : true,  
+					taintTest : false,  
+					onrendered : function(canvas) {  
+						canvas.id = "mycanvas";  
+						//document.body.appendChild(canvas);  
+						//生成base64图片数据  
+						var dataUrl = canvas.toDataURL();  
+						var newImg = document.createElement("img");  
+						newImg.src = dataUrl;  
+						/* document.body.appendChild(newImg);  */  
+						/* window.open(newImg.src); */  
+						var printWindow = window.open(newImg.src);  
+							// printWindow.document.write();   
+							 printWindow.document.write('<img height="950px" src="'+newImg.src+'" />')  
+							 printWindow.print();  
+					}
+				});
+			}
+		</script>
+	</block>

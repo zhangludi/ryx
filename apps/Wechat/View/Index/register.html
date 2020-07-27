@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    	<title><php>echo getConfig('web_name')</php>-登录</title>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_v2.1.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/skin/skin-red.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.picker.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.dtpicker.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/mui/mui.poppicker.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/mine_personal.css"/>
+	</head>
+	<style>
+	.w-169em{width: 8.45rem;}
+    .h-17em{height: 0.85rem;}
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    background-size: 100% 100%;}
+    .select_style{
+		/*-webkit-appearance:menulist!important;*/
+		border:1px solid #dfdfdf!important;
+    }
+    .top-5mem{
+    	top:-0.5rem!important;
+    }
+    button{
+    	    border: 1px solid #e71111;
+	        background-color: #ff3032;
+	       	color: #f3eded;
+	       	margin-top: 5%;
+    }
+    select, textarea, input[type='text'], input[type='search'], input[type='password'], input[type='datetime'], input[type='datetime-local'], input[type='date'], input[type='month'], input[type='time'], input[type='week'], input[type='number'], input[type='email'], input[type='url'], input[type='tel'], input[type='color'] {
+	    width: 50%;
+	}
+	</style>
+<body class="bg-color-whiter">
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+		<!-- <ul>
+			<li class="h-45"> -->
+				<!-- <a class="aui-pull-left" onclick="history.go(-1);">
+					<span class="aui-iconfont aui-icon-left"></span>返回
+				</a> -->
+				<!-- <div class="aui-title f-w"><php>echo getConfig('web_name')</php></div>
+			</li>
+		</ul> -->
+		<ul>
+            <li class="h-45">
+                <!-- <a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> --> 
+                <div id="title" class="aui-title f-w"><php>echo getConfig('web_name')</php></div>
+                <a class="f-12em color-white f-w pull-right pr-12em" href="{:U('Wechat/Index/login')}" >
+                	返回
+                </a>
+            </li>
+        </ul>
+	</div>
+		<!--结束-->
+	<div class="mt-40em pl-20em pr-20em">
+		<form id="form_table" action="{:U('register_save')}" method="post">
+			<div id='login-form' class="">
+				<div class="bb-1-df po-re">	
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe872;</i>
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='real_name' type="text" name="communist_name" onfocus="add(this);"onblur="rem(this)" placeholder="请填写姓名">
+				</div>
+				<div class="bb-1-df po-re">
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe82c;</i>		
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-13em" id='IDCard' maxlength="18" type="email" name="communist_idnumber" onfocus="add(this);"onblur="rem(this)" placeholder="请填写身份证号">
+				</div>
+				<div class="bb-1-df po-re">	
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe607;</i>
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='user_name' type="text" name="username" onfocus="add(this);"onblur="rem(this)" placeholder="请填写用户名">
+				</div>
+				<div class="bb-1-df po-re">
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe871;</i>		
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='password1' maxlength="18" type="password" name="password" onfocus="add(this);"onblur="rem(this)" placeholder="请设置账户密码">
+				</div>
+				<!-- <div class="bb-1-df po-re">
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe871;</i>		
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='password2' maxlength="18" type="email" onfocus="add(this);"onblur="rem(this)" placeholder="请确定账户密码">
+				</div> -->
+				<div class="bb-1-df po-re">
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe871;</i>		
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='mobile' maxlength="18" type="email" name="phone" onfocus="add(this);"onblur="rem(this)" placeholder="请填写手机号"> 
+				</div>
+				<!-- <div class="bb-1-df po-re"> -->
+					<!-- <i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe7c1;</i>		 -->
+					<!-- <input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='mobile' maxlength="18" type="email" name="phone" onfocus="add(this);"onblur="rem(this)" placeholder="请填写手机号"> -->
+					<!-- <span class="po-ab right-0 f-10em lh-20em color-ff3032 b-1-ff3032 mb-8em mt-18em top-0 bor-ra-3 pl-5em pr-5em" onclick="sendcode_no()" id="sendcode">发送验证码<span id="time"></span></span> -->
+				<!-- </div> -->
+				<!-- <div class="over-h">
+					<input class="w-50b pull-right bb-1-df mb-8em mt-25em b-0 w-100b p-0 h-20em lh-20em color-33 f-16em" id='code' maxlength="18" type="email" onfocus="add(this);"onblur="rem(this)" placeholder="请输入验证码">
+				</div> -->
+				<!-- <div class="bb-1-df po-re"> -->
+					<!-- <i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe871;</i>		 -->
+					<!-- <input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='code' maxlength="18" type="email" onfocus="add(this);"onblur="rem(this)" placeholder="请输入验证码"> -->
+				<!-- </div> -->
+			</div>
+			<input type="hidden" id="yanzhengma" name="yanzhengma">
+			<div class="mt-50em">
+				<div class="grad lh-46em h-42em bor-ra-3 text-align color-white f-16em" onclick="login_no()">
+					注册
+				</div>
+			</div>
+		</form>
+	</div>
+		
+	<div class="mui-content-padded oauth-area fcolor-99">
+	</div>
+		
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/mui/mui.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_H5APPFrame_public.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/mui/mui.picker.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/mui/mui.poppicker.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+	<script type="text/javascript" src="__STATICS__/apps/page_wechat/index/js/bd_mine_login.js"></script>
+	<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+	
+	
+	<script type="text/javascript">
+	var communist_no = D.getItem('communist_no');
+	function add(obj){
+		$(obj).addClass("bg-color-white");
+	}
+	function rem(obj){
+		$(obj).removeClass("bg-color-white");
+	}
+	// function openselectWin(winName){
+	// 	api.openWin({
+	// 	    name: winName,
+	// 	    url: '../../sp_com/com_phonebook/header/'+winName+'.html',
+		 
+	// 	});	
+	// }
+	function login_no(){
+		var num = 1;
+		if($('#real_name').val() ==''){
+			alert('请填写姓名');
+			num++;
+			return;
+		}else if($('#IDCard').val() ==''){
+			alert('请填写身份证号码');
+			num++;
+			return;
+		}else if($('#user_name').val() ==''){
+			alert('请输入用户名');
+			num++;
+			return;
+		}else if($('#mobile').val() ==''){
+			alert('请输入手机号');
+			num++;
+			return;
+		}else if(verifyPhone($('#mobile').val())==false){
+			alert('手机号码格式不正确');
+			num++;
+			return;
+		}else if($('#password1').val() ==''){
+			alert('请输入密码');
+			num++;
+			return;
+		}else if(verifyIDCard($('#IDCard').val())==false){
+			alert('身份证号码格式不正确');
+			num++;
+			return;
+		}//else if($('#code').val()==''){
+			//alert('请输入验证码');
+			//return;
+		//}
+		if(num == '1'){
+			$('#form_table').submit();
+		}
+		
+		//var yanzhengma = $('#yanzhengma').val();
+		//var code = $('#code').val();
+		//if(yanzhengma==code){
+			//$('#form_table').submit();
+		//}else{
+			//alert('验证码输入不正确');
+		//}
+	}
+	function verifyIDCard(IDCard){
+		if (!IDCard.match(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/)) {
+			return false;
+		}else{
+			return true;
+		}
+	}	
+	function sendcode_no(){
+		var phone = $("#mobile").val();
+		if(phone==""){
+			alert("请输入手机号");
+		}else if(verifyPhone($('#mobile').val())==false){
+			alert('手机号码格式不正确');
+			return;
+		}//else{
+			//$.ajax({
+			//	url:"{:U('ajax_phone')}",
+			//	data:{'phone':phone},
+			//	type:"post",
+			//	async:false,
+			//	success:function(msg){
+			//		$("#yanzhengma").val(msg.code_no);
+			//		if(msg.success=='ok'){
+			//			$("#sendcode").html('已发送等待(<span id="time">60</span>s)');
+			//			$("#sendcode").removeAttr('onclick');
+			//			var setTime;
+			//			//倒计时
+			//			$(document).ready(function(){
+			//				var time=parseInt($("#time").text());
+			//				setTime=setInterval(function(){
+			//					if(time<=0){
+			//						clearInterval(setTime);
+			//						return;
+			//					}
+			//					time--;
+			//					if(time==0){
+			//						$("#time").remove();
+			//						$("#sendcode").html('发送验证码');
+			//						$("#sendcode").attr('onclick','sendcode_no()');
+			//					}
+			//					$("#time").text(time);
+			//				},1000);
+			//			});
+			//		}
+			//
+			//	}
+			//})
+		//}
+	}
+	//验证手机号
+	function verifyPhone(phone){
+		if (!phone.match(/^1[34578]\d{9}$/)) {
+	//      api.toast({msg: '手机号码格式不正确' ,duration:3000,location: 'top'});
+			return false;
+		}else{
+			return true;
+		}
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+//component
+@import "../components/function_cards";
+
+.content_box{
+  background: #fff url("../../images/guide-neigh-content-bg.png");
+  background-size: cover;
+}
+.function{
+  flex-flow: row wrap;
+  width: inherit;
+  height: inherit;
+  justify-content: space-between;
+}
+.function_title{
+  line-height: 50px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 48px;
+  font-family: 方正正准黑简体;
+  color: #3d700b;
+}
+.function_card{
+  position: relative;
+  width: 250px;
+  height: 300px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.card-title{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  font-size: 18px;
+  background: rgba(61, 112, 11, .3);
+  color: #fff;
+  text-align: center;
+}
+.card-img{
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}

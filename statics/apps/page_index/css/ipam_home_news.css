@@ -1,0 +1,105 @@
+/*
+    新闻页党建新闻右侧新闻样式开始
+*/
+.news_news .public_card_content li{
+    line-height: 38px;
+}
+.news_news_mask{
+    position: absolute;
+    height: 44px;
+    background: linear-gradient(transparent, #000);
+    color: #fff;
+    line-height: 44px;
+    text-align: center;
+}
+/*
+    新闻页党建新闻右侧新闻样式结束
+*/
+/* 新闻首页列表样式结束 */
+/*
+    高层动态部分样式开始
+*/
+.news_state .news_content > div:nth-child(1){
+    border-right: solid 1px #dfdfdf;
+}
+.news_list_imgbox{
+    /*display: table;*/
+    /*width: 100%;*/
+    /*table-layout: fixed;*/
+}
+.news_list_imgitem{
+    /*display: table-cell;*/
+    /*vertical-align: middle;*/
+    float: left;
+    width: 180px;
+    height: 136px;
+    overflow: hidden;
+}
+/*
+    高层动态部分样式结束
+*/
+/*
+    通知公告样式开始
+*/
+.public_word_lr_two{
+    margin: 8px 0;
+}
+.public_word_lr_two_content_date{
+    font-size: 12px;
+}
+.public_word_lr_two_content p{
+    /*font-size: 14px;*/
+}
+/*
+    通知公告样式结束
+*/
+/*
+    投稿专区开始
+*/
+.news_contribute{
+    display: table;
+    table-layout: fixed;
+}
+.news_contribute .public_word_lr_two{
+    display: table-cell;
+    padding: 6px;
+}
+.news_contribute .public_word_lr_two_content p{
+    font-size: 12px;
+    color: #999;
+    -webkit-line-clamp: 3;
+}
+/*
+    投稿专区结束
+*/
+/*
+    新闻详情页样式开始
+*/
+/* 新闻排行样式开始 */
+ol.news_newsranking li{
+  line-height: 31px;
+}
+/* 新闻排行样式结束 */
+/* 新闻首页列表模板样式开始 */
+.news_list_card{
+    display: table;
+}
+.news_list_card_a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.news_list_card_img, .news_list_txt{
+    display: table-cell;
+    vertical-align: middle;
+    table-layout: fixed;
+}
+.news_list_txt{
+    color: #666;
+}
+/* 新闻首页列表模板样式结束 */
+.news_list_title{
+    font-size: 18px;
+    color: #000;
+}
+

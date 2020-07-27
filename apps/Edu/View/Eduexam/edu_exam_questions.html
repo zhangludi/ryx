@@ -1,0 +1,71 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-col-md12">
+        <div class="layui-card ">
+            <div class="page-container">
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        <table  class="layui-table" id="demo"  lay-filter="demo" >
+                        </table>
+                        <form action="{:U('edu_exam_questions_save')}" method="post" id="forms">
+                            <input type="hidden" id="questions" name="questions">
+                            <input type="hidden" name="exam_id" value="{$exam_id}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-footer" style="text-align: right">
+                <button  class="layui-btn table-add " onclick="getCheckData()"   style="text-decoration: none;" title="提交">提交</button>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+    //            默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: '{:U("Edu/Eduexam/edu_exam_questions_data",array("exam_id"=>$exam_id))}'
+                    , height: '260'
+                    , id : 'ztreedata'
+                    , cols: [[
+                        { checkbox: true },
+                        { title: '序号', field: 'questions_id',width:60 },
+                        { title: '题目', field: 'questions_title'  },
+                        { title: '类型', field: 'questions_type',width:60 },
+                        { title: '选项', field: 'questions_item'},
+                        { title: '正确答案', field: 'questions_answer',width:90 },
+                        { title: '分值', field: 'questions_score',width:60 },
+                    ]]
+                    , page: false
+                });
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+            });   
+        })
+     function getCheckData() {
+        var table_data = layui.table.cache.ztreedata;
+        var questions = '';
+        for(var i=0;i< table_data.length;i++){
+                //数据id和要勾选的id相同时checkbox选中
+            if(table_data[i]["LAY_CHECKED"] == true)
+            {
+                questions += table_data[i].questions_id + ',';
+                $("#questions").val(questions);
+                $("#forms").submit();
+            }
+        }
+    }
+</script>
+</block>

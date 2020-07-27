@@ -1,0 +1,55 @@
+.mapcountBox{
+	width: auto;
+	height:40px;
+	overflow: hidden;
+	float: left;
+	background-color: #eee;
+}
+
+.t_num {
+	display: inline-block;
+	line-height: 13px;
+	margin: 2px 4px 0 4px;
+}
+
+.t_num i {
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	background:#FFBF00 url(./img/number.png) no-repeat;
+	background-position: 0 0;
+	text-indent: -999em;
+	margin-right: 1px;
+	overflow: hidden;
+}
+.clear{
+	clear: both;
+}
+.fl{
+	float: left
+}
+.mamcountitem{
+	width: auto;
+	height: auto;
+}
+.clable{
+	width: auto;
+	height: auto;
+	line-height:40px;
+	font-weight: bold;
+	padding: 0 0 0 15px;
+}
+
+.splitline{
+	width: 1px;
+	height: 100%;
+	border-left: 1px solid #ccc;
+	float: left;
+	margin-left:7px;
+	margin-right: 7px;
+}
+.clablegray{
+	color: #999;
+	padding-left: 0px !important;
+	padding-right: 10px;
+}

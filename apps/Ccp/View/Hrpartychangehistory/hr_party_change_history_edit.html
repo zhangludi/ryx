@@ -1,0 +1,387 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+    <style>
+        #js-grid-juicy-projects {
+            margin-left: 0% !important;
+        }
+        #js-grid-juicy-projects2 {
+            margin-left: 0% !important;
+        }
+    </style>
+
+</block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md9">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                    <form id="form_sample_2" action="{:U('Hrpartychange/hr_party_change_history_do_save')}" onsubmit="return check_file()" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input name="party_no" type="hidden" value="{$party_no}">
+                        <input name="type" type="hidden" value="2">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>换届时间：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" id="test4" name="change_time" value="{$change_time}" autocomplete="off"  placeholder="yyyy-mm-dd"  class="layui-input" lay-verify='required' ></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',1);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img1" name="change_file[]" value="{$change_log_info.change_file}" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img1','source_name','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',2);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img2" name="change_file[]" value="{$change_log_info.change_file}" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img2','source_name','js-grid-juicy-projects2','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects2" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',3);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img3" name="change_file[]" value="" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img3','source_name','js-grid-juicy-projects3','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects3" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',4);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img4" name="change_file[]" value="{$change_log_info.change_file}" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img4','source_name','js-grid-juicy-projects4','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects4" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',5);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img5" name="change_file[]" value="{$change_log_info.change_file}" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img5','source_name','js-grid-juicy-projects5','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects5" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',6);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img6" name="change_file[]" value="{$change_log_info.change_file}" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img6','source_name','js-grid-juicy-projects6','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects6" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>材料名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    <select name="code_no"  lay-filter="aihao" lay-search="" disabled="disabled">
+                                            <php>echo getBdCodeSelect('party_change_step_code',7);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:1%">
+                                     <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="hidden" id="source_name" name="source_name" value=""/>
+                                        <input type="hidden" id="ad_img7" name="change_file[]" value="{$change_log_info.change_file}" style="width: 60px">
+
+                                        <button type="button" class="layui-btn " id="test3" target="_self" onclick="uploader_file('ccp','1','ad_img7','source_name','js-grid-juicy-projects7','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <div id="js-grid-juicy-projects7" class="cbp" style="height:100px">
+                                            <neq name="change_log_info.change_file" value="">
+                                                <php>echo getUploadHtml($change_log_info['change_file']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+                <div class="layui-card">
+                    <form class="layui-form">
+                        <div class="layui-card-header" style="position: relative;">
+                            <span>换届组织信息</span>
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="row p5-editor-move">
+                        <div class="form-group  mt-5 col-md-12 ">
+                            <label class="control-label col-md-12 pl-0 lh-30 lh-30 " style="text-align: left !important;">
+                                组织名称：
+                            </label>
+                            <div class="col-md-12 p5-form-control pl-0">
+                                <div class="input-icon right">
+                                    <label class="control-label pl-0 mt-5 ml-20" style="text-align: left !important;">{$party_row.party_name}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group  mt-5 col-md-12 ">
+                            <label class="control-label col-md-12 pl-0 lh-30 lh-30" style="text-align: left !important;">
+                                组织层级：
+                            </label>
+                            <div class="col-md-12 p5-form-control pl-0">
+                                <div class="input-icon right">
+                                    <label class="control-label pl-0 mt-5 ml-20" style="text-align: left !important;">{$party_row.party_level_name}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <!-- <div class="col-md-3">
+            <div class= "portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <div class="cont-col1">
+                            <div class="label label-sm bg-color-red2">
+                                <i class="iconfont">&#xe650;</i>
+                            </div>
+                        </div>
+                        <span class="bold ">换届组织信息</span>
+                    </div>
+                </div>
+                <div class="portlet-body right">
+                    <div class="row p5-editor-move">
+                        <div class="form-group  mt-5 col-md-12 ">
+                            <label class="control-label col-md-12 pl-0 lh-30 lh-30 " style="text-align: left !important;">
+                                组织名称：
+                            </label>
+                            <div class="col-md-12 p5-form-control pl-0">
+                                <div class="input-icon right">
+                                    <label class="control-label pl-0 mt-5 ml-20" style="text-align: left !important;">{$party_row.party_name}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group  mt-5 col-md-12 ">
+                            <label class="control-label col-md-12 pl-0 lh-30 lh-30" style="text-align: left !important;">
+                                组织层级：
+                            </label>
+                            <div class="col-md-12 p5-form-control pl-0">
+                                <div class="input-icon right">
+                                    <label class="control-label pl-0 mt-5 ml-20" style="text-align: left !important;">{$party_row.party_level_name}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script>
+        function uploader_file(functions,type,saveid_id,savename_id,prev_id,rel,single){
+           var url = "{:U('System/Upload/upload_form')}?function="+functions+"&type="+type+"&saveid_id="+saveid_id+"&savename_id="+savename_id+"&prev_id="+prev_id+"&rel="+rel+"&single="+single;
+           layer.open({
+               type: 2,
+               title: '文件上传',
+               shadeClose: true,
+               shade: 0.8,
+               area: ['800px', '400px'],
+               content: url,
+               success:function(){
+                layerAuto();
+               }//iframe的url
+           });
+       }
+        function check_file(){
+            var file_upload1 = $("#ad_img1").val();
+            var file_upload2 = $("#ad_img2").val();
+            var file_upload3 = $("#ad_img3").val();
+            var file_upload4 = $("#ad_img4").val();
+            var file_upload5 = $("#ad_img5").val();
+            var file_upload6 = $("#ad_img6").val();
+            var file_upload7 = $("#ad_img7").val();
+            if(file_upload1 == '' || file_upload1 == null){
+                alert('筹备会议纪要,请上传附件！');
+                return false;
+            } if(file_upload2 == '' || file_upload2 == null){
+                alert('请示文件,请上传附件！');
+                return false;
+            }  if(file_upload3 == '' || file_upload3 == null){
+                alert('请示批复文件,请上传附件！');
+                return false;
+            }  if(file_upload4 == '' || file_upload4 == null){
+                alert('候选人公示名单,请上传附件！');
+                return false;
+            }  if(file_upload5 == '' || file_upload5 == null){
+                alert('上届工作报告,请上传附件！');
+                return false;
+            }  if(file_upload6 == '' || file_upload6 == null){
+                alert('换届选举结果报告,请上传附件！');
+                return false;
+            }  if(file_upload7 == '' || file_upload7 == null){
+                alert('结果报告批复文件,请上传附件！');
+                return false;
+            } else {
+                return true;
+            }
+       }
+         function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form;
+            form.render(null, 'component-form-group');
+            
+            });
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+       
+
+        layui.use('layedit', function(){
+            var layedit = layui.layedit;
+            layedit.set({
+                uploadImage: {
+                    url: "{:U('System/public/layedit_upload')}" //接口url
+                  , type: 'post' //默认post
+                }
+            });
+            layedit.build('notes_content'); //建立编辑器
+        });
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'date'
+            });
+            laydate.render({
+                elem: '#test5'
+                ,type: 'date'
+            });
+        })
+    </script>
+</block>

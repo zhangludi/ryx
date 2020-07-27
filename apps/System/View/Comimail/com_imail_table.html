@@ -1,0 +1,107 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body"> 
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+            	<input type="hidden" name="names" id="names" />
+            	<eq name="type" value="0">
+                <table id="exampleTablePagination" class="table-condensed table-striped"  data-search="true"
+					data-show-refresh="true" data-show-toggle="true" data-toggle="table"
+					data-show-columns="true" data-show-export="true"
+					data-detail-view="false" data-detail-formatter="detailFormatter"
+					data-minimum-count-columns="2" data-striped="true"
+					data-show-pagination-switch="true" data-pagination="true"
+					data-id-field="communist_no" data-page-list="[10, 25, 50, 100, ALL]"
+					data-show-footer="false" 
+					data-url="{:U('com_imail_table_data',array('party_id'=>$party_id))}">
+					<thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="communist_no">员工编号</th>
+                            <th data-field="communist_name">员工姓名</th>
+                            <th data-field="communist_sex">性别</th>
+                        </tr>
+                    </thead>
+				</table>
+				</eq>
+				<eq name="type" value="1">
+                    <table id="exampleTablePagination"  data-search="true"
+						data-show-refresh="true" data-show-toggle="true" data-toggle="table"
+						data-show-columns="true" data-show-export="true"
+						data-detail-view="false" data-detail-formatter="detailFormatter"
+						data-minimum-count-columns="2" data-striped="true"
+						data-show-pagination-switch="true" data-pagination="true"
+						data-id-field="cust_id" data-page-list="[10, 25, 50, 100, ALL]"
+						data-show-footer="false" 
+						data-url="{:U('com_imail_cust_table_data',array('type_id'=>$type_id))}">
+						<thead>
+	                         <tr>
+	                             <th data-field="state" data-checkbox="true"></th>
+	                             <th data-field="communist_name">客户名称</th>
+	                             <th data-field="cust_fullname">客户全名</th>
+	                         </tr>
+                        </thead>
+					</table>
+				</eq>
+				<eq name="type" value="2">
+                    <table id="exampleTablePagination"  data-search="true"
+						data-show-refresh="true" data-show-toggle="true" data-toggle="table"
+						data-show-columns="true" data-show-export="true"
+						data-detail-view="false" data-detail-formatter="detailFormatter"
+						data-minimum-count-columns="2" data-striped="true"
+						data-show-pagination-switch="true" data-pagination="true"
+						data-id-field="supplier_id" data-page-list="[10, 25, 50, 100, ALL]"
+						data-show-footer="false" 
+						data-url="{:U('com_imail_supplier_table_data',array('supplier_id'=>$supplier_id))}">
+						<thead>
+	                         <tr>
+	                             <th data-field="state" data-checkbox="true"></th>
+	                             <th data-field="communist_name">供应商名称</th>
+	                             <th data-field="supplier_fullname">供应商全名</th>
+	                         </tr>
+                        </thead>
+					</table>
+				</eq>
+            </div>
+        </div>
+    </div>
+ </block>
+<block name="js">
+	<script>
+	$("#exampleTablePagination").change(function(){
+		//var TableData = $(this).bootstrapTable('getSelections');//获取表格的所有内容行
+		 var name = $.map($(this).bootstrapTable('getSelections'), function (row) {
+             return row.communist_name;
+         });
+		var names = name+" ";
+		$("#names").val(names);
+	});
+          
+	
+	//从父页面调用此方法
+	function getuserid(){
+		
+			var str=[];
+			$("input[name='btSelectItem']:checked").each(function(){
+				str.push($(this).val());
+			})
+			var strss=str.join(",");
+		/* 	$('#strid').val(strss); */
+			if(strss==""){
+				alert('至少选择一条数据');
+				return false;
+			}else{
+				return strss;
+			}
+		} 
+	function people_type(){
+		return "{$type}";
+	}
+	function names(){
+		var names = $("#names").val();
+		return names;
+		
+	}
+	</script>
+</block>

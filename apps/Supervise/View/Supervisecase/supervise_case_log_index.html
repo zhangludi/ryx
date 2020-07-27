@@ -1,0 +1,151 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 center-text lh-40">
+	                           	 时间：
+	                        </div>
+	                        <div class="layui-col-xs2">
+	                            <input type="text" class="layui-input" autocomplete="off" name="start_time" id="start_time" placeholder="yyyy-mm-dd">
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                          <a type="button"  class="layui-btn table-add" onclick="case_log_hear_add()"">添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="ztreedata"  lay-filter="demo"></table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+	//            默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#ztreedata'
+	                , url: '{:U("supervise_case_log_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+		                {title: '编号', width:120 ,field: 'ce_id',align: 'center',sort: true},
+		                {title: '案件标题', field: 'case_title',  align: 'left'},
+		                {title: '处分人员', width:220 , field: 'communist_name',align: 'center'},
+		                {title: '添加时间', width:190 , field: 'add_time',align: 'center'},
+		                {title: '状态',  width:160 ,   field: 'status_name',  align: 'center'},
+		                {title: '操作', width:200 , field: 'operate',align: 'center'}
+	                ]]
+	                , page: true
+	            });
+	            
+	            var $ = layui.$, active = {
+	                    reload: function(){
+	                        var start_time = $('#start_time').val();
+	                        table.reload('ztreedata', {
+	                            page: {
+	                              curr: 1 
+	                            }
+	                            ,where: {
+	                                "start":start_time,
+	                            }
+	                        });
+	                    }
+	                };
+	                $('.layui-form .layui-btn').on('click', function(){
+	                    var type = $(this).data('type');
+	                    active[type] ? active[type].call(this) : '';
+	                });
+	        });   
+	    })
+	</script>
+    <script>
+		laydate.render({
+			elem: '#start_time'
+			,type: 'date'
+			,range: true
+		});
+
+        function search(){
+           
+            var start = $("#start_time").val();
+           
+            $('#client_table').bootstrapTable('removeAll');
+            $('#client_table').bootstrapTable('refresh',{url:"{:U('supervise_case_log_data')}",query:{'start':start}});
+        }
+        function data_export(){
+            $("#search").attr('action',"{:U('_communist_list_export')}");
+            $("#search").submit();
+        }
+        function case_log_hear($status,$ce_id) {
+			layer.open({
+				type : 2,
+				title : '案件审核详情',
+				offset : window.parent.document.body.scrollTop + 10 + 'px',
+				maxmin : false,
+				shadeClose : true, //点击遮罩关闭层
+				area : [ '600px', '325px' ],
+				content : "{:U('supervise_case_log_hear')}?status="+$status+"&ce_id="+$ce_id,
+				success:function(){
+                	layerAuto();
+                }
+			});
+		};
+		function case_log_hear_info($ce_id) {
+			layer.open({
+				type : 2,
+				title : '案件审核',
+				offset : window.parent.document.body.scrollTop + 10 + 'px',
+				maxmin : false,
+				shadeClose : true, //点击遮罩关闭层
+				area : [ '600px', '325px' ],
+				content : "{:U('supervise_case_log_info')}?ce_id="+$ce_id,
+				success:function(){
+                	layerAuto();
+                }
+			});
+		};
+		function case_log_hear_add() {
+			layer.open({
+				type : 2,
+				title : '添加人员',
+				offset : window.parent.document.body.scrollTop + 10 + 'px',
+				maxmin : false,
+				shadeClose : true, //点击遮罩关闭层
+				area : [ '700px', '425px' ],
+				content : "{:U('supervise_case_log_hear_edit')}",
+				success:function(){
+                	layerAuto();
+                }
+			});
+		};
+		function case_log_info(case_id) {
+			var index = layer.open({
+               type: 2,
+               title: false,
+               end:false,
+               closeBtn: 0,
+               shift: 1,
+               content: "{:U('supervise_case_info')}?case_id="+case_id,
+               area: ['300px', '300px']
+            });
+            layer.full(index);
+		};
+    </script>
+</block>

@@ -1,0 +1,186 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('edu_exam_save')}" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="exam_id" value="{$exam_data.exam_id}">
+                        <input type="hidden" class="form-control" name="material_id" value="{$material_id}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>试卷标题：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="exam_title" placeholder="请输入标题"  value="{$exam_data.exam_title}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                            	<div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考试时间：</strong></div>
+	                                <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+	                                    <input type="text" name="exam_date" id="test4" lay-verify="date|required" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" lay-key="3" value="{$exam_data.exam_date}">
+	                                </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                            	</div>
+                        	</div>
+                            
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考试时长：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="exam_time" onkeyup="value=value.replace(/[^\d.]/g,'')"  placeholder="请输入考试时长，以分钟为单位" value="{$exam_data.exam_time}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>考试范围：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <select name="exam_party" xm-select="party_manager_select" xm-select-skin="danger" xm-select-search lay-verify='required'>
+                                            <php>echo getPartySelect($exam_data['exam_party']);</php>
+                                        </select>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>对应群体：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <select name="exam_group" xm-select="exam_group" xm-select-skin="danger" xm-select-search>
+                                            <php> echo getGroupSelect(1,$exam_data['exam_group'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>资料标签：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <select name="exam_data_r" xm-select="exam_data_r" xm-select-skin="danger" xm-select-search>
+                                            <php> echo getGroupSelect(2,$exam_data['exam_data_r'])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>是否为模拟题：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <input type="radio" name="is_simulation" value="1" title="是"<eq name="exam_data.is_simulation" value="1">checked</eq> >
+                                        <input type="radio" name="is_simulation" value="0" title="否" <neq name="exam_data.is_simulation" value="1">checked</neq> >
+                                    </div>
+                                </div>
+                            </div>
+                            <eq name="is_integral" value="1">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>积分：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="exam_integral"  placeholder="请输入积分" value="{$exam_data.exam_integral}" autocomplete="off" class="layui-input" lay-verify='required' onkeyup="value=value.replace(/[^\d.]/g,'')" ></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            </eq>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>专题：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="exam_topic" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                            <option value="">请选择</option>
+                                            <volist name="topic_data" id="list">
+                                                <option value="{$list.topic_id}" <eq name="list.topic_id" value="$topic_id">selected</eq>
+                                                >{$list.topic_title}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
+
+                                    <input type="hidden" id="source_name" name="source_name" value="" />
+                                    <input type="hidden" id="exam_thumb_old" name="exam_thumb_old" value="{$exam_data.exam_thumb}" style="width: 60px">
+                                    <input type="hidden" id="exam_thumb" name="exam_thumb" value="{$exam_data.exam_thumb}" style="width: 60px">
+                                    
+
+                                    <button type="button" class="layui-btn" id="exam_thumb" onclick="uploader_file('edu','1','exam_thumb','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                     <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                    <div id="js-grid-juicy-projects2" style="height:100px">
+                                        <neq name="exam_data.exam_thumb" value="">
+                                            <php>echo getUploadHtml($exam_data['exam_thumb']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
+                                    <input type="hidden" id="article_thumb" name="exam_thumb" value="{$exam_data.exam_thumb}" style="width: 60px">
+                                    <button type="button" class="layui-btn" id="exam_thumb" onclick="uploader_file('edu','1','exam_thumb','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                    <div id="js-grid-juicy-projects2" style="height:100px">
+                                        <neq name="exam_data.exam_thumb" value="">
+                                            <php>echo getUploadHtml($exam_data['exam_thumb']);</php>
+                                        </neq>
+                                    </div>
+                                </div>
+                            </div> -->
+                           
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+    <script>
+        function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'date'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'datetime'
+                ,range: true
+            });
+        })
+    </script>
+</block>

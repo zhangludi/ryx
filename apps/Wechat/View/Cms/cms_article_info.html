@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>党务动态</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/cms/css/cms_partyWork.css" />
+<style>
+	header{height:3.5rem !important;}
+</style>
+</head>
+<body class="bg-color-whiter">
+<header class="aui-bar aui-bar-nav aui-bar-info pt-20em bg-color-whiter border-3em-de po-fix z-index-max top-0em">
+    <ul>
+       <li class="">
+    		<a class="pull-left mt-15em pl-12em" href="javascript:history.back(-1)">
+		        <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/images/images_cms/cms_back.png" alt="返回" />
+		    </a>
+    		<div class="aui-title f-w color-21">详情</div>
+      </li>
+    </ul>
+</header>
+<div class="mt-70em">		
+	<div class="pt-15em">
+		<h2 id="article_title" class="aui-title f-24em f-w color-21 lh-32em pt-2em pl-15em pr-15em">{$article_info.article_title}</h2>
+		<div class="over-h clearfix f-12em lh-15em color-99 pt-20em pb-15em pl-15em pr-15em">
+			<div class="pull-left">
+				<span>作者：{$article_info.add_staff}</span>
+				<span id="add_communist"></span>
+			</div>
+			<div class="pull-right">
+				<span>时间：{$article_info.add_time}</span>
+				<span id="add_time"></span>
+			</div>
+		</div>
+	</div>
+	<p class="summary_con text-j">
+		<span class="color-75">摘要：</span>
+		<span id="article_description">{$article_info.article_description}</span>
+	</p>
+	<div id="article_content" class="f-13em lh-19em pl-15em pr-15em mt-9em pt-14em mb-74em text-j">
+		{$article_info.article_content}
+	</div>
+	<!--点赞+收藏-->
+	<!-- <div class="clearfix mt-20em w-90b m-a border-3em-de pb-40em"> -->
+		<!-- <div class="pull-left bg-color-f5 b-ra-5em w-160em h-34em lh-34em text-align"> -->
+			<!-- <img class="w-12em h-12em di-i" src="__STATICS__/apps/page_wechat/images/images_cms/cms_dianzan.png"> -->
+			<!-- <span class="color-21 f-12em">1.8w</span> -->
+		<!-- </div> -->
+		<!-- <div class="pull-right bg-color-f5 b-ra-5em w-160em h-34em lh-34em text-align"> -->
+			<!-- <img class="w-12em h-12em di-i" src="__STATICS__/apps/page_wechat/images/images_cms/cms_sc.png"> -->
+			<!-- <span class="color-21 f-12em">收藏</span> -->
+		<!-- </div> -->
+	<!-- </div> -->
+	<!--评论-->
+	<div class="mt-30em mb-70em w-95b m-a">
+		<div class="clearfix h-24em lh-24em va-jz">
+			<div class="pull-left di-i h-20em w-4em bg-color-D4A500"></div>
+			<div class="pull-left f-24em color-21 f-w ml-7em">评论</div>
+		</div>
+		<ul>
+			<volist name="comment_list" id="list">
+			<li class="w-95b m-a mt-20em">
+				<div class="clearfix ">
+					<div class="pull-left va-jz">
+						<img class="h-32em w-32em di-i" src="{$list.communist_avatar}">
+						<span class="f-16em color-21 f-w ml-8em">{$list.communist_name}</span>
+					</div>
+					<!-- <div class="pull-right va-jz h-32em"> -->
+						<!-- <img class="h-12em w-12em di-i mt-1mem" src="__STATICS__/apps/page_wechat/images/images_cms/comment_dz.png"> -->
+						<!-- <span class="f-12em color-9e ml-5em">1.8w</span> -->
+					<!-- </div> -->
+				</div>
+				<div class="lh-32em f-16em color-21 com_sha">{$list.comment_content}</div>
+			</li>	
+			</volist>
+		</ul>
+	</div>
+
+</div>
+<div class="mask_bg">
+	<div class="po-fix bottom-0em w-100b">
+		<!--写评论隐藏框-->
+	<form id="form_sample_2" action="{:U('cms_article_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+		<div class="edu_news_mask di-n border-top-3em-de bg-color-whiter w-100b h-100b lh-42em va-jz b-ra-5em">
+			<input type="hidden" name="article_id" value="{$article_info.article_id}">
+			<textarea name="comment_content" class="h-100b bg-color-whiter f-15em lh-18em color-33 bor-ra-3 bor_none p-20em" placeholder="记录今日的学习收获……"></textarea>
+		</div>
+	</form>
+		<!--写评论隐藏框end-->
+		<div class="edu_news_com bg-color-whiter border-top-3em-de h-42em lh-42em va-jz">
+			<img class="w-20em h-18em ml-12em mr-12em" src="__STATICS__/apps/page_wechat/images/images_cms/comment_fabu.png">
+			<input id="edu_news_input" class="f-16em color-9e" type="text" value="" placeholder="欢迎发表您的观点···">
+			<div class="pull-right color-ff4040 f-16em f-w w-20b" onclick="edu_release()">发布</div>
+		</div>
+	</div>
+</div>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- <script type="text/jscript" src="js/cms_partyWork_info.js"></script> -->
+<script type="text/javascript">
+    //写文字笔记遮罩层--------------------------------------------------------
+	$("#edu_news_input").focus(function(){
+	   $(".edu_news_mask").removeClass("di-n");
+	   $(".edu_news_com").removeClass("border-top-3em-de");
+	   $(".edu_news_com input").attr("disabled","disabled");
+	   $(".mask_bg").addClass("mask_bg_hide");
+	});
+	//发布评论内容
+	function edu_release(){
+		$(".edu_news_com input").removeAttr("disabled");
+		$(".edu_news_mask").addClass("di-n");
+		$(".edu_news_com").addClass("border-top-3em-de");
+		$(".mask_bg").removeClass("mask_bg_hide");
+	}
+	function edu_release(){
+		$('#form_sample_2').submit();
+	}
+</script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/cms/css/cms_partyWork_info.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+header ul li{
+	display: block; !important;
+}
+img {
+    display: inline-block;
+}
+.pt-10em {
+    padding-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.pt-15em {
+	padding-top: 0.5rem;
+}
+.aui-bar .aui-pull-left {
+    padding-left: 10px;
+    font-size: 13.7px;
+    font-weight: 400;
+}
+.aui-bar .aui-iconfont {
+    position: relative;
+    z-index: 20;
+    font-size: 15.2px;
+    color: #ffffff;
+    font-weight: 400;
+    line-height: 45px;
+}
+</style>
+</head>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>
+    		<a class="aui-pull-left" href="javascript:history.back(-1)">
+				<span class="aui-iconfont aui-icon-left"></span>返回
+			</a> 		
+    		<div class="aui-title icon_medium f-16em">文章详情</div>
+    	</li>
+    </ul>
+</header>
+<div class="aui-content">
+	<div class="">
+		<div class="bg-color-whiter pt-15em">
+			<h2 class="aui-title text-align f-15em f-w color-333 lh-20em pt-2em pl-15em pr-15em">{$article_info.article_title}</h2>
+			<img class="mt-25em" src="__STATICS__/apps/page_wechat/images/images_oa/oa-bg.png" alt="" />
+			<div class="over-h f-12em lh-15em color-99 pb-15em pl-15em pr-15em">
+				<div class="pull-left">
+					<span>发布人：</span>
+					<span>{$article_info.add_staff}</span>
+				</div>
+				<div class="pull-right">
+					<span>{$article_info.add_time}</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="text-l f-13em lh-19em pl-15em pr-15em bg-color-whiter mt-9em pt-14em mb-74em">
+			<p class="mt-8em mb-8em pl-16em pl-16em pb-12em f-14em lh-20em color-ffba66 bg-color-whiter" style="padding-top: 0.6rem;">
+				<span class="color-75 pl-15em">摘要：</span>
+				{$article_info.article_description}
+			</p>
+			{$article_info.article_content}
+		</div>
+	</div>
+</div>
+	
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/cms/js/cms_partyWork_info.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/ccp/js/com_phoneBook.js"></script>
+</body>
+</html> -->

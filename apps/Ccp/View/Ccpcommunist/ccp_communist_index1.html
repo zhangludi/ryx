@@ -1,0 +1,355 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body"> 
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                   <div class="row">
+                       <div class="col-md-3">
+                          <div class="portlet light  bordered">
+                               <div class="portlet-title">
+                                   <div class="caption">
+                                       <div class="cont-col1">
+                                           <div class="label label-sm bg-color-green2">
+                                               <i class="iconfont">&#xe64b;</i>
+                                           </div>
+                                       </div>
+                                       <span class="bold ">组织</span>
+                                       <span class="caption-helper">
+                                       </span>
+                                   </div>
+                               </div>
+                               <div class="portlet-body">
+                                   <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1">
+                                       <div class="tree-sidebar">
+                                           <ul id="treeDemo" class="ztree"></ul>
+                                       </div>
+                                   </div> 
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-9">
+                       	<div class="portlet light  bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm bg-color-green2"><i class="iconfont">&#xe64b;</i></div>
+                                    </div>
+                                    <span class="bold ">列表</span><span class="caption-helper"></span>
+                                </div>
+                                <if condition="$type eq '1'" >
+	                                 <div class="pull-right mt-5">
+										<a target='_blank' href="__UPLOAD__/ccp/tpl_xls/communist_members.xls" class="btn btn-sm blue btn-outline bor-ra-2 w-120">
+			                                <i class="iconfont"></i>导入模板下载
+			                            </a>
+			                         	<a class="btn btn-sm blue btn-outline bor-ra-2 w-70" onclick="testTrue()">导入</a>
+										<button onclick="gourl()" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-70" id="communist_add_button" style="display: none;">
+											<i class="iconfont">&#xe674;</i>添加
+										</button>
+	                                 </div>
+                                </if>
+                            </div>
+							<div class="row ml-10">
+								<if condition="$type eq '1'" >
+									<div class="form-group col-md-4">
+										<div class="row">
+											<label class="control-label col-md-4 p-0 lh-35">姓名查询：</label>
+											<div class="col-md-8  p5-bug-search p-0">
+												<input type="text" class=" form-control " name="communist_name" id="communist_name" />
+											</div>
+										</div>
+									</div>
+									<div class="pull-right text-right p-0 mr-10">
+										<button class="btn btn-sm blue btn-outline bor-ra-2 mr-10 w-70" onclick="search()">搜索</button>
+										<!-- <eq name="type" value="1">
+											<button type="button" onclick="btnsearch()" class="btn btn-sm green btn-outline bor-ra-2 mr-30 w-70">高级查询</button>
+										</eq> -->
+									</div>
+								</if>
+							</div>
+							<input type="hidden" id="party" value="{$party_no}" >
+                            <div class="portlet-body">
+							   <div class="scroller p5-scroller"   data-always-visible="1" data-rail-visible1="1">
+									<div id="table">
+                                        <table id="client_table"   style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"
+	                                        class="table table-condensed table-striped" 
+	                                        data-toggle="table" 
+	                                        data-url="{:U('Ccpcommunist/ccp_communist_index_data')}?party_no={$party_no}"
+	                                        data-height="900"
+	                                        data-query-params="queryParams"
+	                                        data-search="false"
+	                                        data-show-refresh="false" data-show-toggle="false"
+	                                        false-show-columns="false" data-show-export="true"
+	                                        data-detail-view="false" data-detail-formatter="detailFormatter"
+	                                        data-minimum-count-columns="2"
+											data-page-size='10'
+											data-query-params-type='limit'
+											data-side-pagination='server'
+	                                        data-show-pagination-switch="false" data-pagination="true"
+	                                        data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]"
+	                                        >
+                                            <thead>
+                                            	<if condition="$type eq '2'" ><!-- 通讯录字段 -->
+													<tr>
+														<th data-align="center" data-sortable="true"  data-width='120px' data-field="communist_no" >党员编号</th>
+														<th data-align="center" data-sortable="true"  data-width='120px' data-field="communist_name" >姓名</th>
+														<th data-align="center" data-sortable="true"  data-width='120px' data-field="communist_mobile" >手机号</th>
+														<th data-align="center" data-sortable="true"  data-width='260px' data-field="party_no" >所属组织</th>
+														<th data-align="center" data-sortable="true" data-width='100px'  data-field="communiststaus"  >正式入党</th>
+													</tr>
+												<else/>
+													<tr>
+														<th data-align="center" data-sortable="true"  data-width='100px' data-field="communist_no" >编号</th>
+														<th data-align="center" data-sortable="true"  data-width='90px' data-field="communist_name" >姓名</th>
+														<th data-align="center" data-sortable="true"  data-width='90px' data-field="communist_sex" >姓别</th>
+														<th data-align="center" data-sortable="true"  data-width='100px' data-field="communist_mobile" >手机号</th>
+														<th data-align="center" data-sortable="true"  data-width='190px' data-field="party_no" >所属组织</th>
+														<th data-align="center" data-sortable="true" data-width='100px'  data-field="post_no"  >党内职务</th>
+													<!-- 	<th data-align="center" data-sortable="true" data-width='100px'  data-field="communiststaus" >党员状态</th> -->
+														<th data-align="center" data-sortable="true"  data-width='200px' data-field="operate" >操作</th>
+													</tr>
+												</if>
+                                            </thead>
+                                        </table>
+									</div>
+                                </div>
+								<div id="search_btn" class="test-layer">
+									<div class="portlet-body mt-30  container-fluid right mr-10b">
+										<div class="form-group col-md-6">
+											<div class="row">
+												<label class="control-label col-md-4 p-0 lh-35">党员编号：</label>
+												<div class="col-md-8">
+													<input type="text" class="  form-control " name="communist_no" id="communist_no" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="row">
+												<label class="control-label col-md-4 p-0 lh-35">性别：</label>
+												<div class="col-md-8">
+													<select id="communist_sex" name="communist_sex" class="  form-control  select2">
+													<option value="">请选择</option>
+													<option value="1">男</option>
+													<option value="2">女</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="row">
+												<label class="control-label col-md-4 p-0 lh-35">学历：</label>
+												<div class="col-md-8">
+													<!-- <input type="text" class="  form-control " name="communist_diploma" id="communist_diploma" /> -->
+													<select id="communist_diploma" name="communist_diploma" class="form-control  select2">
+														<option value="">请选择</option>
+														<php>echo getBdCodeSelect('diploma_level_code');</php>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="row">
+												<label class="control-label col-md-4 p-0 lh-35">手机号：</label>
+												<div class="col-md-8">
+													<input type="text" class="  form-control " name="phone" id="phone" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="row">
+												<label class="control-label col-md-4 p-0 lh-35">职务：</label>
+												<div class="col-md-8">
+													<select id="post_no" name="communist_post_no" class="  form-control  select2">
+														<option value="">请选择</option>
+														<php>echo getPartydutySelect();</php>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="row">
+												<label class="control-label col-md-4 p-0 lh-35">组织：</label>
+												<div class="col-md-8">
+													<select id="party_no" name="party_no" class="  form-control  select2">
+													<option value="0">请选择</option>
+													<php>echo getPartySelect();</php>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12 text-right p5-layer-button">
+											<button type="button" onclick="todo_search()" class="btn btn-sm blue btn-outline bor-ra-2 mr-15">
+												<i class="iconfont">&#xe694;</i>查询
+											</button>
+											<button type="button" onclick="cancel()" class="btn btn-sm blue btn-outline bor-ra-2">
+												<i class="iconfont">&#xe693;</i>取消
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="reinstate_popups" class="test-layer">
+								<div class="portlet-body mt-30">
+									<div class="form-group col-md-12">
+										<div class="row">
+											<label class="control-label col-md-1 lh-35 p-0"></label>
+											<label class="control-label col-md-2 lh-35 p-0">复职时间： </label>
+											<div class="col-md-8">
+												<input type="text" class="form-control layer-date " id="reinstate_time" name="reinstate_time" placeholder="选择日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+												<input type="hidden" id='reinstate_communist_no' name="communist_no" value=''>
+											</div>
+											<label class="control-label col-md-1 lh-35 p-0"></label>
+										</div>
+									</div>
+									<div class="col-md-12 text-right p5-layer-button">
+										<button onclick="cancel()" type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">取消</button>
+										<button class="btn btn-sm blue w-75 bor-ra-2 pull-right mr-10" onclick='communist_reinstate()'>确定</button>
+									</div>
+								</div>
+							</div>
+                          </div>
+                      </div>
+                  </div>
+           	</div>
+       	</div>
+   	</div>
+	<div id="testTrueCon" class="di-n">
+		<div class="portlet-body mt-30">
+			<form action="{:U('Ccpcommunist/ccp_communist_import_do_save')}" class="form-horizontal" enctype="multipart/form-data" method="post">
+				<div class="form-group col-md-12">
+					<div class="row">
+						<label class="control-label col-md-3 p-0">导入Excel表：</label>
+						<div class="col-md-8">
+							<input type="file" name="file_stu" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 text-right p5-layer-button">
+					<button type="submit" class="btn btn-sm blue btn-outline bor-ra-2 w-70">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+<block name="js">
+	 <script>
+	 function queryParams(params){
+			var party = $("#party").val();
+			var communist_name = $("#communist_name").val();
+		    return {
+		        limit : params.limit, //每一页的数据行数，默认是上面设置的10(pageSize)
+		        offset: params.offset,
+		        pageIndex : params.offset/params.limit+1, //当前页面,默认是上面设置的1(pageNumber)
+		        party_no : party, //这里是其他的参数，根据自己的需求定义，可以是多个
+		        communist_name:communist_name,
+		    }
+		}
+		function  Import(){
+			layer.open({
+				type: 2,
+				title: '员工导入',
+				maxmin: false,
+				shadeClose: true, //点击遮罩关闭层
+				offset:150,
+				area : ['500px' , '160px'],
+				content: "{:U('Ccp/Ccpcommunist/ccp_communist_import')}"
+			});
+		};
+	</script>
+		<script>
+               function testTrue(){
+                   layer.open({
+                       type: 1,
+                       title: "党员导入",
+                       offset: 100,
+                       shadeClose: true, //点击遮罩关闭层
+                       area : ['500px' , '200px'],
+                       content: $('#testTrueCon')
+                   });
+
+               }
+
+		</script>
+	<script>
+		function  btnsearch(){
+			layer.open({
+				type: 1,
+				title: '高级查询',
+				maxmin: false,
+				shadeClose: true, //点击遮罩关闭层
+				offset: window.parent.document.body.scrollTop+10+'px',
+				area : ['800px' , '370px'],
+				content: $('#search_btn'),
+			});
+		};
+	</script>
+	<script >
+            var zTreeObj;
+              // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+		 var setting = {
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					onClick: onClick//绑定回调函数
+				},
+				view: {
+                       showIcon: false
+                   }
+		   };
+              // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+              var zNodes = [
+					<volist name="party_list" id="list" key = 'k'>
+						//取消组织编号
+						{ id:"{$list.party_no}",pId:{$list.party_pno}, name:"{$list.party_name}", <if condition='$k eq 1'>open:true</if>},
+					</volist>
+				];
+              $(document).ready(function(){
+                 zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                 // 表格高度
+              });
+		   function onClick(e, treeId, treeNode) {
+				var party_no = treeNode.id;
+				$("#party").val(party_no);
+				var status = $("#status").val();
+				var communist_name = $("#communist_name").val();
+				$('#client_table').bootstrapTable('refresh',{url:"{:U('Ccpcommunist/ccp_communist_index_data')}",query:{party_no:party_no,status:status,communist_name:communist_name}});
+	 			$('#communist_add_button').show();
+			}
+       </script>
+		<script >
+		function todo_search()
+		{
+				var communist_no = $("#communist_no").val();
+				var party_no = $("#party").val();
+				var post_no = $("#post_no").val();
+				var communist_diploma = $("#communist_diploma").val();
+				var communist_sex = $("#communist_sex").val();
+				/* var communist_name=$("#communist_name").val(); */
+				var phone = $("#phone").val();
+				$('#client_table').bootstrapTable('refresh',{url:"{:U('Ccpcommunist/ccp_communist_index_data')}",query:{communist_no:communist_no,party_no:party_no,communist_diploma:communist_diploma,communist_sex:communist_sex,post_no:post_no,phone:phone}});
+				cancel();
+		}
+	 </script>
+	<script >
+		function gourl(){
+			var party_no = $("#party").val();
+			if(party_no == ''){
+				alert('请选择党支部');
+			} else{
+				location.href="{:U('ccp_communist_edit')}?type={$type}&party_no="+party_no+"";
+			}
+		}
+		function cancel(){
+			layer.closeAll();
+		}
+		//查询
+		function search(){
+			var party_no = $("#party").val();
+	        var communist_name=$("#communist_name").val();
+	       	$('#client_table').bootstrapTable('refresh',{url:"{:U('Ccpcommunist/ccp_communist_index_data')}",query:{party_no:party_no,communist_name:communist_name}});
+	    }
+	</script>
+</block>

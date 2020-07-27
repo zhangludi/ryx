@@ -1,0 +1,168 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <form class="layui-form">
+                    <div class="layui-card-header">
+                        <span title="党组织列表">党组织列表</span>
+                    </div>
+                    <div class="layui-card-body" style="overflow-y:auto">
+                        <div class="over-h-tree">
+                            <ul id="treeDemo" class="ztree ztree-demo">
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                        <div class="layui-form layui-card-body fitheight">
+                            <div class="layui-row layui-col-space5">
+                                <div class="layui-col-xs3 pull-right">
+                                    <a class="layui-btn" onclick="notes_info()" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">志愿者简介</a>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="demo"  lay-filter="demo">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+     function audit_volunteer(volun_id){
+        var url = "{:U('Life/Lifevolunteer/life_volunteer_audit')}?volunteer_id="+volun_id;
+        layer.open({
+            type: 2,
+            title: '志愿者详情',
+            maxmin: false,
+            offset: window.parent.document.body.scrollTop+20+'px',
+            shadeClose: true, //点击遮罩关闭层
+            area : ['600px' , '470px'],
+            content: url,
+            success:function(){
+                layerAuto();
+            }
+        });
+    }
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+        , admin = layui.admin
+        , element = layui.element
+        , form = layui.form
+        , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("life_volunteer_index_data")}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'volunteer_id', width: 100, title: '编号', sort: true,align: 'center'}
+                    , {field: 'communist_name', width:120 , title: '姓名'}
+                    , {field: 'add_time', title: '申请时间'}
+                    , {field: 'status', width: 160, title: '状态'}
+                    , {field: 'operate', width: 180, title: '操作',align: 'center'}
+                ]]
+                , page: true
+            });
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            var $ = layui.$, active = {
+                reload: function(){
+                    var time = $('#time').val();
+                    table.reload('ztreedata', {
+                        page: {
+                          curr: 1 
+                        }
+                        ,where: {
+                            "start":time
+                        }
+                    });
+                }
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        //点击左侧树的事件
+        var setting = {
+            view: {
+                showLine: false,
+            },
+            data: {
+                key: {
+                    title: "t"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                    layui.use('table', function () {
+                        var table = layui.table;
+                        table.render({
+                            elem: '#demo'
+                            , url: '{:U("life_volunteer_index_data")}?party_no='+node.id+''
+                            , height: 'full-160'
+                            , cols: [[
+                                {field: 'volunteer_id', width: 100, title: '编号', sort: true,align: 'center'}
+                                , {field: 'communist_name', width:120 , title: '姓名'}
+                                , {field: 'add_time', title: '申请时间'}
+                                , {field: 'status', width: 160, title: '状态'}
+                                , {field: 'operate', width: 180, title: '操作',align: 'center'}
+                            ]]
+                            , page: true
+                        });
+                    });
+                }
+            }
+        };
+
+        var zNodes = [
+            <volist name="party_list" id="list" key = 'k'>
+                {id:"{$list.party_no}",pId:"{$list.party_pno}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+            </volist>
+        ];
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+    })
+	function notes_info() {
+		layer.open({
+			type : 2,
+			title : '志愿者简介',
+            move: false,
+			maxmin : false,
+			shadeClose : true, //点击遮罩关闭层
+			area : [ '500px', '300px' ],
+			content : "{:U('Life/Lifevolunteer/life_volunteer_config_edit')}",
+			success:function(){
+            	layerAuto();
+            }
+		});
+	};
+    $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>	
+</block>

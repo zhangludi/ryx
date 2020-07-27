@@ -1,0 +1,77 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-body layui-form">
+					<form action="{:U('supervise_case_log_hear_save')}" id="form_validation"  class="form-horizontal" method="post">
+					<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>涉及人员：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<select name="case_communist_no" xm-select="communist_manager_select" xm-select-skin="danger" lay-verify='required' xm-select-search>
+                                       <php> echo getCommunistSelect($template_data[template_party]);</php>
+                                </select>
+                                </div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<textarea id="memo" class="layui-textarea " maxlength="500" rows="3" placeholder="备注." name="memo"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+									<div class="layui-footer" style="text-align: right">
+									<button class="layui-btn" type="submit" lay-submit="" lay-filter="component-form-demo1">提交</button>
+									<button type="button" onclick="cancel();" class="layui-btn layui-btn-primary mr-40">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+    <script>
+    layui.use([ 'form', 'laydate','formSelects'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form
+        		, formSelects = layui.formSelects;
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+    })
+	function cancel() {
+        parent.layer.closeAll();
+    }
+   
+    </script>
+    <script>
+    $(document).ready(function() {
+        $(".multiSelect").select2();
+        $("#btnSave").click(function() {
+            var v = $("#worker").select2("val");
+            $("#workers").val(v);
+            $("#myform").submit(); //myform表单的id
+        });
+
+    });
+    </script>
+
+</block>

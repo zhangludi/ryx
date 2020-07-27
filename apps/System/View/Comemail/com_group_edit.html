@@ -1,0 +1,72 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+	<div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="portlet light  bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<div class="cont-col1">
+								<div class="label label-sm bg-color-green2">
+									<i class="iconfont">&#xe64b;</i>
+								</div>
+							</div>
+							<span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+							<span class="caption-helper"></span>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form action="{:U('com/com_group_do_save')}" id="signupForm" class="form-horizontal" method="post">
+							<input id="group_id" name="group_id" type="hidden" value="{$group_row.group_id}" >
+							<div class="form-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label col-md-3">分组名称：</label>
+											<div class="col-md-8">
+												<input type="text" name="group_name" value="{$group_row.group_name}" data-required="1" class="form-control">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label col-md-3">选择人员：</label>
+											<div class="col-md-8 ">
+	                                         	<textarea id="missive_receiver_name" type="textarea" class="form-control " style="height:100px;resize: none;" name="missive_receiver_name"  disabled required/>{$group_row.communist_name}</textarea> 
+			                                    <input id="missive_receiver_no" type="hidden" class="form-control"  value="{$group_row.communist_no}" name="missive_receiver_no" /> 
+			                                    <input type="hidden" class="form-control"  value="{$missive_info.missive_receiver}" name="missive_receiver" /> 
+	                                         </div>
+	                                         <div class="col-md-1 p5-form-control pl-0 ">
+												<button type="button" onclick="select_receive_user('missive_receiver')" class="btn btn-sm blue">选择</button>
+	                                         </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions right">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-offset-3 col-md-9">
+                                                <a type="button" class="btn btn-sm default w-75 bor-ra-2 mr-10 pull-right" href="{:U('com/com_group_index')}">取消</a>
+                                                <button type="submit" class="btn btn-sm blue w-75 bor-ra-2 pull-right mr-20">提交</button>
+                                            </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+</block>

@@ -1,0 +1,503 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>   
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/swiper.min.css"/>    
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_topic.css"/>
+</head>
+<style>
+header ul li{
+	display: block; !important;
+}
+img {
+    display: inline-block;
+}
+#layui-laydate1 {
+    width: 100% !important;
+}
+
+.right-f13em {
+    right: -0.225rem;
+    width: 0.4rem !important;
+    height: 0.4rem !important;
+}
+.top-0em{
+    top: -2px;
+}
+</style>
+<body style="height: auto;">
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>		
+    		<div class="aui-title icon_medium f-16em">学习</div>
+            <img class="pull-right w-20em h-20em mr-17em mt-10em"src="__STATICS__/apps/page_wechat/Index/images/news.png" onclick="openMessage();"/>
+    	</li>
+    </ul>
+</header>
+<section>
+    <!-- <div class="w-100b h-98em bg-color-fb4747 po-ab top-0em"></div> -->
+    <img class="w-100b h-178em po-ab top-0em" src="__STATICS__/apps/page_wechat/images/images_edu/edu_bg1.png">
+</section>
+<!-- 专题课件 -->
+<section class="z-index-max po-re pt-5em " >
+    <div class="clearfix pl-12em pr-12em" style="padding-bottom: 5%;">
+        <div class="pull-left icon_medium color-fffc00 f-16em">专题课件</div>
+        <div class="pull-right icon_medium topic_in color-fffc00 f-12em"  onclick="openEdutopic()" style="line-height: 1.2rem;position: relative;z-index: 999;">专题列表<i class="iconfont color-fffc00 f-12em lh-22em ml-5mem">&#xe613;</i>
+        </div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <volist name="topic_list" id="topic">
+            <div class="swiper-slide">
+                <div class="shyk mt-20em over-h">
+                    <a href="{:U('Edu/edu_material_index',array('topic_id'=>$topic['topic_id'],'zhuanti'=>1))}"> 
+                    <img class="w-100b h-180em over-h pl-5em pr-5em pt-5em bor-ra-5em" src="{$topic.img_url}" class="main-img">
+                    <div class="clearfix icon_normal pl-15em pr-15em pt-10em">
+                        <div class="pull-left f-16em color-212121">{$topic.topic_title}</div>
+                        <div class="pull-right">
+                            <div class="pull-left">
+                                <div class="circleChart{$i} pt-4em" id="circle1" data-rate="{$topic.learn_rate}"></div>
+                            </div>
+                            <div class="pull-right f-12em color-9e pl-5em">
+                                <div>已学习</div>
+                                <div>{$topic.learn_rate}%</div>
+                            </div>                         
+                        </div>          
+                    </div>
+                    </a>
+                </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+</section>
+<!-- 个性化定制 -->
+<eq name="show" value="2">
+<section class="edu_con mb-12em">
+    <div class="f-16em icon_medium color-212121 pt-16em pl-11em f-w">个性化定制</div>
+    <div class="clearfix">
+        <div class="pull-left mt-30em mb-31em ml-25em color-212121">
+            <p class="f-16em icon_medium">只需要简单的几个选项</p>
+            <p class="f-12em icon_regular pt-5em">为你量身定制一份自己的学习计划</p>
+        </div>
+        <div class="pull-right">
+            <img class="w-120em h-100em mr-12em mb-5em" src="__STATICS__/apps/page_wechat/images/images_edu/made.png">
+        </div>
+    </div>
+    <div class="h-44em lh-44em icon_medium f-15em color-ff404d w-90b m-a text-center bt-1-dfdfdf ">
+        <a href="{:U('Edu/edu_mask')}" style="text-decoration:none;color:#ff404d">开启学习计划</a>
+    </div>
+</section>
+</eq>
+<eq name="show" value="1">
+<section class="edu_con edu_made mb-12em pl-12em pr-12em ">
+    <div class="clearfix pt-16em">
+        <div class="pull-left f-16em icon_medium color-212121 f-w">个性化定制</div>
+        <div class="pull-right color-ff3332 f-12em border-1-ff3332 pl-6em pr-6em"><a style="color: #ff3332;" href="{:U('Edu/edu_material_index',array('customization'=>1))}">进入学习</a>
+            <i class="iconfont color-ff3332 f-12em lh-22em ml-5mem">&#xe613;</i>
+        </div>
+    </div>
+    <div class="edu_made_progress mt-20em">
+        <!-- 文章 --> 
+        <div class="clearfix">
+            <div class="pull-left color-212121 f-14em">文章</div>
+            <div class="pull-right color-9e f-10em">共{$arr.article.num}篇、已学{$arr.article.learn}篇</div>
+        </div>          
+        <div class="aui-content-padded pb-20em po-re">
+             <div class="aui-progress aui-progress-xs aui-progress-bg">
+                <div class="aui-progress-bar aui-progress-bar-bg" style="width: {$arr.article.learn_rate}%;"></div>
+            </div>
+            <div class="po-ab top-0em z-index-max w-100b">
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+         </div>
+        </div>
+        <!-- 视频 --> 
+        <div class="clearfix">
+            <div class="pull-left color-212121 f-14em">视频</div>
+            <div class="pull-right color-9e f-10em">共{$arr.video.num}篇、已学{$arr.video.learn}篇</div>
+        </div>          
+        <div class="aui-content-padded pb-20em po-re">
+             <div class="aui-progress aui-progress-xs aui-progress-bg">
+                <div class="aui-progress-bar aui-progress-bar-bg" style="width: {$arr.video.learn_rate}%;"></div>
+            </div>
+            <div class="po-ab top-0em z-index-max w-100b">
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+         </div>
+        </div>
+        <!-- 考试 --> 
+        <div class="clearfix">
+            <div class="pull-left color-212121 f-14em">考试</div>
+            <div class="pull-right color-9e f-10em">共{$arr.exam.num}篇、已考{$arr.exam.learn}篇</div>
+        </div>          
+        <div class="aui-content-padded pb-20em po-re">
+             <div class="aui-progress aui-progress-xs aui-progress-bg">
+                <div class="aui-progress-bar aui-progress-bar-bg" style="width: {$arr.exam.learn_rate}%;"></div>
+            </div>
+            <div class="po-ab top-0em z-index-max w-100b">
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+         </div>
+        </div>
+        <!-- 笔记 --> 
+        <div class="clearfix">
+            <div class="pull-left color-212121 f-14em">笔记</div>
+            <div class="pull-right color-9e f-10em">已写{$arr.notes.count}篇</div>
+        </div>          
+        <div class="aui-content-padded pb-20em po-re">
+             <div class="aui-progress aui-progress-xs aui-progress-bg">
+                <div class="aui-progress-bar aui-progress-bar-bg" style="width: {$arr.notes.learn_rate}%;"></div>
+            </div>
+            <div class="po-ab top-0em z-index-max w-100b">
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+                <li class="w-40em hr-sr-white h-8em lh-8em pull-left">&nbsp;</li>
+            </div>
+        </div>
+    </div>
+</section>
+</eq>
+<!-- 学习笔记 -->
+<section class="edu_con mb-12em">
+    <div class="clearfix pt-15em pl-12em">
+        <div class="pull-left f-16em color-212121 f-w">学习笔记</div>
+        <div class="pull-right color-9e f-12em pr-15em"  onclick="openEdunotes();">更多
+            <i class="iconfont color-de f-12em lh-22em ml-5mem">&#xe613;</i>
+        </div>
+    </div>
+    <input type="hidden" id="communist_no" value="{$communist_no}"/>
+    <!-- 日历组件 -->
+    <div id="test2"></div>
+    <div class="h-100b" id="test">
+        <empty name="notes_list">
+            <span class="ml-30b">今天没有学习笔记哦~</span>
+        <else/>
+        <volist name="notes_list" id="list">
+        <li class="over-h ml-12em " >
+            <div class="pull-left w-20b po-re pb-20em">
+                <p class="f-12em lh-24em color-9e">{$list.add_time}</p>
+                <img class="po-ab top-0 right-f13em wh-24em bor-ra-100b" src="__STATICS__/apps/page_wechat/images/images_edu/notes_time.png" alt="" />
+            </div>
+            <a href="{:U('Edu/edu_notes_info',array('notes_id'=>$list['notes_id']))}" style="vertical-align: bottom;">
+            <div class="pull-left bj_bj w-80b bl-1-dedede pt-8em pl-8em">
+                <p class="ellipsis-one f-14em icon_medium color-212121 mb-5em pl-20em f-w">{$list.notes_title}</p>
+                <p class="f-10em icon_medium fcolor-66 pb-8em pl-20em">类型：{$list.notes_type}</p>
+            </div>
+            </a>
+        </li> 
+        </volist>
+        </empty>
+    </div>    
+    <!-- 日历组件end -->
+</section>
+<!-- 学习实况 -->
+<section class="edu_con mb-12em pl-12em pr-12em">
+    <div class="clearfix over-h h-30em lh-44em">        
+        <span class="pull-left color-212121 f-16em icon_medium f-w">学习实况</span>
+        <span class="pull-right f-12em color-9e icon_regular" onclick="openNewCms('19');">更多
+            <i class="iconfont color-de f-12em lh-44em ml-5mem">&#xe613;</i>
+        </span>
+    </div>
+    <!-- <div>
+        <div class="skeleton">
+            <div class="skeleton-head">1231</div>
+            <div class="skeleton-body">
+                <div class="skeleton-title">123</div>
+                <div class="skeleton-content">12</div>
+            </div>
+        </div>
+    </div> -->  
+   <ul id="list">
+    <volist name="array" id="artic">
+        <li class="va-jz over-h bb-1-f0 pb-12em pt-12em" style="position: relative;">
+            <a href="{:U('Cms/cms_article_info', array('article_id' => $artic['article_id']))}">
+            <div class="pull-left w-97em h-73em">
+                <img class="w-97em h-73em bor-ra-2em" src="{$artic.article_thumb}">
+            </div>
+            <div class="pull-left over-h w-217em ml-13em icon_medium">
+                <div class="pull-left w-217em mt-0em">
+                    <div class="f-14em color-12 f-w" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{$artic.article_title}</div>
+                    <div class="" style="position: absolute; bottom: 10%;width: 65%;">
+                        <div class="pull-left color-a4 f-11em pt-5em" >{$artic.add_staff}</div>
+                        <div class="pull-right color-a4 mt-5em f-11em" >{$artic.add_time}</div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </li>
+    </volist>
+    </ul>
+</section>
+<footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="background: #f4f4f4;">
+    <ul class="aui-bar-tab h-49em">
+    	<li id="tabbar1" onclick="randomSwitchBtn(this,'1')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage1.png" class="fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">首页</p>
+        </li>
+        <li id="tabbar2" onclick="randomSwitchBtn(this,'2')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/super_market1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/super_market2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">超市</p>
+        </li>
+        <li id="tabbar3" class="active-info" onclick="randomSwitchBtn(this,'3')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">学习</p>
+        </li>
+        <li id="tabbar4" onclick="randomSwitchBtn(this,'4')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">服务</p>
+        </li>
+        <li id="tabbar5" onclick="randomSwitchBtn(this,'5')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">我的</p>
+        </li>
+    </ul>
+</footer>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_wechat/edu/laydate/laydate.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/swiper-3.4.2.min.js"></script> 
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/circleChart.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/bd_index.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat
+/public/js/config.js"></script>
+<!-- <script type="text/javascript" src="__STATICS__/apps/page_wechat/edu/js/eud_topic.js"></script> -->
+<script type="text/javascript">
+function openMessage(){
+    location.href="{:U('Wechat/Oa/alert_msg_index')}";
+}
+function openNewCms(cat_id){
+    location.href="{:U('Wechat/Cms/cms_article_list')}?cat_id="+cat_id;
+}
+function openEdunotes(){
+    location.href="{:U('Wechat/Edu/edu_notes_list')}";
+}
+function openEdutopic(){
+    location.href="{:U('Wechat/Edu/edu_material',array('type'=>2))}";
+}
+var num = {$count};
+$.each({$data},function(k,v){
+    k+=1;
+    if(v){
+        $(".circleChart"+k).circleChart({
+            color: "#ff404d",
+            backgroundColor: "#e2e2e2",//进度条之外颜色
+            background: true, // 是否显示进度条之外颜色
+            widthRatio: 0.2,//进度条宽度
+            size: 30,
+            value: v,
+            startAngle: 180,//开始点
+            speed: 3000,
+            onDraw: function(el, circle) {
+                circle.text(Math.round(circle.value) + "%");
+            }
+        })
+    }else{
+        $(".circleChart"+k).circleChart({
+            color: "#ff404d",
+            backgroundColor: "#e2e2e2",//进度条之外颜色
+            background: true, // 是否显示进度条之外颜色
+            widthRatio: 0.2,//进度条宽度
+            size: 30,
+            value: 0.00000000000000001,
+            startAngle: 180,//开始点
+            speed: 3000,
+            onDraw: function(el, circle) {
+                circle.text(Math.round(circle.value) + "%");
+            }
+        })
+    }
+    
+});
+
+var page=1;
+laydate.render({
+    elem: '#test2'
+    ,lang: 'cn'
+    ,position: 'static'
+    ,min: -4 //5天前
+    ,max: 0 //7天后
+    ,type: 'date' //默认，可不填
+    ,format: 'M月d日' //日期组合方式 可任意组合
+     //传入Date对象给初始值
+    //,value: new Date(1534766888000) //参数即为：2018-08-20 20:08:08 的时间戳
+    //,isInitValue: false //是否允许填充初始值，默认为 true
+    // ,trigger: 'click' //如果绑定的元素非输入框，则默认事件为：click 采用click弹出
+    ,show: true //直接显示
+    ,position: 'static'
+    ,showBottom: false//是否显示底部栏
+     //,theme: '#393D49'//主题颜色
+     //,calendar: true//是否显示公历节日
+     // ,mark :''//标记重要日子
+     /*以下是回调函数*/
+     //一、控件初始打开的回调
+    ,ready: function(date){
+        //lay('#testView').html(1);//切换日期时显示的值  
+        $(".layui-laydate-header").addClass('di-n');//隐藏header
+        $('.layui-laydate-content>table>thead>tr').hide();//隐藏周一到周日
+        //隐藏5天之外
+        if($(".layui-laydate-content tr td").hasClass('laydate-disabled')){
+            $('.laydate-disabled').addClass('di-n');                    
+        }
+            //遍历td 添加月份
+        $("table td").each(function(index,item){                
+            if($(this).hasClass("laydate-day-next")){
+                    $(this).html((date.month+1)+'月'+$(this).text()+'日');//下月
+            }else if($(this).hasClass("laydate-day-prev")){
+                  $(this).html((date.month-1)+'月'+$(this).text()+'日');//上月
+            }else{
+                 $(this).html(date.month+'月'+$(this).text()+'日');//当前月份
+            }         
+        });
+    }//二、日期时间被切换后的回调
+    ,change: function(value, date, endDate){
+        //var time = date.year+"-"+date.month+"-"+date.date;
+        // $(".ske").removeClass('di-n');//骨架屏
+        //$(".layui-laydate .layui-this")
+        if($('#testView li').length>0){
+            $('#testView li').remove();
+        }
+        //监听日期被切换
+        //lay('#testView').html(value);//切换日期时显示的值          
+        $(".layui-laydate-header").addClass('di-n');//隐藏header
+        $('.layui-laydate-content>table>thead>tr').hide();//隐藏周一到周日
+        if($(".layui-laydate-content tr td").hasClass('laydate-disabled')){
+            $('.laydate-disabled').addClass('di-n');//隐藏5天之外
+        }
+        //遍历td 添加月份
+        $("table td").each(function(index,item){          
+            if($(this).hasClass("laydate-day-next")){
+                $(this).html((date.month+1)+'月'+$(this).text()+'日');//下月
+            }else if($(this).hasClass("laydate-day-prev")){
+                $(this).html((date.month-1)+'月'+$(this).text()+'日');//上月
+            }else{
+                $(this).html(date.month+'月'+$(this).text()+'日');//当前月份
+            }         
+        });
+        var time = date.year+"-"+date.month+"-"+date.date;
+        var communist_no = $('#communist_no').val();
+        $.ajax({ 
+            type : "POST", //提交方式 
+            url : "{:U('Wechat/Edu/edu_notes_data')}",//路径 
+            data : { "time":time,"communist_no":communist_no,"page":0,"pagesize":10},//数据，这里使用的是Json格式进行传输 
+            datatype: "json",
+            success : function(data){
+                $('#test').html('');
+                if(data.content){
+                    $('#test').html(data.content);
+                }else{
+                    $('#test').html("<span class='ml-30b'>今天没有学习笔记哦~</span>");
+                }
+            }
+        });
+    }
+  
+});
+</script>
+
+
+
+<script type="text/javascript">
+var mySwiper = new Swiper('.swiper-container',{
+    slidesPerView : 1.8,
+    spaceBetween: 20,
+    centeredSlides : true,
+    watchSlidesProgress: true,
+    pagination : '.swiper-pagination',
+    paginationClickable: true,
+    onProgress: function(swiper){
+//              for (var i = 0; i < swiper.slides.length; i++){
+//                var slide = swiper.slides[i];
+//                var progress = slide.progress;
+//                scale = 1 - Math.min(Math.abs(progress * 0.2), 1);
+//              
+//               es = slide.style;
+//               es.opacity = 1 - Math.min(Math.abs(progress/2),1);
+//                      es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0px,0,'+(-Math.abs(progress*150))+'px)';
+//      
+//              }
+    },
+    onSetTransition: function(swiper, speed) {
+        for (var i = 0; i < swiper.slides.length; i++) {
+                es = swiper.slides[i].style;
+                es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+        }
+
+    }
+});
+    
+
+// var body_width = document.body.clientWidth;
+// console.log(body_width);
+// var transform_offset_left = 'translate3d('+body_width * 0.22+'px, 0px, 0px)';
+// console.log(transform_offset_left);
+// $('.swiper-wrapper').css('transform',transform_offset_left);
+
+function randomSwitchBtn(tag,type) {
+	if($(tag).hasClass('active-info')){
+		return ;
+	}
+	switch(type){
+	    case '1':
+	    	location.href="{:U('Wechat/Index/index')}";
+	    	;break;
+	    case '2':
+	    	location.href="{:U('Wechat/Index/store_index')}";
+	    	;break;
+	    case '3':
+	    	location.href="{:U('Wechat/Edu/edu_index')}";
+	    	;break;
+		case '4':
+			location.href="{:U('Wechat/Life/life_index')}";
+			;break;
+	    default:
+	    	location.href="{:U('Wechat/Ccp/ccp_communist_info')}";
+	    	;break;
+	}
+}
+</script>
+</html>

@@ -1,0 +1,130 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+    #LAY-component-layer-list .layui-card-body{padding-top: 15px;}
+</style>
+
+</block>
+<block name="body">
+<div class="layui-fluid " id="LAY-component-layer-list">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                        <div class="layui-form layui-card-body fitheight">
+                            <div class="layui-row layui-col-space5">
+                                <div class="layui-col-xs4 pull-right layadmin-layer-demo">
+                                    <a class="layui-btn table-add" onclick="testTrue()" style="text-decoration: none;" >导入</a>
+                                    <a class="layui-btn table-add "  style="text-decoration: none;" title="添加" data-type="add">添加</a>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+                            </table>
+                            <script type="text/html" id="operate">
+                                <a class="layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                                <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: "{:U('Ccpcommunist/ccp_party_list_data')}?party_no={$party_no}&type={$type}"
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                    {field: 'party_no', width: '7%', title: '编号', sort: true}
+                    , {field: 'party_name', title: '党支部名称',width: '30%'}
+                    , {field: 'party_pno', title: '上级党组织',width: '30%'}
+                    , {field: 'party_manager', title: '负责人',width: '15%'}
+                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate'}
+                ]]
+                ,page:true
+            });
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            table.on('tool(demo)', function(obj){
+                var data = obj.data;
+                var idcard_no = data.idcard_no;
+                if(obj.event === 'del'){
+                    layer.confirm('确认删除该数据吗？', function(index){
+                        window.location='{:U("Ccpcommunist/ccp_party_do_del")}?party_no='+data.party_no+'';
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'edit'){
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('Ccpcommunist/ccp_party_edit')}?party_no="+data.party_no+"",
+                    });
+                    layer.full(index);
+                }
+            });
+        });
+        var active = {
+            add: function(){
+                var index = layer.open({
+                   type: 2,
+                   title: false,
+                   end:false,
+                   closeBtn: 0,
+                   shift: 1,
+                   content: "{:U('Ccpcommunist/ccp_party_edit')}",
+                   area: ['300px', '300px']
+                });
+                layer.full(index);
+            }
+        }
+        $('#LAY-component-layer-list .layadmin-layer-demo .layui-btn').on('click', function(){
+          var type = $(this).data('type');
+          active[type] && active[type].call(this);
+        });
+    })
+</script>
+<script>
+   function testTrue(){
+        layer.open({
+            type : 2,
+            title : '党组织导入',
+            offset : window.parent.document.body.scrollTop + 20 + '%',
+            shadeClose : true, //点击遮罩关闭层
+            area: ['700px', '300px'],
+            fixed: true,
+            scrollbar: true,
+            fixed: true,
+            content: "{:U('Ccpcommunist/ccp_party_import_index')}",
+            success:function(){
+                layerAuto();
+            }
+        });
+    }
+</script>
+</block>

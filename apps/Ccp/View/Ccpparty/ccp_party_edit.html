@@ -1,0 +1,246 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+#js-grid-juicy-projects{
+	margin-left: 0% !important;
+}
+#js-grid-juicy-projects2{
+	margin-left: 0% !important;
+}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('Ccpcommunist/ccp_party_do_save')}" method="post" class="form-horizontal">
+                    <div class="layui-card-body layui-form">
+                        <input name="party_no" type="hidden" value="{$party_row.party_no}">
+                        <input type="hidden" name="party_manager" id="workers" />
+                        <input type="hidden" name="type" value="{$type}" />
+                        <input type="hidden" name="party_type" id="party_type" value="{$party_row.party_type}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-214 fcolor-65 lh-35"><strong>上级党组织：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="party_pno" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                            <option value="0">请选择</option>
+                                            <php>echo getPartySelect($party_row[party_pno])</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部负责人：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <select name="party_manager" xm-select="party_manager_select" xm-select-skin="danger" xm-select-search>
+                                            <php>echo getStaffSelect($party_row[party_manager]);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部书记：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <select name="party_branch_secretary" lay-search="">
+                                            <option value="">--请选择--</option>
+											<php>echo getCommunistSelect($party_row[party_branch_secretary]);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="party_name" value="{$party_row.party_name}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                           <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>经纬度：</strong></div>
+                                    <div class="layui-col-xs4 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="text" name="longlatitude" id="longlatitude" value="{$party_row.longlatitude}" placeholder="请输入经度"  class="layui-input" lay-verify='required'>
+                                    </div>
+                                    <span clas class="layui-btn "><a onclick="on_location('longlatitude')" style="color: #fff">设置经纬度</a></span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>支部地址：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" id="party_address" name="party_address" value="{$party_row.party_address}" autocomplete="off" placeholder="设置经纬度自动获取位置"  class="layui-input" ></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部简称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="party_name_short" value="{$party_row.party_name_short}"  autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-14 lh-35 pl-5">* 建议不要超过4个字</span>
+                                </div>
+                            </div>
+                      
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部分级：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <select name="party_level_code" lay-verify="required" lay-search="">
+                                            <option value="">请选择</option>
+                                            <php>echo getBdCodeSelect('party_level_code',$party_row[party_level_code]);</php>
+                                        </select>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>换届时间：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <input type="text" name="party_change_time" id="test4" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" lay-key="3" value="{$party_row.party_change_time}">
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>
+                            <!-- <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>组织账号：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="party_user" id="party_user" value="{$party_row.party_user}" autocomplete="off" class="layui-input"  ></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div>                     
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>组织密码：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="password" name="party_pwd" id="party_pwd" value="{$party_row.party_pwd}" autocomplete="off" class="layui-input" autocomplete="new-password" ></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+                                </div>
+                            </div> -->
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部简介：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <textarea name="memo" placeholder="请输入简介,字符最长255个" maxlength="255" class="layui-textarea">{$party_row.memo}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部头像：</strong></div>
+                                    <input type="hidden" id="party_avatar" name="party_avatar" style='width:250px' value="{$party_row.party_avatar}" />
+                                    <input type="hidden" id="sore1" name="sore1" style='width:250px' value="" />
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <button type="button" class="layui-btn" onclick="uploader_file('ccp','1','party_avatar','sore1','js-grid-juicy-projects','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                        <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                        <div id="js-grid-juicy-projects" style="height: 100px;">
+                                            <neq name="party_row.party_avatar" value="">
+                                                <php>echo getUploadHtml($party_row['party_avatar']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>党支部风采：</strong></div>
+                                    <input type="hidden" id="party_propagate" name="party_propagate" style='width:250px' value="{$party_row.party_propagate}" />
+                                    <input type="hidden" id="source_name2" name="source_name2" style='width:250px' value="" />
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <button type="button" class="layui-btn" onclick="uploader_file('ccp','1','party_propagate','source_name2','js-grid-juicy-projects2','2','1')"><i class="layui-icon"></i>上传文件</button>
+                                        <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                        <div id="js-grid-juicy-projects2" style="height: 100px;">
+                                            <neq name="party_row.party_propagate" value="">
+                                                <php>echo getUploadHtml($party_row['party_propagate']);</php>
+                                            </neq>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+                                        <!-- <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">取消</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+    function on_location(field_name){
+        var url = "{:U('ccp_party_location')}?field_name="+field_name+"";
+        layer.open({
+            type: 2,
+            title: '地图',
+            maxmin: true,
+            offset: window.parent.document.body.scrollTop+20+'px',
+            shadeClose: true, //点击遮罩关闭层
+            area : ['620px' , '422px'],
+            content: url //iframe的url
+        });
+    }
+</script>
+<script>
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    layui.use([ 'form', 'laydate','formSelects'], function() {
+        var $ = layui.jquery
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer
+                , laydate = layui.laydate
+                , form = layui.form
+                , formSelects = layui.formSelects;
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+        laydate.render({
+            elem: '#test4'
+            ,type: 'date'
+        });
+    })
+    $(document).ready(function() {
+        $(".multiSelect").select2();
+        $("#btnSave").click(function() {
+            var v = $("#worker").select2("val");
+            $("#workers").val(v);
+            $("#myform").submit(); //myform表单的id
+        });
+    });
+    var party_type = $('#party_type').val();
+    if(party_type == 2){
+        $("#party_level_code_div").hide();
+        $("#party_level_code").attr("required",false);
+    }else{
+         $("#party_level_code_div").show();
+        $("#party_level_code").attr("required",true);
+    }
+
+    $("select[name='party_pno']").change(function(){
+        var party_type=$(this).find("option:selected").data("type");
+        $("#party_type").val(party_type);
+        if(party_type == 2){
+            $("#party_level_code_div").hide();
+            $("#party_level_code").attr("required",false);
+        }else{
+             $("#party_level_code_div").show();
+            $("#party_level_code").attr("required",true);
+        }
+    })
+</script>
+</block>

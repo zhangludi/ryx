@@ -1,0 +1,56 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEADER-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-bubble font-green-sharp"></i>
+                                        <span class="caption-subject font-green-sharp bold uppercase">日志列表</span>
+                                    </div>
+                                    <div class="actions">在首页书写日志总结
+                                        <!-- <a class="btn blue btn-xs btn-outline" href="{:U('Oa/oa_worklog_edit')}">
+                                          			  添加	<i class="fa fa-plus"></i>
+                                        </a> -->
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <table id="exampleTablePagination"  data-search="true" data-page-size='25'
+										data-show-refresh="true" data-show-toggle="true" data-toggle="table"
+										data-show-columns="true" data-show-export="true"
+										data-detail-view="false" data-detail-formatter="detailFormatter"
+										data-minimum-count-columns="2"
+										data-show-pagination-switch="true" data-pagination="true"
+										data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]"
+										data-show-footer="false" 
+										data-url="{:U('oa_worklog_index_data',array('type'=>1))}">
+										<!-- data-response-handler="responseHandler" -->
+										<thead>
+		                                    <tr>
+		                                        <!-- <th data-field="state" data-checkbox="true"></th> -->
+		                                        <th data-field="worklog_id">序号</th>
+		                                        <!-- <th data-field="worklog_id">编号</th> -->
+		                                        <th data-field="worklog_title" data-width="22%">标题</th>
+		                                        <th data-field="worklog_type">总结类型</th>
+		                                        <th data-field="worklog_communist">总结人</th>
+		                                        <th data-field="worklog_date">总结日期</th>
+		                                        <th data-field="worklog_audit_man">审核人</th>
+		                                        <th data-field="worklog_audit_time">审核时间</th>
+		                                        <th data-field="operate" data-width="22%">操作</th>
+		                                    </tr>
+		                                </thead>
+									</table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </block>
+	<block name="js"></block>

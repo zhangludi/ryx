@@ -1,0 +1,324 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<link href="__STATICS__/apps/page_index/css/sp_public_mobile.css" rel="stylesheet" type="text/css">
+<link href="__STATICS__/apps/page_index/css/style.css" rel="stylesheet" type="text/css">
+<style>
+#js-grid-juicy-projects {
+    margin-left: 8.4% !important;
+}
+#js-grid-juicy-projects2 {
+    margin-left: 0 !important;
+}
+#js-grid-juicy-projects {
+    margin-left: 8% !important;
+}
+.tip-right:before{ display:none;}
+.tip-right:hover::before{ 
+  margin: 0 auto;
+  width:100%;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  display:block; 
+  background:#f5f5f5; 
+  border:1px solid #ccc;  
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 0.15rem;
+  content:"签到"; 		
+  text-align: center;
+}
+.tip-right:hover{ z-index:9999; position:relative;  cursor: pointer;}
+
+
+.add_btn{
+	height: 38px;
+    padding: 0 18px;
+	width: 1.43rem;
+	line-height: 0.51rem;
+	background-color: #f1372c;
+	border-radius: 0.07rem !important;
+	font-size: 0.22rem;
+	letter-spacing: 0rem;
+	color: #ffffff;
+	text-align: center;
+	float: right;
+	margin-top: -0.1rem;
+	cursor: pointer;
+	
+}
+.info_btn{
+	height: 38px;
+    padding: 0 18px;
+	border-radius: 0.07rem !important;
+	border: solid 0.01rem #388cff;
+	color: #388cff;
+	font-size: 0.2rem;
+	display: inline-block;
+	text-align: center;
+	line-height: 0.55rem;
+	cursor: pointer;
+}
+.edit_btn{
+	height: 38px;
+    padding: 0 18px;
+	border-radius: 0.07rem !important;
+	border: solid 0.01rem #ec322a;
+	color: #ec322a;
+	font-size: 0.2rem;
+	display: inline-block;
+	text-align: center;
+	line-height: 0.55rem;
+	cursor: pointer;
+}
+.status_btn{
+	padding: 0 18px;
+	height: 38px;
+    background: #f60;	
+	border-radius: 0.07rem !important;
+	border: solid 0.01rem #f60;
+	color: #fff;
+	font-size: 0.2rem;
+	display: inline-block;
+	text-align: center;
+	line-height: 0.55rem;
+	cursor: pointer;
+}
+.record_btn {
+	height: 38px;
+    padding: 0 18px;
+    border-radius: 0.07rem !important;
+    border: solid 0.01rem #ec322a;
+    color: #ec322a;
+    font-size:0.2rem;
+    display: inline-block;
+    text-align: center;
+    line-height: 0.55rem;
+    cursor: pointer;
+}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid layui-form" >
+    <div class="layui-row  layui-col-space5" style="background: #fff;padding-bottom: 1.2rem;">
+		<div class="details_box clearfix" >
+			<div class="box1 clearfix">
+				<div class="pull-left box1_l wryh_blod" style="padding-top: 0.02rem;">
+					<eq name="row.meeting_type" value="2001">
+						支部大会
+					</eq>
+					<eq name="row.meeting_type" value="2002">
+						支委会议
+					</eq>
+					<eq name="row.meeting_type" value="2003">
+						党小组会
+					</eq>
+					<eq name="row.meeting_type" value="2004">
+						党课
+					</eq>
+					<eq name="row.meeting_type" value="2005">
+						组织生活
+					</eq>
+					<eq name="row.meeting_type" value="2006">
+						民主生活
+					</eq>
+					<eq name="row.meeting_type" value="2007">
+						主题党日
+					</eq>
+				</div>
+				<input type="hidden" id="meeting_no" value="{$row.meeting_no}" />
+				<div class="pull-left ml-25em-cur">
+					<div class="color-333 f-24em-cur wryh_blod">{$row.meeting_name}</div>
+					<div class="color-666 f-18em-cur mt-1em-cur">
+						<span class="">{$row.party_name}</span>
+						<span class="ml-02em-cur">时间：{$row.meeting_start_time}</span>
+						<span class="ml-02em-cur">地点：{$row.meeting_addr}</span>
+						<span class="ml-02em-cur">主持人：{$row.meeting_host_name}</span>		
+						<span class="ml-02em-cur">状态：{$row.status_name}</span>
+					</div>
+				</div>
+			</div>
+			<div class="line7"></div>
+			<div class="box2">
+				<div class="tit clearfix">
+					<div class="icon pull-left mt-04em-cur"></div>
+					<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">会议简介</div>
+				</div>
+				<div class="con_bg">
+					<p style="    font-size: 0.2rem;">{$row.memo}</p>
+				</div>
+			</div>
+			<div class="box3" >      
+				<div class="tit clearfix">
+					<div class="icon pull-left mt-04em-cur"></div>
+					<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">参会情况
+						<span class="f-20em-cur">（<span class="color-15c750" id="shoulded_info">{$row.shoulded_info}</span>）</span>
+					</div>
+				</div>
+				<div class="mt-25em-cur status clearfix" id="content">
+					<volist name="meeting_result" id="vo" empty="暂时没有数据">
+						<eq name="vo.status_name" value="未签到"> 
+						<li <eq name="row.status" value="21"> class="tip-right" </eq> communist_no="{$vo.communist_no}" style="margin-right: 0.4rem;height: 0.4rem;line-height: 0.4rem;">
+							<img style="width: 0.19rem;height: 0.19rem;" class="mr-17em-cur " src="__STATICS__/apps/page_index/img/xq_false.png" alt="">
+							{$vo.communist_name}
+						</li>
+						<else />
+						<li style="margin-right: 0.4rem;height: 0.4rem;line-height: 0.4rem;">
+							<img style="width: 0.19rem;height: 0.19rem;" class="mr-17em-cur " src="__STATICS__/apps/page_index/img/xq_true.png" alt="">
+							{$vo.communist_name}
+						</li>
+					   </eq>
+					</volist>
+				</div>
+			</div>  
+			<neq name="record.meeting_minutes_id" value="">
+				<neq name="record.meeting_minutes_content" value="">
+				<div class="box2" >
+					<div class="tit clearfix">
+						<div class="icon pull-left mt-04em-cur"></div>
+						<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">会议总结</div>
+					</div>
+					<div class="con_bg">
+						<p>{$record.meeting_minutes_content}</p>
+					</div>
+				</div>
+				</neq>
+				<neq name="record.meeting_video" value="">
+				<div class="box2">
+					<div class="tit clearfix">
+						<div class="icon pull-left mt-04em-cur"></div>
+						<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">会议视频</div>
+					</div>
+					<div class="list clearfix">
+						<div id="js-grid-juicy-projects4" class="cbp" style="height:100px">
+							<neq name="record.meeting_video" value="">
+								<php>echo getUploadHtml($record['meeting_video'],'100','100','1','0');</php>
+							</neq>
+						</div>						
+					</div>
+				</div>
+				</neq>	
+			</neq>
+			<notempty  name="meetting_mien_list" >
+			<div class="box4" >  
+				<div class="tit clearfix">
+					<div class="icon pull-left mt-04em-cur"></div>
+					<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">会议风采</div>
+				</div>
+				<div class="mt-2em-cur clearfix">
+					<volist name="meetting_mien_list" id="mien" empty="暂时没有数据">
+						<li class="pull-left">
+							<img style="width: 2.84rem;height: 1.9rem;margin-right:0.2rem" src="{$mien}" alt="">
+						</li>
+					</volist>
+				</div>
+			</div>
+			</notempty >
+			<!-- <notempty  name="upload" >
+			<div class="box5" >      
+				<div class="tit clearfix">
+					<div class="icon pull-left mt-04em-cur"></div>
+					<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">会议文档</div>
+				</div>
+				<div class="list clearfix">
+					<volist name="upload" id="attach" key="k" empty="暂时没有数据">
+						<li style="width: 222px" >
+							<img class="pull-left pt-05em-cur" style="width: 0.29rem;height: 0.36rem;margin-right:0.2rem" src="__STATICS__/apps/page_index/img/xq_doc.png" alt=""> -->
+							<!-- <div class="pull-right ml-25em-cur f-18em-cur color-666" >2019年度党支部工作总结会议纪要.doc</div> -->
+							<!-- <div><a href="{$attach['up_lo']}" download="{$attach['upload_source']}" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;">{$attach['upload_source']}</a></div>
+						</li>
+					</volist>
+				</div>
+			</div> -->
+			<!-- </notempty > -->
+			<neq name="record.meeting_minutes_id" value=""> 
+				<notempty  name="upload_record" >
+				<div class="box5">      
+					<div class="tit clearfix">
+						<div class="icon pull-left mt-04em-cur"></div>
+						<div class="f-22em-cur color-333 pull-left ml-13em-cur wryh_blod">上传附件</div>
+					</div>
+					<div class="list clearfix">
+						<volist name="upload_record" id="record" key="k" empty="暂时没有数据">
+							<li style="width: 222px" >
+								<img class="pull-left pt-05em-cur" style="width: 0.29rem;height: 0.36rem;margin-right:0.2rem" src="__STATICS__/apps/page_index/img/xq_doc.png" alt="">
+								<!-- <div class="pull-right ml-25em-cur f-18em-cur color-666" >2019年度党支部工作总结会议纪要.doc</div> -->
+								<div><a href="{$record['up_lo']}" download="{$record['upload_source']}" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;">{$record['upload_source']}</a></div>
+							</li>
+						</volist>
+					</div>				
+				</div>
+				</notempty >
+			</neq>
+			<div class="layui-footer" style="text-align: right">
+				{$operate}
+				<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="cancel();">返回</button>
+			</div>
+		</div>  
+    </div>
+</div>
+</block>    
+<block name="js">    
+<script src="__STATICS__/apps/page_index/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATICS__/apps/page_index/js/details.js" type="text/javascript"></script>  
+<script>
+function cancel() {
+	window.parent.location.reload();
+	varindex = parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);
+}
+$(".tip-right").click(function(){
+	var meeting_no = $('#meeting_no').val();	
+	var communist_no = $(this).attr("communist_no");
+	$.ajax({
+		type : "get",
+		url : "{:U('Oa/Oameeting/oa_meeting_info_communist')}",
+		data :{meeting_no:meeting_no,communist_no:communist_no},
+		datatype: "json",
+		success: function (data) {
+			$('#content').html('');
+			$('#shoulded_info').html('');
+			$('#shoulded_info').html(data.shoulded_info);
+			$('#content').html(data.content).listview('refresh');			
+		}
+	});
+})
+//编辑
+function edit(meeting_no,meeting_type){
+	var index = layer.open({
+	   type: 2,
+	   title: false,
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('Oameeting/oa_meeting_edit')}?meeting_no="+meeting_no+"&type="+meeting_type+'',
+	   area: ['300px', '300px']
+	});
+	layer.full(index);
+}
+function record(meeting_no){
+	var index = layer.open({
+	   type: 2,
+	   title: '会议总结',
+	   end:false,
+	   closeBtn: 0,
+	   shift: 1,
+	   content: "{:U('Oameeting/oa_meeting_info_record')}?meeting_no="+meeting_no+"",
+	   area: ['70%', '90%']
+	});
+}
+//开始
+function status_start(meeting_no,type,party_no){
+	window.location='{:U("Oameeting/oa_meeting_do_start")}?meeting_no='+meeting_no+'&type='+type+'&party_no='+party_no+'&info_type=1';
+}
+//结束
+function status_end(meeting_no,type,party_no){	
+	
+	window.location='{:U("Oameeting/oa_meeting_do_end")}?meeting_no='+meeting_no+'&type='+type+'&party_no='+party_no+'&info_type=1';
+}
+
+
+
+</script>  
+</block>
+

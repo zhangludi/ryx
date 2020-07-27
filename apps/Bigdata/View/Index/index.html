@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><php>echo getConfig('web_name');</php>_大数据</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_bigdata/css/sp_public_mobile.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_bigdata/css/layui.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_bigdata/css/style.css" />
+<style>
+.p-fix{
+	position: fixed;
+	top: 0px;
+	left:0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	overflow: hidden;
+}
+.pl-6em{
+	padding-left: 0.6rem;
+}
+.pl-10em{
+	padding-left: 0.65rem;
+}
+.pl-123em-cur {
+    padding-left: 1.0rem;
+}
+.pl-7em-cur {
+    padding-left: 0.7rem;
+}
+</style>
+</head>
+<body class="po-re">
+<div class="p-fix">
+<!--背景-->
+	<div style="position: relative;">
+		<div id="content_bg"></div>
+		<!--左侧-->	
+		<div class="con_left">
+			<div class="con_left_box1">
+				<div class="color-fff box1_yuan f-18em-cur">
+					<div>党建</div>	
+					<div>基础数据</div>
+				</div>
+				<div class="clearfix">
+					<div class="pull-left left_box1_img1">
+						<div class="color-ff3838 f-39em-cur pl-86em-cur">{$party_num}</div>
+						<div class="f-2em-cur color-58beff pl-6em">党组织(个)</div>
+					</div>
+					<div class="pull-left left_box1_img2">
+						<div class="color-ff3838 f-39em-cur pl-123em-cur">{$communist_num}</div>
+						<div class="f-2em-cur color-58beff pl-123em-cur">党员(个)</div>					
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="pull-left left_box1_img3">
+						<div class="color-fff f-39em-cur pl-86em-cur">{$activity_num}</div>
+						<div class="f-2em-cur color-58beff pl-10em">活动(次)</div>
+					</div>
+					<div class="pull-left left_box1_img4">
+						<div class="color-fff f-39em-cur pl-7em-cur">{$dues_sum}</div>
+						<div class="f-2em-cur color-58beff pl-116em-cur">党费(元)</div>	
+					</div>
+				</div>
+			</div>
+			<!--人口数据情况-->
+			<div class="con_left_box2 mt-15em-cur">
+				<div class="ml-130em-cur color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur shs-Regular">党员数据情况</div>
+				<div class="clearfix ml-15em-cur mr-15em-cur mt-1em-cur">
+					<div class="pull-left color-fff f-15em-cur">党员总数：
+						<span class="color-44fff1 f-2em-cur">{$communist_num}</span>
+					</div>
+					<div class="pull-right color-fff f-15em-cur">书记总数：
+					<span class="color-44fff1 f-2em-cur">{$secretary_num}</span>
+					</div>
+				</div>
+				<!--进度条-->
+				<div class="mt-1em-cur ml-15em-cur mr-15em-cur">
+					<div class="layui-progress bg-color-1b3555">
+						<div class="layui-progress-bar bg-color-39b9bc" lay-percent="60%"></div>
+						</div>
+				 </div>
+				<!--圆形进度条-->
+				<div class="clearfix mt-1em-cur circle_press">
+					<div class="circle_press_f">
+						<div class="circleChart color-fff" id="1" data-value="0"></div>
+						<p class="f-16em-cur text-align color-fff">男</p>
+					</div>
+					<div class="circle_press_f">
+						<div class="circleChart color-fff" id="2" data-value="0"></div>
+						<p class="f-16em-cur text-align color-fff">女</p>
+					</div>
+					<div class="circle_press_f">
+						<div class="circleChart color-fff" id="3" data-value="0"></div>
+						<p class="f-16em-cur text-align color-fff">老年党员</p>
+					</div>
+					
+				</div>
+			</div>
+			<!--组织数据情况-->
+			<div class="con_left_box3 mt-15em-cur">
+				<div class="color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur ml-130em-cur shs-Regular">组织类型情况</div>
+				<div class="left_light">
+					<div class="left_light_f">
+						<div class="color-66ffff f-3em-cur mt-1em-cur">{$party_level1}</div>
+						<div class="left_light_1"><img src="__STATICS__/apps/page_bigdata/img/zhu.png"></div>
+						<div class="left_light_1_di"><img src="__STATICS__/apps/page_bigdata/img/di.png"></div>
+						<div class="f-18em-cur color-fff mt-6mem-cur">省委</div>
+					</div>
+					<div class="left_light_f">
+						<div class="color-66ffff f-3em-cur mt-1em-cur">{$party_level2}</div>
+						<div class="left_light_2"><img src="__STATICS__/apps/page_bigdata/img/zhu.png"></div>
+						<div class="left_light_2_di"><img src="__STATICS__/apps/page_bigdata/img/di.png"></div>
+						<div class="f-18em-cur color-fff mt-6mem-cur">企业党委</div>
+					</div>
+					<div class="left_light_f">
+						<div class="color-66ffff f-3em-cur mt-1em-cur">{$party_level3}</div>
+						<div class="left_light_3"><img src="__STATICS__/apps/page_bigdata/img/zhu.png"></div>
+						<div class="left_light_3_di"><img src="__STATICS__/apps/page_bigdata/img/di.png"></div>
+						<div class="f-18em-cur color-fff mt-6mem-cur">党支部</div>
+					</div>
+				</div>
+			</div>
+			<!--志愿活动情况-->
+			<div class="con_left_box4 mt-15em-cur">
+				<div class="color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur ml-130em-cur shs-Regular">三会一课情况</div>
+				<div class="ml-15em-cur mr-15em-cur">
+					<div class="clearfix">
+						<div class="pull-left">
+							<div class="pull-left mt-05em-cur">
+								<div class="color-66ffff f-22em-cur">支部</div>
+								<div class="color-66ffff f-22em-cur">大会</div>
+							</div>
+							<div class="pull-left line1 ml-15em-cur mr-15em-cur mt-1em-cur"></div>
+							<div class="pull-left mt-05em-cur">
+								<div class="f-21em-cur color-fff">
+									<span class="f-16em-cur">本年&nbsp;&nbsp;&nbsp;</span>
+									<span class="color-66ffff">{$year_party_session}</span>
+									<span class="f-16em-cur">次 </span>
+								</div>
+								<div class="f-21em-cur color-fff" >
+									<span class="f-16em-cur">本月&nbsp;&nbsp;&nbsp;</span>
+									<span class="color-66ffff">{$month_party_session}</span>
+									 <span class="f-16em-cur">次 </span>
+								</div>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="pull-left mt-05em-cur">
+								<div class="color-b966ff f-22em-cur">支委</div>
+								<div class="color-b966ff f-22em-cur">会议</div>
+							</div>
+							<div class="pull-left line2 ml-15em-cur mr-15em-cur mt-1em-cur"></div>
+							<div class="pull-left mt-05em-cur">
+								<div class="f-21em-cur color-fff">
+									<span class="f-16em-cur">本年&nbsp;&nbsp;&nbsp;</span>
+									<span class="color-b966ff">{$year_cpc_session}</span>
+									<span class="f-16em-cur">次 </span>
+								</div>
+								<div class="f-21em-cur color-fff" >
+									<span class="f-16em-cur">本月&nbsp;&nbsp;&nbsp; </span>
+									<span class="color-b966ff">{$month_cpc_session}</span>
+									<span class="f-16em-cur">次 </span>
+									 
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="pull-left">
+							<div class="pull-left mt-05em-cur">
+								<div class="color-ffb83b f-22em-cur">党小</div>
+								<div class="color-ffb83b f-22em-cur">组会</div>
+							</div>
+							<div class="pull-left line3 ml-15em-cur mr-15em-cur mt-1em-cur"></div>
+							<div class="pull-left mt-05em-cur">
+								<div class="f-21em-cur color-fff">
+									<span class="f-16em-cur">本年&nbsp;&nbsp;&nbsp;</span>
+									<span class="color-ffb83b">{$year_group_session}</span>
+									<span class="f-16em-cur">次 </span>
+								</div>
+								<div class="f-21em-cur color-fff" >
+									<span class="f-16em-cur">本月&nbsp;&nbsp;&nbsp; </span>
+									<span class="color-ffb83b">{$month_group_session}</span>
+									<span class="f-16em-cur">次 </span>
+								</div>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="pull-left mt-05em-cur" style="margin-top: 0.25rem;">
+								<div class="color-7bff74 f-22em-cur">党课</div>
+							</div>
+							<div class="pull-left line4 ml-15em-cur mr-15em-cur mt-1em-cur"></div>
+							<div class="pull-left mt-05em-cur">
+								<div class="f-21em-cur color-fff">
+									<span class="f-16em-cur">本年&nbsp;&nbsp;&nbsp;</span>
+									<span class="color-7bff74">{$year_lesson_session}</span>
+									<span class="f-16em-cur">次 </span>
+								</div>
+								<div class="f-21em-cur color-fff" >
+									<span class="f-16em-cur">本月&nbsp;&nbsp;&nbsp;</span>
+									<span class="color-7bff74">{$month_lesson_session}</span>
+									<span class="f-16em-cur">次 </span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--中间-->	
+		<div class="con_center">
+			<div class="tit">智慧党建云平台大数据</div>
+			<!--微心愿-->
+			<div class="clearfix center_wish mt-1em-cur">
+				<li class="pull-left text-align ml-8em-cur">
+					<div class="color-fff f-18em-cur pt-1em-cur">三会一课</div>
+					<div class="f-34em-cur color-e0ff4f num1">0</div>
+				</li>
+				<li class="pull-left text-align ml-8em-cur">
+					<div class="color-fff f-18em-cur pt-1em-cur pl-1em-cur">学习资料</div>
+					<div class="f-34em-cur color-e0ff4f num2">0</div>
+				</li>
+				<li class="pull-left text-align ml-8em-cur">
+					<div class="color-fff f-18em-cur pt-1em-cur pl-1em-cur">宣传资料</div>
+					<div class="f-34em-cur color-e0ff4f num3">0</div>
+				</li>
+				<!--<div class="page_turning1">
+					<div class="center_wish_l color-b2eaff">微心愿(条)</div>
+					<div class="clearfix mt-15em-cur ml-15em-cur">
+						<div class="color-b2eaff f-24em-cur page_turning_num1 num1">1271</div>
+					</div>
+				</div>
+				<div class="page_turning">
+					<div class="center_wish_l color-b2eaff">主题教育(次)</div>
+					<div class="clearfix m-a w-20em mt-15em-cur">
+						<div class="color-b2eaff f-24em-cur page_turning_num2 num2">34</div>					
+					</div>
+				</div>
+				<div class="page_turning">
+					<div class="center_wish_l color-b2eaff">协商剧场(次)</div>
+					<div class="clearfix m-a w-20em mt-15em-cur">
+						<div class="color-b2eaff f-24em-cur page_turning_num3 num3">75</div>
+						
+					</div>
+				</div>-->
+			</div>
+			<!--解放云享未来-->
+			<div class="">
+				<div class="circle_div circle">			
+					<div class="c-circle first shs-Medium"><p>党务</p></div>
+					<div class="c-circle second shs-Medium"><p>活动</p></div>
+					<div class="c-circle third shs-Medium"><p>民生</p></div>
+					<div class="c-circle four shs-Medium"><p>学习</p></div>
+					<img class="circle_rate rotate-in" src="__STATICS__/apps/page_bigdata/img/rate_img1.png"/>
+					<img class="circle_rate rotate-in" src="__STATICS__/apps/page_bigdata/img/rate_img2.png"/>
+					<img class="circle_rate rotate-in" src="__STATICS__/apps/page_bigdata/img/rate_img3.png"/>
+					<img class="circle_rate rotate-in" src="__STATICS__/apps/page_bigdata/img/rate_img4.png"/>
+					<img class="circle_rate rotate-in" src="__STATICS__/apps/page_bigdata/img/rate_img5.png"/>
+					<img class="circle_rate" src="__STATICS__/apps/page_bigdata/img/rate_img6.png"/>
+			</div>			
+			</div>
+			<!--一网通办情况-->
+			<div class="netcom">
+				<div class="color-b1d3ff f-2em-cur tit mt-1em-cur">随手拍分布情况</div>
+				<!--水波纹圆形进度条-->
+				<div class="clearfix mt-15em-cur">
+					 <div id='main' style="" class="clearfix">
+						<div class="chart mr-15em-cur"></div>
+						<div class="color-fff f-14em-cur w-7rem shs-Medium" style="position: absolute;top: 1.3rem;left:0.1rem;">意见型<br/><span class="f-2em-cur">{$condition1}</span></div>
+						<div class="chart mr-15em-cur"></div>	
+						<div class="color-fff f-14em-cur w-7rem shs-Medium" style="position: absolute;top: 1.3rem;left:1.15rem">争论型<br/><span class="f-2em-cur">{$condition2}</span></div>
+						<div class="chart mr-15em-cur"></div>
+						<div class="color-fff f-14em-cur w-7rem shs-Medium" style="position: absolute;top: 1.3rem;left:2.25rem">议论型<br/><span class="f-2em-cur">{$condition3}</span></div>
+						<div class="chart mr-15em-cur"></div>
+						<div class="color-fff f-14em-cur w-7rem shs-Medium" style="position: absolute;top: 1.3rem;left:3.3rem">建议型<br/><span class="f-2em-cur">{$condition4}</span></div>
+						<div class="chart mr-15em-cur"></div>
+						<div class="color-fff f-14em-cur w-7rem shs-Medium" style="position: absolute;top: 1.3rem;left:4.35rem">称赞型<br/><span class="f-2em-cur">{$condition5}</span></div>
+						<div class="chart"></div>
+						<div class="color-fff f-14em-cur w-7rem shs-Medium" style="position: absolute;top: 1.3rem;left:5.4rem">其他型<br/><span class="f-2em-cur">{$condition6}</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--右侧-->
+		<div class="con_right">
+			<!--组织生活情况-->
+			<div class="con_right_box1">
+				<div class="color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur ml-130em-cur shs-Regular">党员党龄情况</div>
+				<div class="clearfix right_life mt-1em-cur">
+					<li class="pull-left ">
+						<div class="pull-left ml-1em-cur mt-08em-cur shs-Normal">
+							<div class="color-fff f-18em-cur">5年</div>
+							<div class="color-fff f-18em-cur">以下</div>
+						</div>
+						<div class="pull-right mr-15em-cur color-b1d3ff f-22em-cur lh-66em-cur shs-Bold">{$zero}</div>
+					</li>
+					<li class="pull-left ">
+						<div class="pull-left ml-1em-cur mt-08em-cur shs-Normal">
+							<div class="color-fff f-18em-cur">5年</div>
+							<div class="color-fff f-18em-cur">10年</div>
+						</div>
+						<div class="pull-right mr-15em-cur color-b1d3ff f-22em-cur lh-66em-cur shs-Bold">{$one}</div>
+					</li>
+					<li class="pull-left ">
+						<div class="pull-left ml-1em-cur mt-08em-cur shs-Normal">
+							<div class="color-fff f-18em-cur">10年</div>
+							<div class="color-fff f-18em-cur">20年</div>
+						</div>
+						<div class="pull-right mr-15em-cur color-b1d3ff f-22em-cur lh-66em-cur shs-Bold">{$two}</div>
+					</li>
+					<li class="pull-left ">
+						<div class="pull-left ml-1em-cur mt-08em-cur shs-Normal">
+							<div class="color-fff f-18em-cur">20年</div>
+							<div class="color-fff f-18em-cur">30年</div>
+						</div>
+						<div class="pull-right mr-1em-cur color-b1d3ff f-22em-cur lh-66em-cur shs-Bold">{$tee}</div>
+					</li>
+					<li class="pull-left ">
+						<div class="pull-left ml-15em-cur mt-08em-cur shs-Normal">
+							<div class="color-fff f-18em-cur">30年</div>
+							<div class="color-fff f-18em-cur">40年</div>
+						</div>
+						<div class="pull-right mr-1em-cur color-b1d3ff f-22em-cur lh-66em-cur shs-Bold">{$four}</div>
+					</li>
+					<li class="pull-left ">
+						<div class="pull-left ml-15em-cur mt-08em-cur shs-Normal">
+							<div class="color-fff f-18em-cur">40年</div>
+							<div class="color-fff f-18em-cur">以上</div>
+						</div>
+						<div class="pull-right mr-1em-cur color-b1d3ff f-22em-cur lh-66em-cur shs-Bold">{$five}</div>
+					</li>
+				</div>
+			</div>
+			<!--社区工作情况-->
+			<div class="con_right_box2 mt-15em-cur">
+				<div class="color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur ml-130em-cur shs-Regular">宣传资料情况</div>
+				<div class="shs-Regular">
+					<volist name="article_list" id="article"> 
+					<div class="clearfix ml-15em-cur mr-15em-cur mt-15em-cur">
+						<div class="pull-left w-24em-cur mt-05em-cur">
+							<div class="layui-progress bg-color-1b3555">
+							  <div class="layui-progress-bar bg-color-d18f21" lay-percent="{$article.percentage}%"></div>
+							</div>
+						</div>
+						<div class="pull-left color-fff f-18em-cur ml-3em-cur">{$article.article_cat}				
+							<span class="color-5fe3ff">{$article.article_count}</span>
+						</div>
+						<div class="pull-right color-5fe3ff f-18em-cur">{$article.percentage}%</div>
+					</div>
+					</volist>
+					<!-- <div class="clearfix ml-15em-cur mr-15em-cur mt-1em-cur"> -->
+						<!-- <div class="pull-left w-24em-cur mt-05em-cur"> -->
+							<!-- <div class="layui-progress bg-color-1b3555"> -->
+							  <!-- <div class="layui-progress-bar bg-color-d18f21" lay-percent="56%"></div> -->
+							<!-- </div> -->
+						<!-- </div> -->
+						<!-- <div class="pull-left color-fff f-18em-cur ml-3em-cur">党建论坛<span class="color-5fe3ff">640</span></div> -->
+						<!-- <div class="pull-right color-5fe3ff f-18em-cur">56%</div> -->
+					<!-- </div> -->
+					<!-- <div class="clearfix ml-15em-cur mr-15em-cur mt-1em-cur"> -->
+						<!-- <div class="pull-left w-24em-cur mt-05em-cur"> -->
+							<!-- <div class="layui-progress bg-color-1b3555"> -->
+							  <!-- <div class="layui-progress-bar bg-color-d18f21" lay-percent="50%"></div> -->
+							<!-- </div> -->
+						<!-- </div> -->
+						<!-- <div class="pull-left color-fff f-18em-cur ml-3em-cur">党员声音<span class="color-5fe3ff">560</span></div> -->
+						<!-- <div class="pull-right color-5fe3ff f-18em-cur">50%</div> -->
+					<!-- </div> -->
+					<!-- <div class="clearfix ml-15em-cur mr-15em-cur mt-1em-cur"> -->
+						<!-- <div class="pull-left w-24em-cur mt-05em-cur"> -->
+							<!-- <div class="layui-progress bg-color-1b3555"> -->
+							  <!-- <div class="layui-progress-bar bg-color-d18f21" lay-percent="34%"></div> -->
+							<!-- </div> -->
+						<!-- </div> -->
+						<!-- <div class="pull-left color-fff f-18em-cur ml-3em-cur">共产党风采<span class="color-5fe3ff">263</span></div> -->
+						<!-- <div class="pull-right color-5fe3ff f-18em-cur">34%</div> -->
+					<!-- </div> -->
+				</div>
+			</div>
+			<!--一网通办情况-->
+			<div class="con_right_box3 mt-15em-cur">
+				<div class="color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur ml-130em-cur shs-Regular">党员年龄情况</div>
+				<!--饼状图-->
+				 <div id="container" style="height: 80%;margin-left: -2rem;"></div>
+				
+			</div>
+			<!--走访慰问情况-->
+			<div class="con_right_box4 mt-15em-cur">
+				<div class="color-b1d3ff f-20em-cur w-40em text-align h-45em-cur lh-45em-cur ml-130em-cur shs-Regular">学习资料情况</div>
+				<!--饼状图-->
+				 <div id="container1" style="height: 80%;margin-left: -2rem;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/jquery.min.js"></script>	
+<!--echarts-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/echarts-liquidfill.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/circleChart.js"></script>	
+<!--进度条-->
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/layui.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/index.js"></script>
+</body>
+</html>
+<script>
+/**————————————————————————————————圆形进度条插件——————————————————————————————————————**/
+$(".circleChart#1").circleChart({
+    size: 55,
+    value:{$man_num},
+    widthRatio: 0.15,//进度条宽度
+    startAngle: 180,//开始点
+		speed: 3000,
+		animation: "easeInOutCubic",
+	color: "#68d6ff",
+	backgroundColor: "#101069",
+    text: 0,
+    onDraw: function(el, circle) {
+        circle.text(Math.round(circle.value) + "%");
+    }
+});
+$(".circleChart#2").circleChart({
+    size: 55,
+    value:{$woman_num},
+    widthRatio: 0.15,//进度条宽度
+    startAngle: 180,//开始点
+		speed: 3000,
+		animation: "easeInOutCubic",
+	color: "#e868ff",
+	backgroundColor: "#101069",
+    text: 0,
+    onDraw: function(el, circle) {
+        circle.text(Math.round(circle.value) + "%");
+    }
+});
+$(".circleChart#3").circleChart({
+    size: 55,
+    value: {$agedness_num},
+    widthRatio: 0.15,//进度条宽度
+    startAngle: 180,//开始点
+		speed: 3000,
+		animation: "easeInOutCubic",
+	color: "#ffd97e",
+	backgroundColor: "#101069",
+    text: 0,
+    onDraw: function(el, circle) {
+        circle.text(Math.round(circle.value));
+    }
+});
+/*——————————————————————————数字翻盘——————————————————————————————————————————————*/
+$(function(){
+	$(".num1").numberRock({
+		lastNumber:{$meeting_num},		//终止数字
+		duration:800,
+		easing:'linear',  	//慢快慢
+	});
+	$(".num2").numberRock({
+		lastNumber:{$material_count},		//终止数字
+		duration:800,
+		easing:'linear',  	//慢快慢
+	});
+		$(".num3").numberRock({
+		lastNumber:{$article_count},		//终止数字
+		duration:800,
+		easing:'linear',  	//慢快慢
+	});
+});
+(function($){
+    $.fn.numberRock=function(options){
+        var defaults={
+            lastNumber:100,
+            duration:2000,
+            easing:'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
+        };
+        var opts=$.extend({}, defaults, options);
+
+        $(this).animate({
+            num : "numberRock",
+        },{
+            duration : opts.duration,
+            easing : opts.easing,
+            complete : function(){
+                console.log("success");
+            },
+            step : function(a,b){  //可以检测我们定时器的每一次变化
+                $(this).html(parseInt(b.pos * opts.lastNumber));
+            }
+        });
+
+    }
+
+})(jQuery);
+/**————————————————————————————————年龄饼状图——————————————————————————————————————**/
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+app.title = '环形图';
+
+var  colorList=['#a232cb', '#2eadc2', '#39d6d9', '#29f21a', '#f5ee39'];
+option = {	
+//  tooltip: {
+//      trigger: 'item',
+//      formatter: "{a} <br/>{b}: {c} ({d}%)"
+//  },
+    legend: {
+        orient: 'vertical',
+        top:'12%',
+        left:'62%',//图例组件离容器左侧的距离
+       // padding: [0, 0],
+        itemWidth: 10,
+        itemHeight: 10,
+        itemGap:7,//图例每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
+        x: 'right',
+        textStyle: {
+            color: '#fff',
+            fontSize:'14',
+            fontFamily:'shs-Regular'
+           
+       },
+        data:['30以下','30-40','40-50','50-60','60以上']
+    },
+    series: [
+        {
+            name:'年龄',
+            type:'pie',
+            radius: ['50%', '80%'],
+            avoidLabelOverlap: false,
+             itemStyle: {
+                normal: {
+                    color: function(params) {
+                        return colorList[params.dataIndex]
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: false,
+                    textStyle: {
+                        fontSize: '10',//不显示中间
+                        fontWeight: 'bold',
+                       // fontFamily:'shs-Regular'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:{$thirty}, name:'30以下'},
+                {value:{$forty}, name:'30-40'},
+                {value:{$fifty}, name:'40-50'},
+                {value:{$sixty}, name:'50-60'},
+                {value:{$greater_sixty}, name:'60以上'}
+            ]
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);   
+	//echarts 缩放
+	window.addEventListener("resize",function(){
+        myChart.resize();
+    });
+}
+/**————————————————————————————————饼状图2——————————————————————————————————————**/
+var dom = document.getElementById("container1");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+app.title = '环形图';
+
+var  colorList=['#565afa', '#f2d427', '#02b74b', '#b84889', '#1f8ec4'];
+option = {
+//  tooltip: {
+//      trigger: 'item',
+//      formatter: "{a} <br/>{b}: {c} ({d}%)"
+//  },
+    legend: {
+        orient: 'vertical',// horizontal
+        top:'12%',
+        left:'62%',//图例组件离容器左侧的距离
+       // padding: [0, 0],
+        itemWidth: 10,
+        itemHeight: 10,
+        itemGap:7,//图例每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
+        x: 'right',
+        textStyle: {
+            color: '#fff',
+            fontSize:'14',
+            fontFamily:'shs-Regular'
+           
+       },
+        data:['视频课件','文章课件']
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['50%', '80%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        return colorList[params.dataIndex]
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: false,
+                    textStyle: {
+                        fontSize: '10',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:{$video_count}, name:'视频课件'},
+                {value:{$article_count}, name:'文章课件'}
+            ]
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+    //echarts 缩放
+	window.addEventListener("resize",function(){
+        myChart.resize();
+    });
+}
+
+
+/**————————————————————————————————水波纹进度条——————————————————————————————————————**/
+var bgColor = '#E3F7FF';
+var containers = document.getElementsByClassName('chart');
+var options = [{
+		series: [{
+			type: 'liquidFill',
+			data: [{$condition1_percentage}],     
+		   // color: '#fff',
+			radius: '80%',//圆圈大小
+			itemStyle: {
+				color: '#4e8ad4'
+			},
+			backgroundStyle: {
+				 color: '#062965'
+			}
+		}]
+	}, {
+		series: [{
+			type: 'liquidFill',
+			data: [{$condition2_percentage}],              
+			radius: '80%',
+			itemStyle: {
+				color: '#4e8ad4'
+			},
+			backgroundStyle: {
+				 color: '#062965'
+			}
+		}]
+	}, {
+		series: [{
+			type: 'liquidFill',
+			data: [{$condition3_percentage}],
+			radius: '80%',
+			itemStyle: {
+				color: '#4e8ad4'
+			},
+			backgroundStyle: {
+				 color: '#062965'
+			}
+		}]
+	},{
+		series: [{
+			type: 'liquidFill',
+			data: [{$condition4_percentage}],
+			radius: '80%',
+			itemStyle: {
+				color: '#4e8ad4'
+			},
+			backgroundStyle: {
+				 color: '#062965'
+			}
+		}]
+	}, {
+		series: [{
+			type: 'liquidFill',
+			data: [{$condition5_percentage}],
+			radius: '80%',
+			itemStyle: {
+				color: '#4e8ad4'
+			},
+			backgroundStyle: {
+				 color: '#062965'
+			}
+		}]
+	}, {
+		series: [{
+			type: 'liquidFill',
+			data: [{$condition6_percentage}],
+			radius: '80%',
+			itemStyle: {
+				color: '#4e8ad4'
+			},
+			backgroundStyle: {
+				 color: '#062965'
+			}
+		}]
+	}];
+
+var charts = [];
+for (var i = 0; i < options.length; ++i) {
+	var chart = echarts.init(containers[i]);
+
+	if (i > 0) {
+		options[i].series[0].silent = true;
+	}
+	chart.setOption(options[i]);
+	chart.setOption({
+		baseOption: options[i],
+		media: [{
+			query: {
+				maxWidth: 300
+			},
+			option: {
+				series: [{
+					//radius: '50%',
+					//center: ['50%', '50%'],
+					label: {
+						fontSize: 16,
+						color: '#fff',
+						fontWeight: 'normal',
+						fontFamily: 'shs-Medium'
+					},
+					itemStyle: {
+						shadowBlur: 0,
+					},
+					emphasis: {
+						itemStyle: {
+							opacity: 0.7
+						},
+					},
+					outline: {
+						borderDistance: 1,//间距
+						itemStyle: {
+							borderWidth: 2,
+							borderColor: 'rgb(39,84,125)',
+							shadowBlur: 10,
+							shadowColor: '#0c3a81'
+						}
+					}
+				}]
+			}
+		}]
+	});
+	charts.push(chart);
+}
+
+window.onresize = function () {
+	for (var i = 0; i < charts.length; ++i) {
+		charts[i].resize();
+	}
+};
+
+</script>

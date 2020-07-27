@@ -1,0 +1,30 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="portlet light portlet-fit portlet-form " id="tab_2">
+		<div class="portlet-body">
+			<form action="{:U('life_volunteer_config_do_save')}" id="form_sample_2" method="post" class="form-horizontal">
+				<div class="form-body">
+					<div class="layui-row">
+						<div class="form-group  mt-5 layui-col-md12 ">
+							<div class="layui-row">
+								<div class="layui-col-md9">
+									<div class="input-icon right">
+										<i class="fa"></i>
+										<textarea id="maxlength_textarea" name="config_value" class="  form-control " maxlength="800" rows="4" placeholder="这个文本域的最大长度为225个字符.">{$config.config_value}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-md12 mt-10">
+								<!-- <button type="submit" id="btnSave" class="btn btn-sm blue w-75 bor-ra-2 mr-10 pull-right">保存</button> -->
+								<button style="margin-left:80%" class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+							</div>
+						</div> 
+					 </div>
+				</div>
+			</form>
+		</div>
+	</div>
+	</block>
+<block name="js">
+</block>

@@ -1,0 +1,522 @@
+/* line 5, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* line 22, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+    line-height: 1;
+}
+
+/* line 24, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+    list-style: none;
+}
+
+/* line 26, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* line 28, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+/* line 30, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+    quotes: none;
+}
+/* line 103, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none;
+}
+
+/* line 32, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+    border: none;
+}
+
+/* line 116, F:/shaoyue/program/Ruby24-x64/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+.html,body{height: 100%}
+.w-15{width: 15px;}
+.w-1145{width: 1145px;}
+.h-300{height: 300px}
+.pt-65{padding-top: 65px}
+.color-82{color: #828282}
+.color-4d{color: #4d4d4d}
+
+.pl-48{padding-left: 48px}
+.pr-48{padding-right: 48px}
+.shade{/*字体渐变*/
+    background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(252, 152, 118, 1)), to(rgba(254, 192, 115, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.data_content_left{
+    height:785px;
+    width: 358px;
+    overflow-y: auto;
+}
+.content_left_item{
+    border-bottom: 1px solid #d2d0d3;
+}
+.content_left_item:last-child{
+    border-bottom: none;
+}
+.content_left_item_active{
+    background-color: rgba(255, 237, 235, 1);
+    /*border-style: solid  !important;*/
+    /*border-width: 1px !important;*/
+    /*border-image-source: linear-gradient(0deg,*/
+    /*rgba(255, 255, 255, 1) 0%,*/
+    /*rgba(128, 128, 128, 1) 0%,*/
+    /*rgba(0, 0, 0, 1) 0%,*/
+    /*rgba(128, 25, 25, 1) 0%,*/
+    /*rgba(255, 50, 49, 1) 0%,*/
+    /*rgba(255, 87, 45, 1) 100%)  !important;*/
+    /*border-image-slice: 1;*/
+    /*border-radius: 2px;*/
+    color: #ff5824 !important;
+    font-size: 32px !important;
+}
+.data_content_right{
+    width:1285px;
+    min-height: 785px;
+    background: rgba(255,255,255, .4);
+    box-shadow: 0 0 10px 0 rgba(10,2,4,0.34);
+    border-radius: 4px;
+}
+.serve-intro {
+    line-height: 30px;
+    font-size: 18px;
+    color: #666;
+}
+.notice_body_center{
+    width:1680px;
+    margin:0 auto;
+}
+.notice_info{
+    width:1680px;
+    height: 812px;
+    box-shadow: 0 0 10px 0 rgba(10,2,4,0.34);
+    background: #fff;
+    border-radius: 7px;
+}
+.notice_info_title{
+    width:1145px;
+    color: #111;
+    font-size: 42px;
+    margin:0 auto;
+    text-align: center;
+}
+.guide_notice_body{
+    height: calc(100% - 140px);
+    background-image:  url("../../sp_guide/images/gov-print-bg.jpg");
+    background-size: cover;
+}
+.hide-y{
+    width: 340px;
+    height:785px;
+    overflow: hidden;
+    background: rgba(255,255,255, .4);
+    box-shadow: 0 0 10px 0 rgba(10,2,4,0.34);
+    border-radius: 10px;
+}
+
+@charset "UTF-8";
+/* line 11, ../../sass/objects/_foldbox.scss */
+.listbox_title {
+    line-height: 70px;
+    padding: 0 48px 0 40px;
+    font-size: 24px;
+    color: #fff;
+    background: linear-gradient(90deg, #ff5500, #ff0000);
+    position: relative;
+}
+/* line 19, ../../sass/objects/_foldbox.scss */
+.listbox_title:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+
+/* line 31, ../../sass/objects/_foldbox.scss */
+.is-active .listbox_title:after {
+    transform: rotate(90deg);
+}
+/* line 35, ../../sass/objects/_foldbox.scss */
+.is-active .listbox_list {
+    display: block;
+}
+
+/* line 40, ../../sass/objects/_foldbox.scss */
+.listbox_list {
+    display: none;
+}
+
+/* line 44, ../../sass/objects/_foldbox.scss */
+.listbox_sec {
+    position: relative;
+    line-height: 64px;
+    padding: 0 48px 0 40px;
+    font-size: 18px;
+    color: #999;
+    background: #fff;
+    border-bottom: solid 1px #e8e9eb;
+}
+/* line 53, ../../sass/objects/_foldbox.scss */
+.sec_title:hover {
+    background: rgba(255, 88, 45, 0.08);
+    color: #ff582d;
+    border-bottom: solid 1px rgba(255, 88, 45, 0.08);
+}
+/* line 58, ../../sass/objects/_foldbox.scss */
+.sec_title:hover:before {
+    top: 0;
+    bottom: 0;
+}
+/* line 64, ../../sass/objects/_foldbox.scss */
+.sec_title:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 1px;
+    width: 4px;
+    top: 50%;
+    bottom: 50%;
+    background: #ff6600;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+}
+
+/* line 78, ../../sass/objects/_foldbox.scss */
+.listbox_list .is-active:before {
+    height: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+/* line 84, ../../sass/objects/_foldbox.scss */
+.listbox_list .is-active {
+    background: rgba(255, 88, 45, 0.08);
+    color: #ff582d;
+    border-bottom: solid 1px rgba(255, 88, 45, 0.08);
+}
+/* line 89, ../../sass/objects/_foldbox.scss */
+.listbox_list .is-active:before {
+    top: 0;
+    bottom: 0;
+}
+
+/* line 15, ../../sass/objects/_button.scss */
+.button {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+/* line 19, ../../sass/objects/_button.scss */
+.button-red {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+    background: #ff582d;
+}
+
+/* line 24, ../../sass/objects/_button.scss */
+.button-linered {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+    background: linear-gradient(0deg, #ff204d, #ff6745);
+}
+
+/* line 29, ../../sass/objects/_button.scss */
+.button-strokered {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+    border: solid 1px #ff582d;
+    color: #ff582d;
+    background: transparent;
+}
+
+/* line 13, ../../sass/sp_guide/sp_guide_notice1.scss */
+#integral {
+    width: 1200px;
+    height: 560px;
+    margin-top: 50px;
+}
+
+/* line 19, ../../sass/sp_guide/sp_guide_notice1.scss */
+.detail_btn {
+    float: right;
+    margin: 10px;
+    padding: 0 10px;
+}
+
+
+@charset "UTF-8";
+
+/* line 55, ../sass/objects/_foldbox.scss */
+.listbox_wrap {
+    display: none;
+}
+/* line 58, ../sass/objects/_foldbox.scss */
+.listbox_wrap .unique:after {
+    content: "";
+}
+
+/* line 64, ../sass/objects/_foldbox.scss */
+.listbox_title {
+    position: relative;
+    padding: 0 48px 0 40px;
+    line-height: 70px;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+}
+/* line 19, ../sass/objects/_foldbox.scss */
+.listbox_title:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+
+/* line 68, ../sass/objects/_foldbox.scss */
+.listbox_title-red, .listbox_title-fir {
+    position: relative;
+    padding: 0 48px 0 40px;
+    line-height: 70px;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+    background: linear-gradient(90deg, #ff5500, #ff0000);
+    color: #fff;
+}
+/* line 19, ../sass/objects/_foldbox.scss */
+.listbox_title-red:after, .listbox_title-fir:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+/* line 73, ../sass/objects/_foldbox.scss */
+.listbox_title-red:before, .listbox_title-fir:before {
+    content: "";
+    clear: both;
+}
+
+/* line 79, ../sass/objects/_foldbox.scss */
+.listbox_title-sec {
+    position: relative;
+    padding: 0 48px 0 40px;
+    line-height: 70px;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+    font-size: 18px;
+}
+/* line 19, ../sass/objects/_foldbox.scss */
+.listbox_title-sec:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+/* line 31, ../sass/objects/_foldbox.scss */
+.listbox_title-sec:hover {
+    background: rgba(255, 88, 45, 0.08);
+    color: #ff582d;
+}
+/* line 35, ../sass/objects/_foldbox.scss */
+.listbox_title-sec:hover:before {
+    top: 0;
+    bottom: 0;
+}
+/* line 41, ../sass/objects/_foldbox.scss */
+.listbox_title-sec:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 1px;
+    width: 4px;
+    top: 50%;
+    bottom: 50%;
+    background: #ff6600;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+}
+
+/* line 85, ../sass/objects/_foldbox.scss */
+.listbox_title-trd {
+    position: relative;
+    padding: 0 48px 0 40px;
+    line-height: 70px;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+    font-size: 18px;
+    padding-left: 70px;
+}
+/* line 19, ../sass/objects/_foldbox.scss */
+.listbox_title-trd:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+/* line 90, ../sass/objects/_foldbox.scss */
+.listbox_title-trd:hover {
+    color: #ff582d;
+}
+
+/* line 95, ../sass/objects/_foldbox.scss */
+.listbox_title-four {
+    position: relative;
+    padding: 0 48px 0 40px;
+    line-height: 70px;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+    font-size: 16px;
+    padding-left: 90px;
+}
+/* line 19, ../sass/objects/_foldbox.scss */
+.listbox_title-four:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+/* line 100, ../sass/objects/_foldbox.scss */
+.listbox_title-four:hover {
+    color: #ff582d;
+}
+
+/* line 105, ../sass/objects/_foldbox.scss */
+.listbox_title-five {
+    position: relative;
+    padding: 0 48px 0 40px;
+    line-height: 70px;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+    font-size: 14px;
+    padding-left: 120px;
+}
+/* line 19, ../sass/objects/_foldbox.scss */
+.listbox_title-five:after {
+    content: ">";
+    position: absolute;
+    right: 48px;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+}
+/* line 110, ../sass/objects/_foldbox.scss */
+.listbox_title-five:hover {
+    color: #ff582d;
+}
+/* line 114, ../sass/objects/_foldbox.scss */
+.listbox_title-five:after {
+    content: "";
+}
+
+/* line 119, ../sass/objects/_foldbox.scss */
+.unique:after {
+    content: "";
+}
+
+/* line 124, ../sass/objects/_foldbox.scss */
+div[class*="is-active"]:after {
+    transform: rotate(90deg);
+}
+
+/* line 129, ../sass/objects/_foldbox.scss */
+[class*="listbox_title-sec unique is-active"], [class*="listbox_title-sec is-active"] {
+    background: rgba(255, 88, 45, 0.08);
+    color: #ff582d;
+}
+/* line 133, ../sass/objects/_foldbox.scss */
+[class*="listbox_title-sec unique is-active"]:before, [class*="listbox_title-sec is-active"]:before {
+    top: 0;
+    bottom: 0;
+}
+
+/* line 139, ../sass/objects/_foldbox.scss */
+[class*="listbox_title-trd unique is-active"], [class*="listbox_title-trd is-active"] {
+    color: #ff582d;
+}
+
+/* line 143, ../sass/objects/_foldbox.scss */
+[class*="listbox_title-four unique is-active"], [class*="listbox_title-four is-active"] {
+    color: #ff582d;
+}
+
+/* line 147, ../sass/objects/_foldbox.scss */
+[class*="listbox_title-five unique is-active"], [class*="listbox_title-five is-active"] {
+    color: #ff582d;
+}

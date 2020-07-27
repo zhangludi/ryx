@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="森普，智慧党建，云平台">
+    <meta name="description" content="森普智慧党建云平台">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title><php>echo getConfig('web_name');</php>-注册</title>
+    <!--公共样式-->
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css">
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_login.css">
+    <!--------end-------->
+
+</head>
+<style>
+    .layui-btn {
+        /*display: inline-block;
+        height: 38px;
+        margin-left: 10%;
+        line-height: 38px;*/
+        background-color: #ff3032;
+        margin-left: 12%;
+        padding: 0 36px;
+        background-color: #ff3032;
+        /*color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;*/
+    }
+    .border-e {
+        background-color: #8e8585;
+    }
+    blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+   
+    margin-left: 14px;
+    }
+
+   
+</style>
+<body>
+<div class="login_box" style="width:430px;margin-left: 17%;">
+    <form id="form" action="{:U('Index/Index/register_save')}" method="post" onsubmit="return check()" >
+        <div class="mb-40 center-text fsize-32 login_title">用户注册</div>
+        <!-- <p class="mb-15">
+            <span class="login_lbl">党组织</span>
+            <select name="party_no" class="di-ib w-220 h-28 ipam_input login_sel">
+                <php>echo getPartySelect();</php>
+            </select>
+        </p> -->
+        <p class="mb-15">
+            <span class="login_lbl">姓&emsp;名</span>
+            <input type="text" class="di-ib w-200 h-28 ipam_input" id="communist_name"  placeholder="请输入真实姓名" name="communist_name" required>
+        </p>
+        <p class="mb-15">
+            <span class="login_lbl">身份证</span>
+            <input type="text" class="di-ib w-200 h-28 ipam_input" onblur="communist_idnumber_no()" placeholder="注意身份证格式" id="communist_idnumber" name="communist_idnumber" required><span id="cardPrompt" ></span>
+        </p>
+        <p class="mb-15">
+            <span class="login_lbl">用户名</span>
+            <input type="text" class=" di-ib w-200 h-28 ipam_input" onblur="username_no()" placeholder="4-16字节，允许字母数字下划线"  autocomplete="off"   id="username" name="username" required><span color="red" id="userNamePrompt"></span>
+        </p>
+        <p class="mb-15">
+            <span class="login_lbl">密&emsp;码</span>
+            <input type="password" class=" di-ib w-200 h-28 ipam_input" placeholder="请输入密码"  lay-verify="" autocomplete="off" id="password" name="password" required>
+        </p>
+        <p class="mb-15">
+            <span class="login_lbl">手机号</span>
+            <input type="phone" class=" di-ib w-200 h-28 ipam_input" onblur="phone_blur()" placeholder="请输入手机号"  lay-verify="" autocomplete="off" id="phone"  name="phone" required>
+            <span color="red" id="phonePrompt"></span>
+        </p>
+        <input type="hidden" id="a_name"  name="a_name">
+        <input type="hidden" id="reverification"  name="reverification">
+        <p class="mb-15">
+            <span class="login_lbl">验证码</span>
+            <input type="text" class=" di-ib w-100 h-28 ipam_input" placeholder="请输入验证码"  lay-verify="" autocomplete="off" id="verification" onblur="reverification_no()"  name="verification" required>
+            <span lay-submit lay-filter="login"  id="verificationButton"  onclick="verification_no()" class="layui-btn biankuang" style="padding: 0; width: 90px;margin-left: 10px">发送验证码</span>
+            <span color="red" id="verificationPrompt"></span>
+
+
+        </p>
+        <!-- <p class="mb-40">
+            <span class="login_lbl">确认密码</span>
+            <input type="password" class="di-ib w-200 h-28 ipam_input" placeholder="再次输入密码" id="repassword" name="repassword" required><span id="rePwdPrompt"></span>
+        </p> -->
+        <!-- <button type="submit"  class="login_btn center-block center-text lh-30 bor-ra-4 h-30 w-290">注册</button> -->
+         <button lay-submit lay-filter="sub" class="layui-btn">注册</button>
+        <!-- <button type="submit" lay-submit lay-filter="sub" class="layui-btn">登录</button> -->
+        <a href="{:U('Index/Index/login')}" lay-filter="sub" class="layui-btn">返回</a>
+        <!-- <button class="login_btn  center-text lh-30 bor-ra-4 h-30 w-290">注册</button> -->
+    </form>
+
+</div>
+</body>
+<script src="__STATICS__/plugins/jquery.min.js"></script>
+<script>
+
+    
+        //身份证验证
+        function communist_idnumber_no(){
+            var card = $("#communist_idnumber").val();
+            var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if(!pattern.test(card)){
+                $("#cardPrompt").html("<span id='i2' style='color:red'>&emsp;格式不正确！</span>");
+                return false;
+            }else{
+                $("#i2").remove();
+            }
+        }
+        //用户名验证
+        function username_no(){
+            var username = $("#username").val();
+            var reg = /^[0-9a-zA-Z_\u3E00-\u9FA5]{4,15}$/;//4-16字符，允许字母数字下划线
+            if (!reg.test(username)) {
+                $("#userNamePrompt").html("<span id='i' style='color:red'>&emsp;格式不正确！</span>");
+                return false;
+            }else{
+                $("#i").remove();
+                var username = $("#username").val();
+                $.ajax({
+                    url:"{:U('register_username')}",
+                    data:{'username':username},
+                    type:"post",
+                    async:false,
+                    success:function(msg){
+                        if(msg==null){
+                            $("#i5").remove();
+                            $("#a_name").val(1);
+                        }else{
+                            $("#userNamePrompt").html("<span id='i5' style='color:red'>&emsp;用户名重复！</span>");
+                            $("#a_name").val(2);
+                        }
+                    }
+                })
+                if($('#a_name').val()==2){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
+           
+        //手机号验证
+        function phone_blur(){
+            var patt = /^1[34578]\d{9}$/;
+            var phone = $("#phone").val();
+            if(!patt.test(phone)){
+                $("#phonePrompt").html("<span id='i3' style='color:red'>&emsp;格式不正确！</span>");
+                return false;
+            }else{
+                $("#i3").remove();
+                if(communist_idnumber_no()!=false && username_no()!=false){
+                    var communist_name = $("#communist_name").val();
+                    var card = $("#communist_idnumber").val();
+                    var phone = $("#phone").val();
+                    $.ajax({
+                        url:"{:U('register_phone')}",
+                        data:{'communist_name':communist_name,"communist_idnumber":card},
+                        type:"post",
+                        async:false,
+                        success:function(msg){
+                            if(msg != phone){
+                                alert("验证手机号与之前预留手机号不一致，请确认手机号，如果继续操作会更换之前预留手机号")
+                            }
+                        }
+                    })
+                }
+            }
+
+        }
+        //手机验证码
+        function verification_no(){
+            var phone = $("#phone").val();
+            $.ajax({
+                url:"{:U('register_verification')}",
+                data:{'phone':phone},
+                type:"post",
+                async:false,
+                success:function(msg){
+                    $("#reverification").val(msg.code_no);
+                    if(msg.success=='ok'){
+                        $("#verificationButton").addClass('border-e');
+                        $("#verificationButton").html('已发送(<span id="time">60</span>s)');
+                        $("#verificationButton").removeAttr('onclick');
+                        var setTime;
+                        //倒计时
+                        $(document).ready(function(){
+                            var time=parseInt($("#time").text());
+                            setTime=setInterval(function(){
+                                if(time<=0){
+                                    clearInterval(setTime);
+                                    return;
+                                }
+                                time--;
+                                if(time==0){
+                                    $("#verificationButton").removeClass('border-e');
+                                    $("#time").remove();
+                                    $("#verificationButton").html('发送验证码');
+                                    $("#verificationButton").attr('onclick',"verification_no()");
+                                }
+                                $("#time").text(time);
+                            },1000);
+                        });
+                    }
+                }
+            })
+        }
+        //输入验证码验证
+        function reverification_no(){
+            var reverification= $("#reverification").val();
+            var verification= $("#verification").val();
+            if(reverification != verification){
+                $("#verificationPrompt").html("<span id='i4' style='color:red'>&emsp;输入不正确！</span>");
+                return false;
+            }else if(reverification == '' || verification ==''){
+                return false;
+            }else{
+                $("#i4").remove();
+            }
+        }
+    function check(){
+        if (communist_idnumber_no()!=false && username_no()!=false && phone_blur()!=false && reverification_no() !=false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+</html>

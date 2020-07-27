@@ -1,0 +1,67 @@
+body {
+
+}
+
+.w-14em{width: 0.7rem;}
+.h-12em{height: 0.6rem;}
+.w-38em{width: 1.9rem;}
+.h-38em{height: 1.9rem;}
+
+.p-12em{padding: 0.6rem;}
+.pl-12em{padding-left:0.6rem;}
+.pr-12em{padding-right: 0.6rem;}
+.pt-12em{padding-top: 0.6rem;}
+.pb-12em{padding-bottom: 0.6rem;}
+
+.mr-8em{margin-right: 0.4rem;}
+.mr-12em{margin-right: 0.6rem;}
+.mb-8em{margin-bottom: 0.4rem;}
+.mb-12em{margin-bottom: 0.6rem;}
+
+.f-17em{font-size: 0.85rem;}
+
+.color-b3{color: #b3b3b3;}
+.color-75{color: #757575;}
+.color-ff3032{color: #ff3032;}
+.color-ff9776{color: #ff9776;}
+.bg-color-ff3032{background: #ff3032;}
+
+.b-1-dfdfdf{border: 1px solid #dfdfdf;}
+.bt-1-dfdfdf{border-top: 1px solid #dfdfdf;}
+.bb-1-dfdfdf{border-bottom: 1px solid #dfdfdf;}
+.bg-color-fcfdfe{background: #fcfdfe;}
+
+
+
+#tabBox2{
+	background: #fff;
+	overflow: hidden;
+}
+#tabBox2 li{
+	width: 50%;
+	float: left;
+	border-right: 1px solid #eeeeee;
+	text-align: center;
+	position: relative;
+}
+#tabBox2 li a{
+	display: block;
+	margin: 0 auto;
+	color: #757575;
+}
+#tabBox2 li .active{
+	display: none;
+	width: 2rem;
+	height: 1px;
+	position: absolute;
+	bottom: -0.25rem;
+	left: 50%;
+	background: #ff3032;
+	margin-left: -1rem;
+}
+#tabBox2 .tabBox2-active a{
+	color: #ff3032;
+}
+#tabBox2 .tabBox2-active .active{
+	display: block;
+}

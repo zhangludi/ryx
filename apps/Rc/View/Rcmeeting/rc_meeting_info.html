@@ -1,0 +1,338 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+    <style type="text/css"/>
+        #meeting_table{ text-align:center; vertical-align: meddle;}
+    </style>
+</block>
+<block name="body">
+    <form action="{:U('att_meeting_do_save')}" id="form_sample_2" method="post">
+        <!-- 开始 -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="portlet light ">
+                    <div class="portlet-body right">
+                            <div class="row p5-editor-move">
+                                <!-- 输入会议名称开始   -->
+                                <div class="form-group  mt-5 col-xs-4 ">
+                                        <div class="row">
+                                                <label class="control-label  col-xs-4 pl-0 lh-30 lh-30">会议名称： 
+                                                    <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <div class="input-icon right">
+                                                                <i class="fa"></i> <input type="text" class="  form-control " name="meeting_name" id="cust_name" value="{$row['meeting_name']}"/>
+                                                        </div>-->
+                                                    <!--<label  class="control-label col-xs-12 pl-0 lh-30 lh-30 ">-->
+                                                        {$row['meeting_name']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 会议名称结束 -->
+                                <!-- 会议时间（单独时间）开始 -->
+                                <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30">会议时间：
+                                                    <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+                                                        <!--<input type="text" value="{$row['meeting_start_time']}" name="meeting_start_time" id="commu_time" date class="form-control layer-date " placeholder="选择日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['meeting_start_time']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 会议时间（单独时间）结束 -->
+                                <!-- 单选下拉开始 -->
+<!--							<div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-3 pl-0 lh-30">客户区域<span class="required"> * </span>
+                                                </label>
+                                                <div class="col-xs-3 p5-form-control pl-0 ">
+                                                        <select id="province" class="  form-control  select2 " name="province" onchange='custarea(this.options[this.selectedIndex].value)'>
+                                                                <option value="">请选择</option>
+                                                                <php>echo getAreaSelect('0', '');</php>
+                                                        </select>
+                                                </div>
+                                                <div class="col-xs-3 p5-form-control pl-0 ">
+                                                        <select id="city" class="form-control  select2" name="city">
+                                                                <option value='0' selected>请选择</option>
+                                                        </select>
+                                                </div>
+                                                <div class="col-xs-3 p5-form-control pl-0 ">
+                                                        <select id="area_no" class="form-control  select2" name="area_no">
+                                                                <option value='0' selected>请选择</option>
+                                                        </select>
+                                                </div>
+                                        </div>
+                                </div>-->
+                                <!-- 单选下拉结束 -->
+                                <!-- 输入会议地点开始   -->
+                                <div class="form-group  mt-5 col-xs-4 ">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">会议地点： 
+                                                    <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <div class="input-icon right">
+                                                                <i class="fa"></i> <input type="text" class="  form-control " name="machine_addr" id="cust_name" value="{$row['machine_addr']}"/>
+                                                        </div>-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['meeting_addr']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 输入会议地点结束 -->
+                                <!-- 组织部门（单独下拉列表）开始 -->
+                                <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">组织部门：
+                                                        <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <select id="cust_type" name="cust_type" class="  form-control  select2">
+                                                                <php>echo getPartySelect($row['party_no']);</php>
+                                                        </select>-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['party_name']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 组织部门（单独下拉列表）开始 结束 -->    
+
+                                <!-- 主持人（单独下拉列表）开始   -->
+                                <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30">主持人：
+                                                        <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <select id="cust_type" name="cust_type" class="  form-control  select2">
+                                                                <php> echo getCommunistSelect($row['meeting_host']);</php>
+                                                        </select>-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['meeting_host_name']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 主持人（单独下拉列表）结束 -->
+                                <!-- 对面考勤机（单独下拉列表）开始 -->
+                                <div class="form-group  mt-5 col-xs-4 ">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">
+                                                    对应考勤机： 
+                                                    <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <div class="input-icon right">
+                                                                <i class="fa"></i> <input type="text" class="  form-control " name="machine_addr" id="cust_name" value="{$row['machine_addr']}"/>
+                                                        </div>-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['machine_name']['machine_name']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 对面考勤机（单独下拉列表）结束 -->
+                                <!-- 会议类型（单独下拉列表）开始 -->
+                                <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">会议类型：
+                                                        <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <select id="cust_type" name="cust_type" class="  form-control  select2">
+                                                                <php>echo getPartySelect($row['party_no']);</php>
+                                                        </select>-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['meeting_type_name']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- 会议类型（单独下拉列表）开始 结束 -->    
+
+                                <!-- 会议积分（单独下拉列表）开始   -->
+                                <eq name="is_integral" value="1">
+                                <div class="form-group mt-5 col-xs-4">
+                                    <div class="row">
+                                        <label class="control-label col-xs-4 pl-0 lh-30">会议积分：
+                                        </label>
+                                        <div class="col-xs-8 p5-form-control pl-0 mt-5">
+                                            {$row['meeting_integral']}
+                                        </div>
+                                    </div>
+                                </div>
+                                </eq>
+                                <!-- 会议积分（单独下拉列表）结束 -->
+                                <!-- 对面考勤机（单独下拉列表）开始 -->
+                                <neq name='is_camera' value=''>
+                                <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">摄像头编号：
+                                                        <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+<!--                                                        <select id="cust_type" name="cust_type" class="  form-control  select2">
+                                                                <php>echo  getMachineSelect($row['machine_no']);</php>
+                                                        </select>-->
+                                                    <!--<label class="control-label col-xs-12 pl-0 lh-30 lh-30">-->
+                                                        {$row['meeting_camera']}
+                                                    <!--</label>-->
+                                                </div>
+                                        </div>
+                                </div>
+                                </neq>
+                                <!-- 对面考勤机（单独下拉列表）结束 -->                                 
+<!--                                 会议状态开始   
+-->                             <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30">会议状态：
+                                                        <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+                                                        {$row['status_name']}
+                                               </div>
+                                        </div>
+                                </div><!--
+                                 会议状态结束 --> 
+                                 <!-- 应到/实到开始   -->
+                                <div class="form-group mt-5 col-xs-4">
+                                        <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">实到/应到：
+                                                        <!--<span class="required"> * </span>-->
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+
+                                                        {$row['shoulded_info']}
+                                                </div>
+                                        </div>
+                                </div>                               
+                                <!-- 应到/实到结束 -->
+                                <!-- 布局用空div开始 -->
+                              <div class="form-group  mt-5 col-xs-4  ">
+                                         <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">
+                                                    <span class="required">  </span>
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0">
+
+                                                </div>
+                                        </div>
+                                </div>
+                                
+                                <!-- 布局用空div结束 -->
+                                <!-- 布局用空div开始 -->
+<!--                              <div class="form-group  mt-5 col-xs-4  ">
+                                         <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">
+                                                    <span class="required">  </span>
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0">
+
+                                                </div>
+                                        </div>
+                                </div>-->
+                                
+                                <!-- 布局用空div结束 -->
+                               <!-- 参会人员开始 -->
+                                <div class="form-group  mt-5   col-xs-4  ">
+                                         <div class="row">
+                                                <label class="control-label col-xs-4 pl-0 lh-30 lh-30">参会人员：
+                                                    <span class="required">  </span>
+                                                </label>
+                                                <div class="col-xs-8 p5-form-control pl-0 mt-5">
+                                                    
+                                                </div>
+                                        </div>
+                                </div><!--
+                                <!-- 参会人员结束 -->
+                                <!-- 文本域开始 -->
+<!--                                <div class="form-group col-xs-12 mt-10">
+                                        <div class="row">
+                                                <label class="control-label col-xs-1 pl-0 lh-30 lh-30"> </label>
+                                                                                      
+                                        </div>-->
+                                    <!--参会人员信息显示-->
+                                    <div class="row">
+                                        <div class="col-xs-offset-1 col-xs-10">
+                                        <table class="table table-bordered table-hover  table-striped" width="600" id="meeting_table">
+                                            <thead>
+                                                <tr class="info">
+                                                <th width="60">序号</th>
+                                                <th width="80">党员部门</th>
+                                                <th width="80">党员姓名</th>
+                                                <th width="80">签到状态</th>
+                                                <th width="100">签到方式</th>
+                                                <th>签到时间</th>
+                                                <th>签到地点</th>
+                                                <th>签到内容</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+<!--                                            <tr>
+                                                <td>aaaa</td>
+                                                <td>bbbbb</td>
+                                            </tr>
+                                            <tr>
+                                                <td>cccc</td>
+                                                <td>bbddddbbb</td>
+                                            </tr>-->
+                                            <foreach name="meeting_result" item="v">                                           
+                                            <tr>
+                                                <td>{$v.meeting_ids}</td>
+                                                <td>{$v.party_name}</td>
+                                                <td>{$v.communist_name}</td>                                              
+                                                <td>{$v.status_name}</td>
+                                                <td>{$v.ckeck_type_name}</td>
+                                                <td>{$v.check_time}</td>   
+                                                <td>{$v.check_addr}</td>
+                                                <td><button type="button" onclick="content_info('{$v.communist_no}')"  class='btn btn-xs yellow btn-outline'>详情</button></td>                                                 
+                                            </tr>
+                                            </foreach>
+                                            </tbody>
+                                        </table>                                         
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 文本域结束 -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-30">
+                                <button onclick="cancel()" type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">取消</button>			
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- 添加结束 -->
+    <!-- 表单内容 -->
+    </form>                                 
+</block>  
+<block name="js">
+	<script>
+		function cancel(){
+			parent.layer.closeAll();
+		}
+	</script>
+    <script >
+        function content_info(communist_no){
+		    var url = "{:U('Oa/Oameeting/oa_check_info_show')}?communist_no="+communist_no+"&meeting_no={$row['meeting_no']}";
+            parent.layer.open({
+                type: 2,
+                title: '会议记录内容展示',
+                maxmin: true,
+                offset: '10px',
+                shadeClose: true, //点击遮罩关闭层
+                area : ['800px' , '500px'],
+                content: url //iframe的url
+            });
+	   }
+    </script>
+</block>  

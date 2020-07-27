@@ -1,0 +1,62 @@
+<!--评论开始-->
+<p class="mt-30">
+    <i class="public_mark_org"></i> 评论 <span class="fsize-12">({$comment_num}条评论)</span>
+</p>
+<div>
+    <volist name="comment_list" id="comment" >
+        <div class="di-fl mt-15">
+            <div class="w-46">
+                <div class="w-46 h-46 bor-ra-50b over-h ">
+                    <a href="javascript:;">
+                        <img style="width:100%" src="{$comment.communist_avatar}" >
+                    </a>
+                </div>
+            </div>
+            <div class="ml-15 w-all">
+                <p>
+                    <a href="javascript:;" class="fcolor-3096ff">{$comment.communist_name}</a>
+                    <span class="ml-10 fsize-14 fcolor-99">{$comment.communist_address}</span>
+                    <span class="fsize-12 fcolor-99 pull-right">{$comment.comment_time}</span>
+                </p>
+                <p class="fsize-14 fcolor-33 lh-30">{$comment.comment_content}</p>
+            </div>
+        </div>
+    </volist>
+</div>
+<div class="mt-20">
+    <p class="public_article_right study_note_article_right po-re">
+        <span class="ml-20 fsize-14 fcolor-11 font-bold">写评论</span>
+    </p>
+    <textarea name="comment_content" id="comment_content" class="ipam_input w-all h-100 mt-20" style="resize: none"></textarea>
+</div>
+<input type="hidden" id="article_id" name="article_id" value="{$article_id}">
+<input type="hidden" id="type" name="type" value="{$type}">
+<a class="di-b w-100 h-30 lh-30 mt-20 pull-right fsize-14 fcolor-f33 hr-s-ff3032 bor-ra-4 center-text submit_comment">点击提交</a>
+<!--评论结束-->
+<script type="text/javascript">
+    $(".submit_comment").click(function(){
+        var article_id = $('#article_id').val();
+        var type = $('#type').val();
+        var comment_content = $('#comment_content').val();
+        if(comment_content == null || comment_content == ''){
+            layer.msg('请先填写评论！');
+        } else {
+            $.ajax({
+                url: "{:U('News/ipam_article_comment_save')}",
+                data: {'article_id':article_id,'type':type,'comment_content':comment_content},
+                type: "post",
+                async:false,
+                success: function(data) {
+                    if(data.code == 1){
+                        layer.msg(data.msg);
+                        setTimeout(location.reload(),4000)
+                    } else {
+                        layui.msg(data.msg);
+                    }
+                },
+                error: function(xhr) {
+                }
+            });
+            }
+    })
+</script>

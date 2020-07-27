@@ -1,0 +1,211 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style>
+	* { margin: 0; padding: 0; }
+	a { text-decoration: none; }
+	ul { list-style: none; }
+	body,  html { height: 100%; font-family: "微软雅黑"; }
+	.box { width: 100%; height: 600px; margin: 0px 0; }
+	#container3 { width: 100%; height: 100%; }
+	.list { width: 20%; height: 100%; background: #eee; }
+	.list li { height: 34px; line-height: 34px; padding-left: 20px; }
+	.list li.active a { color: red; }
+	.title { font-size: 14px; font-weight: bold; color: #cc5522; }
+	.content { font-size: 13px; color: #333; margin-top: 6px; }
+	.fl { float: left; }
+	</style>
+	<!-- 百度地图   -->
+</block>
+<block name="body">
+<div class="page-container page-content-white page-full-width container-fluid">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <div class="cont-col1">
+                            <div class="label label-sm bg-color-green2">
+                                <i class="iconfont">&#xe64b;</i>
+                            </div>
+                        </div>
+                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                    </div>
+                    <div class="pull-right text-right p-0 ">
+                        <a href="javascript:history.back();" class=" btn btn-sm green w-80 bor-ra-2 mr-10 mt-10">返回</a>
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                	<div class="portlet-body">
+                    	<div class="row">
+                    	<eq name="page_type" value="edit">
+                    		<div class="col-md-12">
+                        		<input type="hidden" value="{$party_no}" id="party_no" />
+                            	<div class="box" id="maps">
+									<div id="container3" class="container fl"></div>
+									<!-- <ul class="list fl" >
+										<volist name="map_list" id="list">
+											<li> <a href="javascript:void(0)" onclick="clickparty({$list.party_no})" value="{$list.party_map}">{$list.party_name}</a> </li>
+										</volist>
+									</ul> -->
+								</div>
+                        	</div>
+                        <else />
+                        	<iframe name="main_iframe"  width="100%" height="500px" src="{:U('System/Index/baidu_map_grid')}" target="_self" frameborder="0"></iframe>
+                    	</eq>
+                    	</div>
+                	</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<!-- 百度地图 -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={$web_map_ak}"></script>
+<script type="text/javascript" src="__STATICS__/plugins/Bdmap/js/jquery.baiduMap.min.js"></script>
+<script >
+//百度地图API功能
+//创建坐标标识
+var map = new BMap.Map("container3");
+map.centerAndZoom(new BMap.Point(104.897856,26.600358), 16);//定义默认显示左边  15为地图等级
+
+//创建坐标标识
+/* var marker = new BMap.Marker(new BMap.Point(116.404, 39.915)); // 创建点
+map.addOverlay(marker);//增加点 */
+//创建多个点
+//var json_data = [[116.404,39.915],[116.383752,39.91334],[116.384502,39.932241]];
+//定义json
+var json_data = [];
+//循环给json追加json数据
+$("#maps").find("li").each(function(){
+    var y = "["+$(this).children().attr("value")+"]"; //得到数据两侧需拼接“'[]'”
+    json_data.push(JSON.parse(y)); //追加的数据为json
+});
+var pointArray = new Array();
+for(var i=0;i<json_data.length;i++){
+	var marker = new BMap.Marker(new BMap.Point(json_data[i][0], json_data[i][1])); // 创建点
+	map.addOverlay(marker);    //增加点
+	pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
+	marker.addEventListener("click",attribute);
+}
+//让所有点在视野范围内
+map.setViewport(pointArray);
+function attribute(e){
+	var p = e.target;
+	alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);    
+}
+
+//添加带有定位的导航控件
+var navigationControl = new BMap.NavigationControl({
+	// 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+  // 启用显示定位
+  enableGeolocation: true
+});
+map.addControl(navigationControl);
+// 添加定位控件
+/* var geolocationControl = new BMap.GeolocationControl();
+geolocationControl.addEventListener("locationSuccess", function(e){
+  // 定位成功事件
+  var address = '';
+  address += e.addressComponent.province;
+  address += e.addressComponent.city;
+  address += e.addressComponent.district;
+  address += e.addressComponent.street;
+  address += e.addressComponent.streetNumber;
+  alert("当前定位地址为：" + address);
+});
+map.addControl(geolocationControl); */
+
+map.enableScrollWheelZoom(true);//开启鼠标缩放功能
+map.addControl(new BMap.MapTypeControl({
+    mapTypes: [
+        BMAP_NORMAL_MAP,
+        BMAP_HYBRID_MAP
+    ]
+}));   //添加地图类型控件
+/* var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+stCtrl.setOffset(new BMap.Size(30, 40));
+map.addControl(stCtrl);//添加全景控件 */
+
+//添加交通图层
+/* var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
+map.addTileLayer(traffic);                    // 将图层添加到地图上
+//移除图层
+map.removeTileLayer(traffic);                // 将图层移除 */
+
+//获取鼠标点击的坐标
+map.addEventListener("click", function(e){    
+	var party_no = $("#party_no").val();	//获取部门编号
+	var lng = e.point.lng;
+	var lat = e.point.lat;
+	layer.confirm('坐标：'+lng+'&nbsp;&nbsp;'+lat+',确定选这里么？', {
+        btn: ['确定','取消'] //按钮
+    }, function(){
+        $.post("{:U('ccp_party_grid_do_save')}", { lng:lng,lat:lat,party_no:party_no}, function(result){
+        	if (Number(result) == 1){
+                alert('操作失败！');
+            }else{
+            	layer.msg('操作成功！');
+                /* location.href = "{:U('"+result+"')}"; */
+            }
+        });
+    }, function(){
+        layer.close();
+    });
+});
+</script>
+<!-- 百度地图结束-->
+<script >
+    layui.use(['form', 'layedit', 'laydate','jquery'], function(){
+        var form = layui.form()
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate
+            ,$ = layui.jquery;
+        layui.selMeltiple($);
+        //自定义验证规则
+        form.verify({
+            project_logo: function(value){
+                if(value.length==0){
+                    return '请选择logo图片';
+                }
+            },
+            project_map: function(value){
+                if(value.length==0){
+                    return '请选择项目地图图片';
+                }
+            }
+
+        });
+    });
+</script>
+<script >
+    function getPos(o,e,party_no) {
+        var top = e.offsetY;
+        var left = e.offsetX;
+        layer.confirm('确定选这里么？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.post("{:U('ccp_party_grid_do_save')}", { top:top,left:left,party_no:party_no}, function(result){
+                if (Number(result) == 1){
+                    alert('操作失败！');
+                }else{
+                    alert('操作成功！');
+                    location.href = "{:U('"+result+"')}";
+                }
+            });
+        }, function(){
+            layer.close();
+        });
+    } ;
+
+</script>
+<script >
+    $( "#iPicture" ).iPicture();
+</script>
+</block>

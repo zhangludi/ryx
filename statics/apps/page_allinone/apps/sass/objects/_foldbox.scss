@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+@import "../variables/font-size";
+@import "../variables/color";
+
+$title-lh: 70px;
+$item-lh: 64px;
+$space-l: 40px;
+$space-r: 48px;
+
+.listbox_title{
+  line-height: $title-lh;
+  padding: 0 $space-r 0 $space-l;
+  @include font-sizes(l2);
+  @include whites(default);
+  background: $linear-red1;
+  position: relative;
+
+  &:after{
+    content: ">";
+    position: absolute;
+    right: $space-r;
+    font-family: 宋体;
+    font-weight: bold;
+    transition: .3s;
+    transition-timing-function: ease;
+  }
+}
+
+.is-active{
+  & .listbox_title:after{
+    transform: rotate(90deg);
+  }
+
+  .listbox_list{
+    display: block;
+  }
+}
+
+.listbox_list{
+  display: none;
+}
+
+.listbox_item{
+  position: relative;
+  line-height: $item-lh;
+  padding: 0 $space-r 0 $space-l;
+  @include font-sizes(l1);
+  @include grays(seven);
+  background: whites(default);
+  border-bottom: solid 1px grays(eight);
+
+  &:hover{
+    background: reds(sec);
+    color: reds(fir);
+    border-bottom: solid 1px reds(sec);
+
+    &:before{
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+  &:before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 1px;
+    width: 4px;
+    top: 50%;
+    bottom: 50%;
+    background: oranges(fir);
+    transition-duration: .3s;
+    transition-timing-function: ease;
+  }
+}
+
+.listbox_list .is-active:before{
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.listbox_list .is-active{
+  background: reds(sec);
+  color: reds(fir);
+  border-bottom: solid 1px reds(sec);
+
+  &:before{
+    top: 0;
+    bottom: 0;
+  }
+}

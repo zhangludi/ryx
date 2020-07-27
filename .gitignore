@@ -1,0 +1,9 @@
+/.idea
+/.vscode
+/vendor
+*.log
+.env
+/Runtime
+/apps333
+/11
+/uploads

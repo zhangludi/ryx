@@ -1,0 +1,129 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+  <!--页面自定义样式-->
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_exam_my_info.css">
+<div class="public_content clearfix">
+  	<div class="clearfix">
+  		<div class="pull-left con_exam_official_tit white-space">已参加考试的详情页面</div>
+  		<div class="pull-left exam_official_type">我的考试</div>
+  		<div class="pull-left exam_total_score">得分：{$exam_list['branch']['log_score']}</div>
+  	</div>
+  	
+  	
+  <!---------------------------左侧------------------------------------->
+  <div class="pull-left">
+  	<div class="exam_official_l">
+  	<!--剩余时间-->
+  	<div class="content_time_num clearfix">
+			<div id="timer" class="pull-left">
+				<div class="false">
+					<span class="over_time">用时:</span>
+					<span class="time minute">{$exam_list['branch']['time_lave']}</span>
+					<!-- <span class="time second">00</span> -->
+				</div>
+			</div>
+			<div class="pull-right"></div>
+			<!--<div class="content_num pull-right">
+				<span class="num questioned">&nbsp;</span>&nbsp;/
+				<span class="question_sum"></span>
+			</div>-->
+	</div>
+  	
+  	<div class="content_main">
+			<div class="content_class">
+				<div class="content_class_tit clearfix">
+					<div class="content_class_tit_left pull-left">
+						<i></i>
+						<span class="questions_type"></span>
+					</div>
+				
+					<div class="content_class_tit_right pull-right next" id="nextQuestion">
+						<a href="javascript:;">下一题</a>
+					</div>
+					<div class="content_class_tit_right pull-right submitQuestions" style="display: none">
+						<a href="javascript:;">最后一题</a>
+					</div>
+					
+					
+				</div>
+				<div class="quiz">
+					<div class="content_classes slide active-slide">
+						<ul class="list-unstyled question">
+							<p class="question_title"></p>
+							<div id="question_list"></div>
+						</ul>
+						<div class="content_class_answer pull-right">
+							<img src="" alt="">
+							<!--<a href="javascript:;">查看解析</a>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		</div>
+		<!--答案解析-->
+			<div class="content_class_con answer_analysis">
+				<div class="content_class_tit clearfix">
+					<div class="content_class_tit_left1 pull-left">
+						<i></i>
+						<span>答案解析</span>
+					</div>
+				</div>
+				<div class="content_class_line"></div>
+				<div class="content_classes1">
+					<p class="correct_answer">正确答案：<span class="xuanxiang">B</span></p>
+					<div class="content_classes_msg"><span class="answer_true"></span><span class="answer_memo"></span></div>
+				</div>
+			</div>
+  </div>
+  <!-- 右侧 答题卡-------------------------------------------------------->
+  <div class="pull-right exam_official_r">
+  	<div class="clearfix exam_official_r_dtk">
+  		<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/icon_dtk.png"></div>
+  		<div class="pull-left title">答题卡</div>
+  	</div>
+  	<div class="answer_sheet_line"></div>
+
+  	<div class="edu_choice_question">选择题</div>
+			<!--<div class="f-12em color-9e icon_regular text-align m-a w-180em">总分:&nbsp;&nbsp;<span id="exam_point"></span>&nbsp;&nbsp;&nbsp;共<span id="questions_num"></span>道题</div>-->
+			<!-- 选择题 -->
+			<div class="mt-30em">				
+				<div class="list list1 clearfix" id="answerCard">
+					<ul>
+					</ul>
+				</div>
+			</div>
+  </div>
+  </div>
+  <!-- 内容区域结束 -->
+    <div style="display: none" id="strBtn">{$questions_list}</div>
+
+<!-- 考试得分遮罩层 -->
+<section>
+	<div class="edu_score_mask di-n">
+		<div class="bullet_box">
+			<img style="width: 589px;overflow: hidden;" src="__STATICS__/apps/page_portal/portal/images/defen.png">
+			<div class="Total_score">本次考试所得总分：</div>
+			<div class="Total_score_fs">90<span>分</span></div>
+			<div class="clearfix correct_rate">
+				<div class="pull-left">
+					<div class="box">正确率：50%</div>
+					<div class="box">答题数：20</div>
+				</div>
+				<div class="pull-right">
+					<div class="box">用时：50%</div>
+					<div class="box">积分：0</div>
+				</div>
+			</div>
+			<div class="clearfix edu_analysis">
+				<div class="learning_analysis pull-left">学习分析</div>
+				<div class="edu_answer_analysis pull-right">答案解析</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</section>
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/toPage.js"></script> 
+  <!--本页面js-->
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/edu_exam_my_info.js"></script>

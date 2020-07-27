@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+//helper
+@import "../helper/helper";
+
+//layout
+@import "../layouts/layouts";
+
+//var
+@import "../variables/color";
+
+//component
+@import "../components/function_cards";
+@import "../components/page_title";
+
+$function_card-w: 23%;
+$function_card-h: 580px;
+$function_card-space: 12px;
+$page-title-lh: 90px;
+$card-img-h: 220px;
+$card_title-space: 20px;
+$card_title-lh: 30px;
+$card_title-fs: 22px;
+$card_para-fs: 18px;
+$gray2: #838383;
+$gray3: #4c4c4c;
+$gray4: #828282;
+$black: #111;
+
+.function{
+  height: 100%;
+  background: url("../../images/guide-info-card-bg.jpg") no-repeat fixed center/ 100% 100%;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+}
+.function_card{
+  height: $function_card-h;
+  width: $function_card-w;
+  position: relative;
+  background: #fff;
+  margin: $function_card-space;
+  .card_time,.card_content{
+    text-align: left;
+    padding: $card_title-space;
+  }
+  .card_time-date{
+    color: $gray2;
+    margin-right: 10px;
+  }
+  .card_img{
+    @include img-objfit(100%, $card-img-h, cover);
+  }
+  .card_title{
+    @include multi-text-overflow(2);
+    text-align: left;
+    font-size: $card_title-fs;
+    color: $black;
+    line-height: $card_title-lh;
+  }
+  .card_para{
+    @include multi-text-overflow(4);
+    margin-top: 20px;
+    font-size: $card_para-fs;
+    color: $gray3;
+    line-height: $card_title-lh;
+  }
+  .card_people{
+    position: absolute;
+    bottom: $card_title-space;
+    color: $gray4;
+  }
+}

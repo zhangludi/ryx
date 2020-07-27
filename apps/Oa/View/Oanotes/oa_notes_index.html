@@ -1,0 +1,133 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							关键字：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="id" id="notes_content" autocomplete="off" placeholder="请输入关键字">
+						</div>
+						<div class="layui-col-xs3 pull-right">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+							<a class="layui-btn table-add " data-type="add"  style="text-decoration: none;" title="添加">添加</a>
+						</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="info">查看</a>
+                        <a class="layui-btn layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('Oa/Oanotes/oa_notes_index_data')}"
+			,cellMinWidth: 80
+			,height:'full-155'
+			, id: 'ztreedata'
+			,cols: [[
+				{field:'notes_id', title:'编号', width:100, align: 'center', sort: true}
+				,{field:'notes_title', title:'标题',align: 'left'}
+				,{field:'is_alert', title:'是否提醒',align: 'center',width:120}
+				,{field:'alert_time', title:'提醒时间',align: 'center',width:170}
+				,{field:'add_staff', title:'添加人',align: 'center',width:130}
+				,{field:'update_time', title:'操作时间',align: 'center',width:160}
+				,{field:'operate', title:'操作', width:170,align: 'center' ,toolbar: '#barDemo'}
+			]]
+			,page: true
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'del'){
+				layer.confirm('确认删除该数据吗？', function(index){
+					window.location='{:U("oa_notes_del")}?notes_id='+data.notes_id+'';
+					layer.close(index);
+				});
+			}else if(obj.event === 'edit'){
+				var index = layer.open({
+                   type: 2,
+                   title: false,
+                   end:false,
+                   closeBtn: 0,
+                   shift: 1,
+                   content: "{:U('oa_notes_edit')}?notes_id="+data.notes_id+"",
+                   area: ['300px', '300px']
+                });
+                layer.full(index);
+			}else if(obj.event === 'info'){
+				layer.open({
+					type: 2,
+					title:'备忘录详情',
+					area:['1000px', '450px'],
+					content: '{:U("Oa/Oanotes/oa_notes_info")}?notes_id='+data.notes_id//这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+				});
+			}
+		});
+		var $ = layui.$, active = {
+	        reload: function(){
+	        	var notes_content = $("#notes_content").val();
+		      	table.reload('ztreedata', {
+			        page: {
+			          curr: 1 
+			        }
+			        ,where: {
+			        	"notes_content":notes_content
+			        }
+		      	});
+	        },
+	        add: function(){
+            	var index = layer.open({
+                   type: 2,
+                   title: false,
+                   end:false,
+                   closeBtn: 0,
+                   shift: 1,
+                   content: "{:U('oa_notes_edit')}",
+                   area: ['300px', '300px']
+            	});
+            	layer.full(index);
+        	}
+	    };
+	    $('.layui-form .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		});
+	});
+	
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#start',
+			type : 'time',
+			range: true
+		});
+	})
+</script>
+</block>

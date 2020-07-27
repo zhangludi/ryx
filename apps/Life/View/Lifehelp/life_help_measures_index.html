@@ -1,0 +1,177 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo  getFunctionInfo(ACTION_NAME.session('team'));</php>"> <php>echo getFunctionInfo(ACTION_NAME.session('team'));</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                    	<input type="hidden" name="team" id="team" value="{$team}">
+	                    	<eq name="team" value="1">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            帮扶名称：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="measures_name" id="measures_name" autocomplete="off" placeholder="请输入帮扶名称">
+	                        </div>
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                           负责人：
+	                        </div>
+	                        <div class="layui-col-xs2">
+	                            <input type="text" class="layui-input" name="measures_leader" id="measures_leader" autocomplete="off" placeholder="请输入负责人">
+	                        </div>
+	                    	</eq>
+	                    	<eq name="team" value="2">
+	                    		<!-- <div class="layui-col-xs1 text-r lh-40"> -->
+	                            <!-- 帮扶： -->
+	                        <!-- </div> -->
+	                        <!-- <div class="layui-col-xs2 "> -->
+	                            <!-- <input class="layui-input" name="measures_help" id="measures_help" autocomplete="off" placeholder="请输入帮扶人"> -->
+	                        <!-- </div> -->
+	                    	</eq>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <neq name="team" value="2">
+								<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                            </neq>
+								<a class="layui-btn table-add " data-type="add"  style="text-decoration: none;" title="添加">添加</a>
+	                        </div>
+	                    </div>
+	                    <table class="layui-table" id="demo"  lay-filter="demo"></table>
+	                     <script type="text/html" id="operate">
+                            <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                            <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                        </script>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            console.log(table);
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("life_help_measures_index_data",array("team"=>$team))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'measures_id', width:80 ,title: '编号', sort: true}
+	                	<eq name="team" value="1">
+	                    , {field: 'measures_name', title: '名称'}
+	                    , {field: 'measures_team',  title: '帮扶队伍'}
+	                    , {field: 'measures_leader',  title: '负责人'}
+	                    </eq>
+	                    <eq name="team" value="2">
+	                    , {field: 'measures_help', title: '帮扶人'}
+	                    , {field: 'measures_genre', title: '帮扶对象'}
+	                    </eq>
+	                    , {field: 'measures_help_time', title: '帮扶时间'}
+	                    , {field: 'measures_phone', title: '联系电话'}
+	                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 250}
+	                    
+	                ]]
+	                , page: true
+	            });
+			    
+			     //监听工具条
+
+			    table.on('tool(demo)', function(obj){
+			    	var team = $('#team').val();
+			        var data = obj.data;
+			        var idcard_no = data.idcard_no;
+			        if(obj.event === 'detail'){
+			        	var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('life_help_measures_info')}?measures_id="+data.measures_id+"&team="+team+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+		          	} else if(obj.event === 'del'){
+		              	layer.confirm('确认删该数据吗？', function(index){
+			              	window.location='{:U("life_help_measures_del")}?measures_id='+data.measures_id+'&team='+team+'';
+		                    layer.close(index);
+		              	});
+		          	} else if(obj.event === 'edit'){
+		          		var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('life_help_measures_edit')}?measures_id="+data.measures_id+"&team="+team+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+		          	}
+		      	});
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var measures_name = $('#measures_name').val();
+			            var measures_leader = $('#measures_leader').val();
+			            var measures_help = $('#measures_help').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"measures_leader":measures_leader,
+					        	"measures_name": measures_name,
+					        	"measures_help":measures_help
+					        }
+				      	});
+			        },
+			        add: function(){
+	                	var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('life_help_measures_edit',array('team'=>$team))}",
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+	            	}
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+			    
+	        });
+	        //点击左侧树的事件
+	        
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>

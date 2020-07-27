@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><php>echo getConfig('web_name');</php>-总后台管理系统</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- <include file="./public/header/link.html"> -->
+	<link rel="stylesheet" href="__STATICS__/layuiadmin/style/admin.css" media="all">
+	<link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+	<!--框架样式-->
+	<link rel="stylesheet" href="__STATICS__/public/css/sp_theme_button_red.css" media="all">
+	<!--森普公共样式-->
+	<link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+	<!-- 登录 -->
+	<link rel="stylesheet" href="__STATICS__/layuiadmin/style/login.css" media="all">
+	<!--框架样式修改版党建版-->
+	<link rel="stylesheet" id="change_theme" href="__STATICS__/public/css/sp_theme_red.css" media="all">
+	<script>
+		/^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+	</script>
+</head>
+<body class="layui-layout-body">
+	<div id="LAY_app">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="menu_bg2"></div>
+				<div class="layui-logo1 text-l">
+					<img id="sp_index_logo" src="__STATICS__/layuiadmin/style/res/index_header_logo.png" alt="">
+					<strong id="sp_index_title">
+						<php>echo getConfig('web_name');</php>
+						<!-- 站点名称 -->
+					</strong>
+				</div>
+				<div class="pull-right">
+					<!--头部中间0级菜单-->
+					<ul class="zero-level pull-left layui-hide-xs sp_header_nav_left" id="function_list">
+						<eq name="is_big_data" value="1">
+						<li class="pull-left pl-20 pr-20" style="cursor: pointer;">
+							<a href="{:U('Bigdata/Index/index')}" class="zero-level-item" target="_blank">大数据</a>
+						</li>
+						</eq>
+						<volist name="functionList" id="list">
+							<li href="javascript:;" my-event="menu_refresh" my-url=" 
+							{:U('get_function_json_list',array('function_pid'=>$list['function_id'] ))}"
+							class="pull-left pl-20 pr-20" value ="{$list.function_id}" style="cursor: pointer;" onclick="onclick_function({$list.function_id})">
+								<a class="zero-level-item">{$list.function_name}</a>
+							</li>
+						</volist>
+					</ul>
+					<ul class="layui-nav pull-right sp_header_nav_right" lay-filter="layadmin-layout-right">
+						<!-- 消息中心开始 -->
+						<!-- <li class="layui-nav-item" lay-unselect>
+							<a lay-href="{:U('Bd/bd_alertmsg_list')}" layadmin-event="message" lay-text="消息中心">
+								<i class="layui-icon layui-icon-notice"></i>
+								<span class="layui-badge-dot"></span>
+							</a>
+						</li> -->
+
+						<li class="layui-nav-item index_erweima" lay-unselect>
+			              	<a href="javascript:;">
+			                	<i class="layui-icon layui-icon-cellphone"></i>
+			              	</a>
+			              	<div class="index_erweima_hide center-text">
+			                	<img class="mt-10"  src="__STATICS__/public/images/app_qrcode.png" width="160" alt="">
+			                	<p class=" mt-10">扫描二维码，下载APP</p>
+			              	</div>
+			            </li>
+						<!-- 消息中心结束 -->
+						<!-- 用户资料开始 -->
+						<li class="layui-nav-item" lay-unselect>
+							<a href="javascript:;">
+								<cite><php>echo getStaffInfo(session('staff_no'),'staff_name')</php></cite>
+							</a>
+							<dl class="layui-nav-child">
+								<dd style="text-align: center;">
+									<!-- <a id="index_info" style="text-decoration: none;"  >个人中心</a> -->
+									<a  href="javascript:;" lay-href="{:U('System/sysuser/sys_user_edit')}?tab=1&user_id={$user_id}" lay-text="个人中心" >个人中心</a>
+									<!-- <a lay-href="{:U('sysuser/sys_user_edit', array('user_id' => $user_id))}"></a> -->
+								</dd>
+								<dd style="text-align: center;">
+									<a  href="javascript:;" lay-href="{:U('System/sysuser/sys_user_edit')}?tab=1&user_id={$user_id}" lay-text="个人中心" >修改资料</a>
+									<!-- <a id="index_edit"  style="text-decoration: none;"  >修改资料</a> -->
+									<!-- <a lay-href="{:U('sysuser/sys_user_edit', array('user_id' => $user_id))}"></a> -->
+								</dd>
+								<dd style="text-align: center;">
+									<a onclick="clear_runtime()" style="cursor:pointer">清理缓存</a>
+								</dd>
+								<hr>
+								<dd style="text-align: center;">
+									<a href="{:U('Public/logout')}">退出</a>
+								</dd>
+							</dl>
+						</li>
+						<!-- 用户资料结束 -->
+						<!-- 版本信息开始 -->
+						<li class="layui-nav-item layui-hide-xs" lay-unselect>
+							<a href="javascript:;" layadmin-event="about">
+								<i class="layui-icon layui-icon-more-vertical"></i>
+							</a>
+						</li>
+						<!-- 版本信息结束 -->
+						<!-- 快捷板块开始 -->
+						<li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+							<a href="javascript:;" layadmin-event="more">
+								<i class="layui-icon layui-icon-more-vertical"></i></a>
+						</li>
+						<!-- 快捷板块结束 -->
+					</ul>
+				</div>
+			</div>
+			<!-- 侧边菜单开始 -->
+			<div class="layui-side layui-side-menu layui-hide-xs top-80">
+                <div class="layui-side-scroll">
+                    <script type="text/html" template lay-url="{:U('get_function_json_list',array('function_pid'=>$function_pid))}" lay-done="layui.element.render('nav', 'layadmin-system-side-menu');" id="TPL_layout">
+                        <div class="layui-side-menu-top layui-side-menu-top-title">
+                            {{d.title}}
+                        </div>
+                        <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                            {{# var path = layui.router().path ,dataName = layui.setter.response.dataName; layui.each(d[dataName], function(index, item){ var hasChildren = typeof item.list === 'object' && item.list.length > 0 ,classSelected = function(){ var match = path[0] == item.name || (index == 0 && !path[0]) || path.join('/') == item.jump; if(match){ return hasChildren ? 'layui-nav-itemed' : 'layui-this'; } return ''; } , code = item.code, url = typeof item.jump === 'string' ? item.jump : item.name; }}
+                            <li data-name="{{ item.name || '' }}" data-jump="{{ item.jump || '' }}" class="layui-nav-item {{ classSelected() }}" >
+                                {{# if(code == 1){ }}
+                                <a href="{{ url }}" lay-tips="{{ item.title }}" target="_blank" lay-direction="2">
+                                    <i class="layui-icon {{ item.icon }}"></i>
+                                    <cite>{{ item.title }}</cite>
+                                </a>
+                                {{# }  }} 
+                                {{# if(code == 2){ }}
+                                <a href="javascript:;" {{ hasChildren ? '' : 'lay-href="'+ url + '"' }} lay-tips="{{ item.title }}" lay-direction="2">
+                                    <i class="layui-icon {{ item.icon }}"></i>
+                                    <cite>{{ item.title }}</cite>
+                                </a> 
+                                {{# }  }}
+                                {{# if(hasChildren){ }}
+                                <dl class="layui-nav-child">
+                                    {{# layui.each(item.list, function(index2, item2){ var hasChildren2 = typeof item2.list == 'object' && item2.list.length > 0 ,classSelected2 = function(){ var match = path[0] == item.name && path[1] == item2.name; if(match){ return hasChildren2 ? 'layui-nav-itemed' : 'layui-this'; } return ''; } ,code2 = item2.code,url2 = typeof item2.jump === 'string' ? item2.jump : [item.name, item2.name, ''].join('/'); }}
+                                    <dd data-name="{{ item2.name || '' }}" data-jump="{{ item2.jump || '' }}" {{ classSelected2() ? ( 'class="'+ classSelected2() + '"') : '' }}>
+                                        {{# if(code2 == 1){ }}
+	                                		<a href="{{ url2 }}" target="_blank">{{ item2.title }}</a> 
+		                                {{# }  }} 
+                                		{{# if(code2 == 2){ }}
+	                                		<a href="javascript:;" {{ hasChildren2 ? '' : 'lay-href="'+ url2 + '"' }}>{{ item2.title }}</a> 
+	                                		{{# if(hasChildren2){ }}
+	                                        <dl class="layui-nav-child">
+	                                            {{# layui.each(item2.list, function(index3, item3){ var match = path[0] == item.name && path[1] == item2.name && path[2] == item3.name , code3 = item3.code, url3 = typeof item3.jump === 'string' ? item3.jump : [item.name, item2.name, item3.name].join('/') }}
+	                                            <dd data-name="{{ item3.name || '' }}" data-jump="{{ item3.jump || '' }}" {{ match ? 'class="layui-this"' : '' }}>
+	                                                {{# if(code3 == 1){ }}
+					                                	<a href="{{ url3 }}" target="_blank" >{{ item3.title }}</a>
+					                                {{# } else { }}
+				                                	 	<a href="javascript:;" lay-href="{{ url3 }}">{{ item3.title }}</a>
+					                                {{# }  }}
+	                                            </dd>
+	                                            {{# }); }}
+	                                        </dl>
+	                                        {{# } }}
+                                        {{# } }}
+                                    </dd>
+                                    {{# }); }}
+                                </dl>
+                                {{# } }}
+                            </li>
+                            {{# }); }}
+                        </ul>
+                    </script>
+                </div>
+            </div>
+			<!--侧边菜单结束-->
+			<!-- 页面标签 -->
+			<div class="layadmin-pagetabs" id="LAY_app_tabs">
+				<div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+				<div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+				<div class="layui-icon layadmin-tabs-control layui-icon-down">
+					<ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+						<li class="layui-nav-item" lay-unselect>
+							<a href="javascript:;"></a>
+							<dl class="layui-nav-child layui-anim-fadein">
+								<dd layadmin-event="closeThisTabs">
+									<a href="javascript:;">关闭当前标签页</a>
+								</dd>
+								<dd layadmin-event="closeOtherTabs">
+									<a href="javascript:;">关闭其它标签页</a>
+								</dd>
+								<dd layadmin-event="closeAllTabs">
+									<a href="javascript:;">关闭全部标签页</a>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+				<div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+					<ul class="layui-tab-title" id="LAY_app_tabsheader">
+						<li lay-id="<php> echo U(getConfig('default_main'));</php>" class="layui-this">
+							<i class="layui-icon layui-icon-home"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 主体内容 -->
+			<div class="layui-body" id="LAY_app_body">
+				<div class="layadmin-tabsbody-item layui-show">
+					<iframe src="<php> echo U(getConfig('default_main'));</php>" frameborder="0" class="layadmin-iframe" id="iframeid"></iframe>
+				</div>
+				<div class="sp-footer">
+					<a href="<php> echo getConfig('web_url');</php>" style="padding: 20px;color:#333;"><php> echo getConfig('web_copyright');</php></a>
+				</div>
+			</div>
+			<!-- 辅助元素，一般用于移动设备下遮罩 -->
+			<div class="layadmin-body-shade" layadmin-event="shade"></div>
+			<input type="hidden" name="function_pid" id="function_pid" value="{$function_pid}">
+		</div>
+	</div>
+	<!-- <include file="./public/footer/script.html"> -->
+	<script src="__STATICS__/plugins/jquery.min.js"></script>
+	<script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+	<script src="__STATICS__/public/js/index.js"></script>
+	<script>
+		function onclick_function(function_id){
+
+			var host = window.location.host;
+			if(function_id==5){
+				$('#LAY_app_tabsheader').find('li').eq(0).click();
+
+				$("#iframeid").attr('src', "http://"+host+"/index.php/Oa/Oameeting/oa_meeting_list.html");
+			}else if(function_id==1){
+				$('#LAY_app_tabsheader').find('li').eq(0).click();
+
+				$("#iframeid").attr('src', "http://"+host+"/index.php/System/Index/main_dj.html");
+			}
+
+		}
+	</script>
+	<script>
+		layui.config({
+			base: '__STATICS__/layuiadmin/' //静态资源所在路径
+		}).extend({
+			index: 'lib/index' //主入口模块
+		}).use('index');
+	</script>
+	<script>
+		$(function(){ // zero-bg-active
+			var function_pid = $('#function_pid').val();
+			var function_list = $("#function_list").find('li');
+			$("#function_list").find('li').each(function(){
+				$(this).removeClass('zero-bg-active');
+			    var pid =  $(this).val();
+			    if(pid == function_pid){
+			    	console.log(pid)
+			    	$(this).addClass('zero-bg-active');
+			    }
+			});
+		})
+		function zeroLevel(_this) {
+			$(".layui-side-menu").hide();
+			$(".layui-side-menu").eq($(_this).index()).show();
+		}
+		function clear_runtime() {
+			var r = confirm("确认清理缓存文件吗？")
+		  	if (r==true) {
+			    $.ajax({
+					url: "{:U('Public/del_runtime')}",
+					data: {},
+					type: "post",
+					async:false,
+					success: function(msg) {
+						alert('清理成功');
+					},
+					error: function(xhr) {
+					}
+				});
+		    } else {
+			    return true;
+		    }
+		}
+	</script>
+	<script>
+		//默认第一个显示
+		$(".zero-level>li").eq(1).addClass("zero-bg-active");
+		$(".zero-level>li").eq(0).removeClass("zero-bg-active");
+		$(".zero-level>li").click(function () {
+			$(this).siblings().removeClass("zero-bg-active");
+			$(this).addClass("zero-bg-active");
+		})
+	</script>
+</body>
+
+</html>

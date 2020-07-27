@@ -1,0 +1,62 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+		    <div class="layui-card layui-form">
+				<div class="layui-card-header"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+				<div class="layui-card-body">
+				  	<div class="layui-row">
+				        <div class="layui-col-xs12 mt-10">
+				            <div class="layui-row">
+				                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>评议记录标题：</strong></div>
+				                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.meeting_minutes_title}</span></div>
+				            </div>
+				        </div>
+				        <div class="layui-col-xs12 mt-10">
+				            <div class="layui-row">
+				                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>添加人：</strong></div>
+				                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.add_staff}</span></div>
+				            </div>
+				        </div>
+				        <div class="layui-col-xs12 mt-10">
+				            <div class="layui-row">
+				                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>党组织：</strong></div>
+				                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span><php> echo getPartyInfo($data['party_no'])</php></span></div>
+				            </div>
+				        </div>
+				        <div class="layui-col-xs12 mt-10">
+				            <div class="layui-row">
+				                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>会议记录：</strong></div>
+				                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.meeting_minutes_content}</span></div>
+				            </div>
+				        </div>
+				        <div class="layui-col-xs12 mt-10">
+				            <div class="layui-row">
+				                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>意见建议：</strong></div>
+				                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.meeting_minutes_feedback} </span></div>
+				            </div>
+				        </div>
+				        <div class="layui-col-xs12 mt-10">
+				            <div class="layui-row">
+				                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>整改方案：</strong></div>
+				                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$data.meeting_minutes_improvement}</span></div>
+				            </div>
+				        </div>
+				    	<button style="margin-left:80%" type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+</script>
+</block>

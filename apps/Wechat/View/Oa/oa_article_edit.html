@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice_edit.css" />
+
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <style>
+    	.w-9em{width: 0.45rem !important;}
+    	.w-80b{width: 80% !important;}
+    	.h-400em{height: 4.0rem !important;}
+    	.p-0{padding:0;}
+    	.h-19em{height: 0.95rem !important;}
+		.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    		background-size: 100% 100%;}
+    </style>
+</head>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+		<ul>
+			<li class="h-45em">
+				<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+				<div class="aui-title">党员投稿</div>
+			</li>
+		</ul>
+	</div>
+	<form id="forms" action="{:U('oa_article_save')}" method="post" enctype="multipart/form-data">
+			<div id='login-form' class="">
+				<!-- <div class="bb-1-df po-re pl-10em">	
+					<div class="di-ib">标题：</div>
+					<input class="mb-8em mt-18em b-0 p-0 pl-35em h-20em lh-20em color-33 f-16em" id='real_name' type="text" name="communist_name" onfocus="add(this);"onblur="rem(this)" placeholder="请输入标题">
+				</div> -->
+				<div class="pl-10em pr-10em ">
+					<span class="f-16em">标&emsp;题：</span> 
+					<input type="text" name="article_title" placeholder="请输入标题" class="w-80b di-ib p-0 b-0">
+				</div>
+				<div class="pl-10em pr-10em">
+					<span class="f-16em">关键字：</span>
+					<input type="text" name="article_keyword" placeholder="请输入关键字" class="w-80b di-ib p-0 b-0">
+				</div>
+				<div class="pl-10em pr-10em">
+					<span class="f-16em pull-left">描&emsp;述：</span>
+					<textarea class="h-400em w-250em f-12em p-5em" name="article_description" placeholder="请输入描述"></textarea>
+				</div>
+				<div class="pl-10em pr-10em">
+					<span class="f-16em pull-left">内&emsp;容：</span>
+					<textarea class="h-400em w-250em f-12em p-5em" name="article_content" placeholder="请输入内容"></textarea>
+				</div>
+				<div class="pl-10em pr-10em">
+					<span class="f-16em pull-left">图&emsp;片：</span>
+					<input class="h-400em w-250em f-12em p-5em" type="file" multiple="multiple" capture="camera" id="open_photo" name="file">
+				</div>
+				
+				<!-- <div class="bb-1-df po-re">
+					<i class="iconfont po-ab left-0 f-20em lh-20em mb-8em mt-18em p-0">&#xe871;</i>		
+					<input class="mb-8em mt-18em b-0 w-100b p-0 pl-35em h-20em lh-20em color-33 f-16em" id='password2' maxlength="18" type="email" onfocus="add(this);"onblur="rem(this)" placeholder="请确定账户密码">
+				</div> -->
+				
+			</div>
+			<div class="mt-50em">
+				<div class="grad lh-46em h-42em bor-ra-3 text-align color-white f-16em" onclick="sub()">
+					提交
+				</div>
+			</div>
+	</from>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice_edit.js"></script>
+<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+<script>
+
+function sub(){
+	$('#forms').submit();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="添加编辑页面"> 添加编辑页面</div>
+                    <form id="form_sample_2" action="{:U('Lifecondition/life_condition_cat_do_save')}" method="post" class="form-horizontal">
+                        <div class="layui-card-body layui-form">
+                            <input type="hidden" name="cat_id"  value="{$cat_data['cat_id']}">
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>上级分类：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                            <select name="cat_pid" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                                <option value ="0">创建新类</option>
+                                                <volist name="cat_list" id="list">
+                                                        <option value ="{$list.cat_id}"<eq name="list.cat_id" value="$cat_data.cat_pid">selected</eq><eq name="list.cat_id" value="$cat_id">selected</eq>>{$list.partcate}</option>
+                                                </volist>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>分类名称：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                            <input type="text" data-required="1" class="layui-input" lay-verify='required' name="cat_name" value="{$cat_data.cat_name}" /> </div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                        </div>
+                                    </div>
+                                
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>分类简介：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        
+                                        <textarea name="memo" data-required="1" id="maxlength_textarea" class="  form-control " maxlength="225" rows="3" placeholder="这个文本域的最大长度为225个字符.">{$cat_data.memo}</textarea>
+                                    </div>
+                                </div>
+                               
+                                
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <div class="layui-footer" style="text-align: right">
+                                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+        <script>
+            layui.use([ 'form', 'laydate'], function() {
+                var $ = layui.jquery
+                        , admin = layui.admin
+                        , element = layui.element
+                        , layer = layui.layer
+                        , laydate = layui.laydate
+                        , form = layui.form
+                form.render(null, 'component-form-group');
+                laydate.render({
+                    elem: '#LAY-component-form-group-date'
+                });
+            })
+            
+        </script>
+   
+</block>

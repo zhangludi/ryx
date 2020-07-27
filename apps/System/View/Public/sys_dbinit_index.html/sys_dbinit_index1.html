@@ -1,0 +1,89 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  portlet-fit">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                        <div class="pull-right text-right pr-10 ">
+                            <a onclick="do_init();" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-70 mb-20">
+                                <i class="fa fa-download"></i>初始化
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="table" class="table-scrollable">
+                            <table id="client_table" class="table table-hover"
+                                   data-toggle="table"
+                                   data-url=""
+                                   data-height=""
+                                   data-search="false"
+                                   data-show-refresh="false" data-show-toggle="false"
+                                   data-show-columns="false" data-show-export="false"
+                                   data-detail-view="false" data-detail-formatter="detailFormatter"
+                                   data-minimum-count-columns="2" data-page-size="25"
+                                   data-show-pagination-switch="false" data-pagination="true"
+                                   data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]">
+                                <thead>
+                                <tr>
+                                    <th data-field="log_id" data-align="center" data-sortable="true">序号</th>
+                                    <th data-field="staff_name" data-align="center" data-sortable="true">操作人</th>
+                                    <th data-field="log_newcontent" data-align="center" data-sortable="true">操作内容</th>
+                                    <th data-field="add_time" data-align="center" data-sortable="true">操作时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <foreach name="data" item="vo">
+                                        <tr>
+                                            <td>{$vo.log_id}</td>
+                                            <td>{$vo.staff_name}</td>
+                                            <td>{$vo.log_newcontent}</td>
+                                            <td>{$vo.add_time}</td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        function do_init() {
+            //加载层
+            //var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+            //询问框
+            layer.confirm('确定要初始话数据库吗？将会删除所有数据！确定吗？', {
+                btn: ['是','否'] //按钮
+            }, function(){
+                $.ajax({
+                    url:"{:U('System/Syssql/sys_dbinit_do_save')}",
+                    type:'post',
+                    async:false,
+                    data:{},
+                    success: function (data) {
+                        if(data.code == 1){
+                            alert(data.msg);
+                            setTimeout(location.reload(true),8000);
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                })
+            });
+        }
+    </script>
+</block>

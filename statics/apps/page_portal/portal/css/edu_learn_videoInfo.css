@@ -1,0 +1,290 @@
+/*——————————————————————————————本页面公用—————————————————————————————————————————*/
+.public_content{
+	padding-bottom: 128px !important;
+}
+.ipam_home_public_background .ipam_home_public_title{
+	width: 1200px;
+    margin: 36px auto 50px auto !important;
+    text-align: center;
+}
+
+/*——————————————————————————————视频详情左侧样式—————————————————————————————————————————*/
+.con_videoInfo_left{
+	
+}
+.con_videoInfo{
+	margin-top: 30px;
+}
+.con_videoInfo_tit{
+	width: 620px;
+    overflow: hidden;
+    height: 35px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #212121;
+    line-height: 35px;
+ }
+ .con_videoInfo_type{
+ 	width:93px;
+	height:28px;
+	line-height:28px;
+	background:rgba(55,107,245,0.13);
+	border-radius:14px;
+	color:#376BF5;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 3px;
+ }
+ .con_videoInfo_photo img{
+	width: 791px;
+	height: 446px;
+	overflow: hidden;
+	margin-top: 28px;
+ }
+ /*学习人员样式*/
+ .Learner{
+ 	position: relative;
+ 	width:792px;
+	height:179px;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+	border-radius:12px;
+	margin-top: 23px;
+ }
+ .Learner_shu{
+ 	margin-top: 18px;
+    margin-left: 24px;
+ 	width:4px;
+	height:20px;
+	background:rgba(255,64,64,1);
+	border-radius:2px;
+ }
+ .Learner_people{
+ 	margin-top: 16px;
+ 	margin-left: 8px;
+ 	overflow: hidden;
+ 	width:400px;
+	height:22px;
+	font-size:20px;
+	font-weight:400;
+	color:rgba(33,33,33,1);
+	line-height:22px;
+ }
+ .Learner_people span{
+ 	font-weight:normal;
+ 	color: #9e9e9e;
+ 	font-size: 14px;
+ }
+ 
+ 
+ /***********************************************************/
+.edu_arrow{
+	position: absolute;
+    top: -37px;
+    right: 40px;
+}
+a.abtn { 
+	display: block; 
+	height: 130px;
+	width: 17px;
+	overflow: hidden;
+	background: url(../images/arrow4.png) no-repeat 0px 50%; 
+}
+a.aleft { 
+	float: left;
+	position: absolute;
+    top: -34px;
+    right: 51px; 
+    }
+a.agrayleft { cursor: default; background-position: -34px 50%; }
+a.aright { 
+	float: right; 
+	background-position: -17px 50%; 
+	position: absolute;
+    right: 20px;
+    top: -34px;
+	}
+a.agrayright { cursor: default; background-position: -51px 50%; }
+.scrolllist {     
+	width: 742px;
+    height: 132px;
+    margin: 0 auto;
+    margin-top: 25px;
+     }
+.scrolllist .imglist_w { width: 750px; height:132px; overflow: hidden; float: left; position: relative;/*必要元素*/ }
+.scrolllist .imglist_w ul { width: 20000px; position: absolute; left: 0px; top: 0px; }
+.scrolllist .imglist_w li { float: left; padding: 0 10px; }
+.scrolllist .imglist_w li img {  }
+.scrolllist .imglist_w li a {  text-decoration: none; }
+.scrolllist .imglist_w li a:hover img { filter: alpha(opacity=86); -moz-opacity: 0.86; opacity: 0.86; }
+.scrolllist .imglist_w li p { 
+	padding-top: 10px;
+    text-align: center;
+    height: 28px;
+    line-height: 24px;
+    overflow: hidden;}
+
+/*视频笔记样式*/
+.con_videoInfo_notes{
+	margin-top: 24px;
+	width:792px;
+	height:100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+	border-radius:12px;
+}
+.con_videoInfo_input{
+	padding: 10px;
+    margin-left: 24px;
+    margin-top: 17px;
+    width: 720px;
+    height: 120px;
+    background: rgba(255,255,255,1);
+    border: 1px solid rgba(222,222,222,1);
+    border-radius: 10px;
+}
+.sibmit{
+	width:100px;
+	height:32px;
+	line-height:32px;
+	background:linear-gradient(90deg,rgba(255,48,50,1),rgba(255,90,45,1));
+	border-radius:16px;
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+	margin-right: 24px;
+    margin-top: 16px;
+}
+/*以往笔记样式*/
+.con_videoInfo_past_notes{
+	margin-top: 16px;
+}
+.past_notes_line{
+	width:744px;
+	height:1px;
+	background:rgba(222,222,222,1);
+	margin-top: 16px;
+	margin-left: 24px;
+}
+.past_notes_con{
+	margin-top: 25px;
+}
+.past_notes_con li{
+	list-style: none;
+	margin-left: 24px;
+	margin-bottom: 33px;
+}
+.past_notes_con li .past_notes_time{
+	overflow: hidden;
+    width: 300px;
+    height: 27px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(158,158,158,1);
+    line-height: 27px;
+}
+.past_notes_con li .past_notes_tit{
+	overflow: hidden;
+    margin-top: 10px;
+    width: 744px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(33,33,33,1);
+    line-height: 27px;
+}
+ 
+ 
+ 
+ 
+/*——————————————————————————————视频详情右侧样式—————————————————————————————————————————*/
+.con_videoInfo_right{
+	margin-top: 94px;
+}
+.con_videoInfo_Intro{
+	width: 384px;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 10px 0px 
+		rgba(0, 0, 0, 0.12);
+	border-radius: 12px;
+}
+.add_title{
+	padding-top: 17px;
+    padding-left: 24px;
+    width: 150px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(33,33,33,1);
+    line-height: 22px;
+}
+.add_line{
+	margin: 0 auto;
+    margin-top: 10px;
+    width: 336px;
+    height: 1px;
+    background: rgba(222,222,222,1);
+}
+.add_Introduction{
+	margin: 0 auto;
+    margin-top: 14px;
+    width: 335px;
+    font-size: 14px;
+    color: rgba(158,158,158,1);
+    line-height: 22px;
+    overflow: hidden;
+}
+.add_time{
+	overflow: hidden;
+    margin-top: 14px;
+    padding-left: 24px;
+    width: 300px;
+    height: 22px;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(158,158,158,1);
+    line-height: 22px;
+}
+.add_scan{
+	overflow: hidden;
+    padding-left: 24px;
+    margin-top: 5px;
+    width: 300px;
+    height: 22px;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(158,158,158,1);
+    line-height: 22px;
+}
+.videoInfo_right_about{
+	padding-bottom: 20px;
+    width: 384px;
+    height: 100%;
+    background: rgba(255,255,255,1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    margin-top: 24px;
+}
+.videoInfo_right_about li{
+	list-style: none;
+	margin-top: 16px;
+	margin-left: 24px;
+}
+.videoInfo_right_about_tit{
+	overflow: hidden;
+    width: 168px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(33,33,33,1);
+    line-height: 22px;
+}
+.videoInfo_right_about_scan{
+	margin-top: 24px;
+    width: 168px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(158,158,158,1);
+    line-height: 22px;
+}

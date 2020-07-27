@@ -1,0 +1,45 @@
+<div class="meeting_topic w-780 pull-left pr-5">
+    <div class="bd">
+        <ul>
+            <foreach name="meeting_list" item="list">
+                <li class="w-780 h-490 po-re">
+                    <a  class='see-details' href="{:U('Meeting/ipam_meeting_detail',array('meeting_no' => $list['meeting_no'],'type_no' => $meeting_type ))}">
+                        <div class="bg-color-mask po-ab top-0 left-0 w-all h-all po-re">
+                            <p class="w-all po-ab bottom-20 fcolor-white center-text fsize-22">{$list.meeting_name}</p>
+                        </div>
+                        <div>
+                            <img src="{$list.meetting_thumb}" class="w-all">
+                        </div>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="hd meeting_carousel_point meeting_carousel_topic">
+        <ul>
+            <foreach name="meeting_list" item="list">
+                <li></li>
+            </foreach>
+        </ul>
+    </div>
+</div>
+<!--轮播结束-->
+<!--右侧图片开始-->
+<div class="w-380 pull-left">
+    <volist name="meeting_list" id="vo" offset="0" length='2'>
+        <a class='see-details' href="{:U('Meeting/ipam_meeting_detail', array('type_no' => $meeting_type, 'meeting_no' => $vo['meeting_no']))}">
+            <div class="h-245 w-all po-re over-h">
+                <div class="bg-color-mask po-ab top-0 left-0 w-all h-all po-re">
+                    <p class="w-all po-ab bottom-20 fsize-18 fcolor-white center-text">{$vo.meeting_name}</p>
+                </div>
+                <div class="h-245">
+                    <img src="{$vo.meetting_thumb}" class="w-all" alt="新闻图片">
+                </div>
+            </div>
+        </a>
+    </volist>
+</div>
+<script>
+    $(".meeting_topic").slide({"autoPlay" : false, "effect" : "leftLoop", "mainCell" : ".bd ul", "titCell": ".hd li", "scroll": "1", "vis": "1"});
+    $(".meeting_center").slide({"autoPlay" : true, "effect" : "leftLoop", "mainCell" : ".bd ul", "titCell": ".hd li", "scroll": "1", "vis": "1"});
+</script>

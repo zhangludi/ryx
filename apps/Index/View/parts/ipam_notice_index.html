@@ -1,0 +1,19 @@
+ <div class="notice">
+    <div class="f-16em color-21 pt-15 pl-20">通知公告</div>
+    <div class="line7"></div>
+    <ul>
+        <volist name="viewrecord_list" id="vo" key="k">
+            <if condition="$k lt 4 ">
+                <li>
+                    <div class="icon_no_FF3032 di-ib">{$k}</div>
+                    <div class="fcolor-66 f-16em list">{$vo.notice_title}</div>
+                </li>
+            <else />
+                <li>
+                    <div class="icon_no_ccc di-ib">{$k}</div>
+                    <div class="fcolor-66 f-16em list">{$vo.notice_title}</div>
+                </li>
+            </if>
+        </volist>
+    </ul>
+</div>

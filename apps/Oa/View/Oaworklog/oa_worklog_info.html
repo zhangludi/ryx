@@ -1,0 +1,153 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15 layui-form">
+		<form id="form_sample_2" action="{:U('oa_worklog_info_do_save')}" method="post" enctype="multipart/form-data">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header">
+						<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>
+					</div>
+					<div class="layui-card-body ">
+						<div class="layui-row">
+							<input id="worklog_id" name="worklog_id" type="hidden" value="{$worklog_row.worklog_id}">
+							<input name="is_audit" type=hidden value="{$worklog_row.is_audit}">
+							<input name="reject" id="reject" type=hidden value="">
+							<input name="worklog_type" id="worklog_type" type=hidden value="{$worklog_row.worklog}">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$worklog_row.worklog_title}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>日志类型：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$worklog_row.worklog_type}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审核人：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$worklog_row.audit_man}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>总结人：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$worklog_row.worklog_communist}
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>总结日期：</strong></div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+									{$worklog_row.worklog_date}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md12">
+				<div class="layui-card" style="margin-top:10px;">
+					<div class="layui-card-header"> 总结内容</div>
+					<div class="layui-card-body ">
+						<div class="layui-row">
+							<input name="worklog_id" type="hidden" value="{$worklog_row.worklog_id}"> 
+							<input name="is_audit" type=hidden value="{$is_audit}">
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+		                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>总结内容：</strong></div>
+		                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+		                                    {$worklog_row.worklog_summary}
+		                                </div>
+		                            </div>
+								</div>
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+										<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>上传附件：</strong></div>
+										<neq name="worklog_row.worklog_attach" value="">
+											<php>echo getUploadHtml($worklog_row['worklog_attach'],'100','100','0','0');</php>
+										</neq>
+									</div>
+								</div>
+								<if condition="$is_audit eq 1 ">
+								<div class="layui-col-xs12 mt-10">
+									<div class="layui-row">
+		                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审核批注：</strong></div>
+		                                <div class="layui-col-xs6 fsize-14 fcolor-65 ">
+		                                	<if condition="$worklog_row['status'] eq 1">
+		                                		<span style="line-height: 2.5;">
+		                                		{$worklog_row.worklog_audit_content}</span>
+		                                	<else/>
+		                                	<textarea  class="layui-textarea" name="worklog_audit_content">{$worklog_row.worklog_audit_content}</textarea>
+		                                	</if>
+		                                    
+		                                </div>
+		                            </div>
+								</div>
+								</if>
+								<div class="layui-form-item">
+									<div class="layui-input-block">
+										<div class="layui-footer" style="text-align: right">
+											<if condition="$is_audit eq 1 ">
+												<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+											</if>
+											<button type="button" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">取消</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		//关闭弹出的窗口
+		function layer_colse() {
+			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+			parent.layer.close(index);
+		}
+	</script>
+	<script>
+	function select_receive_user(field_name){
+		var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name+"&group=1";
+		layer.open({
+				type: 2,
+				title: '选择联系人',
+				maxmin: true,
+				offset: window.parent.document.body.scrollTop+20+'px',
+				shadeClose: true, //点击遮罩关闭层
+				area : ['620px' , '422px'],
+				content: url //iframe的url
+			});
+	}
+	layui.use([ 'form', 'laydate','layedit'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+			 var layedit = layui.layedit;
+
+	})
+
+</script>
+</block>

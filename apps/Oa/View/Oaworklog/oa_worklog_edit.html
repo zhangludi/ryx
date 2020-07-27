@@ -1,0 +1,167 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+	<style type="text/css">
+		#js-grid-juicy-projects{
+		    margin-left: 17% !important;
+		}
+		#js-grid-juicy-projects2{
+		    margin-left: 9% !important;
+		} 
+	</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15 layui-form">
+		<form id="form_sample_2" action="{:U('Oawork/oa_worklog_do_save')}" method="post" enctype="multipart/form-data">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header"> 总结信息</div>
+					<div class="layui-row">
+						<input name="worklog_id" type="hidden" value="{$worklog_row.worklog_id}"> 
+						<input name="is_audit" type=hidden value="{$is_audit}">
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>总结标题：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								<input type="text" id="worklog_title" name="worklog_title" placeholder="标题" lay-verify="required" autocomplete="off" class="layui-input" value="{$worklog_row.worklog_title}" readonly >
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>总结类型：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								<select name="worklog_type" lay-filter="" lay-search="" lay-verify="required">
+								{:getTypeSelect("worklog_type","",$worklog_row['worklog_type'],$worklog_type)}
+								</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>审核人：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								<select name="worklog_audit_man" lay-filter="" lay-search="" lay-verify="required">
+								{:getStaffSelect($worklog_row[worklog_audit_man])}
+								</select>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10 mb-20">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>总结日期：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								{$worklog_row.worklog_date}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6 mt-10 mb-20">
+							<div class="layui-row">
+								<div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>提交人：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+								<eq name="add_staff" value="">
+								<select name="worklog_commmunist" id="communist_no" lay-filter="communist_no" lay-search="" lay-verify="required">
+								{:getCommunistSelect($worklog_row['worklog_commmunist'])}
+								</select>
+								<else/>
+								{$add_staff}
+								</eq>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md12 mt-15">
+				<div class="layui-card">
+					<div class="layui-card-header"> 总结内容</div>
+					<div class="layui-card-body ">
+						<div class="layui-row">
+						<input name="worklog_id" type="hidden" value="{$worklog_row.worklog_id}"> <input name="is_audit" type=hidden value="{$is_audit}">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>内容：</strong></div>
+	                                <div class="layui-col-xs9 fsize-14 fcolor-65 ">
+	                                    <!-- <textarea id="demoedit" name="worklog_summary">{$worklog_row.worklog_summary}</textarea> -->
+	                                    <script id="editor" name="worklog_summary" type="text/plain" style="height:350px;width:100%">{$worklog_row.worklog_summary}</script>
+	                                </div>
+	                            </div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>上传附件：</strong></div>
+
+	                                <input type="hidden" id="source_name" name="source_name" value="" />
+	                                <input type="hidden" id="article_thumb_old" name="article_thumb_old" value="" style="width: 60px">
+	                                <input type="hidden" id="worklog_attachs" name="worklog_attachs" value="{$worklog_row.worklog_attach}" style="width: 60px">
+	                                <input type="hidden" class="form-control" id="article_img" name="article_img" value="{$worklog_row.worklog_attach}">
+
+	                                <button type="button" class="layui-btn" id="article_thumb" onclick="uploader_file('oa','1','worklog_attachs','source_name','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+	                                <div id="js-grid-juicy-projects" class="cbp" style="height:100px">
+	                                    <neq name="worklog_row.worklog_attach" value="">
+	                                        <php>echo getUploadHtml($worklog_row['worklog_attach']);</php>
+	                                    </neq>
+	                                </div>
+	                            </div>
+	                        </div>
+							<div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                        <!-- <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button> -->
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+
+	//关闭弹出的窗口
+	function layer_colse() {
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	}
+
+	var index = parent.layer.getFrameIndex(window.name);
+	$('#close').click(function() {
+		var index = parent.layer.getFrameIndex(window.name);
+		parent.layer.close(index);
+	});
+</script>
+<script>
+	layui.use([ 'form', 'laydate','layedit'], function() {
+		var $ = layui.jquery
+				, admin = layui.admin
+				, element = layui.element
+				, layer = layui.layer
+				, laydate = layui.laydate
+				, form = layui.form;
+		 	var layedit = layui.layedit;
+            layedit.set({
+                uploadImage: {
+                    url: "{:U('System/public/layedit_upload')}" //接口url
+                  , type: 'post' //默认post
+                }
+            });
+            layedit.build('demoedit'); //建立编辑器
+       	form.on('select(communist_no)', function(data){
+            var communist_no = $('#communist_no').val();
+            $.post("{:U('Oawork/get_communist_name')}",{communist_no:communist_no},function(result){
+                if(result)
+                {
+                    $('#worklog_title').val(result);
+                }
+            });     
+        });
+	})
+
+</script>
+</block>

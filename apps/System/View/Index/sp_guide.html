@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title><php>echo getConfig('web_name');</php>-引导页</title>
+		<link rel="stylesheet" href= "__STATICS__/apps/page_guide/css/style.css">
+			<style type="text/css">														
+			.gif_tu {position: absolute;top: -1%;left: 1%;width: 3.12rem;height: 3.3rem;}
+			.e_ewm img {width: 1.3rem;padding-left: 0.35rem;}	
+			.index_prop_pc_img img {width: 0.3rem;}
+			.index_con {margin-top: 120.66rem;width: 19.16rem;margin: 0 auto;}		
+			.index_lead_con {padding-bottom: 0.1rem;}		
+			.index_manages_foor_tit{left: 12.5%;top: 30%;font-size:0.18rem;}
+			.arrow1_1 img {width: 0.6rem;left: 3.2rem;}
+   			.arrow2_2 img {width: 0.6rem;left: 9.4rem;}
+   			.arrow3_3 img {width: 0.6rem;left: 16rem;}	    			
+    		.e_ewm {top: 58%;left: 9%;}
+			.index_wisdom_data1 img {width: 0.3rem;	}
+			.index_wisdom_data2 img {width: 0.3rem;	}
+			.index_wisdom_data3 img {width: 0.3rem;	}
+			.index_bus_bg { height: 0.85rem;}
+			.index_bus_bg p {height: 0.85rem; line-height:0.85rem;}
+			</style>
+	</head>
+	<body class="bg">
+		<!-- <header>
+			<div class="index_title">
+				<php>echo getConfig('web_name');</php>
+			</div>
+		</header> -->
+	   <header class="title clearfix" style="text-align: center;" >
+		    <img src="__STATICS__/apps/page_allinone/public/images/allinone_icon.png" alt="智慧党建自助服务终端" style="vertical-align:middle; width: 4%"> 
+		    <span class="pl-10 pt-50" style="font-size: 40px; font-weight:600; color: #2b2b2b;vertical-align:middle;"><php>echo getConfig('web_name');</php></span>
+		</header>
+		<!--二维码-->
+		<section>
+			<!-- 居民通 -->
+			<div>
+				<input type="hidden" id="android_downurl_people" value="${android_downurl_people}"/>
+				<div class="ewm">
+				<div id="people" style="margin: 7px 10px;" ></div>
+				</div>
+			</div>
+			
+		</section>
+		<!-- 工作人员App -->
+		<section>
+			<div>
+				<input type="hidden" id="android_downurl_people" value="${android_downurl_people}"/>
+				<div class="ewm1">
+					<div id="people" style="margin: 7px 10px;" ></div>		
+				</div>
+			</div>		
+		</section>
+		<section>
+			<div class="arrow1_1"><img src="__STATICS__/apps/page_guide/images/right_jt.png"></div>
+			<div class="arrow2_2"><img src="__STATICS__/apps/page_guide/images/right_jt.png"></div>
+			<div class="arrow3_3"><img src="__STATICS__/apps/page_guide/images/right_jt.png"></div>
+			
+		</section>
+		<section>
+			<div class="clearfix index_con">
+				<!--政务平台-->
+				<div class="pull-left index_bus">
+					<div class="index_bus_tit">
+						<p>党建平台</p>
+					</div>
+					<!--居民通-->
+					<div class="index_bus_wechat index_bus_wechat_first_two">
+						<a onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/wechat.png" alt="手机端">
+						</a>
+						<div class="index_bus_bg" >
+							<p>手机端</p>
+						</div>
+					</div>
+					<!--居民通-->
+					<div class="index_bus_wechat index_bus_wechat_first_two">
+						<a onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/wechat.png" alt="微信端">
+						</a>
+						<div class="index_bus_bg" >
+							<p>微信端</p>
+						</div>
+					</div>
+					<!--pc门户-->
+					<div class="index_bus_wechat">
+						<a href="{:U('Index/Index/index')}" target="_blank" ><img src="__STATICS__/apps/page_guide/images/pc_mh.png" alt="PC门户"></a>
+						<div class="index_bus_bg">
+							<p>PC门户</p>
+						</div>
+					</div>
+					<!--pc门户-->
+					<div class="index_bus_wechat">
+						<a href="{:U('Allinone/Index/index')}" target="_blank" ><img src="__STATICS__/apps/page_guide/images/one_machine.png" alt="一体机"></a>
+						<div class="index_bus_bg">
+							<p>一体机</p>
+						</div>
+					</div>
+					
+				</div>
+				<!--街道智慧大脑-->
+				<div class="pull-left index_wisdom">
+					<div class="index_wisdom_re">
+						<img class="index_wisdom_line" src="__STATICS__/apps/page_guide/images/line1.png">
+						<div class="index_wisdom_data1 clearfix">
+							<img class="pull-left" src="__STATICS__/apps/page_guide/images/data1.png" alt="数据采集">
+							<div class="pull-left">数据采集</div>
+						</div>
+						<div class="index_wisdom_data2 clearfix">
+							<img class="pull-left" src="__STATICS__/apps/page_guide/images/data2.png" alt="数据清洗">
+							<div class="pull-left">数据清洗</div>
+						</div>
+						<div class="index_wisdom_data3 clearfix">
+							<img class="pull-left" src="__STATICS__/apps/page_guide/images/data3.png" alt="数据分析">
+							<div class="pull-left">数据分析</div>
+						</div>
+					</div>
+					<div class="index_wisdom_brain"><img src="__STATICS__/apps/page_guide/images/wisdom.png"></div>
+				</div>
+				<!--工作平台-->
+				<div class="pull-left index_prop">
+					<div class="index_bus_tit">
+						<p>工作平台</p>
+					</div>
+					<!--管理后台-->
+					<div class="index_manages">
+						<div class="index_manages_title">管理后台</div>
+						<div class="gif_tu "> 
+							<a href="{:U('System/Index/index',array('function_pid'=>1))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/gif2.gif" ></a>
+						</div>
+						<div class="index_manages_foor_tit">智慧党建</div>
+						<div class="pull-right mrr-20em">
+							<img class="index_manages_foor" src="__STATICS__/apps/page_guide/images/foor_1.png">
+							<div class="index_manages_tu clearfix">
+								<a href="{:U('System/Index/index',array('function_pid'=>2))}" target="_blank"> <img src="__STATICS__/apps/page_guide/images/pc2.png"></a>
+								<a href="{:U('System/Index/index',array('function_pid'=>3))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/pc3.png"></a>
+								<a href="{:U('System/Index/index',array('function_pid'=>5))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/pc4.png"></a>
+							</div>
+							<div class="index_manages_tu_tit clearfix">
+								<li>党务平台</li>
+								<li>学习平台</li>
+								<li>活动平台</li>
+							</div>
+						</div>
+						<!--第二层-->
+						<div class="foor_2">
+							<img class="index_manages_foor_2" src="__STATICS__/apps/page_guide/images/foor_2.png">
+							<div class="index_manages_tu_2 clearfix">
+								<a href="{:U('System/Index/index',array('function_pid'=>6))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/ht1.png"></a>
+								<a href="{:U('System/Index/index',array('function_pid'=>4))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/ht2.png"></a>
+								<a href="{:U('System/Index/index',array('function_pid'=>7))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/ht3.png"></a>
+								<a href="{:U('System/Index/index',array('function_pid'=>8))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/ht4.png"></a>
+								<a href="{:U('System/Index/index',array('function_pid'=>99))}" target="_blank"><img src="__STATICS__/apps/page_guide/images/ht5.png"></a>
+							</div>
+							<div class="index_manages_tu_2_tit clearfix">
+								<li>民生平台</li>
+								<li>宣传平台</li>
+								<li>监督平台</li>
+								<li>办公平台</li>
+								<li>系统设置</li>
+							</div>
+						</div>
+						<div class="foot2_line"></div>
+					</div>
+					<!--管理端-->
+					<div class="index_e_title">手机端</div>
+					<div id="staff" class="e_ewm" style="width: 0.8rem;height: 0.8rem;">
+						<img style="padding-left: 0;" src="__STATICS__/public/images/app_qrcode.png">
+					</div>
+					<div class="pull-right mrr-20em">
+						<img class="index_manages_foor_3" src="__STATICS__/apps/page_guide/images/foor_3.png">
+						<div class="index_manages_tu_3 clearfix">
+							<img src="__STATICS__/apps/page_guide/images/pc3.png" onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/e3.png" onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/pc4.png" onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/e1.png" onclick="layer.msg('请到指定终端操作！')">
+						</div>
+						<div class="index_manages_tu_3_tit clearfix">
+							<li>党务平台</li>
+							<li>学习平台</li>
+							<li>活动平台</li>
+							<li>民生平台</li>
+						</div>
+						<div class="foot3_line"></div>
+					</div>
+					<!--第三方-->	
+					<div class="index_three_title">微信端</div>
+					<div class="e_ewm1 "><img src="__STATICS__/apps/page_index/images/erw.jpg"></div>
+					<div class="">
+						<img class="index_manages_foor_31" src="__STATICS__/apps/page_guide/images/foor_3.png">
+						<div class="index_manages_tu_31 clearfix">
+							<img src="__STATICS__/apps/page_guide/images/pc3.png" onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/e3.png" onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/pc4.png" onclick="layer.msg('请到指定终端操作！')">
+							<img src="__STATICS__/apps/page_guide/images/e1.png" onclick="layer.msg('请到指定终端操作！')">
+							</div>
+						<div class="index_manages_tu_3_tit1 clearfix">
+							<li>党务平台</li>
+							<li>学习平台</li>
+							<li>活动平台</li>
+							<li>民生平台</li>
+						</div>
+					</div>
+				</div>
+				<!--指挥平台-->
+				<div class="pull-right index_lead">
+					<div class="index_bus_tit">
+						<p>指挥平台</p>
+					</div>
+					<!--大数据-->
+					<div>
+						<div class="clearfix index_lead_data">
+						<div class="pull-left index_prop_pc_img">
+							<img class="pull-left" src="__STATICS__/apps/page_guide/images/pc_tit.png">
+						</div>
+						<div class="pull-left index_prop_pc_tit">大数据</div>
+					</div>
+					<a href="{:U('Bigdata/Index/index')}" target="_blank">
+						<div class="index_lead_con clearfix">
+							<li>党员分析</li>
+							<li>组织数据</li>
+							<li>会议数据</li>
+							<li>组织地图</li>
+							<li>待办事项</li>
+							<li>组织生活</li>
+						</div>
+					</a>
+					</div>
+					<!--GIS地图-->
+					<div>
+						<div class="clearfix index_lead_data">
+						<div class="pull-left index_prop_pc_img">
+							<img class="pull-left" src="__STATICS__/apps/page_guide/images/pc_tit.png">
+						</div>
+						<div class="pull-left index_prop_pc_tit">GIS地图</div>
+					</div>
+					<a href="{:U('System/Gis/index')}" target="_blank">
+						<div class="index_lead_con clearfix" >
+							<li>组织地图</li>
+							<li>组织信息</li>
+							<li>组织层级</li>
+							<li>党员信息</li>
+							<li>组织生活</li>
+							<li>积分数据</li>
+						</div>
+					</a>
+					</div>
+					<!--分析研判-->
+					<div>
+						<div class="clearfix index_lead_data">
+						<div class="pull-left index_prop_pc_img">
+							<img class="pull-left" src="__STATICS__/apps/page_guide/images/pc_tit.png">
+						</div>
+						<div class="pull-left index_prop_pc_tit">分析研判</div>
+					</div>
+					<a href="{:U('System/Index/index',array('function_pid'=>2))}" target="_blank">
+						<div class="index_lead_con clearfix" >
+							<li>党员分析</li>
+							<li>组织分析</li>
+							<li>组织地图</li>
+							<li>活动分析</li>
+							<li>待办事项</li>							
+						</div>
+					</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	<script src="__STATICS__/plugins/jquery.min.js"></script>
+  	<script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+  	<script src="__STATICS__/public/js/index.js"></script>
+	<script src="__STATICS__/apps/page_guide/js/index.js"></script>
+	<script>
+	   	layui.config({
+			base: '__STATICS__/layuiadmin/' //静态资源所在路径
+		}).extend({
+			index: 'lib/index' //主入口模块
+		}).use('index');
+	</script>
+	</body>	
+</html>

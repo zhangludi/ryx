@@ -1,0 +1,176 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid " >
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="layui-row">
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    <div class="layui-col-xs1 text-r lh-40">
+                                        名称：
+                                    </div>
+                                    <div class="layui-col-xs2 ">
+                                        <input class="layui-input"  id="keywords" autocomplete="off" placeholder="请输入名称">
+									</div>
+									<div class="layui-col-xs1 text-r lh-40">
+										考题类型：
+									</div>
+									<div class="layui-col-xs2 ">
+										<select name="questions_type" id="questions_type" lay-filter="aihao" lay-search="" lay-verify='required'>
+											<option value="">请选择</option>
+											<php>echo getBdTypeSelect('topic_type','',$questions['questions_type']);</php>
+										</select>
+									</div>
+									<div class="layui-col-xs4 pull-right" >
+										<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+										<a class="layui-btn table-add" data-type="add" style="text-decoration: none;" title="添加">新增试题</a>
+										<!-- <a class="layui-btn" data-type="reload" href="__UPLOAD__/ccp/tpl_xls/exam_questions.xls" target="_blank" lay-filter="searchFilter" style="text-decoration: none;" title="查询">导入模板下载</a> -->
+										<a class="layui-btn" onclick="testTrue()" style="text-decoration: none;" title="添加">导入试题</a>
+									</div>
+                                </div>
+                                <table class="layui-table" id="demo"  lay-filter="demo">
+
+                                </table>
+								<script type="text/html" id="operate">
+								</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        function edit(questions_id){
+            var index = layer.open({
+               type: 2,
+               title: false,
+               end:false,
+               closeBtn: 0,
+               shift: 1,
+               content: "{:U('edu_questions_edit')}?questions_id="+questions_id+'',
+               area: ['300px', '300px']
+            });
+            layer.full(index);
+        }
+		function testTrue(){
+			layer.open({
+				type : 2,
+				title : '导入试题',
+				offset : window.parent.document.body.scrollTop + 20 + '%',
+				shadeClose : true, //点击遮罩关闭层
+				area: ['700px', '300px'],
+				fixed: true,
+				scrollbar: true,
+				fixed: true,
+				content: "{:U('Edu/Eduexam/questions_import_index')}",
+				success:function(){
+					layerAuto();
+				}
+			});
+		}
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: '{:U("edu_questions_data",array("status"=>$status,"cat_id"=>$cat_id))}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'questions_id',width:80, title: '编号', sort: true}
+                        , {field: 'questions_title', title: '名称'}
+                        , {field: 'questions_item',  title: '选项'}
+                        , {field: 'questions_answer', width:80,  title: '正确答案'}
+                        , {field: 'questions_score', width:80, title: '分值'}
+                        , {field: 'questions_type', width:80, title: '类型'}
+                        , {field: 'operate', title: '操作' ,align: 'center',width: 140}
+                        
+                    ]]
+                    , page: true
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+                //监听工具条
+                table.on('tool(demo)', function(obj){
+                    var data = obj.data;
+                    var idcard_no = data.idcard_no;
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除该数据吗？', function(index){
+                            window.location='{:U("Edunotes/edu_notes_del")}?notes_id='+data.notes_id+'';
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        window.location='{:U("Edunotes/edu_notes_edit")}?notes_id='+data.notes_id+'';
+                        layer.close(index);
+                    }
+                });
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keyword = $('#keywords').val();
+                        var time = $('#time').val();
+                        var questions_type = $('#questions_type').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "keyword": keyword,
+                                "start":time,
+                                "questions_type":questions_type,
+                            }
+                        });
+                    },
+                    add: function(){
+                        var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('Eduexam/edu_questions_edit')}",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+            //点击左侧树的事件
+            
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+        // 设置ztree 列表和右侧列表一样高度
+        $(".over-h-tree").css("height",($(window).height() - 95));
+    </script>
+</block>
+

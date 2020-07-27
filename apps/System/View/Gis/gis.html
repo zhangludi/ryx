@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="text/html;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv ="Pragma" content = "no-cache"/>
+<meta http-equiv="Cache-Control" content="no cache" />
+<meta http-equiv="Expires" content="0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="format-detection" content="telephone=no"/>
+<!-- layui的css -->
+<link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/sp_public.css" />
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+<!--   <script src="http://webapi.amap.com/maps?v=1.4.6&key=2fc435a5051d929d4e7159337457b7f6&plugin=AMap.MouseTool"></script>
+<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script> -->
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/admin.css" media="all">
+<!--ztree-->
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/ztree/css/zTreeStyle/zTreeStyle.css"/>
+<link rel="stylesheet" href="https://layui.hcwl520.com.cn/layui/css/layui.css">
+<!--通知栏插件-->
+<link rel="stylesheet" href="__STATICS__/apps/page_gis/Source/jBox.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_gis/Source/plugins/Notice/jBox.Notice.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_gis/Source/themes/NoticeFancy.css">
+<!--自定义 css-->
+<link rel="stylesheet" href="__STATICS__/apps/page_gis/css/indextwo_red.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/layouts_admin_red.css" media="all">
+<title>GIS地图平台</title>
+<style type="text/css">
+    .organsize_btn{line-height: normal}
+    html {
+	    background-color: #ffffff !important;
+	    color: #666;
+	}
+    .ztree {
+        height: 300px;
+        overflow-y: auto;
+        width: calc(100% + 27px)
+    }
+
+    .ztree li a {
+        height: 28px;
+    }
+
+    .ztree li a:hover {
+        text-decoration: none
+    }
+
+    .ztree li span {
+        font-size: 14px;
+        font-family: 微软雅黑 !important;
+    }
+
+    .ztree li span.button.root_close {
+        background: url("__STATICS__/apps/page_index/images/left-arrow.png") no-repeat
+    }
+
+    .ztree li span.button {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+
+    .ztree li span.button.root_open {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+
+    .ztree li span.button.bottom_open {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+
+    .ztree li span.button.bottom_close {
+        background: url("__STATICS__/apps/page_index/images/left-arrow.png") no-repeat
+    }
+    
+    .ztree li span.button.center_open {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+
+    .ztree li span.button.center_close {
+        background: url("__STATICS__/apps/page_index/images/left-arrow.png") no-repeat
+    }
+
+    .ztree li span.button {
+        width: 0;
+    }
+
+    .overhiddenx {
+        overflow: hidden;
+        width: calc(100% - 27px);
+        padding-bottom: 10px
+    }
+
+    .ztree li a.curSelectedNode {
+        border: none;
+        color: #f60;
+        background: none;
+        height: 28px
+    }
+
+    #allmap {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px
+    }
+    .borb-e5 {
+        border-bottom: 1px solid #e5e5e5
+    }
+    html {
+        background-color: #fff;
+        color: #666;
+    }
+    .map_tips_lunbo{
+        height: 130px;
+    }
+    .map_tips{
+        height: 236px;
+    }
+    .organsize_btn_active{
+        background: #ff6600;
+        border: 0px solid #ff6600;
+    }
+</style>
+</head>
+<body>
+<div id="allmap" style="position: fixed;z-index: 0;">
+    <div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;"></div>
+</div>
+<!--头部开始-->
+<div class="sp_map_head">
+	<div class="menu_bg2"></div>
+	<p class="sp_map_head_title">党建GIS地图平台</p>
+	<!--头部右侧标识-->
+	<div class="sp_map_head_icon clearfix">
+		<!-- <img class="sp_map_head_icon_img1 fl target-notice" id="Notice-2" src="__STATICS__/apps/page_gis/images/tongzhi.png" alt="" /> -->
+		<div class="fr sp_map_head_icon_weather">
+			<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no" src="http://tianqi.2345.com/plugin/widget/index.htm?s=3&z=3&t=1&v=0&d=1&bd=0&k=000000&f=ffffff&ltf=ffffff&htf=ffffff&q=1&e=0&a=1&c=54511&w=180&h=36&align=center"></iframe>		
+		</div>
+	</div>
+</div>
+<div class="sp_map_left sp_map_left-1">
+	<div class="sp_map_left_anmit">
+		<img class="icon_fangx" src="__STATICS__/apps/page_gis/images/left_icon.png" alt="" />
+		<img class="icon_fangx1" src="__STATICS__/apps/page_gis/images/right_icon.png" alt="" />
+	</div>
+	<div class="sp_map_left_box">
+	    <div class="layui-card" style="width:100%;margin-left:0.06rem;margin-top:0.04rem;border-radius:0.03rem">
+	    	<input type="hidden" id="party_no" value="{$party_no}">
+	        <div class="layui-card-header h-45 lh-45"><img class="mt-5m mr-10" src="__STATICS__/apps/page_gis/images/cd-icon.png	" alt=""><span class="">党组织列表</span></div>
+	        <div class="layui-card-body ">
+	            <div class="overhiddenx sp_map_left_box_g">
+	                <div class="ztree">
+	                    <ul id="treeDemo_index"></ul>
+	                </div>
+				<div class="scrollbar"></div>
+	            </div>
+	        </div>
+	    </div>
+	    <!--左边第一个结束-->
+	    <!--左边第二个开始-->
+	    <div class="sp_map_left_two">
+	    	<p class="sp_map_left_two_head">点击切换显示组织层级</p>
+	    	<div class="sp_map_left_box_g1">
+		    	<div class="sp_map_left_two_content clearfix ">
+		    		<volist name="code_list" id="code">
+		    			<div class="sp_map_left_two_content_box fl w-20b" onclick="getPartyLevel(this,{$code.code_no})">
+		    				<eq name="i" value="1">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="2">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test1.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="3">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test2.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="4">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test3.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="5">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test4.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="6">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test5.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="7">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test6.png" alt="" />
+		    				</eq>
+		    				<eq name="i" value="8">
+		    					<img src="__STATICS__/apps/page_gis/images/icon-test7.png" alt="" />
+		    				</eq>
+		    				<p>{$code.code_name}</p>
+		    			</div>
+		    		</volist>
+		    	</div>
+				<div class="scrollbar"></div>
+	    	</div>
+	    </div>
+	    <!--左边第二个结束-->
+	    <!--左边第三个开始-->
+	    <div class="sp_map_left_three">
+	    	<p class="sp_map_left_three_head"><img src="__STATICS__/apps/page_gis/images/shuju.png" alt="" /><span class="sp_map_left_three_span">党组织数据</span></p>
+	    	<div class="sp_map_left_box_g2">
+		    	<div class="sp_map_left_three_content clearfix ">
+		    		<div class="sp_map_left_three_content_box fl">
+		    			<p class="sp_map_left_three_content_box_p1">党组织(个)</p>
+		    			<p class="sp_map_left_three_content_box_p2 red">{$party_num}</p>
+		    		</div>
+		    		<div class="sp_map_left_three_content_box fl">
+		    			<p class="sp_map_left_three_content_box_p1">党员数(个)</p>
+		    			<p class="sp_map_left_three_content_box_p2 blue">{$communist_num}</p>
+		    		</div>
+		    		<div class="sp_map_left_three_content_box fl">
+		    			<p class="sp_map_left_three_content_box_p1">组织生活(个)</p>
+		    			<p class="sp_map_left_three_content_box_p2 zong">{$meeting_num}</p>
+		    		</div>
+		    		<eq name="is_integral" value="1">
+		    		<div class="sp_map_left_three_content_box fl">
+		    			<p class="sp_map_left_three_content_box_p1">积分(本月)(分)</p>
+		    			<p class="sp_map_left_three_content_box_p2 yellow">{$dues_month_num}</p>
+		    		</div>
+		    		</eq>
+		    	</div>
+				<div class="scrollbar2"></div>
+	    	</div>
+	    </div>
+	    <!--左边第三个结束-->
+	</div>
+</div>
+</body>
+<!--jq库-->
+<script type="text/javascript" src="__STATICS__/apps/page_gis/js/jquery-3.3.1.min.js"></script>
+<!--本页面js-->
+<script type="text/javascript" src="__STATICS__/apps/page_gis/js/indextwo.js"></script>
+<!--主框架js-->
+<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js" ></script>
+<script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__STATICS__/layuiadmin/layui/layui.all.js"></script>
+<!--地区js-->
+<script type="text/javascript" src="__STATICS__/apps/page_gis/js/area.js"></script>
+<!--主框架js end-->
+<!--ztree-->
+<script src="__STATICS__/plugins/ztree/js/jquery.ztree.core.js"></script>
+<!--layui 效果-->
+<script src="https://layui.hcwl520.com.cn/layui/layui.js"></script>
+<!--通知栏插件 js-->
+<script src="__STATICS__/apps/page_gis/Source/jBox.js"></script>
+<script src="__STATICS__/apps/page_gis/Source/plugins/Notice/jBox.Notice.js"></script>
+<script src="__STATICS__/apps/page_gis/Demo.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={$web_map_ak}"></script>
+<script type="text/javascript" src="__STATICS__/plugins/Bdmap/js/jquery.baiduMap.min.js"></script>
+<script>
+    layui.config({
+        base: '../../../statics/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'console']);
+
+    $(".index_organize_hide").click(function() {
+        $(".organize_hide").hide();
+        $(".organize_show").removeClass("layui-col-md9");
+        $(".organize_show").addClass("layui-col-md12");
+        $(".index_organize_show").show();
+    })
+    $(".index_organize_show").click(function() {
+        $(".organize_hide").show();
+        $(".organize_show").removeClass("layui-col-md12");
+        $(".organize_show").addClass("layui-col-md9");
+        $(".index_organize_show").hide();
+    })
+
+</script>
+<!-- echarts js开始 -->
+<script type="text/javascript" src="__STATICS__/layuiadmin/lib/extend/echarts.js"></script>
+<!--点击显示和隐藏-->
+<script>
+    $(document).ready(function () {
+		setRem()
+    })
+    //  设置选中效果
+    function chooseChange(This,mape_type){
+		$('.sp_map_left_two_content_box').css('background-color','#fff');
+		$(This).css('background-color','#dfdfdf');
+
+	}
+	//  设置rem
+    function setRem(){
+	    var innerWidth = window.innerWidth;
+	    var remUnit = innerWidth * 100 / 1902;
+	    $("html").css("font-size", remUnit + "px");
+	}
+</script>
+<!--ztree数据-->
+<script>
+	function map_onclick(e, treeId, treeNode) {
+		console.log(1);
+        var party_no = treeNode.id;
+        var party_pno = treeNode.pid;
+        var longitude = treeNode.longitude;
+        var latitude = treeNode.latitude;
+        getMap(party_no);
+    }
+    var setting = {
+        data: {
+            key: {
+                title: "t"
+            },
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: map_onclick//绑定回调函数
+        },
+        view: {
+            showLine: true,
+            showIcon: true
+        }
+    };
+    var zNodes = [
+        <volist name="party_list" id="list">
+            //取消组织编号
+            { id:"{$list.party_no}",pId:"{$list.party_pno}",icon:"__STATICS__/public/images/dj.png" ,longitude:"{$list.gc_lng}",latitude:"{$list.gc_lat}", t:"{$list.party_name}", name:"{$list.party_name}",<eq name='list.party_pno' value='0'>open:true<else/>open:false</eq>},
+        </volist>
+    ];
+    $(document).ready(function() {
+        $.fn.zTree.init($("#treeDemo_index"), setting, zNodes);
+    });
+
+</script>
+<script>
+	var party_no = $('#party_no').val();
+    getMap(party_no);
+    function getMap(party_no){
+        $('.sp_map_left_two_content_box').removeClass('organsize_btn_active');
+        $.get("{:U('System/Index/getPartyGC')}",{party_no:party_no},function(e){
+            if(e){
+                creat_map(e);
+            }else{
+                alert("数据错误 ");
+            }
+        })
+    }
+    // 获取某个等级下的党组织列表
+    function getPartyLevel(that,party_level){
+        $('.sp_map_left_two_content_box').removeClass('organsize_btn_active');
+        $(that).addClass('organsize_btn_active');
+        $.get("{:U('System/Index/getPartyGC')}",{party_level:party_level},function(party_list){
+            if(party_list){
+                creat_map(party_list);
+            }else{
+                alert("该等级下无党组织相关数据");
+            }
+        })
+    }
+    //导航栏滚动
+    var i = 1;
+    var showLength = Math.floor ($(".evt-box").height() / $(".evt-list").height());
+    var itemLength = $(".evt-list").length;
+
+    function scrollTop() {
+        $(".evt-wrap").css("transform", "translateY(" + (- $(".evt-list").height() * i) + "px)");
+        i < itemLength - showLength ? i ++ : i = 0 ;
+    }
+    //右上列表滚动
+    setInterval(function(){
+        scrollTop();
+    }, 2000);
+</script>
+<script >
+//百度地图API功能
+//创建坐标标识
+function creat_map(e){
+    var map = new BMap.Map("allmap");
+	//map.centerAndZoom("{$web_address}",9);      // 用城市名设置地图中心点
+    // map.centerAndZoom(new BMap.Point("{$map_list.gc_lng}","{$map_list.gc_lat}"), 9);//定义默认显示左边  15为地图等级
+
+    //添加带有定位的导航控件
+    var navigationControl = new BMap.NavigationControl({
+        // 靠左上角位置
+        anchor: BMAP_ANCHOR_TOP_LEFT,
+        // LARGE类型
+        type: BMAP_NAVIGATION_CONTROL_LARGE,
+      // 启用显示定位
+      enableGeolocation: true
+    });
+    map.addControl(navigationControl);
+    // var  mapStyle ={ 
+    //      features: ["road", "building","water","land","point"],//隐藏地图上的poi
+    //      style : "midnight"  //设置地图风格为高端黑 正常颜色设置为 light
+    //  };
+    // map.setMapStyle(mapStyle);
+    //map.disableDragging();     //禁止拖拽
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes: [
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]
+    }));   //添加地图类型控件
+    //map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    console.log(e);
+    if(e.length > 1){
+        console.log('多个');
+        // new BMap.Point(116.98, 36.67)
+        map.centerAndZoom("{$web_address}",9);
+    } else if(e.length == 1) {
+        var party_point = new BMap.Point(e[0]['gc_lng'], e[0]['gc_lat']);
+        console.log('一个');
+        map.centerAndZoom(party_point,14);
+    }
+    //百度地图显示的区域用边框标示
+    var bdary = new BMap.Boundary();
+    var name = "{$web_address}";
+    bdary.get(name, function(rs){ 
+        var count = rs.boundaries.length;
+        for(var i = 0; i < count; i++){
+            var ply = new BMap.Polygon(
+            rs.boundaries[0],
+                {
+                    strokeWeight: 3,//边框线的宽度,以像素为单位
+                    strokeColor: "yellow",//边框线的颜色
+                    strokeOpacity: 0.8,//边线的透明度
+                    //strokeStyle: 'solid',    //边线的样式，solid或dashed。 
+                    fillColor:"null",   //是否需要填充色
+                    fillOpacity: 0.05 //填充色的透明度，0~1之间
+                }
+            ); 
+            map.addOverlay(ply);  //添加覆盖物
+        } 
+    });
+
+
+    var myIcon = new BMap.Icon("__STATICS__/apps/page_layout/images/flag-red.png", new BMap.Size(32,32));//创建图标
+    var pointArray = new Array();
+    var data_info = e;
+    var opts = {
+        width : 500,     // 信息窗口宽度
+        height: 250,     // 信息窗口高度
+        //title : "信息窗口" , // 信息窗口标题
+        enableMessage:true//设置允许信息窗发送短息
+    };
+    for(var i=0;i<data_info.length;i++){
+        if(data_info[i]['party_pno']==0){
+            myIcon = new BMap.Icon("__STATICS__/apps/page_layout/images/qi.png", new BMap.Size(48,48));//创建图标
+        }else{
+            myIcon = new BMap.Icon("__STATICS__/apps/page_layout/images/flag-red.png", new BMap.Size(32,32));
+        }
+        pointArray[i] = new BMap.Point(data_info[i]['gc_lng'], data_info[i]['gc_lat']);
+        var marker = new BMap.Marker(new BMap.Point(data_info[i]['gc_lng'],data_info[i]['gc_lat']),{icon:myIcon});  // 创建标注
+        var content =
+            "<div class='po-ab map_tips layui-card' style='margin-top: -5px;padding:0px;'>"+
+                "<div class='fsize-18 fcolor-33 lh-30 borb-e5'>"+data_info[i]['party_name']+"</div>"+
+                "<div class='map_tips_left pull-left'>"+
+                    "<p class='fsize-14 fcolor-33 lh-26'>组织负责人：<span class='fcolor-66'>"+data_info[i]['party_manager']+"</span></p>"+
+                    "<p class='fsize-14 fcolor-33 lh-26'>党组织简介：</p>"+
+                    "<p class=' fsize-12 fcolor-66'>"+data_info[i]['memo']+"</p>"+
+                    "<div class='mt-15' style='position: absolute;bottom: 0;'>"+
+                        "<div class='map_tips_left_num'>"+
+                            "<p>党员</p>"+
+                            "<p>"+data_info[i]['communist_num']+"</p>"+
+                        "</div>"+
+                        <eq name='is_integral' value='1'>
+                        "<div class='map_tips_left_num'>"+
+                            "<p>积分</p>"+
+                            "<p>"+data_info[i]['integral_num']+"</p>"+
+                        "</div>"+
+                        </eq>
+                        "<div class='map_tips_left_num'>"+
+                            "<p>会议</p>"+
+                            "<p>"+data_info[i]['meetting_num']+"</p>"+
+                        "</div>"+
+                        "<div class='map_tips_left_num'>"+
+                            "<p>党费</p>"+
+                            "<p>"+data_info[i]['duse_num']+"</p>"+
+                        "</div>"+
+                    "</div>"+
+                "</div>"+
+                "<div class='map_tips_right pull-left ml-25' style='width: 21%;'>"+
+                    "<div class='map_tips_lunbo mt-5' style='height160px;margin-top:20%;'>"+
+                        "<ul class='po-re map_tips_lunbo_ul'>"+
+                            data_info[i]['propagate_html']+
+                        "</ul>"+
+                    "</div>"+
+                "</div>"+
+                "<div class='clearfix'></div>"+
+            "</div>";
+        map.addOverlay(marker);               // 将标注添加到地图中
+        addClickHandler(content,marker);
+    }
+    function addClickHandler(content,marker){
+        marker.addEventListener("click",function(e){
+            openInfo(content,e)}
+        );
+    }
+    function openInfo(content,e){
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+        map.openInfoWindow(infoWindow,point); //开启信息窗口
+    }
+    //map.setViewport(pointArray);
+
+    //添加带有定位的导航控件
+    var navigationControl = new BMap.NavigationControl({
+        // 靠左上角位置
+        anchor: BMAP_ANCHOR_TOP_LEFT,
+        // LARGE类型
+        type: BMAP_NAVIGATION_CONTROL_LARGE,
+		// 启用显示定位
+      enableGeolocation: true
+    });
+    map.addControl(navigationControl);
+    map.enableScrollWheelZoom(true);//开启鼠标缩放功能
+}
+
+function attribute(e){
+	var p = e.target;
+	alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);    
+}
+
+function theLocation(event){
+	if(event.which==13){ 
+		var city = document.getElementById("cityName").value;
+		if(city != ""){
+			map.centerAndZoom(city,11);      // 用城市名设置地图中心点
+		}
+	} 
+}
+</script>
+</html>

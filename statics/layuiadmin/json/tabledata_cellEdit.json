@@ -1,0 +1,39 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 1000,
+	"data": [
+		{
+			"id": 10000,
+			"title": "工作完成情况",  
+			"proportion": "30",
+			"cycle": "按月考核",
+			"name":"李成",
+			"score":"23"
+		},{
+			"id": 10007,
+			"title": "工作完成情况",  
+			"proportion": "50",
+			"cycle": "代码规范",
+			"name":"李阳",
+			"score":"73"
+			
+		}, {
+			"id": 10003,
+			"title": "工作完成情况",  
+			"proportion": "50",
+			"cycle": "代码规范",
+			"name":"李阳",
+			"score":"33"
+			
+		},  {
+			"id": 10007,
+			"title": "工作完成情况",  
+			"proportion": "50",
+			"cycle": "代码规范",
+			"name":"李阳",
+			"score":"33"
+			
+		}
+	]
+}

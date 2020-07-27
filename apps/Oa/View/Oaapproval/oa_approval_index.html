@@ -1,0 +1,186 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md3">
+	            <div class="layui-card">
+	                <form class="layui-form">
+	                    <div class="layui-card-header">
+	                    	<span title="审批模板">审批模板</span>
+	                    	<a href="{:U('Oa/Oaapproval/oa_approval_template_index')}" title="审批模板管理" style="text-decoration: none;">
+	                    		<i class="layui-icon" style="color: #f60;position: relative;top: 0px;left: 67%;font-size: 20px;"></i>
+	                    	</a>
+	                    </div>
+	                    <div class="layui-card-body">
+	                        <div class="over-h-tree">
+	                            <ul id="treeDemo" class="ztree ztree-demo">
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	        <input type="hidden" name="app_type" id="app_type" value="{$app_type}">
+	        <div class="layui-col-md9">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                                <div class="layui-col-xs2 text-r lh-40">
+	                                    审批名称：
+	                                </div>
+	                                <div class="layui-col-xs3 ">
+	                                    <input class="layui-input" name="approval_name" id="approval_name" autocomplete="off" placeholder="请输入审批名称">
+	                                </div>
+	                                <div class="layui-col-xs3 pull-right">
+	                                	<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+	                            </table>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+		function info(approval_no,template_no){
+			var index = layer.open({
+               type: 2,
+               title: false,
+               end:false,
+               closeBtn: 0,
+               shift: 1,
+               content: "{:U('oa_approval_info')}?approval_no="+approval_no+"&template_no="+template_no+"",
+               area: ['300px', '300px']
+        	});
+        	layer.full(index);
+		}
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("oa_approval_list_data",array("template_no"=>$template_no,"type"=>$app_type))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'approval_no', width: 130, title: '编号', sort: true}
+	                    , {field: 'approval_name', title: '审批名称'}
+	                    , {field: 'approval_apply_man', width: 120, title: '发起人'}
+	                    , {field: 'approval_time', width: 160, title: '发起时间'}
+	                    , {field: 'status',width: 80, title: '状态'}
+	                    , {field: 'operate', width: 130, title: '操作'}
+	                ]]
+	                , page: true
+	            });
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+			        console.log(obj)
+			    });
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var approval_name = $('#approval_name').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"approval_name": approval_name
+					        }
+				      	});
+			        }
+			    };
+
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	        //点击左侧树的事件
+	        var setting = {
+	            view: {
+	                showLine: false,
+	            },
+	            data: {
+	                key: {
+	                    title: "t"
+	                },
+	                simpleData: {
+	                    enable: true
+	                }
+	            },
+	            callback: {
+	                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+                        layui.use('table', function () {
+                            var table = layui.table;
+                            var type = $("#app_type").val();
+                            table.render({
+                                elem: '#demo'
+                                , url: '{:U("oa_approval_list_data")}?template_no='+node.id+'&type='+type+''
+                                , height: 'full-160'
+                                , cols: [[
+                                    {field: 'approval_no', width: 110, title: '编号', sort: true}
+				                    , {field: 'approval_name', title: '审批名称',minWidth: 180}
+				                    , {field: 'approval_apply_man', width: 100, title: '发起人'}
+				                    , {field: 'approval_time', width: 160, title: '发起时间'}
+				                    , {field: 'status', title: '状态'}
+				                    , {field: 'operate', width: 160, title: '操作'}
+                                ]]
+                                , page: true
+                            });
+                        });
+	                }
+	            }
+	        };
+
+	        var zNodes = [
+	        	<volist name="tpl_list" id="list" key = 'k'>
+	            	{id:"{$list.template_no}", pId:0, name:"{$list.template_name}", t:"{$list.template_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+	            </volist>
+	        ];
+
+	        $(document).ready(function () {
+	            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	        });
+	    })
+	</script>
+	<script>
+		function data_del(approval_no){
+			if(confirm("你确认要删除吗？")){
+				$.get("{:U('oa_approval_do_del')}",{approval_no:approval_no},function(data){
+					if(data){
+						alert('删除成功！！');
+						location.reload();
+					}
+				});
+			}
+		}
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>

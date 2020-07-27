@@ -1,0 +1,69 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <!-- <div class="layui-col-xs1 text-r lh-40">
+	                            专题名称：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入专题名称">
+	                        </div>
+	                        <div class="layui-col-xs1 center-text lh-40">
+	                            时间：
+	                        </div>
+	                        <div class="layui-col-xs2">
+	                            <input type="text" class="layui-input" name="time" id="time" placeholder="yyyy-MM-dd">
+	                        </div> -->
+	                        <div class="layui-col-xs3 pull-right">
+	                            <!-- <button class="layui-btn" onclick="search()">查询</button> -->
+	                            <a class="layui-btn table-add " href="{:U('life_vote_subject_edit')}" style="text-decoration: none;" title="添加">添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="ztreedata"  lay-filter="demo"></table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+	//            默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#ztreedata'
+	                , url: '{:U("life_vote_subject_data")}'
+	                , height: 'full-160'
+	                , cols: [[
+	                	{field: 'num', width: '8%',  title: '编号', sort: true,align: 'center'}
+		                ,{field:'subject_content', width: '30%', title:'题目'}
+		                ,{field:'subject_starttime', title:'开始时间'}
+		                ,{field:'subject_endtime', title: '结束时间'}
+		                ,{field: 'operate',  title: '操作',align: 'center', width: '20%'}
+	                ]]
+	                , page: false
+	            });
+	        });   
+	    })
+	</script>
+	<script>
+    	//添加按钮的点击事件
+	    
+	</script>
+</block>

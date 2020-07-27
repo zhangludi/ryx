@@ -1,0 +1,230 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+	<style>
+.layui-card-body{
+	overflow-y: inherit !important;
+}
+</style>
+</block>
+<block name="body">
+    <div class="layui-fluid layui-form"">
+    <div class="layui-row layui-col-space15">
+    	<form action="{:U('life_poor_household_save')}" id="form_sample_2" class="form-horizontal" method="post">
+		<input type="hidden" name="poor_household_id" value="{$poor_household_data.poor_household_id}">
+	        <div class="layui-col-md12">
+	            <div class="layui-card">
+	                <div class="layui-card-header"> 基本信息</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>户主姓名：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="poor_household_name" id="poor_household_name" value="{$poor_household_data.poor_household_name}" placeholder="请输入户主姓名" autocomplete="off" class="layui-input" lay-verify='required' /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>户主身份证号：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="poor_household_identity" maxlength="18"  placeholder="请输入身份证号" id="poor_household_identity" value="{$poor_household_data.poor_household_identity}" autocomplete="off" class="layui-input" lay-verify='required|identity'/></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                      	<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>联系电话：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="poor_household_phone" maxlength="11" value="{$poor_household_data.poor_household_phone}"  lay-verify='required|phone' placeholder="请输入联系电话" autocomplete="off" class="layui-input" /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>所属村：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<select id="single" name="poor_village_type" lay-filter="aihao" lay-search=""> 
+		                                	<option value="">请选择</option>
+		                                	<!-- <php>echo getBdCodeSelect('subordinate_to_the_village',$poor_household_data['poor_village_type'])</php> -->
+		                                	 <volist name="poor_village_data" id="village">
+                                                 <option value="{$village.poor_village_id}" <if condition="$village['poor_village_id'] eq $poor_household_data['poor_village_type']">selected</if>>{$village.poor_village_name}</option>
+                                            </volist>
+		                                </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>人口数量：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="man_num" value="{$poor_household_data['man_num']}" placeholder="请输入人口数量" autocomplete="off" class="layui-input" lay-verify='required|number' /></div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                       	<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>是否为贫困户：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<select id="single" name="is_poor_village" lay-filter="aihao" lay-search=""> 
+		                                	<option value="">请选择</option>
+		                                	<option value="0" <eq name="poor_household_data.is_poor_village" value='0'>selected</eq>>否</option>
+		                                	<option value="1" <eq name="poor_household_data.is_poor_village" value='1'>selected</eq>>是</option>
+		                                </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="layui-col-md12 mt-10">
+	            <div class="layui-card">
+	                <div class="layui-card-header">贫困属性信息</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                    	<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>贫困户属性：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<select id="single" name="poor_village_property" lay-filter="aihao" lay-search=""> 
+		                                	<php>echo getBdTypeSelect('poor_households','',$poor_household_data['poor_village_property'])</php>
+		                                </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>致贫原因：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<select id="single" name="poor_cause" lay-filter="aihao" lay-search=""> 
+		                                	<option value="">请选择</option>
+		                                	<php>echo getBdTypeSelect('poverty_causes','',$poor_household_data['poor_cause'])</php>
+		                                </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>脱贫状态：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<select id="single" name="poor_status" lay-filter="aihao" lay-search=""> 
+		                                	<option value="">请选择</option>
+		                                	<php>echo getStatusSelect('state_of_poverty',$poor_household_data['poor_status'],'')</php>
+		                                </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>脱贫方式：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text" name="poor_manner"  placeholder="请输入贫困方式" value="{$poor_household_data.poor_manner}"  autocomplete="off" class="layui-input"  >
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            <div class="layui-col-md12 mt-10">
+	            <div class="layui-card">
+	                <div class="layui-card-header">家庭型收入</div>
+	                <div class="layui-card-body layui-form">
+	                    <div class="layui-row">
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>工资性收入（元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text"  name="poor_wage_income" value="{$poor_household_data.poor_wage_income}" placeholder="请输入工资性收入,只能填数字"   autocomplete="off" class="layui-input" lay-verify='required|number'  >
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>生产经营性收入（元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text" placeholder="请输入生产经营性收入,只能填数字" name="production_manage_income" value="{$poor_household_data.production_manage_income}"  autocomplete="off" class="layui-input" lay-verify='required|number'  >
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+							
+							<div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>其他收入（元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text" name="other_income" value="{$poor_household_data.other_income}" placeholder="请输入其他收入,只能填数字"  autocomplete="off" class="layui-input" lay-verify='required|number' >
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>年收入（元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text" name="year_income" value="{$poor_household_data.year_income}" placeholder="请输入年收入收入,只能填数字"  autocomplete="off" class="layui-input" lay-verify='required|number' >
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+
+	                        <div class="layui-col-xs6 mt-10">
+	                            <div class="layui-row">
+	                                 <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>人均纯收入（元）：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+	                                	<input type="text" name="percapita_income" value="{$poor_household_data.percapita_income}"  placeholder="请输入人均纯收入,只能填数字" autocomplete="off" class="layui-input" lay-verify='required|number' >
+	                                </div>
+	                            	<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+			        <div class="layui-form-item">
+		                <div class="layui-input-block">
+		                    <div class="layui-footer" style="text-align: right">
+		                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+		                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+	    </form>
+    </div>
+</div>
+</block>
+<block name="js">
+<script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+    <script>
+    	function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'date'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'datetime'
+                ,range: true
+            });
+        })
+    </script>
+
+</block>

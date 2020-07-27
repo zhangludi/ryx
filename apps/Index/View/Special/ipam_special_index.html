@@ -1,0 +1,200 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_special_twostudies.css">
+<style type="text/css">
+
+</style>
+<body class="ipam_home_public_background">
+<div class="public_content">
+	<volist name="topic_list" id="topic">
+	<a href="{:U('Edu/ipam_material_list',array('topic_id'=>$topic['topic_id']))}">
+	<div class="edu_con_special clearfix">
+	 	<div class="pull-left edu_con_special_tu1">
+	 		<img src="{$topic.topic_img}">
+	 	</div>
+	    <div class="pull-right edu_con_special_right">
+	   		<div class="clearfix">
+	   			<div class="pull-left special_right_tit">{$topic.topic_title}</div>
+   				<if condition="$topic['percent']['rate'] eq '0'">
+   				<div class="pull-right special_right_not_bg">
+	   				未开展
+	   			</div>
+   				<elseif condition="$topic['percent']['rate'] eq '100'"/>
+   				<div class="pull-right special_right_end_bg">
+	   				已结束
+	   			</div>
+   				<else/>
+   				<div class="pull-right special_right_bg">
+       				进行中
+       			</div>
+   				</if>
+	   		</div>
+	   		<p>{$topic.memo}</p>
+	   		<!-- 进度条开始 -->
+	   		<div class="clearfix special_right_progress">
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_learn.png"></div>
+	   					<div class="pull-left ml-5">{$topic.percent.article.learn_rate}%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-ff4040" lay-percent="{$topic.percent.article.learn_rate}%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共{$topic.percent.article.num}篇文章，已学习{$topic.percent.article.learn}篇</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_video.png"></div>
+	   					<div class="pull-left ml-5">{$topic.percent.video.learn_rate}%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-376BF5" lay-percent="{$topic.percent.video.learn_rate}%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共{$topic.percent.video.num}部视频，已学习{$topic.percent.video.learn}部</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_notes.png"></div>
+	   					<div class="pull-left ml-5">{$topic.percent.notes.learn_rate}%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-A144FE" lay-percent="{$topic.percent.notes.learn_rate}%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">已写{$topic.percent.notes.count}篇</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_exam.png"></div>
+	   					<div class="pull-left ml-5">{$topic.percent.exam.learn_rate}%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-FE9C44" lay-percent="{$topic.percent.exam.learn_rate}%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共{$topic.percent.exam.num}次考试，已考试{$topic.percent.exam.learn}次</div>
+	   			</li>
+	   		</div>
+	   </div>
+	</div>
+	</a>
+	</volist>
+	<!-- <div class="edu_con_special clearfix">
+	 	<div class="pull-left edu_con_special_tu1">
+	 		<img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_small02.png">
+	 	</div>
+	   <div class="pull-right edu_con_special_right">
+	   		<div class="clearfix">
+	   			<div class="pull-left special_right_tit">广东代表团发感谢信</div>
+	   			<div class="pull-right special_right_end_bg">
+	   				已结束
+	   			</div>
+	   		</div>
+	   		<p>2017年3月14日，邀请国家质检总局局长支树平、副局长兼国家认证认可监督管理委员会主任国家标准化管理委员会主任田世宏就“质量提升”的相关问题回答中外记者的提问。</p>
+	   		<div class="clearfix special_right_progress">
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_learn.png"></div>
+	   					<div class="pull-left ml-5">60%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-ff4040" lay-percent="60%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共16篇文章，已学习10篇</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_video.png"></div>
+	   					<div class="pull-left ml-5">20%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-376BF5" lay-percent="20%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共10部视频，已学习2部</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_notes.png"></div>
+	   					<div class="pull-left ml-5">50%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-A144FE" lay-percent="50%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共32次笔记，已写16次</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_exam.png"></div>
+	   					<div class="pull-left ml-5">100%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-FE9C44" lay-percent="100%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共8次考试，已考试8次</div>
+	   			</li>
+	   			
+	   		</div>
+	   </div></div>
+	<div class="edu_con_special clearfix">
+	 	<div class="pull-left edu_con_special_tu1">
+	 		<img src="__STATICS__/apps/page_portal/portal/images/ipam_edu_small03.png">
+	 	</div>
+	    <div class="pull-right edu_con_special_right">
+	   		<div class="clearfix">
+	   			<div class="pull-left special_right_tit">三严三实学习专题 </div>
+	   			<div class="pull-right special_right_not_bg">
+	   				未开展
+	   			</div>
+	   		</div>
+	   		<p>今年以来，国网平阴县供电公司党委坚持以习近平新时代中国特色社会主义思想和党的十九大精神为指导，坚决落实国网公司党组、省市公司党委部署，深入实施“旗帜领航·三年登高”计划</p>
+	   		<div class="clearfix special_right_progress">
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_learn.png"></div>
+	   					<div class="pull-left ml-5">60%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-ff4040" lay-percent="60%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共16篇文章，已学习10篇</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_video.png"></div>
+	   					<div class="pull-left ml-5">20%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-376BF5" lay-percent="20%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共10部视频，已学习2部</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_notes.png"></div>
+	   					<div class="pull-left ml-5">50%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-A144FE" lay-percent="50%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共32次笔记，已写16次</div>
+	   			</li>
+	   			<li>
+	   				<div class="clearfix special_right_progress_tit">
+	   					<div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_exam.png"></div>
+	   					<div class="pull-left ml-5">100%</div>
+	   				</div>      				
+						<div class="layui-progress">
+					  <div class="layui-progress-bar bg-color-FE9C44" lay-percent="100%"></div>
+					</div>       			
+	   				<div class="special_right_progress_con">共8次考试，已考试8次</div>
+	   			</li>
+	   			
+	   		</div>
+	    </div></div> 
+	--> 
+</div>
+<script src="__STATICS__/apps/page_portal/portal/js/ipam_home_public.js"></script>
+<script>
+layui.use('element', function () {
+  var element = layui.element;
+});
+</script>
+</body>
+</html>

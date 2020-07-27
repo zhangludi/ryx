@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+//var
+@import "../variables/color";
+@import "../variables/font-size";
+
+//component
+@import "../components/function_cards";
+@import "../objects/_title";
+
+$function_card-w: 25%;
+$function_card-h: 230px;
+$function_card-space: 10px;
+$function_img-w: 150px;
+$function_img-h: 120px;
+$function_txt-col: #666;
+$function_txt-size: 32px;
+
+.bg{
+  background: url('../../images/guide-bg.jpg');
+  background-size: cover;
+}
+
+.function{
+  flex-flow: row wrap;
+
+  .function_card{
+    width: $function_card-w;
+    height: $function_card-h;
+    margin: $function_card-space;
+    box-shadow: 0 12px 5px rgba(0, 0, 0, .1);
+
+    .card_img{
+      @include img-objfit($function_img-w, $function_img-h, scale-down);
+
+      box-sizing: content-box;
+      padding-top: 40px;
+      padding-bottom: 10px;
+    }
+
+    .card_title{
+      font-size: $function_txt-size;
+      color: $function_txt-col;
+    }
+  }
+}

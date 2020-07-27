@@ -1,0 +1,830 @@
+  <!-- <link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public.css"> -->
+  <!-- <link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css"> -->
+  <!--页面自定义样式-->
+  <link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_special_twostudies_list.css">
+  <link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_notes.css">
+
+  <style>
+        .edu_notes_left{
+            margin-top: 20px;
+            width:70%;
+            height:100%;
+            background:rgba(255,255,255,1);
+            box-shadow:0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+            border-radius:12px;
+            margin: 20px;
+            margin-top: 40px;
+        }
+        .edu_notes_line{
+            width:100%;
+            height:1px;
+            background:rgba(222,222,222,1);
+            margin-top: 18px;
+        }
+        .edu_original{
+            width:100%;
+            height:128px;
+            background:rgba(245,245,245,1);
+            border-radius:10px;
+            margin-top: 23px;
+        }
+        .edu_notes_right {
+            margin-top: 40px;
+            margin-right: 20px;
+        }
+    </style>
+ <div class="public_content">
+    <div class="edu_con_special clearfix">
+      <div class="pull-left edu_con_special_tu1">
+        <img src="{$topic_data.topic_img}">
+      </div>
+       <div class="pull-right edu_con_special_right">
+          <div class="clearfix">
+            <div class="pull-left special_right_tit">{$topic_data.topic_title}</div>
+            <div class="pull-right special_right_bg">
+              进行中
+            </div>
+          </div>
+          <p>{$topic_data.memo}</p>
+          <!-- 进度条开始 -->
+          <div class="clearfix special_right_progress">
+            <li>
+              <div class="clearfix special_right_progress_tit">
+                <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_learn.png"></div>
+                <div class="pull-left ml-5">{$learn_data.article.learn_rate}%</div>
+              </div>              
+            <div class="layui-progress">
+            <div class="layui-progress-bar bg-color-ff4040" lay-percent="{$learn_data.article.learn_rate}%"></div>
+          </div>            
+              <div class="special_right_progress_con">共{$learn_data.article.num}篇文章，已学习{$learn_data.article.learn}篇</div>
+            </li>
+            <li>
+              <div class="clearfix special_right_progress_tit">
+                <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_video.png"></div>
+                <div class="pull-left ml-5">{$learn_data.video.learn_rate}%</div>
+              </div>              
+            <div class="layui-progress">
+            <div class="layui-progress-bar bg-color-376BF5" lay-percent="{$learn_data.video.learn_rate}%"></div>
+          </div>            
+              <div class="special_right_progress_con">共{$learn_data.video.num}部视频，已学习{$learn_data.video.learn}部</div>
+            </li>
+            <li>
+              <div class="clearfix special_right_progress_tit">
+                <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_notes.png"></div>
+                <div class="pull-left ml-5">{$learn_data.notes.learn_rate}%</div>
+              </div>              
+            <div class="layui-progress">
+            <div class="layui-progress-bar bg-color-A144FE" lay-percent="{$learn_data.notes.learn_rate}%"></div>
+          </div>            
+              <div class="special_right_progress_con">已写{$learn_data.learn.learn}次</div>
+            </li>
+            <li>
+              <div class="clearfix special_right_progress_tit">
+                <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/edu_special_exam.png"></div>
+                <div class="pull-left ml-5">{$learn_data.exam.learn_rate}%</div>
+              </div>              
+            <div class="layui-progress">
+            <div class="layui-progress-bar bg-color-FE9C44" lay-percent="{$learn_data.exam.learn_rate}%"></div>
+          </div>            
+              <div class="special_right_progress_con">共{$learn_data.exam.num}次考试，已考试{$learn_data.exam.learn}次</div>
+            </li>
+            
+          </div>
+          <!-- 进度条结束 -->
+       </div>
+    </div>
+  <!---------------------------------列表样式--------------------------------------------->
+    <div class="edu_special_list">
+      <div class="special_list_tit">欢迎来到{$topic_data.topic_title}</div>
+      <div class="special_list_des"><!-- 张悦党员您在“两学一做”专题学习了123天，共学习了12篇文章、24部视、完成2次考试希望您加油完成专题学习任务 -->
+        {$content}
+      </div>
+      <!-- table切换 -->
+      <div class="special_list_tab">
+      <ul class="" id="tabBox2">
+          <li class="mt-5em mb-5em tabBox2-active" num="1">
+            <a>文章学习</a>
+          </li>
+          <li class="mt-5em mb-5em" num="2">
+            <a>视频学习</a>
+          </li>
+          <li class="mt-5em mb-5em" num="3">
+            <a>学习笔记</a>
+          </li>
+          <li class="mt-5em mb-5em" num="4">
+            <a>考试中心</a>
+          </li>
+      </ul>
+    </div>
+       </div>
+       <!-------------------------------文章学习----------------------------------------->
+       <div id="list_article" class="">
+           <div class="di-f pt-50">
+             <volist name="material_article" id="vo">
+                <div class="center-text flex" onclick="ipam_material_info('{$vo.material_id}')">
+                    <img class="w-140 h-200 bor-ra-10" src="__STATICS__/apps/page_portal/portal/images/index_book2.jpg">
+                    <p class="fcolor-33 fsize-20 pt-25" title="{$vo.material_title}">{$vo.material_title_q}</p>
+                    <p class="fcolor-66 fsize-14 pt-10 pb-15">浏览量：{$vo.read_num}次</p>
+                    <div class="bor-learn lh-22 w-100 center">
+                        <span class="fcolor-learn fweight-400">开始学习</span>
+                    </div>
+                </div>
+              </volist>
+                </div>
+    </div>
+     <!-------------------------------视频学习----------------------------------------->
+    <div id="list_video" class="di-n">
+          <div class="">
+             <volist name="material_vedio" id="vo">
+              <div class="w-266 di-ib ml-25 mt-40" onclick="ipam_material_videoInfo('{$vo.material_id}')">
+                  <div class="video-card po-re">
+                      <img class="w-266 h-150" src="{$vo.material_thumb}" style="width:266px;height:150px;">
+                      <div class="video-time lh-20 pl-10 pr-10 po-ab top-110 left-15">
+                          <span class="fcolor-white fsize-14">0{$vo.video_duration}：00</span>
+                      </div>
+                      <div class="p-15 clearfix">
+                          <div class="w-230 lh-26">
+                              <div class="bor-ra-5 bg-study lh-20 w-50 di-ib center">
+                                  <span class="fsize-12 fcolor-white">学习</span>
+                              </div>
+                              <span class="fsize18 fcolor-33 article_over_two" style="height: 3.3rem;"> {$vo.material_title}</span>
+                          </div>
+                          <span class="fsize-12 fcolor-99 pt-10 pull-right">浏览量：{$vo.read_num}次</span>
+                      </div>
+                  </div>
+              </div>
+              </volist>
+          </div>
+    </div>
+     <!-------------------------------学习笔记----------------------------------------->
+    <div id="list_notes" class="di-n">
+          <div class="clearfix">
+              <!-- 左侧 ------------------------------------------------------------>
+              <div class="edu_notes_left pull-left">
+                  <div class="clearfix">
+                      <div class="pull-left edu_notes_tit">文章笔记</div>
+                      <div class="pull-right edu_notes_edit">
+                          <img src="__STATICS__/apps/page_portal/portal/images/biji.png">
+                          新建笔记
+                      </div>
+                  </div>
+                  <div class="edu_notes_line"></div>
+                  <!-- 日历开始 -->
+                  <div id="test2">
+                      <div class="next_year"></div>
+                  </div>
+
+                  <span id="testView"></span>
+                  <!-- 日历结束 -->
+                  <!-- 笔记内容 ------------------------------------->
+
+                  <!-- 文章笔记笔记样式 ------------>
+                  <div class="edu_notes_con" id="edu_notes_con">
+                      <!-- <li class="clearfix">
+                          <div class="pull-left edu_notes_l">
+                              <div class="notes_article_bg">
+                                  20
+                              </div>
+                              <div class="dotted_line"></div>
+                              <img class="article_bg" src="__STATICS__/apps/page_portal/portal/images/icon_article.png">
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">注意：文章、视频、日常、会议笔记样式都在此页面</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+                              <div class="clearfix edu_original">
+                                  <div class="pull-left">
+                                      <div class="edu_original_tit">习近平主持召开解决“两不愁三保障”突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决</div>
+                                      <div class="edu_original_type">文章详情</div>
+                                  </div>
+                                  <div class="pull-right edu_original_r">
+                                      <img src="__STATICS__/apps/page_portal/portal/images/2.png">
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="clearfix">
+                          <div class="pull-left edu_notes_l">
+                              <div class="notes_article_bg">
+                                  20
+                              </div>
+                              <div class="dotted_line"></div>
+                              <img class="article_bg" src="__STATICS__/apps/page_portal/portal/images/icon_article.png">
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">如何避免脱贫人群再返贫的困境?如何杜绝数字脱贫?</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+                              <div class="clearfix edu_original">
+                                  <div class="pull-left">
+                                      <div class="edu_original_tit">习近平主持召开解决“两不愁三保障”突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决</div>
+                                      <div class="edu_original_type">文章详情</div>
+                                  </div>
+                                  <div class="pull-right edu_original_r">
+                                      <img src="__STATICS__/apps/page_portal/portal/images/2.png">
+                                  </div>
+                              </div>
+                          </div>
+                      </li> -->
+                  </div>
+                  <!-- 视频笔记笔记样式 ------------------------------------------------------------->
+                  <!-- <div class="edu_notes_con">
+                      <li class="clearfix">
+                          <div class="pull-left edu_notes_l">
+                              <div class="notes_video_bg">
+                                  7
+                              </div>
+                              <div class="dotted_line"></div>
+                              <img class="article_bg" src="__STATICS__/apps/page_portal/portal/images/icon_video.png">
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">这里是视频笔记样式!!!</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+                              <div class="clearfix edu_original">
+                                  <div class="pull-left">
+                                      <div class="edu_original_tit">习近平主持召开解决“两不愁三保障”突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决</div>
+                                      <div class="edu_original_type">文章详情</div>
+                                  </div>
+                                  <div class="pull-right edu_original_r">
+                                      <img src="__STATICS__/apps/page_portal/portal/images/2.png">
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="clearfix">
+                          <div class="pull-left edu_notes_l">
+                              <div class="notes_video_bg">
+                                  7
+                              </div>
+                              <div class="dotted_line"></div>
+                              <img class="article_bg" src="__STATICS__/apps/page_portal/portal/images/icon_video.png">
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">如何避免脱贫人群再返贫的困境?如何杜绝数字脱贫?</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+                              <div class="clearfix edu_original">
+                                  <div class="pull-left">
+                                      <div class="edu_original_tit">习近平主持召开解决“两不愁三保障”突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决</div>
+                                      <div class="edu_original_type">文章详情</div>
+                                  </div>
+                                  <div class="pull-right edu_original_r">
+                                      <img src="__STATICS__/apps/page_portal/portal/images/2.png">
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+
+                  </div> -->
+                  <!-- 日常笔记笔记样式 ------------------------------------------------------------->
+                 <!--  <div class="edu_notes_con">
+                      <li class="clearfix">
+                          <div class="pull-left notes_daily_l">
+                              <div class="notes_daily_bg">
+                                  15
+                              </div>
+                              <div class="dotted_line"></div>
+
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">这里是日常笔记样式!!!</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+
+                          </div>
+                      </li>
+                      <li class="clearfix">
+                          <div class="pull-left notes_daily_l">
+                              <div class="notes_daily_bg">
+                                  15
+                              </div>
+                              <div class="dotted_line"></div>
+
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">如何避免脱贫人群再返贫的困境?如何杜绝数字脱贫?</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+
+                          </div>
+                      </li>
+
+                  </div> -->
+                  <!-- 会议笔记笔记样式 ------------------------------------------------------------->
+                  <!-- <div class="edu_notes_con">
+                      <li class="clearfix">
+                          <div class="pull-left edu_notes_l">
+                              <div class="notes_meeting_bg">
+                                  30
+                              </div>
+                              <div class="dotted_line"></div>
+                              <img class="article_bg" src="__STATICS__/apps/page_portal/portal/images/icon_meeting.png">
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">这里是会议笔记样式!!!</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+                              <div class="clearfix edu_original">
+                                  <div class="pull-left">
+                                      <div class="edu_original_tit">习近平主持召开解决“两不愁三保障”突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决</div>
+                                      <div class="edu_original_type">文章详情</div>
+                                  </div>
+                                  <div class="pull-right edu_original_r">
+                                      <img src="__STATICS__/apps/page_portal/portal/images/2.png">
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="clearfix">
+                          <div class="pull-left edu_notes_l">
+                              <div class="notes_meeting_bg">
+                                  30
+                              </div>
+                              <div class="dotted_line"></div>
+                              <img class="article_bg" src="__STATICS__/apps/page_portal/portal/images/icon_meeting.png">
+                          </div>
+                          <div class="pull-left edu_notes_r">
+                              <div class="edu_notes_r_tit white-space">如何避免脱贫人群再返贫的困境?如何杜绝数字脱贫?</div>
+                              <div class="edu_notes_r_des white-space">为深入学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神。</div>
+                              <div class="clearfix edu_original">
+                                  <div class="pull-left">
+                                      <div class="edu_original_tit">习近平主持召开解决“两不愁三保障”突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决突出问题习近平主持召开解决习近平主持召开解决</div>
+                                      <div class="edu_original_type">文章详情</div>
+                                  </div>
+                                  <div class="pull-right edu_original_r">
+                                      <img src="__STATICS__/apps/page_portal/portal/images/2.png">
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                  </div> -->
+            <div id="news_page"></div>
+
+              </div>
+              <!-- 右侧 ------------------------------------------------------------->
+              <div class="edu_notes_right pull-right">
+                  <!-- 整月日历 -->
+                  <div class="edu_calendar">
+                      <div class="edu_calendar_tit">日历</div>
+                      <div class="edu_calendar_line"></div>
+                      <div id="test3"></div>
+                      <span id="testView3"></span>
+                      <div class="this_week"></div>
+                  </div>
+
+                  <!-- 分类筛选 -->
+                  <div class="edu_assort clearfix">
+                      <div class="edu_assort_tit">分类筛选</div>
+                      <ul>
+                          <li onclick="notes_type()" class="edu_assort_active">全部</li>
+                          <li onclick="notes_type('1','21')">视频笔记</li>
+                          <li onclick="notes_type('1','11')">文章笔记</li>
+                          <li onclick="notes_type('3')">日常笔记</li>
+                          <li onclick="notes_type('2')">会议笔记</li>
+                      </ul>
+                  </div>
+
+
+              </div>
+
+
+          </div>
+    </div>
+     <!-------------------------------考试中心----------------------------------------->
+    <div id="list_exam" class="di-n">
+      <div class="mt-50 w-100b clearfix">
+                <div class="w-71b pull-left video-card pb-40 ml-10 mt-10 mb-10">
+                    <div class="bb-solid w-100b lh-40">
+                        <p class="fsize-18 fcolor-33 fweight-500 pl-20">考试中心</p>
+                    </div>
+                    <div id="content">
+                      
+                    </div>
+                </div>
+                <div class="w-25b pull-right video-card  mr-10 mt-10 mb-10">
+                    <div class="w-100b lh-40">
+                        <p class="fsize-18 fcolor-33 fweight-500 pl-20">分类筛选</p>
+                        <div class="pl-20 pr-20 pb-20">
+                            <ul class="" id="typeBox">
+                                <li class="type-active"  onclick="exam_all(1)">
+                                    <a>正式考试</a>
+                                </li>
+                                <li onclick="exam_all(3)">
+                                    <a>模拟考试</a>
+                                </li>
+                                
+                                <li class="" onclick="exam_all(2)">
+                                    <a>我的考试</a>
+                                </li>
+                                <li >
+                                    <a>全部</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <input type="hidden" id="notes_type" value="">
+    <input type="hidden" id="material_cat_type" value="">
+    <input type="hidden" id="time" value="">   
+  </div>
+  <!-- 内容区域结束 -->
+    <!--自定义js-->
+  <script src="__STATICS__/apps/page_portal/portal/js/ipam_home_public.js"></script>
+  <script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/edu_special_twostudies_list.js"></script>
+  <script>
+    function info_exam_already(id){
+      window.location.href="{:U('Edu/ipam_exam_attent_already')}?exam_id="+id+"";
+    }
+    function ipam_material_info(id){
+      window.location.href = "{:U('Edu/ipam_material_info')}?material_id="+id+""
+    }
+    function ipam_material_videoInfo(id){
+      window.location.href = "{:U('Edu/ipam_material_videoInfo')}?material_id="+id+""
+    }
+    //注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
+    layui.use('element', function () {
+      var element = layui.element;
+    });
+    function notes_type(type,cat_id){
+      $('#notes_type').val(type);
+      $('#material_cat_type').val(cat_id);
+      //分页
+      layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        var count = '';
+        var time = $('#time').val();
+        $.ajax({
+          type : "post",
+          url : "{:U('Index/Edu/getnoteCount')}",
+          data :{notes_type:type, material_cat_type:cat_id,time:time},
+          async:false,
+          success: function (data) {
+            count = data;
+          }
+        });
+        //完整功能
+        if (count === 0) {
+            alert('暂无数据');
+        } else {
+          laypage.render({
+            elem: 'news_page'
+            ,count: count
+            ,theme: '#ff3032'
+            ,first: '首页'
+            ,last: '尾页'
+            ,limit: 10
+            ,layout: ['count', 'prev', 'page', 'next', 'skip']
+            ,jump: function(obj){
+              $.ajax({
+                  type : "post",
+                  url : "{:U('Index/Edu/getnoteList')}",
+                  data :{ page:obj.curr, pagesize:obj.limit,notes_type:type,material_cat_type:cat_id,time:time},
+                  datatype: "json",
+                  success: function (data) {
+                    $('#edu_notes_con').html(data.content);
+                    // 查看详情验证登陆
+                    $(".see-details").click(function (e) {
+                      var flag = false;
+                      $.ajax({
+                        type: "POST",
+                        url: "{:U('Index/check_login')}",
+                        async:false,
+                        success: function(data){
+                          flag = data;
+                        }
+                      });
+                      if(flag == true){
+                        location.href = "{:U('Index/Index/login')}";
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    });
+                  }
+              });
+            }
+          });
+        }
+      });
+    }
+  </script>
+  <script>
+    function info_exam(id,is_exam){
+      window.location.href="{:U('Edu/ipam_exam_attent')}?exam_id="+id+"&is_exam="+is_exam+"";
+    }
+    exam_all(1)
+    function exam_all(is_id){
+          layui.use('laypage', function(){
+          var laypage = layui.laypage;
+          var count1 = '';
+          //完整功能
+          $.ajax({
+              type: "POST",
+              data:{'value':is_id},
+              url: "{:U('Edu/ipam_exam_count_ajax')}",
+              async:false,
+              success: function(data){
+                 count1 = data;
+              }
+          });
+          if (count1 === 0) {
+              alert('暂无数据');
+          } else {
+              laypage.render({
+                  elem: 'news_page'
+                  ,count: count1
+                  ,theme: '#ff3032'
+                  ,first: '首页'
+                  ,last: '尾页'
+                  ,limit: 10
+                  ,layout: [ "count",'prev', 'page', 'next', 'skip']
+                  ,jump: function(obj){
+                      $.ajax({
+                          type : "get",
+                          url : "{:U('Index/Edu/getexamList_data')}",
+                          data :{ is_exam:is_id,page:obj.curr, pagesize:obj.limit},
+                          datatype: "json",
+                          success: function (data) {
+                              $('#content').html(data.content);
+                              // 查看详情验证登陆
+                              $(".see-details").click(function (e) {
+                                var flag = false;
+                                 $.ajax({
+                                       type: "POST",
+                                       url: "{:U('Index/check_login')}",
+                                       async:false,
+                                       success: function(data){
+                                         flag = data;
+                                       }
+                                   });
+                                 if(flag == true){
+                                   location.href = "{:U('Index/Index/login')}";
+                                   return false;
+                                 } else {
+                                   return true;
+                                 }
+                              });
+                          }
+                      });
+                     
+                  }
+              });
+          }
+
+      });
+    }
+  </script>
+ <script>
+/*---------------------------------test2年份日历组件--------------------------------------------------*/
+laydate.render({
+  elem: '#test2'
+  ,lang: 'cn'
+  ,position: 'static'
+  ,type: 'month' 
+  ,format: 'M月' //日期组合方式 可任意组合
+  ,isInitValue: true //是否允许填充初始值，默认为 true
+  ,show: true //直接显示
+  ,position: 'static'
+  ,showBottom: false//是否显示底部栏
+   //一、控件初始打开的回调
+  ,ready: function(date){     
+    //lay('#testView').html(1);//切换日期时显示的值  
+    var next_year=$(".laydate-set-ym span:first-child").html();
+    $(".next_year").html(parseInt(next_year)+1+"年");
+  }
+  //二、日期时间被切换后的回调
+  ,change: function(value, date, endDate){
+    var next_year=$(".laydate-set-ym span:first-child").html();
+    $(".next_year").html(parseInt(next_year)+1+"年");
+    var time = date.year+"-"+date.month+"-"+date.date;;
+    $('#time').val(time);
+    var material_cat_type = $('#material_cat_type').val();
+    var notes_type = $('#notes_type').val();
+    layui.use('laypage', function(){
+      var laypage = layui.laypage;
+      var count = '';
+      $.ajax({
+        type : "post",
+        url : "{:U('Index/Edu/getnoteCount')}",
+        data :{notes_type:notes_type, material_cat_type:material_cat_type,time:time,time_type:1},
+        async:false,
+        success: function (data) {
+          count = data;
+        }
+      });
+      //完整功能
+      if (count === 0) {
+          alert('暂无数据');
+      } else {
+        laypage.render({
+          elem: 'news_page'
+          ,count: count
+          ,theme: '#ff3032'
+          ,first: '首页'
+          ,last: '尾页'
+          ,limit: 10
+          ,layout: ['count', 'prev', 'page', 'next', 'skip']
+          ,jump: function(obj){
+            $.ajax({
+                type : "post",
+                url : "{:U('Index/Edu/getnoteList')}",
+                data :{ page:obj.curr, pagesize:obj.limit,notes_type:notes_type,material_cat_type:material_cat_type,time:time,time_type:'1'},
+                datatype: "json",
+                success: function (data) {
+                  $('#edu_notes_con').html(data.content);
+                  // 查看详情验证登陆
+                  $(".see-details").click(function (e) {
+                    var flag = false;
+                    $.ajax({
+                      type: "POST",
+                      url: "{:U('Index/check_login')}",
+                      async:false,
+                      success: function(data){
+                        flag = data;
+                      }
+                    });
+                    if(flag == true){
+                      location.href = "{:U('Index/Index/login')}";
+                      return false;
+                    } else {
+                      return true;
+                    }
+                  });
+                }
+            });
+          }
+        });
+      }
+    });
+  }
+});
+/*---------------------------------test3整月日历组件--------------------------------------------------*/
+laydate.render({
+  elem: '#test3'
+  ,lang: 'cn'
+  ,position: 'static'
+  //,min: -4 //5天前
+  //,max: 0 //7天后
+  ,type: 'date' 
+  ,format: 'M月d日' //日期组合方式 可任意组合
+  //传入Date对象给初始值
+  //,value: '2018-08-18' //参数即为：2018-08-20 20:08:08 的时间戳
+  ,isInitValue: true //是否允许填充初始值，默认为 true
+  ,show: true //直接显示
+  ,position: 'static'
+    ,showBottom: false//是否显示底部栏
+   //一、控件初始打开的回调
+  ,ready: function(date){           
+      //得到初始的日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+      //显示周几
+    var this_week=date.month+'/'+date.date+'/'+date.year;     
+    var day = new Date(Date.parse(this_week)); 
+    var today = new Array('周日','周一','周二','周三','周四','周五','周六');  
+    var week = today[day.getDay()];  
+    //显示几月几号 
+    var how_months=date.month+'月'+date.date+'日';
+    $(".this_week").html(how_months+'('+week+')');
+    var count = {$count};
+    //分页
+    layui.use('laypage', function(){
+      var laypage = layui.laypage;
+      //完整功能
+      if (count === 0) {
+          alert('暂无数据');
+      } else {
+        laypage.render({
+          elem: 'news_page'
+          ,count: count
+          ,theme: '#ff3032'
+          ,first: '首页'
+          ,last: '尾页'
+          ,limit: 10
+          ,layout: ['count', 'prev', 'page', 'next', 'skip']
+          ,jump: function(obj){
+            $.ajax({
+                type : "post",
+                url : "{:U('Index/Edu/getnoteList')}",
+                data :{ page:obj.curr, pagesize:obj.limit},
+                datatype: "json",
+                success: function (data) {
+                  $('#edu_notes_con').html(data.content);
+                  // 查看详情验证登陆
+                  $(".see-details").click(function (e) {
+                    var flag = false;
+                    $.ajax({
+                      type: "POST",
+                      url: "{:U('Index/check_login')}",
+                      async:false,
+                      success: function(data){
+                        flag = data;
+                      }
+                    });
+                    if(flag == true){
+                      location.href = "{:U('Index/Index/login')}";
+                      return false;
+                    } else {
+                      return true;
+                    }
+                  });
+                }
+            });
+          }
+        });
+      }
+    });
+  }
+  //二、日期时间被切换后的回调
+  ,change: function(value, date, endDate){
+    $("#test2 #layui-laydate1").remove();   
+    var date_month=date.month+'月';
+    console.log(date_month);//当前月份
+    var time = date.year+"-"+date.month+"-"+date.date;;
+    $('#time').val(time);
+    var material_cat_type = $('#material_cat_type').val();
+    var notes_type = $('#notes_type').val();
+    layui.use('laypage', function(){
+      var laypage = layui.laypage;
+      var count = '';
+      $.ajax({
+        type : "post",
+        url : "{:U('Index/Edu/getnoteCount')}",
+        data :{notes_type:notes_type, material_cat_type:material_cat_type,time:time},
+        async:false,
+        success: function (data) {
+          count = data;
+        }
+      });
+      //完整功能
+      if (count === 0) {
+          alert('暂无数据');
+      } else {
+        laypage.render({
+          elem: 'news_page'
+          ,count: count
+          ,theme: '#ff3032'
+          ,first: '首页'
+          ,last: '尾页'
+          ,limit: 10
+          ,layout: ['count', 'prev', 'page', 'next', 'skip']
+          ,jump: function(obj){
+            $.ajax({
+                type : "post",
+                url : "{:U('Index/Edu/getnoteList')}",
+                data :{ page:obj.curr, pagesize:obj.limit,notes_type:notes_type,material_cat_type:material_cat_type,time:time},
+                datatype: "json",
+                success: function (data) {
+                  $('#edu_notes_con').html(data.content);
+                  // 查看详情验证登陆
+                  $(".see-details").click(function (e) {
+                    var flag = false;
+                    $.ajax({
+                      type: "POST",
+                      url: "{:U('Index/check_login')}",
+                      async:false,
+                      success: function(data){
+                        flag = data;
+                      }
+                    });
+                    if(flag == true){
+                      location.href = "{:U('Index/Index/login')}";
+                      return false;
+                    } else {
+                      return true;
+                    }
+                  });
+                }
+            });
+          }
+        });
+      }
+    });
+    /////////////////////////////////////////////////////////////初始化test2
+    laydate.render({
+      elem: '#test2'
+      ,lang: 'cn'
+      ,position: 'static'
+      ,type: 'month'    
+      ,format: 'M月' //日期组合方式 可任意组合
+      ,isInitValue: true //是否允许填充初始值，默认为 true
+      ,value: date_month
+      ,show: true //直接显示
+      ,position: 'static'
+        ,showBottom: false//是否显示底部栏
+       //一、控件初始打开的回调
+      ,ready: function(date){   
+     // alert(date.date)  
+          //lay('#testView').html(1);//切换日期时显示的值  
+          var next_year=$(".laydate-set-ym span:first-child").html();
+          $(".next_year").html(parseInt(next_year)+1+"年");
+      }
+      //二、日期时间被切换后的回调
+      ,change: function(value, date, endDate){
+       // alert(date.date)
+        var next_year=$(".laydate-set-ym span:first-child").html();
+        $(".next_year").html(parseInt(next_year)+1+"年");
+      }
+    });
+  }
+});
+/*---------------------------------其它--------------------------------------------------*/ 
+$(".edu_assort li").click(function(){
+  $(this).addClass("edu_assort_active");
+  $(".edu_assort li").not($(this)).removeClass("edu_assort_active");
+})
+</script>

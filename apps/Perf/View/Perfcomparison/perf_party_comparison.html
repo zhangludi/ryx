@@ -1,0 +1,162 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+		<div class="page-container">
+			<div class="page-content-wrapper">
+				<div class="page-content">
+					<!-- 此处向上为页面容器 -->
+					<!--页面标题-->
+					<div class="row">
+						<div class="col-xs-10 h-50 lh-50 fcolor-333 fizie-16">
+							<i class="iconfont font-blue">&#xe631;</i>
+							<php>echo getFunctionInfo(ACTION_NAME);</php>
+						</div>
+					</div>
+					<!-- 页面标题结束-->
+					<div class="portlet light  bordered">
+						  <div class="form-group col-md-3">
+                                    <div class="row">
+                                        <label class="control-label col-md-4 p-0 lh-35">月份选择：
+                                        </label>
+                                        <div class="col-md-8  p-0">
+                                        	<form action="pf_party_comparison.html" id="form" method="post">
+                                            <select name="time"class="form-control  select2 ">
+                                                <option value="0">请选择</option>
+                                                <volist name="luna" id="v">
+														<option <eq name="v.0" value="$time">selected</eq>  <if condition="$v.0 gt $date">disabled</if> value="{$v.0}">{$v.1}</option>
+												</volist>
+                                            </select>
+                                            </form>
+                                        </div>
+                                    </div> 
+                                </div>
+						<div class="portlet-body">
+								 <div class="row">
+                                <div class="col-md-12">
+                                    <!-- BEGIN CHART PORTLET-->
+                                    <div class="portlet light bordered">
+                                        <div class="portlet-body">
+                                            <div id="chart_5" class="chart" style="height: 400px;"> </div>
+                                            <div class="well margin-top-20">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label class="text-left">最大半径:</label>
+                                                        <input class="chart_5_chart_input" data-property="topRadius" type="range" min="0" max="1.5" value="1" step="0.01" /> </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="text-left">角度:</label>
+                                                        <input class="chart_5_chart_input" data-property="angle" type="range" min="0" max="89" value="30" step="1" /> </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="text-left">深度:</label>
+                                                        <input class="chart_5_chart_input" data-property="partyh3D" type="range" min="1" max="120" value="40" step="1" /> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END CHART PORTLET-->
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<!-- 表格结束 -->
+					<div class="clearfix mt-50"></div>
+					<!-- end -->
+				</div>
+				<!-- END CONTENT BODY -->
+			</div>
+			<!-- END CONTENT -->
+		</div>
+	</block>
+	<block name="js">
+        <script>
+      var ChartsAmcharts = function() {
+         var initChartSample5 = function() {
+        var chart = AmCharts.makeChart("chart_5", {
+            "theme": "light",
+            "type": "serial",
+            "startDuration": 2,
+
+            "fontFamily": 'Open Sans',
+            
+            "color":    '#888',
+
+            "dataProvider": [
+            <volist name="party_per" id="v">	
+            {
+                "country": "{$v.party_name}",
+                "visits": "{$v.per_sum}",
+                "color": "#{$v.color}"
+            },
+            </volist>
+            ],
+            "valueAxes": [{
+                "position": "left",
+                "axisAlpha": 0,
+                "gridAlpha": 0
+            }],
+            "graphs": [{
+                "balloonText": "[[category]]: <b>[[value]]</b>",
+                "colorField": "color",
+                "fillAlphas": 0.85,
+                "lineAlpha": 0.1,
+                "type": "column",
+                "topRadius": 1,
+                "valueField": "visits"
+            }],
+            "partyh3D": 40,
+            "angle": 30,
+            "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+            },
+            "categoryField": "country",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "gridAlpha": 0
+
+            },
+            "exportConfig": {
+                "menuTop": "20px",
+                "menuRight": "20px",
+                "menuItems": [{
+                    "icon": '/lib/3/images/export.png',
+                    "format": 'png'
+                }]
+            }
+        }, 0);
+
+        jQuery('.chart_5_chart_input').off().on('input change', function() {
+            var property = jQuery(this).data('property');
+            var target = chart;
+            chart.startDuration = 0;
+
+            if (property == 'topRadius') {
+                target = chart.graphs[0];
+            }
+
+            target[property] = this.value;
+            chart.validateNow();
+        });
+
+        $('#chart_5').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+       return {
+	        init: function() {
+	            initChartSample5();
+	        }
+	    };
+	 }();
+		 jQuery(document).ready(function() {    
+		   ChartsAmcharts.init(); 
+		   $(".amcharts-chart-div").remove();
+		});
+		$(function(){
+			$("select[name='time']").change(function(){
+				$("#form").submit();
+			})
+		})
+        </script>
+	</block>

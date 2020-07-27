@@ -1,0 +1,145 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"><php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php></div>
+	                        <div class="layui-form layui-card-body fitheight" style="padding-bottom: 50px;">
+	                            <div class="layui-row layui-col-space5">
+	                            	<if condition="$cat_id neq '14'">
+		                                <div class="layui-col-xs1 text-r lh-40">
+		                                    类型名称：
+		                                </div>
+		                                <div class="layui-col-xs3 ">
+		                                    <input class="layui-input" name="cat_name" id="cat_name" autocomplete="off" placeholder="请输入类型名称">
+		                                </div>
+		                            </if>
+	                                <input type="hidden" class="layui-input" name="cat_id" id="cat_id" value="{$cat_id}">
+	                                <div class="layui-col-xs3 pull-right">
+	                                	<if condition="$cat_id neq '14'">
+	                                		<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                                	</if>
+	                                	<if condition="$type eq '1'">  <!-- 判断是否未三务公开 -->
+                                			<a class="layui-btn table-add " href="{:U('cms_affairs_cat_edit',array(type=>$type))}" style="text-decoration: none;" title="添加">添加</a>
+                                		<else/>
+                                			<if condition="$cat_id neq '14'">  <!-- 判断是否便民服务 -->
+                                				<a class="layui-btn table-add "  data-type="add"   style="text-decoration: none;" title="添加">添加</a>
+                                			</if>
+	                                	</if>
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+	                            </table>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+<script>
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+		// 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: '{:U("Cmsarticle/cms_article_cat_index_data")}?cat_id={$cat_id}'
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                	{field: 'cat_id', width: 80, title: '编号', sort: true}
+                	, {field: 'cat_name', title: '类型名称'}
+                    , {field: 'add_staff', title: '操作人'}
+                    , {field: 'add_time', width: 200, title: '添加时间'}
+                    , {field: 'operate', width: 220, title: '操作'}
+                ]]
+                , page: false
+            });
+
+            var $ = layui.$, active = {
+		        reload: function(){
+		            var cat_name = $('#cat_name').val();
+		            var cat_id = $('#cat_id').val();
+			      	table.reload('ztreedata', {
+				        page: {
+				          curr: 1 
+				        }
+				        ,where: {
+				        	"cat_name": cat_name,
+				        	"cat_id": cat_id
+				        }
+			      	});
+		        },
+		        add: function(){
+		        	var index = layer.open({
+                        type: 2,
+                        title: false,
+                        end:false,
+                        closeBtn: 0,
+                        shift: 1,
+                        area : ['800px' , '400px'],
+                        content: "{:U('cms_article_cat_edit')}",
+                    });
+                    layer.full(index);
+		        }
+		    };
+		    $('.layui-form .layui-btn').on('click', function(){
+			    var type = $(this).data('type');
+			    active[type] ? active[type].call(this) : '';
+			});
+        });
+    })
+</script>
+<script>
+	function edit_pid(cat_id){
+		var index = layer.open({
+            type: 2,
+            title: false,
+            end:false,
+            closeBtn: 0,
+            shift: 1,
+            area : ['800px' , '400px'],
+            content: "{:U('cms_article_cat_edit')}?cat_pid="+cat_id+"",
+        });
+        layer.full(index);
+	}
+	function edit_id(cat_id){
+		var index = layer.open({
+            type: 2,
+            title: false,
+            end:false,
+            closeBtn: 0,
+            shift: 1,
+            area : ['800px' , '400px'],
+            content: "{:U('cms_article_cat_edit')}?cat_id="+cat_id+"",
+        });
+        layer.full(index);
+	}
+
+
+
+
+    //时间选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //常规用法
+        laydate.render({
+            elem: '#time',
+            range: true
+        });
+    })
+</script>
+</block>

@@ -1,0 +1,206 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+	#js-grid-juicy-projects{
+	    margin-left: 0% !important;
+	}
+	#js-grid-juicy-projects2{
+	    margin-left: 0% !important;
+	} 
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card layui-form">
+				<div class="layui-card-header">
+					<div class="layui-col-xs6">
+					{:getFunctionInfo(ACTION_NAME)}
+					</div>
+					<div class="layui-col-xs6 text-r">
+					<button onclick="layer_colse();" class="layui-btn layui-btn-primary layui-btn-sm">返回</button>
+					</div>
+				</div>
+				<div class="layui-card-body">
+					<div class="layui-row">
+						<div class="layui-col-xs12">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>公文主题：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35"><span>{$missive_row.missive_title}</span></div>
+							</div>
+						</div>
+						<div class="layui-col-xs12">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>收件人：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35"><span>{$missive_row.missive_receiver}</span></div>
+							</div>
+						</div>
+						<div class="layui-col-xs12">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>公文内容：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66  lh-35">
+									{$missive_row.missive_content}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35 ">
+									<div id="js-grid-juicy-projects2" class="cbp" style="height:100px">
+										<neq name="missive_row.missive_attach" value="">
+											<php>echo getUploadHtml($missive_row['missive_attach'],'40');</php>
+										</neq>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs6">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>拟稿人：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35"><span>{:getStaffInfo($missive_row[missive_communist])}</span></div>
+							</div>
+						</div>
+						<div class="layui-col-xs6">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>所在部门：</strong></div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35"><span>{:getDeptInfo(getStaffInfo($missive_row[missive_communist],'staff_dept_no'))}</span></div>
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<eq name="type" value='2'>
+		<div class="layui-col-md12">
+			<div class="layui-card layui-form">
+				<div class="layui-card-header">阅读人员</div>
+				<div class="layui-card-body">
+					<div class="layui-row">
+						<volist name="sign_communist_arr" id="vo">
+						<div class="layui-col-xs12">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35">
+								<div class="prosess-item-pic">
+									<img src="__STATICS__/public/images/demopage/thumb-3.jpg" style="border-radius: 50%;" width="40">
+								</div>
+								</div>
+								<div class="layui-col-xs8 fsize-14 fcolor-66 lh-35">
+								<span>{$vo.sign_communist}</span>
+								<span>{$vo.update_time}</span>
+								</div>
+							</div>
+						</div>
+						</volist>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</eq>
+		<neq name='missive_row.approval_no' value=''>
+        	<iframe name="main_iframe"  width="100%" height="800px" src="{:U('Oa/Oaapproval/oa_approval_info')}?approval_no={$missive_row.approval_no}&mode=2&url_no=Oa/Oamissive/oa_missive_index?type=2" target="_self" frameborder="0"></iframe>
+        </neq>
+	</div>
+</div>
+</block>
+<block name="js">	
+<script>
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+	}
+	layui.use(['form'], function() {
+		var $ = layui.$,
+			admin = layui.admin,
+			element = layui.element,
+			form = layui.form;
+
+		form.render(null, 'component-form-element');
+		//        element.render('breadcrumb', 'breadcrumb');
+
+		form.on('submit(component-form-element)', function(data) {
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+</script>
+<script>
+	$("#example-basic").steps({
+		headerTag: "h3",
+		bodyTag: "section",
+		transitionEffect: "slideLeft",
+		autoFocus: true
+	});
+</script>
+<!--流程图1-->
+<script>
+	$(".ystep").loadStep({
+		steps: ["发起", "审核", "募款", "执行"],
+
+		beforeChange: function(nowIndex, nextIndex) {
+
+			if(nowIndex === 1 && nextIndex === 2) {
+				return true;
+			} else if(nowIndex === 2 && nextIndex === 3) {
+				return true;
+			} else if(nowIndex === 3 && nextIndex === 4) {
+				return true;
+			}
+			return true;
+		},
+		afterChange: function(nowIndex, prevIndex) {
+
+			if(nowIndex < 1 || nowIndex > 5) return;
+
+			/*for(var i = 1; i <= 5; i++){
+			 if(i === nowIndex){
+			 $("#page"+i).css("display","block");
+			 }else{
+			 $("#page"+i).css("display","none");
+			 }
+			 }*/
+
+			if(nowIndex === 2 && prevIndex === 1) {
+
+			} else if(nowIndex === 3 && prevIndex === 2) {
+
+			} else if(nowIndex === 4 && prevIndex === 3) {
+
+			}
+		}
+	});
+	$(".ystep").setStep(3);
+	$("#prevBtn").addClass("layui-btn");
+	$("#nextBtn").addClass("layui-btn");
+</script>
+<!--流程图2-->
+<script>
+	$(function() {
+		initStep();
+	});
+
+	function initStep() {
+		$(".steps").step({
+			stepNames: ['购买', '付款', '发货', '收货', '评价', '完成'],
+			initStep: 3
+		})
+	}
+
+	function previousStep() {
+		$(".steps").step("previous");
+	}
+
+	function nextStep() {
+		$(".steps").step("next");
+	}
+
+	function gotoStep(step) {
+		$(".steps").step("goto", step)
+	}
+</script>
+</block>
+<block name="js">

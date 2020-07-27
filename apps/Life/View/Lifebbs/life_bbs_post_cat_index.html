@@ -1,0 +1,64 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                        <div class="layui-form layui-card-body fitheight">
+                            <div class="layui-row layui-col-space5">
+                                <div class="layui-col-xs2 pull-right" >
+                                    <a class="layui-btn table-add " href="{:U('Lifebbs/life_bbs_post_cat_edit')}" style="text-decoration: none;" title="添加">添加</a>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="demo"  lay-filter="demo">
+                            </table>
+                            <script type="text/html" id="operate">
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script>
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: '{:U("life_bbs_post_cat_index_data")}'
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'cat_id', width: '15%', title: '类型编号', sort: true}
+                        , {field: 'partcate', width:'30%' , title: '类型名称'}
+                        , {field: 'add_staff', width: '30%', title: '添加人'}
+                        , {field: 'operate', width:'25%' , title: '操作'}
+                    ]]
+                    , page: false
+                });
+
+                //监听表格复选框选择
+ 
+                //监听工具条
+
+            });
+        })
+    </script>
+
+
+</block>

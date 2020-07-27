@@ -1,0 +1,37 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/style/admin.css" media="all">
+</block>
+<block name="body">
+    <div class="layui-fluid" id="LAY-app-message-detail">
+        <div class="layui-card layuiAdmin-msg-detail">
+            <div class="layui-card-header">
+                <h1>{$alertmsg_data.alert_type}</h1>
+                <p>
+                    <span>{$alertmsg_data.add_time}</span>
+                </p>
+            </div>
+            <div class="layui-card-body layui-text">
+                <div class="layadmin-text">
+                	{$alertmsg_data.alert_title}
+                	<a href="http://{$http_host}{$alertmsg_data.alert_url}.html">点击跳转</a>
+                </div>
+                <div style="padding-top: 30px;">
+                    <a href="javascript:;" layadmin-event="back" class="layui-btn layui-btn-primary layui-btn-sm">返回上级</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script src="__STATICS__/plugins/jquery.min.js"></script>
+    <script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+    <script>
+    layui.config({
+        base: '__STATICS__/plugins/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+    </script>
+</block>

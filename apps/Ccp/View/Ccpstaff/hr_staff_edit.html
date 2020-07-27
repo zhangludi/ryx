@@ -1,0 +1,266 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+		#js-grid-juicy-projects{
+		    margin-left: 25% !important;
+		}
+		#js-grid-juicy-projects2{
+		    margin-left: 25% !important;
+		}
+	</style>
+</block>
+<block name="body">
+<!--<link rel="stylesheet" href="sp_demo/style/sp_public_icon.css">-->
+
+<div class="layui-fluid">
+<div class="layui-row layui-col-space10 layui-collapse layui-form" lay-filter="more" style="    margin-left: 0px;">
+	<div class="layui-col-md12">
+		<div class="layui-card layui-colla-item">
+			<div class="layui-card-header">  基本信息</div>
+			<form id="form_sample_2" action="{:U('Ccpstaff/hr_staff_do_save')}" method="post" class="form-horizontal">
+			<div class="layui-card-body layui-colla-content layui-show">
+				<div class="layui-row">
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+						<input name="recruit_no" value="{$staff.recruit_no}" type="hidden" />
+						<input type="hidden" name="staff" value="{$staff.staff_no}">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>编号：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+							<input type="text" id="staff_no" class="layui-input" required placeholder="编号" name="staff_no" value="{$staff.prefix_staff_no}"
+							<neq name="staff.prefix_staff_no" value="">readonly </neq>>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>姓名：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="staff_name" placeholder="姓名" autocomplete="off" lay-verify="required" class="layui-input" value="{$staff.staff_name}">
+							</div>
+							<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>性别：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65  ">
+								<input type="radio" name="staff_sex" value="1" title="男" <eq name="staff.staff_sex" value="1">checked</eq>>
+								<input type="radio" name="staff_sex" value="0" title="女" <neq name="staff.staff_sex" value="1">checked</neq> >
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>民族：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 ">
+								<select name="staff_nation" lay-filter="aihao" lay-search="">
+									<!-- <option value="">---请选择---</option> -->
+									{:getBdCodeSelect('communist_nation_code',$staff['staff_nation'])}
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>出生日期：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><input id="staff_birthday" type="text" name="staff_birthday" placeholder="出生日期" autocomplete="off" class="layui-input" value="{$staff.staff_birthday}"></div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>身份证号：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="staff_idnumber" placeholder="身份证号"  lay-verify="required" autocomplete="off" class="layui-input" value="{$staff.staff_idnumber}"></div>
+							<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>籍贯：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="staff_paddress" placeholder="籍贯" autocomplete="off" class="layui-input" value="{$staff.staff_paddress}"></div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>现住址：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="staff_address" placeholder="现住址" autocomplete="off" class="layui-input" value="{$staff.staff_address}"></div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>学历：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                	<select name="staff_diploma" lay-search class="  form-control  select2">
+										{:getBdCodeSelect('diploma_level_code',$staff['staff_diploma'])}
+									</select>
+								</div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>毕业院校：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="staff_school" placeholder="毕业院校" autocomplete="off" class="layui-input" value="{$staff.staff_school}"></div>
+                            </div>
+                        </div>
+						<div class="layui-col-xs6 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>专业：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="staff_specialty" placeholder="专业" autocomplete="off" class="layui-input" value="{$staff.staff_specialty}"></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>职务：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+									<select name="staff_post_no" lay-search class="  form-control  select2">
+										{:getPostSelect($staff['staff_post_no'])}
+									</select>
+								</div>
+                            </div>
+                        </div>
+						<div class="layui-col-xs6 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>部门：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <select name="staff_dept_no" lay-search class="  form-control  select2">{:getDeptSelect($staff['staff_dept_no'])}
+														</select></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
+
+	                            <input type="hidden" id="source_name" name="source_name" value="" />
+	                            <input type="hidden" id="staff_avatar_old" name="staff_avatar_old" value="{$staff.staff_avatar}" style="width: 60px">
+	                            <input type="hidden" id="staff_avatar" name="staff_avatar" value="{$staff.staff_avatar}" style="width: 60px">
+	                            <input type="hidden" class="form-control" id="material_img" name="material_img" value="{$staff.staff_avatar}">
+	                            
+	                            <button type="button" class="layui-btn" id="staff_avatar" onclick="uploader_file('staff','1','staff_avatar','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+	                             <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+	                            <div id="js-grid-juicy-projects2" style="height:100px">
+	                                <neq name="staff.staff_avatar" value="">
+	                                    <php>echo getUploadHtml($staff['staff_avatar']);</php>
+	                                </neq>
+	                            </div>
+	                        </div>
+	                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-col-md12">
+		<div class="layui-card layui-colla-item">
+			<div class="layui-card-header">联系方式</div>
+			<div class="layui-card-body layui-colla-content layui-show">
+				<div class="layui-row">
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>电话：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="staff_tel"class="layui-input"  placeholder="电话" value="{$staff.staff_tel}">
+
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>手机：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="staff_mobile"class="layui-input"  placeholder="手机" value="{$staff.staff_mobile}">
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>邮箱：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="staff_email"class="layui-input"  placeholder="邮箱" value="{$staff.staff_email}">
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-xs6 mt-10">
+						<div class="layui-row">
+							<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>QQ号：</strong></div>
+							<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+								<input type="text" name="staff_qq"class="layui-input"  placeholder="QQ号" value="{$staff.staff_qq}">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-xs12 mt-10">
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<div class="layui-footer" style="text-align: right">
+							<button class="layui-btn" id="close" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+							<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+	
+	</div>
+</block>
+<block name="js">
+<script>
+function layer_colse() {
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+}
+layui.use([ 'form', 'laydate'], function() {
+	var $ = layui.jquery
+			, admin = layui.admin
+			, element = layui.element
+			, layer = layui.layer
+			, laydate = layui.laydate
+			, form = layui.form;
+	form.render(null, 'component-form-group');
+	laydate.render({
+		elem: '#LAY-component-form-group-date'
+	});
+})
+
+//时间选择器
+layui.use('laydate', function() {
+	var laydate = layui.laydate;
+
+	//时间选择器
+	//时间选择器
+	laydate.render({
+		elem: '#staff_birthday'
+	});
+	//日期时间范围
+	laydate.render({
+		elem: '#test10_add'
+		,type: 'datetime'
+		,range: true
+	});
+})
+
+//上传文件
+layui.use('upload', function(){
+	var upload = layui.upload;
+
+	//指定允许上传的文件类型
+	upload.render({
+		elem: '#test3'
+		,url: '/upload/'
+		,accept: 'file' //普通文件
+		,done: function(res){
+			console.log(res)
+		}
+	});
+});
+
+//监听折叠
+layui.use(['element'], function() {
+	var element = layui.element;
+	var layer = layui.layer;
+	element.on('collapse(more)', function(data){
+//            layer.msg('展开状态：'+ data.show);
+	});
+});
+
+</script>
+
+</block>

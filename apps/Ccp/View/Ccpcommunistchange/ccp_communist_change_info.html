@@ -1,0 +1,401 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/process/css/ystep.css"/>
+<style type="text/css">
+	.ystep-lg li {
+    	margin-right: 0px !important;
+	}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">基本信息</div>
+                <div class="layui-card-body layui-form">
+                    <div class="layui-row">
+                    	<div class="layui-col-md12">
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>党员编号：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_data.communist_no}</span></div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>党员姓名：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_data.communist_name}</span></div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>性别：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                    <span class="di-b"><if condition="$communist_data.communist_sex eq 0 ">女<else/>男</if></span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>民族：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	<span class="di-b"><php>echo getBdCodeInfo($communist_data['communist_nation'], 'communist_nation_code')</php></span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>党员生日：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_data.communist_birthday}</span></div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>身份证号：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                    {$communist_data.communist_idnumber}
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>毕业学校：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                    {$communist_data.communist_school}
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>学历：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                	 <span class="di-b"><php>echo getBdCodeInfo($communist_data['communist_diploma'], 'diploma_level_code')</php></span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="layui-col-xs6">
+	                            <div class="layui-row">
+	                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>职务：</strong></div>
+	                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+	                                    <span class="di-b"><php>echo getPartydutyInfo($communist_data['post_no'])</php></span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-md2">
+	                    	<div class="layui-col-md12" id="dowebok">
+                                <neq name='communist.communist_avatar' value=''>
+                                    <img src="__ROOT__/{$communist.communist_avatar}" height="198px" width="142px">
+                                </neq>
+                            </div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">党员转移信息</div>
+                <div class="layui-card-body layui-form">
+                    <div class="layui-row">
+                    	<div class="layui-col-xs6">
+                            <div class="layui-row">
+                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>转入党支部：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span class="di-b"><eq name="communist_change['new_party']" value=''>{$communist_change.new}<else/>{$communist_change.new_party}</eq></span></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6">
+                            <div class="layui-row">
+                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>当前党支部：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_change.old_party}</span></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6">
+                            <div class="layui-row">
+                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>申请时间：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_change.update_time}</span></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6">
+                            <div class="layui-row">
+                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>转移类型：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_change.change_type}</span></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6">
+                            <div class="layui-row">
+                                <div class="layui-col-xs5 text-r fsize-14 fcolor-65 lh-35"><strong>申请原因：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"><span>{$communist_change.memo}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">审核信息</div>
+                <div class="layui-card-body layui-form">
+                    <div class="layui-row">
+                    	<div class="layui-col-xs10 pull-right">
+                    		<div class="ystep2"></div>
+                    	</div>
+                    	<div class="layui-col-xs12">
+                    		<div id="log_typ">
+                    			<volist name="res" id="vo">
+		                            <ul class=" ml-20">
+		                                <li class="client-info-dian pl-60" >
+				                             <span class="fcolor-99">
+				                                 <span class="fsize-12">{$vo.check_staff}</span>
+				                                 <span class="fsize-12">{$vo.add_time}</span>
+				                             </span>
+		                                </li>
+		                                <neq name="vo['log_audit_man']" value="">
+		                                	<li class="client-info-dian pl-60" >
+				                            <span class="fcolor-99">
+				                            	<span class="fsize-12">经办人：{$vo.log_audit_man}</span>
+				                                <span class="fsize-12">联系方式：{$vo.log_contact_tel}</span>
+				                            </span>
+				                            <div class="mt-step-title uppercase font-grey-cascade" style="font-size:14px;"><php>echo getUploadInfo($vo['log_attach'],'upload_source');</php></div>
+		                                	</li>	
+		                                </neq>
+		                                <li class="pl-60">
+				                            <span class=" fsize-16">
+				                                <i class="iconfont fcolor-green2">&#xe64b;</i> {$vo.check_content}
+				                            </span>
+		                                </li>
+		                            </ul>
+			                    </volist>
+                    		</div>
+                    		<div class="layui-col-xs4 pull-right">
+                            	<elt name="communist_change['change_audit_status']" value="30">
+									<eq name='reveal' value='1'>
+										<button type="reset" class="layui-btn mr-10"onclick='operator()'>审核</button>
+									</eq>
+								</elt>
+								<if condition="($communist_change['change_audit_status'] eq 30 && $communist_change['join'] eq 2)">
+									<button type="reset" onclick="btnreceipt({$communist_change['communist_no']},{$communist_change['change_id']})" class="layui-btn  mr-10" onclick='operator()'>打印回执单</button>
+								</if>
+								<a type="reset" class="layui-btn layui-btn-primary mr-10" href="{:U('Ccpcommunistchange/ccp_communist_change_index',array('type'=>$type))}">返回</a>
+								
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模块 -->
+<form action="{:U('Ccpcommunistchange/ccp_communist_change_check',array('type'=>$type))}" method="post">
+	<input type=hidden id="status_type" name="change_audit_status" value="{$communist_change.change_audit_status}"/>
+	<input type=hidden id="change_id" name="change_id" value="{$communist_change.change_id}"/>
+	<input type=hidden id="change" name="change" value="{$communist_change.change}"/>
+	<input type=hidden id="type" name="type" value="{$type}"/>
+	<input type=hidden id="old_party" name="old_party" value="{$communist_change.old}"/>
+	<input type=hidden id="new_party" name="new_party" value="{$communist_change.new}"/>
+	<input type=hidden id="communist_no" name="communist_no" value="{$communist_change.communist_no}"/>
+	<input type=hidden id="party_no" name="party_no" value="{$communist_change.party_no}"/>
+	<input type=hidden id="log_audit_man" name="log_audit_man" value=""/>  
+	<input type=hidden id="log_contact_tel" name="log_contact_tel" value=""/>
+	<input type=hidden id="log_attach" name="log_attach" value=""/>
+	<input type=hidden id="reject" name="reject" value=""/>
+	<div id="pop" class="di-n ">
+		<if condition="$communist_change['change_audit_status'] eq 30">
+			<if condition="$communist_change['change_audit_status'] eq 30 && $communist_change['join'] eq 2">
+				<div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>经办人：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"> 
+                        	<input type="text" name="log_audit_man" id="log_man" autocomplete="off" class="layui-input" placeholder="请输入经办人" lay-verify='required'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                        <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>联系方式：</strong></div>
+                        <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"> 
+                        	<input type="text" name="log_contact_tel" id="log_tel" autocomplete="off" class="layui-input" placeholder="请输入联系方式" lay-verify='required'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 mt-10">
+                    <div class="layui-row">
+                         <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>上传附件：</strong></div>
+                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+							<input type="hidden" id="source_name" name="source_name" value=""/>
+							<input type="hidden" id="material_attach" name="log_attach" value="{$communist.log_attach}" style="width: 60px">
+
+							<button type="button" class="layui-btn" id="test3" target="_self" onclick="uploader_file('ccp','1','material_attach','source_name','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+							<div id="js-grid-juicy-projects2" class="cbp" style="height:100px">
+								<neq name="communist.log_attach" value="">
+									<php>echo getUploadHtml($communist['log_attach'],'40');</php>
+								</neq>
+							</div>
+                        </div>
+                    </div>
+                </div>
+			 </if> 
+		</if>
+		<div class="layui-col-xs12 mt-10" >
+            <div class="layui-row">
+                <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>审核意见：</strong></div>
+                <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"> 
+                	<textarea name="change_audit_content" placeholder="同意~" id="maxlength_textarea" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs9 pull-right mt-20">
+			<button type="submit" class="layui-btn mr-10" >同意</button>
+			<button type="submit" id='button_not' class="layui-btn mr-10" >驳回</button>
+			<button type="button"  class="layui-btn red layui-btn-primary mr-10" onclick="cancel()">取消</button>
+        </div>
+		<p>&nbsp;</p>
+	</div>
+</form>
+</block>
+<block name="js">
+<script type="text/javascript" src="__STATICS__/plugins/process/js/ystep.js"></script>	
+	<script>
+	function  operator(){
+		layer.open({
+			type: 1,
+			title: '接收',
+			shadeClose: true, //点击遮罩关闭层
+			maxmin: false,
+			closeBtn:false,
+			offset: window.parent.document.body.scrollTop+50+'px',
+			area : ['500px','400px'],
+			content: $('#pop'),
+			success: function (layer, index) {
+                layer.iframeAuto(index);
+            }
+		});
+	};
+	function present(){
+		$('#log_audit_man').val($('#log_man').val());
+		$('#log_contact_tel').val($('#log_tel').val());
+		$('#log_attach').val($('#material_attach').val());
+		cancel();
+	}
+	
+	function cancel(){
+		layer.closeAll();
+	}
+	</script>
+	<script>
+	//详情弹窗
+	function  btnreceipt(communist_no,change_id){
+		var url = "{:U('ccp_communist_transfer_leave_info')}?communist_no="+communist_no+"&change_id="+change_id
+		//alert(url);			
+		layer.open({
+			type: 2,
+			title: '回执单',
+			maxmin: false,
+			shadeClose: true, //点击遮罩关闭层
+			offset: window.parent.document.body.scrollTop+50+'px',
+			fixed: true,
+           	scrollbar: true,
+           	fixed: true,
+			area : ['600px','500px'],
+			content: url,
+			success:function(){
+            	layerAuto();
+            }
+		});
+	};
+	</script>
+	<script>
+	$("#button_not").click(function(){
+		$("#reject").val('50');
+	});
+	</script>
+	<script type="text/javascript">
+	//根据jQuery选择器找到需要加载ystep的容器
+	//loadStep 方法可以初始化ystep
+	var change_type = $('#change').val();
+	if(change_type == 2){
+		var status_type = $("#status_type").val()/10;
+		if(status_type >= 3){
+			status_type -= 1;
+		} 
+		if(status_type == 4){
+			
+			$(".ystep2").loadStep({
+				  size: "large",
+				  color: "green",
+				  steps: [{
+					title: "待审核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "待复核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "驳回",
+					content: "党员关系转移失败"
+				  }]
+				});
+			status_type -=1;
+		}else{
+			$(".ystep2").loadStep({
+				  size: "large",
+				  color: "green",
+				  steps: [{
+					title: "待审核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "待复核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "完成",
+					content: "党员关系转移成功"
+				  }]
+				});
+		}
+	}else{
+		var status_type = $("#status_type").val()/10;
+		if(status_type == 5){
+			$(".ystep2").loadStep({
+				  size: "large",
+				  color: "green",
+				  steps: [{
+					title: "待审核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "待接受",
+					content: "转入支部管理员审核"
+				  },{
+					title: "待复核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "驳回",
+					content: "党员关系转移失败"
+				  }]
+				});	
+			status_type -=1;
+		}else{
+			$(".ystep2").loadStep({
+				  size: "large",
+				  color: "green",
+				  steps: [{
+					title: "待审核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "待接受",
+					content: "转入支部管理员审核"
+				  },{
+					title: "待复核",
+					content: "转出支部管理员审核"
+				  },{
+					title: "完成",
+					content: "党员关系转移成功"
+				  }]
+				});	
+		}
+		
+		
+	}
+	$(".ystep2").setStep(parseInt(status_type));
+	</script>
+</block>

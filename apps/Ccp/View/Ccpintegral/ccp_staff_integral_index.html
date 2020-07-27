@@ -1,0 +1,127 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row ml-10">
+                            <div class="form-group col-md-3 ml-100m">
+                                <div class="row">
+                                    <label class="control-label col-md-4 lh-35 p-0">支部：
+                                    </label>
+                                    <div class="col-md-8  p-0">
+                                        <select name="party_no" id="party_no" class="form-control  select2">
+                                            <option value="">请选择</option>
+                                            <foreach name="party_no" item="list">
+                                                <option value="{$list.party_no}">{$list.party_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ml-10 form-group col-md-3">
+                                <div class="row">
+                                    <label class="control-label col-md-4 lh-35 p-0">只查看本年：
+                                    </label>
+                                    <div class="col-md-8  p-0 pt-10">
+                                        <input type="checkbox" checked value="1" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right text-right p-0 mr-50">
+                                <!--<a onclick="data_export()" class="btn btn-sm blue btn-outline bor-ra-2 w-70">-->
+                                    <!--<i class="iconfont"></i>导出-->
+                                <!--</a>-->
+                                <button type="button" onclick="search()" class="btn btn-sm blue btn-outline bor-ra-2 w-70">
+                                    <i class="iconfont">&#xe675;</i>搜索
+                                </button>
+                            </div>
+                        </div>
+                        <div class="scroller p5-scroller" data-always-visible="1" data-rail-visible1="1">
+                            <table id="client_table"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+		laydate.render({
+			elem: '#start'
+			,type: 'year'
+		});
+        $("#client_table").bootstrapTable({
+            method: "get",  //使用get请求到服务器获取数据
+            url: "{:U('ccp_communist_integral_index_data',array('is_year'=>1))}", //获取数据的Servlet地址
+            striped: true,  //表格显示条纹
+            pagination: true, //启动分页
+            pageSize: 10,  //每页显示的记录数
+            pageNumber:1, //当前第几页
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    offset: params.offset,
+                    party_id:$("#party_id").val(),
+                }
+            },
+            pageList: [5, 10, 15, 20, 25],  //记录数可选列表
+            cache:false,
+            showColumns: false,  //显示下拉框勾选要显示的列
+            showRefresh: false,  //显示刷新按钮
+            sidePagination: "server", //表示服务端请求
+            columns:[
+                {title: '排名',field: 'num',align: 'center',valign: 'middle'},
+                {title: '姓名',   field: 'communist_name',  align: 'center',valign: 'middle'},
+                {title: '支部',   field: 'party_name',  align: 'center',valign: 'middle'},
+                {title: '总积分',   field: 'integral_totle',  align: 'center',valign: 'middle'},
+                {title: '积分明细',field: 'operate',align: 'center'}
+            ],
+//            onLoadSuccess: function(){  //加载成功时执行
+//                layer.msg("加载成功");
+//            },
+            onLoadError: function(){  //加载失败时执行
+                layer.msg("加载失败", {time : 1500, icon : 2});
+            }
+        });
+        function search(){
+            var party_no = $("#party_no").val();
+            $('#client_table').bootstrapTable('removeAll');
+            $('#client_table').bootstrapTable('refresh',{url:"{:U('ccp_communist_integral_index_data')}",query:{'party_no':party_no}});
+        }
+        function data_export(){
+            $("#search").attr('action',"{:U('ccp_communist_list_export')}");
+            $("#search").submit();
+        }
+        $('input').iCheck({
+            labelHover : false,
+            cursor : true,
+            checkboxClass : 'icheckbox_square-blue',
+            radioClass : 'iradio_square-blue',
+            increaseArea : '20%'
+        });
+        $('input').on('ifChecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            $('#client_table').bootstrapTable('removeAll');
+            $('#client_table').bootstrapTable('refresh',{url:"{:U('ccp_communist_integral_index_data')}",query:{'is_year':1}});
+        });
+        $('input').on('ifUnchecked', function(event){ //ifCreated 事件应该在插件初始化之前绑定
+            $('#client_table').bootstrapTable('removeAll');
+            $('#client_table').bootstrapTable('refresh',{url:"{:U('ccp_communist_integral_index_data')}"
+            });
+        });
+    </script>
+</block>

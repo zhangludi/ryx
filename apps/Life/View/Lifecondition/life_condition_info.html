@@ -1,0 +1,159 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card layui-form">
+              <div class="layui-card-header">  民情详情</div>
+              <div class="layui-card-body">
+                  <div class="layui-row">
+                  	<div class="col-md-8">
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>任务编号：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_id}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>提交人：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_personnel}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>电话：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_personnel_mobile}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>提交时间：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.add_time}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>状态：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.status_name}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>地址：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35 article_over_one"><span title="{$condition_data.condition_area}">{$condition_data.condition_area}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>民情民意：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_content}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>指派人：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_delegate_no}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>接收人：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_accept_no}</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="layui-col-xs6 mt-10">
+	                        <div class="layui-row">
+	                            <div class="layui-col-xs4 text-r fsize-14 fcolor-65 lh-35"><strong>接受部门：</strong></div>
+	                            <div class="layui-col-xs7 fsize-14 fcolor-65 lh-35"><span>{$condition_data.condition_accept_party_name}</span></div>
+	                        </div>
+	                    </div>
+	                </div>
+                    <div class="col-md-4" id="dowebok">
+						<div id="js-grid-juicy-projects" style="height:100px">
+							<php>echo getUploadHtml($condition_data['condition_thumb'],'100','100','1','0');</php>
+						</div>
+					</div>
+                </div>
+             </div>
+          </div>
+        </div>
+        <neq name="condition_data['status']" value="0">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>">处理历程</div>
+                <div class="layui-form layui-card-body fitheight">
+                    <div class="layui-row layui-col-space5">
+                        
+                        <div class="layui-col-xs3 pull-right" >
+                            
+                            <!-- <a class="layui-btn table-add " onclick="exam_add('')" style="text-decoration: none;" title="添加">添加</a> -->
+                        </div>
+                    </div>
+                    <table class="layui-table" id="demo"  lay-filter="demo">
+                       <div class="scroller" data-always-visible="1" data-rail-visible1="1">
+							<ul class="client-info-list ml-20">
+								<volist name="condition_log_data" id="log">
+									<li class="client-info-dian pl-40 mt-10" >
+                                    <span class="fcolor-99">
+                                        <i>{$i}</i>
+                                        <span class="font-green fsize-16">{$log.add_time}</span>
+                                    </span>
+										<span class=" ml-20"> <laber class="bold"></laber>{$log.condition_log_content}</span>
+									</li>
+								</volist>
+							</ul>
+						</div>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </neq>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-footer" style="text-align: right">
+                    <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</block>
+<block name="js">
+	<script type="text/javascript">
+	//根据jQuery选择器找到需要加载ystep的容器
+	//loadStep 方法可以初始化ystep
+	
+	$(".ystep2").loadStep({
+	  size: "large",
+	  color: "green",
+	  steps: [{
+		title: "信息提交"
+	  },{
+		title: "任务指派"
+	  },{
+		title: "任务处理"
+	  },{
+		title: "任务完成"
+	  }]
+	});
+	var status_type = $("#status_type").val();
+	switch (status_type){
+		case '10':
+	        status_type = 2;
+	        break;
+	    case '20':
+	        status_type = 3;
+	        break;
+	    case '30':
+	        status_type = 4;
+	        break;
+	}
+	$(".ystep2").setStep(parseInt(status_type));
+	var viewer = new Viewer(document.getElementById('dowebok'), {
+	    url: 'data-original'
+	});
+	</script>
+</block>

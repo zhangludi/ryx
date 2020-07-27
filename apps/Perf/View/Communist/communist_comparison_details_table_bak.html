@@ -1,0 +1,65 @@
+ <div id="Broken6" style="height: 323px;width: 100%" alt="对标体系折线图"></div>
+ <script src="__STATICS__/plugins/echarts/echarts.js" type="text/javascript"></script>
+ 	<script>
+			// 对标体系折线图
+			var assess_name=$.parseJSON('{$assess.assess_name}')
+			var score=$.parseJSON("{$assess.score}")
+			var Broken6 = echarts.init(document.getElementById('Broken6'));
+		
+		option6 = {
+			title: {
+				text: ''
+			},
+			legend: {
+				data: ['{$assess.party_name}']
+			},
+			radar: [
+				{
+					indicator:assess_name,
+					center: ['50%', '60%'],
+					radius: 120,
+					startAngle: 90,
+					splitNumber: 4,
+					name: {
+						formatter:'【{value}】',
+						textStyle: {
+							color:'red'
+						}
+					}
+				}
+			],
+			series: [
+				{
+					name: '雷达图',
+					type: 'radar',
+					itemStyle: {
+						emphasis: {
+							// color: 各异,
+							lineStyle: {
+								width: 4
+							}
+						}
+					},
+					data: [
+						{
+							value: score,
+							name: '{$assess.party_name}',
+							symbol: 'rect',
+							symbolSize: 5,
+							lineStyle: {
+								normal: {
+									show: true,
+									type: 'dashed',
+									formatter:function(params) {
+										return params.value;
+									}
+								}
+							}
+						},
+					]
+				}
+			]
+		};
+
+		Broken6.setOption(option6);
+		</script>

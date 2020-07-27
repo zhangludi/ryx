@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice_edit.css" />
+
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <style>
+    	.w-9em{width: 0.45rem !important;}
+    	.h-19em{height: 0.95rem !important;}
+		.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    		background-size: 100% 100%;}
+    </style>
+</head>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+		<ul>
+			<li class="h-45em">
+				<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+				<div class="aui-title">留言建议</div>
+			</li>
+		</ul>
+	</div>
+	<form action="{:U('Life/life_guestbook_do_save')}" id="forms" method="post" enctype="multipart/form-data">	
+		<div class="p-12em mb-12em bg-color-whiter mt-20b">
+			<textarea class="w-100b h-150em f-15em lh-18em color-b3" name="guestbook_content" id="" placeholder="编辑你的公文内容"></textarea>
+		</div>
+		<div class="w-100b h-50em bottom-0 bg-color-whiter">
+			<div class="m-a mt-8em w-350em h-34em f-14em lh-36em color-white text-align grad bor-ra-7" onclick='sub()'>发送</div>
+		</div>
+	</from>
+</body>
+
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice_edit.js"></script>
+<script type="text/javascript" src="__STATICS__/public/js/common.js"></script>
+<script>
+
+function sub(){
+	$('#forms').submit();
+}
+</script>
+</body>
+</html>

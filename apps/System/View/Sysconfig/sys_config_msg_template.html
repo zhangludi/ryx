@@ -1,0 +1,47 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+	<block name="body">
+		<div class="page-container">
+			<div class="page-content-wrapper">
+				<div class="page-content ">
+					<div class="portlet light bordered right">
+						<form action="{:U('Sysconfig/sys_config_do_save')}" id="form_sample_2" class="p5-editor-add" method='post'>
+							<div class="row">
+								<div class="clearfix">
+									<div class="form-group mt-5 col-xs-12">
+										<div class="row">
+											<label class="control-label col-xs-4 pl-0 lh-30">选择模版
+												<span class="required"> * </span>
+											</label>
+											<div class="col-xs-8 p5-form-control pl-0 ">
+												<input type="hidden" value="1" name="template_name"/>
+												<select name="{$template_name}" id="single" class="  form-control  select2">
+													<optgroup label="请选择模版">
+														<volist name="template_list" id="list">
+															<option <eq name="config_value" value="$list['template_id']">selected</eq> value="{$list.template_id}">{$list.template_name}</option>
+														</volist>
+													</optgroup>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<button type="submit" class="btn btn-sm blue w-75 bor-ra-2 mr-10 pull-right">提交</button>
+										<button onclick="cancel()" type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">取消</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		</block>  
+    	<block name="js">
+		<script>
+			function cancel(){
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+			}
+		</script>
+		</block>  

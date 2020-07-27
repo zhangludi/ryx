@@ -1,0 +1,155 @@
+
+<!--内容区开始-->
+<div  class="public_content bg-color-gray9">
+    <!--右侧内容区开始-->
+    <!--<div class="public_content_right news_content">-->
+        <!--民生平台开始-->
+        <div class="public_content_l pr-10 pull-left w-870 hr-sr-gray2">
+            <div class="h-300 w-870 over-h po-re">
+                <a href="{:U('ipam_home_service')}">
+                    <img src="__STATICS__/apps/page_portal/images/career_banner.jpg" class="w-all center-ver" alt="便民服务图片">
+                </a>
+            </div>
+            <!--民生O2O开始-->
+            <div class="public_card mt-25">
+                <div class="public_card_title bg-img-card fcolor-white">
+                    <span class="pl-15 fsize-18">随手拍</span>　/　<a href="{:U('ipam_o2o_list')}" class="fcolor-white">更多</a>
+                </div>
+                <table class="career_table w-all center-text fsize-14 fcolor-33 mt-25">
+                    <thead>
+                    <tr class="h-45 lh-45">
+                        <th>编号</th>
+                        <th>标题</th>
+                        <th>提交日期</th>
+                        <th>办理日期</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="condition_data" id="cvo">
+                        <tr class="h-45 lh-45">
+                            <td>{$i}</td>
+                            <td>{$cvo.condition_title}</td>
+                            <td>{$cvo.add_time}</td>
+                            <td>{$cvo.update_time}</td>
+                            <if condition="$cvo.status eq 30">
+							<td>处理完成</td>
+                            <else /> 
+                            <td>处理中</td>
+                            </if>
+                        </tr>
+                      </volist>
+                    </tbody>
+                </table>
+            </div>
+            <!--民生O2O结束-->
+            <!--调查问卷开始-->
+            <div class="public_card mt-25">
+                <div class="public_card_title bg-img-card fcolor-white">
+                    <span class="pl-15 fsize-18">调查问卷</span>　/　<a href="{:U('ipam_home_survey_list')}" class="fcolor-white">更多</a>
+                </div>
+                <ul class="public_card_content mt-25">
+                <volist name="survey_data" id="svo" offset="0" length='8'>
+                    <li class="w-420 pull-left ">
+                        <a href="{:U('ipam_home_survey_list')}" class="di-b fsize-16 see-details ">{$svo.survey_title}</a>
+                        <span class="fsize-12 lh-24">
+                            <span>分类：</span><span>民生平台</span>
+                         <!--    <span class="hr-sl-d5d5d5 pl-5">次数：</span><span>1920次</span>
+                            <span class="hr-sl-d5d5d5 pl-5">共</span><span>1</span><span>页</span> 
+                            <span>18</span><span>个问题</span>-->
+                        </span>
+                    </li>
+                  </volist>  
+                </ul>
+            </div>
+            <!--调查问卷结束-->
+            <!--精准扶贫开始-->
+            <div class="public_card mt-25"></div>
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="pl-15 fsize-18">精准扶贫</span>　/　<a href="{:U('ipam_help_list')}" class="fcolor-white">更多</a>
+            </div>
+            <div class="news_content mt-15">
+                <div class="pull-left over-h pr-15 w-all">
+                    <ul>
+                    <volist name="article_data" id="vo">
+                        <li class="public_word_lr_two w-all">
+                            <a class='see-details'  href="{:U('ipam_help_info',array('cat_id'=>$vo[article_id]))}">
+                                <div class="public_word_lr_two_img">
+                                    <img src="{$vo.article_thumb}" alt="新闻图片">
+                                </div>
+                                <div class="public_word_lr_two_content">
+                                    <div class="public_word_lr_two_content_title fsize-14">{$vo.article_title}</div>
+                                    <div class="public_word_lr_two_content_date fsize-12">{$vo.add_time}</div>
+                                    <p class="fsize-12">{$vo.article_keyword}</p>
+                                </div>
+                            </a>
+                        </li>
+                        </volist>
+                      
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!--精准扶贫结束-->
+        </div>
+        <div class="public_content_r pull-right w-280">
+            {:W('Article/hotspot_issues')}
+            {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+            {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+      
+            <!--帮扶动态开始-->
+            <div>
+                <div class="public_card_title mt-25">
+                    <span class="fsize-16">帮扶动态</span>
+                </div>
+                <div class="pull-right w-280 h-500  bcon center-block">
+                    <div class="list_lh h-420 mb-30 pt-40">
+                        <ul>
+                        <volist name="help_list" id="hvo" offset="0" length='8'>
+                            <li class="pt-15">
+                                <a href="javascript:;" >
+                                    <div class="di-ib over-h h-35 fsize-14">
+                                        <span class="fcolor-307eff fsize-14">{$hvo.communist_name}</span>
+                                            <eq name="hvo.type" value="1">
+                                        	  在{$hvo.add_time}，帮扶队伍：{$hvo.measures_name}帮助了
+                                                <span class="fsize-14 fcolor-ff9776">{$hvo.measures_genre}:{$hvo.measures_genre_no}</span>
+                                            </eq>
+                                            <eq name="hvo.type" value="2">
+                                              在{$hvo.add_time}，帮扶人：{$hvo.measures_help}帮助了
+                                                 <span class="fsize-14 fcolor-ff9776">{$hvo.measures_genre}:{$hvo.measures_genre_no}</span>
+                                            </eq>
+                                    </div>
+                                </a>
+                            </li>
+                         </volist>
+                         
+                        </ul>
+                    </div>
+                    <!-- <div class=" app_support w-130 h-30 bor-ra-2 lh-30 center-text center-block">
+                        <a href="{:U('ipam_o2o_edu')}" class="fcolor-white fsize-16">
+                            申请帮扶
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+            <!--帮扶动态结束-->
+        </div>
+        <!--民生平台结束-->
+    <!--</div>-->
+    <!--右侧内容区结束-->
+    <div class="clearfix">
+    
+    </div>
+</div>
+<script type="text/javascript" src="__STATICS__/plugins/scroll/scroll.js"></script>
+<script>
+    //报纸轮播
+    //$(".newspaper_carousel").slide({"autoPlay" : true, "autoPage": true, "effect" : "left", "mainCell" : ".bd ul", "titCell": ".hd li", "scroll": "2", "vis": "2"});
+    //视频轮播
+    //$(".video_carousel").slide({"autoPlay" : true, "effect" : "left", "mainCell" : ".bd ul", "titCell": ".hd li", "scroll": "1", "vis": "1"});
+    //文字滚动
+    $(".list_lh").myScroll({
+        speed:100, //数值越大，速度越慢
+        rowHeight:53 //li的高度
+    });
+</script>

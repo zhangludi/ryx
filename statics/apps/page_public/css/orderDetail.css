@@ -1,0 +1,145 @@
+
+.orderTitle{
+    padding-top:5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000000;
+    background: #fff;
+}
+.payStep{
+    background: #fff;
+    margin-top: 5px;
+}
+.leftPay{
+    border-right: 1px solid #000000;
+    margin-top: 5px;
+    padding-left: 10px;
+    background: #fff;
+}
+.leftPay .orderNum{
+    margin-top: 10px;
+}
+.leftPay .waitConfirm{
+    margin-top: 20px;
+    font-size: 20px;
+    color: red;
+    margin-left: 20px;
+    margin-bottom: 37px;
+}
+.leftPay .orderBtn{
+    margin-bottom: 20px;
+}
+.leftPay .btnConfirm{
+    width:60px;
+    height:25px;
+    background: url("../images/orderConfirm.png") no-repeat 7px center;
+    padding-left: 25px;
+    color: red;
+    border:1px solid red;
+    cursor: pointer;
+}
+.leftPay .btnSet{
+    width:110px;
+    height:25px;
+    background: url("../images/successPay.png") no-repeat 7px center;
+    padding-left: 32px;
+    color: #000;
+    border:1px solid #000;
+    margin-left: 5px;
+    cursor: pointer;
+
+}
+.leftPay .btnNull{
+    width:90px;
+    height:25px;
+    background: url("../images/noUse.png") no-repeat 7px center;
+    padding-left: 25px;
+    color: #000;
+    border:1px solid #000;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.rightPay{
+    border-right: 1px solid #000000;
+    margin-top: 5px;
+    padding-left: 30px;
+    background: #fff;
+}
+.rightPay img{
+    width:50px;
+    height:50px;
+}
+.rightPay .line{
+    width:90px;
+    height:20px;
+    margin-top: 16px;
+    margin-bottom: 14px;
+    /*margin-left: -26px;*/
+}
+
+.rightPay .orderFlow{
+    margin-top: 10px;
+}
+.rightPay .lineWait{
+    width:130px;
+    height:20px;
+    margin-left: -26px;
+}
+.logisticsDetail{
+    background: #fff;
+    margin-top: 5px;
+}
+.leftLogistics{
+    margin-top: 10px;
+    border-right: 1px solid #ccc;
+    padding-bottom: 100px;
+}
+.leftLogistics img{
+    width:100px;
+    height:100px;
+}
+.leftLogistics dd{
+    margin-left: 15px;
+}
+.leftLogistics p{
+    margin-top: 5px;
+}
+.getDetail{
+    background: #fff;
+    margin-top: 10px;
+}
+.leftGet, .centerGet, .rightGet{
+    border-right: 1px solid #ccc;
+}
+.leftGet p, .centerGet p, .rightGet p{
+    margin-top: 10px;
+    padding-left: 20px;
+}
+.leftGet span, .centerGet span, .rightGet span{
+    margin-right: 20px;
+}
+.leftGet{
+    padding-bottom: 30px;
+}
+.rightGet{
+    padding-bottom: 30px;
+}
+.express{
+    margin-top: 10px;
+    border-right: 1px solid #ccc;
+    height:200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.orderUp{
+    margin-top: 14px;
+    margin-left: -23px;
+}
+.orderImg{
+    width:10%;
+}
+.orderData{
+    width:30%;
+}
+.orderInfo{
+    width:60%;
+}

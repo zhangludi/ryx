@@ -1,0 +1,221 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+html { overflow-x: hidden; overflow-y: auto; }
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                <form id="form_sample_2" action="{:U('life_volunteer_activity_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="topic_id" value="{$topic_edit.topic_id}">
+                        <input type="hidden" class="form-control" name="material_id" value="{$material_id}">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动名称：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="activity_title" value="{$article.activity_title}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动缩略图：</strong></div>
+                                    <input type="hidden" id="sore" name="sore" value="{$article.activity_thumb}" />
+                                    <input id="ad_img" type="hidden" name="activity_thumb" value="">
+                                    <button type="button" class="layui-btn" id="notes_thumb" onclick="uploader_file('life','1','ad_img','sore','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                    <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                    <div id="js-grid-juicy-projects2" style="height:100px">
+                                        <neq name="article.activity_thumb" value="">
+                                            <php>echo getUploadHtml($article['activity_thumb'],'40');</php>
+                                         </neq>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动时间：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                        <input type="text" id="test10_add" class="form-control layer-date " name="activity_time" placeholder="选择日期" lay-verify='required'>
+                                    </div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>主持人：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="activity_host" value="{$article.activity_host}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动地点：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="activity_address" value="{$article.activity_address}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>参与党支部：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+                                        <select name="party_no" xm-select="party_manager_select" xm-select-skin="danger" xm-select-search>
+                                            <php>echo getPartySelect($communist[communist_party_no]);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动简介：</strong></div>
+                                        <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="activity_description" placeholder="" class="layui-textarea"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" id="close" >返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="layui-row layui-col-space15" style="overflow: hidden;">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+            <form id="form_sample_2" action="{:U('life_volunteer_activity_do_save')}" method="post" class="form-horizontal">
+                <div class="layui-card-body layui-form">
+                    <input type="hidden" class="form-control" name="topic_id" value="{$topic_edit.topic_id}">
+                    <input type="hidden" class="form-control" name="material_id" value="{$material_id}">
+                    <div class="layui-row">
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动名称：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="activity_title" value="{$article.activity_title}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动缩略图：</strong></div>
+                                <input type="hidden" id="sore" name="sore" value="{$article.activity_thumb}" />
+                                <input id="ad_img" type="hidden" name="activity_thumb" value="">
+                                <button type="button" class="layui-btn" id="notes_thumb" onclick="uploader_file('life','1','ad_img','sore','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
+                                <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
+                                <div id="js-grid-juicy-projects2" style="height:100px">
+                                    <neq name="article.activity_thumb" value="">
+										<php>echo getUploadHtml($article['activity_thumb'],'40');</php>
+									 </neq>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动时间：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+									<input type="text" id="test10_add" class="form-control layer-date " name="activity_time" placeholder="选择日期" lay-verify='required'>
+                                </div>
+                                <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>主持人：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="activity_host" value="{$article.activity_host}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动地点：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> <input type="text" name="activity_address" value="{$article.activity_address}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 mt-10">
+                            <div class="layui-row">
+                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>参与党支部：</strong></div>
+                                <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
+                                    <select name="party_no" xm-select="party_manager_select" xm-select-skin="danger">
+                                        <php>echo getPartySelect($communist[communist_party_no]);</php>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>活动简介：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                        <textarea name="activity_description" placeholder="" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <div class="layui-footer" style="text-align: right">
+                                    <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                    <button type="reset" id="close" class="layui-btn layui-btn-primary mr-40" >取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+</div>
+</block>
+<block name="js">
+<script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+<script type="text/javascript">
+    $('#close').click(function() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
+</script>
+<script>
+    layui.use([ 'form', 'laydate','formSelects'], function() {
+        var $ = layui.jquery
+        , admin = layui.admin
+        , element = layui.element
+        , layer = layui.layer
+        , laydate = layui.laydate
+        , form = layui.form
+        , formSelects = layui.formSelects;
+    })
+    //时间选择器
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //时间选择器
+        //时间选择器
+        laydate.render({
+            elem: '#test4'
+            ,type: 'date'
+        });
+        //日期时间范围
+        laydate.render({
+            elem: '#test10_add'
+            ,type: 'date'
+            ,range: true
+        });
+    })
+</script>
+</block>

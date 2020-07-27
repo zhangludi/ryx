@@ -1,0 +1,93 @@
+<div class="public_footer">
+    <div class="public_footer_header center-text">
+        <span>友情链接：</span>
+        <ul class="di-ib">
+            <volist name="blogroll_list" id="list">
+                {$list.code}
+            </volist>
+            <!-- <li><a href="http://www.baidu.com">中国共产党新闻网</a> </li>
+            <li><a href="">中国共产党新闻网</a></li>
+            <li><a href="">中国共产党新闻网</a></li>
+            <li><a href="{:U('Allinone/Index/index')}" target="_blank">党建自助服务终端</a></li>
+            <li><a href="{:U('Wechat/Index/index')}" target="_blank">智慧党建微信平台</a></li>
+            <li><a href="{:U('System/Index/index')}" target="_blank">登录管理后台</a></li> -->
+        </ul>
+    </div>
+    <ul class="public_footer_content">
+        <li>
+            <span>互联网新闻信息服务许可证1012006001</span>
+            <span>增值电信业务经营许可证B2-20100025</span>
+        </li>
+        <li>
+            <span>信息网络传播视听节目许可证0104065</span>
+            <span>广播电视节目制作经营许可证（广媒）字第172号</span>
+        </li>
+        <li>
+            <span>网络文化经营许可证 京网文[2014]2108-308号</span>
+            <span>网络出版服务许可证（京）字258号</span>
+        </li>
+    </ul>
+</div>
+<!--footer结束-->
+</body>
+<script>
+    //$(".index_content_lunbo").slide({"autoPlay" : true, "effect" : "left", "mainCell" : ".bd ul", "titCell": ".hd li", "scroll": "1", "vis": "1"});
+    //    $.ajax({
+    //        url: "./index_content.html",
+    //        success: function (html) {
+    //            $(".index_content").empty();
+    //            $(".index_content").append(html);
+    //        }
+    //    });
+</script>
+<script>
+    var page_flag = sessionStorage.getItem("page_flag");
+    if(page_flag == null){
+        page_flag = 'home';
+    }
+    $("#"+page_flag).addClass("public_header_active");
+    $(".logins").click(function (e) {
+        location.href = "{:U('Index/Index/login')}";
+    });
+    layui.use('layer', function() {});
+    /* 登录点击事件开始 */
+    /* header 点击事件开始 */
+    $(".ipam_home_public_header_nav_horizontal li").click(function () {
+        $(this).css("background", "#fafafa");
+        $(this).children("a").css("color", "#d10000");
+        var id = $(this).attr("id");
+        sessionStorage.setItem("page_flag", id);
+        $(".public_header_nav_horizontal li").each(function(){
+            $(this).removeClass("public_header_active");
+        })
+    });
+    // 查看详情验证登陆
+    $(".see-details").click(function (e) {
+    	var flag = false;
+    	 $.ajax({
+             type: "POST",
+             url: "{:U('Index/check_login')}",
+             async:false,
+             success: function(data){
+            	 flag = data;
+             }
+         });
+    	 if(flag == true){
+    		 location.href = "{:U('Index/Index/login')}";
+    		return false;
+    	 } else {
+    		 return true;
+    	 }
+    });
+    // jquery文章水印
+    // var user_name = "123456789987654321";
+    // $('.article_content_view').watermark({
+    //     texts : [user_name], //水印文字
+    //     textColor : "#d2d2d2", //文字颜色
+    //     textFont : '22px 微软雅黑', //字体
+    //     width : 120, //水印文字的水平间距
+    //     height : 100,  //水印文字的高度间距（低于文字高度会被替代）
+    //     textRotate : -30 //-90到0， 负数值，不包含-90
+    // })
+</script>
+</html>

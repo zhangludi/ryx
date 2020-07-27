@@ -1,0 +1,54 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                    </div>
+                    <div class="pull-right text-right pr-10">
+                        <div class="actions">
+                            <a class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-70" href="{:U('com_group_edit')}">
+                                添加	<i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table id="exampleTablePagination"  
+                               data-show-refresh="true" data-show-toggle="true" data-toggle="table"
+                               data-show-columns="true" data-show-export="true"
+                               data-detail-view="false" data-detail-formatter="detailFormatter"
+                               data-minimum-count-columns="2" data-striped="true"
+                               data-show-pagination-switch="true" data-pagination="true"
+                               data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]"
+                               data-show-footer="false"
+                               data-url="{:U('com_group_index_data')}">
+                            <thead>
+                            <tr>
+                                <th data-field="num">编号</th>
+                                <th data-field="group_name">分组名称</th>
+                                <th data-field="add_staff">添加人</th>
+                                <th data-field="add_time">添加时间</th>
+                                <th data-field="operate" data-width="22%">操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+</block>

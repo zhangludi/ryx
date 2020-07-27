@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>事件系统</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+   
+    <style>
+        html,
+        body,
+        #container {
+          width: 100%;
+          height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div class="info" id="text">
+    请用鼠标在地图上操作试试
+</div>
+<div class="input-card" style="margin-right:28rem">
+    <label style='color:grey'>行政区边界查询</label>
+    
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >名称</span>
+            </div>
+            <input id='district' type="text" value=''>
+    </div>
+    <input id="draw" type="button" class="btn" value="查询" />
+</div>
+<div class="input-card" style="width:6rem;background:#25A5F7;opacity:0.8; ">
+    <div>
+      <div class="input-item">
+        <button onclick="tijiao()"  class="btn" style="margin-right:1rem;color:#fff">提交</button>
+      </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/agricultural/statics/public/js/jquery.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/jquery-1.10.2.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=bb7c6f644a094402056bd707cfb53ab3&plugin=AMap.PolyEditor,AMap.Autocomplete,AMap.PlaceSearch,AMap.MouseTool,AMap.Geocoder,AMap.DistrictSearch,AMap.CitySearch"></script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript">
+
+
+
+    //初始化地图对象，加载地图
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        zoom: 13
+    });
+
+    //获取用户所在城市信息
+    function showCityInfo() {
+        //实例化城市查询类
+        var citysearch = new AMap.CitySearch();
+        //自动获取用户IP，返回当前城市
+        citysearch.getLocalCity(function(status, result) {
+            if (status === 'complete' && result.info === 'OK') {
+                if (result && result.city && result.bounds) {
+                    var cityinfo = result.city;
+                    // var citybounds = result.bounds;
+                    // document.getElementById('info').innerHTML = '您当前所在城市：'+cityinfo;
+                    //地图显示当前城市
+                    $("#district").val(cityinfo);
+                    // map.setBounds(citybounds);
+                }
+            } else {
+                document.getElementById('info').innerHTML = result.info;
+            }
+        });
+    }
+    showCityInfo();
+
+    var district = null;
+    var polygons=[];
+    function drawBounds() {
+        //加载行政区划插件
+        if(!district){
+            //实例化DistrictSearch
+            var opts = {
+                subdistrict: 0,   //获取边界不需要返回下级行政区
+                extensions: 'all',  //返回行政区边界坐标组等具体信息
+                level: 'district'  //查询行政级别为 市
+            };
+            district = new AMap.DistrictSearch(opts);
+        }
+        //行政区查询
+        // district.setLevel(document.getElementById('level').value)
+        district.search(document.getElementById('district').value, function(status, result) {
+            map.remove(polygons)//清除上次结果
+            polygons = [];
+            var bounds = result.districtList[0].boundaries;
+            if (bounds) {
+                for (var i = 0, l = bounds.length; i < l; i++) {
+                    //生成行政区划polygon
+                    var polygon = new AMap.Polygon({
+                        strokeWeight: 1,
+                        path: bounds[i],
+                        fillOpacity: 0.4,
+                        fillColor: '#80d8ff',
+                        strokeColor: '#0091ea'
+                    });
+                    alert(polygon)
+                    polygons.push(polygon);
+                }
+            }
+            map.setFitView(polygons);//视口自适应
+        });
+    }
+    drawBounds();
+    document.getElementById('draw').onclick = drawBounds;
+    document.getElementById('district').onkeydown = function(e) {
+        if (e.keyCode === 13) {
+            drawBounds();
+            return false;
+        }
+        return true;
+    };
+
+
+
+
+
+    function showInfoClick(e){
+        var text = e.lnglat.getLng()+','+e.lnglat.getLat();
+        document.querySelector("#text").innerText = text;
+
+    }
+       
+    var clickHandler = function(e) {
+        log.success("您选择了此位置");
+        new AMap.InfoWindow({
+            content:'位置',
+        }).open(map,e.lnglat)
+    };
+    // 
+    map.on('click', clickHandler);
+    map.on('complete', function() {
+        setTimeout(function(){
+            // 模拟触发地图click事件
+            map.emit('click',{
+                lnglat : map.getCenter()
+            });
+        },2000)
+    })
+
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+    var geocoder = new AMap.Geocoder({
+        city: "010", //城市设为北京，默认：“全国”
+        radius: 1000 //范围，默认：500
+    });
+    function tijiao(){
+        var value11 = $('#text').text();
+        geocoder.getAddress(value11, function(status, result) {
+            if (status === 'complete'&&result.regeocode) {
+                var address = result.regeocode.formattedAddress;
+                this.parent.$("#party_address").val(address);
+            }else{
+                log.error('根据经纬度查询地址失败')
+            }
+        });
+        this.parent.$("#{$name}").val(value11);
+        parent.layer.close(index);
+    }
+    log.success("绑定事件!");  
+    map.on('click', showInfoClick);
+    document.getElementById("clickOn").onclick = clickOn;
+    document.getElementById("clickOff").onclick = clickOff;
+
+
+</script>
+<script>
+    
+ 
+</script>
+</body>
+</html>

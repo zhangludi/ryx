@@ -1,0 +1,55 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+
+</block>
+<block name="body">
+<div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space15">
+    	<form action="{:U('Ccpcommunist/ccp_communist_label_save')}" id="form_sample_2" onsubmit="return check()" class="form-horizontal" method="post">
+			<input type="hidden" name="communist_no" value="{$communist_no}">
+			<div class="layui-col-xs12 mt-10">
+				<div class="layui-card">
+	                <div class="layui-card-body layui-form" style="height: 32rem;">
+	                    <div class="layui-row">
+							<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>党员标签：</strong></div>
+							<div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+								<select name="communist_label" xm-select="communist_label" xm-select-skin="danger" xm-select-search>
+									<php>echo getBdCodeSelect('communist_label_code',$communist_label)</php>
+								</select>
+							</div>
+							<span class="fcolor-red fsize-18 lh-35 pl-5"></span>
+						</div>
+					</div>	
+				</div>
+			</div>	
+	        <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="text-align: right">
+                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                    </div>
+                </div>
+            </div>
+	    </form>
+    </div>
+</div>
+
+</block>
+<block name="js">
+<script>
+function layer_colse() {
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+}
+layui.use([ 'form', 'laydate','formSelects'], function() {
+    var $ = layui.$
+    , admin = layui.admin
+    , element = layui.element
+    , layer = layui.layer
+    , laydate = layui.laydate
+    , form = layui.form
+    , formSelects = layui.formSelects;
+    form.render();
+});
+</script>
+</block>

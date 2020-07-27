@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>社区服务</title>    
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/public/css/sp_public.css">
+    <link rel="stylesheet" href= "__STATICS__/apps/page_allinone/community/css/service.css">
+</head>
+<style type="text/css">
+.title {
+    width: 1123px;
+    height: 209px;
+    margin: 0 auto;
+    margin-top: 120px;
+}
+.hand_con {
+    position: relative;
+    width: 1445px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+</style>
+<body class="bg">
+<header class="title clearfix" style="text-align: center;width: 1650px;" >
+    <img src="__STATICS__/apps/page_allinone/public/images/allinone_icon.png" alt="智慧党建自助服务终端" style="vertical-align:middle; width: 13%"> 
+    <span class="pl-10 pt-50" style="font-size: 92px; font-weight:600; color: #2b2b2b;vertical-align:middle;">{$web_name}一体机</span>
+	</header>
+<div class="hand_con clearfix">
+	<div class="live_con_bg">
+		<a href="{:U('Community/ipam_notice_list')}">
+		<li>
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_notes.png">
+			<div class="pull-left">通知公告</div>
+		</li>
+		</a>
+		<a href="{:U('Community/ipam_affairs_index')}">
+		<li>
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_three.png">
+			<div class="pull-left">三务公开</div>
+		</li>
+		</a>
+		<a href="{:U('News/party_news_index',array('cat_id'=>38))}">
+		<li>
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_style.png">
+			<div class="pull-left">共产党员风采</div>
+		</li>
+		</a>
+		<a href="{:U('News/party_news_index',array('cat_id'=>40))}">
+		<li>
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_party.png">
+			<div class="pull-left">党务工作风采</div>
+		</li>
+		</a>
+		<a href="{:U('News/party_news_index',array('cat_id'=>39))}">
+		<li>
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_pioneer.png">
+			<div class="pull-left">先锋风采</div>
+		</li>
+		</a>
+		<a href="{:U('Community/ipam_volunteer_list')}">
+		<li>
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_volunteer.png">
+			<div class="pull-left">志愿者服务</div>
+		</li>
+		</a>
+	</div>
+	<!--底部-->
+	<div class="clearfix live_footer">
+		<a href="{:u('Index/index')}">
+			<div class="pull-left back_bg">
+				<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/back.png">
+				<div class="pull-left">返回</div>
+			</div>
+		</a>
+		<div class="pull-right back_live">
+			<img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/service_bus.png">
+			<div class="pull-left">社区服务</div>
+		</div>
+	</div>
+</div>
+<script src="__STATICS__/apps/page_allinone/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_allinone/community/js/service.js"></script>
+</body>
+</html>

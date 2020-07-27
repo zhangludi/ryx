@@ -1,0 +1,94 @@
+<div  class="public_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div class="public_content_left career_slide">
+      {:W('Leftmenu/ipam_home_slide', array(2,'2'))}
+    </div>
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right">
+        <!--调查问卷开始-->
+        <div class="public_card">
+            <div class="public_card_title bg-img-card fcolor-white">
+                <span class="fsize-18 pl-15">调查问卷</span> /
+                <a href="javascript:;" class="fcolor-white">更多</a>
+            </div>
+            <div class="mt-15">
+                <ul class="career_question_list" id="content">
+                 <!--    <li class="mt-25 pb-25 hr-sb-dfdfdf ">
+                        <a href="./ipam_home_career_question_detail.html">
+                            <span class="fcolor-33 fsize-20 font-bold career_question_title">中国石油大学，党建调查问卷</span>
+                            <span class="pull-right fcolor-99 fsize-12 mr-10">
+                                共一页&nbsp;&nbsp;12个问题
+                            </span>
+                            <p class="fcolor-b3b3b3 mt-15">
+                                <span class="mr-15 pr-15 hr-sr-b3b3b3">发布人：赵建国</span>
+                                <span class="mr-15 pr-15 hr-sr-b3b3b3">发布时间：2017年07月14日</span>
+                                <span>浏览次数：21万次</span>
+                            </p>
+                            <p class="fcolor-66 mt-25">为进一了解当情况，请你们认真填写你们的宝贵意见！！</p>
+                        </a>
+                    </li> -->
+                    
+                </ul>
+            </div>
+             <div id="news_page"></div>
+        </div>
+        <!--调查问卷结束-->
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>
+<script>
+    var count = {$count};
+
+    //分页
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        //完整功能
+        if (count === 0) {
+            alert('暂无数据');
+        } else {
+            laypage.render({
+                elem: 'news_page'
+                ,count: count
+                ,theme: '#ff3032'
+                ,first: '首页'
+                ,last: '尾页'
+                ,limit: 10
+                ,layout: ['count', 'prev', 'page', 'next', 'skip']
+                ,jump: function(obj){
+
+                    $.ajax({
+                        type : "post",
+                        url : "{:U('Index/Life/getsurveyList')}",
+                        data :{ page:obj.curr, pagesize:obj.limit},
+                        datatype: "json",
+                        success: function (data) {
+                            $('#content').html(data.content);
+                            // 查看详情验证登陆
+                            $(".see-details").click(function (e) {
+                       	    	var flag = false;
+                       	    	 $.ajax({
+                       	             type: "POST",
+                       	             url: "{:U('Index/check_login')}",
+                       	             async:false,
+                       	             success: function(data){
+                       	            	 flag = data;
+                       	             }
+                       	         });
+                       	    	 if(flag == true){
+                       	    		 location.href = "{:U('Index/Index/login')}";
+                       	    		 return false;
+                       	    	 } else {
+                       	    		 return true;
+                       	    	 }
+                       	    });
+                        }
+                    });
+                   
+                }
+            });
+        }
+
+    });
+</script>

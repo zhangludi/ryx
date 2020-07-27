@@ -1,0 +1,213 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+	#js-grid-juicy-projects {
+    	margin-left: 0% !important;
+	}
+</style>
+</block>
+<block name="body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                    <div class="layui-card-body layui-form">
+                        <div class="layui-row">
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>计划标题：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+                                   {$cat_list.partyday_title}
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>活动时间：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    {$cat_list.partyday_time}
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                             <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>活动内容：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                    {$cat_list.partyday_content}
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>活动要求：</strong></div>
+                                    <div class="layui-col-xs6 fsize-14 fcolor-65 lh-35"> 
+                                   {$cat_list.partyday_require}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>活动附件：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									 <input type="hidden" class="form-control" id="article_img2" name="case_attach" value="{$case_data.case_situation_attach}">
+                                      <neq name="cat_list.partyday_attach" value="">
+                                         <div id="js-grid-juicy-projects" class="cbp"
+											style="height: 100px">
+											<php>echo getUploadHtml($cat_list['partyday_attach'],'40','40','1','0');</php>
+										</div>
+                                      </neq>
+								</div>
+							</div>
+						</div>
+                             
+                            <form id="form_sample_2" action="{:U('ccp_partyday_check_save')}" method="post" class="form-horizontal">
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>三会一课情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="meeting_content" name="meeting_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.meeting_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>党费缴纳情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="dues_content" name="dues_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.dues_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>宣传稿件情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="cms_content" name="cms_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.cms_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>执行党日工作计划情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="partyday_content" name="partyday_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.partyday_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>员工思想动态反应：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="response_content" name="response_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.response_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>党员遵纪守法情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="condition_content" name="condition_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.condition_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>支部计划落实情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="workable_content" name="workable_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.workable_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>积极分子培训情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="cultivate_content" name="cultivate_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.cultivate_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-xs12 mt-10">
+								<div class="layui-row">
+									<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35">
+										<strong>创新活动情况：</strong>
+									</div>
+									<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+										<textarea id="activity_content" name="activity_content"
+											class="  form-control " maxlength="100" rows="3"
+											placeholder="这个文本域的最大长度为100个字符.">{$partyday_log.activity_content}</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="layui-form-item">
+	                                <div class="layui-input-block">
+	                                    <div class="layui-footer" style="text-align: right">
+	                                    <input id="partyday_id" type="hidden" class="form-control"  value="{$cat_list.partyday_id}" name="partyday_id" />
+										<input id="partyday_log_id" type="hidden" class="form-control"  value="{$partyday_log.partyday_log_id}" name="partyday_log_id" />
+	                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+	                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">取消</button>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                         </form>
+	                     </div>
+                	</div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+
+<block name="js">
+	<script>
+	layui.use('layedit', function(){
+	    var layedit = layui.layedit;
+	    layedit.build('demoedit'); //建立编辑器
+	});
+	 layui.use([ 'form', 'laydate'], function() {
+	        var $ = layui.jquery
+	                , admin = layui.admin
+	                , element = layui.element
+	                , layer = layui.layer
+	                , laydate = layui.laydate
+	                , form = layui.form;
+	        form.render(null, 'component-form-group');
+	        laydate.render({
+	            elem: '#LAY-component-form-group-date'
+	        });
+	    })
+	
+	</script>
+</block>

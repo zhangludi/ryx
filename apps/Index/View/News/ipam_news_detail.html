@@ -1,0 +1,280 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/news_Info.css">
+<style>
+    .past_notes_con {
+        margin-top: 24px;
+        margin-left: 4%;
+    }
+</style>
+<!-- 内容开始 -->
+  <div class="public_content clearfix">
+  <!-- 左侧 -->
+  <div class="pull-left con_videoInfo_left">
+  
+    <!-- 文章详情 -->
+    <div class="con_videoInfo_details">
+        <div class="tit">{$data.title}</div>
+        <div class="clearfix mt-40">
+            <div class="pull-left color-9e">来源：{$data.article_source}<span class="ml-10">{$data.add_time}</span></div>
+            <div class="pull-right">
+                <div class="mr-15 di-i">
+                        <img class="di-ib mr-5 mb-5" src="__STATICS__/apps/page_index/images/icon_zf.png"/>209
+                    </div>
+                    <div class="mr-15 di-i">
+                        <img class="di-ib mr-5 mb-5" src="__STATICS__/apps/page_index/images/icon_pl.png"/>{$comment_count}
+                    </div>
+                    <input type="hidden" id="data_article_id" value="{$data.article_id}">
+                    <div class="di-i" onclick="give_like(1)">
+                        <eq name="msg" value="1">
+                            <img id="give_img" class="di-ib mr-5 mb-5"  src="__STATICS__/apps/page_index/images/info_dz2.png"/>
+                        <else />
+                            <img id="give_img" class="di-ib mr-5 mb-5"  src="__STATICS__/apps/page_index/images/info_dz1.png"/>
+                        </eq>
+                        <span id="article_give">{$give_count}次</span>
+                    </div>
+            </div>
+        </div>
+        <div class="summary">
+                 【描述】{$data.article_description}
+        </div>
+        
+        <div class="con_cen mt-20">
+            {$data.content}
+            <!-- <p>【编前语】中共中央政治局5月13日召开会议，决定从今年6月开始，在全党自上而下分两批开展“不忘初心、牢记使命”主题教育。不忘初心，方得始终。2016年7月1日，在庆祝中国共产党成立95周年大会上，习近平对“初心”的内涵作深刻阐述。此后，习近平在许多场合进一步提及和阐释“初心”。新华社《学习进行时》为您梳理。</p>
+<p> 记住他们，最重要的就是不忘初心，继续高举这面革命的旗帜向前走，将来我们的后代也要继续往前走，奋力实现“两个一百年”奋斗目标、实现中华民族伟大复兴的中国梦。</p>
+ <p>——2019年5月20日，会见于都县的红军后代、革命烈士家属代表时说 </p>
+ 
+                                      记住他们，最重要的就是不忘初心，继续高举这面革命的旗帜向前走，将来我们的后代也要继续往前走，奋力实现“两个一百年”奋斗目标、实现中华民族伟大复兴的中国梦。
+　　<img class="mt-20" src="__STATICS__/apps/page_index/images/info_tu1.png"/>
+            <p class="mt-10">
+                　　退役军人服务保障体系从广义上来讲包括三个方面，我们称之为“三驾马车”。一是政府机构，也就是退役军人事务部、厅、局；二是事业单位，包括正在组建的退役军人服务中心、服务站和原有的转业军官培训中心、优抚医院、光荣医院、军休所、军供站等等；三是社会力量，包括企事业单位、社会团体和志愿者机构等。只有这“三驾马车”齐头并进，退役军人工作才能做好。
+            </p>  --> 
+            
+        </div>
+        <div class="line8"></div>
+        <div class="clearfix con_share">
+            <div class="pull-left share_boder1 va-jz mr-15">
+                <img class="mr-5" src="__STATICS__/apps/page_index/images/info_zd.png">
+                <span id="give_size"  onclick="give_like(1)">
+                    <eq name="msg" value="1">
+                       点赞
+                    <else />
+                        已赞
+                    </eq>
+                </span>
+            </div>
+            <div class="pull-left share_boder2 va-jz" onclick="collect({$data.article_id})">
+                <img class="mr-5"  src="__STATICS__/apps/page_index/images/info_sc.png">
+                <eq name="fav_mcount" value="1">
+                    <span id="news_collect">已收藏</span>
+                <else />
+                    <span id="news_collect">收藏</span>
+                </eq>
+            </div>
+            <div class="pull-right share_boder3 color-9e va-jz">点击分享</div>
+        </div>
+    </div>
+    <div class="con_videoInfo_notes">
+        <!-- 视频笔记 -->
+        <form action="{:U('News/ipam_article_comment_save')}" method="post">
+            <div class="clearfix">
+                <div class="pull-left Learner_shu"></div>
+                <div class="pull-left Learner_people">评论</div>          
+            </div>
+                <input type="hidden" name="article_id" value="{$data['article_id']}">
+                <input type="hidden" name="comment_type" value="article">
+                <textarea class="con_videoInfo_input" name="comment_content" placeholder="欢迎留言讨论~"></textarea>
+           
+            <div class="clearfix">
+                <button class="pull-right sibmit" style="border: none;" >提交评论</button>
+            </div>
+        </form>
+        <!-- 视频笔记结束 -->
+        <!-- 热门评论 -->
+        <div class="con_videoInfo_past_notes">
+            <div class="clearfix">
+                <div class="pull-left Learner_shu"></div>
+                <div class="pull-left Learner_people">热门评论</div> 
+                <div class="pull-right Learner_people2 color-9e">共{$comment_count}次评论</div>  
+            </div>
+            <div class="past_notes_line"></div>
+            <div class="past_notes_con">
+                <volist name="comment_data" id="vo" empty="暂时没有评论">
+                <li class="clearfix">
+                    <div class="pull-left">
+                        <div class="tx"><img src="{$vo.communist_avatar}" /></div>
+                    </div>
+                    <div class="pull-right w-90b">
+                        <div class="color-21 f-w fsize-20">{$vo.communist_no}</div>
+                        <div class="clearfix mt-8">
+                            <div class="pull-left color-9e">{$vo.add_time}</div>
+                            <!-- <div class="pull-right va-jz"> -->
+                                <!-- <eq name="vo.code" value="1"> -->
+                                    <!-- <img class="mr-5" id="comment_img{$vo.comment_id}" onclick="give_like(2,{$vo.comment_id})" src="__STATICS__/apps/page_index/images/icon_dz.png"> -->
+                                <!-- <else /> -->
+                                    <!-- <img class="mr-5" id="comment_img{$vo.comment_id}" onclick="give_like(2,{$vo.comment_id})" src="__STATICS__/apps/page_index/images/info_dz2.png"> -->
+                                <!-- </eq> -->
+                                <!-- <span id="comment_give_map{$vo.comment_id}">{$vo.comment_give}次</span> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="mt-15 fcolor-66 lh-24">
+                            {$vo.comment_content}
+                        </div>
+                    </div>
+                </li>
+                </volist>
+            </div>
+            
+        </div>
+        <!-- 以往笔记结束 -->
+    </div>
+    
+    
+    
+  </div>
+  <!-- 右侧 -->
+  <div class="pull-right con_videoInfo_right">
+      <!-- 文章简介 -->
+        <div class="metting_right_block1">
+            <div class="clearfix w-90b m-a pt-25">
+                <div class="pull-left va-jz fcolor-white f-w">
+                    <div class="icon_shu1 di-ib mr-5"></div>
+                    最新专题学习
+                </div>
+                <div class="pull-right color-ff0 f-14em va-jz" onclick="edu_index()">全部
+                    <img class="di-ib ml-5" src="__STATICS__/apps/page_index/images/icon_right.png" >
+                </div>
+            </div>
+            <div class="tu1">
+                <img src="{$edutopic_list.topic_img}" style="width:336px;height: 189px;">
+            </div>
+            <div class="theme">{$edutopic_list.topic_title}</div>
+            <div class="memo">{$edutopic_list.memo}</div>
+            
+        </div>
+     <!-- 文章简介结束-->
+      <!-- 相关文章 -->
+      <div class="videoInfo_right_about">
+            <div class="add_title">相关文章</div>
+            <div class="add_line"></div>
+        <volist name="article_data" id="data" >
+            <li class="clearfix">
+                <div class="pull-left">
+                    <img src="{$data.article_thumb}" style="width:156px;height:88px">
+                </div>
+                <div class="pull-left ml-10">
+                    <div class="videoInfo_right_about_tit">{$data.article_title}</div>
+                    <div class="videoInfo_right_about_scan">浏览量：{$data.article_view}次</div>
+                </div>
+            </li>
+        </volist>
+        <!-- <li class="clearfix">
+            <div class="pull-left">
+                <img src="__STATICS__/apps/page_index/images/info_tu3.png">
+            </div>
+            <div class="pull-left ml-10">
+                <div class="videoInfo_right_about_tit">两会每日图片精选：格力董明珠冲镜头大笑</div>
+                <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+            </div>
+        </li>
+        <li class="clearfix">
+            <div class="pull-left">
+                <img src="__STATICS__/apps/page_index/images/info_tu3.png">
+            </div>
+            <div class="pull-left ml-10">
+                <div class="videoInfo_right_about_tit">目前中医理论差异性较大 现代医学听不懂</div>
+                <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+            </div>
+        </li>
+        <li class="clearfix">
+            <div class="pull-left">
+                <img src="__STATICS__/apps/page_index/images/info_tu3.png">
+            </div>
+            <div class="pull-left ml-10">
+                <div class="videoInfo_right_about_tit">中药在走向世界过程中存在哪些问题</div>
+                <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+            </div>
+        </li>
+        <li class="clearfix">
+            <div class="pull-left">
+                <img src="__STATICS__/apps/page_index/images/info_tu3.png">
+            </div>
+            <div class="pull-left ml-10">
+                <div class="videoInfo_right_about_tit">要幸福就要奋斗!习主席最新讲话。</div>
+                <div class="videoInfo_right_about_scan">浏览量：1240次</div>
+            </div>
+        </li> -->
+        
+      </div>
+           <!--通知公告-->
+    {:W('Article/notice_index')}
+      
+       <!-- 相关专题视频结束 -->
+  </div>
+    
+    
+    
+  </div>
+  <!-- 内容区域结束 -->
+  <script type="text/javascript" src="__STATICS__/apps/page_index/js/news_Info.js"></script> 
+  <script>
+        function edu_index(){
+            window.location.href="{:U('Edu/ipam_edu_index')}";
+        }
+        //点赞
+        function give_like(type,comment_id){
+            var article_id = $("#data_article_id").val();
+            $.ajax({
+                url:"{:U('News/news_give_like')}",
+                data:{'give_type':type,'comment_id':comment_id,'article_id':article_id},
+                type:"post",
+                async:false,
+                success:function(msg){
+                    switch(type){
+                        case 1 : 
+                            $('#article_give').html(msg.give_count+'次');
+                            break; 
+                        case 2:
+                            $('#comment_give_map'+comment_id+'').html(msg.give_count+'次');
+                            break;
+                    }
+                    if(msg.num==1){
+                        if(type==1){
+                            $("#give_img").attr('src','__STATICS__/apps/page_index/images/info_dz1.png');
+                            $("#give_size").html('已赞');
+                        }else{
+                            $("#comment_img"+comment_id+"").attr('src','__STATICS__/apps/page_index/images/info_dz1.png');
+                        }
+                    }else{
+                        if(type==1){
+                            $("#give_size").html('点赞');
+                            $("#give_img").attr('src','__STATICS__/apps/page_index/images/info_dz2.png');
+                        }else{
+                            $("#comment_img"+comment_id+"").attr('src','__STATICS__/apps/page_index/images/info_dz2.png');
+                        }
+                    }
+                }
+            })
+        }
+        //收藏
+        function collect(article_id){
+            $.ajax({
+                url:"{:U('News/news_collect')}",
+                data:{'article_id':article_id},
+                type:"post",
+                async:false,
+                success:function(msg){
+                    switch(msg){
+                        case 1:
+                            alert("收藏成功");
+                            $("#news_collect").html("已收藏");
+                        break;
+                        case 2:
+                            alert("取消收藏");
+                            $("#news_collect").html("收藏");
+                        break;
+                    }
+                }
+            })
+        }
+       
+  </script>

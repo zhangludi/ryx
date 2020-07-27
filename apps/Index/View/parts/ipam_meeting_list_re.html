@@ -1,0 +1,16 @@
+<div class="metting_right_block3">
+        <img src="{$meeting_count.meetting_thumb}" style="width:384px;height:216;border-radius: 10px">
+        <div class="color-ff3032 f-16em f-w mt-25 ml-15">#热门会议</div>
+        <div class="tit">{$meeting_count.meeting_name}</div>
+        <div class="clearfix participate">
+            <div class="pull-left">
+                <ul class="clearfix">
+                    <volist name="communist_list" id="vo">
+                        <img src="{$vo.communist_avatar}">
+                    </volist>
+                </ul>
+            </div>
+            <div class="pull-right"><span class="color-2F87FF">{$meeting_count.meeting_count}</span>参与</div>
+        </div>
+        <div class="color-9e f-16em mt-10 ml-20">地点：{$meeting_count.meeting_addr}</div>
+    </div>

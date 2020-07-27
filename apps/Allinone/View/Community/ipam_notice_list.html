@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>党建要闻</title>    
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/public/css/sp_public.css">
+    <link rel="stylesheet" href= "__STATICS__/apps/page_allinone/community/css/notes.css">
+</head>
+<body class="bg">
+    <a onclick="window.history.go(-1);"><div class="back1"><img src="__STATICS__/apps/page_allinone/community/images/back1_bg.png"></div></a>
+   <header class="title clearfix" style="text-align: center;width: 1650px;" >
+    <img src="__STATICS__/apps/page_allinone/public/images/allinone_icon.png" alt="智慧党建自助服务终端" style="vertical-align:middle; width: 4.5%"> 
+    <span class="pl-10 pt-50" style="font-size: 48px; font-weight:600; color: #2b2b2b;vertical-align:middle;">{$web_name}一体机</span>
+    </header>
+<div class="hand_con clearfix">
+    <div class="clearfix style_tit">
+        <img class="pull-left" src="__STATICS__/apps/page_allinone/community/images/notes_bg.png">
+        <div class="pull-left">通知公告</div>
+    </div>
+    <div class="style_con">
+        <volist name="notice_list" id="list">
+        <a href="{:U('Community/ipam_notice_info',array('notice_id'=>$list['notice_id']))}">
+        <li>
+            <div class="pull-right notes_rang"></div>
+            <div class="style_con_tit">{$list.notice_title}</div>
+            <div class="clearfix style_con_time">
+                <div class="pull-left fsize-16 color-83">发布人：<span>{$list.add_staff}</span></div>
+                <div class="pull-right fsize-16 color-83">{$list.add_time}</div>
+            </div>
+        </li>
+        </a>
+        </volist>
+    </div>
+  
+    
+</div>
+
+
+<script src="__STATICS__/apps/page_allinone/static/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_allinone/community/js/notes.js"></script>
+</body>
+</html>
+
+
+
+

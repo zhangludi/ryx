@@ -1,0 +1,139 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header"><php>echo getFunctionInfo($action);</php></div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							时间：
+						</div>
+						<div class="layui-col-xs3 ">
+							<input class="layui-input" name="start" id="start" autocomplete="off" placeholder="请选择日期">
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+							关键字：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入关键字">
+						</div>
+						<div class="layui-col-xs2 pull-right">
+							<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+							<eq name="type" value='2'>
+							<a class="layui-btn table-add " style="text-decoration: none;" data-type="add" >发起公文</a>
+							</eq>
+						</div>
+					</div>
+					<input type="hidden" name="type" id="type" value="{$type}">
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+						<a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a> 
+					</script>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		var type = {$type};
+		table.render({
+			elem: '#test'
+			,url:"{:U('oa_missive_index_data')}?type="+type
+			,cellMinWidth: 80
+			,height:'full-155'
+			, id : 'ztreedata'
+			,cols: [[
+				{field:'missive_id', title:'编号',width:'8%',align: 'center', sort: true}
+				,{field:'missive_title', title:'公文主题',align: 'left'}
+				,{field:'missive_receiver', title:'收件人',width:170}
+				,{field:'missive_communist', title:'拟稿人',width:170}
+				,{field:'missive_corporation', title:'所在部门',width:170}
+				,{field:'missive_date',width:'13%', title:'发送时间',align:"center"}
+				,{field:'status', title:'状态',width:120,align:"center"}
+				,{field:'sex', title:'操作', width:'10%',align: 'center' ,toolbar: '#barDemo'}
+			]]
+			,page: true
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'del'){
+				layer.confirm('确认删除？', function(index){
+					window.location='{:U("oa_missive_do_del")}?missive_no='+data.missive_no+'&type='+data.type+'';
+				});
+			}else if(obj.event === 'detail'){
+				var index = layer.open({
+                    type: 2,
+                    title: false,
+                    end:false,
+                    closeBtn: 0,
+                    shift: 1,
+                    area : ['800px' , '400px'],
+                    content: "{:U('oa_missive_info')}?type="+data.is_type+"&missive_no="+data.missive_no+"",
+                });
+                layer.full(index);
+			}
+		});
+		var $ = layui.$, active = {
+	        reload: function(){
+	        	var type = $('#type').val();
+	            var keywords = $('#keywords').val();
+	            var start = $('#start').val();
+		      	table.reload('ztreedata', {
+			        page: {
+			          curr: 1 
+			        }
+			        ,where: {
+			        	"keywords": keywords,
+			        	"type": type,
+			        	"start":start
+			        }
+		      	});
+	        },
+	        add: function(){
+	        	var index = layer.open({
+	                type: 2,
+	                title: false,
+	                end:false,
+	                closeBtn: 0,
+	                shift: 1,
+	                area : ['800px' , '400px'],
+	                content: "{:U('Oamissive/oa_missive_edit')}",
+	            });
+	            layer.full(index);
+	        }
+	    };
+	    $('.layui-form .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		});
+	});
+	
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+	});
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#start',
+			range: true
+		});
+	})
+</script>
+</block>

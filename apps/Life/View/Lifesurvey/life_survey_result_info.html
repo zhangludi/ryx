@@ -1,0 +1,95 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css">
+</block>
+<block name="body">
+	<div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm bg-color-green">
+                                            <i class="iconfont">&#xe61c;</i>
+                                        </div>
+                                    </div>
+                                    <span class="bold ">信息</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="" class="reload"> </a>
+                                    <a href="" class="collapse"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-2 pr-0 text-r lh-35">
+                                            <b>姓名：</b>
+                                    </div>
+                                    <div class="col-md-8 pl-0 lh-35">
+                                            <span class="di-b">{$communist_info.communist_name}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 pr-0 text-r lh-35">
+                                        <b>所属支部：</b>
+                                    </div>
+                                    <div class="col-md-8 pl-0 lh-35">
+                                            <span class="di-b">{$communist_info.party_name}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 pr-0 text-r lh-35">
+                                        <b>问卷标题：</b>
+                                    </div>
+                                    <div class="col-md-8 pl-0 lh-35">
+                                        <span class="di-b">{$survey.survey_info.survey_title}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm bg-color-red">
+                                            <i class="iconfont">&#xe620;</i>
+                                        </div>
+                                    </div>
+                                    <span class="bold ">问卷详情</span>
+                                    <span class="caption-helper"></span>
+                                </div>
+                                <div class="tools">
+                                    <a href="" class="reload"> </a>
+                                    <a href="" class="collapse"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <volist name="survey['questions_list']" id="vo">
+                                    <h4 class="form-section">{$vo.questions_title}  <span class="label label-sm bg-color-green2">{$vo.questions_item}</span></h4>
+                                    <div class="row mt-5">
+                                            <div class="form-group form-md-line-input col-md-3">
+                                                <label class="control-label ml-10" style="color:brown;">选择项：{$vo.item}</label>
+                                            </div>
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" onclick="history.go(-1);" class="btn btn-sm default w-75 bor-ra-2 pull-right mr-20">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+</block>

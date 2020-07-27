@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/ccp/css/mine_personal.css"/>
+    <style>
+    	.w-9em{width: 0.45rem !important;}
+    	.h-19em{height: 0.95rem !important;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/> -->
+<style>
+header ul li {height: 45px}
+header ul li.active{ display: block; }
+.aui-icon-roundadd{font-size: 40px !important;margin-top:8px}
+.aui-nav {
+position: inherit;
+}
+/* .h0{height:0px!important} */
+.pt-0{padding-top:0px!important}
+.aui-bar {
+ min-height: 0px!important
+}
+.fcolor-white {color:#fff!important}
+.fsize-24{font-size:24px!important} 
+
+
+.aui-nav{height: 4rem;}
+.aui-nav .aui-bar-tab{height: 4rem;background:rgb(255, 255, 255);}
+.aui-border-tb:after {border-top: 1px solid rgb(200, 200, 200);border-bottom: 1px solid rgb(171, 8, 9);}
+.aui-nav .aui-bar-tab li p{width: 100%;line-height: 0.5rem;color:#333;font-size: 0.5rem;}
+.aui-nav .aui-bar-tab li .img2{display: none;}
+
+.aui-nav .aui-bar-tab .active-info p{display: none;}
+.aui-nav .aui-bar-tab .active-info .img1{display: none;}
+.aui-nav .aui-bar-tab .active-info .img2{display: inline-block;}
+.aui-border-tb:after{border-top: 1px solid #f3f3f3;}
+
+p{color:#ccc}
+
+.wh-24em{width: 1.2rem !important;height: 1.2rem !important;}
+.wh-33em{width: 1.65rem !important;height: 1.65rem !important;}
+
+.w-18em{width: 0.9rem !important;}
+.w-95b{width:95%;}
+.w-169em{width: 8.45rem;}
+
+.h-100b{height:100%;}
+.h-49em{height: 2.45rem !important;}
+.h-18em{height: 0.9rem !important;}
+.h-17em{height: 0.85rem;}
+
+.p-0{padding: 0 !important;}
+
+.mt-14em{margin-top: 0.7rem !important;}
+.mt-3m{margin-top:-4px}
+.mt-2em{margin-top: 0.1rem !important;}
+
+.ml-8em{margin-left: 0.4rem !important;}
+
+.mr-8em{margin-right: 0.4rem !important;}
+
+.m-14em-auto-12em{margin: 0.7rem auto 0.6rem !important;}
+
+.f-18em{font-size: 0.9rem !important;}
+
+.color_ff{color:#fff;}
+
+.bt-1-f9{border-top: 1px solid #f1f1f1;}
+
+
+
+</style>
+</head>
+<style>
+</style>
+<body class="bg-color-f9">
+	<div class="bg-color-white clearfix pt-12em pl-12em pb-12em">
+		<div class="pull-left">
+			<eq name="communist_info.communist_avatar" value="">
+				<img class="w-103em h-144em" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" />
+			<else/>
+				<img class="w-103em h-144em" src="{$communist_info.communist_avatar}"  />
+			</eq>
+
+			<!-- <img class="" src="{$communist_info.communist_avatar}" /> -->
+		</div>
+		<div class="pull-left pl-12em pt-20em">
+			<div class="f-15em color-33 pb-5em">{$communist_info.communist_name}</div>
+			<div class=""><span class="color-75 f-14em"><!--<i class="iconfont f-16em color-ff4530">&#xe889;</i>-->{$communist_info.age}</span></div>
+			<div class="f-11em  border-ff3032 color-ff3032 text-align lh-19em mt-10em">{$communist_info.communist_sex}</div>
+			<div class="f-11em border-ff3032 color-ff3032 text-align lh-19em mt-10em pl-10em pr-10em">{$communist_info.post_no}</div>
+		</div>
+	</div>
+	<div class="mt-12em bg-color-white">
+		<div class="clearfix pl-12em pr-12em bb-df">
+			<div class="pull-left lh-48em color-33 f-14em">生日</div><span class="pull-right lh-48em color-33 f-14em">{$communist_info.communist_birthday}</span>
+		</div>
+		<div class="clearfix pl-12em pr-12em bb-df">
+			<div class="pull-left lh-48em color-33 f-14em">邮箱</div><span class="pull-right lh-48em color-33 f-14em">{$communist_info.communist_mobile}</span>
+		</div>
+		<div class="clearfix pl-12em pr-12em bb-df">
+			<div class="pull-left lh-48em color-33 f-14em">地址</div><span class="pull-right lh-48em color-33 f-14em">{$communist_info.communist_address}</span>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/ccp/js/mine_personal.js"></script>
+</html>
+

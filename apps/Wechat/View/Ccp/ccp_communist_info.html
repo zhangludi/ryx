@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>  
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-flex.css"/> 
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-pull-refresh.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/ccp/css/hr_staff.css"/>
+</head>
+<style>
+header ul li{
+	display: block !important;
+}
+img {
+    display: inline-block;
+}
+/*.h-100b{
+	height: 100% !important;
+}*/
+.ml-40em {
+    margin-left: 1rem;
+}
+</style>
+<body style="height: auto;">
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>	    		
+    		<div class="aui-title icon_medium f-16em">我的</div>
+    		<a class="pull-right f-12em f-w pr-12em  w-40em h-20em mt-10em" onclick="out_communist();" style="line-height: 24px;"> 退出</a>
+    	</li>
+    </ul>
+</header>
+<!-- <section>
+    <div class="w-100b h-98em bg-color-fb4747 po-ab top-0em"></div>
+</section> -->
+<section class="bg-color-f5">
+	<div class="clearfix ml-40em mr-55em pt-16em pb-16em">
+		<div id='cc' class="pull-left mr-40em w-104em h-37em">
+			<eq name="communist_info.communist_avatar" value="">
+				<img class="w-100b h-100b" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" />
+			<else/>
+				<img class="w-100b h-100b" src="{$communist_info.communist_avatar}"  />
+			</eq>
+		</div>
+		<div class="pull-left">
+			<!-- 姓名 -->
+			<div class="w-100b pt-12em">
+			<span class="icon_bold f-20em lh-22em color-ff4242 f-w">{$communist_info.communist_name}</span>
+			</div>
+			<!-- 入党时间 -->
+			<div class="h-12em w-100b mt-15em">
+				<p class="pull-left m-0 w-60em f-12em lh-12em color-66 text-justify">入党时间:</p>
+				<span class="pull-left icon_regular f-12em lh-12em color-66">{$communist_info.communist_ccp_date}</span>
+			</div>
+			<!-- 手机号 -->
+			<div class="h-12em w-100b mt-6em">
+				<p class="pull-left m-0 w-60em f-12em lh-12em color-66 text-justify">手机号码:</p>				
+				<span class="pull-left icon_regular f-12em lh-12em color-66">{$communist_info.communist_mobile}</span>
+			</div>
+			<!-- 所属支部 -->
+			<div class="mt-14em">
+				<span  class="pull-left h-12em color-0095ff f-12em lh-12em party_name">{$communist_info.party_name}</span>
+			</div>
+			<!-- 积分 -->
+			<div class="h-24em w-8em mt-35em po-re" onclick="integral({$communist_info.communist_no});">
+			<img class="w-8em h-24em" src="__STATICS__/apps/page_wechat/public/aui2/img/me_jf.png"/>
+				<div class="clearfix po-ab top-2em left-30em">
+				<p class="pull-left m-0 f-12em lh-24em color-ff4242 text-justify">积分:</p>				
+				<span id="integral" class="pull-left f-12em lh-24em color-ff4242">{$communist_info.integral}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--第一部分-->	
+	<!--<div class="p-12em bg-color-f9">
+		<div class="over-h">
+			<div id='cc' class="pull-left w-103em h-144em mr-12em">
+				<img id="communist_avatar" class="w-100b h-100b" src=""/>
+			</div>
+			<div class="pull-left w-236em">
+				<div class="w-100b mt-20em">
+					<span id="communist_name" class="pull-left f-22em lh-22em color-33 f-w"></span>
+				</div>
+				<div class="clearfix"></div>
+				<div class="h-14em w-100b mt-15em" onclick="openIntegral('hr_integral_header')">
+					<p class="pull-left m-0 w-60em f-14em lh-14em color-75 f-w text-justify">积分</p>
+					<img class="pull-left w-6em h-12em lh-14em ml-12em mr-12em" src="../../../statics/public/aui2/img/dl-icon.png"/>
+					<span id="integral" class="pull-left f-14em lh-14em color-ff5a2d"></span>
+					<i class="pull-right iconfont f-12em lh-14em color-99">&#xe765;</i>
+				</div>
+				<div class="h-14em w-100b mt-15em">
+					<p class="pull-left m-0 w-60em f-14em lh-14em color-75 f-w text-justify">入党时间</p>
+					<img class="pull-left w-6em h-12em lh-14em ml-12em mr-12em" src="../../../statics/public/aui2/img/dl-icon.png"/>
+					<span id="communist_ccp_date" class="pull-left f-14em lh-14em color-99"></span>
+				</div>
+				<div class="h-14em w-100b mt-15em">
+					<p class="pull-left m-0 w-60em f-14em lh-14em color-75 f-w text-justify">手机号</p>
+					<img class="pull-left w-6em h-12em lh-14em ml-12em mr-12em" src="../../../statics/public/aui2/img/dl-icon.png"/>
+					<span id="communist_mobile" class="pull-left f-14em lh-14em color-99"></span>
+				</div>
+			</div>
+		</div>
+		<div class="over-h pt-8em">
+			<span id="" class="pull-left pl-25em pr-25em h-22em grad color-white f-12em lh-22em text-align party_name bor-ra-3"></span>
+		</div>
+	</div>-->
+<!--党员信息-->	
+<section class="hr_con mt-12em mb-12em">
+	<div class="clearfix">
+		<div class="h-44em lh-44em bg-color-fafafa bb-1-eb hr-border-radius pl-16em pr-16em f-16em color-21 icon_medium">党员信息</div>
+		<div class="pl-16em pr-16em w-100b">
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">身份证</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_idnumber}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">电话</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_tel}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">邮箱</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_email}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">毕业院校</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_school}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">所学专业</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_specialty}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">籍贯</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_paddress}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">现住址</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_address}</div>
+			</li>
+		</div>
+	</div>
+</section>
+<!--党内信息-->
+<section class="hr_con mt-12em mb-12em">
+	<div class="clearfix">
+		<div class="h-44em lh-44em bg-color-fafafa bb-1-eb hr-border-radius pl-16em pr-16em f-16em color-21 icon_medium">党内信息</div>
+		<div class="pl-16em pr-16em w-100b">				
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">所属党组织</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left party_name">{$communist_info.party_name}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em bb-1-eb clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">党内职务</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.post_name}</div>
+			</li>
+			<li class="w-100b h-40em lh-40em clearfix">
+				<div class="f-14em lh-40em color-9e mr-12em w-25b pull-left">入党时间</div>
+				<div class="f-14em lh-40em w-50b color-21 pull-left">{$communist_info.communist_ccp_date}</div>
+			</li>
+		</div>
+	</div>	
+</section>
+<!--党员发展历程-->
+<noempty name="communist_info.dev_log_list">
+<section id="bb" class="hr_con mt-12em mb-12em">
+	<div class="clearfix">
+		<div class="h-44em lh-44em bg-color-fafafa bb-1-eb hr-border-radius pl-16em pr-16em f-16em color-21 icon_medium">党员历程</div>
+		<div class="clearfix dev_log_list_height">
+			<ul class="pl-12em pt-12em pr-12em mb-12em po-re" id="dev_log_list">
+			<volist name="communist_info.dev_log_list" id="list"  mod="2">
+				<li class="100b">
+					<div class="pull-left">{$list.add_time}</div>
+					<div class="pull-left ml-12em po-re z-index2">
+						<img class="wh-24em left-12mem" src="__STATICS__/apps/page_wechat/images/images_edu/edu_notes_time.png" alt="" />			
+					</div>
+					<div class="pull-left ml-12mem pl-20em w-60b over-h pb-20em border-left-3 z-index1">
+						<div class="f-14em color-21">{$list.log_title}</div>
+						<div class="f-12em color-21">{$list.log_content}</div>
+					</div>
+				</li>
+			</volist>
+			</ul>
+		</div>
+	</div>	
+</section>
+
+
+<!-- <section id="bb" class="hr_con mt-12em mb-12em">
+	<div class="clearfix">
+		<div class="h-44em lh-44em bg-color-fafafa bb-1-eb hr-border-radius pl-16em pr-16em f-16em color-21 icon_medium">党员历程</div>
+		<div class="clearfix">
+			<ul class="pl-12em pt-12em pr-12em mb-12em po-re" >
+		    	<div class="po-ab w-2px h-100b bg-color-ffb767 left-50b ml-1mpx"></div>	
+		    	
+		    		<eq name="mod" value="1">
+			    	<li class="di-b over-h">
+	                    <div class="w-50b pull-right po-re pb-25em">
+	                   		<img class="po-ab wh-24em left-12mem top-0" src="__STATICS__/apps/page_wechat/images/images_edu/edu_notes_time.png" alt="" />
+	                      	<p class="f-15em lh-24em color-33 pl-20em">{$list.add_time}</p>
+	                      	<p class="f-15em color-99 mt-4em pl-20em"><span class="color-ffb767">{$list.log_content}</span></p>
+	                    </div>
+	                </li>
+                	<else/>
+	                <li class="di-b over-h">
+					   <div class="w-50b pull-left po-re pb-25em text-r">
+							<img class="po-ab wh-24em right-12mem top-0" src="__STATICS__/apps/page_wechat/images/images_edu/edu_notes_time.png" alt="" />
+	                      	<p class="f-15em lh-24em color-33 pr-20em">{$list.add_time}</p>
+	                      	<p class="f-15em color-99 mt-4em pr-20em"><span class="color-ffb767">{$list.log_content}</span></p>
+	                    </div>
+	                </li>
+            		</eq>
+            	</volist>
+			</ul>
+		</div>
+	</div>	
+</section> -->
+</noempty>
+<!--结束-->
+<noempty name="communist_info.log_list">
+<section class="hr_con mt-12em mb-12em">
+	<div class="h-44em lh-44em bg-color-fafafa bb-1-eb hr-border-radius pl-16em pr-16em f-16em color-21 icon_medium">党内生活</div>
+	<div class="pb-5em">
+		<volist name="communist_info.log_list" id="log">
+		<div class="pl-12em pr-12em pt-15em pb-15em bb-1-eb bg-color-whiter">
+   			<p class="f-12em lh-15em f-w color-99">{$log.add_time}</p>
+   			<div class="f-15em lh-17em color-33 mt-10em">
+   				<img class="w-15em h-17em lh-17em pull-left mr-5em mt-4em" src="__STATICS__/apps/page_wechat/images/images_edu/edu_notes_time.png" alt="" />{$log.log_content}
+   			</div>
+   		</div>
+   		</volist>
+	</div>
+</section>
+</noempty>
+<footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="background: #f4f4f4;">
+    <ul class="aui-bar-tab h-49em" style="z-index: 999;">
+    	<li id="tabbar1" onclick="randomSwitchBtn(this,'1')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage1.png" class="fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">首页</p>
+        </li>
+        <li id="tabbar2" onclick="randomSwitchBtn(this,'2')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/super_market1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/super_market2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">超市</p>
+        </li>
+        <li id="tabbar3" onclick="randomSwitchBtn(this,'3')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">学习</p>
+        </li>
+        <li id="tabbar4" onclick="randomSwitchBtn(this,'4')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">服务</p>
+        </li>
+        <li id="tabbar5" class="active-info" onclick="randomSwitchBtn(this,'5')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">我的</p>
+        </li>
+    </ul>
+</footer>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script src="__STATICS__/apps/page_wechat/edu/laydate/laydate.js"></script> 
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/bd_index.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/ccp/js/hr_staff_info.js"></script>
+
+
+
+
+<script type="text/javascript">
+function integral(communist_no){
+	location.href="{:U('Wechat/Ccp/ccp_communist_integral')}?communist_no="+communist_no;
+}
+function out_communist(){
+	location.href="{:U('Wechat/Ccp/out_communist')}";
+}
+function randomSwitchBtn(tag,type) {
+	if($(tag).hasClass('active-info')){
+		return ;
+	}
+	var eFootLis = $api.domAll('#aui-footer li'),
+ 	eHeaderLis = $api.domAll('header li'),
+ 	index = 0;
+	for (var i = 0,len = eFootLis.length; i < len; i++) {
+		if( tag == eFootLis[i] ){
+		 	index = i;
+		}else{
+			 $api.removeCls(eFootLis[i], 'active-info');
+			 $api.removeCls(eHeaderLis[i], 'active');
+		}
+	}
+	$api.addCls( eFootLis[index], 'active-info');
+	$api.addCls( eHeaderLis[index], 'active');
+	switch(type){
+	    case '1':
+	    	location.href="{:U('Wechat/Index/index')}";
+	    	;break;
+	    case '2':
+	    	location.href="{:U('Wechat/Index/store_index')}";
+	    	;break;
+	    case '3':
+	    	location.href="{:U('Wechat/Edu/edu_index')}";
+	    	;break;
+		case '4':
+			location.href="{:U('Wechat/Life/life_index')}";
+			;break;
+	    default:
+	    	location.href="{:U('Wechat/Ccp/ccp_communist_info')}";
+	    	;break;
+	}
+}
+</script>
+</html>

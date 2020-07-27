@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_notes_info.css">
+</head>
+<body class="ipam_home_public_background">
+<div class="public_content clearfix">
+ <!-- 左侧 ------------------------------------------------------------>
+<div class="edu_notes_left pull-left">
+  <div class="notes_info_tit">{$notes_info.notes_title}</div>
+<div class="clearfix notes_info_add">
+  <div class="pull-left">
+      <span class="add_origin">添加入：{$notes_info.add_staff}</span>
+      <span class="add_time">{$notes_info.add_time}</span>
+  </div>
+  <!-- <div class="pull-right">
+      <div class="pull-left info_share">
+          <img src="__STATICS__/apps/page_portal/portal/images/info_share.png">
+          <span>209</span>
+      </div>
+      <div class="pull-left info_pinglun">
+          <img src="__STATICS__/apps/page_portal/portal/images/info_pinglun.png">
+          <span>1250</span>
+      </div>
+      <div class="pull-left info_dianzan">
+          <img src="__STATICS__/apps/page_portal/portal/images/info_dianzan.png">
+          <span>6594次</span>
+      </div>
+  </div> -->
+</div>
+<if condition="$notes_info['notes_type'] == '1' || $notes_info['notes_type'] == '2'">
+  <!--原文-->   
+  <if condition="$notes_info['cat_type'] == '11'">
+    <a href="{:U('Edu/ipam_material_info',array('material_id'=>$notes_info['material_id']))}">
+  <elseif condition="$notes_info['cat_type'] == '21'"/>
+    <a href="{:U('Edu/ipam_material_videoInfo',array('material_id'=>$notes_info['material_id']))}">
+  <else/>
+    <a href="{:U('Meeting/ipam_meeting_detail',array('meeting_no'=>$notes_info['material_id'],'type_no'=>$notes_info['cat_type']))}">
+  </if>
+  <div class="clearfix notes_info_original">
+      <div class="pull-left notes_info_original_l">
+          <span>【原文】</span>{$notes_info.title}                        
+      </div>
+      <div class="pull-right notes_info_original_r">
+          <img src="{$notes_info.thumb}">
+      </div>
+  </div>
+  </a>
+</if>
+  <!--文章内容--> 
+  <div class="notes_info_con">{$notes_info.notes_content}</div>
+</div>
+ <!-- 右侧 ------------------------------------------------------------->
+<div class="edu_notes_right pull-right">
+  <div class="original_r_tit">最新笔记</div>
+  <div class="original_r_line"></div>
+    <ul>
+      <volist name="notes_list" id="list">
+        <li>
+          <a href="{:U('ipam_note_info',array('notes_id'=>$list['notes_id']))}">
+          <div class="clearfix">
+              <div class="pull-left original_shafe"></div>
+              <div class="pull-left tit">{$list.notes_title}</div>
+          </div>
+          <div class="clearfix original_r_bg">
+              <div class="pull-left"><img src="{$list.notes_thumb}"></div>
+              <div class="pull-left original_r_bg_tit">{$list.notes_content}</div>
+          </div>
+          </a>
+        </li>
+      </volist>
+    </ul>
+  </div>
+</div>
+<script src="__STATICS__/apps/page_portal/portal/js/ipam_home_public.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/edu_notes.js"></script> 
+<script>
+  //注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+  });
+</script>
+
+</body>
+</html>

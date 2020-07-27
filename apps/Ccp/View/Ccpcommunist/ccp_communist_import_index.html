@@ -1,0 +1,156 @@
+﻿<html>
+<head>
+<link rel="stylesheet" type="text/css" href="__STATICS__/public/css/jquery.step.css">
+<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js" ></script>
+<script type="text/javascript" src="__STATICS__/plugins/jquery.step.min.js"></script>
+<style>
+.main {
+	width: 500px;
+	margin: 20px auto;
+}
+
+#step {
+	margin-bottom: 10px;
+}
+
+.btns {
+	float: left;
+	margin: 0 auto;
+}
+
+.info {
+	float: left;
+	height: 34px;
+	line-height: 34px;
+	margin-left: 40px;
+	font-size: 28px;
+	font-weight: bold;
+	color: #928787;
+}
+
+.info span {
+	color: red;
+}
+.file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
+.but{
+	    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #5bc0de;
+}
+</style>
+<meta id="kancloud-proxy" version="0.0.2"></head>
+<body style="">
+<div class="main">
+	<div id="step">
+		<div class="ui-step-wrap">
+			
+		</div>
+	</div>
+	<eq name="type" value="0">
+	<div class="col-md-12 text-right export_one" style="padding-top: 10px; margin-left:20%;">
+    	 <a id="basic" class="but" >下载基础数据</a>
+    	 <a id="download_tpl" class="but" style="text-decoration: none;" target='_blank' href="__UPLOAD__/ccp/tpl_xls/communist_members.xls">下载导入模板</a>
+    	 <a id="skip" class="but" style="background-color: red;" >跳过</a>
+    </div>
+	</eq>
+	<div class="btns export_two" style="display: none;">
+		<div id="testTrueCon">
+	        <div class="portlet-body mt-30">
+	            <form  id="import" action="{:U('ccp_communist_import_do_save')}" class="form-horizontal" enctype="multipart/form-data" method="post">
+	            	<input type="hidden" name="type" value="2">
+	                <div class="form-group col-md-12" style="padding-left: 80px; ">
+	                    <div class="row">
+	                        <label class="control-label col-md-3 info p-0">导入Excel表：</label>
+	                        <a href="javascript:;" class="file">选择文件
+							    <input type="file" class="button" name="file_stu" >
+							</a>
+	                    </div>
+	                </div>
+	                <div class="col-md-12 text-right " style="margin-top: 20px;padding-left: 60%;">
+	                	 <a onclick="testTrue();" class="but">提交</a>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	<eq name="type" value="2">
+		<div class="info" style="padding-left: 31%;">导入成功!</div>
+	</eq>
+</div>
+
+<script type="text/javascript">
+	var $step = $("#step");
+	var $index = $("#index");
+	$step.step({
+		index: 0,
+		time: 500,
+		title: ["下载基础数据", "上传文件", "上传完成"]
+	});
+	var type = {$type};
+	$step.toStep(type);
+	if(type == 3){
+		$('.export_one').hide();
+		$('.export_two').hide();
+	}
+	$("#nextBtn").on("click", function() { //开始导入
+		$('.export_one').hide();
+		$('.export_two').hide();	
+		location.href="{:U('ccp_communist_import',array('type'=>3))}";
+	});
+	$("#basic").on("click", function() { //下载基础数据
+		location.href="{:U('ccp_communist_basic_data')}";
+	});
+	$("#skip").on("click", function() { //跳过
+		$step.toStep(1);
+		$('.export_one').hide();
+		$('.export_two').show();
+	});
+	function testTrue() {
+		$step.toStep(2);
+		$('.export_one').hide();
+		$('.export_two').hide();
+		$('#import').submit();
+	}
+/*	$("#btn1").on("click", function() {
+		$step.toStep(1);
+		$index.text($step.getIndex());
+	});
+	$("#btn2").on("click", function() {
+		$step.toStep(2);
+		$index.text($step.getIndex());
+	});*/
+</script>
+</body>
+</html>

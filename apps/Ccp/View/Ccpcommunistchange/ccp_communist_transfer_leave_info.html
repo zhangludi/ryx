@@ -1,0 +1,118 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+	<style type="text/css"/>
+	body{
+		div.fixed-table-body{
+			height:1000px;
+			
+		}
+	</style>
+</block>
+<block name="body">
+<div class="page-container">
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<div class="mt-20"></div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="portlet light  bordered">
+						<div class="row">
+							<div class="pull-right text-right p-0 mr-15 col-md-12 mb-30">
+								<a type="button" class="btn btn-sm default w-75 bor-ra-2 pull-right ml-20" onclick="history.go(-1)">返回</a>
+								<button type="button" onclick="previews(type)" class="btn btn-sm blue w-75 bor-ra-2 pull-right">
+									<i class="iconfont">&#xe674;</i>打印
+								</button>
+							</div>
+						</div>
+						<br />
+						<div id="dayin">
+							<div class="fsize-30 mt-30 pb-30">
+							  <center>介绍信</center>  
+							</div>
+							<table border="1px" class="center mt-30">
+								<tr class="h-200">
+									<td class="w-50 fsize-14">存<br />根</td>
+									<td class="w-500 ml-500  fsize-14" style="border-right:1px solid black;"><span class="pull-right mr-15"><br />第<input value="{$data.num}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px "  size="13" >号</span><br /><br />
+										<input value="{$data.communist_name}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px" class="ml-35 mt-10" size="15"  >同志系中共（正式）党员，组织关系由
+										<input value="{$data.old_party}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px" size="35"  ><span >转到</span><input value="{$data.new_party}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px" size="15"  >
+										 。<br /><br /><br />
+										 <span class="pull-right mr-15">
+											 <input value="{$data.year}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="5" >年
+											 <input value="{$data.month}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="3" >月
+											 <input value="{$data.day}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="3" >日
+										 </span>
+									</td>
+									<td class="w-50 mt-50  fsize-14" style="border:1px dashed black;">第<br />一<br />联</td>
+								</tr>
+							</table>
+							<center class=" fsize-14">（贴回执联处）</center>
+							<hr class="mt-0 w-600 center " style="border:1px dashed black;"></hr>
+							<span style="margin-left:65%;" class=" fsize-14">(加盖骑缝章)</span>
+							<br />
+							<center class="fsize-20 mb-20">中国共产党党员组织关系介绍信</center>
+							<table border="1px" class="center mt-30">
+								<tr class="h-250  fsize-14">
+									<td class="w-550  fsize-14" style="border-right:1px solid black;"><span class="pull-right mr-15"><br />第<input  value="{$data.num}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" >号</span><br /><br />
+										<input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px" class="pull-left mt-10 ml-20" size="15"  >
+										<br /><span class='pull-left'>：</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="{$data.communist_name}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="10" >同志（{$data.communist_sex}），<input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="5" >岁，<input value="{$data.communist_nation}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="10" >，系中共（正式）党员，身份证号码<input value="{$data.communist_idnumber}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="22" >，由<input value="{$data.old_party}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="35" >去<input value="{$data.new_party}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="22" >，请转接组织关系。该同志党费已交到<input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="10" >年 <input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="10" >月。
+										<br />
+										<br />
+										<span class="pull-right mr-15  fsize-14">
+											<input value="{$data.year}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="5" >年
+											<input value="{$data.month}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="3" >月
+											<input value="{$data.day}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="3" >日
+										</span>
+										<br />
+										<span class="pull-left ml-15 fsize-14">党员联系电话或其他联系方式：<input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="20" ></span><br />
+										<span class="pull-left ml-15 fsize-14">党员所在地基层党委通讯地址：<input style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="35" ></span><br />
+										<span class="pull-left ml-15 fsize-14">联系电话：<input style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" ></span>
+										<span class="pull-left ml-15 fsize-14">传真：<input style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" ></span>
+										<span class="pull-left ml-15 fsize-14">邮编：<input style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" ></span>
+									</td>
+									<td class="w-50  fsize-14" style="border:1px dashed black;">第<br />二<br />联</td>
+								</tr>
+							</table>
+							<br / >
+							<hr class="mt-30 w-600 center" style="border:1px dashed black;"></hr>
+							<br />
+							<center class="fsize-20 mb-20">中国共产党党员组织关系介绍信回执联</center>
+							<table border="1px" class="center mt-30">
+								<tr class="h-100">
+									<td  style="border-right:1px solid black;" class=" fsize-14"><span class="pull-right mr-15  fsize-14"><br />第<input  value="{$data.num}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" >号</span><br />
+										<input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px" class="pull-left mt-10 ml-10" size="15"  >
+										<br /><span class='pull-left  fsize-14'>：</span><br />	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input value="" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px" class="ml-20 mt-10" size="15" class='ml-20' >同志的党员组织关系已转达我处，特此回复 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</span>
+										<br />
+										<span class="pull-right mr-15  fsize-14" >
+										（盖章）
+										</span>
+										<br />
+										<span class="pull-right mr-15">
+											<input value="{$data.year}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="5" >年
+											<input value="{$data.month}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="3" >月
+											<input value="{$data.day}" style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="3" >日
+										</span>
+										<br />
+										<span class="pull-left ml-15">经办人：<input style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" ></span>
+										<span class="pull-left ml-15">联系电话：<input style="text-align:center;color: black; background-color: #FFFFFF; border: black; border-style: none; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px"  size="13" ></span>
+									</td>
+									<td class="w-50" style="border:1px dashed black;">第<br />三<br />联</td>
+								</tr>
+							</table>
+							<center class='ml-10 mt-5'>注：回执联由接收党员组织关系的基层党委在接收党员后一个月内邮寄或传真至党员原所在基层党委</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script src="__STATICS__/plugins/PrintArea/jquery.PrintArea.js" type="text/javascript"></script>
+<script >
+	function previews(type){
+		$("#dayin").printArea();
+	}
+</script>
+</block>

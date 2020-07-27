@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_study.css">
+<div>
+    <div class="public_card_title">
+        <span class="fsize-16">视频资料库</span>
+    </div>
+    <!--轮播开始-->
+    <div class="news_carousel video_carousel h-200 po-re mt-15"> <!--384 760-->
+        <div class="bd">
+            <ul class="h-200">
+                <foreach name="video_list" item="list">
+                    <li>
+                        <a class='see-details' class='see-details' href="{:U('Edu/ipam_material_info', array('material_id' => $list['material_id']))}">
+                            <img src="{$list.material_thumb}"/>
+                            <span class="di-ib w-280">{$list.material_title}123456</span>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+        <div class="hd center-text po-ab">
+            <ul>
+                <foreach name="video_list" item="list">
+                    <li></li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+    <!--轮播结束-->
+</div>
+<script>
+    //报纸轮播
+    $(".video_carousel").slide({
+        "autoPlay" : true,
+        "effect" : "left",
+        "mainCell" : ".bd ul",
+        "titCell": ".hd li",
+        "scroll": "1",
+        "vis": "1"
+    });
+</script>

@@ -1,0 +1,99 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                           标题：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="partyday_title" id="partyday_title" autocomplete="off" placeholder="请输入标题">
+	                        </div>
+	                        <div class="layui-col-xs1 center-text lh-40">
+	                            时间：
+	                        </div>
+	                        <div class="layui-col-xs2">
+	                            <input type="text" class="layui-input" name="start" id="start"  autocomplete="off" placeholder="yyyy-mm-dd">
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                          <a class="layui-btn table-add" onclick="log_add()" id="communist_add_button" style="display: none;">添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="ztreedata"  lay-filter="demo"></table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+	//            默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#ztreedata'
+	                , url: '{:U("ccp_partyday_tracking_index_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'partyday_id', width: 80,  title: '编号', sort: true}
+		                ,{field:'partyday_title', title:'标题',align:'center'}
+		                ,{field:'partyday_time', title:'活动时间',align:'center'}
+		                ,{field:'status_name', title: '状态',align:'center'}
+		                ,{field: 'operate', align:"center", title: '操作',align:'center'}
+	                ]]
+	                , page: false
+	            });
+	            
+	            var $ = layui.$, active = {
+	                    reload: function(){
+	                    	 var start=$("#start").val();
+	                         var partyday_title = $("#partyday_title").val();
+	                        table.reload('ztreedata', {
+	                            page: {
+	                              curr: 1 
+	                            }
+	                            ,where: {
+	                                "partyday_title": partyday_title,
+	                                "start":start
+	                            }
+	                        });
+	                    }
+	                };
+	                $('.layui-form .layui-btn').on('click', function(){
+	                    var type = $(this).data('type');
+	                    active[type] ? active[type].call(this) : '';
+	                });
+	        });   
+	    })
+	</script>
+
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+
+	        //常规用法
+	        laydate.render({
+	            elem: '#start',
+	            range: true
+	        });
+	    })
+
+	</script>
+</block>

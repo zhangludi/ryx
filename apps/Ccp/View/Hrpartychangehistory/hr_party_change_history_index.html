@@ -1,0 +1,302 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<style type="text/css">
+	.ystep-lg li {
+	  width: 113px;
+	}
+	.ystep-lg .ystep-step-done {
+	  background-position: -273px -131px;
+	}
+	.ystep-lg .ystep-step-active {
+		background-position: -381px -131px;
+	}
+	
+	.ystep-lg{
+		left: 0%; 
+		margin-right: 21px;
+		font-size: 1px !important;
+		
+	}
+	.portlet-body .slimScrollDiv{
+		height:420px !important;
+	}
+	.slimScrollDiv .scroller{
+		height:420px !important;
+	}
+	.fixed-table-container{
+		height:420px !important;
+	}
+	.fixed-table-body{
+		height:320px !important;
+	}
+	.step-button {
+		margin-top: 100px;
+		opacity: 0;
+	}
+	.ystep-container-steps{
+		font-size: 14px !important;
+	}
+</style>
+</block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md3">
+	            <div class="layui-card">
+	                <form class="layui-form">
+	                    <div class="layui-card-header" style="position: relative;">
+                            <span>组织选择</span>
+                        </div>
+	                    <div class="layui-card-body" style="overflow-y:auto">
+	                        <div class="over-h-tree">
+	                            <ul id="treeDemo" class="ztree ztree-demo">
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	        <div class="layui-col-md9">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php><span id="party_change_time"></span></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                                <div class="layui-col-xs3 pull-right" >
+	                                    <a class="layui-btn table-add " id="change_history_add"     style="text-decoration: none;" title="添加">添加</a>
+	                                </div>
+	                            </div>
+	                            <input type="hidden" id="party" value="{$party_no}" >
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+	                            </table>
+	                            <script type="text/html" id="operate">
+	                                <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+	                                <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+	                                <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+		<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>">组织换届基本流程</div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                                <div class="layui-col-xs6 pull-right">
+	                                	<!-- <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a> -->
+                                		<!-- <a class="layui-btn table-add " data-type="add" id="add" style="text-decoration: none;" title="添加">添加</a> -->
+	                                    <a class="layui-btn table-add " href="{:U('Hrpartychange/hr_party_change_flow_index')}">编辑流程信息</a>
+	                                    <a href="{:U('Hrpartychange/hr_party_change_templete_index')}" class="layui-btn table-add">下载材料模板</a>
+	                                </div>
+	                            </div>
+	                            <div class="portlet-body">
+									<div class="row center">
+										<div class="ystep2 "></div>
+									</div>
+								</div>
+	                            
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+		function xiazai(){
+			$("#xiazai").attr("href","{:U('Hrpartychange/hr_party_change_flow_index')}");
+		}
+		$("#change_history_add").click(function(){
+			var party_no = $("#party").val();
+			var url = "{:U('Hrpartychange/hr_party_change_history_edit')}?party_no="+party_no+"";
+			location.href = url;
+		})
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	        	
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("hr_party_change_history_index_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                    {field: 'change_time', title: '换届时间' , sort: true}
+	                    , {field: 'add_time',  title: '上传时间'}
+	                    , {field: 'party_name',  title: '党组织'}
+	                	, {field: 'add_staff',  title: '添加人'}
+	                	, {field: 'operate', width: 180, title: '操作'}
+	                ]]
+	                , page: false
+	            });
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+			        console.log(obj)
+			    });
+			    //监听工具条
+			    table.on('tool(demo)', function(obj){
+			        var data = obj.data;
+			        var idcard_no = data.idcard_no;
+			        if(obj.event === 'detail'){
+	                    var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('Edumaterial/edu_material_info')}?material_id="+data.material_id+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+		          	} else if(obj.event === 'del'){
+		              	layer.confirm('确认删除该数据吗？', function(index){
+			              	window.location='{:U("Edumaterial/edu_material_do_del")}?material_id='+data.material_id+'';
+		                    layer.close(index);
+		              	});
+		          	} else if(obj.event === 'edit'){
+		          		var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('Edumaterial/edu_material_edit')}?material_id="+data.material_id+"&cat_id="+data.material_cat+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+		          	}
+		      	});
+		      	
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time
+					        }
+				      	});
+			        },
+			        add: function(){
+	                	var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('Edumaterial/edu_material_edit')}",
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+	            	}
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	        //点击左侧树的事件
+	        var setting = {
+	            view: {
+	                showLine: false,
+	            },
+	            data: {
+	                key: {
+	                    title: "t"
+	                },
+	                simpleData: {
+	                    enable: true
+	                }
+	            },
+	            callback: {
+	                onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
+	                	$('#party').val(node.id);
+                        layui.use('table', function () {
+                            var table = layui.table;
+                            table.render({
+                                elem: '#demo'
+                                , url: '{:U("hr_party_change_history_index_data")}?party_no='+node.id+''
+                                , height: 'full-160'
+                                , cols: [[
+                                    {field: 'change_time', title: '换届时间' , sort: true}
+				                    , {field: 'add_time',  title: '上传时间'}
+				                    , {field: 'party_name',  title: '党组织'}
+				                	, {field: 'add_staff',  title: '添加人'}
+				                	, {field: 'operate', width: 180, title: '操作'}
+                                ]]
+                                , page: true
+                            });
+                        });
+	                }
+	            }
+	        };
+
+	        var zNodes = [
+	        	<volist name="party_list" id="list" key = 'k'>
+	            	{id:"{$list.party_no}", pId:"{$list.party_pno}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
+	            </volist>
+	        ];
+
+	        $(document).ready(function () {
+	            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	        });
+	    })
+	</script>
+	<script type="text/javascript">
+		$(".ystep2").loadStep({
+		  	size: "large",
+		  	color: "green",
+		  	steps: [
+		  	<volist name="flow_list" id="flow">
+				"{$flow.flow_name}",
+		  	</volist>
+		  	
+		  	]
+		});
+		$(".ystep2").setStep({$flow_count});
+		var width = {$flow_count} * 140;
+		var bar_width = ({$flow_count} - 1) * 140;
+		$(".ystep-container").css('width',width);
+		$(".ystep-progress").css('width',bar_width);
+		$(".ystep-progress-bar").css('width',bar_width);
+
+	</script>
+	<script>
+		
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>

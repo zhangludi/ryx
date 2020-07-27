@@ -1,0 +1,76 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<form>
+				<div class="layui-card-body layui-form">
+				<div class="layui-row">
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									{$notes_info.notes_title}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>任务内容：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									{$notes_info.notes_content}
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									{$notes_info.memo}
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+	layui.use([ 'form', 'laydate','layedit'], function() {
+		var form = layui.form;
+		var layedit = layui.layedit
+			,$ = layui.jquery;
+		var index = layedit.build('LAY_demo1');  
+		form.on('select(test)', function(data){
+			var value = data.value;
+			$('#week')[0].style.display = 'none'; 
+			$('#month')[0].style.display = 'none'; 
+			$('#year')[0].style.display = 'none'; 
+			if(value == 12){
+				$('#week')[0].style.display = ''; 
+			}else if(value == 13){
+				$('#month')[0].style.display = '';
+			}else if(value == 14){
+				$('#year')[0].style.display = '';
+			}
+		});
+	})
+</script>
+</block>

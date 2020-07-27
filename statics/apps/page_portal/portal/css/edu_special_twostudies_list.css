@@ -1,0 +1,325 @@
+/*——————————————————————————————本页面公用—————————————————————————————————————————*/
+.public_content{
+	padding-bottom: 64px !important;	
+}
+.ipam_home_public_background .ipam_home_public_title{
+	width: 1200px;
+    margin: 36px auto 50px auto !important;
+    text-align: center;
+}
+
+
+
+/*——————————————————————————————页面第一部分专题样式—————————————————————————————————————————*/
+.edu_con_special{
+	width: 1200px;
+    height: 354px;
+    background: #ffffff;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;	
+    margin-bottom: 64px;
+}
+.edu_con_special_tu1 img{
+	width: 572px;
+	height: 322px;
+	border-radius: 5px;
+	padding: 16px;
+}
+.edu_con_special_right{
+	padding-right: 16px;
+	padding-top: 16px;
+	width: 48%;
+}
+.edu_con_special_right p{
+	padding-top: 19px;
+    width: 572px;
+    height: 95px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #212121;
+}
+.special_right_tit{
+	width: 440px;
+    overflow: hidden;
+    height: 35px;
+    line-height: 35px;
+    font-size: 36px;
+    letter-spacing: 0px;
+    color: #212121;
+}
+/*进行中样式*/
+.special_right_bg{
+	width: 80px;
+    line-height: 28px;
+    height: 28px;
+    background: rgba(55,107,245,0.13);
+    border-radius: 14px;
+    text-align: center;
+    color: #376bf5;
+    font-size: 14px;
+	margin-top: 4px;
+}
+/*已结束样式*/
+.special_right_end_bg{
+	width: 80px;
+    line-height: 28px;
+    height: 28px;
+    background:rgba(235,235,235,1);
+    border-radius: 14px;
+    text-align: center;
+    color: #9e9e9e;
+    font-size: 14px;
+	margin-top: 4px;
+
+}
+/*未开展样式*/
+.special_right_not_bg{
+	width: 80px;
+    line-height: 28px;
+    height: 28px;
+    background:rgba(255,64,64,0.13);
+    border-radius: 14px;
+    text-align: center;
+    color: #ff4040;
+    font-size: 14px;
+	margin-top: 4px;
+}
+/*进度条样式*/
+.layui-progress{
+	height: 4px !important;	
+}
+.layui-progress-bar{
+	height: 4px !important;	
+}
+.special_right_progress{
+	
+}
+.special_right_progress li{
+	list-style: none;
+    width: 48%;
+    height: 80px;
+    background: rgba(245,245,245,1);
+    border-radius: 10px;
+    float: left;
+    margin: 4px;
+}
+.special_right_progress_tit{
+	padding-top: 14px;
+    padding-left: 19px;
+    height: 23px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(102,102,102,1);
+    line-height: 23px;
+}
+.special_right_progress_tit img{
+	margin-top: -3px;
+}
+.layui-progress {
+    position: relative;
+    height: 6px;
+    border-radius: 20px;
+    background-color: #e2e2e2;
+    width: 87%;
+    margin: 0 auto;
+    margin-top: 7px;
+}
+/*进度条颜色*/
+.bg-color-ff4040{
+	background-color: #FF4040 !important;
+}
+.bg-color-376BF5{
+	background-color: #376BF5 !important;
+}
+.bg-color-A144FE{
+	background-color: #A144FE !important;
+}
+.bg-color-FE9C44{
+	background-color: #FE9C44 !important;
+}
+.special_right_progress_con{
+	padding-top: 4px;
+    padding-left: 19px;
+    width: 230px;
+    overflow: hidden;
+    height: 25px;
+    font-size: 12px;
+    color: #212121;
+    line-height: 22px;
+}
+
+/*——————————————————————————————专题列表样式—————————————————————————————————————————*/
+.edu_special_list{
+	margin-top: 68px;
+}
+.special_list_tit{
+	overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    font-size: 36px;
+    font-weight: 500;
+    color: rgba(33,33,33,1);
+}
+.special_list_des{
+	overflow: hidden;
+	margin: 0 auto;
+    text-align: center;
+    width: 631px;
+    height: 60px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(158,158,158,1);
+    line-height: 25px;
+    margin-top: 18px;
+	
+}
+.special_list_tab{
+	
+}
+#tabBox2{
+	padding-left: 10px;
+	margin: 0 auto;
+    width: 565px;
+    height: 56px;
+    line-height: 56px;
+    background: rgba(245,245,245,1);
+    border-radius: 28px;
+    overflow: hidden;
+    margin-top: 35px;
+    display: flex;
+    align-items:Center; 
+	}
+#tabBox2 li{
+	cursor: pointer;
+	width: 20%;
+	float: left;
+	text-align: center;
+	position: relative;
+	border-right:none !important;
+	margin-left: 20px;
+}
+#tabBox2 li a{
+font-size:0.6rem;
+	display: block;
+	margin: 0 auto;
+	color: #757575;
+}
+#tabBox2 li .active{
+	display: none;
+	width: 2rem;
+	height: 1px;
+	position: absolute;
+	bottom: -0.25rem;
+	left: 50%;
+	background: #fe9c44;
+	margin-left: -1rem;
+}
+#tabBox2 .tabBox2-active{
+	text-align: center;
+	width:20%;
+	height:32px;
+	line-height:32px;
+	background:linear-gradient(90deg,rgba(255,48,50,1),rgba(255,90,45,1));
+	border-radius:16px;
+}
+#tabBox2 .tabBox2-active a{
+	color: #fff;
+	font-size:18px;
+}
+/*——————————————————————————————专题文章列表样式—————————————————————————————————————————*/
+
+.h-200{
+    height:200px;
+}
+/*开始学习 按钮*/
+.bor-learn{
+    border:1px #FF5A2D solid;
+    border-radius:14px;
+}
+.fcolor-learn{
+    color:#FF3032;
+}
+.fweight-400{
+    font-weight:400;
+}
+.fweight-500{
+    font-weight:500;
+}
+.di-f{
+   display: flex;
+}
+.flex{
+    flex:1;
+}
+
+/*学习视频 卡片阴影*/
+.video-card{
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+}
+.video-time{
+    width:70px;
+    height:24px;
+    background:rgba(0,0,0,1);
+    opacity:0.6;
+    border-radius:12px;
+}
+
+.w-266{
+    width:266px;
+}
+.w-230{
+    width:231px;
+}
+.h-150{
+    height:150px;
+}
+.w-80{
+    width:80px;
+}
+.bg-study{
+    background:rgba(254,156,68,1);
+}
+/*考试中心 进行中样式*/
+.bg-learning{
+    background:rgba(55,107,245,0.13);
+    border-radius:14px;
+}
+.color-376BF5{
+    color:#376BF5;
+}
+.bb-solid{border-bottom:1px solid #DEDEDE;}
+.bb-dashed{border-bottom:1px dashed #DEDEDE;}
+
+.w-71b{
+    width:71%;
+}
+
+/*考试分类样式*/
+#typeBox li{
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height:24px;
+    border:1px solid rgba(222,222,222,1);
+    border-radius:16px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+#typeBox li a{
+    font-size:14px;
+    color: #666666;
+}
+.type-active{
+    background:linear-gradient(90deg,rgba(255,48,50,1),rgba(255,90,45,1));
+}
+#typeBox .type-active a{
+    color: #fff;
+}
+

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/life/css/life_volunteer_apply.css" />
+
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;}
+</style>
+</head>
+<body class="bg-color-f9">
+<div class="aui-bar aui-bar-nav aui-bar-info ">
+	<ul>
+		<li class="h-45">
+			<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+			<div class="aui-title">志愿者</div>
+		</li>
+	</ul>
+</div>
+<ul class="bb-1-dfdfdf" id="tabBox2">
+    <li id="name1" <eq name="type" value="1">  class="mt-5em mb-5em tabBox2-active"  <else/> class=" mt-5em mb-5em "  </eq>  ><a name="#tab1">志愿者申请</a><span class="active"></span></li>
+    <li id="name2" <eq name="type" value="2">  class="mt-5em mb-5em tabBox2-active"  <else/> class=" mt-5em mb-5em "  </eq> ><a name="#tab2">活动申请</a><span class="active"></span></li>
+</ul>
+<eq name="type" value='1'>
+	<div class="over-h p-12em mt-8em mb-8em bg-color-whiter">
+		<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">提交</div>
+		<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-ff3032 f-w ml-3em mr-3em">&#xe765;</i>
+		<if condition="$volunteer['status'] eq 1">
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b bg-color-f1 f-12em lh-50em text-align color-99">完成</div>
+		<elseif condition="$volunteer['status'] eq 3"/>
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">拒绝</div>
+		<else/>
+			<div class="pull-left w-50em h-50em bor-ra-100b bg-color-f1 f-12em lh-50em text-align color-99">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b bg-color-f1 f-12em lh-50em text-align color-99">完成</div>
+		</if>
+	</div>
+	<div class="p-12em mb-8em over-h bg-color-whiter">
+		<img class="pull-left w-50em h-50em bor-ra-100b mr-12em" src="{$communist_info.communist_avatar}" alt="" />
+		<p class="pull-left w-80em f-15em lh-50em color-33 f-w mr-10em">{$communist_info.communist_name}</p>
+		<p class="pull-left w-110em f-12em lh-50em color-75 f-w">{$communist_info.party_no}</p>
+		<p class="pull-right w-80em f-12em lh-50em color-75 f-w">{$communist_info.communist_birthday}</p>
+	</div>
+	<if condition="$volunteer['status'] gt 2 || $volunteer eq ''">
+	<form action="{:U('life/life_volunteer_do_save')}" id="volunteer" method="post">
+		<div class="">
+			<input type='hidden' value="{$volunteer.volunteer_id}"  name="volunteer_id"/>
+			<input type='hidden' value="{$communist_info.communist_no}"  name="communist_no"/>
+			<input type='hidden' value="{$type}"  name="type"/>
+			<textarea class="h-180em p-12em f-16em lh-20em color-df bg-color-whiter" name="volunteer_reason" id="" placeholder="请填写您的申请事由">{$volunteer.volunteer_reason}</textarea>
+		</div>
+		<div class="w-100b pl-12em pr-12em pb-20em pt-25em bottom-0">
+			<div class="pl-25em pr-25em">
+				<button class="w-100b h-35em text-align f-16em lh-35em color-white bor-0 grad" type="submit" >提交</button>
+			</div>
+		</div>
+	</form>
+	<else/>
+	<neq name="volunteer_apply.apply_desc" value="">
+		<div class="p-12em mb-8em over-h bg-color-whiter">
+			<p class="pull-left w-110em f-12em lh-50em color-75 f-w">{$volunteer_apply.apply_desc}</p>
+		</div>
+	</neq>
+	</if>
+
+<else/>
+	<div class="over-h p-12em mt-8em mb-8em bg-color-whiter">
+		<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">提交</div>
+		<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-ff3032 f-w ml-3em mr-3em">&#xe765;</i>
+		<if condition="$volunteer_apply['status'] eq 1">
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b bg-color-f1 f-12em lh-50em text-align color-99">完成</div>
+		<elseif condition="$volunteer_apply['status'] eq 3"/>
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">拒绝</div>
+		<elseif condition="$volunteer_apply['status'] eq 2"/>
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b grad f-12em lh-50em text-align color-white">完成</div>
+		<else/>
+			<div class="pull-left w-50em h-50em bor-ra-100b bg-color-f1 f-12em lh-50em text-align color-99">待处理</div>
+			<i class="pull-left h-50em f-16em lh-50em iconfont p-0 color-f1 f-w ml-3em mr-3em">&#xe765;</i>
+			<div class="pull-left w-50em h-50em bor-ra-100b bg-color-f1 f-12em lh-50em text-align color-99">完成</div>
+		</if>
+	</div>
+	<div class="p-12em mb-8em over-h bg-color-whiter">
+		<img class="pull-left w-50em h-50em bor-ra-100b mr-12em" src="{$communist_info.communist_avatar}" alt="" />
+		<p class="pull-left w-80em f-15em lh-50em color-33 f-w mr-10em">{$communist_info.communist_name}</p>
+		<p class="pull-left w-110em f-12em lh-50em color-75 f-w">{$communist_info.party_no}</p>
+		<p class="pull-right w-80em f-12em lh-50em color-75 f-w">{$communist_info.communist_birthday}</p>
+	</div>
+	<if condition="$volunteer_apply['status'] gt 2 || $volunteer_apply eq '' ">
+	<form action="{:U('life/life_volunteer_do_save')}" id="forms" method="post">
+		<input type='hidden' value="{$volunteer_apply.apply_id}"  name="apply_id"/>
+		<input type='hidden' value="{$activity_id}"  name="activity_id"/>
+		<input type='hidden' value="{$communist_info.communist_no}"  name="communist_no"/>
+		<input type='hidden' value="{$type}"  name="type"/>
+		<div class="">
+			<textarea class="h-180em p-12em f-16em lh-20em color-df bg-color-whiter" name="apply_desc" id="" placeholder="请填写您的申请事由">{$volunteer_apply.apply_desc}</textarea>
+		</div>
+		<div class="w-100b pl-12em pr-12em pb-20em pt-25em bottom-0">
+			<div class="pl-25em pr-25em">
+				<button class="w-100b h-35em text-align f-16em lh-35em color-white bor-0 grad" type="submit">提交</button>
+			</div>
+		</div>
+	</form>
+	<else/>
+	<neq name="volunteer_apply.apply_desc" value="">
+		<div class="p-12em mb-8em over-h bg-color-whiter">
+			<p class="pull-left w-110em f-12em lh-50em color-75 f-w">{$volunteer_apply.apply_desc}</p>
+		</div>
+	</neq>
+		
+	</if>
+</eq>
+</body>
+
+
+
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/life/js/life_volunteer_apply.js"></script>
+</body>
+</html>

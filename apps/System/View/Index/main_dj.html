@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>layuiAdmin 控制台主页一</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+    <!--ztree-->
+    <link rel="stylesheet" href="__STATICS__/plugins/ztree/css/zTreeStyle/zTreeStyle.css">
+    <!--森普公共样式-->
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_public.css" media="all">
+    <!--框架样式-->
+    <link rel="stylesheet" href="__STATICS__/apps/page_index/css/admin.css" media="all">
+    <!--框架样式修改-->
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_theme_red.css" media="all">
+    <style>
+    .top-2 {
+        top: 2px;
+    }
+
+    .left-2m {
+        left: -2px
+    }
+
+    .h-462 {
+        height: 462px;
+    }
+
+    .ztree {
+        height: 300px;
+        overflow-y: auto;
+        width: calc(100% + 27px)
+    }
+
+    .ztree li a {
+        height: 28px;
+    }
+
+    .ztree li a:hover {
+        text-decoration: none
+    }
+
+    .ztree li span {
+        font-size: 14px;
+        font-family: 微软雅黑 !important;
+    }
+    
+    .ztree li span.button.root_close {
+        background: url("__STATICS__/apps/page_index/images/left-arrow.png") no-repeat
+    }
+
+    .ztree li span.button {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+    
+    .ztree li span.button.root_open {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+
+     .ztree li span.button.roots_open {
+        background: url("__STATICS__/apps/page_index/images/down-arrow.png") no-repeat
+    }
+
+     .ztree li span.button.roots_close {
+        background: url("__STATICS__/apps/page_index/images/left-arrow.png") no-repeat
+    }
+
+    .ztree li span.button {
+        width: 0;
+    }
+
+    .overhiddenx {
+        overflow: hidden;
+        width: calc(100% - 27px);
+        padding-bottom: 10px
+    }
+
+    .ztree li a.curSelectedNode {
+        border: none;
+        color: #f60;
+        background: none;
+        height: 28px
+    }
+
+    #allmap {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px
+    }
+
+    .bgcolor-cc {
+        background-color: #ccc
+    }
+
+    .borb-e5 {
+        border-bottom: 1px solid #e5e5e5
+    }
+
+    .material_over_point{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .layadmin-shortcut li .layui-icon {
+        background: #eceaea !important;
+    }
+    </style>
+</head>
+
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <!--个人中心面板开始-->
+                <div class="layui-row  layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span class="fsize-22 mr-15">
+                                    <php>echo getStaffInfo(session('staff_no'),'staff_name')</php>
+                                </span>
+                                <span>欢迎您登录本平台</span>
+                            </div>
+                            <div class="layui-card-body" style="height: 11.6rem;">
+                                <div class="layui-row layui-col-space15">
+                                    <div class="layui-col-md3" style="width:50%">
+                                        <a lay-href="{:U('Ccp/Ccpcommunist/ccp_communist_index')}" lay-text="党员列表" >
+                                        <div class="index-userzone">
+                                            <img src="__STATICS__/apps/page_index/images/sp_ui_v4_icon_party_member.png" alt="">
+                                            <div>
+                                                <div>党员数(全部)</div>
+                                                <div>
+                                                    <span data-counter="counterup" id="communist">0</span>
+                                                </div>
+                                            </div>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="layui-col-md3 " style="width:50%">
+                                        <a lay-href="{:U('Ccp/Ccpcommunist/ccp_party_index')}" lay-text="组织列表">
+                                        <div class="index-userzone">
+                                            <img src="__STATICS__/apps/page_index/images/sp_ui_v4_icon_organize.png" alt="">
+                                            <div>
+                                                <div>组织数(全部)</div>
+                                                <div>
+                                                    <span data-counter="counterup" id="organization">0</span>
+                                                </div>
+                                            </div>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="layui-col-md3" style="width:50%">
+                                        <a lay-href="{:U('Oa/Oameeting/oa_meeting_list')}" lay-text="活动统计">
+                                        <div class="index-userzone ">
+                                            <img class="pull-left" src="__STATICS__/apps/page_index/images/sp_ui_v4_icon_activity.png" alt="">
+                                            <div class="pull-right">
+                                                <div>活动（次）</div>
+                                                <div>
+                                                    <span data-counter="counterup" id="activity">0</span>
+                                                </div>
+                                            </div>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="layui-col-md3" style="width:50%">
+                                        <a lay-href="{:U('Ccp/Ccpdues/ccp_dues_index')}" lay-text="缴费列表">
+                                        <div class="index-userzone">
+                                            <img src="__STATICS__/apps/page_index/images/sp_ui_v4_icon_party_cost.png" alt="">
+                                            <div>
+                                                <div>本月党费（元）</div>
+                                                <div>
+                                                    <span data-counter="counterup" id="cost">0</span>
+                                                </div>
+                                            </div>
+                                            <p class="clearfix"></p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span class="fsize-14">我的视图</span>
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="layui-carousel layadmin-carousel layadmin-shortcut">
+                                    <div carousel-item>
+                                        <ul class="layui-row layui-col-space10">
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Oa/Oanotice/oa_notice_index')}">
+                                                    <i class="layui-icon layui-icon-website"></i>
+                                                    <cite>公告管理</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Cms/Cmsarticle/cms_article_index')}">
+                                                    <i class="layui-icon layui-icon-find-fill"></i>
+                                                    <cite>党建宣传</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Edu/Edumaterial/edu_material_index')}">
+                                                    <i class="layui-icon layui-icon-survey"></i>
+                                                    <cite>学习资料库</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Edu/Edunotes/edu_notes_index')}">
+                                                    <i class="layui-icon layui-icon-home"></i>
+                                                    <cite>学习笔记</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Oa/Oameeting/oa_meeting_list')}">
+                                                    <i class="layui-icon layui-icon-read"></i>
+                                                    <cite>三会一课</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Ccp/Ccpdues/ccp_dues_index')}">
+                                                    <i class="layui-icon layui-icon-tree"></i>
+                                                    <cite>党费缴纳</cite>
+                                                </a>
+                                            </li>
+                                            <eq name="is_integral" value="1" >
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Ccp/Ccpintegral/ccp_communist_integral_index')}">
+                                                    <i class="layui-icon layui-icon-console"></i>
+                                                    <cite>党员积分</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3" >
+                                                <a lay-href="{:U('Ccp/Ccpintegral/ccp_party_integral_index')}">
+                                                    <i class="layui-icon layui-icon-survey"></i>
+                                                    <cite>党组织积分</cite>
+                                                </a>
+                                            </li>
+                                            </eq>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+                 <!--党组织地图面板开始-->
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">党组织地图</div>
+                            <iframe name="main_iframe" width="100%" height="540px" src="{:U('System/Index/baidu_map_grid')}" target="_self" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+                <!--党员年龄结构开始-->
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md4">
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">党员党龄结构</div>
+                            <div class="layui-card-body">
+                                <div id="age_old_echarts" style="height: 275px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">三会一课情况</div>
+                            <div class="layui-card-body">
+                                <div id="echarts_l" style="height: 275px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">会议类型分析</div>
+                            <div class="layui-card-body">
+                                <div class="sex_echarts" id="echarts_c" style="height: 275px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="layui-row layui-col-space15">
+                    <div <eq name="is_integral" value="1">class="layui-col-md4"<else/>  class="layui-col-md6"</eq>>
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">党员发展情况</div>
+                            <div class="layui-card-body">
+                                <div class="develop_echarts" style="height: 275px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div <eq name="is_integral" value="1">class="layui-col-md4"<else/>  class="layui-col-md6"</eq>>
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">随手拍类型</div>
+                            <div class="layui-card-body">
+                                <div class="artical_echarts" style="height: 275px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <eq name="is_integral" value="1">
+                    <div class="layui-col-md4">
+                        <div class="layui-card">
+                            <div class="layui-card-header fsize-14">党组织积分情况</div>
+                            <div class="layui-card-body">
+                                <div class="score_echarts" style="height: 275px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>    
+                    </eq>
+                    
+                </div>
+                <!--end-->
+               
+                <!--我的视图开始-->
+                <!-- <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span class="fsize-14">我的视图</span>
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="layui-carousel layadmin-carousel layadmin-shortcut">
+                                    <div carousel-item>
+                                        <ul class="layui-row layui-col-space10">
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Oa/Oanotice/oa_notice_index')}">
+                                                    <i class="layui-icon layui-icon-website"></i>
+                                                    <cite>公告管理</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Cms/Cmsarticle/cms_article_index')}">
+                                                    <i class="layui-icon layui-icon-find-fill"></i>
+                                                    <cite>党建宣传</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Edu/Edumaterial/edu_material_index')}">
+                                                    <i class="layui-icon layui-icon-survey"></i>
+                                                    <cite>学习资料库</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Edu/Edunotes/edu_notes_index')}">
+                                                    <i class="layui-icon layui-icon-home"></i>
+                                                    <cite>学习笔记</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Oa/Oameeting/oa_meeting_list')}">
+                                                    <i class="layui-icon layui-icon-read"></i>
+                                                    <cite>三会一课</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Ccp/Ccpdues/ccp_dues_index')}">
+                                                    <i class="layui-icon layui-icon-tree"></i>
+                                                    <cite>党费缴纳</cite>
+                                                </a>
+                                            </li>
+                                            <eq name="is_integral" value="1">
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Ccp/Ccpintegral/ccp_communist_integral_index')}">
+                                                    <i class="layui-icon layui-icon-console"></i>
+                                                    <cite>党员积分</cite>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs3">
+                                                <a lay-href="{:U('Ccp/Ccpintegral/ccp_party_integral_index')}">
+                                                    <i class="layui-icon layui-icon-survey"></i>
+                                                    <cite>党组织积分</cite>
+                                                </a>
+                                            </li>
+                                            </eq>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span class="fsize-14">待办事项提醒【一个月内】</span>
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="pt-10 pb-10 pl-15 pr-15 h-165">
+                                    <volist name='alertmsg_row' id='msg'>
+                                        <div class="mt-15 mb-15">
+                                            <div class="pull-left tips_circle bor_bg_f60">{$key+1}</div>
+                                            <div class="pull-left fcolor-66 ml-15 w-110 mr-15 lh-18">【{$msg.type_name}】</div>
+                                            <div class="pull-left fcolor-66 lh-18 material_over_point w-300">{$msg.alert_title}</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </volist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!--end-->
+            </div>
+        </div>
+    </div>
+    <!--jquery-->
+    <script src="__STATICS__/plugins/jquery.min.js"></script>
+    <!--layuijs-->
+    <script src="__STATICS__/layuiadmin/layui/layui.js?t=1"></script>
+    <!--echarts-->
+    <script src="__STATICS__/plugins/echarts/echarts.min.js"></script>
+    <!--ztree-->
+    <script src="__STATICS__/plugins/ztree/js/jquery.ztree.core.js"></script>
+    <!--百度地图-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={$web_map_ak}"></script>
+    <script>
+    var echarts_data;
+    layui.config({
+        base: '../../../statics/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'console']);
+    </script>
+    <script>
+    var echarts_data = 0;
+    $.ajax({
+        url: "{:U('System/Index/main_dj_data')}",
+        data: {},
+        type: "get",
+        async:false,
+        success: function(data) {
+            console.log(data.type_list);
+            echarts_data = data;
+            $("#communist").html(data.communist_num);
+            $("#organization").html(data.party_no_num);
+            $("#activity").html(data.activity_num);//活动
+            $("#cost").html(data.cost_sum);
+            $("#thirty").html(data.thirty + '人');
+            $("#forty").html(data.forty + '人');
+            $("#fifty").html(data.fifty + '人');
+            $("#male").html(data.male + '人'); //男
+            $("#female").html(data.female + '人'); //女
+            $("#zero").html(data.zero + '人'); //0-10年
+            $("#one").html(data.one + '人'); //11-20年
+            $("#two").html(data.two + '人'); //21-30年
+            $("#tee").html(data.tee + '人'); //31-40年
+            $("#four").html(data.four + '人'); //41-50年
+            $("#five").html(data.five + '人'); //51-60年
+        },
+        error: function(xhr) {
+        }
+    });
+
+        //三会一课情况
+        var dom = document.getElementById("echarts_l");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'rgba(255,255,255,0)' // 0% 处的颜色
+                            }, {
+                                offset: 0.5,
+                                color: 'rgba(255,255,255,1)' // 100% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'rgba(255,255,255,0)' // 100% 处的颜色
+                            }],
+                            global: false // 缺省为 false
+                        }
+                    },
+                },
+
+            },
+            grid: {
+                top: '10%',
+                left: '10%',
+                right: '3%',
+                bottom: '23%',
+                // containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                axisLine: { //坐标轴轴线相关设置。数学上的x轴
+                    show: true,
+                    lineStyle: {
+                        color: 'rgba(255,255,255,0.4)'
+                    },
+                },
+                axisLabel: { //坐标轴刻度标签的相关设置
+                    rotate: 65,
+                    textStyle: {
+                        color: '#333',
+                        margin: 15,
+                    }
+                },
+                axisTick: {
+                    show: false,
+                },
+                data: echarts_data.party_name_num,
+            }],
+            yAxis: [{
+                type: 'value',
+                min: 0,
+                // max: 140,
+                splitNumber: 4,
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: '#dedede'
+                    }
+                },
+                axisLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    show: true,
+                    margin: 10,
+                    textStyle: {
+                        color: '#999',
+
+                    },
+                },
+                axisTick: {
+                    show: false, //刻度
+                },
+            }],
+            series: [{
+                name: '总量',
+                type: 'line',
+                smooth: true, //是否平滑曲线显示
+                // symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
+                showAllSymbol: true,
+                // symbol: 'image://./static/images/guang-circle.png',
+                symbolSize: 8,
+                lineStyle: {
+                    normal: {
+                        color: "#ff9c07", // 线条颜色
+                    },
+                    borderColor: '#ff9c07'
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color: '#ff9c07',
+                        fontSize: 14,
+                        fontWeight: 'bold'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: "#ff9c07",
+                        borderColor: "#ff9c07",
+                        borderWidth: 2
+                    }
+                },
+                tooltip: {
+                    show: true
+                },
+                areaStyle: { //区域填充样式
+                    normal: {
+                        //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(255,224,178,1)'
+                            },
+                            {
+                                offset: 1,
+                                color: 'rgba(255,224,178,1)'
+                            }
+                        ], false),
+                        //  shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
+                        // shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+                    }
+                },
+                data: echarts_data.party_me_num
+            }]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+            window.onresize = function() {
+                myChart.resize();
+            }
+        }
+
+        var type_list1 = echarts_data.type_list;
+
+        //会议类型分析
+        var dom = document.getElementById("echarts_c");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        app.title = '环形图';
+
+        var colorList = ['#ff3738', '#2f99d7', '#fcd241', '#f8a53f'];
+        option = {
+            tooltip: {
+                formatter: "{b}: {c} ({d}%)"
+            },
+            legend: {
+        
+                top: 10,
+                textStyle: {
+                    color: "#666"
+                },
+                itemWidth: 5,
+                itemHeight: 5,
+                itemGap: 5,
+                data: ["支部大会", "支委会议", "党小组会", "党课"]
+            },
+            series: [{
+                name: '来源',
+                type: 'pie',
+                radius: ['35%', '65%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                },
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            fontSize: '10', //不显示中间
+                            fontWeight: 'bold',
+                            // fontFamily:'shs-Regular'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                        value: type_list1[0].num,
+                        name: "支部大会"
+                    },
+                    {
+                        value: type_list1[1].num,
+                        name: "支委会议"
+                    },
+                    {
+                        value: type_list1[2].num,
+                        name: "党小组会"
+                    },
+                    {
+                        value: type_list1[3].num,
+                        name: "党课"
+                    }
+                ]
+            }]
+        };;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+            //echarts 缩放
+            window.addEventListener("resize", function() {
+                myChart.resize();
+            });
+        }
+
+
+        //党龄
+        var dom = document.getElementById("age_old_echarts");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        app.title = '环形图';
+
+        var colorList = ['#ff3738', '#2f99d7', '#fcd241', '#f8a53f',"#43e2af","#e243c7"];
+        option = {
+            tooltip: {
+                formatter: "{b}: {c} ({d}%)"
+            },
+            legend: {
+        
+                top: 5,
+                textStyle: {
+                    color: "#666"
+                },
+                itemWidth: 9,
+                itemHeight: 9,
+                itemGap: 9,
+                data: ['0-10年','11-20年','21-30年','31-40年','41-50年','50年以上']
+            },
+            series: [{
+                name: '来源',
+                type: 'pie',
+                radius: ['35%', '65%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                },
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            fontSize: '10', //不显示中间
+                            fontWeight: 'bold',
+                            // fontFamily:'shs-Regular'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [
+                    { value: echarts_data.zero, name: '0-10年' },
+                    { value: echarts_data.one, name: '11-20年' },
+                    { value: echarts_data.two, name: '21-30年' },
+                    { value: echarts_data.tee, name: '31-40年' },
+                    { value: echarts_data.four, name: '41-50年' },
+                    { value: echarts_data.five, name: '50年以上' }
+                ]
+            }]
+        };;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+            //echarts 缩放
+            window.addEventListener("resize", function() {
+                myChart.resize();
+            });
+        }
+
+
+    //echarts  环形图
+    // var myChart1 = echarts.init(document.getElementsByClassName('age_echarts')[0]);
+    // var myChart2 = echarts.init(document.getElementsByClassName('sex_echarts')[0]);
+    // var myChart3 = echarts.init(document.getElementsByClassName('age_old_echarts')[0]);
+    
+   //  option2 = {
+   //          tooltip: {
+   //              trigger: 'item',
+   //              formatter: "{b}: {c} ({d}%)"
+   //          },
+			// color:["#F05639","#FF9E7E","#37A1DB","#FFDB60","#64DEE3","#FF3358","#008B00","#11A2A8","#85E31C","#6F39A9"],
+   //          legend: {
+   //              icon: 'rect',
+   //              orient: 'horizontal',
+   //              x: 'center',
+   //              y: 'top',
+   //              bottom: '10',
+   //              data: ['男', '女']
+   //          },
+   //          series: [{
+   //              type: 'pie',
+   //              radius: ['40%', '60%'],
+   //              avoidLabelOverlap: false,
+   //              itemStyle: {
+   //                  normal: {
+   //                      label: {
+   //                          show: false,
+   //                      },
+   //                      labelLine: {
+   //                          show: false,
+   //                      }
+   //                  }
+   //              },
+   //              data: [
+   //                  { value: echarts_data.male, name: '男' },
+   //                  { value: echarts_data.female, name: '女' }
+   //              ]
+   //          }]
+   //      };
+   //      myChart2.setOption(option2);
+   //      option3 = {
+   //          tooltip: {
+   //              trigger: 'item',
+   //              formatter: "{b}: {c} ({d}%)"
+   //          },
+			// color:["#F05639","#FF9E7E","#37A1DB","#FFDB60","#64DEE3","#FF3358","#008B00","#11A2A8","#85E31C","#6F39A9"],
+   //          legend: {
+   //              icon: 'rect',
+   //              orient: 'horizontal',
+   //              x: 'center',
+   //              y: 'top',
+   //              bottom: '10',
+   //              data: ['0-10年','11-20年','21-30年','31-40年','41-50年','50年以上']
+   //          },
+   //          series: [{
+   //              type: 'pie',
+   //              radius: ['40%', '60%'],
+   //              avoidLabelOverlap: false,
+   //              itemStyle: {
+   //                  normal: {
+   //                      label: {
+   //                          show: false,
+   //                      },
+   //                      labelLine: {
+   //                          show: false,
+   //                      }
+   //                  }
+   //              },
+   //              data: [
+   //                  { value: echarts_data.zero, name: '0-10年' },
+   //                  { value: echarts_data.one, name: '11-20年' },
+   //                  { value: echarts_data.two, name: '21-30年' },
+   //                  { value: echarts_data.tee, name: '31-40年' },
+   //                  { value: echarts_data.four, name: '41-50年' },
+   //                  { value: echarts_data.five, name: '51-60年' }
+   //              ]
+   //          }]
+   //      };
+    // myChart3.setOption(option3);
+    // 柱状图
+    var myChart4 = echarts.init(document.getElementsByClassName('develop_echarts')[0]);
+    var option4 = {
+     backgroundColor:'#fff',
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        grid: {
+          left: '5%',
+            top: '15%',
+            bottom: '5%',
+            right: '10%',
+          containLabel: true
+        },
+         legend: {
+        data: ['转正人数', '预备人数'],
+        right: 10,
+        top:5,
+
+        textStyle: {
+            color: "#000"
+        },
+        itemWidth: 12,
+        itemHeight: 10,
+        // itemGap: 35
+    },
+        xAxis: {
+          type: 'category',
+          data: [<volist name='communist_range' id='range_val' offset="0" length='10'>'{$range_val.party_name}',</volist>],
+          axisLine: {
+            lineStyle: {
+              color: '#000'
+
+            }
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 40,
+            borderWidth:1,
+            textStyle: {
+              fontFamily: 'Microsoft YaHei'
+            }
+          },
+        },
+
+        yAxis: {
+          type: 'value',
+          
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {}
+        },
+        series: [{
+          name: '转正人数',
+          type: 'bar',
+          barWidth: '30%',
+          itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'red'
+                }, {
+                    offset: 1,
+                    color: 'red'
+                }]),
+                barBorderRadius: 12,
+            },
+          },
+          data:[{$real_num_str}]
+        },
+        {
+          name: '预备人数',
+          type: 'bar',
+          barWidth: '30%',
+          itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#8bd46e'
+                }, {
+                    offset: 1,
+                    color: '#8bd46e'
+                }]),
+                barBorderRadius: 11,
+            }
+            
+          },
+          data:[{$ready_num_str}]
+        }]
+      };
+
+      
+    myChart4.setOption(option4);
+
+
+var myChart5 = echarts.init(document.getElementsByClassName('artical_echarts')[0]);
+var option5 = {
+     backgroundColor:'#fff',
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        grid: {
+          left: '5%',
+            top: '15%',
+            bottom: '5%',
+            right: '10%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          data: echarts_data.cat_name_list,
+          axisLine: {
+            lineStyle: {
+              color: '#000'
+
+            }
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 40,
+            borderWidth:1,
+            textStyle: {
+              fontFamily: 'Microsoft YaHei'
+            }
+          },
+        },
+
+        yAxis: {
+          type: 'value',
+          
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {}
+        },
+        series: [{
+
+          type: 'bar',
+          barWidth: '30%',
+          itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'red'
+                }, {
+                    offset: 1,
+                    color: 'red'
+                }]),
+                barBorderRadius: 12,
+            },
+          },
+          data:echarts_data.cat_name_num
+        }]
+      };
+	myChart5.setOption(option5);
+
+
+    var myChart6 = echarts.init(document.getElementsByClassName('score_echarts')[0]);
+	var option6 = {
+		backgroundColor:'#fff',
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        grid: {
+          left: '5%',
+            top: '15%',
+            bottom: '5%',
+            right: '10%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          data: [<volist name='communist_range' id='list' offset="0" length='10'>'{$list.party_name}',</volist>],
+          axisLine: {
+            lineStyle: {
+              color: '#000'
+
+            }
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 40,
+            borderWidth:1,
+            textStyle: {
+              fontFamily: 'Microsoft YaHei'
+            }
+          },
+        },
+
+        yAxis: {
+          type: 'value',
+          
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {}
+        },
+        series: [{
+
+          type: 'bar',
+          barWidth: '30%',
+          itemStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'red'
+                }, {
+                    offset: 1,
+                    color: 'red'
+                }]),
+                barBorderRadius: 12,
+            },
+          },
+          data:[{$integral_num_str}]
+        }]
+      };
+      myChart6.setOption(option6);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="mt-20"></div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="portlet light ">
+							<div class="portlet-title">
+								<div class="caption">
+									<div class="cont-col1">
+										<div class="label label-sm bg-color-green2">
+											<i class="iconfont">&#xe602;</i>
+										</div>
+									</div>
+									<span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+								</div>
+								<div class="tools">
+									<a href="" class="reload"> </a> <a href="" class="collapse"> </a>
+								</div>
+							</div>
+							<!-- 页面标题结束-->
+							<!-- 表单内容 -->
+							<div class="portlet-body">
+								<div class="form-body">
+									<div class="scroller" style="height: 310px;">
+										<!-- 开始 -->
+										<div class="col-xs-12">
+											<div class="row">
+												<div class="col-xs-2 pr-0 text-r lh-35">
+													<b>标题：</b>
+												</div>
+												<div class="col-xs-9 pl-0 lh-35">
+													<span class="di-b lh-35">{$notes_info.notes_title}</span>
+												</div>
+											</div>
+										</div>
+										<!-- 结束 -->
+										
+										<!-- 开始 -->
+										<div class="col-xs-12">
+											<div class="row">
+												<div class="col-xs-2 pr-0 text-r lh-35">
+													<b>内容：</b>
+												</div>
+												<div class="col-xs-9 pl-0 lh-35">
+													<span class="di-b lh-35">{$notes_info.notes_content}</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="row">
+												<div class="col-xs-2 pr-0 text-r lh-35">
+													<b>备注：</b>
+												</div>
+												<div class="col-xs-9 pl-0 lh-35">
+													<span class="di-b lh-35">{$notes_info.memo}</span>
+												</div>
+											</div>
+										</div>
+										<!-- 结束 -->
+										<!-- 横排复选框 -->
+										<eq name="is_alert" value="1">
+										<div class="col-xs-12 ">
+											<div class="row">
+												<label class="col-xs-2 pr-0 text-r lh-35"> <b>是否提醒：</b>
+												</label>
+												<div class="col-xs-7 pl-0 lh-35">
+													<div class="input-group">
+														<div class="input-group">
+															<div class="icheck-inline">
+																<label> <span class="di-b lh-35">{$notes_info.alert_time}</span>
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										</eq>
+										<!-- 横排复选框结束 -->
+									</div>
+								</div>
+							</div>
+						</div>
+						 <div class="col-md-12">
+							<button type="button" class="btn btn-sm default w-75 bor-ra-2 mr-10 pull-right" onclick="layer_colse()">取消</button>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	$('#is_alert').on('ifChanged', function(event){
+		$("#alert_time").toggle();
+	});
+	function layer_colse(){
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		parent.layer.close(index);
+	};
+	</script>
+</block>

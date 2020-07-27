@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/life/css/life_volunteer.css" />
+
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;}
+</style>
+</head>
+<body>
+<div class="aui-bar aui-bar-nav aui-bar-info">
+	<ul>
+		<li class="h-45">
+			<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+			<div class="aui-title f-w">志愿者服务</div>
+			<a class="aui-pull-right f-12em f-w" href="{:U('Life/life_volunteer_index_my')}">我的活动</a>
+		</li>
+	</ul>
+</div>
+<div class="over-h pl-6em pr-6em pt-8em mb-50em">
+	<volist name="activity_data" id="list">
+		<div class="pull-left w-50b">
+			<div class="pt-12em pb-15em mb-8em m-a w-170em h-210em b-1-df bor-ra-7 bg-color-whiter" onclick="openInfo({$list.activity_id})">
+				<p class="ml-12em mr-12em mb-8em f-14em h-34em lh-17em f-w">{$list.activity_title}</p>
+				<div class="ml-12em mr-12em"><img class="w-100b h-80em mb-8em" src="{$list.activity_thumb}" alt="" /></div>
+				<p class="ml-12em mr-12em h-55em f-10em lh-14em color-75">{$list.activity_description}</p>
+			</div>
+		</div>
+	</volist>
+</div>
+<eq name="volunteer" value="1">
+	<div class="w-100b h-44em bottom-0 grad color-white text-align lh-44em f-w f-16em" onclick="volunteer_integral(2)">
+		志愿者积分
+	</div>
+<else/>
+	<div class="w-100b h-44em  bottom-0 grad color-white text-align lh-44em f-w f-16em" onclick="openIntegral(1)">
+		申请成为志愿者
+	</div>
+</eq>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_volunteer.js"></script>
+<script type="text/javascript">
+	function openIntegral(type){
+		location.href="{:U('Wechat/Life/life_volunteer_apply')}?type="+type;
+	}
+	function volunteer_integral(){
+		location.href="{:U('Wechat/Life/life_volunteer_integral')}";
+	}
+	//详情
+	function openInfo(id){
+		location.href="{:U('Wechat/Life/life_volunteer_info')}?activity_id="+id;
+	}
+</script>
+
+</body>
+</html>

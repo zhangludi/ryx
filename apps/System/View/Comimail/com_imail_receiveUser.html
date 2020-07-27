@@ -1,0 +1,421 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/css.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/jquery.gritter.css" />
+<link rel="stylesheet" href="__STATICS__/plugins/ztree/css/demoStyle/demo.css" type="text/css">
+<link rel="stylesheet" href="__STATICS__/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/ace.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/default.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/assets/css/component.css" />
+<script src="__STATICS__/plugins/assets/js/modernizr.custom.js"></script>
+<script src="__STATICS__/plugins/assets/js/ace-extra.min.js"></script>
+</block>
+<block name="body">
+<from id="form1" action="" method="post" runat="server"> 
+	<div class="eoffice" style="height:360px">
+		<div class="tabbable tabs-below office_tab">
+			<ul class="nav nav-tabs" id="myTab2" style="border-bottom:1px solid #d9d9d9; margin:0;">
+				<eq name="group" value="1">
+					<li class="active"><a data-toggle="tab" href="#profile2">按支部</a></li>
+				<else/>
+					<li class="active"><a data-toggle="tab" href="#home2">按部门</a></li>
+				</eq>
+				<script src="__STATICS__/plugins/assets/js/classie.js"></script>
+				<script src="__STATICS__/plugins/assets/js/uisearch.js"></script>
+			</ul>
+			<div class="tab-content office_tabcontent">
+				<eq name="group" value="1">
+					<div id="profile2" class="tab-pane in active">
+						<div class="mail-sidebar" style="overflow:auto;height:325px;">
+							<ul class="list" style="margin: 0 0 0 10px;padding: 0;">
+							    <li class="title">名称：<input id="party_name" type="text" value="" onkeyup="AutoMatch(this)"
+							        style="width: 120px;" />
+							    </li>
+							</ul>
+		                     <ul id="partyTree" class="ztree" ></ul>
+		                 </div>
+					</div>
+				<else/>
+					<div id="home2" class="tab-pane in active">
+						<div class="mail-sidebar" style="overflow:auto;height:302px;">
+		                     <ul id="deptTree" class="ztree" ></ul>
+		                 </div>
+					</div>
+				</eq>
+				<div id="dropdown12" class="tab-pane">
+					<div class="mail-sidebar" style="overflow:auto;height:302px;">
+						<ul id="group" class="ztree"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" id="staff_nos" value=""/> 
+		<input type="hidden" id="staff_names" value=""/>
+		<input type="hidden" id="type" value="{$type}"/> 
+		<div class="eoffice_right">
+			<div class="eoffice_right_bg" style="height:33px">
+				<a href="javascript:void(0)" class="op_button close_dialog" data-placement="left" title="关闭窗口">
+				<i class="fa fa-times" style="line-height:35px;"></i></a>											
+			</div>
+			<div class="row"></div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="allclear fr"><i class="icon-trash">清空</i></div>
+					<div class="allselect fr"><i class="icon-check">全选</i></div>
+				</div>
+			</div>
+			<div class="row" style="margin: 0;">
+				<div class="col-xs-12 user_list_main">
+					<ul id="inp">
+					</ul>
+				</div>
+			</div>
+			<div class="row" style="margin: 0;">
+				<div class="col-xs-12 eoffice_right_bg">已选择</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="selected_user" id='selected_user'></div>
+				</div>
+			</div>
+			<div class="eoffice_buttonpane" >
+				<div class="button_position fr ">
+			  		<button onclick="submit_staff()" class="btn btn-xs w-75 bor-ra-2 mr-10 pull-right" style="background-color: #f60!important;border-color: #f60;">提交</button>
+			  	</div>
+			</div>
+		</div>
+		<div id="cleaner"></div>
+	</div>
+</from>
+</block>
+<block name="js">
+<script src="__STATICS__/plugins/assets/js/jquery-1.10.2.min.js"></script>
+<script src="__STATICS__/plugins/assets/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/ztree/js/jquery.ztree.all.js"></script>
+<script>
+	//隐藏div中的滚动条
+	$(".user_list_main").niceScroll({   
+	cursoropacitymax:0,  
+	}); 
+	$(".selected_user").niceScroll({   
+	cursoropacitymax:0,  
+	}); 
+	function cancel(){
+		layer.closeAll();
+	}
+</script>
+<script>
+//传输文字并添加<a>标签
+	function seletc_staff(a){
+		var word = $(a).text();
+		var staff_no = $(a).data('staff_no');
+		word = $.trim(word);
+		var has = false;
+			$(".selected_user li").each(function(){
+				if($(this).text() == word){
+				has=true;
+				$(this).remove();
+			}
+			});
+		if(!has){
+			var type = $("#type").val();
+			if(type){
+				$(".selected_user").html("<li value='"+staff_no+"' data-staff_no='"+staff_no+"' staff_name='"+word+"'>"+word+"<span class='shanchu'><i class='icon-close'></i></span></li>");
+			 	//$(a).prepend("<a class='selected_tip' href='javascript:void(0)'><i class='icon-check-circle'></i></a> ");
+			}else{
+				$(".selected_user").append ("<li value='"+staff_no+"' data-staff_no='"+staff_no+"'  staff_name='"+word+"'>"+word+"<span class='shanchu'><i class='icon-close'></i></span></li>");
+				$(a).prepend("<a class='selected_tip' href='javascript:void(0)'><i class='icon-check-circle'></i></a> ");
+			}
+		
+		}else{
+			$(a).children("a").remove();
+		}
+		  change_staff();
+	}; 
+	function change_staff(){
+		var obj_lis = $('#selected_user').find('li');
+		var s = '';
+		var name = '';
+		for(i=0;i<obj_lis.length;i++){
+	   			if(s == ""){
+	   				//s=obj_lis[i].value;
+	   				s=$(obj_lis[i]).data('staff_no');
+
+	   			}else{
+	   				//s += ","+obj_lis[i].value;
+	   				s += ","+$(obj_lis[i]).data('staff_no');
+	   			}
+	   			if(name == ""){
+	   				name=$(obj_lis[i]).attr('staff_name');
+	   				
+	   			}else{
+	   				name += ","+$(obj_lis[i]).attr('staff_name')
+	   			}
+	    	}
+		$("#staff_nos").val(s);
+		$("#staff_names").val(name);
+	}
+	$(document).ready(function(){
+	  //取消选中、remove <a>标签
+	  $(".selected_user").delegate("li", "click", function(){
+		$(this).remove();
+		var name = $(this).text();
+		//alert(name);
+			$("li#user_list").each(function(){
+			if($.trim($(this).text()) == name){
+			$(this).children("a").remove();
+			}
+		});
+		change_staff();
+	  });
+	  //全选、清空
+	  $(".allselect").click(function(){
+		  	// $(".selected_user").children("li").remove();
+		  	//$("li#user_list").children("a").remove();
+			$("li#user_list").each(function(){
+				var word = $(this).text();
+		  		var communist_no = $(this).val();
+		  		word = $.trim(word);
+		  		var is_has_element = $("#selected_user").find("li[data-staff_no="+communist_no+"]");
+		  		if(is_has_element.length<1){
+		  			$(".selected_user").append ("<li  data-staff_no="+communist_no+" value='"+communist_no+"' staff_name='"+word+"'>"+$.trim($(this).text())+"<span class='shanchu'><i class='icon-close'></i></span></li>");
+		  			var select_flag = $(this).find("a");
+		  			if(select_flag.length < 1){
+		  				$(this).prepend("<a class='selected_tip' href='javascript:void(0)'><i class='icon-check-circle'></i></a> ");
+		  			}
+		  		}
+			});
+			change_staff();
+	  });
+	  $(".allclear").click(function(){
+		  $(".selected_user").children("li").remove();
+		  $("li#user_list").children("a").remove();
+		  change_staff();
+	  });
+	  
+	});
+</script>
+<script type="text/javascript">
+	if("ontouchend" in document) document.write("<script src='__STATICS__/plugins/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script type="text/javascript">
+
+	// 选择联系人页面
+		/* 部门 */
+var setting = {
+	view: {
+	   showIcon: false
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	},
+	callback:{
+			onClick:zTreeOnClick
+		},
+	check: {
+		enable:false,
+		autoCheckTrigger:false,
+		chkboxType:{ "Y":"ps", "N":"ps" }
+	}
+};
+var zNodes_dept = [
+			<volist name="dept_list" id="dept" key = 'dept_k'>
+				{ id:{$dept.dept_no}, pId:{$dept.dept_pno},name:"{$dept.dept_name}",<if condition='$dept_k eq 1'>open:true</if>},
+			</volist>
+		];
+
+$(document).ready(function(){
+	var t = $("#deptTree");
+	t = $.fn.zTree.init(t, setting, zNodes_dept);
+});
+function zTreeOnClick(event, treeId, treeNode) {
+	var names=[];
+	var namesone=[];
+	getChildren(names,treeNode);
+};
+
+//names是一个数组 返回结果数组     treeNode是选中的节点
+function getChildren(names,treeNode){
+	$('#inp').html("");
+	var id = treeNode.id;
+	$.get("{:U('Com/com_imail_receiveUser_data')}",{staff_dept_no:id},function(data){
+		$.each(data,function(i,n){
+			$("#inp").append("<li id='user_list' onclick='seletc_staff(this)' value="+data[i]['staff_no']+" staff_name="+data[i]['staff_name']+"  data-staff_no='"+data[i]['staff_no']+"'>"+data[i]['staff_name']+"</li>");
+		});
+	});
+}
+/* 党员部门 */
+	var setting_party = {
+		view: {
+		   showIcon: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback:{
+				onClick:zTreeOnClick_party
+			},
+		check: {
+			enable:false,
+			autoCheckTrigger:false,
+			chkboxType:{ "Y":"ps", "N":"ps" }
+		}
+	};
+	var zNodes_party = [
+				<volist name="party_list" id="party" key = 'party_k'>
+					{ id:{$party.party_no} ,pId:{$party.party_pno},name:"{$party.party_name}",<if condition='$party_k eq 1'>open:true</if>},
+				</volist>
+			];
+	
+	$(document).ready(function(){
+		var t = $("#partyTree");
+		t = $.fn.zTree.init(t, setting_party, zNodes_party);
+	});
+	function zTreeOnClick_party(event, treeId, treeNode) {
+		var names=[];
+		var namesone=[];
+		getChildren_party(names,treeNode);
+	};
+
+	//显示树
+	function showMenu() {
+	    var cityObj = $("#party_name");
+	    var cityOffset = $("#party_name").offset();
+	    //$("#menuContent").css({ left: cityOffset.left + "px", top: cityOffset.top + cityObj.outerHeight() + "px" }).slideDown("fast");
+	    $("#menuContent").slideDown("fast");
+	}
+	       
+	 //隐藏树
+	function hideMenu() {
+	    $("#menuContent").fadeOut("fast");
+	    //$("body").unbind("mousedown", onBodyDown);
+	}
+
+	//还原zTree的初始数据
+	function InitialZtree() {
+	    $.fn.zTree.init($("#partyTree"), setting, zNodes_party);
+	}
+
+	///根据文本框的关键词输入情况自动匹配树内节点 进行模糊查找
+	function AutoMatch(txtObj) {
+	    if (txtObj.value.length > 0) {
+	    	console.log(zNodes_party);
+	        $.fn.zTree.init($("#partyTree"), setting, zNodes_party);
+	        var zTree = $.fn.zTree.getZTreeObj("partyTree");
+	        console.log(zTree);
+	        var nodeList = zTree.getNodesByParamFuzzy("name", txtObj.value);
+	        //将找到的nodelist节点更新至Ztree内
+	        $.fn.zTree.init($("#partyTree"), setting, nodeList);
+	        showMenu();
+	    } else {
+	        //隐藏树
+	        //hideMenu();
+	        InitialZtree();                
+	    }              
+	}
+
+	function initEvent(){
+	    //鼠标获得焦点的时候，显示所有的树
+	    $("#party_name").focus(function(){
+	        $("#party_name").css("background-color","#FFFFCC");
+	        showMenu();
+	    });
+	    //鼠标失去焦点的时候，隐藏
+	/*    $("#party_name").blur(function(){
+	        $("#party_name").css("background-color","#fff");
+	        hideMenu();
+	    });*/
+	}
+	//names是一个数组 返回结果数组     treeNode是选中的节点
+	function getChildren_party(names,treeNode){
+		 $('#inp').html("");
+		var id = treeNode.id;
+		$.get("{:U('Com/com_imail_receiveUser_data')}",{party_no:id},function(data){
+			$.each(data,function(j,y){
+				$("#inp").append("<li id='user_list' onclick='seletc_staff(this)' value="+data[j]['communist_no']+" staff_name="+data[j]['communist_name']+" data-staff_no="+data[j]['communist_no']+">"+data[j]['communist_name']+"</li>");
+			});
+		}); 
+	}
+	/* 分组 */
+	var setting_group = {
+		view: {
+		   showIcon: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback:{
+				onClick:zTreeOnClick_group
+			},
+		check: {
+			enable:false,
+			autoCheckTrigger:false,
+			chkboxType:{ "Y":"ps", "N":"ps" }
+		}
+	};
+	var zNodes_group = [
+				<volist name="group_list" id="group">
+					{ id:{$group.group_id},name:"{$group.group_name}",open:true},
+				</volist>
+			];
+	
+	$(document).ready(function(){
+		var t = $("#group");
+		t = $.fn.zTree.init(t, setting_group, zNodes_group);
+	});
+	function zTreeOnClick_group(event, treeId, treeNode) {
+		var names=[];
+		var namesone=[];
+		getChildren_group(names,treeNode);
+	};
+	//names是一个数组 返回结果数组     treeNode是选中的节点
+	function getChildren_group(names,treeNode){
+		$('#inp').html("");
+		var id = treeNode.id;
+		$.get("{:U('Com/com_imail_receiveUser_data')}",{group_id:id},function(data){
+			$.each(data,function(k,n){
+				$("#inp").append("<li id='user_list' onclick='seletc_staff(this)' value="+data[k]['staff_no']+" staff_name="+data[k]['staff_name']+">"+data[k]['staff_name']+"</li>");
+			});
+		}); 
+	}
+	
+</script>
+<script>
+	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	function submit_staff(){
+		var staff_names=$("#staff_names").val();
+		var staff_nos=$("#staff_nos").val();
+		var name_arr=staff_names.split(',');
+		var no_arr=staff_nos.split(',');
+		name_arr=first(name_arr);
+		no_arr=first(no_arr);
+		staff_names=name_arr.join(',');
+		staff_nos=no_arr.join(',');
+		this.parent.$("#{$name}_name").val(staff_names);
+		this.parent.$("#{$name}_no").val(staff_nos);
+		parent.layer.close(index);
+	}
+</script>
+<script>
+	function first(args){
+		var str1=[];
+	    for(i=0;i<args.length;i++){
+	        if(str1.indexOf(args[i])<0){
+	        	str1.push(args[i])
+	        }
+	    }
+	    return str1;
+	}
+</script>
+</block>

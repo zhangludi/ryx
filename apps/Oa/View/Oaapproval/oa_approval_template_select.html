@@ -1,0 +1,86 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light bordered">
+	                            <div class="portlet-title">
+		                            <div class="caption">
+		                                <div class="cont-col1">
+		                                    <div class="label label-sm bg-color-green2">
+		                                        <i class="iconfont">&#xe64b;</i>
+		                                    </div>
+		                                </div>
+		                                <span class="bold ">模板列表</span>
+		                                <span class="caption-helper">
+		                                </span>
+		                            </div>
+		                            <div class="actions">
+                                        <button class="btn yellow-p5 btn-xs btn-outline" onclick="tpl_edit('')">
+                                          	<i class="fa fa-plus">  添加</i>
+                                        </button>
+                                    </div>
+		                        </div>
+                                <div class="portlet-body">
+	                                <div class="scroller p5-right-table-scroller" data-always-visible="1" data-rail-visible1="1">
+	                                    <table  id="client_table"
+	                                    	class="table" 
+						                    data-toggle="table" 
+						                    data-search="true"
+						                    data-show-refresh="true" data-show-toggle="true"
+						                    data-show-columns="true" data-show-export="true"
+						                    data-detail-view="false" data-detail-formatter="detailFormatter"
+						                    data-minimum-count-columns="2"
+						                    data-show-pagination-switch="true" data-pagination="true"
+						                    data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]" 
+											data-url="{:U('oa_approval_template_list_data')}?template_no={$template_no}">
+											<thead>
+			                                    <tr>
+			                                        <th data-field="template_no" data-halign="center" data-sortable="true" data-width='150px'>编号</th>
+			                                        <th data-field="template_name" data-halign="center" data-sortable="true" data-width='250px'>模板名称</th>
+			                                        <th data-field="select_operate" data-halign="center" data-width='100px'></th>
+			                                    </tr>
+			                                </thead>
+										</table>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </block>
+	<block name="js">
+        <script type="text/javascript">
+        function  tpl_edit(tpl_id){
+        	layer.open({
+                type: 2,
+                title: '模板编辑',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['700px' , '364px'],
+                content: "{:U('Oa/Oaapproval/oa_approval_template_edit/template_id/"+tpl_id+"')}",
+                success:function(){
+                	layerAuto();
+                }
+            });
+        };
+        function  tpl_info(tpl_no){
+        	layer.open({
+                type: 2,
+                title: '审批流程图',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['700px' , '270px'],
+                content: "{:U('Oa/Oaapproval/oa_approval_template_info')}?template_no="+tpl_no,
+                success:function(){
+                	layerAuto();
+                }
+            });
+        };
+        </script>
+	</block>

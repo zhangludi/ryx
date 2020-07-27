@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title>专题</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_zhdj.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_special_twostudies.css" />
+</head>
+<style type="text/css">
+.f-14em {
+    font-size: 0.5rem !important;
+}
+.w-230em {
+    width: 10.5rem !important;
+}
+.video_class{
+    box-shadow: 0rem 0.1rem 0.3rem 0rem rgba(55, 107, 245, 0.62);
+}
+.pt-0em{
+    padding-top: 1.8rem !important;
+}
+.mt-12mem {margin-top: -2.6rem !important;}
+.mt-55mem{margin-top: -4rem;}
+.top-50mem {top: -4rem;}
+.left-80em {left: 4.8rem !important;}
+.left-75em {left: 4.55rem !important;}
+.pr-12em {padding-right: 0.3rem;}
+.pl-12em {padding-left: 0.3rem;}
+</style>
+<!-- <script type="text/javascript">
+    location.reload();
+</script> -->
+<body class="bg-color-f5">
+<section class="top_bg"></section>
+<section>
+<div class="po-ab edu_special_one top-10em pl-16em pr-16em w-100b">
+<ul>
+    <li class="h-45em clearfix w-100b">
+        <a class="pull-left mt-15em" href="javascript:history.back(-1)">
+            <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back.png" alt="返回" />
+        </a>
+        <!--<div class="aui-title" id="title"></div>-->
+        <!--<div class="pull-right mt-15em color-fff f-12em" onclick="open_daily_notes('edu_notes_daily_edit_header')">写笔记</div>-->
+    </li>
+</ul>
+</div>  
+<div class="po-fix edu_special_two top-0em pl-16em pr-16em w-100b bg-color-whiter z-index-max">
+<ul>
+    <li class="h-56em clearfix w-100b">
+        <div class="pull-left mt-30em" onclick="goBlack();">
+            <img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back_info.png" alt="返回" />
+        </div>
+        <div class="header_list pull-left mt-25em ml-40em">
+            <ul class="w-100b m-a" id="tabBox4">
+                <li class="mt-5em mb-5em tabBox2-active" num="1">
+                    <a>视频</a><span class="active"></span>
+                </li>
+                <li class="mt-5em mb-5em" num="2">
+                    <a>课件</a><span class="active"></span>
+                </li>
+                <li class="mt-5em mb-5em" num="3">
+                    <a>考试</a><span class="active"></span>
+                </li>
+                 <li class="mt-5em mb-5em" num="4">
+                    <a>笔记</a><span class="active"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="daily_notes pull-right mt-30em color-66 f-12em">写笔记</div>
+    </li>
+</ul>
+</div>  
+</section>  
+<!-- 写日常笔记遮罩层 -->
+<section class="daily_notes_mask po-fix di-n w-100b h-100b top-0em left-0em bg-color-000 z-index-mask">
+    <div class="po-ab bottom-0em w-100b bg-color-whiter edu_mask_radius h-97b">
+        <div class="daily_mask_close clearfix pt-16em">
+            <img class="w-12em h-12em pull-right mr-20em" src="__STATICS__/apps/page_wechat/images/images_edu/mask_close.png">
+        </div>
+        <div class="daily_notes_mask_con">
+        <div class="pl-12em pr-12em pt-12em  bb-1-df">
+            <!--<p class="over-h f-16em color-33 lh-30em mb-12em">
+            <span class="pull-left">笔记类型: </span>
+            <select id="notes_type" class="pull-right h-30em w-273em bg-color-f9 box-inset bor-ra-7 pl-5em" name=""></select>
+            </p>-->
+            <!--<p class="over-h f-16em color-33 lh-30em mb-12em"><span class="pull-left">专题类型: </span><select id="topic_type" class="pull-right h-30em w-273em bg-color-f9 box-inset bor-ra-7 pl-5em" name=""><option value="">--请选择--</option></select></p>-->
+            <p class="over-h f-16em color-33 lh-30em mb-12em">
+            <span class="pull-left">笔记标题: </span>
+            <input id="notes_title" class="pull-right h-30em w-273em bg-color-f9 box-inset bor-ra-7 pl-10em" type="text" />
+            </p>
+        </div>
+        <div class="pl-12em pr-12em pt-12em">
+            <textarea class="h-178em bg-color-33 box-inset bor-ra-7 p-12em f-14em lh-20em color-33" name="" id="notes_content" placeholder="请输入笔记内容"></textarea>
+        </div>
+        <div class="pl-12em pr-12em pt-15em pb-15em bg-color-whiter bb-1-df">
+            <p class="f-12em lh-20em color-99 mb-12em">
+                <span class="f-15em color-33 mr-12em">选择图片</span>
+                已添加<span id="num">0</span>张
+                <i class="iconfont f-20em pull-right lh-20em color-b3 p-0" onclick="open_uploud_1('add_upload_list')">&#xe6df;</i>
+            </p>
+            <ul id="add_upload_list" class="mb-12em clearfix"></ul>
+        </div>
+        <div class="w-100b pl-12em pr-12em pb-20em pt-40em">
+            <div class="pl-25em pr-25em">
+                <button class="w-100b h-35em text-align f-16em lh-35em color-white bor-0 grad" id="submit" onclick="setEduNotes()">提交</button>
+            </div>
+        </div>  
+        </div>
+    </div>
+</section>
+
+<section class="clearfix w-100b">
+    <div class="po-ab edu_special_tit top-75em pl-16em pr-16em f-16em">
+        <div id="content">{$content}</div>
+        <div id="content1">{$content1}</div>
+        <div id="content2">{$content2}</div>
+    </div>
+    <!-- 重新调整兴趣按钮 -->
+    <neq name="customization" value="">
+    <div class="Reset_bg po-ab top-75em right-0em f-14em color-fff text-align">调整兴趣&nbsp;>
+    </div>
+    </neq>
+</section>
+
+<!-- 学习分析  查看报告-->      
+<eq name="customization" value="">
+<section class="Learning_analysis po-re top-50mem z-index-max clearfix va-jz">
+    <div class="z-index2 pull-left fenxi_word pl-20em">
+        <img src="__STATICS__/apps/page_wechat/public/aui2/img/fenxi_word.png">
+    </div>
+    <div class="pull-left color-ffdf77">丨</div>
+    <div class="pull-left color-ffdf77 f-10em"> 学会分析报告、提升学习效率</div>
+    <div class="pull-left ml-30em view_report color-21 f-10em text-align" >
+        查看报告            
+    </div>
+    <div class="pull-left ml-10mem arrow-right z-index-max"></div>
+</section>
+<else/>
+<section class="Learning_analysis po-re top-50mem z-index-max clearfix va-jz"></section>
+</eq>
+
+<input type="hidden" id="topic_id" value="{$topic_id}">
+<section class="edu_special_con mb-12em mt-55mem">
+    <div class="edu_special_tab clearfix pt-12em pl-12em pb-12em w-100b over-h">
+        <li class="edu_special_shipin_active" onclick="getEduTopic('1')">
+            <div class="color-fff f-12em icon_regular text-center pt-40em">视频</div>
+            <div class="edu_special_shipin_jdt text-center f-10em">
+            <div class="aui-content-padded pt-5em">
+                <div class="aui-progress aui-progress-xxs bg-color-f0f0f0">
+                    <div class="aui-progress-bar bg-color-whiter video_progress" style="width:{$percent.video.learn_rate}%;"></div>
+                </div>
+            </div>
+            <p class="f-10em color-fff pt-5em opa-62 text-l pl-8em lh-14em">
+                已学习<span class="video_no">{$percent.video.learn}</span>部
+            </p>
+            <p class="f-10em color-fff pt-0 opa-62 text-l pl-8em lh-14em">
+                余<span class="video_over">{$percent.video.residue}</span>部
+            </p>
+            </div>
+        </li>
+        <li class="edu_special_shipin di-n" onclick="getEduTopic('1')">
+            <div class="color-21 f-12em icon_regular text-center pt-70em">视频</div>
+            <div class="edu_special_shipin_jdt text-center f-10em">
+            <div class="aui-content-padded pt-12em">
+                <div class="aui-progress aui-progress-xxs bg-color-4580fe">
+                    <div class="aui-progress-bar video_progress" style="background-color: #4580fe;width:{$percent.video.learn_rate}%;"></div>
+                </div>
+            </div>
+            </div>
+        </li>
+        <li class="edu_special_kejian" onclick="getEduTopic('2')">
+            <div class="edu_special_kejian_p color-21 f-12em icon_regular text-center pt-70em">课件</div>
+            <div class="edu_special_kejian_jdt text-center f-10em">
+                <div class="aui-content-padded pt-12em">
+                <div class="aui-progress aui-progress-xxs bg-color-fe454a">
+                    <div class="aui-progress-bar article_progress" style="background-color: #fe454a;width:{$percent.article.learn_rate}%;"></div>
+                </div>
+            </div>
+            </div>
+        </li>
+        <li class="edu_special_kejian_active di-n" onclick="getEduTopic('2')">
+            <div class="edu_special_kejian_p color-fff f-12em icon_regular text-center pt-40em">课件</div>
+            <div class="edu_special_kejian_jdt text-center f-10em">
+            <div class="aui-content-padded pt-5em">
+              <div class="aui-progress aui-progress-xxs bg-color-f0f0f0">
+                  <div class="aui-progress-bar bg-color-whiter article_progress" style="width:{$percent.article.learn_rate}%;" ></div>
+               </div>
+            </div>
+            <p class="f-10em color-fff pt-5em opa-62 text-l pl-8em lh-14em">
+            已学习<span class="article_no">{$percent.article.learn}</span>部
+            </p>
+            <p class="f-10em color-fff pt-0 opa-62 text-l pl-8em lh-14em">
+            余<span class="article_over">{$percent.article.residue}</span>部
+            </p>
+            </div>
+        </li>
+        <li class="edu_special_kaoshi" onclick="getEduTopic('3')">
+            <div class="color-21 f-12em icon_regular text-center pt-70em">考试</div>
+            <div class="edu_special_kejian_jdt text-center f-10em">
+            <div class="aui-content-padded pt-12em">
+             <div class="aui-progress aui-progress-xxs bg-color-fe9c44">
+                <div class="aui-progress-bar exam_progress" style="background-color: #fe9c44;width:{$percent.exam.learn_rate}%;"></div>
+                </div>
+            </div>
+            </div>
+        </li>
+        <li class="edu_special_kaoshi_active di-n" onclick="getEduTopic('3')">
+            <div class="color-fff f-12em icon_regular text-center pt-40em">考试</div>
+            <div class="edu_special_kejian_jdt text-center f-10em">
+                <div class="aui-content-padded pt-5em">
+                    <div class="aui-progress aui-progress-xxs bg-color-f0f0f0">
+                      <div class="aui-progress-bar bg-color-whiter exam_progress" style="width:{$percent.exam.learn_rate}% "></div>
+                   </div>
+                </div>
+                <p class="f-10em color-fff pt-5em opa-62 text-l pl-8em lh-14em">
+                已学习<span class="exam_no">{$percent.exam.learn}</span>部
+                </p>
+                <p class="f-10em color-fff pt-0 opa-62 text-l pl-8em lh-14em">
+                余<span class="exam_over">{$percent.exam.residue}</span>部
+                </p>
+            </div>
+        </li>
+        <li class="edu_special_biji" onclick="getEduTopic('4')">
+            <div class="color-21 f-12em icon_regular text-center pt-70em">笔记</div>
+            <div class="edu_special_kejian_jdt text-center f-10em">
+                <div class="aui-content-padded pt-12em">
+                    <div class="aui-progress aui-progress-xxs bg-color-a144fe">
+                        <div class="aui-progress-bar notes_progress" style="background-color: #a144fe;width:{$percent.notes.learn_rate}%;"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="edu_special_biji_active di-n" onclick="getEduTopic('4')">
+            <div class="color-fff f-12em icon_regular text-center pt-40em">笔记</div>
+            <div class="edu_special_kejian_jdt text-center f-10em">
+                <div class="aui-content-padded pt-5em">
+                  <div class="aui-progress aui-progress-xxs bg-color-f0f0f0">
+                      <div class="aui-progress-bar bg-color-whiter notes_progress" style="width:{$percent.notes.learn_rate}%;"></div>
+                   </div>
+                </div>
+                <p class="f-10em color-fff pt-5em opa-62 text-l pl-8em lh-14em">
+                已写笔记<span class="notes_no">{$percent.notes.count}</span>篇
+                </p>
+               <!--  <p class="f-10em color-fff pt-0 opa-62 text-l pl-8em lh-14em">
+                余<span class="notes_over">{$percent.notes.residue}</span>部
+                </p> -->
+            </div>
+        </li>
+    </div>
+    <div class="edu_video f-16em ml-12em color-21 lh-24em f-w ">视频学习</div>
+    <div class="mt-12em edu_video ml-12em">
+        <ul style="color: #000;height: 100%;" >
+        <empty name="material_list">
+            <span class="ml-30b">暂无内容</span>
+        <else/>
+        <volist name="material_list" id="list123" >
+            <li class="mb-12em over-h" >
+                <a href="{:U('Edu/edu_material_videoInfo', array('material_id' => $list123['material_id'],'customization'=>$customization))}">
+                    <div class="pull-left w-110em h-90em">
+                        <img class=" w-110em h-90em bor-ra-3" src="{$list123.material_thumb}">
+                    </div>
+                    <div class="pull-left over-h w-230em ml-8em">
+                        <div class="pull-left w-216em mt-12em">
+                            <div class="f-16em color-33 f-w">{$list123.material_title}</div>
+                            <div class="pull-left color-a4 f-14em pt-5em">{$list123.add_time}</div>
+                          <!--   <div class="pull-right color-a4 f-14em pt-5em">2188浏览</div>  -->
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </volist>
+        </empty>
+        </ul>
+    </div>
+    <div class="edu_kejian f-16em ml-12em color-21 lh-24em f-w di-n">课件学习</div>
+    <div class="mt-12em edu_kejian ml-12em">
+        <ul style="color: #000;height: 100%;">
+        <empty name="material_data">
+            <span class="ml-40b">暂无内容</span>
+        <else/>
+        <volist name="material_data" id="data" >
+            <li class="mb-12em over-h" >
+                <a href="{:U('Edu/edu_material_info', array('material_id' => $data['material_id'],'customization'=>$customization))}">
+                    <div class="pull-left w-110em h-90em">
+                        <img class=" w-110em h-90em bor-ra-3" src="{$data.material_thumb}">
+                    </div>
+                    <div class="pull-left over-h w-230em ml-8em">
+                        <div class="pull-left w-216em mt-12em">
+                            <div class="f-16em color-33 f-w">{$data.material_title}</div>
+                            <div class="pull-left color-a4 f-14em pt-5em">{$data.add_time}</div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </volist>
+        </empty>
+        </ul>
+    </div>
+    <div class="edu_kaoshi f-16em ml-12em color-21 lh-24em f-w di-n">
+        <ul class="w-100b z-index-max" id="tabBox2">
+        <li class="mt-5em mb-5em tabBox2-active" num="3">
+            <a>模拟考试</a><span class="active"></span>
+        </li>
+        <li class="mt-5em mb-5em" num="1">
+            <a>正式考试</a><span class="active"></span>
+        </li>
+        <li class="mt-5em mb-5em" num="2">
+            <a>我的考试</a><span class="active"></span>
+        </li>
+        </ul>
+    </div>
+    <div id="exam_list" class="clearfix pb-12em mt-10em di-n ml-12em">
+        <div class="mt-12em is_exam" id="exam3">
+            <ul style="color: #000;height: 100%;">
+            <empty name="exam_list3">
+                <span class="ml-40b">暂无内容</span>
+            <else/>
+            <volist name="exam_list3" id="list3">
+                <li class="mb-12em over-h" style="position: relative;">
+                    <a href="{:U('Edu/edu_exam_info',array('exam_id'=>$list3['exam_id'],'moni'=>1,'topic_id'=>$list3['exam_topic'],'customization_type'=>$customization,'zhuanti'=>$zhuanti))}">
+                        <div class="pull-left w-110em h-90em">
+                            <img class=" w-110em h-90em bor-ra-3" src="{$list3.exam_thumb}">
+                        </div>
+                        <div class="pull-left over-h w-230em ml-8em">
+                            <div class="pull-left w-216em mt-12em">
+                                <div class="f-16em color-33 f-w" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{$list3.exam_title}</div>
+                                <div class="" style="position: absolute; bottom: 10%;width: 55%;">
+                                    <div class="pull-left color-a4 f-11em pt-5em" >{$list3.exam_title_type}</div>
+                                    <div class="pull-right color-a4 mt-5em f-11em" >{$list3.exam_date}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </volist>
+            </empty>
+            </ul>
+        </div>
+        <div class="mt-12em di-n is_exam" id="exam1">
+            <ul style="color: #000;height: 100%;">
+            <empty name="exam_list1">
+                <span class="ml-40b">暂无内容</span>
+            <else/>
+                <volist name="exam_list1" id="list1">
+                <li class="mb-12em over-h" style="position: relative;">
+                    <a href="{:U('Edu/edu_exam_info',array('exam_id'=>$list1['exam_id'],'zhengshi'=>1,'topic_id'=>$list1['exam_topic'],'customization_type'=>$customization,'zhuanti'=>$zhuanti))}">
+                        <div class="pull-left w-110em h-90em">
+                            <img class=" w-110em h-90em bor-ra-3" src="{$list1.exam_thumb}">
+                        </div>
+                        <div class="pull-left over-h w-230em ml-8em">
+                            <div class="pull-left w-216em mt-12em">
+                                <div class="f-16em color-33 f-w" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{$list1.exam_title}</div>
+                                <div class="" style="position: absolute; bottom: 10%;width: 55%;">
+                                    <div class="pull-left color-a4 f-11em pt-5em" >{$list1.exam_title_type}</div>
+                                    <div class="pull-right color-a4 mt-5em f-11em" >{$list1.exam_date}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                </volist>
+            </empty>
+            </ul>
+        </div>
+        <div class="mt-12em di-n is_exam" id="exam2">
+            <ul style="color: #000;height: 100%;">
+            <empty name="exam_list2">
+                <span class="ml-40b">暂无内容</span>
+            <else/>
+                <volist name="exam_list2" id="list2">
+                <li class="mb-12em over-h" style="position: relative;">
+                    <a href="{:U('Edu/edu_exam_info',array('exam_id'=>$list2['exam_id'],'topic_id'=>$list2['exam_topic'],'customization_type'=>$customization))}">
+                        <div class="pull-left w-110em h-90em">
+                            <img class=" w-110em h-90em bor-ra-3" src="{$list2.exam_thumb}">
+                        </div>
+                        <div class="pull-left over-h w-230em ml-8em">
+                            <div class="pull-left w-216em mt-12em">
+                                <div class="f-16em color-33 f-w" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{$list2.exam_title}</div>
+                                <div class="" style="position: absolute; bottom: 10%;width: 55%;">
+                                    <div class="pull-left color-a4 f-11em pt-5em" >{$list2.exam_title_type}</div>
+                                    <div class="pull-right color-a4 mt-5em f-11em" >{$list2.exam_date}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                </volist>
+            </empty>
+            </ul>
+        </div>
+    </div>
+    <div class="edu_biji f-16em ml-12em color-21 lh-24em f-w di-n">
+        <ul class="w-100b z-index-max" id="tabBox3">
+        <li class="mt-5em mb-5em tabBox2-active" num="3">
+            <a>学习笔记</a><span class="active"></span>
+        </li>
+        <li class="mt-5em mb-5em" num="1">
+            <a>视频笔记</a><span class="active"></span>
+        </li>
+        <li class="mt-5em mb-5em" num="2">
+            <a>课件笔记</a><span class="active"></span>
+        </li>
+        </ul>
+    </div>
+    <div id="notes_list" class="clearfix pb-12em mt-10em di-n">
+        <div class="mt-12em is_notes" id="notes3">
+            <ul style="color: #000;height: 100%;">
+            <empty name="notes_list3">
+                <span class="ml-40b">暂无内容</span>
+            <else/>
+            <volist name="notes_list3" id="n_list3" >
+            <a href="{:U('Edu/edu_notes_info',array('notes_id'=>$n_list3['notes_id']))}">
+            <div class="clearfix pr-12em w-100b po-re">
+                <div class="pull-left pl-12em pt-0em mt-5mem color-21">{$n_list3.add_time}</div>
+                <div class="edu_line pull-left h-100b hr-sr-de po-ab left-80em top-0em"></div>
+                <eq name="n_list3.is_video" value="21">
+                    <div class="edu-quan bg-color-376bf5 box-sha-3em w-12em h-12em po-ab top-0em left-75em bor-ra-50b video_class" ></div>
+                <else/>  
+                    <div class="edu-quan bg-color-ff4733 box-sha-3em w-12em h-12em po-ab top-0em left-75em bor-ra-50b"></div>
+                </eq>
+                <div class="pull-right h-70em bor-ra-25em border-3em clearfix w-70b pl-8em va-jz mt-12mem mb-10em">
+                    <div class="pull-left w-65b">
+                        <div class="f-14em color-12">{$n_list3.notes_title}</div>
+                        <div class="f-10em color-a4">{$n_list3.notes_type}</div>
+                    </div>
+                    <div class="pull-right">
+                        <img class="w-70em h-52em bor-ra-25em over-h" src="{$n_list3.notes_thumb}">
+                    </div>
+                </div>
+            </div>
+            </a>
+            </volist>
+            </empty>
+            </ul>
+        </div>
+        <div class="mt-12em is_notes di-n" id="notes1">
+            <ul style="color: #000;height: 100%;">
+            <empty name="notes_list1">
+                <span class="ml-40b">暂无内容</span>
+            <else/>
+            <volist name="notes_list1" id="n_list1" >
+            <div class="clearfix pr-12em w-100b po-re">
+                <div class="pull-left pl-12em pt-0em mt-5mem color-21">{$n_list1.add_time}</div>
+                <div class="edu_line pull-left h-100b hr-sr-de po-ab left-80em top-0em"></div>
+                <div class="edu-quan bg-color-376bf5 box-sha-3em w-12em h-12em po-ab top-0em left-75em bor-ra-50b video_class" ></div>
+                <a href="{:U('Edu/edu_notes_info',array('notes_id'=>$n_list1['notes_id']))}">
+                <div class="pull-right h-70em bor-ra-25em border-3em clearfix w-70b pl-8em va-jz mt-12mem mb-10em">
+                    <div class="pull-left w-65b">
+                        <div class="f-14em color-12">{$n_list1.notes_title}</div>
+                        <div class="f-10em color-a4">{$n_list1.notes_type}</div>
+                    </div>
+                    <div class="pull-right">
+                        <img class="w-70em h-52em bor-ra-25em over-h" src="{$n_list1.notes_thumb}">
+                    </div>
+                </div>
+                </a>
+            </div>
+            </volist>
+            </empty>
+            </ul>
+        </div>
+        <div class="mt-12em is_notes di-n" id="notes2">
+            <ul style="color: #000;height: 100%;">
+            <empty name="notes_list2">
+                <span class="ml-40b">暂无内容</span>
+            <else/>
+            <volist name="notes_list2" id="n_list2" >
+            <div class="clearfix pr-12em w-100b po-re">
+                <div class="pull-left pl-12em pt-0em mt-5mem color-21">{$n_list2.add_time}</div>
+                <div class="edu_line pull-left h-100b hr-sr-de po-ab left-80em top-0em"></div>
+                <div class="edu-quan bg-color-ff4733 box-sha-3em w-12em h-12em po-ab top-0em left-75em bor-ra-50b"></div>
+                <a href="{:U('Edu/edu_notes_info',array('notes_id'=>$n_list2['notes_id']))}">
+                <div class="pull-right h-70em bor-ra-25em border-3em clearfix w-70b pl-8em va-jz mt-12mem mb-10em">
+                    <div class="pull-left w-65b">
+                        <div class="f-14em color-12">{$n_list2.notes_title}</div>
+                        <div class="f-10em color-a4">{$n_list2.notes_type}</div>
+                    </div>
+                    <div class="pull-right">
+                        <img class="w-70em h-52em bor-ra-25em over-h" src="{$n_list2.notes_thumb}">
+                    </div>
+                </div>
+                </a>
+            </div>
+            </volist>
+            </empty>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- <div>
+    <div id="videoBox" class="di-n">
+        <section class="aui-content-padded moving" id="title1">
+            <div class="aui-content">
+                <div class="aui-list-item-title f-17 fwei-600 shade lh-47em ">
+                    <img class="w-7em h-17em pull-left mt-15em mr-12em" src="__STATICS__/apps/page_wechat/public/aui2/img/dl-icon.png"> 专题视频
+                    <span class="color_b3b3b3 f-12em pull-right f-nw" onclick="openlearn_type_list('edu_special_twostudies_list_header','21')">查看更多&nbsp;></span>
+                </div>
+
+            </div>
+        </section>
+        <div id="video_1">
+        </div>
+        <div id="video_list" class="pl-15em clearfix mt-40em mb-12mem">
+        </div>
+    </div>
+    <div id="articleBox" class="di-n">
+        <section class="aui-content-padded moving" id="title1">
+            <div class="aui-content">
+                <div class="aui-list-item-title f-17 fwei-600 shade lh-47em ">
+                    <img class="w-7em h-17em pull-left mt-15em mr-12em" src="__STATICS__/apps/page_wechat/public/aui2/img/dl-icon.png"> 专题课件<span class="color_b3b3b3 f-12em pull-right f-nw" onclick="openlearn_type_list('edu_special_twostudies_list_header','11')">查看更多&nbsp;></span>
+                </div>
+            </div>
+        </section>
+        <div id="article_1">                    
+        </div>  
+        <div id="article_list" class="pl-15em clearfix mt-40em mb-12em">        
+        </div>
+    </div>
+    <div id="liveBox" class="di-n">
+        <section class="aui-content-padded moving" id="title1">
+            <div class="aui-content">
+                <div class="aui-list-item-title f-17 fwei-600 shade lh-47em ">
+                    <img class="w-7em h-17em pull-left mt-15em mr-12em" src="__STATICS__/apps/page_wechat/public/aui2/img/dl-icon.png"> 学习实况
+                    <span class="color_b3b3b3 f-12em pull-right f-nw" onclick="openlearn_type_list('edu_special_twostudies_list_header','学习实况')">查看更多&nbsp;></span>
+                </div>
+            </div>
+        </section>
+        <div id="notes_list" class="pl-15em clearfix mb-12mem">     
+        </div>
+    </div>
+    <div id="examBox" class="di-n">
+        <section class="aui-content-padded moving" id="title1">
+            <div class="aui-content">
+                <div class="aui-list-item-title f-17 fwei-600 shade lh-47em ">
+                    <img class="w-7em h-17em pull-left mt-15em mr-12em" src="__STATICS__/apps/page_wechat/public/aui2/img/dl-icon.png"> 参加考试
+                    <span class="color_b3b3b3 f-12em pull-right f-nw" onclick="openlearn_type_list('edu_special_twostudies_list_header','参加考试')">查看更多&nbsp;></span>
+                </div>
+            </div>
+        </section>
+        <div id="exam_list" class="pl-15em pr-10em clearfix mb-12em">
+        </div>
+    </div>
+</div> -->
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- <script type="text/jscript" src="__STATICS__/apps/page_wechat/Edu/js/edu_special_twostudies.js"></script> -->
+<script type="text/javascript">
+console.log({$material_list});
+console.log({$material_list.material_id});
+
+//返回
+$(function(){
+    $(".edu_video").removeClass('di-n');
+    $(".edu_kejian").addClass('di-n');
+    $(".edu_kaoshi").addClass('di-n');
+    $(".edu_biji").addClass('di-n');
+});
+/*function goBlack(){
+    location.href="{:U('Wechat/Edu/edu_index')}";
+}*/
+$('#tabBox2').find('li').click(function(){
+    $('#tabBox2').find('li').removeClass('tabBox2-active').find('.active').hide();
+    $(this).addClass('tabBox2-active').find('.active').show();
+    is_exam = $(this).attr('num');
+    $(".is_exam").addClass('di-n');
+    $("#exam"+is_exam).removeClass('di-n');
+})
+$('#tabBox3').find('li').click(function(){
+    $('#tabBox3').find('li').removeClass('tabBox2-active').find('.active').hide();
+    $(this).addClass('tabBox2-active').find('.active').show();
+    is_notes = $(this).attr('num');
+    $(".is_notes").addClass('di-n');
+    $("#notes"+is_notes).removeClass('di-n');
+})
+function getEduTopic(type){
+    $('#topic_id').val();
+    switch (type) {
+        case '1':
+            $("#exam_list").addClass('di-n');
+            $("#notes_list").addClass('di-n');
+            $(".edu_special_shipin").addClass('di-n');
+            $(".edu_special_shipin_active").removeClass('di-n');
+            $(".edu_special_kejian").removeClass('di-n');
+            $(".edu_special_kejian_active ").addClass('di-n');
+            $(".edu_special_kaoshi").removeClass('di-n');
+            $(".edu_special_kaoshi_active ").addClass('di-n');
+            $(".edu_special_biji").removeClass('di-n');
+            $(".edu_special_biji_active").addClass('di-n');
+            $(".edu_video").removeClass('di-n');
+            $(".edu_kejian").addClass('di-n');
+            $(".edu_kaoshi").addClass('di-n');
+            $(".edu_biji").addClass('di-n');
+            break;
+        case '2':
+            $("#exam_list").addClass('di-n');
+            $("#notes_list").addClass('di-n');
+            $(".edu_special_shipin").removeClass('di-n');
+            $(".edu_special_shipin_active").addClass('di-n');
+            $(".edu_special_kejian").addClass('di-n');
+            $(".edu_special_kejian_active ").removeClass('di-n');
+            $(".edu_special_kaoshi").removeClass('di-n');
+            $(".edu_special_kaoshi_active ").addClass('di-n');
+            $(".edu_special_biji").removeClass('di-n');
+            $(".edu_special_biji_active").addClass('di-n');
+            $(".edu_video").addClass('di-n');
+            $(".edu_kejian").removeClass('di-n');
+            $(".edu_kaoshi").addClass('di-n');
+            $(".edu_biji").addClass('di-n');
+            break;
+        case '3':
+            $("#exam_list").removeClass('di-n');
+            $("#notes_list").addClass('di-n');
+            $(".edu_special_shipin").removeClass('di-n');
+            $(".edu_special_shipin_active").addClass('di-n');
+            $(".edu_special_kejian").removeClass('di-n');
+            $(".edu_special_kejian_active ").addClass('di-n');
+            $(".edu_special_kaoshi").addClass('di-n');
+            $(".edu_special_kaoshi_active ").removeClass('di-n');
+            $(".edu_special_biji").removeClass('di-n');
+            $(".edu_special_biji_active").addClass('di-n');
+            $(".edu_video").addClass('di-n');
+            $(".edu_kejian").addClass('di-n');
+            $(".edu_kaoshi").removeClass('di-n');
+            $(".edu_biji").addClass('di-n');
+            break;
+        case '4':
+            $("#exam_list").addClass('di-n');
+            $("#notes_list").removeClass('di-n');
+            $(".edu_special_shipin").removeClass('di-n');
+            $(".edu_special_shipin_active").addClass('di-n');
+            $(".edu_special_kejian").removeClass('di-n');
+            $(".edu_special_kejian_active ").addClass('di-n');
+            $(".edu_special_kaoshi").removeClass('di-n');
+            $(".edu_special_kaoshi_active ").addClass('di-n');
+            $(".edu_special_biji").addClass('di-n');
+            $(".edu_special_biji_active").removeClass('di-n');
+
+            $(".edu_video").addClass('di-n');
+            $(".edu_kejian").addClass('di-n');
+            $(".edu_kaoshi").addClass('di-n');
+            $(".edu_biji").removeClass('di-n');
+            break;
+    }
+}
+$(".Reset_bg").click(function(){
+    location.href="{:U('Edu/edu_edu_material_del')}"
+
+});
+$(".view_report").click(function(){
+    var topic_id = $('#topic_id').val();
+    location.href="{:U('Edu/edu_exam_analysis')}?topic_id="+topic_id
+
+});
+
+
+
+</script>
+
+</html>

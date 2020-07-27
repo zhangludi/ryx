@@ -1,0 +1,142 @@
+/* 森普蓝色配色方案 */
+
+
+/*********** 
+    Page Header
+***********/
+
+
+/*p5首页a 的颜色*/
+
+a {
+	color: #666;
+}
+
+
+/*框架整体背景色*/
+
+body {
+	background: #3e495f;
+}
+
+
+/*p5专用蓝色的设置*/
+
+.fcolor-p5blue {
+	color: #0165bd!important
+}
+
+.bg-color-p5blue {
+	background: #0165bd
+}
+
+.hr-sb-blue {
+	background: #0165bd;
+	height: 1px;
+	width: 100%
+}
+
+
+/*页签颜色*/
+
+.page-tabs a.active {
+	background: #555;
+	color: #fff;
+}
+
+
+/*头部样式*/
+
+.navbar-static-top {
+	background: #0165b6;
+}
+
+.fixed-nav .navbar-fixed-top {
+	background: #0165b6;
+}
+/*侧栏颜色样式*/
+
+.navbar-static-side{
+	background: #343640;	
+}
+.logo h2 {
+	color: #fff;
+}
+
+.nav>li>a {
+	/*  color:#fff;*/
+}
+
+
+/*图标字体*/
+
+.nav>li>a i {
+	/*font-size: 15px;*/
+}
+
+
+/*一级下拉*/
+
+.navbar-default .nav>li>a:hover,
+.navbar-default .nav>li>a:focus {
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+}
+
+.navbar-default .nav>li:hover>ul.nav-second-level,
+.navbar-default .nav>li.active>ul.nav-second-level {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+
+/*二级下拉*/
+
+.navbar-default .nav.nav-second-level>li>a {
+	background-image: url(../../images/hr_cblue_after.png);
+	background-repeat: no-repeat;
+	background-position: center left 30px;
+}
+
+.navbar-default .nav.nav-second-level>li>a:hover,
+.navbar-default .nav.nav-second-level>li>a:focus,
+.navbar-default .nav.nav-second-level>li.active>a {
+	background: url(../../images/hr_cblue_before.png) rgba(0, 0, 0, 0.3);
+	background-repeat: no-repeat;
+	background-position: center left 30px;
+	color: #fff;
+}
+
+.navbar-default .nav>li:hover>ul.nav-third-level,
+.navbar-default .nav>li.active>ul.nav-third-level {
+	background: rgba(0, 0, 0, 0.3);
+}
+
+
+/*三级下拉*/
+
+.navbar-default .nav.nav-third-level>li>a {
+	background-image: url(../../images/hr_cblue_after.png);
+	background-repeat: no-repeat;
+	background-position: center left 30px;
+}
+
+.navbar-default .nav.nav-third-level>li>a:hover,
+.navbar-default .nav.nav-third-level>li>a:focus,
+.navbar-default .nav.nav-third-level>li.active>a {
+	background: url(../../images/hr_cblue_before.png) rgba(0, 0, 0, 0.4);
+	background-repeat: no-repeat;
+	background-position: center left 30px;
+	color: #fff;
+}
+
+
+/*左侧缩进图标*/
+
+.navbar-minimalize {
+	background: rgba(0, 0, 0, 0.1);
+	border-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar-minimalize i {
+	color: #fff;
+}

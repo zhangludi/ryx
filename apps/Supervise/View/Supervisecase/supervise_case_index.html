@@ -1,0 +1,148 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            	关键字：
+	                        </div>
+	                        <div class="layui-col-xs2 ">
+	                            <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="关键字">
+	                        </div>
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                           	 时间：
+	                        </div>
+	                        <div class="layui-col-xs3">
+	                            <input type="text" class="layui-input" name="start_time" autocomplete="off" id="start_time" placeholder="yyyy-mm-dd">
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                          <a class="layui-btn table-add" data-type="add">添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="ztreedata"  lay-filter="demo"></table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+	//            默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#ztreedata'
+	                , url: '{:U("supervise_case_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'case_id', width: 80,  title: '编号', sort: true}
+		                ,{field:'case_title', title:'案件标题'}
+		                ,{field:'add_staff', title:'添加人', width: 120}
+		                ,{field:'add_time', title: '添加时间'}
+		                ,{field:'case_ource', title:'来源'}
+		                ,{field: 'status_name',  title: '状态'}
+		                ,{field: 'operate',  title: '操作',align: 'center', width: 250}
+	                ]]
+	                , page: true
+	            });
+	            
+	            var $ = layui.$, active = {
+	                    reload: function(){
+	                        var keywords = $('#keywords').val();
+	                        var start_time = $('#start_time').val();
+	                        table.reload('ztreedata', {
+	                            page: {
+	                              curr: 1 
+	                            }
+	                            ,where: {
+	                                "keywords": keywords,
+	                                "start_time":start_time
+	                            }
+	                        });
+	                    },
+						//点击添加按钮，全屏弹出.曾宪坤
+						add: function(){
+							var index = layer.open({
+								type: 2,
+								title: false,
+								end:false,
+								closeBtn: 0,
+								shift: 1,
+								area : ['800px' , '400px'],
+								content: "{:U('supervise_case_edit')}",
+							});
+							layer.full(index);
+						}
+	                };
+	                $('.layui-form .layui-btn').on('click', function(){
+	                    var type = $(this).data('type');
+	                    active[type] ? active[type].call(this) : '';
+	                });
+	        });   
+	    })
+	</script>
+    <script>
+		laydate.render({
+			elem: '#start_time'
+			,type: 'date'
+			,range: true
+		});
+        function case_hear($status,$case_id) {
+			layer.open({
+				type : 2,
+				title : '案件审核',
+				offset : window.parent.document.body.scrollTop + 10 + 'px',
+				maxmin : false,
+				shadeClose : true, //点击遮罩关闭层
+				area : [ '600px', '325px' ],
+				content : "{:U('supervise_case_hear')}?status="+$status+"&case_id="+$case_id,
+				success:function(){
+                	layerAuto();
+                }
+			});
+		};
+		function info(case_id){
+			var index = layer.open({
+				type: 2,
+				title: false,
+				end:false,
+				closeBtn: 0,
+				shift: 1,
+				area : ['300px' , '300px'],
+				content: "{:U('supervise_case_info')}?case_id="+case_id,
+			});
+			layer.full(index);
+		}
+		 function case_reject($status,$case_id) {
+		
+				layer.open({
+					type : 2,
+					title : '案件驳回',
+					offset : window.parent.document.body.scrollTop + 10 + 'px',
+					maxmin : false,
+					shadeClose : true, //点击遮罩关闭层
+					area : [ '600px', '325px' ],
+					content : "{:U('supervise_case_reject')}?status="+$status+"&case_id="+$case_id,
+					success:function(){
+	                	layerAuto();
+	                }
+				});
+			};
+    </script>
+</block>

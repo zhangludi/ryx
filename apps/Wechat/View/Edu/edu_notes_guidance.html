@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+<title>考试中心</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" href="__STATICS__/apps/page_wechat/public/css/icheck-bootstrap.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_wechat/public/css/message.css">
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_exam.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_exam_info.css" />
+<style>
+	header {
+		background-color: #fff !important;
+		line-height: 3rem !important;
+		position: fixed !important;
+		top: 0 !important;
+	}
+
+	#aui-content {
+		margin-top: 3.25rem !important;
+	}
+
+	.questionId {
+		cursor: pointer;
+		font-size: 0.8rem;
+		line-height: 1.7rem;
+		text-align: center;
+		color: #DCE7F2;
+		border: 0.03rem solid white !important;
+	}
+
+	.question_id {
+		color: #FFF;
+		background: #d4a500;
+		border: 0.03rem solid #d4a500 !important;
+	}
+
+	.active_question_id {
+		color: #d4a500;
+		background: none;
+		border: 0.03rem solid #CCC !important;
+	}
+
+	.clickQue {
+		color: #FFF;
+		background: #d4a500;
+		border: 0.03rem solid #d4a500 !important;
+	}
+
+	.question_title {
+		margin-bottom: 1rem;
+	}
+
+	.options {
+		position: absolute;
+		transform: translateY(-50%);
+		top: 50%;
+		left: 0.2rem;
+	}
+</style>
+</head>
+<body class="bg-color-f9">
+<section class="edu_analysis_mask" style="display:none">
+	<div class="po-fix w-100b h-100b top-0em left-0em bg-color-000 z-index-mask">
+		<div class="edu_mask_radius_25em w-80b h-50b bg-color-whiter po-ab top-20b left-10b">
+			<div><img src="__STATICS__/apps/page_wechat/public/images/exam_fenxi.png"></div>
+			<div class="po-ab top-5b left-5b">
+				<div class="f-18em color-21">本次考试所得总分：</div>
+				<div class="color-ff4242 f-50em mt-5mem">{$data.point_amount}分</div>
+			</div>
+			<div class="clearfix po-ab top-40b color-66 f-16em">
+				<div class="pull-left ml-20em">
+					<div>正确率：<span>{$data.accuracy}%</span></div>
+					<div class="mt-10em">答题数：<span>{$data.count}</span></div>
+				</div>
+				<div class="pull-left ml-25em">
+					<div>用时：<span>{$data.time_lave}</span></div>
+					<div class="mt-10em">积分：<span><neq name="data.integral" value="">{$data.integral}<else/>0</neq></span></div>
+				</div>
+			</div>
+			<div class="clearfix po-ab top-80b left-10b" style="top: 76%;">
+				<eq name="zhuanti" value="1">
+				<div class="pull-left edu_exam_analysis text-align f-15em color-ff4242" onclick="edu_exam_analysis({$data.exam_topic},'1');">学习分析</div>
+				<div class="pull-left edu_exam_Answer text-align f-15em color-fff ml-12em" onclick="edu_exam_info({$data.exam_id},'1',{$data.exam_topic})" style="margin-left: 0.6rem;">答案解析</div>
+				<else />
+				<div class="pull-left edu_exam_Answer text-align f-15em color-fff ml-12em" onclick="edu_exam_info({$data.exam_id},'1',{$data.exam_topic})" style="margin-left: 2.6rem;">答案解析</div>
+				</eq>
+
+			</div>
+		</div>
+	</div>
+</section>
+<input type="hidden" id="uuuuu" >
+<div style="display: none" id="strBtn">{$exam_list1}</div>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-pull-refresh.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-slide.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/message.min.js"></script>
+<!-- <script type="text/jscript" src="__STATICS__/apps/page_wechat/edu/js/edu_exam_info.js"></script> -->
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script type="text/jscript">
+$(".edu_analysis_mask").show();
+function edu_exam_info(exam_id,type_topic,exam_topic) {
+	location.href="{:U('edu_exam_info')}?exam_id="+exam_id+"&type_topic="+type_topic+"&topic_id="+exam_topic;
+}
+function edu_exam_analysis(exam_topic,type_topic) {
+	location.href="{:U('edu_exam_analysis')}?topic_id="+exam_topic+"&type_topic="+type_topic;
+}
+</script>
+<!--end-->
+</body>
+
+</html>

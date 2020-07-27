@@ -1,0 +1,143 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid " >
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="layui-row">
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                            <div class="layui-form layui-card-body fitheight">
+                                <div class="layui-row layui-col-space5">
+                                    <div class="layui-col-xs2 text-r lh-40">
+                                        考勤机名称：
+                                    </div>
+                                    <div class="layui-col-xs3 ">
+                                        <input class="layui-input" name="machine_name" id="machine_name" autocomplete="off" placeholder="请输入考勤机名称">
+                                    </div>
+                                    <div class="layui-col-xs3 pull-right">
+                                        <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+                                        <if condition="$is_audit neq '1'">
+                                            <a class="layui-btn table-add "  data-type="add"  style="text-decoration: none;" title="添加">添加</a>
+                                        </if>
+                                    </div>
+                                </div>
+                                <table class="layui-table" id="demo"  lay-filter="demo">
+                                </table>
+                                <script type="text/html" id="operate">
+                                    <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                                    <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                                    <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="download">人员信息下载到考勤机</a>
+                                    <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="upload">考勤机人员信息上传</a>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        layui.use(['element','form'], function() {
+            var $ = layui.$
+                    , admin = layui.admin
+                    , element = layui.element
+                    , form = layui.form
+                    , router = layui.router();
+            form.render();
+            // 默认显示的 表格
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#demo'
+                    , url: "{:U('System/Index/att_machine_list_data')}"
+                    , height: 'full-160'
+                    , id: 'ztreedata'
+                    , cols: [[
+                        {field: 'machine_id', width: 80, title: '编号', sort: true}
+                        , {field: 'machine_no', width: 140, title: '考勤机号'}
+                        , {field: 'machine_name', width: 160, title: '考勤机名称'}
+                        , {field: 'party_name', width: 140, title: '考勤机所属部门'}
+                        , {field: 'machine_addr',width: 140, title: '考勤机地点'}
+                        , {field: 'machine_type_name', width: 100, title: '考勤机类型'}
+                        , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 400}
+                    ]]
+                    , page: false
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function(obj){
+                    console.log(obj)
+                });
+                //监听工具条
+                table.on('tool(demo)', function(obj){
+                    var data = obj.data;
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除该数据吗？', function(index){
+                            window.location='{:U("Index/att_machine_do_del")}?machine_no='+data.machine_no+'';
+                        });
+                    } else if(obj.event === 'edit'){
+                        var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('Index/att_machine_edit')}?machine_no="+data.machine_no+"",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+                    } else if(obj.event === 'download'){
+                        window.location='{:U("Index/att_machine_download")}?machine_no='+data.machine_no+'';
+                    } else if(obj.event === 'upload'){
+                        window.location='{:U("Index/att_machine_upload")}?machine_no='+data.machine_no+'';
+                    }
+                });
+                // 查询时间触发
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var machine_name = $('#machine_name').val();
+                        table.reload('ztreedata', {
+                            page: {
+                              curr: 1 
+                            }
+                            ,where: {
+                                "machine_name": machine_name
+                            }
+                        });
+                    },
+                    add: function(){
+                        var index = layer.open({
+                           type: 2,
+                           title: false,
+                           end:false,
+                           closeBtn: 0,
+                           shift: 1,
+                           content: "{:U('Index/att_machine_edit')}",
+                           area: ['300px', '300px']
+                        });
+                        layer.full(index);
+                    }
+                };
+                $('.layui-form .layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+        })
+    </script>
+    <script>
+        //时间选择器
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                range: true
+            });
+        })
+    </script>
+</block>

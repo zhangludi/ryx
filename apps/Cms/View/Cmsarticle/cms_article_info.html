@@ -1,0 +1,96 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+   	<div class="layui-fluid">
+	    <div class="layui-row  layui-col-space5">
+	    <form action="{:U('cms_article_status')}" method="post" class="form-horizontal">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"><php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php></div>
+	                <div class="layui-card-body">
+	                    <div class="portlet-body">
+	                        <div class="center-text">
+	                            <span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$article_data.article_title}</span>
+	                            <div class="center-text fcolor-99">
+	                                <span class="mr-10">日期：{$article_data.add_time}</span>
+	                                <span class="mr-10">作者：{$article_data.add_staff}</span>
+	                                <span class="mr-10">文章来源：上传添加</span>
+	                            </div>
+	                        </div>
+	                        <div class="layui-row">
+	                            {$article_data.article_content}
+	                        </div>
+	                        <neq name="article_data.article_attach" value="">
+		                        <hr>
+		                        <div class="layui-row">
+	                               <div class="layui-col-xs6 mt-10">
+		                                <div class="layui-row">
+		                                    <div class="layui-col-xs2 text-l fsize-14 fcolor-65 lh-35"><strong>下载附件：</strong></div>
+		                                    <div id="js-grid-juicy-projects" class="cbp" style="height:60px">
+		                                            <php>echo getUploadHtml($article_data['article_attach'],'','',1,0);</php>
+		                                    </div>
+		                                </div>
+		                            </div> 
+		                        </div>
+	                        </neq>
+	                        <!-- <eq name='cat_type_a' value="14">
+	                        <hr>
+	                        <div class="layui-row">
+                               <div class="layui-col-xs6 mt-10">
+	                                <div class="layui-row">
+	                                    <div class="layui-col-xs2 text-l fsize-14 fcolor-65 lh-35"><strong>下载附件：</strong></div>
+
+	                                    <input type="hidden" id="source_name2" name="source_name2" value="" />
+	                                    <input type="hidden" id="article_thumb_old2" name="article_thumb_old2" value="" style="width: 60px">
+	                                    <input type="hidden" id="article_attach" name="article_attach" value="{$article_data.article_attach}" style="width: 60px">
+	                                    <input type="hidden" class="form-control" id="article_img2" name="article_img2" value="{$article_data.article_attach}">
+
+	                                    <button type="button" class="layui-btn" onclick="uploader_file('cms','1','article_attach','source_name2','js-grid-juicy-projects','2','1')"><i class="layui-icon"></i>上传文件</button>
+	                                    <div id="js-grid-juicy-projects" class="cbp" style="height:60px">
+	                                        <neq name="article_data.article_attach" value="">
+	                                            <php>echo getUploadHtml($article_data['article_attach'],'','',1,0);</php>
+	                                        </neq>
+	                                    </div>
+	                                </div>
+	                            </div> 
+	                        </div>
+	                    	</eq> -->
+	                    </div><!-- end -->
+	                </div>
+	            </div>
+	        </div>
+	        
+	        	<input type="hidden" id="status" name="status">
+	        	<input type="hidden" name="article_id" value="{$article_data['article_id']}">
+	        <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="text-align: right">
+                    	<eq name="article_data.article_cat" value="15">
+                    	<eq name="article_data.status" value="21">
+	                		<button class="layui-btn" lay-submit="" onclick="status2()" lay-filter="component-form-demo1">同意</button>
+	                    	<button class="layui-btn" lay-submit="" onclick="status3()" lay-filter="component-form-demo1">驳回</button>
+	                	</eq>
+	                	</eq>
+                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                    </div>
+                </div>
+            </div>
+	    </form>
+	    </div>
+	</div>
+</block>
+<block name="js">
+
+<script type="text/javascript">
+	function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+	function status2(){
+        $('#status').val(1);
+    }
+    function status3(){
+        $('#status').val(31);
+    }
+</script>
+</block>

@@ -1,0 +1,201 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+    <block name="body">
+        <div class="page-container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEADER-->
+					<div class="row">
+                        <div class="col-sm-3">
+							<div class="portlet light  bordered">
+                            <!-- 小标题 -->
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm bg-color-green2">
+                                            <i class="iconfont">&#xe64b;</i>
+                                        </div>
+                                    </div>
+                                    <span class="bold ">党组织列表</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <!-- 小标题结束 -->
+                                <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1">
+                                    <div class="tree-sidebar">
+                                        <ul id="treeDemo" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						</div>
+                        <!-- 左侧结束 -->
+                        <!-- 右侧开始 -->
+                        <div class="col-sm-9">
+                        	<div class="portlet light  bordered">
+                                <!-- 小标题 -->
+                                   <div class="portlet-title">
+                                       <div class="pull-right mt-5">
+                                    </div>
+                                </div>
+								<div class="form-group col-md-4">
+										<div class="row">
+											<label class="control-label col-md-4 p-0">月份选择： </label>
+											<div class="col-md-8  p-0">
+													<select class="form-control  select2 " id="month_change" lay-search>
+													<php>echo getdatelist($month);</php>
+												</select>
+												<input type="hidden" id="month" value="{$month}">
+												<input type="hidden" id="party" value="{$assess.party_no}">
+											</div>
+										</div>
+									</div>
+                                <!-- 小标题结束 -->
+                                <div class="portlet-body">
+                                    <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1" id="Broke">
+                                       <div id="Broken6" style="height: 323px;width: 100%" alt="对标体系折线图"></div>
+                                    </div>
+									  <table id="client_table" class="table" data-show-footer="true" data-toggle="table" data-url="{:U('communist_comparison_details_data',array('group'=>party,'month'=>$month,'party_no'=>$assess['party_no']))}" data-height="450" data-search="false" data-show-refresh="false" data-show-toggle="false" data-show-columns="false" data-show-export="false" data-detail-view="false" data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-show-pagination-switch="false" data-pagination="false" data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]">
+											<thead>
+												<tr>
+													<th data-field="assess_id"  data-align="center" data-footer-formatter="合计："   data-sortable="true">序号</th>
+													<th data-field="assess_name" data-align="center" data-sortable="true">考核项</th>
+													<th data-field="proportion" data-align="center" data-sortable="true">比重</th>
+													<th data-field="cycle_name" data-align="center" data-sortable="true">考核周期</th>
+													<th data-field="communist_name" data-align="center"  data-sortable="true">负责人</th>
+													<th data-field="operate" data-align="center" data-footer-formatter="sumFormatter" data-sortable="true">分值</th>
+												</tr>
+											</thead>
+										</table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 右侧结束 -->
+                    <!-- 整个部分结束 -->
+                    <div class="clearfix col-xs-12" style="height: 15px"></div>
+                    </div><!-- row结束 -->
+
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+    </block>  
+    <block name="js">
+		<script>
+			  var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick//绑定回调函数
+            },
+            view: {
+                showIcon: false
+            }
+        };
+		//$('#client_table').bootstrapTable('refresh',{url:"{:U('pf_assess_set_index_data')}?party_no="+party_no+"&group='party'"});
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            <volist name="category_lista" id="list">
+            { id:"{$list.party_no}",pId:{$list.party_pno}, name:"["+"{$list.party_no}"+"]"+"{$list.party_name}",open:true},
+			</volist>
+        ];
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+        function onClick(e, treeId, treeNode) {
+			var party_no=treeNode.id
+			$("#party").val(party_no);
+			var mothod=$("#month").val();
+			$.post("{:U('communist_comparison_details_table')}",{party_no:party_no,mothod:mothod},function(e){
+				$("#Broke").html(e)
+				$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+mothod});
+			})
+        }
+		$("#month_change").change(function(){
+			var party_no=$("#party").val();
+			$("#month").val(this.value);
+			var mothod=this.value;
+			$.post("{:U('communist_comparison_details_table')}",{party_no:party_no,mothod:mothod},function(e){
+				$("#Broke").html(e)
+				$('#client_table').bootstrapTable('refresh',{url:"{:U('communist_comparison_details_data')}?party_no="+party_no+"&group=party&month="+mothod});
+			})
+		})
+		</script>
+		<script>
+			// 对标体系折线图
+			var assess_name=$.parseJSON('{$assess.assess_name}')
+			var score=$.parseJSON("{$assess.score}")
+			var Broken6 = echarts.init(document.getElementById('Broken6'));
+		
+		option6 = {
+			title: {
+				text: ''
+			},
+			legend: {
+				data: ['{$assess.party_name}']
+			},
+			radar: [
+				{
+					indicator:assess_name,
+					center: ['50%', '60%'],
+					radius: 120,
+					startAngle: 90,
+					splitNumber: 4,
+					name: {
+						formatter:'【{value}】',
+						textStyle: {
+							color:'red'
+						}
+					}
+				}
+			],
+			series: [
+				{
+					name: '雷达图',
+					type: 'radar',
+					itemStyle: {
+						emphasis: {
+							// color: 各异,
+							lineStyle: {
+								width: 4
+							}
+						}
+					},
+					data: [
+						{
+							value: score,
+							name: '{$assess.party_name}',
+							symbol: 'rect',
+							symbolSize: 5,
+							lineStyle: {
+								normal: {
+									show: true,
+									type: 'dashed',
+									formatter:function(params) {
+										return params.value;
+									}
+								}
+							}
+						},
+					]
+				}
+			]
+		};
+
+		Broken6.setOption(option6);
+		function sumFormatter(data) {
+			field = this.field;
+			return data.reduce(function(sum, row) { 
+				return sum + (+row[field]);
+			}, 0);
+		}
+		</script>
+    </block>  

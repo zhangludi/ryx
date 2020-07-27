@@ -1,0 +1,108 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php>（换届时间：{$change_time}）</div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <!-- <div class="layui-row layui-col-space5">
+	                            	
+	                                <div class="layui-col-xs3 pull-right" >
+	                                    <a class="layui-btn table-add " href="{:U('Hrpartychange/hr_party_change_flow_edit')}"    style="text-decoration: none;" title="添加">添加</a>
+	                                </div>
+	                            </div> -->
+	                            <input type="hidden" id="party" value="{$party_no}" >
+								<input type="hidden" id="change_time" value="{$change_time}" >
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+	                            </table>
+	                            <script type="text/html" id="operate">
+	                                
+	                                
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("Hrpartychange/hr_party_change_history_list_data")}?party_no={$party_no}&change_time={$change_time}&type={$type}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                    {field: 'change_code_name', title: '材料名称'}
+	                    , {field: 'change_file_upload_time',  title: '上传时间'}
+	                	, {field: 'status_name', width:80 ,title: '状态'}
+	                    , {field: 'operate', width:180 , title: '操作'}
+	                ]]
+	                , page: false
+	            });
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+			        console.log(obj)
+			    });
+			    //监听工具条
+			    
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+			            var notes_type = $('#notes_type').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time,
+					        	"notes_type":notes_type,
+					        }
+				      	});
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	        //点击左侧树的事件
+	        
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>
+	
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-pull-refresh.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui-flex.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_zhdj.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+	.aui-load-container{
+		height:100%;
+	}
+	.aui-input-row{
+		width: 100% !important;
+	}
+	label,.aui-input-addon{
+		width: 85% !important;
+		text-align: left !important;
+	}
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    		background-size: 100% 100%;}
+</style>
+</head>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info">
+	    <ul>
+	    	<li class="h-45em">
+	    		<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+	    		<div class="aui-title f-w">选择部门</div>
+	    		<a class="pull-right f-12em f-w pr-12em" onclick="submit_party();">
+			      	 确定
+			    </a>
+	    	</li>
+	    </ul>
+   	</div>
+	<div id="personnelBox">
+		<div>
+			<ul class="pl-12em pr-12em pt-10em">
+				<volist name="party_list" id="list">
+					<li class="over-h">
+						<img class="pull-left w-40em h-40em bor-ra-100b mr-12em mb-10em" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" alt="" />
+						<div class="pull-left w-270em">
+							<p class="f-16em lh-16em color-33 f-w pt-5em pb-8em">{$list.party_name}</p>
+						</div>
+						<div class="pull-right w-16em h-16em mt-20em mr-12em" id="partys_list">
+							<div class="pull-left w-16em h-16em b-1-df bor-ra-3 di-n"></div>
+							<input type='radio' class="pull-left w-16em h-16em bor-ra-3 communist_nos" name="party_no"   value={$list.party_no} />
+						</div>
+					</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+</body>
+<!--end-->
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_threeservices_select.js"></script>
+
+<script>
+function submit_party(){
+	var party_no = $('#partys_list input[type=radio]:checked').val();
+	if(party_no){
+		location.href="{:U('Wechat/life/life_affairs_index')}?party_no="+party_no;
+	}else{
+		alert("您还没有选择部门！！");
+	}
+	
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/life/css/life_volunteer_integral.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+
+
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;}
+.bg-color-integral{
+	background: #ffffff url('__STATICS__/apps/page_wechat/images/images_life/life_volunteer_integral.png') no-repeat top center;
+	background-size: contain;
+}
+</style>
+</head>
+<body>
+<div class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li class="h-45">
+    		<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a>     		
+    		<div class="aui-title f-w">志愿者积分</div>
+    		
+    	</li>
+    </ul>
+</div>
+<div  class="bg-color-integral ">
+	<div class="pt-10em mb-12em h-167em">
+		
+		<div class="mt-20em pl-12em pr-12em">
+			<p class="text-align f-60em lh-60em h-60em color-white"><span class="f-14em color-white mr-8em">积分</span><span class="f-w">{$integral_info.change_integral}</span></p>
+		</div>
+	</div>
+	<div class="mt-25em ">
+		<p class="h-32em f-14em lh-26em over-h pl-12em pr-12em color-33 f-w pt-5em"><span class="pull-left w-33b text-align">所参加活动</span><span class="pull-left w-33b text-align">时间</span><span class="pull-left w-33b text-align">所获得的积分</span></p>
+		<volist name="integral_info.log_list" id="list">
+			<p class="h-32em f-10em lh-35em over-h pl-12em pr-12em color-75 bg-color-f1f1f1">
+				<span class="pull-left w-33b text-align">{$list.memo}</span>
+				<span class="pull-left w-33b text-align">{$list.add_time}</span>
+				<span class="pull-left f-14em w-33b text-align color-ff9743">+{$list.change_integral}</span>
+			</p>
+		</volist>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_volunteer_integral.js"></script>
+</body>
+</html>

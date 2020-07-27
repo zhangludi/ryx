@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_community_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_allinone/css/sp_gov/sp_gov_flow.css">
+    <style>
+        .w-1000 {
+            width: 1000px
+        }
+
+        .fsize-42 {
+            font-size: 42px
+        }
+
+        .fcolor-4d {
+            color: #4d4d4d
+        }
+
+        .gov_flow_body {
+            height: 1350px;
+            background: #fff;
+            border-radius: 7px;
+            box-shadow: 0 0 10px 0 rgba(10, 2, 4, 0.34);
+        }
+
+        .gov_flow_item {
+            width: 302px;
+            /*border: 1px solid #d1d1d1;*/
+            /*padding-top: 30px;*/
+        }
+
+        .gov_flow_item_bottom {
+            height: 48px;
+            line-height: 48px;
+            background: #ff9876;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .gov_flow_online {
+            width: 560px;
+            height: 88px;
+            line-height: 88px;
+            text-align: center;
+            background-image: linear-gradient(45deg,
+            rgba(255, 77, 77, 1) 0%,
+            rgba(255, 63, 64, 1) 0%,
+            rgba(255, 48, 50, 1) 0%,
+            rgba(255, 70, 48, 1) 50%,
+            rgba(255, 90, 45, 1) 100%),
+            linear-gradient(
+                    rgba(150, 136, 126, 1),
+                    rgba(150, 136, 126, 1));
+            background-blend-mode: normal,
+            normal;
+            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.12);
+            border-radius: 4px 4px 4px 4px;
+            margin: 0 auto;
+            margin-top: 65px;
+            color: #fff;
+            font-size: 36px;
+        }
+
+        .gov_flow_online a {
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="page-bg">
+<!--通知公告详情开始-->
+<div class="guide_notice_body pt-20 pb-120">
+    <div class="notice_body_center gov_flow_body" style="height: 100%;">
+        <div class="pl-50 pr-50 pt-60 ">
+            <div class="center-text"><p class="fsize-42">{$article_info.article_title}</p></div>
+            <div class="article serve-intro mb-40 mt-50">
+                <p class="article_title fsize-32">办事简介</p>
+                <p class="article_content mt-20 fsize-22 fcolor-4d">{$article_info.article_keyword}</p>
+            </div>
+            <div class="article serve-intro mb-40 mt-50">
+                <p class="article_title fsize-32">办事流程</p>
+                <neq name="article_thumb" value="">
+                    <img src="{$article_thumb}" class="pl-15b w-70b h-400" >
+
+                </neq>
+                <p class="article_content mt-20 center-text">
+                    {$article_info.article_content}
+                </p>
+            </div>
+            <div class="article serve-intro mb-40 mt-50">
+                <p class="article_title fsize-32">所需材料示例</p>
+                <foreach name="url" item="list">
+                    <div class="gov_flow_item pull-left mr-25">
+                        <iframe style="display:none" id="{$list.num}" src="{$list.url}"></iframe>
+                        <div class="gov_flow_item_bottom mt-30" onclick="printPDF('{$list.num}')">打印</div>
+                    </div>
+                </foreach>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--通知公告详情结束-->
+</body>
+<!--jqery-->
+<script src="__STATICS__/public/js/jquery.min.js"></script>
+<!--公共js-->
+<script src="__STATICS__/apps/page_allinone/js/public/sp_community_public.js"></script>
+<!--本页面js-->
+<script src="__STATICS__/apps/page_allinone/js/sp_guide/sp_guide_data.js"></script>
+
+<script>
+    function printPDF(id) {
+        $("#"+id)[0].contentWindow.print();//不知为什么在IE中一直无法打印文件
+    }
+</script>
+</html>

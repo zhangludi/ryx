@@ -1,0 +1,86 @@
+<div  class="public_content bg-color-gray9">
+    <!--左侧内容区开始-->
+    <div class="bg-color-white w-840 pull-left">
+        <div class="w-205  h-all pull-left">
+            <div class="h-230 po-re hr-sb-dfdfdf">
+                {:W('Leftmenu/communist_avatar')}
+            </div>
+            <div class="">
+                {:W('Leftmenu/personal', array(2))}
+            </div>
+        </div>
+        <div class="w-630 p-15 pull-right boxsize-b hr-sl-dfdfdf">
+            <!--个人资料开始-->
+            <div class="userinfo_title">
+                <span class="userinfo_title_txt">个人资料</span>
+            </div>
+            <form action="{:U('ipam_user_info_save')}" method="post">
+                <input type="hidden" value="{$data.communist_no}" name="communist_no">
+                <div>
+                    <p class="mt-30">
+                        <span class="userinfo_label">姓&emsp;&emsp;名：</span>
+                        <input class="w-240 h-30 ipam_input" type="text" name="communist_name" value="{$data.communist_name}" required>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">性&emsp;&emsp;别：</span>
+                        <input type="checkbox" name="communist_sex" value="1" <eq name="data['communist_sex']" value="1">checked</eq>> 男
+                        <input type="checkbox" name="communist_sex" value="0" <eq name="data['communist_sex']" value="0">checked</eq>> 女
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">出生日期：</span>
+                        <input type="date" class="w-240 h-30 ipam_input" name="communist_birthday" value="{$data.communist_birthday}" id="test1" placeholder="yyyy-MM-dd" required>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">电&emsp;&emsp;话：</span>
+                        <input class="w-240 h-30 ipam_input" type="text" name="communist_mobile" value="{$data.communist_mobile}" required>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">学&emsp;&emsp;历：</span>
+                        <select class="ipam_input w-250 h-30" lay-search name="communist_diploma" required>
+                            <php>echo getBdCodeSelect('diploma_level_code', $data['communist_diploma']);</php>
+                        </select>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">学&emsp;&emsp;校：</span>
+                        <input class="w-240 h-30 ipam_input" type="text" name="communist_school" value="{$data.communist_school}" required>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">专&emsp;&emsp;业：</span>
+                        <input class="w-240 h-30 ipam_input" type="text" name="communist_specialty" value="{$data.communist_specialty}" required>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">民&emsp;&emsp;族：</span>
+                        <select class="ipam_input w-250 h-30" name="communist_nation" required>
+                            <php>echo getBdCodeSelect('communist_nation_code', $data['communist_nation']);</php>
+                        </select>
+                    </p>
+                    <p class="mt-30">
+                        <span class="userinfo_label">地&emsp;&emsp;址：</span>
+                        <input class="w-240 h-30 ipam_input" type="text" name="communist_address" value="{$data['communist_address']}" required>
+                    </p>
+                </div>
+                <button type="submit" class="public_button_stroke-red w-100 h-30 lh-28 ml-90 mt-30">修改</button>
+            </form>
+        </div>
+    </div>
+    <!--左侧内容区结束-->
+    <!--右侧内容区开始-->
+    <div class="pull-right news_content w-320 bg-color-white p-15 boxsize-b">
+        {:W('Article/hotspot_issues')}
+        {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+        {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>
+
+
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //常规用法
+        laydate.render({
+            elem: '#test1'
+        });
+    });
+</script>

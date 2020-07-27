@@ -1,0 +1,179 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight">
+	                            <div class="layui-row layui-col-space5">
+	                            	<div class="layui-col-xs1 lh-40 text-r">
+	                                    考试时间：
+	                                </div>
+	                                <div class="layui-col-xs3">
+	                                    <input type="text" autocomplete="off" class="layui-input " id="time" placeholder="yyyy-mm-dd">
+	                                </div>
+	                                <div class="layui-col-xs3 pull-right" >
+	                                	<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                                    <a class="layui-btn table-add "   data-type="add" style="text-decoration: none;" title="添加">新增试题</a>
+	                                </div>
+	                            </div>
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+
+	                            </table>
+	                            <script type="text/html" id="operate">
+	                                
+	                                
+	                            </script>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+		function info(exam_id){
+			var index = layer.open({
+               type: 2,
+               title: false,
+               end:false,
+               closeBtn: 0,
+               shift: 1,
+               content: "{:U('Eduexam/edu_exam_info')}?exam_id="+exam_id+'',
+               area: ['300px', '300px']
+        	});
+        	layer.full(index);
+		}
+		function edit(exam_id){
+			var index = layer.open({
+               type: 2,
+               title: false,
+               end:false,
+               closeBtn: 0,
+               shift: 1,
+               content: "{:U('Eduexam/edu_exam_edit')}?exam_id="+exam_id+'',
+               area: ['300px', '300px']
+        	});
+        	layer.full(index);
+		}
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("edu_exam_index_data",array("status"=>$status,"cat_id"=>$cat_id))}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'exam_id', width:80 ,title: '编号', sort: true}
+	                    , {field: 'exam_title', title: '名称'}
+	                    , {field: 'exam_thumb',width:80,  title: '缩略图'}
+	                    , {field: 'exam_date',  title: '考试时间',width:150}
+	                    <eq name="is_integral" valeu="1">
+						, {field: 'exam_integral',width:80, title: '积分'}
+	                    </eq>
+	                    , {field: 'status',width:80, title: '状态'}
+	                    , {field: 'add_time', title: '添加时间',width:150}
+	                    , {field: 'operate', title: '操作',width: 180,align:'center'}
+	                ]]
+	                , page: true
+	            });
+
+	            //监听表格复选框选择
+			    table.on('checkbox(demo)', function(obj){
+			        console.log(obj)
+			    });
+			    //监听工具条
+			    
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var time = $('#time').val();
+			            var notes_type = $('#notes_type').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"start":time,
+					        	"notes_type":notes_type,
+					        }
+				      	});
+			        },
+			        add: function(){
+	                	var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('Eduexam/edu_exam_edit')}",
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+	            	}
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	        //点击左侧树的事件
+	        
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+</block>
+	<!-- <div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="portlet light  bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<div class="cont-col1">
+								<div class="label label-sm bg-color-green2">
+									<i class="iconfont">&#xe64b;</i>
+								</div>
+							</div>
+							<span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span> <span class="caption-helper"> </span>
+						</div>
+						<div class="pull-right text-right p-0 ">
+							<a href="{:U('edu_exam_edit')}" class="btn btn-sm yellow-p5 btn-outline bor-ra-2 w-90 mr-10">
+								<i class="iconfont">&#xe674;</i>新增试卷
+							</a>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<table id="client_table" class="table table-condensed table-striped"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+

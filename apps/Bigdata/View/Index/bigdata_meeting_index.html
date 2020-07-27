@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" http-equiv="组织生活数据">
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_bigdata/css/sp_population.css">
+    <title><php>echo getConfig('web_name');</php>-组织生活数据</title>
+</head>
+<body class="background">
+<header class="c-header l-header">
+    <nav class="c-header_box">
+        <ul class="o-tab l-justify-flex">
+            <li class="o-tab_item c-header_tab_item-l1" style="margin-left: 20%;">
+                <a href="{:U('Bigdata/Index/bigdata_communist_index')}" class="o-tab_text">&nbsp;&nbsp;&nbsp;党员&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <li class="o-tab_item c-header_tab_item-r1" style="margin-right: 10%;">
+                <a href="{:U('Bigdata/Index/bigdata_party_index')}" class="o-tab_text">&nbsp;&nbsp;党组织&nbsp;&nbsp;</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="c-header_title"><a href="{:U('Bigdata/Index/index')}">智慧党建大数据平台</a></div>
+    <nav class="c-header_box">
+        <ul class="o-tab l-justify-flex">
+            <li class="o-tab_item c-header_tab_item-r1 is-active" style="margin-left: 10%;">
+                <a href="{:U('Bigdata/Index/bigdata_meeting_index')}" class="o-tab_text">组织生活</a>
+            </li>
+            <li class="o-tab_item c-header_tab_item-r2" style="margin-right: 20%;">
+                <a href="{:U('Bigdata/Index/bigdata_life_index')}" class="o-tab_text">&nbsp;&nbsp;&nbsp;民生&nbsp;&nbsp;&nbsp;</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<section class="c-content-pop l-center-flex l-content-pop">
+    <div class="c-content_item l-content_item">
+        <div class="o-box c-content_box-up1"></div>
+        <div class="o-box c-content_box-down1"></div>
+    </div>
+    <div class="c-content_item l-content_item">
+        <div class="o-box c-content_box-up2"></div>
+        <div class="o-box c-content_box-down2"></div>
+    </div>
+    <div class="c-content_item l-content_item">
+        <div class="o-box c-content_box-up3"></div>
+        <div class="o-box c-content_box-down3"></div>
+    </div>
+</section>
+<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/index.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_bigdata/js/sp_bg.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        url: "{:U('Bigdata/Index/meeting_index_data')}",
+        async: false,
+        success: function (res) {
+            //房屋住房情况分布
+            drawCharts($('.c-content_box-up1')[0], res.meeting);
+            //党员年龄分布
+            drawCharts($('.c-content_box-up2')[0], res.help);
+            //人口类型分布
+            drawCharts($('.c-content_box-up3')[0], res.voluntee);
+            //重点事件比例分布
+            drawCharts($('.c-content_box-down1')[0], res.survey);
+            //24项办理业务
+            drawCharts($('.c-content_box-down2')[0], res.comment);
+            //三会一课召开情况分布
+            drawCharts($('.c-content_box-down3')[0], res.excellent);
+        }
+    });
+</script>
+</body>
+</html>

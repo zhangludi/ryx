@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title><php>echo getConfig('web_name')</php></title>
+		<link rel="stylesheet" href="__STATICS__/apps/page_index/css/sign.css">
+	</head>
+	<!-- <style type="text/css">
+		.menu_bg2 {
+        width: 100%;
+        height: 100%;
+        background: url(__STATICS__/layuiadmin/style/res/menu_bg2.png) no-repeat !important;
+    
+        -webkit-animation: menubg2 1.75s steps(1) infinite;
+        display: flex;
+        background-size: 100
+    }
+    @keyframes menubg2 {
+      5% {
+        background-position: 0 -75px;
+      }
+      10% {
+        background-position: 0 -150px;
+      }
+      15% {
+        background-position: 0 -225px;
+      }
+      20% {
+        background-position: 0 -300px;
+      }
+      25% {
+        background-position: 0 -375px;
+      }
+      30% {
+        background-position: 0 -450px;
+      }
+      35% {
+        background-position: 0 -525px;
+      }
+      40% {
+        background-position: 0 -600px;
+      }
+      45% {
+        background-position: 0 -675px;
+      }
+      50% {
+        background-position: 0 -750px;
+      }
+      55% {
+        background-position: 0 -825px;
+      }
+      60% {
+        background-position: 0 -900px;
+      }
+      65% {
+        background-position: 0 -975px;
+      }
+      70% {
+        background-position: 0 -1050px;
+      }
+      75% {
+        background-position: 0 -1125px;
+      }
+      80% {
+        background-position: 0 -1200px;
+      }
+      85% {
+        background-position: 0 -1275px;
+      }
+      90% {
+        background-position: 0 -1350px;
+      }
+      95% {
+        background-position: 0 -1425px;
+      }
+      100% {
+        background-position: 0 -1500px;
+      }
+    }
+	</style> -->
+	<body>
+		<div class="sp_sign_box clearfix">
+			<div class="sp_sign_box_left fl ">
+				<!-- <div class="menu_bg2"> -->
+				<div class="sp_sign_box_left_p_box">
+					<p class="sp_sign_box_left_p1">欢迎来到</p>
+					<p class="sp_sign_box_left_p2"><php>echo getConfig('web_name');</php></p>
+				</div>
+				<!-- </div> -->
+			</div>
+			<div class="sp_sign_box_right fr">
+				<div class="sp_sign_box_right_sign">
+					<p class="sp_sign_box_right_sign_title">登录</p>
+					<form id="form_login" action="{:U('login_do')}" method="post" >
+						<div class="sp_sign_box_right_sign_zmbox">
+							<p class="sp_sign_box_right_sign_zmbox_name">账号</p>
+							<input class="sp_sign_box_right_sign_zmbox_name_inp" type="text" name="username" >
+							<p class="sp_sign_box_right_sign_zmbox_password">密码</p>
+							<input class="sp_sign_box_right_sign_zmbox_password_inp" type="password" name="password" >
+							<div class="clearfix code_box">
+								<p class="sp_sign_box_right_sign_zmbox_code">验证码</p>
+								<input class="sp_sign_box_right_sign_zmbox_code_inp fl" type="text" name="code" id="code" autocomplete="off">
+								<img  src="{:U('verify',array())}" class="sp_sign_box_right_sign_zmbox_code_img fr" id="verify_img" style="cursor:pointer;margin-left:10px;">
+							</div>
+							<div class="clearfix"></div>
+							<div class="sign_btn">
+								<button class="sign_btn_click">登录</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="__STATICS__/plugins/jquery.min.js"></script>
+		<script src="__STATICS__/apps/page_index/js/sign.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+    // 验证码生成
+    var captcha_img = $('#verify_img');
+    var verifyimg = captcha_img.attr("src");
+    // captcha_img.attr('title', '点击刷新');
+    captcha_img.click(function(){
+        if( verifyimg.indexOf('?')>0){
+            $(this).attr("src", verifyimg+'&random='+Math.random());
+        }else{
+            $(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+        }
+    });
+</script>
+
+ 

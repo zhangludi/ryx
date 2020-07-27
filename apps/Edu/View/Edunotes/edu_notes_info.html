@@ -1,0 +1,225 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+   	<div class="layui-fluid">
+		<div class="layui-row  layui-col-space5">
+			<div class="layui-col-xs12">
+				<div class="layui-card">
+					<div class="layui-card-header"><php>echo getFunctionInfo(ACTION_NAME.session('notes_type'));</php></div>
+					<div class="layui-card-body">
+	                    <div class="portlet-body">
+							<div class="center-text">
+								<span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$notes_info.notes_title}</span>
+								<div class="center-text fcolor-99">
+									<span class="mr-50">添加人：{$notes_info.add_staff}</span>
+									<span class="mr-50">添加时间：{$notes_info.add_time}</span>
+									<span class="mr-50">笔记类型：{$notes_info.notes_type}</span>
+								</div>
+							</div>
+							<div class="layui-row" style="margin-top:20px;">
+								<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+									内容：
+								</div>
+								<div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+									{$notes_info.notes_content}
+								</div>
+							</div>
+							<div class="layui-row">
+								<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+									备注：
+								</div>
+								<div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+									{$notes_info.memo}
+								</div>
+							</div>
+							<neq name="notes_img" value="">
+                              <div class="layui-row">
+                                  <div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+                                      图片：
+                                  </div>
+                                  <div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+                                    	<img src="{$notes_img}" width='300'>
+                                  </div>
+                              </div>
+                            </neq>
+	                    </div><!-- end -->
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<!--
+		日常笔记/其他 不显示原件
+		学习笔记notes_type为1 视频还是文章
+		会议笔记notes_type为2 
+	-->
+	<if condition="($notes_type eq 1) OR ($notes_type eq 2) ">
+   	<div class="layui-fluid">
+		<div class="layui-row  layui-col-space5">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header">原件内容</div>
+	                <div class="layui-card-body">
+	                    <div class="portlet-body">
+	                        <div class="center-text">
+								<eq name="notes_type" value="1">
+									<span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$material_data.material_title}</span>
+									<div class="center-text fcolor-99">
+										<span class="mr-50">作者：{$material_data.add_staff}</span>
+										<span class="mr-50">添加时间：<php>echo date('Y-m-d',$material_data['add_time']);</php></span>
+										<span class="mr-50">资料类型：{$material_data.material_cat}</span>
+									</div>
+								<else/>
+									<span class="fsize-18 lh-40 fweight-900 fcolor-66 di-ib">{$meeting_info.meeting_name }</span>
+									
+								</eq>
+	                        </div>
+	                        <eq name="notes_type" value="1">
+								<div class="layui-row" style="margin-top:20px;">
+									<!-- 学习资料通用简介 开始 -->
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+										简介：
+									</div>
+									<div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+										<neq name="material_data.material_desc" value="">
+											{$material_data.material_desc}
+										<else />
+											暂无简介
+										</neq>
+									</div>
+								</div>
+								<div class="layui-row" style="margin-top:20px;">
+									<!-- 学习资料通用简介 结束 -->
+									<!-- 根据类型判断  视频笔记显示视频  文章笔记显示文章内容 -->
+									<eq name="material_cat" value="1">
+										<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+											内容：
+										</div>
+										<div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+											<neq name="material_data.material_content" value="">
+												{$material_data.material_content}
+											<else />
+												暂无内容
+											</neq>
+										</div>
+									<else/>
+										<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+											视频：
+										</div>
+										<div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+											<neq name="material_data.material_vedio" value="">
+												<video src="{$material_data.material_vedio}" width="800" max-width="1000" controls="" autoplay="autoplay">
+												</video>
+											<else />
+												未上传视频
+											</neq>
+										</div>
+									</eq>
+									<!-- 根据类型判断  视频笔记显示视频  文章笔记显示文章内容 -->
+								</div>
+							<else/>
+								<div class="layui-row" style="margin-top:20px !important;">
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+										会议简介：
+									</div>
+									<div class="layui-col-xs10 text-left fsize-214 fcolor-65 lh-35">
+										<neq name="meeting_info.memo" value="">
+											{$meeting_info.memo}
+											<else />
+											暂无简介
+										</neq>
+									</div>
+								</div>
+								<div class="layui-row" style="margin-top:20px !important;">
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+										会议类型：
+									</div>
+									<div class="layui-col-xs2 text-left fsize-214 fcolor-65 lh-35">
+										{$meeting_info.meeting_type_val}
+									</div>
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+										组织部门：
+									</div>
+									<div class="layui-col-xs2 text-left fsize-214 fcolor-65 lh-35">
+										{$meeting_info.party_no}
+									</div>
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+										会议时间：
+									</div>
+									<div class="layui-col-xs2 text-left fsize-214 fcolor-65 lh-35">
+										{$meeting_info.add_time}
+									</div>
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">
+										会议地点：
+									</div>
+									<div class="layui-col-xs2 text-left fsize-214 fcolor-65 lh-35">
+										{$meeting_info.meeting_addr}
+									</div>
+								</div>
+								<div class="layui-row" style="margin-top:20px !important;">
+									<div class="layui-col-xs1 text-r fsize-214 fcolor-65 lh-35">参会人员：</div>
+									<div class="layui-col-xs10 text-r fsize-214 fcolor-65 lh-35">
+			                            <table class="table table-bordered table-hover  table-striped" width="600" id="meeting_table">
+			                                <thead>
+			                                    <tr class="info">
+			                                        <th width="60">序号</th>
+			                                        <th >党员部门</th>
+			                                        <th width="100">党员姓名</th>
+			                                        <th width="90">签到状态</th>
+			                                        <th width="90">签到方式</th>
+			                                        <th width="190">签到时间</th>
+			                                    </tr>
+			                                </thead>
+			                                <tbody>
+			                                    <foreach name="meeting_result" item="v">
+			                                        <tr>
+			                                            <td>{$v.meeting_ids}</td>
+			                                            <td>{$v.party_name}</td>
+			                                            <td>{$v.communist_name}</td>
+			                                            <td>{$v.status_name}</td>
+			                                            <td>{$v.ckeck_type_name}</td>
+			                                            <td>{$v.check_time}</td>
+			                                        </tr>
+			                                    </foreach>
+			                                </tbody>
+			                            </table>
+			                        </div>
+		                        </div>
+							</eq>
+							<div class="layui-form-item">
+								<div class="layui-input-block">
+									<div class="layui-footer" style="text-align: right">
+										<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- / end -->
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>	
+	</if>
+	<div class="layui-form-item">
+        <div class="layui-input-block">
+            <div class="layui-footer" style="text-align: right">
+                <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+	<script >
+		function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+		var myPlayer = videojs('my-video');
+		videojs("my-video").ready(function(){
+			var myPlayer = this;
+			myPlayer.play();
+		});
+	</script>
+</block>

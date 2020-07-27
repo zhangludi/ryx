@@ -1,0 +1,114 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <form id="form_sample_2" action="{:U('oa_approval_template_node_do_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" name="node_no" value="{$node_no}">
+						<input type="hidden" name="template_no" value="{$template_no}">
+                        <div class="layui-row">
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>节点名称：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="node_name" value="{$node_row.node_name}" placeholder="请输入节点名称" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审批岗位：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="node_staff" lay-search id="node_staff" lay-verify='required'>
+                                            <php>echo getPostSelect($node_row[node_post]);</php>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="range1" name="node_post"  class="form-control" placeholder="请选择审批人员" value="{$node_row[node_post]}"  required="">
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>审批顺序：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="node_order" value="{$node_row.node_order}" placeholder="请输入审批顺序，数字越小越靠前" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs3 text-r fsize-14 fcolor-65 lh-35"><strong>节点说明：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="memo" placeholder="请输入节点说明" class="layui-textarea">{$node_row.memo}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1" onclick="select_val()">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" id="close">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+			$('#close').click(function() {
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+			});
+		</script>
+		<script>
+			function select_val(){
+				var node_staff = $("#node_staff").val();
+				$("#range1").val(node_staff);
+			}
+		</script>
+		<script>
+			function select_communist(field_name){
+				var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name;
+				layer.open({
+					type: 2,
+					title: '选择联系人',
+					maxmin: true,
+					offset: window.parent.document.body.scrollTop+5+'px',
+					shadeClose: false, //点击遮罩关闭层
+					area : ['620px' , '415px'],
+					content: url,
+					success:function(){
+	                	layerAuto();
+	                }//iframe的url
+				});
+			}
+		</script>
+    <script>
+        layui.use([ 'form', 'laydate'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form;
+            form.render(null, 'component-form-group');
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+
+    </script>
+</block>

@@ -1,0 +1,282 @@
+<div class="public_content bg-color-white index_content">
+    <!--上边部分的新闻块加图-->
+    <div class="index_content_topic">
+        <!--左侧部分的图加新闻块-->
+        <div class="index_content_topic_left pull-left border_none">
+            <!--轮播开始-->
+            {:W('Article/ipam_banner_article_list')}
+            <!--轮播结束-->
+            <!--轮播下新闻开始区-->
+            <div class="index_content_topic_down mt-30">
+                <!--左侧新闻开始-->
+                <div class="public_card index_content_topic_down_left">
+                    <div class="ipam_home_public_card_title">
+                        <span class="pl-15 fsize-18">党建要闻</span><a href="{:U('News/ipam_news_list',array('id' => 36))}" class="fcolor-white">更多</a>
+                    </div>
+                    <ul class="public_card_content">
+                        {:W('Article/article_list', array(36, 10))}
+                    </ul>
+                </div>
+                <!--左侧新闻结束
+                右侧新闻开始-->
+                <div class="public_card" style="float: right;">
+                    <div class="ipam_home_public_card_title">
+                        <span class="pl-15 fsize-18">党建论坛</span><a href="{:U('News/ipam_news_list',array('id' => 37))}" class="fcolor-white">更多</a>
+                    </div>
+                    <ul class="public_card_content">
+                        {:W('Article/article_list', array(37, 10))}
+                    </ul>
+                </div>
+                <!--右侧新闻结束-->
+            </div>
+            <!--轮播下新闻区结束-->
+        </div>
+        <!--右侧部分的新闻块加功能块-->
+        <div class="index_content_topic_right pull-right border_left">
+            <!--新闻区开始-->
+            <div class="public_card index_content_topic_right_top">
+                <div class="ipam_home_public_card_title">
+                    <span class="pl-15 fsize-18">今日首推</span><a href="{:U('News/ipam_news_list' ,array('id' => 2))}" class="fcolor-white">更多</a>
+                </div>
+                <ul class="public_card_content">
+                    <volist name="today_article" id="list">
+                        <li>
+                            <a href="{:U('News/ipam_news_detail',array('article_id' => $list['article_id']))}" style="width:95%;">{$list.article_title}</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+            <!--新闻区结束-->
+            <!--功能块开始-->
+            <div>
+                <div class="public_news_button index_content_topic_button">
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_dongtai">
+                        <a href="{:U('News/ipam_news_index')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_dongtai.png" alt="党务动态">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_dongtai_active.png" alt="党务动态">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">党务动态</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_gonggao">
+                        <a href="{:U('News/ipam_news_list',array('id'=>1))}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_gonggao.png" alt="通知公告">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_gonggao_active.png" alt="通知公告">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">通知公告</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_tougao">
+                        <a class="see-details" href="{:U('User/ipam_user_contribute')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_zhuanqu.png" alt="投稿专区">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_zhuanqu_active.png" alt="投稿专区">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">投稿专区</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="public_news_button index_content_topic_button">
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_zaixian">
+                        <a class="see-details" href="{:U('Edu/ipam_edu_index')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_dangxiao.png" alt="在线党校">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_dangxiao_active.png" alt="在线党校">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">在线党校</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_sanyan">
+                        <a href="{:U('Special/ipam_special_study',array('topic_id'=>2))}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_sanyan.png" alt="三严三实">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_sanyan_active.png" alt="三严三实">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">三严三实</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_lianghui">
+                        <a class="see-details" href="{:U('Meeting/ipam_meeting_index')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_linaghui.png" alt="三会一课">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_lianghui_active.png" alt="三会一课">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">三会一课</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="public_news_button index_content_topic_button">
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_biji mb-0">
+                        <a class="see-details" href="{:U('Edu/ipam_edu_index')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_biji.png" alt="学习笔记">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_biji_active.png" alt="学习笔记">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">学习笔记</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_wenjuan mb-0">
+                        <a class="see-details" href="{:U('Life/ipam_life_index')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_wenjuan.png" alt="调查问卷">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_wenjuan_active.png" alt="调查问卷">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">调查问卷</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ipam_home_public_card_button ipam_home_index_card_button_kaoshi mb-0">
+                        <a class="see-details" href="{:U('Edu/ipam_edu_index')}">
+                            <div class="ipam_home_public_card_button_content">
+                                <div class="ipam_home_public_card_button_content_imgbox">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_kaoshi.png" alt="考试中心">
+                                </div>
+                                <div class="ipam_home_public_card_button_content_imgboxactive">
+                                    <img src="__STATICS__/apps/page_portal/images/party_home_index_kaoshi_active.png" alt="考试中心">
+                                </div>
+                                <div class="ipam_home_public_card_button_txt">考试中心</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--功能块结束-->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--两学一做图片开始-->
+    <div class="mt-30 w-all">
+        <img src="__STATICS__/apps/page_portal/images/index_liangxueyizuo.jpg" alt="两学一做图片">
+    </div>
+    <!--两学一做图片结束-->
+    <!--风采新闻区开始-->
+    <div class="index_content_mix mt-30">
+        <div class="public_card" style="float: left;">
+            <div class="ipam_home_public_card_title">
+                <span class="pl-15 fsize-18">共产党风采</span><a href="{:U('News/ipam_news_list',array('id' => 38))}" class="fcolor-white">更多</a>
+            </div>
+            <ul class="public_card_content">
+                {:W('Article/article_list', array(38, 6))}
+            </ul>
+        </div><!--
+     --><div class="public_card" style="float: left;">
+        <div class="ipam_home_public_card_title">
+            <span class="pl-15 fsize-18">先锋风采</span><a href="{:U('News/ipam_news_list',array('id' => 39))}" class="fcolor-white">更多</a>
+        </div>
+        <ul class="public_card_content">
+            {:W('Article/article_list', array(39, 6))}
+        </ul>
+    </div><!--
+     --><div class="public_card">
+        <div class="ipam_home_public_card_title">
+            <span class="pl-15 fsize-18">党纪党规</span><a href="{:U('News/ipam_news_list',array('id' => 42))}" class="fcolor-white">更多</a>
+        </div>
+        <ul class="public_card_content">
+            {:W('Article/article_list', array(42, 6))}
+        </ul>
+    </div>
+    </div>
+    <div class="index_content_mix mt-20">
+        <div class="public_card">
+            <div class="ipam_home_public_card_title">
+                <span class="pl-15 fsize-18">党务工作风采</span><a href="{:U('News/ipam_news_list',array('id' => 40))}" class="fcolor-white">更多</a>
+            </div>
+            <ul class="public_card_content">
+                {:W('Article/article_list', array(40, 6))}
+            </ul>
+        </div><!--
+     --><div class="public_card" style="float: left;">
+        <div class="ipam_home_public_card_title">
+            <span class="pl-15 fsize-18">红色文艺</span><a href="{:U('News/ipam_news_list',array('id' => 41))}" class="fcolor-white">更多</a>
+        </div>
+        <ul class="public_card_content">
+            {:W('Article/article_list', array(41, 6))}
+        </ul>
+    </div>
+        <div  class="w-380 h-230 over-h pull-right">
+            <img src="__STATICS__/apps/page_portal/images/index_ganbuwangping.jpg" class="di-b w-all" alt="最新干部王评图片">
+        </div>
+    </div>
+    <!--风采新闻区结束-->
+    <!--文章资料库区开始-->
+    <div class="public_card index_content_books w-all mt-30">
+        <div class="ipam_home_public_card_title">
+            <span class="pl-15 fsize-18">文章资料库</span><a href="{:U('Edu/ipam_material_list', array('type' => 21))}" class="fcolor-white see-details">更多</a>
+        </div>
+        <ul class="public_card_text_content">
+            {:W('Material/material_article_list')}
+        </ul>
+    </div>
+    <!--文章资料库区结束-->
+    <!--视频资料库区开始-->
+    <div class="public_card index_content_video w-all mt-30">
+        <div class="ipam_home_public_card_title">
+            <span class="fsize-18 pl-15">视频资料库</span><a href="{:U('Edu/ipam_material_list', array('type' => 11))}" class="fcolor-white see-details">更多</a>
+        </div>
+        <ul class="mt-15">
+            {:W('Material/material_video_list')}
+        </ul>
+    </div>
+    <input type="hidden" name="is_lose" value="{$is_lose}">
+    <!--视频资料库区结束-->
+</div>
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/layer/theme/default/layer.css">
+<script type="text/javascript" src="__STATICS__/plugins/layer/layer.js"></script>
+<script type="text/javascript">
+    var is_lose = $("input[name='is_lose']").val();
+    if(is_lose == 1){
+        location.href = "{:U('Index/Index/login')}";
+    }
+    // 门户首页轮播图
+    $(".index_content_lunbo").slide({"autoPlay" : true, "effect" : "left", "mainCell" : ".bd ul", "titCell": ".hd li", "scroll": "1", "vis": "1"});
+    $(".see-details").click(function (e) {
+        var flag = false;
+         $.ajax({
+             type: "POST",
+             url: "{:U('Index/check_login')}",
+             async:false,
+             success: function(data){
+                 flag = data;
+             }
+         });
+         if(flag == true){
+            location.href = "{:U('Index/Index/login')}";
+             return false;
+         } else {
+             return true;
+         }
+    });
+</script>

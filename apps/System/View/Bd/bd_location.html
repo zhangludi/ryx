@@ -1,0 +1,87 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid " >
+	    <div class="layui-row layui-col-space10">
+	        <div class="layui-col-md12">
+	            <div class="layui-row">
+	                <div class="layui-col-xs12">
+	                    <div class="layui-card">
+	                        <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"><php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                        <div class="layui-form layui-card-body fitheight" style="padding-bottom: 45px;">
+	                            <table class="layui-table" id="demo"  lay-filter="demo">
+	                            </table>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("bd_localtion_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'location_id', width: 80, title: '编号', sort: true}
+	                	, {field: 'location_name', title: '位置名称'}
+	                	, {field: 'location_description', title: '位置简介'}
+	                    , {field: 'ad_list', title: 'banner图片'}
+	                    , {field: 'add_staff', width: 200, title: '添加人'}
+	                    , {field: 'operate', width: 120, title: '操作'}
+	                ]]
+	                , page: false
+	            });
+
+	            var $ = layui.$, active = {
+			        reload: function(){
+			            var cat_name = $('#location_name').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"location_name": location_name
+					        }
+				      	});
+			        }
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+	        });
+	    })
+	</script>
+	<script>
+	    function select_receive_user(id) {
+	        var url = "{:U('Bd/bd_location_edit')}?location_id=" + id;
+	        layer.open({
+	            type: 2,
+	            title: '广告位置编辑',
+	            maxmin: false,
+	            offset: window.parent.document.body.scrollTop + 50 + 'px',
+	            shadeClose: true, //点击遮罩关闭层
+	            area: ['600px', '330px'],
+	            content: url,
+	            success:function(){
+                	layerAuto();
+                }//iframe的url
+	        });
+	    }
+	</script>
+</block>

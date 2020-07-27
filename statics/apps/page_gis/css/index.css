@@ -1,0 +1,97 @@
+body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";position: relative;}
+.ls-0{letter-spacing: 0px;}
+.h-80b{height: 80%}
+.w-70{width: 70px;}
+.bor-f60{border: 1px solid #f60;}
+.h-100b{height: 100%}
+.fcolor-f60{color: #f60}
+.fcolor-73{color: #737373}
+.mt-4b{margin-top: 4%}
+.bg-f6{background-color: #f60;}
+.overtext{
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 225px;
+    white-space:nowrap;
+}
+.ball{width: 7px;  height: 7px;  background-color: rgba(255, 0, 0, 1);margin-top: 8px;border-radius: 50%}
+#allmap {height:100%; width: 100%;}
+#control{width:100%;}
+.choose{position:absolute;left:0%;bottom: 9%;width: 14%;height:50px;background: #fff;line-height: 50px;padding-left: 1%;border-radius: 5px;}
+.check{position:absolute;top:10%;right:0.5%;width: 20%;height:50px;background: #fff;border-radius: 5px;}
+#cityName{width: 50%;height:28px;border:1px solid #c2c2c2;padding-left: 10%;display: inline-block; }
+.input{width: 30%;height:32px;background: #fff;border:1px solid #c2c2c2;display: inline-block;vertical-align: middle;
+    margin-left: -8px;cursor: pointer;background-color: rgba(20, 70, 121, 0.65);color: #fff;}
+.input:hover{color:#fff;opacity: 0.9;}
+.bg_000{width: 100%;height:100%;opacity: 0.8;position:absolute;z-index: 777;display: none;top:0;left:0;cursor: pointer;}
+.ztree{height:100%;overflow-y: auto;width:calc(100% + 27px) }
+.ztree li a{height:28px;}
+.ztree li a:hover{text-decoration:none}
+.ztree li span{font-size: 14px; font-family:微软雅黑 !important;}
+.ztree li span.button.noline_close{background: url("../../../../statics/layuiadmin/style/res/left-arrow.png") no-repeat}
+.ztree li span.button{background: url("../../../../statics/layuiadmin/style/res/down-arrow.png") no-repeat}
+.ztree li span.button.noline_open{background: url("../../../../statics/layuiadmin/style/res/down-arrow.png") no-repeat}
+.ztree li span.button{  width:0;}
+.overhiddenx{overflow: hidden;width: calc(100% - 27px);padding-bottom: 10px;border-bottom: 1px solid #ccc;height: calc(100% - 76px)}
+.ztree li a.curSelectedNode{border: none;color: #f60;background: none;height: 28px}
+.organsize_btn{float: left;padding: 2px 6px;margin-bottom: 5px}
+.organsize_btn:nth-of-type(1){border: 1px solid #d30078;color: #d30078}
+.organsize_btn:nth-of-type(2){border: 1px solid #01880b;color: #01880b}
+.organsize_btn:nth-of-type(3){border: 1px solid #00bb90;color: #00bb90}
+.organsize_btn:nth-of-type(4){border: 1px solid #f60;color: #f60}
+.social_data{ /*background-color: rgba(245, 245, 245, 1);  border-radius: 4px 4px 4px 4px; */float: left;height: 100%;width: 100%;/*border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;*/}
+.bigdata{
+    display:block;
+    width:360px;
+    height:50px;
+    background:url('../images/gis_title_bg.png') no-repeat;
+    text-align:center;
+    position:absolute;
+    top:0;
+    left:50%;
+    margin-left:-180px;
+    line-height:50px;
+    color: #fffffe;
+    font-size: 26px;
+    font-family: "Trebuchet MS";
+}
+/*简介弹窗*/
+.intro_people{
+    background-color:rgba(245, 247, 250, 1);
+    border-radius:4px 4px 4px 4px;
+    padding:15px 45px;
+    float:left;
+}
+/* 打开数据按钮 */
+.map_btn_open{
+    position:absolute;
+    width:142px;
+    height:34px;
+    line-height:32px;
+    right:0;
+    top:46px;
+    margin-left:-8px;
+    font-size:20px;
+    text-align:center;
+    background:url('../images/gis_btn_open_bg.png');
+    color: #fff;
+    cursor: pointer;
+    /*z-index: 1000;*/
+}
+.evt-box{
+    box-sizing: border-box;
+    height: calc( 100% - 36px );
+    padding-top: 4px;
+    overflow: hidden;
+}
+.evt-wrap{
+    position: relative;
+    top: 0;
+    transition: .4s ease;
+}
+@media screen and (max-height: 600px){
+    .social_data p:nth-of-type(1){
+        display: none;
+    }
+}

@@ -1,0 +1,522 @@
+html{
+    background: #fff;
+}
+.di-tb{
+    display: table;
+}
+.di-tc{
+    display: table-cell;
+}
+.lh-34{
+    line-height: 34px;
+}
+.h-34{
+    height: 34px;
+}
+.h-110{
+    height: 110px;
+}
+.h-auto{
+    height: auto;
+}
+.h-all{
+    height: 100%;
+}
+.w-20{
+    width: 20px;
+}
+.w-50{
+    width: 50px;
+}
+.w-32{
+    width: 32px;
+}
+.w-40{
+    width: 40px;
+}
+.w-70{
+    width: 70px;
+}
+.w-80{
+    width: 80px;
+}
+.w-94{
+    width: 94px;
+}
+.w-146{
+    width: 146px;
+}
+.w-allm{
+    max-width: 100%;
+}
+.m-auto{
+    margin: auto;
+}
+.p-15{
+    padding: 15px;
+}
+.layui-btn-ff6600 {
+    background-color: #ff6600;
+}
+.layui-btn-bor-ff6600{
+    background-color: #fff;
+    border:solid 1px #ff6600;
+    color: #ff6600;
+}
+.layui-btn-bor-ff6600:hover{
+    color: #ff9b1b;
+}
+.fcolor-blue1{
+    color: #6bb7fe;
+}
+.fcolor-orange1{
+    color: #ff6600;
+}
+.fcolor-gray1{
+    color: #8c8c8c;
+}
+.fcolor-gray2{
+    color: #4c4c4c;
+}
+.fcolor-gray3{
+    color: #808080;
+}
+.fcolor-88{
+    color: #888;
+}
+.fcolor-0084b6{
+    color: #0084b6;
+}
+.hr-s-fafbfc{
+    border: solid 1px #fafbfc;
+}
+.hr-s-e6e6e6{
+    border: solid 1px #e6e6e6;
+}
+.hr-sr-e6e6e6{
+    border-right: solid 1px #e6e6e6;
+}
+.hr-st-e6e6e6{
+    border-top: solid 1px #e6e6e6;
+}
+.hr-sb-e6e6e6{
+    border-bottom: solid 1px #e6e6e6;
+}
+.bg-color-f5f7fa{
+    background-color: #f5f7fa;
+}
+.bg-color-fafbfc{
+    background-color: #fafbfc;
+}
+.bg-color-ff6600{
+    background-color: rgba(255, 102, 0, .9);
+}
+.font-st{
+    font-family: "宋体";
+}
+.bor-ra-50b{
+    border-radius: 50%;
+}
+/*分页样式*/
+.layui-laypage a, .layui-laypage span{
+    padding: 0 12px;
+    font-size: 14px;
+    color: #999;
+    border-radius: 4px;
+}
+.layui-laypage>a:first-child,
+.layui-laypage>a:first-child em,
+.layui-laypage>a:last-child,
+.layui-laypage>a:last-child em{
+    border-radius: 4px;
+}
+/*分页样式*/
+.layui-form-item{
+    margin-bottom: 4px;
+}
+
+/*行高样式*/
+.layui-row {
+    line-height: 16px;
+}
+
+/*文本框样式*/
+.layui-input{
+    height: 34px;
+    line-height: 34px;
+}
+/*时间线样式*/
+.sp-map-timeline{
+    padding-left: 30px;
+    background: linear-gradient(to bottom, #ccc, #ccc) no-repeat 12px center/2px 70%;
+}
+.sp-map-timeline-item{
+    position: relative;
+    list-style: none;
+}
+.sp-map-timeline-item:before{
+    content: '●';
+    position: absolute;
+    left: -23px;
+    color: #ccc;
+    font-size: 12px;
+}
+.sp-map-timeline-item:hover:before{
+    color: #fc6703;
+}
+.sp-map-timeline-active:before{
+    color: #fc6703;
+}
+/*表格样式*/
+.layui-table td, .layui-table th {
+    padding: 8px 15px;
+}
+/*
+    地图弹窗模块公共lbl、val样式
+*/
+.sp-map-lbl{
+    color: #8c8c8c;
+    text-align: right;
+}
+.sp-map-val{
+    color: #4c4c4c;
+}
+/*
+    地图弹窗模块公共lbl样式
+*/
+/*
+    弹层首页    -- sp_home
+*/
+
+/* 弹层tab样式 */
+.layui-tab-title{
+    height: 30px;
+    padding: 0 ;
+    background-color: #fafbfc;
+}
+.layui-tab-title li{
+    line-height: 30px;
+    padding: 0 16px;
+    border-radius: 4px 4px 0 0;
+    border-right: solid 1px #e6e6e6;
+}
+.layui-tab-title li:nth-last-of-type(1){
+    border-right: none;
+}
+.layui-tab-title li a{
+    font-size: 14px;
+    color: #333;
+}
+.layui-tab-title li:hover{
+    background-color: #ff6600;
+    color: #fff;
+}
+.layui-tab-title li:hover a{
+    color: #fff;
+}
+.layui-tab-title .layui-this{
+    background-color: #ff6600;
+}
+.layui-tab-title .layui-this:after{
+    border: none;
+}
+.layui-tab-title .layui-this a{
+    color: #fff;
+}
+/*
+    弹层首页    -- sp_home
+*/
+
+/*
+    弹层-个人信息页    -- sp_people_detail
+*/
+.detail-attr{
+    position: relative;
+    padding: 10px 0;
+    border:solid 1px #e6e6e6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.detail-attr-active{
+    display: none;
+}
+.detail-attr:hover .detail-attr-active{
+    display: block;
+}
+.detail-attr:hover .detail-attr-def{
+    display: none;
+}
+.detail-attr:hover .detail-attr-opt{
+    display: table;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    text-align: center;
+    background: rgba(255, 102, 0, .9);
+}
+.people_delete .layui-layer-btn1{
+    border-color: #f60;
+    background-color: #f60;
+    color: #fff;
+}
+.people_delete .layui-layer-btn .layui-layer-btn0{
+    border-color: #dedede;
+    background-color: #fff;
+    color: #666;
+}
+/*
+    弹层-个人信息页    -- sp_people_detail
+*/
+
+/*
+    弹层-户籍人口     -- sp_people
+*/
+.people-form-item .layui-input-inline{
+    height: 34px;
+    width: 100%;
+    margin-right:0;
+}
+.layui-laypage a, .layui-laypage span{
+    margin: 0 -1px 5px 10px;
+}
+/*
+    弹层-户籍人口     -- sp_people
+*/
+
+/*
+    弹层-个人信息详情编辑     -- sp_people_attr_detail_edit
+*/
+.detail-edit .layui-form-select{
+    width: 240px;
+}
+.detail-edit .layui-form-label{
+    width: 100px;
+    font-size: 12px;
+}
+/*
+    弹层-个人信息详情编辑     -- sp_people_detail_edit
+*/
+
+/*
+    弹层-添加人员属性     -- sp_people_attr_add
+*/
+.attr_add .layui-form-label{
+    width: 120px;
+}
+.attr_add .layui-input-inline{
+    width: 330px;
+}
+/*
+    弹层-添加人员属性     -- sp_people_attr_add
+*/
+
+/*
+    弹层-添加人员属性详情编辑     -- sp_people_attr_add_d
+*/
+.attr_add_d .layui-form-label{
+    width: 120px;
+}
+.attr_add_d .layui-form-select{
+    width: 240px;
+}
+.attr_add_d .layui-input-block{
+    margin-left: 150px;
+}
+/*
+    弹层-添加人员属性详情编辑     -- sp_people_attr_add_d
+*/
+
+/*
+    弹层-编辑人员属性     -- sp_people_attr_edit
+*/
+.attr_edit .layui-form-label{
+    width: 144px;
+}
+.attr_edit .layui-form-select{
+    width: 240px;
+}
+.attr_edit .layui-input-block{
+    margin-left: 174px;
+}
+/*
+    弹层-编辑人员属性     -- sp_people_attr_edit
+*/
+
+/*
+    弹层-建筑物详情    -- sp_land_detail
+*/
+.build-detail-icon-ques{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(../images/sp_gis_build_detail_icon.png) no-repeat;
+    vertical-align: text-bottom;
+}
+.build-detail-info-icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
+}
+.build-detail-info-card{
+    line-height: 24px;
+    padding: 2px;
+    background-color: #fafbfc;
+    border-radius: 4px;
+    border: solid 1px #fafbfc;
+}
+.build-detail-info-card:hover{
+    color: #4c4c4c;
+    border: solid 1px #ffd1b2;
+    background-color: #fff;
+}
+.build-detail-info-card:hover .build-detail-info-icon{
+    background-position: -20px 0;
+}
+.build-detail-info-card:hover .build-detail-info-txt{
+    color: #ff6600;
+}
+.build-detail-icon-child{
+    background: url(../images/gis-build-detail-icon-child.png) no-repeat;
+}
+.build-detail-icon-rect{
+    background: url(../images/gis-build-detail-icon-rect.png) no-repeat;
+}
+.build-detail-icon-room{
+    background: url(../images/gis-build-detail-icon-room.png) no-repeat;
+}
+.build_detail_real .layui-this{
+    color: #ff6600;
+}
+/*
+    弹层-建筑物详情    -- sp_land_detail
+*/
+
+/*
+    弹层-住宅详情-图标事例    -- sp_land_detail_icon
+*/
+.build-detail-icon-item:hover .build-icon-def{
+    display: none;
+}
+.build-detail-icon-item:hover .build-icon-active{
+    display: block;
+}
+.build-detail-icon-item:hover .build-detail-icon-txt{
+    color: #ff6600;
+}
+.build-detail-icon-txt{
+    font-size: 12px;
+}
+/*
+    弹层-住宅详情-图标事例    -- sp_land_detail_icon
+*/
+
+/*
+    弹层-房屋详情     -- sp_land_room_detail
+*/
+.room_detail_owner{
+    width: 50px;
+    height: 50px;
+    background-image: linear-gradient(45deg, #fff 50%, #6bb7fe 50%);
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 999;
+}
+.room_detail_owner_txt{
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    text-align: right;
+    font-style: normal;
+    transform: rotate(45deg);
+}
+.layui-timeline-axis{
+    color: #ccc;
+}
+/*
+    弹层-房屋详情     -- sp_land_room_detail
+*/
+
+/*
+    弹层-未处理事件    -- sp_case
+*/
+.layui-table tbody tr:hover{
+    background-color: #fff;
+    color: #ff6600;
+}
+/*
+    弹层-未处理事件    -- sp_case
+*/
+
+/*
+    弹层-未处理事件详情    -- sp_case
+*/
+/*
+    弹层-未处理事件详情    -- sp_case
+*/
+
+/*
+    弹层-事件详情     --sp_thing_detail
+*/
+.thing_step{
+    text-align: center;
+    word-spacing: 156px;
+    color: #999;
+}
+.thing_step_item{
+    display: inline-block;
+    position: relative;
+}
+.thing_step_item:before{
+    content: '';
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: solid 7px #fff;
+    background: #ccc;
+    z-index: 1;
+}
+.thing_step_item:after{
+    content: '';
+    width: 176px;
+    height: 4px;
+    position: absolute;
+    top: -14px;
+    right: 80%;
+    background: #ccc;
+}
+.thing_step li:nth-of-type(1):after{
+    content: '';
+    width: 0;
+    height: 0;
+}
+.thing_step_item_active{
+    color: #444;
+}
+.thing_step_item_active:before,.thing_step_item_active::after{
+    background-color: #f60;
+}
+/*
+    弹层-事件详情     --sp_thing_detail
+*/
+/*
+    弹层-组织详情     -- sp_org_detail
+*/
+.org_detail td{
+    font-size: 12px;
+}
+/*
+    弹层-组织详情     -- sp_org_detail
+*/
+
+.org_info td{
+    font-size: 12px;
+}

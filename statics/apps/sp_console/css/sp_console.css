@@ -1,0 +1,308 @@
+.counter {
+	padding: 10px 15px;
+	text-align: left;
+	position: relative;
+}
+
+.counter-icon {
+	display: block;
+	font-size: 50px;
+	color: #f19f48;
+	line-height: 50px;
+}
+
+.counter-value {
+	font-size: 30px;
+	color: #2ab4c0;
+	line-height: 40px;
+}
+
+.title {
+	display: inline-block;
+	padding: 5px 5px;
+	background: #f19f48;
+	border-radius: 10px;
+	font-size: 20px;
+	color: #fff;
+	text-transform: capitalize;
+	margin: 0;
+}
+
+.counter.red .counter-icon {
+	color: #ef5f61;
+}
+
+.counter.red .title {
+	background: #ef5f61;
+}
+
+.counter.blue .counter-icon {
+	color: #4d9fcf;
+}
+
+.counter.blue .title {
+	background: #4d9fcf;
+}
+
+.counter.purple .counter-icon {
+	color: #2ab4c0;
+}
+
+.counter.purple .title {
+	background: #a98ceb;
+}
+
+.sp_icon_slash {
+	font-size: 28px;
+	padding: 0px 10px;
+}
+
+.mybug {
+	font-size: 16px;
+	color: #AAB5BC;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.sp-fsize24 {}
+
+.sp-icon>i {
+	color: #cbd4e0;
+	font-size: 36px;
+}
+
+.layui-progress-text {
+	color: #cbd4e0;
+	top: 10px;
+	font-size: 12px;
+}
+
+.sp-pross {
+	display: inline-block;
+	color: #cbd4e0;
+	padding-top: 14px;
+	font-size: 14px;
+}
+
+.layui-progress-bar {
+	background-color: #2ab4c0;
+}
+
+.counter .fcolor-yellow {
+	color: #ffbc00;
+}
+
+.fcolor-yellow {
+	color: #ffbc00 !important;
+}
+
+.bgcolor-yellow {
+	background-color: #ffbc00;
+}
+
+.fcolor-red {
+	color: #f1494e;
+}
+
+.bgcolor-red {
+	background-color: #f1494e;
+}
+
+.fcolor-green {
+	color: #a2d148;
+}
+
+.bgcolor-green {
+	background-color: #a2d148;
+}
+
+
+/*公共console*/
+
+body {
+	font-family: 微软雅黑;
+}
+
+.fsize14 {
+	font-size: 14px;
+}
+
+.fsize16 {
+	font-size: 16px;
+}
+
+.fsize18 {
+	font-size: 18px;
+}
+
+.fsize20 {
+	font-size: 20px;
+}
+
+.fsize22 {
+	font-size: 22px;
+}
+
+.fsize24 {
+	font-size: 24px;
+}
+
+.fsize26 {
+	font-size: 26px;
+}
+
+.fsize28 {
+	font-size: 28px;
+}
+
+.fsize-32 {
+	font-size: 32px;
+}
+
+.fsize-36 {
+	font-size: 36px;
+}
+
+.fsize-38 {
+	font-size: 38px;
+}
+
+.cricle-big {
+	line-height: 72px;
+}
+
+.fcolor-33 {
+	color: #333 !important;
+}
+
+.font-w {
+	font-weight: bold;
+}
+
+
+/*覆盖layui样式*/
+
+.layui-colla-icon {
+	top: -40px;
+	left: 89%
+}
+
+.layui-tab-close {
+	top: 19px;
+	left: 96%;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.layui-colla-title {
+	background-color: #Fff !important;
+	height: 0px;
+	overflow: visible;
+}
+
+.layui-colla-content,
+.layui-colla-item {
+	border-top: 1px solid #f2f2f2;
+	padding-top: 14px;
+}
+
+.layui-tab-refresh {
+	top: 19px;
+	left: 92%;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.actice-btn {
+	width: 24px;
+	height: 22px;
+	text-align: center;
+	line-height: 22px;
+	border-radius: 0px;
+	padding: 0px;
+}
+
+.remindbtn {
+	font-size: 14px !important;
+	margin-right: 10px;
+	display: block;
+	margin-right: 0px !important;
+}
+
+.hoverbg {
+	padding: 6px 10px;
+}
+
+.hoverbg:hover {
+	background-color: #f4f6f9;
+}
+
+.layui-colla-content {
+	padding: 0px;
+}
+
+.vscorll {
+	position: relative;
+	overflow: hidden;
+	overflow-y: auto;
+	height: 250px;
+}
+.vyscorll{
+	height:1030px;
+	position: relative;
+	overflow:hidden;
+	overflow-y:auto;
+}
+.cricle-big {
+	width: 74px;
+	height: 74px;
+	border-radius: 100%!important;
+	margin: 0 auto;
+}
+
+.sp-cricle-small {
+	position: absolute;
+	color: #ffffff;
+	border-radius: 100%!important;
+	line-height: 20px;
+	font-size: 12px;
+	min-width: 20px;
+	top: 0;
+	left: 65px;
+	text-align: center
+}
+
+.sp-transform:hover {
+	transition: all ease-in 0.2s;
+	transform: scale(1.2, 1.2);
+	box-shadow: 0 0 10px #ccc;
+	display: inline-block;
+}
+.sp-dot{width:22px;height:22px;}
+.h-265{height:265px;}
+.sp-dot{width:42px;height:42px;line-height:42px;font-size:18px;}
+.sp-cricle-dot{
+	text-align: center;
+											    position: absolute;
+											    color: #ffffff;
+											    border-radius: 100%!important;
+											    line-height: 20px;
+											    font-size: 12px;
+											    min-width: 20px;
+											    z-index: 20;
+											    left: 90%;
+											    top: -5px;
+}
+
+.sp-circle-content::before{
+	display: table;
+	content:"";
+}
+.sp-circle-content{
+	
+}
+.layui-tab-bar{
+	top: 16px;
+}

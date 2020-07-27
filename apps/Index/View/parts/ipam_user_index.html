@@ -1,0 +1,10 @@
+<ul class="userinfo_infolist mt-25">
+    <foreach name="menu" item="list">
+        <li class='lh-40 po-re center-text <eq name="list[is_active]" value="1">userinfo_active</eq>'>
+            <a  href="{$list.url}" class="fcolor-33">
+                <i class="userinfo-icon {$list.css}"></i>
+                <span>{$list.name}</span>
+            </a>
+        </li>
+    </foreach>
+</ul>

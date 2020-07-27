@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>学习笔记详情</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_notes.css" />
+</head>
+<style type="text/css">
+header ul li{
+	display: block; !important;
+}
+.aui-bar .aui-pull-left {
+    padding-left: 10px;
+    font-size: 13.7px;
+    font-weight: 400;
+}
+.aui-bar .aui-iconfont {
+    position: relative;
+    z-index: 20;
+    font-size: 15.2px;
+    color: #ffffff;
+    font-weight: 400;
+    line-height: 45px;
+}
+</style>
+<body class="bg-color-whiter">
+<header class="aui-bar aui-bar-nav aui-bar-info">
+	<ul>
+		<li class="h-45em">
+			<a class="aui-pull-left" href="javascript:history.back(-1)">
+				<span class="aui-iconfont aui-icon-left"></span>返回
+			</a> 
+			<div class="aui-title icon_medium f-16em">学习笔记详情</div>
+		</li>
+	</ul>
+</header>
+
+<section class="edu_notes_info_con pt-20em">
+	<div id="notes_title" class="color-21 f-24em f-w">{$notes_info.notes_title}</div>
+	<div class="clearfix pt-16em">
+		<div class="pull-left f-10em w-100b color-9e">
+			<span>时间:</span>
+			<span id="add_time">{$notes_info.add_time}</span>
+			<span class="pl-10b">添加人:</span>
+			<span id="add_communist">{$notes_info.communist_name}</span>
+			<div class="pull-right">
+			<img class="w-12em h-10em di-i" src="__STATICS__/apps/page_wechat/images/images_edu/edu_notes_info_video.png" alt="" style="vertical-align: middle;height: 0.38rem;"/>
+				<span id="notes_type" class="f-10em color-9e" style="vertical-align: middle;">{$notes_info.notes_type}</span>
+			</div>
+		</div>
+	</div>
+</section>
+<!--图片-->
+<notempty name="notes_info.material_id">
+<section class="edu_notes_info_con pt-20em" id="notes_info_con">
+	<if condition="$notes_info['material_vedio'] eq '' ">
+	<a href="{:U('Edu/edu_material_info',array('material_id'=>$notes_info['material_id'],'notes_id'=>$notes_info['notes_id']))}">
+		<div class="edu_notes_info_pic" >
+			<img class="w-350em h-201em m-a" src='{$notes_info.material_thumb}' alt="" />
+			<p class="pt-12em pb-15em text-align pl-12em pr-12em">{$notes_info.material_title}</p>
+		</div>
+	</a>
+	<else/>
+	<a href="{:U('Edu/edu_material_videoInfo',array('material_id'=>$notes_info['material_id'],'notes_id'=>$notes_info['notes_id']))}">
+		<div class="edu_notes_info_pic">
+			<video style="object-fit:fill" class="w-100b h-201em m-a" src='{$notes_info.material_vedio}' controls="controls" poster="{$notes_info.material_thumb}"></video>
+			<p class="pt-12em pb-15em text-align pl-12em pr-12em">{$notes_info.material_title}</p>
+		</div>
+	</a>
+	</if>
+</section>
+</notempty>
+<!--内容-->
+<section class="edu_notes_info_con mt-20em pl-10em">
+	<p class="f-15em color-33 icon_regular color-f37019 f-w pb-10em">笔记内容:</p>
+	<p id="notes_content" class="f-14em color-21 icon_regular">
+		{$notes_info.notes_content}
+	</p>
+</section>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<!-- api核心js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<!-- end -->
+<!-- aui下拉刷新js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<!-- end -->
+<!-- aui轮播 -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<!-- end -->
+<!-- 项目公共js -->
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- end -->
+<!-- 本页面js -->
+<!-- <script type="text/jscript" src="js/edu_notes_info.js"></script> -->
+<!-- end -->
+<script type="text/javascript">
+	
+</script>
+<!--end-->
+</body>
+</html>

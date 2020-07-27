@@ -1,0 +1,157 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+<div class="layui-fluid " >
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-card">
+                        <div class="layui-card-header" title="{$title}">{$title}</div>
+                        <div class="layui-form layui-card-body fitheight">
+                        	<form action="{:U('sys_role_auth_do_save')}"  class="form-horizontal" method="post">
+								<input type="hidden" name="role_id" value="{$role_id}"> 
+								<input type="hidden" id="modules" name="role_auth" value="{$role_auth}">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-xs-2 control-label">角色名：</label>
+										<label class="control-label">{$role_id}-{$role_name}</label>
+									</div>
+								</div>
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-xs-2 control-label">授权：</label>
+										<div class="col-sm-10">
+											<div class="scroller p5-scroller">
+												<div class="tree-sidebar">
+													<ul id="treeDemo" class="ztree"></ul>
+												</div>
+											</div>
+										</div>
+										<div class="form-actions text-right" >
+											<div class="col-md-offset-3 col-md-9">
+												<button class="layui-btn" lay-submit="" type="submit" lay-filter="component-form-demo1">提交</button>
+                        						<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">取消</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="page-container">
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="portlet light  bordered">
+						<div class="portlet-title">
+							<div class="caption">
+								<span class="bold "></span>
+								<span class="caption-helper"></span>
+							</div>
+						</div>
+						<div class="portlet-body pb-30">
+							<form action="{:U('sys_role_auth_do_save')}"  class="form-horizontal" method="post">
+								<input type="hidden" name="role_id" value="{$role_id}"> 
+								<input type="hidden" id="modules" name="role_auth" value="{$role_auth}">
+													
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-xs-2 control-label">角色名：</label>
+										<label class="control-label">{$role_id}-{$role_name}</label>
+									</div>
+								</div>
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-xs-2 control-label">授权：</label>
+										<div class="col-sm-10">
+											<div class="scroller p5-scroller">
+												<div class="tree-sidebar">
+													<ul id="treeDemo" class="ztree"></ul>
+												</div>
+											</div>
+										</div>
+										<div class="form-actions text-right" >
+											<div class="col-md-offset-3 col-md-9">
+												<button class="layui-btn" lay-submit="" type="submit" lay-filter="component-form-demo1">提交</button>
+                        						<button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="window.history.go(-1);">取消</button>
+											</div>
+										</div>
+									</div>											
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>			
+</div>-->
+</block>
+<block name="js">		
+<SCRIPT >
+		var setting = {
+			view: {
+                   showIcon: false
+               },
+			check: {
+				enable: true,
+				chkStyle: "checkbox",
+				chkboxType: { "Y": "ps", "N": "ps" }//复选框关联方式
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onCheck: onCheck//绑定回调函数
+			}
+		};
+		/* 遍历节点 */
+		var zNodes =[
+			<volist name="function" id="vo">
+				{ id:{$vo.function_id}, pId:{$vo.function_pid},open:false,<in name="vo.function_id" value="$role_auth">checked:true,</in> name:"{$vo.function_name}"},
+			</volist>
+		];
+				
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		});
+		
+		function onCheck(e, treeId, treeNode) {
+		    var zTree = $.fn.zTree.getZTreeObj(treeId),
+		        Nodes = zTree.getCheckedNodes(true)
+		    var ids = '', names = ''
+		    for (var i = 0; i < Nodes.length; i++) {
+		        ids   += ','+ Nodes[i].id
+		        names += ','+ Nodes[i].name
+		    }
+		    if (ids.length > 0) {
+		        ids = ids.substr(1), names = names.substr(1)
+		    }
+		    $("#modules").val(ids);
+		}
+	</SCRIPT>
+<script>
+    layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+    })
+    $(".over-h-tree").css("height",($(window).height() - 95));
+</script>
+
+
+
+</block>

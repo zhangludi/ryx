@@ -1,0 +1,25 @@
+<?php
+if(function_exists('saeAutoLoader')){
+	define('IS_CLOUD',true);
+	define('IS_SAE',true);
+	define('IS_BAE',false);
+	define('IO_TRUE_NAME','sae');
+}elseif(isset($_SERVER['HTTP_BAE_ENV_APPID'])){
+	define('IS_CLOUD',true);
+	define('IS_SAE',false);
+	define('IS_BAE',true);
+	define('IO_TRUE_NAME','bae');
+}else{
+	define('IS_SAE',false);
+	define('IS_BAE',false);
+	define('IS_CLOUD',false);
+}
+define('DATABASE_NAME','sp_ipam_v2');
+define('USER_NAME','admin');
+define('USER_PWD','');
+// define('URL','/erp/erp_sdmt/index.php');
+define('BASE_HOST','localhost');
+define('BASE_USER','root');
+define('BASE_PWD','');
+define('BASE_NO','170323001');
+define('BASE_ID','10014');

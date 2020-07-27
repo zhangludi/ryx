@@ -1,0 +1,164 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<div class="layui-col-xs1 text-r lh-40">
+							标题：
+						</div>
+						<div class="layui-col-xs2 ">
+							<input class="layui-input" name="id" id="notice_content" autocomplete="off" placeholder="请输入标题">
+						</div>
+						<div class="layui-col-xs1 text-r lh-40">
+							选择日期：
+						</div>
+						<div class="layui-col-xs3 ">
+							<input class="layui-input" name="id" id="start" autocomplete="off" placeholder="请选择日期">
+						</div>
+						<div class="layui-col-xs3 pull-right">
+							<button class="layui-btn" data-type="reload" id="seach">查询</button>
+							<a class="layui-btn table-add" data-type="add" style="text-decoration: none;">发起公告</a>
+						</div>
+					</div>
+					<table class="layui-hide" id="demo" lay-filter="demo"></table>
+					<script type="text/html" id="operate">
+						<a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+						<a class="layui-btn layui-btn-f60 layui-btn-xs" lay-event="edit">编辑</a>
+						<a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a> 
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script >
+	function notice_info(notice_id,is_add) {
+		layer.open({
+			type : 2,
+			title : '公告详情',
+			// offset : window.parent.parent.document.body.scrollTop + 10 + 'px',
+			maxmin : false,
+			shadeClose : true, //点击遮罩关闭层
+			area : [ '800px', '400px' ],
+			content : "{:U('Oa/Oanotice//notice_id/"+notice_id+"/is_add/"+is_add+"')}",
+			success:function(){
+            	layerAuto();
+            }
+		});
+	};
+	</script>
+<script>
+	layui.use(['element','form'], function() {
+        var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form
+                , router = layui.router();
+        form.render();
+        // 默认显示的 表格
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#demo'
+                , url: "{:U('Oanotice/oa_notice_index_data')}"
+                , height: 'full-160'
+                , id: 'ztreedata'
+                , cols: [[
+                	{field:'notice_id', title:'编号',align: 'center',width:'8%', unresize: true, sort: true}
+					,{field:'notice_title', title:'标题'}
+					,{field:'add_staff', title:'操作人' ,width:200, unresize: true}
+					,{field:'update_time',align:"center", title:'操作时间',width:200, unresize: true}
+					,{field:'sex', title:'操作', width:200,align: 'center' ,toolbar: '#operate'}
+                ]]
+                , page: true
+            });
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            table.on('tool(demo)', function(obj){
+		        var data = obj.data;
+		        if(obj.event === 'detail'){
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('Oanotice/oa_notice_info')}?notice_id="+data.notice_id+"&is_add="+data.is_add,
+                       area: ['300px', '300px']
+                    });
+                    layer.full(index);
+                    
+	          	}  else if(obj.event === 'del'){
+	              	layer.confirm('确认删除该数据吗？', function(index){
+		              	window.location='{:U("Oanotice/oa_notice_del")}?notice_id='+data.notice_id+'';
+	              	});
+	          	} else if(obj.event === 'edit'){
+                    var index = layer.open({
+                       type: 2,
+                       title: false,
+                       end:false,
+                       closeBtn: 0,
+                       shift: 1,
+                       content: "{:U('Oanotice/oa_notice_edit')}?notice_id="+data.notice_id,
+                       area: ['300px', '300px']
+                    });
+                    layer.full(index);
+	          	}
+	      	});
+            var $ = layui.$, active = {
+                reload: function(){
+                    var start = $('#start').val();
+                    var notice_content = $('#notice_content').val();
+                    table.reload('ztreedata', {
+                        page: {
+                          curr: 1 
+                        }
+                        ,where: {
+                            "notice_content": notice_content,
+                            "start":start
+                        }
+                    });
+                },
+                add: function(){
+                    var index = layer.open({
+                        type: 2,
+                        title: false,
+                        end:false,
+                        closeBtn: 0,
+                        shift: 1,
+                        area : ['800px' , '400px'],
+                        content: "{:U('Oanotice/oa_notice_edit')}",
+                    });
+                    layer.full(index);
+                }
+            };
+            $('.layui-form .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+        //点击左侧树的事件
+    })
+
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#start',
+			range: true
+		});
+	})
+</script>
+</block>

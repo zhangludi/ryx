@@ -1,0 +1,319 @@
+@charset "UTF-8";
+/* line 32, ../../sass/layouts/_layouts.scss */
+.l-flex-center {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* line 36, ../../sass/layouts/_layouts.scss */
+.l-margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 40, ../../sass/layouts/_layouts.scss */
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1720px;
+}
+
+/* line 45, ../../sass/layouts/_layouts.scss */
+.l-right {
+  float: right;
+}
+
+/* line 49, ../../sass/layouts/_layouts.scss */
+.l-flex-justify {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  justify-content: space-between;
+}
+
+/* line 27, ../../sass/components/_function_cards.scss */
+.function {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* line 30, ../../sass/components/_function_cards.scss */
+.function_card {
+  border-radius: 10px;
+  text-align: center;
+}
+/* line 34, ../../sass/components/_function_cards.scss */
+.function_card a {
+  color: inherit;
+}
+/* line 37, ../../sass/components/_function_cards.scss */
+.function_card .function_text {
+  color: inherit;
+}
+/* line 40, ../../sass/components/_function_cards.scss */
+.function_card .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 45, ../../sass/components/_function_cards.scss */
+.function_card .card_title {
+  text-align: center;
+}
+
+/* line 50, ../../sass/components/_function_cards.scss */
+.function_card-gray {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #ebebeb, #fff);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-gray a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-gray .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-gray .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-gray .card_title {
+  text-align: center;
+}
+/* line 53, ../../sass/components/_function_cards.scss */
+.function_card-gray .function_text {
+  color: inherit;
+}
+
+/* line 57, ../../sass/components/_function_cards.scss */
+.function_card-red {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #ff204d, #ff6745);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-red a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-red .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-red .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-red .card_title {
+  text-align: center;
+}
+
+/* line 61, ../../sass/components/_function_cards.scss */
+.function_card-org {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #ff7200, #ffaa01);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-org a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-org .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-org .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-org .card_title {
+  text-align: center;
+}
+
+/* line 65, ../../sass/components/_function_cards.scss */
+.function_card-green1 {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #00b778, #0cdd9f);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-green1 a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-green1 .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-green1 .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-green1 .card_title {
+  text-align: center;
+}
+
+/* line 69, ../../sass/components/_function_cards.scss */
+.function_card-green2 {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #14b800, #51ed0e);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-green2 a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-green2 .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-green2 .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-green2 .card_title {
+  text-align: center;
+}
+
+/* line 73, ../../sass/components/_function_cards.scss */
+.function_card-blue {
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient(0deg, #3c78f2, #54affe);
+}
+/* line 10, ../../sass/components/_function_cards.scss */
+.function_card-blue a {
+  color: inherit;
+}
+/* line 13, ../../sass/components/_function_cards.scss */
+.function_card-blue .function_text {
+  color: inherit;
+}
+/* line 17, ../../sass/components/_function_cards.scss */
+.function_card-blue .card_img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 22, ../../sass/components/_function_cards.scss */
+.function_card-blue .card_title {
+  text-align: center;
+}
+
+/* line 80, ../../sass/components/_function_cards.scss */
+.l-function-wrap {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* line 6, ../../sass/sp_guide/sp_guide_neigh.scss */
+.content_box {
+  background: #fff url("../../sp_guide/images/guide-neigh-content-bg.png");
+  background-size: cover;
+}
+
+/* line 10, ../../sass/sp_guide/sp_guide_neigh.scss */
+.function {
+  flex-flow: row wrap;
+  width: inherit;
+  height: inherit;
+  justify-content: space-between;
+}
+
+/* line 16, ../../sass/sp_guide/sp_guide_neigh.scss */
+.function_title {
+  line-height: 50px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 48px;
+  font-family: 方正正准黑简体;
+  color: #3d700b;
+}
+
+/* line 24, ../../sass/sp_guide/sp_guide_neigh.scss */
+.function_card {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+/* line 32, ../../sass/sp_guide/sp_guide_neigh.scss */
+.card-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  font-size: 18px;
+  background: rgba(61, 112, 11, 0.3);
+  color: #fff;
+  text-align: center;
+}
+
+/* line 43, ../../sass/sp_guide/sp_guide_neigh.scss */
+.card-img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}

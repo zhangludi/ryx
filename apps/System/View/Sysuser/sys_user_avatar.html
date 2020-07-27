@@ -1,0 +1,52 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+<!-- 此处为修改头像弹出内容 -->
+  <div id="testTrueCon" class="di-n">
+    <div class="portlet-body mt-30">
+        <div class="ibox-content">
+           <form method="post" action="{:U('Sysuser/sys_user_avatar_save')}" class="form-horizontal" enctype="multipart/form-data" id="signupForm">
+								<div class="form-group" style="margin:0px 20px 0 20px">
+                  &nbsp;
+                </div>
+                <div class="form-group" style="margin:0px 20px 0 20px">
+                  <label class="col-sm-1 control-label"></label>
+									 <label class="col-sm-2 control-label">用户头像:</label>
+									 <div class="col-sm-6">
+										{$img}
+									 </div>
+								</div>
+                 <div class="form-group" style="margin:20px 20px 0 20px">
+                    <label class="col-sm-1 control-label"></label>
+                    <label class="col-sm-2 control-label"  >头像上传: </label>
+                    <button type="button" id="upload" class="btn btn-primary" style="height: 32px; " onclick="$('input[name=file]').click()">头像上传</button>
+                    <input type='file' name="file" style="display:none">
+                  </div>                               
+                  <div class="form-group" style="margin:40px 20px 0 20px">
+                     <label class="col-sm-2 control-label"></label>
+                     <label class="col-sm-8 control-label"  > 
+                          <button type="submit" class="btn btn-md blue mr-15">
+                            确定
+                          </button>
+                     </label>
+                      <label class="col-sm-1 control-label"  > 
+                          <button type="button" class="btn btn-md #000fff "onclick="bd_colse()">
+                            取消
+                          </button>
+                        </label>
+                  </div>                     
+            </form> 
+          </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+   <script>
+   //头像上传取消按钮
+    function bd_colse(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    </script>
+</block>

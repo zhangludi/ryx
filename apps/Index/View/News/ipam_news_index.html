@@ -1,0 +1,197 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/news.css">
+<body class="ipam_home_public_background">
+<div class="public_content clearfix">
+    <div class="edu_notes_left pull-left">
+        <div class="clearfix">
+            <div id="demo1" class="picBtnTop">
+            <div class="hd">
+                <ul>
+                    <volist name="article" id="vo">
+                        <li ><img src="{$vo.article_thumb}" style="width:176px;height:107px"></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="bd">
+                <ul>
+                    <volist name="article" id="vo">
+                        <li >
+                            <div class="bg"></div>
+                            <div class="pic"><img src="{$vo.article_thumb}" style="width:595px;height:335px" onclick="article_info({$vo.article_id})"></div>
+                            <div class="title"><a href="">{$vo.article_title}</a></div>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        </div>
+        <div class="metting_list">
+            <ul  id="content">
+            </ul>
+            <div class="more" onclick="more_no()">加载更多</div>
+        </div>
+    </div>
+    <div class="edu_notes_right pull-right">
+        <div class="metting_right_block1">
+            <div class="clearfix w-90b m-a pt-25">
+                <div class="pull-left va-jz fcolor-white f-w">
+                    <div class="icon_shu1 di-ib mr-5"></div>
+                    最新专题学习
+                </div>
+                <div class="pull-right color-ff0 f-14em va-jz see_news_detail" onclick="edu_index()">全部
+                    <img class="di-ib ml-5" src="__STATICS__/apps/page_index/images/icon_right.png" >
+                </div>
+            </div>
+            <div class="tu1">
+                <img src="{$edutopic_list.topic_img}" style="width:336px;height: 186px;">
+            </div>
+            <div class="theme">{$edutopic_list.topic_title}</div>
+            <div class="memo">{$edutopic_list.memo}</div>
+            
+        </div>
+        <!-- 分类筛选 -->   
+      <div class="edu_assort clearfix">
+        <div class="edu_assort_tit">分类筛选</div>
+            <ul>
+                <!-- <li  onclick = "news_cat()">全部</li> -->
+                <li class="edu_assort_active" onclick="news_cat(36)">党建要闻</li>
+                <li onclick="news_cat(37)">党建论坛</li>
+                <li onclick="news_cat(38)">共产党风采</li>
+                <li onclick="news_cat(39)">先锋风采</li>
+                <li onclick="news_cat(40)">党务工作风采</li>
+                <li onclick="news_cat(41)">红色文艺</li>
+                <li onclick="news_cat(42)">党纪党规</li>
+                <li onclick="news_cat(46)">党员声音</li>
+                <li onclick="news_cat(47)">新闻快讯</li>
+            </ul>
+      </div>
+      <!--热门会议-->
+      <div class="metting_right_block3">
+        <div class="tit">党建公众号推荐</div>
+        <div class="line"></div>
+        <div class="clearfix no_public">
+            <div class="pull-left"><img src="__STATICS__/apps/page_index/images/ewm.png"></div>
+            <div class="pull-right w-65b">
+                <div class="tit3">智慧党建研究院</div>
+                <div class="con3">党建研究院立足“互联网+大党建”的形势，从时代背景对党建的影响。</div>
+            </div>
+        </div>
+        <ul>
+                <li>中国党建新闻网</li>
+                <li>学习强国</li>
+                <li>森普信息集团</li>
+            </ul>
+      </div>
+       <!--通知公告-->
+       <div class="notice">
+            <div class="f-16em color-21 pt-15 pl-20">新闻排行</div>
+            <div class="line7"></div>
+            <ul>
+                <volist name="article_ranking" id="vo" key="k">
+                <if condition="$k lt 4 ">
+                    <li>
+                        <div class="icon_no_FF3032 di-ib">{$k}</div>
+                        <div class="fcolor-66 f-16em list">{$vo.article_title}</div>
+                    </li>
+                <else />
+                    <li>
+                        <div class="icon_no_ccc di-ib">{$k}</div>
+                        <div class="fcolor-66 f-16em list">{$vo.article_title}</div>
+                    </li>
+                </if>
+                </volist>
+            </ul>
+       </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATICS__/apps/page_index/js/news.js"></script> 
+<script>
+    news_cat(36)
+    var cat_id_r = '';
+    var limit_count = 5;
+    function news_cat(cat_id,limit_count){
+        cat_id_r = cat_id;
+        if(limit_count==undefined){
+            limit_count = 5;
+        }else{
+            limit_count += 10;
+        }
+        var count = 0;
+        $.ajax({
+            type : "post",
+            url : "{:U('Index/News/ipam_meeting_index_ajax_count')}",
+            data :{'cat_id':cat_id},
+            datatype: "json",
+            async: false,
+            success: function (data) {
+                count = data;
+            }
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //完整功能
+            if (count == 0 || count == '' || count == null) {
+                $('#content').html('<li>暂无数据</li>');
+            } else {
+                laypage.render({
+                    elem: 'news_page'
+                    ,count: count
+                    ,theme: '#ff3032'
+                    ,first: '首页'
+                    ,last: '尾页'
+                    ,limit: limit_count
+                    ,layout: ['count', 'prev', 'page', 'next', 'skip']
+                    ,jump: function(obj){
+                        $.ajax({
+                            type : "post",
+                            url : "{:U('Index/News/ipam_news_index_ajax')}",
+                            data :{'cat_id':cat_id, pagesize:obj.limit},
+                            datatype: "json",
+                            async: false,
+                            success: function (data) {
+                                // console.log(data);
+                                $('#content').html(data.content);
+                                // 查看详情验证登陆
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+	// 验证登陆
+	$(".see_news_detail").click(function(e){
+		 var flag = false;
+		 $.ajax({
+			 type: "POST",
+			 url: "{:U('Index/check_login')}",
+			 async:false,
+			 success: function(data){
+				 flag = data;
+			 }
+		 });
+		 if(flag == true){
+			 location.href = "{:U('Index/Index/login')}";
+			 return false;
+		 } else {
+			 return true;
+		 }
+	})
+    function more_no(){
+        if(cat_id_r){
+            news_cat(cat_id_r,10);
+        }else{
+            news_cat(36,10);
+
+        }
+    }
+    function edu_index(){
+        window.location.href="{:U('Edu/ipam_edu_index')}";
+    }
+    function article_info(id){
+        window.location.href="{:U('news/ipam_news_detail')}?article_id="+id+"";
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<extend name="./apps/Common/Template/temp.html"/>
+<block name="css"></block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="layui-form">
+                                    <div class="row ml-10">
+                                        <div class="form-group  col-md-4">
+                                            <div class="row">
+                                                <label class="control-label col-md-4 p-0 lh-35">开会时间：</label>
+                                                <div class="col-md-4  p-0">
+                                                    <input type="text" name="start_time" id="start" class=" form-control layer-date " value="{$post.start_time}" placeholder=" - ">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right text-right p-0 mr-10">
+                                            <button type="button" class="btn btn-sm blue btn-outline bor-ra-2 mr-10 w-70" onclick="search()">搜索</button>
+                                            <!-- <button type="button" class="btn btn-sm green btn-outline bor-ra-2 mr-10 w-70" onclick="ex()">导出</button> -->
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="portlet-body">
+                                    <div class="">
+                                        <div id="table">
+                                            <table id="client_table">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        
+        laydate.render({
+            elem: '#start'
+            ,range: true
+        });
+        $(document).ready(function(){
+            var scHeight = $("#client_table").parents(".scroller").height();
+            //1.初始化Table
+            $("#client_table").bootstrapTable({
+                height:'400',
+                method: "get",  //使用get请求到服务器获取数据
+                url: "{:U('rc_meeting_data')}", //获取数据的Servlet地址
+                striped: true,  //表格显示条纹
+                pagination: true, //启动分页
+                pageSize: 50,  //每页显示的记录数
+                pageNumber:1, //当前第几页
+                pageList: [5, 10, 15, 20, 25],  //记录数可选列表
+                sortName:'num',
+                sortOrder:'desc',
+                search: true,  //是否启用查询
+                cache:false,
+                showColumns: false,  //显示下拉框勾选要显示的列
+                showRefresh: false,  //显示刷新按钮
+                sidePagination: "client", //表示服务端请求
+                columns:[
+                    {title: '党支部',field: 'party_name',align: 'center',valign: 'middle'},
+                    {title: '支部大会',   field: 'branch_meeting',  align: 'center',valign: 'middle'},
+                    {title: '支委会议',   field: 'zhiwei_meeting',  align: 'center',valign: 'middle'},
+                    {title: '党小组会',   field: 'group_meeting',  align: 'center',valign: 'middle'},
+                    {title: '党课',   field: 'communist_lecture',  align: 'center',valign: 'middle'},
+                    {title: '总计',   field: 'count',  align: 'center',valign: 'middle'},
+                    {title: '总计',   field: 'num',  visible:false}
+                ]
+            });
+        });
+
+        function search(){
+            var start = $("#start").val();
+            $('#client_table').bootstrapTable('removeAll');
+            $('#client_table').bootstrapTable('refresh',{url:"{:U('Rc/Rc/rc_meeting_data',array('double_type'=>$double_type))}",query:{'start':start}});
+        }
+        function ex(){
+            var start = $("#start").val();
+            var end = $("#end").val();
+            if (start.length>0 && end.length>0){
+                location.ef = "{:U('Report/Report/meeting_statistics_exports/start/"+start+"/end/"+end+"')}";
+            }else if(start.length==0 && end.length==0){
+                location.ef = "{:U('Report/Report/meeting_statistics_exports')}";
+            }else{
+                alert('请选择正确的时间');
+            }
+        }
+        function att_list(meeting_type,party_no) {
+            var index = layer.open({
+                type : 2,
+                title : '会议列表',
+                offset : window.parent.document.body.scrollTop + 50 + 'px',
+                shadeClose : true, //点击遮罩关闭层
+                area: ['950px', '450px'],
+                fixed: true,
+//                maxmin: true,
+                scrollbar: true,
+                content: "{:U('Rc/Rc/rc_meeting_list/meeting_type/"+meeting_type+"/party_no/"+party_no+"')}"
+            });
+            layer.full(index);
+        }
+    </script>
+</block>

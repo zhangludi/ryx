@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="森普，智慧党建，云平台">
+    <meta name="description" content="森普智慧党建云平台">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title><php>echo getConfig('web_name');</php>-自助服务终端登录</title>
+    <!--公共样式-->
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css">
+    <link rel="stylesheet" href="__STATICS__/public/css/sp_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_public.css">
+    <link rel="stylesheet" href="__STATICS__/apps/page_portal/css/ipam_home_login.css">
+    <!--------end-------->
+</head>
+<body>
+<div class="w-300 login_box">
+    <form action="{:U('Index/Index/login_save')}" method="post">
+        <div class="mb-40 center-text fsize-32 login_title">用户登录</div>
+        <p class="mb-15">
+            <span class="login_lbl">党组织</span>
+            <select name="party_no" class="di-ib w-220 h-28 ipam_input login_sel">
+                <php>echo getPartySelect();</php>
+            </select>
+        </p>
+        <p class="mb-15">
+            <span class="login_lbl">姓&emsp;名</span>
+            <input type="text" class="di-ib w-210 h-28 ipam_input" name="communist_name" required>
+        </p>
+        <p class="mb-40">
+            <span class="login_lbl">身份证</span>
+            <input type="text" class="di-ib w-210 h-28 ipam_input" name="communist_idnumber" required>
+        </p>
+        <button type="submit" class="login_btn center-block center-text lh-30 bor-ra-4 h-30 w-290">点击登录</button>
+    </form>
+
+</div>
+</body>
+</html>

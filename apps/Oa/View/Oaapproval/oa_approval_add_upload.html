@@ -1,0 +1,139 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+	<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="tab-pane" id="tab_2">
+                       <div class="portlet box blue">
+	                     <div class="portlet-title">
+	                         <div class="caption">
+	                             <i class="fa fa-gift"></i><php>echo getFunctionInfo(ACTION_NAME);</php> 
+	                         </div>
+	                     </div>
+	                     <div class="portlet-body form">
+	                         
+	                         <form id="signupForm"  method="post" action="{:U('Api/Upload/file_upload')}" class="form-horizontal" enctype="multipart/form-data">
+	                             <div class="form-body">
+	                                 <div class="row">
+	                                     <div class="col-md-6">
+	                                         <div class="form-group">
+	                                             <label class="control-label col-md-3">审批标题：</label>
+	                                             <input type="file" name="file" class="form-control layer-date" value="{$template_list.template_name}" required> 
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                                 <h4 class="form-section">发起人</h4>
+	                                 <div class="row">
+	                                     <div class="col-md-6">
+	                                         <div class="form-group">
+	                                             <label class="control-label col-md-3">姓名：</label>
+	                                             <label class="control-label col-md-3" style="text-align:left;">{$communist_list.communist_name}</label>
+	                                         </div>
+	                                     </div>
+	                                     <div class="col-md-6">
+	                                         <div class="form-group">
+	                                             <label class="control-label col-md-3">职位：</label>
+	                                             <label class="control-label col-md-3" style="text-align:left;">{$communist_list.communist_post}</label>
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                                 <!--/row-->
+	                                 <div class="row">
+	                                     <div class="col-md-6">
+	                                         <div class="form-group">
+	                                             <label class="control-label col-md-3">申请时间：</label>
+	                                             <label class="control-label col-md-3" style="text-align:left;"><php> echo date('Y-m-d'); </php></label>
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                                 <!--/row-->
+	                                 <h4 class="form-section">审批模板</h4>
+	                                 <!--/row-->
+	                                 <div class="form-body">
+	                                 	<input type="hidden" name="approval_template" value="{$template_list.template_no}">
+										<volist name='field_list' id='field'>
+	                                        <div class="form-group">
+												<label class="col-md-3 control-label">{$field.field_name}</label>
+												<div class="col-md-4">
+													<switch name="field.field_type">
+														<case value="select"><!-- 下拉框 -->
+															<select name="{$field.field_no}" lay-search class="form-control" {$field.is_required}>
+																<php>$select_options=$field[field_options];
+																	 $select_option_arr=strToarr($select_options);
+																</php>
+																<volist name='select_option_arr' id='select_option'>
+																	<option value='{$select_option}'>{$select_option}</option>
+																</volist>
+															</select>
+														</case>
+														<case value="radio"><!-- 单选 -->
+															<php>$radio_options=$field[field_options];
+																 $radio_option_arr=strToarr($radio_options);
+															 </php>
+															 <div class="input-group">
+																<div class="icheck-inline">
+																	<volist name='radio_option_arr' id='radio_option'>
+														    			<label><input type="radio" name="{$field.field_no}" value="{$radio_option}" class="icheck" {$field.is_required}>{$radio_option}</label>
+																	</volist>
+																</div>
+															</div>
+														</case>
+														<case value="checkbox"><!-- 多选 -->
+															<php>$checkbox_options=$field[field_options];
+																$checkbox_option_arr=strToarr($checkbox_options);
+															</php>
+															<div class="input-group">
+	                                                        	<div class="icheck-inline">
+	                                                            	<volist name='checkbox_option_arr' id='checkbox_option'>
+																	    <label><input name="{$field.field_no}[]" value="{$checkbox_option}" type="checkbox" class="icheck" {$field.is_required}>{$checkbox_option}</label>
+																	</volist>
+	                                                             </div>
+                                                            </div>
+														</case>
+														<case value="textarea"><!-- 多行文本 -->
+															<textarea name="{$field.field_no}" class="form-control" rows='3' {$field.is_required}></textarea>
+														</case>
+														<case value="date"><!-- 日历 -->
+															<input type="text"  name="{$field.field_no}" value="{$option}"  class="form-control layer-date " placeholder="YYYY-MM-DD" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+														</case>
+														<case value="file"><!-- 附件、文件域 -->
+															<div class="col-sm-10">
+								                                <input type="hidden" id="{$field.field_no}" name="{$field.field_no}" value="" style="width: 60px">
+								                                <a href="javascript:void(0);" target="_self" onclick="uploader_file('oa','1','{$field.field_no}','{$field.field_no}source_name','{$field.field_no}js-grid-juicy-projects','2','1')" class="btn btn-sm btn-success layer-demolist">点击选择文件</a>
+								                             	<span id="{$field.field_no}js-grid-juicy-projects">
+								                             	</span>
+								                           </div>
+														</case>
+														<default /><input type="{$field.field_type}" name="{$field.field_no}" class="form-control" {$field.is_required} placeholder="">
+													</switch>
+												</div>
+											</div>
+										</volist>
+	                      			</div>
+	                           <!--/row-->
+	                             </div>
+	                             <div class="form-actions right">
+	                                 <div class="row">
+	                                     <div class="col-md-12">
+	                                         <div class="row">
+	                                             <div class="col-md-offset-3 col-md-9">
+	                                                 <button type="submit" class="btn green">提交</button>
+	                                                 <button type="button" class="btn default" onclick='history.back();'>返回</button>
+	                                             </div>
+	                                         </div>
+	                                     </div>
+	                                 </div>
+	                             </div>
+	                         </form>
+	                         
+	                     </div>
+	                 </div>
+	                </div>
+                
+            </div>
+            <!-- END CONTENT -->
+        </div>
+    </block>  
+    <block name="js">
+ 	</block> 

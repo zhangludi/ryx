@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice.css" />
+
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+<style>
+	.w-9em{width: 0.45rem !important;}
+	.h-19em{height: 0.95rem !important;}
+	.article_over_one{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+    background-size: 100% 100%;}
+	.m-4em {
+	    margin: 0.2rem;
+	}
+	.wh-6em {
+	    width: 0.3rem;
+	    height: 0.3rem;
+	}
+	.article_over_one{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+    }
+</style>
+</head>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info ">
+	    <ul>
+	    	<li class="h-45em">
+	    		<a class="aui-pull-left" onclick="window.history.go(-1);" >
+					<span class="aui-iconfont aui-icon-left"></span>返回
+				</a> 
+	    		<div class="aui-title f-w">留言建议</div>
+	    		<a class="pull-right f-14em  f-w pr-12em" href="{:U('Life/life_guestbook_edit')}" >
+	    		留言
+	    		</a>
+	    	</li>
+	    </ul>
+    </div>
+	<div class="ml-8em mr-8em mt-12em bg-color-whiter" id="listBox">
+		<volist name="guestbook_list" id="list" key='k'>
+			<div class="over-h bb-1-dfdfdf" >
+				<a href="{:U('Life/life_guestbook_info',array('guestbook_id'=>$list['guestbook_id']))}" style="    width: 100%; padding-right: 0.5rem">
+					<div class="mt-8em bg-color-whiter po-re bor-ra-4">
+						<p class="f-14em color-75 lh-14em p-5em pl-30em pull-left">{$list.communist_name}</p>
+						<p class="f-14em color-75 lh-14em p-5em pl-30em pull-right">{$list.add_time}</p>
+						<span class="po-ab left-10em top-20em wh-6em m-4em bor-ra-100b bg-color-ff3032" ></span>
+						<p class="f-14em color-75 lh-22em p-5em pl-30em pull-left w-all article_over_one">{$list.guestbook_content}</p>
+					</div>
+				</a>
+			</div>
+		</volist>
+	</div>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice.js"></script>
+
+</body>
+</html>

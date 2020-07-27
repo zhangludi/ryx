@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css"/>    
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_p5boss.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_zhdj.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/life/css/life_threeservices.css" />
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/news_Info.css">
+<link rel="stylesheet" type="text/css" href="__STATICS__/plugins/cubeportfolio/css/cubeportfolio.css"/>
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+  		background-size: 100% 100%;}
+header ul li{
+	display: block; !important;
+}
+</style>
+</head>
+<body>
+	<header class="aui-bar aui-bar-nav aui-bar-info">
+	    <ul>
+	    	<li class="h-45">
+	    		<a class="aui-pull-left" href="{:U('Index/index')}">
+					<span class="aui-iconfont aui-icon-left"></span>首页
+				</a> 
+	    		<div class="aui-title f-w">三务公开详情</div>
+	    	</li>
+	    </ul>
+    </header>
+	<div class="aui-content">
+		<div class="">
+			<neq name="affairs_info.article_title" value="">
+				<div class="bg-color-whiter pt-15em">
+					<h2 id="article_title" class="aui-title text-align f-15em f-w color-333 lh-20em pt-2em pl-15em pr-15em">{$affairs_info.article_title}</h2>
+					<img class="mt-25em" src="__STATICS__/apps/page_wechat/images/images_oa/oa-bg.png" alt="" />
+					<div class="over-h f-12em lh-15em color-99 pb-15em pl-15em pr-15em">
+						<div class="pull-left">
+							<span>发布人：</span>
+							<span id="add_staff">{$affairs_info.add_staff}</span>
+						</div>
+						<div class="pull-right">
+							<span id="add_time">{$affairs_info.add_time}</span>
+						</div>
+					</div>
+				</div>
+				<div id="article_content" class="text-l f-13em lh-19em pl-15em pr-15em pt-10em pb-12em bg-color-whiter mt-9em pt-14em mb-74em">
+					{$affairs_info.article_content}
+				</div>
+			<else/>
+					暂无数据
+			</neq>
+			<neq name="affairs_info.article_attach" value="">
+				<div class="con_videoInfo_past_notes" style="border-bottom: 1px solid #999;padding-bottom: 10px;">
+		            <div class="clearfix">
+		                <div class="pull-left Learner_shu"></div>
+		                <div class="pull-left Learner_people" style="width:150px;">相关文件</div> 
+		            </div>
+	            </div>
+	            <div id="js-grid-juicy-projects" class="cbp" style="height:60px;margin-top: 10px; margin-left: 15px;">
+                    <php>echo getUploadHtml($affairs_info['article_attach'],'','',1,0);</php>
+                </div>
+			</neq>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_threeservices_info.js"></script>
+<script type="text/javascript" src="__STATICS__/plugins/cubeportfolio/js/jquery.cubeportfolio.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_public/js/portfolio-1.js"></script>
+</html>

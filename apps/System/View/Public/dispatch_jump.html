@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>倒计时跳转页面</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+body {background: #fff no-repeat center center;height:600px;}
+.ie-con{ width:500px; margin:0 auto; margin-top:10% ;height:70px;overflow: hidden;font-family:"MicroSoft YaHei";color:#666;font-size:14px; display:table;}
+.ico_iewarning {display:table-cell;width:70px;text-align:center;}
+.ico_iewarning img{vertical-align:middle}
+.ico_main {display: table-cell;width:340px;vertical-align:middle;text-align:left;}
+.ico_main h3{margin:0;padding:0;}
+.ie-con a{color:#333}
+
+</style>
+</head>
+<body>
+<div class="ie-con">
+	<div class="ico_iewarning">
+		<img src="<?php if(isset($message)) {
+			echo('__STATICS__/apps/page_public/images/duihao.png');
+		}else{
+			echo('__STATICS__/apps/page_public/images/cuohao.png');
+		}?>" width="70">
+	</div>
+	<div class="ico_main">
+		<h3><?php if(isset($message)) {
+			echo($message);
+		}else{
+			echo($error);
+		}?>页面在<span id="span">2</span>秒后自动跳转</h3>
+	</div>
+	<a id="href" href="<?php echo($jumpUrl); ?>"></a>
+</div>
+
+	<script type="text/javascript" src="__STATICS__/plugins/jquery.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/bootstrap/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/js.cookie.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/jquery-slimscroll/jquery.slimscroll.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/jquery.blockui.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/uniform/jquery.uniform.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/bootstrap-switch/js/bootstrap-switch.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/jquery-validation/js/jquery.validate.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/jquery-validation/js/additional-methods.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/plugins/select2/js/select2.full.min.js" ></script>
+	<script type="text/javascript" src="__STATICS__/public/js/app.min.js" ></script>
+
+	<script type="text/javascript" src="__STATICS__/apps/page_public/js/login-5.js" ></script>
+<script >
+	var time = 2;
+	function jump(){
+		time -= 1;
+		if(time <= 0){
+			$("#span").html("0");
+			location.href = document.getElementById('href').href;
+			clearInterval(interval);
+		}else{
+			$("#span").html(time);
+		}
+	}
+	var interval = setInterval("jump()",1000);
+</script>
+</body>
+</html>

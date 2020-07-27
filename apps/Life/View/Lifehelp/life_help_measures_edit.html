@@ -1,0 +1,238 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	    <div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('team'));</php>"> <php>echo getFunctionInfo(ACTION_NAME.session('team'));</php></div>
+                <form id="form_sample_2" action="{:U('life_help_measures_save')}" method="post" class="form-horizontal layui-form" enctype="multipart/form-data">
+                    <div class="layui-card-body layui-form">
+                        <input type="hidden" class="form-control" name="measures_id" value="{$measures_data.measures_id}"/>
+                        <input type="hidden" name="type" value="{$team}" />
+                		<input type="hidden" id="measures_genre_aaaa" value="{$measures_data['measures_genre']}" />
+                        <eq name="team" value="1">
+                        <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>名称：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="measures_name" value="{$measures_data.measures_name}" placeholder="请输入名称" autocomplete="off" class="layui-input" lay-verify='required' maxlength="50"></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>所属队伍：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="measures_team" id="measures_team" lay-filter="category" lay-search=""  >
+                                            <option value=''>请选择</option>
+                                                <foreach name="db_help_team" item="team" key="k">
+                                                    <option value="{$team['help_team_id']}"
+                                                            <eq name="measures_data.measures_team" value="$team['help_team_id']">selected</eq> >{$team['help_team_name']}</option>
+                                                </foreach>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>负责人：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" id="measures_leader" name="measures_leader" value="{$measures_data.measures_leader}" placeholder="请输入负责人" autocomplete="off" class="layui-input" lay-verify='required' maxlength="100"></div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </eq>
+                        <eq name="team" value="2">
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶人：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
+                                            <!-- <input type="text" name="measures_help" value="{$measures_data.measures_help}" placeholder="请输入帮扶人" autocomplete="off" class="layui-input" lay-verify='required' maxlength="100"> -->
+                                             <select name="measures_help" id="measures_help"  lay-filter="category2" lay-search="" lay-verify='required' >
+                                                <option value=''>请选择</option>
+                                                <foreach name="help_communist_data" item="data" key="k">
+                                                    <option value="{$data['help_id']}" <eq name="measures_data.measures_help" value="$data['help_id']">selected</eq> >{$data['help_name']}</option>
+                                                </foreach>
+                                            </volist>
+                                        </select>
+
+                                        </div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </eq>
+                        <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>帮扶时间：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <input type="text" name="measures_help_time" id="test4"  placeholder="yyyy-mm-dd" autocomplete="off" lay-verify='required' class="layui-input" lay-key="3" value="{$measures_data.measures_help_time}">
+                                    </div>
+									<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>联系电话：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <input type="text" id="measures_phone" name="measures_phone"  placeholder="请输入联系电话" autocomplete="off" class="layui-input" lay-verify='required|phone'  lay-key="3" value="{$measures_data.measures_phone}">
+                                    </div>
+                                        <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                </div>
+                            </div>
+                            
+                        	
+                        	<div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>帮扶对象：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="measures_genre" id="measures_genre" lay-filter="" lay-search="" lay-verify='required' >
+                                                <option value="1" <eq name="measures_data.measures_genre" value="1">selected</eq>>贫困村</option>
+												<option value="2" <eq name="measures_data.measures_genre" value="2">selected</eq>>贫困户</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form layui-col-xs12 mt-10 " id="village">
+                                <!--<div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>选择村：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="measures_genre_no"  xm-select="party_manager_select" xm-select-skin="danger">
+                                        	<option value="" >请选择</option>
+                                                <eq name="measures_data.measures_genre" value="1">
+                                                    <php>echo getPoorVillage($measures_data['measures_genre_no']);</php>
+                                                </eq>
+                                        </select>
+                                    </div>
+                                </div> -->
+                            </div>
+                           <!--  <div class="layui-col-xs12 mt-10" id="households">
+                                
+                            </div> -->
+                             <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>帮扶措施：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                        <select name="measures_type"  lay-search="" lay-verify='required'>
+                                                <php> echo getBdTypeSelect('help_measures','',$measures_data['measures_type']); </php>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <div class="layui-footer" style="text-align: right">
+                                        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+    function layer_colse() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+     var a = $('#measures_genre_aaaa').val();
+        if(a==1){
+            var text = "<div class='layui-row '> <div class='layui-col-xs2 text-r fsize-214 fcolor-65 lh-35'><strong>选择村：</strong></div><div class='layui-col-xs8 fsize-14 fcolor-65 lh-35'> <select name='measures_genre_no'  xm-select='party_manager_select'  xm-select-skin='danger'><option value='' >请选择</option><php>echo getPoorVillage($measures_data['measures_genre_no']);</php></select></div></div>"
+            $("#village").html(text);
+        }else if(a==2){
+            var text = "<div class='layui-row'> <div class='layui-col-xs2 text-r fsize-214 fcolor-65 lh-35'><strong>选择户：</strong></div> <div class='layui-col-xs8 fsize-14 fcolor-65 lh-35'><select name='measures_genre_no'  xm-select='party_manager_select'  xm-select-skin='danger'><option value='' >请选择</option><php>echo getPoorhousehold($measures_data['measures_genre_no']);</php> </select></div></div>";
+            $("#village").html(text);
+        }else{
+            var text = "<div class='layui-row '> <div class='layui-col-xs2 text-r fsize-214 fcolor-65 lh-35'><strong>选择村：</strong></div><div class='layui-col-xs8 fsize-14 fcolor-65 lh-35'> <select name='measures_genre_no'  xm-select='party_manager_select'  xm-select-skin='danger'><option value='' >请选择</option><php>echo getPoorVillage($measures_data['measures_genre_no']);</php></select></div></div>"
+            $("#village").html(text);
+        }
+    
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+
+            form.on('select()', function(data){
+                var type = $("#measures_genre").val();
+                    if(type==1){
+                        var text = "<div class='layui-row '> <div class='layui-col-xs2 text-r fsize-214 fcolor-65 lh-35'><strong>选择村：</strong></div><div class='layui-col-xs8 fsize-14 fcolor-65 lh-35'> <select name='measures_genre_no' lay-filter=''  xm-select='party_manager_select' xm-select-skin='danger'><option value='' >请选择</option><php>echo getPoorVillage($measures_data['measures_genre_no']);</php></select></div></div>"
+                        
+                        $("#village").html(text);
+                       
+                    }else{
+         //             $("#village").hide();
+                         var text = "<div class='layui-row'> <div class='layui-col-xs2 text-r fsize-214 fcolor-65 lh-35'><strong>选择户：</strong></div> <div class='layui-col-xs8 fsize-14 fcolor-65 lh-35'><select name='measures_genre_no' lay-filter=''  xm-select='party_manager_select' xm-select-skin='danger'><option value='' >请选择</option><php>echo getPoorhousehold($measures_data['measures_genre_no']);</php> </select></div></div>";
+                        $("#village").html(text);
+                        
+                    }
+                form.render()
+                formSelects.render();
+            });
+            form.on('select(category)', function (data) {
+                $.ajax({
+                    url:"{:U('life_help_team_prople')}",
+                    data:{'value':data.value},
+                    type:"post",
+                    async:false,
+                    success:function(msg){
+                        $('#measures_leader').val(msg.help_name)
+                        $('#measures_phone').val(msg.help_mobile)
+                    }
+                })
+            });
+            form.on('select(category2)', function (data) {
+                $.ajax({
+                    url:"{:U('life_help_team_phone')}",
+                    data:{'value':data.value},
+                    type:"post",
+                    async:false,
+                    success:function(msg){
+                        $('#measures_phone').val(msg.help_mobile);
+                    }
+                })
+            });
+
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //时间选择器
+            //时间选择器
+            laydate.render({
+                elem: '#test4'
+                ,type: 'date'
+            });
+            //日期时间范围
+            laydate.render({
+                elem: '#test10_add'
+                ,type: 'datetime'
+                ,range: true
+            });
+        })
+    </script>
+    
+     
+
+</block>

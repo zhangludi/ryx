@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title><php>echo getConfig('web_name')</php>-微信端</title>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/oa/css/oa_notice_info.css" />
+
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+</head>
+<style>
+	.w-9em{width: 0.45rem !important;}
+	.h-19em{height: 0.95rem !important;}
+	.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+background-size: 100% 100%;}
+</style>
+<body>
+	<div class="aui-bar aui-bar-nav aui-bar-info ">
+	    <ul>
+	    	<li class="h-45em">
+	    		<a class="aui-pull-left" href="javascript:history.back(-1)">
+					<span class="aui-iconfont aui-icon-left"></span>返回
+				</a> 
+	    		<div class="aui-title">消息提醒详情</div>
+	    	</li>
+	    </ul>
+		</div>
+	<!--标题-->
+	<div class="over-h pt-15em bg-color-whiter mb-8em center-text">
+		<div class="pb-15em pl-12em pr-12em">
+			<p class="f-17em color-33 mb-8em f-w">{$alert_info.alert_title}</p>
+			<p class="f-12em color-99 pull-left">接收人：{$alert_info.alert_man}</p>
+			<p class="f-12em color-99 pull-right">时间：{$alert_info.add_time}</p>
+		</div>
+	</div>
+	<div class="p-12em bg-color-whiter mb-12em">
+		<p class="pt-12em pb-12em f-15em color-75 lh-20em">
+			{$alert_info.alert_content}
+		</p>
+	</div>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/oa/js/oa_notice_info.js"></script>
+</body>
+</html>

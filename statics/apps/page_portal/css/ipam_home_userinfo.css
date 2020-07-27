@@ -1,0 +1,149 @@
+/* 个人资料页标题样式开始 */
+.userinfo_title{
+    border-bottom: solid 1px #dfdfdf;
+    line-height:40px;
+}
+.userinfo_title_txt{
+    display:inline-block;
+    line-height:40px;
+    font-size:18px;
+    color: #111111;
+    border-bottom: solid 2px #ff3032;
+}
+/* 个人资料页标题样式结束 */
+/* 个人中心页信息样式布局开始 */
+.userinfo_info_tr{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.userinfo_info_tr_style{
+    font-size: 14px;
+    margin-top: 20px;
+}
+.userinfo_info_td{
+    display: table-cell;
+    vertical-align: top;
+}
+/* 个人中心页信息样式布局结束 */
+/* 左侧有橙色圆的列表样式开始 */
+.userinfo_list_org{
+    position: relative;
+    padding: 10px;
+    padding-left: 32px;
+}
+/* 党建生活列表样式开始 */
+.userinfo_list_life{
+    font-size: 14px;
+    line-height: 20px;
+}
+/* 党建生活列表样式结束 */
+.userinfo_list_process{
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 18px;
+    color: #8c8c8c;
+}
+.userinfo_list_org:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #ff9776, #ffba66) center center / 200% 100%;
+    border: double #fff;
+    z-index: 99;
+}
+.userinfo_list_line:after{
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(#ffb767 50%, #ffb767 50%) repeat-y;
+}
+.userinfo_list_life:before{
+    width: 10px;
+    height: 10px;
+    border-width: 6px;
+}
+.userinfo_list_step:before{
+    width: 14px;
+    height: 14px;
+    border-width: 6px;
+}
+/* 左侧有橙色圆的列表样式结束 */
+/*我的积分左侧列表icon开始*/
+.userinfo-icon{
+    display: inline-block;
+    width: 20px;
+    height: 16px;
+    background: no-repeat 0 0;
+}
+.userinfo_home{
+    background-image: url("../../page_index/images/userinfo_integral_icon_home.png");
+}
+.userinfo_info{
+    background-image: url("../../page_index/images/userinfo_integral_icon_info.png");
+}
+.userinfo_contribute{
+    background-image: url("../../page_index/images/userinfo_integral_icon_contribute.png");
+}
+.userinfo_exam{
+    background-image: url("../../page_index/images/userinfo_integral_icon_exam.png");
+}
+.userinfo_ques{
+    background-image: url("../../page_index/images/userinfo_integral_icon_ques.png");
+}
+.userinfo_help{
+    background-image: url("../../page_index/images/userinfo_integral_icon_help.png");
+}
+.userinfo_integral{
+    background-image: url("../../page_index/images/userinfo_integral_icon_integral.png");
+}
+/*我的积分左侧列表icon开始*/
+/* 我的积分左侧列表滑动样式开始 */
+ul.userinfo_infolist li:hover ,.userinfo_active{
+    background: #332c2c;
+}
+ul.userinfo_infolist li:hover .userinfo-icon, .userinfo_active .userinfo-icon{
+    background-position: -20px 0;
+}
+ul.userinfo_infolist li:hover a, .userinfo_active a{
+    color: #fff;
+}
+ul.userinfo_infolist li:hover:before, .userinfo_active:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #d10000;
+}
+ul.userinfo_infolist li:hover:after, .userinfo_active:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px;
+    border-color: transparent #fff transparent transparent;
+    top: 50%;
+    transform: translateY( -50% );
+}
+/* 我的积分左侧列表滑动样式结束 */
+/* 我的积分右侧课件排行样式开始 */
+ol.userinfo_newsranking li{
+    line-height: 30px;
+}
+/* 我的积分右侧课件排行样式开始 */
+/* 个人资料页label样式开始 */
+.userinfo_label{
+    display: inline-block;
+    width: 70px;
+    color: #999;
+    font-size: 14px;
+    margin-right: 12px;
+}
+/* 个人资料页label样式结束 */

@@ -1,0 +1,162 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+<div class="layui-fluid">
+	<div class="layui-row">
+		<div class="layui-col-xs12">
+			<div class="layui-card">
+				<div class="layui-card-header">{:getFunctionInfo(ACTION_NAME)}</div>
+				<div class="layui-form layui-card-body">
+					<div class="layui-row layui-col-space5">
+						<input name="is_arranger" type=hidden value="{$is_arranger}" id="is_arranger"> <input
+                                name="is_partyplan" type=hidden value="{$is_partyplan}">
+							<div class="layui-col-xs1 text-r lh-40">
+									任务周期：
+								</div>
+								<div class="layui-col-xs2 ">
+									<select id="willdo_cycle" lay-verify="" lay-search>
+										<option value="0">请选择</option>
+                                                <option value="01"<eq name="willdo_cycle" value="01">selected</eq> >每日
+                                                </option>
+                                                <option value="02"<eq name="willdo_cycle" value="02">selected</eq> >每周
+                                                </option>
+                                                <option value="03"<eq name="willdo_cycle" value="03">selected</eq> >每月
+                                                </option>
+                                                <option value="04"<eq name="willdo_cycle" value="04">selected</eq> >每年
+                                                </option>
+									</select>
+								</div>
+								<div class="layui-col-xs1 text-r lh-40">
+									任务时间：
+								</div>
+								<div class="layui-col-xs2 ">
+									<input class="layui-input" name="id" id="start" autocomplete="off" placeholder="请选择时间">
+								</div>
+								<div class="layui-col-xs1 text-r lh-40">
+									关键词：
+								</div>
+								<div class="layui-col-xs2 ">
+									<input class="layui-input" name="id" id="willdo_content" autocomplete="off" placeholder="请输入关键词">
+								</div>
+								<div class="layui-col-xs3 pull-right">
+									<a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+									<a class="layui-btn table-add " data-type="add"  style="text-decoration: none;" title="添加">添加</a>
+								</div>
+					</div>
+					<table class="layui-hide" id="test" lay-filter="demo"></table>
+					<script type="text/html" id="barDemo">
+						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="info">查看</a>
+						<a class="layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+					</script>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="js">
+<script>
+	layui.use([ 'form'], function(){
+		var $ = layui.$
+				,admin = layui.admin
+				,element = layui.element
+				,form = layui.form;
+		form.render()
+		form.render(null, 'component-form-element');
+		form.on('submit(component-form-element)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+	});
+	layui.use('table', function(){
+		var table = layui.table
+				,form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:"{:U('Oa/Oawilldo/oa_willdo_index_data')}"
+			,cellMinWidth: 80
+			,height:'full-155'
+			, id : 'ztreedata'
+			,cols: [[
+				{field:'willdo_id', title:'编号', width:90,align: 'center', sort: true}
+				,{field:'willdo_title', title:'标题',minWidth:200,align: 'left'}
+				,{field:'willdo_cyda', title:'任务周期',width:100,align: 'center'}
+				,{field:'status', title:'完成情况',align: 'center',width:130}
+				,{field:'willdo_time', title:'任务时间',align: 'center',width:150}
+				,{field:'is_alert', title:'是否提醒',align: 'center',width:100}
+				,{field:'add_staff', title:'提交人',align: 'center',width:130}
+				,{field:'add_time', title:'提交时间',align: 'center',width:130}
+				,{field:'operate', title:'操作',align: 'center' ,toolbar: '#barDemo',width:160}
+			]]
+			,page: true
+		});
+		table.on('tool(demo)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'edit'){
+				var index = layer.open({
+                   type: 2,
+                   title: false,
+                   end:false,
+                   closeBtn: 0,
+                   shift: 1,
+                   content: "{:U('oa_willdo_edit')}?willdo_id="+data.willdo_id+'',
+                   area: ['300px', '300px']
+            	});
+            	layer.full(index);
+			}else if(obj.event === 'info'){
+				layer.open({
+					type: 2,
+					title:'任务详情',
+					area:['1000px', '450px'],
+					content: '{:U("Oa/Oawilldo/oa_willdo_info")}?willdo_id='+data.willdo_id+'&willdo_status='+data.willdo_status//这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+				});
+			}
+		});
+		var $ = layui.$, active = {
+	        reload: function(){
+	        	var willdo_cycle = $("#willdo_cycle").val();
+				var time = $("#start").val();
+				var willdo_content = $("#willdo_content").val();
+		      	table.reload('ztreedata', {
+			        page: {
+			          curr: 1 
+			        }
+			        ,where: {
+			        	"willdo_cycle": willdo_cycle,
+			        	"time":time,
+			        	"willdo_content":willdo_content
+			        }
+		      	});
+	        },
+	        add: function(){
+            	var index = layer.open({
+                   type: 2,
+                   title: false,
+                   end:false,
+                   closeBtn: 0,
+                   shift: 1,
+                   content: "{:U('oa_willdo_edit')}",
+                   area: ['300px', '300px']
+            	});
+            	layer.full(index);
+        	}
+	    };
+	    $('.layui-form .layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		});
+	});
+	
+	//时间选择器
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//常规用法
+		laydate.render({
+			elem: '#start',
+			type : 'time',
+			range: true
+		});
+	})
+</script>
+</block>

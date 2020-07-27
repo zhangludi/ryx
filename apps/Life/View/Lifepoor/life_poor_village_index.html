@@ -1,0 +1,158 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+	<div class="layui-fluid">
+	    <div class="layui-row ">
+	        <div class="layui-col-xs12">
+	            <div class="layui-card">
+	                <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME);</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+	                <div class="layui-form layui-card-body">
+	                    <div class="layui-row layui-col-space5">
+	                        <div class="layui-col-xs1 text-r lh-40">
+	                            名称：
+	                        </div>
+	                        <div class="layui-col-xs2">
+	                            <input class="layui-input" name="keywords" id="keywords" autocomplete="off" placeholder="请输入标题内容" >
+	                        </div>
+	                        <div class="layui-col-xs2 text-r lh-40">
+	                           是否为贫困村：
+	                        </div>
+	                        <div class="layui-col-xs2">
+	                            <select name="is_poor" id="is_poor" class="  form-control  select2" onchange="change_type()">
+									<option value="">请选择</option>
+									<option value="1">是</option>
+									<option value="2">否</option>
+								</select>
+	                        </div>
+	                        <div class="layui-col-xs3 pull-right">
+	                            <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
+	                            <!-- <a class="layui-btn table-add " href=search"{:U('life_plan_edit')}" >添加</a> -->
+	                             <a class="layui-btn table-add "data-type="add"  style="text-decoration: none;" title="添加">添加</a>
+	                        </div>
+
+	                    </div>
+	                    <table class="layui-table" id="demo"  lay-filter="demo"></table>
+	                     <script type="text/html" id="operate">
+                            <a class=" layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                            <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
+                        </script>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>
+<block name="js">
+	<script>
+	    layui.use(['element','form'], function() {
+	        var $ = layui.$
+	                , admin = layui.admin
+	                , element = layui.element
+	                , form = layui.form
+	                , router = layui.router();
+	        form.render();
+			// 默认显示的 表格
+	        layui.use('table', function () {
+	            var table = layui.table;
+	            table.render({
+	                elem: '#demo'
+	                , url: '{:U("life_poor_village_data")}'
+	                , height: 'full-160'
+	                , id: 'ztreedata'
+	                , cols: [[
+	                	{field: 'poor_village_id', width:80 ,title: '编号', sort: true}
+	                    , {field: 'poor_village_name', title: '名称'}
+	                    , {field: 'poor_village_charge',  title: '负责人'}
+	                    , {field: 'is_poor',  title: '是否为贫困村'}
+	                    , {field: 'poor_village_phone', title: '联系电话'}
+	                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 250}
+	                ]]
+	                , page: true
+	            });
+			    
+			     //监听工具条
+			    table.on('tool(demo)', function(obj){
+			        var data = obj.data;
+			        var idcard_no = data.idcard_no;
+			        if(obj.event === 'detail'){
+			        	var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('life_poor_village_info')}?poor_village_id="+data.poor_village_id+'',
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+		          	} else if(obj.event === 'del'){
+		              	layer.confirm('确认删除该数据吗？', function(index){
+			              	window.location='{:U("life_poor_village_del")}?poor_village_id='+data.poor_village_id+'';
+		                    layer.close(index);
+		              	});
+		          	} else if(obj.event === 'edit'){
+		          		var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('life_poor_village_edit')}?poor_village_id="+data.poor_village_id+'',
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+		          	}
+		      	});
+		  		var $ = layui.$, active = {
+			        reload: function(){
+			            var keyword = $('#keywords').val();
+			            var is_poor = $('#is_poor').val();
+				      	table.reload('ztreedata', {
+					        page: {
+					          curr: 1 
+					        }
+					        ,where: {
+					        	"keyword": keyword,
+					        	"is_poor":is_poor,
+					        }
+				      	});
+			        },
+			        add: function(){
+	                	var index = layer.open({
+	                       type: 2,
+	                       title: false,
+	                       end:false,
+	                       closeBtn: 0,
+	                       shift: 1,
+	                       content: "{:U('life_poor_village_edit')}",
+	                       area: ['300px', '300px']
+	                	});
+	                	layer.full(index);
+	            	}
+			    };
+			    $('.layui-form .layui-btn').on('click', function(){
+				    var type = $(this).data('type');
+				    active[type] ? active[type].call(this) : '';
+				});
+			    
+	        });
+	        //点击左侧树的事件
+	        
+	    })
+	</script>
+	<script>
+	    //时间选择器
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        //常规用法
+	        laydate.render({
+	            elem: '#time',
+	            range: true
+	        });
+	    })
+	    // 设置ztree 列表和右侧列表一样高度
+	    $(".over-h-tree").css("height",($(window).height() - 95));
+	</script>
+	
+</block>

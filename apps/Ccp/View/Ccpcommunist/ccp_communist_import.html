@@ -1,0 +1,49 @@
+﻿<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+	<div class="col-xs-12 ml-30">
+	<form id="form" action="{:U('Ccp/ccp_communist_import_excel')}" class="form-horizontal form-bordered" method="post" enctype="multipart/form-data">
+		<div class="form-body">
+			<div class="form-group">
+				<label class="col-xs-3">选择文件：</label>
+				<div class="col-xs-5">
+					<div class="fileinput fileinput-new" data-provides="fileinput">
+						<div class="input-group input-large">
+							<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+								<i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename"> </span>
+							</div>
+							<span class="input-group-addon btn default btn-file"> 
+							<span class="fileinput-new"> 选择文件 </span> 
+							<span class="fileinput-exists"> 更改 </span>
+							 <input type="file" name="file_name">
+							</span> 
+							<!-- <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a> -->
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+	</form>
+	</div>
+	<div class="col-xs-6 ml-30">
+	<button class="btn btn-sm btn-outline blue bor-ra-2" onclick='down_url()'>
+		<i class="iconfont">&#xe674;</i>模板下载
+	</button>
+	 <button class="btn btn-sm btn-outline blue bor-ra-2"  onclick='testTrue()';>
+		<i class="iconfont">&#xe674;</i>数据导入
+	</button>
+	</div>
+</block>
+<block name="js">
+	<script >
+	function testTrue(){
+		$("#form").submit();//myform表单的id
+	};
+	</script>
+	<script >
+	function down_url(){
+		window.open ('__UPLOAD__/admin/xls/templates/hr_communist.xls',"status=yes");
+	};
+	</script>
+</block>

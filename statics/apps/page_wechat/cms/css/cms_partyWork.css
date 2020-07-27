@@ -1,0 +1,264 @@
+/*——————————————————————————————本页面公用—————————————————————————————————————————*/
+/*width类*/
+.w-32em{width:1.6rem;}
+.w-7em{width: 0.35rem;}
+.w-12em{width: 0.6rem;}
+.w-22em{width: 1.1rem;}
+.w-38em{width: 1.9rem;}
+.w-228em{width: 11.4rem;}
+.w-334em{width: 16.7rem;}
+.w-93b{width:93%;}
+.w-96b{width:96%;}
+.w-63b{width:63%;}
+.w-14em{width:0.78rem;}
+.w-12em{width:0.6rem;}
+.w-4em{width: 0.2rem;}
+.w-25em{width:1.25rem;}
+.w-93b{width: 93%;}
+/*height类*/
+.h-14em{height:0.78rem;}
+.h-14em{height: 0.7rem;}
+.h-16em{height: 0.8rem;}
+.h-17em{height: 0.85rem;}
+.h-22em{height: 1.1rem;}
+.h-32em{height: 1.6rem !important;}
+.h-34em{height: 1.7rem !important;}
+.h-47em{height: 2.35rem;}
+.h-178em{height: 8.9rem;}
+.h-230em{height: 11.5rem;}
+.h-100b{height: 100% !important;}
+
+.bottom-0em{bottom:0rem;}
+.top-0em{top:0rem;}
+.bg-color-000{background: rgba(0,0,0,0.8);}
+.bg-color-fff{background:#fff;}
+.z-index-mask{z-index: 2000 !important;}
+/*padding类*/
+.pt-2em{padding-top: 0.1rem !important;}
+.pt-3em{padding-top: 0.15rem !important;}
+.pt-14em{padding-top: 0.7rem !important;}
+.p-5-1em{padding: 0.2rem 0.8rem;}
+.pb-13em{padding-bottom: 0.65rem !important;}
+
+.pl-2em{padding-left: 0.1rem;}
+.pl-6em{padding-left: 0.3rem}
+.pl-16em{padding-left: 0.8rem;}
+.pl-30em{padding-left: 1.5rem !important;}
+.pl-34em{padding-left: 1.7rem;}
+
+.pr-2em{padding-right: 0.1rem;}
+.pr-6em{padding-right: 0.3rem;}
+.pr-7em{padding-right: 0.35rem;}
+.pr-16em{padding-right: 0.8rem;}
+.pr-16em{padding-right: 0.8rem;}
+
+/*margin类*/
+.mt-9em{margin-top: 0.45rem !important;}
+.mt-18em{margin-top:0.85rem;}
+.mb-14em{margin-bottom: 0.7rem;}
+.mb-74em{margin-bottom: 3.7rem;}
+.ml-7em{margin-left:0.38rem;}
+.mb-42em{margin-bottom:2.1rem;}
+
+/*font-size类*/
+.f-13em{font-size: 0.65rem !important;}
+.f-22em{font-size: 1.1rem !important;}
+
+/*line-height类*/
+.lh-14em{line-height: 0.7rem;}
+.lh-16em{line-height: 0.8rem;}
+.lh-19em{line-height: 0.95rem !important;}
+.lh-32em{line-height: 1.6rem !important;}
+.lh-34em{line-height: 1.7rem !important;}
+
+/*color类*/
+.color-a4{color: #a4a4a4;}
+.color-75{color: #757575;}
+.color-ff3032{color: #ff3032;}
+.color-ffba66{color: #ffba66;}
+.color-ff2f34{color: #ff2f34 !important;}
+.color-9e{color:#9e9e9e}
+.color-21{color:#212121}
+.color-ff4040{color: #ff4040;}
+
+.bg-color-f5{background-color: #f5f5f5;}
+.bg-color-D4A500{background:#D4A500;border-radius: 0.08rem;}
+.bg-color-000{
+	background: rgba(0,0,0,0.8);
+}
+/* 垂直居中 */
+.va-jz{
+	display: flex;
+    align-items:Center; 
+}
+
+/*background类*/
+.bg-fff{background: #fff;}
+.border-3em-de{border-bottom:0.03rem solid #dedede}
+.border-top-3em-de{border-top:0.03rem solid #dedede}
+/*border类*/
+.b-1-df{border: 1px solid #dfdfdf !important;}
+
+.bt-1-d3d3d3{border-top: 1px solid #d3d3d3;}
+
+.br-1-df{border-right: 1px solid #dfdfdf !important;}
+
+/*font-weight类*/
+.fwei-600{font-weight: 600;}
+
+/*border-radius类*/
+.b-ra-16em{border-radius: 0.8rem !important;}
+.b-ra-5em{border-radius: 0.25rem !important;}
+/*bottom类*/
+.bottom-0{bottom: 0;}
+
+/*字体渐变*/
+.shade{
+	background-image: -webkit-gradient(linear, left center, right center, from(rgba(252, 152, 118, 1)), to(rgba(254, 192, 115, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*letter-spacing类*/
+.letter-spacing{letter-spacing:2px;}
+
+/*text-indent类*/
+.indent-2{text-indent: 2em !important;}
+
+
+/*列表样式4*/
+#list4{background: #fff;}
+#list4 .h-114em{height: 5.7rem;}
+#list4 .pl-8em{padding-left: 0.4rem;}
+#list4 .pr-8em{padding-right: 0.4rem;}
+#list4 .pt-12em{padding-top: 0.6rem;}
+#list4 .pb-12em{padding-bottom: 0.6rem;}
+#list4 .bg-ff3032{background: #ff3032;}
+#list4 .box{box-shadow: 0px 0px 3px 0px #dfdfdf;}
+#list4 .bor-ra-2em{border-radius: 0.1rem;}
+/*--end--*/
+.color-12{color: #121212;}
+.bb-3em-e6{border-bottom: 0.03rem solid #e6e6e6;}
+
+section{display:none}
+#list{
+	display:none;
+}
+#list1,#list2,#list3,#list44,#list5,#list6,#list7,#list8,#list9,#list10,#list11,#list12{
+	display:none;
+}
+/*骨架屏*/
+.skeleton {
+    padding: 10px;
+}
+ 
+.skeleton .skeleton-head,
+.skeleton .skeleton-title,
+.skeleton .skeleton-content {
+    background: #ececec;
+}
+ 
+.skeleton-head {
+    width: 3rem;
+    height: 2.5rem;
+    float: left;
+}
+ 
+.skeleton-body {
+    margin-left: 4rem;
+}
+ 
+.skeleton-title {
+    width: 12rem;
+    height: 1rem;
+}
+ 
+.skeleton-content {
+    width: 5rem;
+    height: 1rem;
+    margin-top: 10px;
+} 
+/*——————————————————————————————头部—————————————————————————————————————————*/
+
+/*——————————————————————————————滑动—————————————————————————————————————————*/
+#tabBigBox{width:100%;height: 1.7rem;}
+#tabBox2{
+	overflow: hidden;
+	position: fixed;
+	top: 3.5rem;/*left: 0;*/
+}
+#tabBox2 li{
+	float: left;
+	/*border-right: 1px solid #eeeeee;*/
+	text-align: center;
+	position: relative;
+	font-size: 0.8rem;
+	color:#666
+	}
+#tabBox2 li a{
+	display: block;
+	margin: 0 auto;
+	color: #757575;
+	padding: 0 0.5rem;
+}
+#tabBox2 li .active{
+	display: none;
+	width: 2rem;
+	height: 1px;
+	position: absolute;
+	bottom: -0.25rem;
+	left: 50%;
+	background: #ff3032;
+	margin-left: -1rem;
+	font-weight: bold;
+}
+#tabBox2 .tabBox2-active a{color: #ff3032;font-weight: bold;}
+#tabBox2 .tabBox2-active .active{display: block;}
+
+/*——————————————————————————————页面其它样式—————————————————————————————————————————*/
+.summary_con{
+	width:96%;
+	margin-left:3%;
+	background-color: #f5f5f5;
+	border-radius: 0.25rem;
+	padding: 0.78rem;
+	color:#666;
+	font-size:0.7rem;
+	margin:0 auto;
+}
+.com_sha{
+	padding:0.6rem;
+	width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,1);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 1.4rem;
+}
+
+.mask_bg_hide{
+	position:fixed;
+	width: 100%;
+	height:100%;
+	top:0rem;
+	background: rgba(0,0,0,0.5);
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

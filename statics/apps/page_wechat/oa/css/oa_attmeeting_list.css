@@ -1,0 +1,85 @@
+/*——————————————————————————————本页面公用—————————————————————————————————————————*/
+/*宽度*/
+.w-7em{width: 0.35rem;}
+.w-44em{width: 2.2rem;}
+.w-118em{width: 5.9rem;}
+.w-33b{width: 33.33%;}
+.w-217em{width:10.85rem;}
+.w-97em{width:7.18rem;}
+
+/*高度*/
+.h-17em{height: 0.85rem;}
+.h-18em{height: 0.9rem;}
+.h-98em{height: 4.9rem;}
+.h-73em{height:4.08rem;}
+.h-556em{height:2.5rem;}
+.h-188em{height: 9.6rem;}
+/*margin类*/
+.ml-13em{margin-left:0.65rem;}
+/*颜色*/
+.color-fe9776{color: #fe9776 !important;}
+.color-12{color:#121212 !important;}
+.color-21{color:#212121 !important;}
+.color-9e{color:#9e9e9e}
+.color-ff3032{color:#ff3032}
+
+.bg-color-ff4844{background: #ff4844}
+/*border类*/
+.br-1-df{border-right: 1px solid #dfdfdf;}
+.bb-1-df{border-bottom: 1px solid #dfdfdf !important;}
+.bor-ra-10em{border-radius: 0.5rem;}
+.bor-ra-25em{border-radius: 0.25rem;}
+.bb-3em-e6{border-bottom: 0.03rem solid #e6e6e6;}
+.bor-ra-2em{border-radius: 0.1rem}
+.bb-3em-de{border-bottom: 0.03rem solid #dedede;}
+/*字体渐变*/
+.shade{
+	background-image: -webkit-gradient(linear, left center, right center, from(rgba(252, 152, 118, 1)), to(rgba(254, 192, 115, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*——————————————————————————————热点列表—————————————————————————————————————————*/
+.oa_con{
+	width:94%;
+	margin-left:3%;	
+}
+
+/*——————————————————————————————滑动样式—————————————————————————————————————————*/
+#tabBigBox{width:100%;height: 1.7rem;}
+#tabBox2{
+	overflow: hidden;
+	position: fixed;
+	top: 0rem;/*left: 0;*/
+}
+#tabBox2 li{
+	float: left;
+	/*border-right: 1px solid #eeeeee;*/
+	text-align: center;
+	position: relative;
+	font-size: 0.8rem;
+	color:#666
+	}
+#tabBox2 li a{
+	display: block;
+	margin: 0 auto;
+	color: #757575;
+	padding: 0 1rem;
+}
+#tabBox2 li .active{
+	display: none;
+	width: 2rem;
+	height: 1px;
+	position: absolute;
+	bottom: -0.25rem;
+	left: 50%;
+	background: #ff3032;
+	margin-left: -1rem;
+	font-weight: bold;
+}
+#tabBox2 .tabBox2-active a{color: #ff3032;font-weight: bold;}
+#tabBox2 .tabBox2-active .active{display: block;}
+
+
+
+/*——————————————————————————————页面其他样式—————————————————————————————————————————*/

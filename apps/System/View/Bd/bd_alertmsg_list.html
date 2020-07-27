@@ -1,0 +1,101 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__STATICS__/layuiadmin/style/admin.css" media="all">
+</block>
+<block name="body">
+    <div class="layui-fluid" id="LAY-app-message">
+        <div class="layui-card">
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" data-type="reload" data-msg="">全部消息</li>
+                    <li data-type="reload" data-msg="11,12,13">党员</li>
+                    <li data-type="reload" data-msg="21">通知公告</li>
+                    <!-- <span class="layui-badge">6</span> -->
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="LAY-app-message-btns" style="margin-bottom: 10px;">
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="all" data-events="del">删除</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="all" data-events="ready">标记已读</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="all" data-events="readyAll">全部已读</button>
+                        </div>
+                        <table id="message_list" lay-filter="message_list"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script src="__STATICS__/plugins/jquery.min.js"></script>
+    <script src="__STATICS__/layuiadmin/layui/layui.js"></script>
+    <script>
+    layui.config({
+        base: '__STATICS__/plugins/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+
+    layui.use('table', function() {
+        var table = layui.table;
+        //第一个实例
+        var tableIns = table.render({
+            elem: '#message_list',
+            height: 315,
+            url: "{:U('System/Bd/bd_alertmsg_data')}", //数据接口
+            page: true, //开启分页
+            cols: [
+                [ //表头
+                    { checkbox: true, fixed: true },
+                    { field: 'alert_title', title: '标题', width:300, sort: true, fixed: 'left' },
+                    { field: 'type_name', title: '提醒类型' },
+                    { field: 'alert_time', title: '提醒时间', sort: true },
+                    // { field: 'alert_nexttime', title: '下次提醒时间' },
+                    // { field: 'alert_cycle', title: '提醒周期' },
+                    // { field: 'alert_cycle', title: '提醒周期' },
+                    { field: 'operate', title: '操作', sort: true }
+                ]
+            ],
+            id: 'message_table'
+        });
+
+        var $ = layui.$,
+            active = {
+                reload: function() {
+                    var alert_type = $(this).data('msg');
+                    //执行重载
+                    table.reload('message_table', {
+                        where: { //设定异步数据接口的额外参数，任意设
+                        	alert_type: alert_type
+                        },
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
+                }
+            };
+
+        $('.layui-tab-title li').on('click', function() {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+    </script>
+    <script>
+    function alertmsg_info(alert_id) {
+        layer.open({
+            type: 2,
+            title: '提醒详情',
+            offset: window.parent.document.body.scrollTop + 10 + 'px',
+            maxmin: false,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['800px', '500px'],
+            content: "{:U('Bd/Bd/bd_alertmsg_info/alert_id/" + alert_id + "')}",
+            success: function() {
+                layerAuto();
+            }
+        });
+    };
+    </script>
+</block>

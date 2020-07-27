@@ -1,0 +1,118 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+	<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <!-- BEGIN PAGE TITLE-->
+                    <h3 class="page-title"> 收件箱
+                        <small>用户 收件箱</small>
+                    </h3>
+                    
+                    
+                    <div class="inbox">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="inbox-sidebar">
+                                    <a href="{:U('com_imail_edit')}" data-title="Compose" class="btn red compose-btn btn-block">
+                                        <i class="fa fa-edit"></i> 撰写 </a>
+                                    <ul class="inbox-nav">
+                                        <li>
+                                            <a href="{:U('com_imail_inbox')}" data-type="inbox" data-title="Inbox"> 收件箱
+                                                <span class="badge badge-success">3</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{:U('com_imail_outbox')}" data-type="important" data-title="Inbox"> 重要 </a>
+                                        </li>
+                                        <li>
+                                            <a href="{:U('com_imail_outbox')}" data-type="sent" data-title="Sent"> 发送 </a>
+                                        </li>
+                                        <li>
+                                            <a href="{:U('com_imail_outbox')}" data-type="draft" data-title="Draft"> 草稿
+                                                <span class="badge badge-danger">8</span>
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="{:U('com_imail_outbox')}" class="sbold uppercase" data-title="Trash"> 垃圾
+                                                <span class="badge badge-info">23</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{:U('com_imail_outbox')}" data-type="inbox" data-title="Promotions"> 促销
+                                                <span class="badge badge-warning">2</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{:U('com_imail_outbox')}" data-type="inbox" data-title="News"> 新闻 </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+								<div class="tab-content">
+										<div class="tab-pane active">
+											<div class="inbox-body">
+												<div class="row">
+													<form class="inbox-compose form-horizontal" id="fileupload" action="{:U('com_imail_do_save')}" method="POST" enctype="multipart/form-data">
+													    <span>
+													    	<div class="col-md-10"></div>
+													    	<a href="javascript:void(0);" target="_self" onclick="select_receive_user()" class="btn"><i></i>选择联系人</a>
+													    </span>
+													    <div class="inbox-form-group">
+													        <label class="control-label"><span style="color:red">发送给 : </span></label>
+													        <div class="controls controls-to">
+													        	<input type="text" class="form-control" name="to" id="receive_users" value="" placeholder="请选择或输入联系人 用英文“,”分割">
+													            <input type="hidden" class="form-control" name="to" id="receive_users_id" value="">
+													        </div>
+													    </div>
+													    <div class="inbox-form-group">
+													        <label class="control-label"><span style="color:red">邮件主题 : </span></label>
+													        <div class="controls">
+													            <input type="text" class="form-control" name="subject" value="" placeholder="请填写邮件主题"> </div>
+													    </div>
+													    <div class="inbox-form-group">
+												    		<label class="control-label"><span style="color:red">邮件内容 : </span></label>
+													    </div>
+													    <br><br>
+													    <div class="inbox-form-group">
+													    	<script id="editor" type="text/plain"></script>
+													    </div>
+													    <div class="inbox-compose-btn">
+													        <button class="btn green" type="submit">
+													            <i class="fa fa-check"></i>发送</button>
+													        <a href="" class="btn default">放弃</a>
+													        <button class="btn default">草稿</button>
+													    </div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </block>
+		<block name="js">
+		   <script>
+				function select_receive_user(field_name){
+					var url = "{:U('System/Com/com_imail_receiveUser')}?field_name="+field_name;
+					layer.open({
+							type: 2,
+							title: '选择联系人',
+							maxmin: true,
+							offset: window.parent.document.body.scrollTop+20+'px',
+							shadeClose: true, //点击遮罩关闭层
+							area : ['620px' , '422px'],
+							content: url,
+							success:function(){
+			                	layerAuto();
+			                }//iframe的url
+						});
+				}
+			</script>
+	</block>

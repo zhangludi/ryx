@@ -1,0 +1,88 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="portlet light  bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <div class="cont-col1">
+                                <div class="label label-sm bg-color-green2">
+                                    <i class="iconfont">&#xe64b;</i>
+                                </div>
+                            </div>
+                            <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+                            <span class="caption-helper"></span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <input type="hidden" id="year" value="{$yaer}">
+                        <div class="row">
+                            <div class="col-md-offset-9 col-md-3">
+                                <a class="btn btn-sm blue btn-outline bor-ra-2 w-95" onclick="add_score('{$communist_no}')">手动调整积分</a>
+                            </div>
+                            <div class="col-md-offset-2 col-md-8">
+                                <div class="col-md-4">
+                                    <div class="color-demo" data-original-title="Click to view demos for this color" data-toggle="modal" data-target="#demo_modal_red-thunderbird">
+                                        <div class="color-view bg-red-thunderbird bg-font-red-thunderbird bold uppercase"><h3>当前积分：<if condition="$communist_data['integral']">{$communist_data.integral}<else/> 0 </if>分</h3></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 ml-40 mt-80">
+                                    <a  class="label label-default fsize-24"> 本支部排名 {$communist_data.party_ranking} </a>
+                                </div>
+                                <div class="col-md-3 ml-40 mt-80">
+                                    <a  class="label label-default fsize-24"> 本系统排名 {$communist_data.ranking} </a>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-2 col-md-8 mt-10">
+                                <div id="table" >
+                                    <table id="client_table" class="table" data-toggle="table" data-page-size="5" data-pagination="true" >
+                                        <thead>
+                                        <tr>
+                                            <th data-align="center" data-sortable="true">积分变动项</th>
+                                            <th data-align="center" data-sortable="true">积分变动时间</th>
+                                            <th data-align="center" data-sortable="true">积分变动数</th>
+                                            <th data-align="center" data-sortable="true">事件</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <foreach name="log_list" item="list">
+                                            <tr>
+                                                <td>{$list.log_name}</td>
+                                                <td>{$list.add_time}</td>
+                                                <td>{$list.change_integral}</td>
+                                                <td>{$list.memo}</td>
+                                            </tr>
+                                        </foreach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        function add_score(communist_no){
+            var year = $('#year').val();
+            layer.open({
+                type: 2,
+                title: '变动积分',
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭层
+                area: ['500px', '500px'],
+                offset: window.parent.document.body.scrollTop + 10 + 'px',
+                content: "{:U('Ccp/Ccpintegral/ccp_integral_add_score/log_relation_type/2/log_relation_no/"+communist_no+"/year/"+year+"')}",
+                success:function(){
+                	layerAuto();
+                }
+            });
+        };
+    </script>
+</block>

@@ -1,0 +1,135 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header" title="<php>echo getFunctionInfo(ACTION_NAME.session('cat'));</php>"> <php>echo getFunctionInfo(ACTION_NAME);</php></div>
+                    <form id="form_sample_2" action="{:U('edu_material_cat_do_save')}" method="post" class="form-horizontal">
+                        <div class="layui-card-body layui-form">
+                           <input type="hidden" class="form-control"  name="article_id" value="{$article.article_id}">
+                            <input type="hidden" class="form-control"  name="cat_id" value="{$cat_data.cat_id}">
+                            <div class="layui-row">
+                                <neq name="cat_data.cat_pid" value="0">
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>所属栏目：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                             <select lay-filter="aihao" lay-search="" lay-verify='required' name="cat_pid">
+                                                <volist name="category_list" id="list">
+                                                    <option value="{$list.cat_id}" <eq name="list.cat_id" value="$cat_data.cat_pid">selected</eq>
+                                                        <eq name="list.cat_id" value="$cat_pid">selected</eq>>{$list.cat_name}</option>
+                                                </volist>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                </neq>
+                                <div class="layui-row">
+                                    <div class="layui-col-xs12 mt-10">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>类型名称：</strong></div>
+                                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="cat_name" value="{$cat_data.cat_name}" placeholder="请输入类型名称" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                            <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>文章类型：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <select name="cat_type" lay-filter="aihao" lay-search="" lay-verify='required'>
+                                               <php> echo getBdTypeSelect('edu_cat_type','',$cat_data[cat_type])</php>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-xs12 mt-10">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>关键字：</strong></div>
+                                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> <input type="text" name="cat_keywords" value="{$cat_data.cat_keywords}" placeholder="请输入关键字" autocomplete="off" class="layui-input" lay-verify='required'></div>
+                                            <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-xs12 mt-10">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>文章描述：</strong></div>
+                                            <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                                <textarea name="cat_desc" placeholder="请输入文章描述,最长字符225" maxlength="225" class="layui-textarea">{$cat_data.cat_desc}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>栏目状态：</strong></div>
+                                    <div class="layui-col-xs8 fsize-14 fcolor-65  ">
+                                        <input type="radio" name="status" value="0" title="禁用"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>禁用</div></div>
+                                        <input type="radio" name="status" value="1" title="可用" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>可用</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>公开范围：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
+                                            <select name="share_party" xm-select="party_manager_select" xm-select-skin="danger" xm-select-search>
+                                                <php> echo getPartySelect($cat_data['share_party'])</php>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 mt-10">
+                                    <div class="layui-row">
+                                        <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
+                                        <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+                                            <textarea name="memo" placeholder="请输入备注,最长字符225" maxlength="225" class="layui-textarea">{$cat_data.memo}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <div class="layui-footer" style="text-align: right">
+                                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">提交</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary mr-40" onclick="layer_colse();">返回</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script src="__STATICS__/plugins/layuiformSelect/js/formSelects-v4.js"></script>
+    <script>
+         function layer_colse() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        layui.use([ 'form', 'laydate','formSelects'], function() {
+            var $ = layui.jquery
+                    , admin = layui.admin
+                    , element = layui.element
+                    , layer = layui.layer
+                    , laydate = layui.laydate
+                    , form = layui.form
+                    , formSelects = layui.formSelects;
+            form.render(null, 'component-form-group');
+            
+            laydate.render({
+                elem: '#LAY-component-form-group-date'
+            });
+        })
+    </script>
+</block>

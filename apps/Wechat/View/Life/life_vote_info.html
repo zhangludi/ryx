@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title><php>echo getConfig('web_name')</php>-微信端</title>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui-slide.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/life/css/life_survey_info.css" />
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+<style>
+.aui-bar-info {background: url(__STATICS__/apps/page_wechat/public/images/header_bg_img.png) no-repeat center center;
+		background-size: 100% 100%;}
+header ul li {height: 45px}
+header ul li.active{ display: block; }
+.aui-icon-roundadd{font-size: 40px !important;margin-top:8px}
+.aui-nav {
+    position: inherit;
+}
+.pt-0{padding-top:0px!important}
+.aui-bar {
+     min-height: 0px!important
+}
+.fcolor-white {color:#fff!important}
+.fsize-24{font-size:24px!important} 
+.aui-nav{height: 4rem;}
+.aui-nav .aui-bar-tab{height: 4rem;background:rgb(255, 255, 255);}
+.aui-border-tb:after {border-top: 1px solid rgb(200, 200, 200);border-bottom: 1px solid rgb(171, 8, 9);}
+.aui-nav .aui-bar-tab li p{width: 100%;line-height: 0.5rem;color:#333;font-size: 0.5rem;}
+.aui-nav .aui-bar-tab li .img2{display: none;}
+.aui-nav .aui-bar-tab .active-info p{display: none;}
+.aui-nav .aui-bar-tab .active-info .img1{display: none;}
+.aui-nav .aui-bar-tab .active-info .img2{display: inline-block;}
+.aui-border-tb:after{border-top: 1px solid #f3f3f3;}
+p{color:#ccc}
+.wh-24em{width: 1.2rem !important;height: 1.2rem !important;}
+.wh-33em{width: 1.65rem !important;height: 1.65rem !important;}
+.w-18em{width: 0.9rem !important;}
+.w-95b{width:95%;}
+.w-169em{width: 8.45rem;}
+.h-100b{height:100%;}
+.h-49em{height: 2.45rem !important;}
+.h-18em{height: 0.9rem !important;}
+.h-17em{height: 0.85rem;}
+.p-0{padding: 0 !important;}
+.mt-14em{margin-top: 0.7rem !important;}
+.mt-3m{margin-top:-4px}
+.mt-2em{margin-top: 0.1rem !important;}
+.ml-8em{margin-left: 0.4rem !important;}
+.mr-8em{margin-right: 0.4rem !important;}
+.m-14em-auto-12em{margin: 0.7rem auto 0.6rem !important;}
+.f-18em{font-size: 0.9rem !important;}
+.color_ff{color:#fff;}
+.bt-1-f9{border-top: 1px solid #f1f1f1;}
+</style>
+</head>
+<body class="bg-color-whiter">
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li class="h-45">
+    		<a class="aui-pull-left" href="{:U('Index/index')}">
+				<span class="aui-iconfont aui-icon-left"></span>首页
+			</a> 
+    		<div class="aui-title">投票管理</div>
+    	</li>
+    </ul>
+</header>
+<form action="{:U('Life/life_vote_do_save')}" id="forms" method="post" >
+
+	<div class="pl-12em pr-12em">
+	<volist name="subject_list" id="list" >
+		<p class="text-align f-18em color-33 pt-15em pb-20em lh-18em f-w">{$list.subject_content}</p>
+			<ul>
+<!-- 					<p class="f-14em color-33"><span>{$k}.</span><span>{$list.questions_title}</span><span>（{$list.questions_type}）</span></p> -->					
+				<input type="hidden" name="subject_id"  value="{$list.subject_id}" />
+				<eq name="type" value="1">
+					<volist name="list.option_list" id="option" >
+						<li class="po-re pt-10em pl-50em f-14em color-75 lh-18em">{$option.option_name}<input type="radio" class="pull-left pl-20" name="option_id" value="{$option.option_id}"></li>
+					</volist>
+				<else/>
+					<volist name="list.option_list" id="op" >
+						<li class="po-re pt-10em pl-50em f-14em color-75 lh-18em">{$op.option_name} <span class="ml-5b">投票数：{$op.result}</span></li>
+					</volist>
+				</eq>
+			</ul>
+		</volist>	
+	</div>
+	<eq name="type" value="1">
+		<div class="w-100b pl-12em pr-12em pb-8em pt-25em  bottom-0">
+			<div class="pl-25em pr-25em">
+				<button class="w-100b h-35em text-align f-16em lh-35em color-white bor-0 grad" id="submit">提交</button>
+			</div>
+		</div>
+	</eq>
+</form>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/aui2/js/aui-slide.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/plugins/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/life/js/life_survey_info.js"></script>
+</body>
+</html>

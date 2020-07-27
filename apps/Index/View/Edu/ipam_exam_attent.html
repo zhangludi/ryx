@@ -1,0 +1,280 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/ipam_home_public_edu_index.css">
+  <!--页面自定义样式-->
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_exam_mock_info.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_exam_all.css">
+
+<div class="public_content clearfix">
+    <div class="clearfix">
+        <neq name="is_exam" value="1">
+        <div class="pull-left con_exam_official_tit white-space">欢迎来到模拟考试页面!!!</div>
+        <div class="pull-left exam_official_type">模拟考试</div>
+        <else />
+        <div class="pull-left con_exam_official_tit white-space">欢迎来到正式考试页面!!!</div>
+        <div class="pull-left exam_official_type">正式考试</div>
+        </neq>
+        <div class="pull-left exam_total_score">总分：{$exam_list['exam']['exam_point']}</div>
+    </div>
+    <!---------------------------左侧------------------------------------->
+    <div class="pull-left">
+        <div class="exam_official_l">
+            <!--剩余时间-->
+            <div class="content_time_num clearfix">
+                    <div id="timer" class="pull-left">
+                        <div class="false">
+                            <span class="over_time">剩余时间 </span>
+                            <!--<span class="time minute">20</span>:
+                            <span class="time second">00</span>-->
+                        </div>
+                    </div>
+                    <div class="pull-right"></div>
+                    <!--<div class="content_num pull-right">
+                        <span class="num questioned">&nbsp;</span>&nbsp;/
+                        <span class="question_sum"></span>
+                    </div>-->
+            </div>
+            
+            <div class="content_main">
+                <div class="content_class">
+                    <div class="content_class_tit clearfix">
+                        <div class="content_class_tit_left pull-left">
+                            <i></i>
+                            <span class="questions_type"></span>
+                        </div>
+                        <div class="content_class_tit_right pull-right next" id="nextQuestion">
+                            <a href="javascript:;">下一题</a>
+                        </div>
+                        <div class="content_class_tit_right pull-right submitQuestions" style="display: none" onclick="setEduExamQuestions()">
+                            <a href="javascript:;">提交试卷</a>
+                        </div>
+                    </div>
+                    <div class="quiz">
+                        <div class="content_classes slide active-slide">
+                            <ul class="list-unstyled question">
+                                <p class="question_title"></p>
+                                <div id="question_list"></div>
+                            </ul>
+                            <div class="content_class_answer pull-right">
+                                <img src="" alt="">
+                                <!--<a href="javascript:;">查看解析</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <neq name="is_exam" value="1">
+                <div class="content_class_answer">查看解析！</div>
+                </neq>
+            </div>
+        </div>
+        <div class="content_class_con answer_analysis" style="display: none">
+            <div class="content_class_tit clearfix">
+                <div class="content_class_tit_left1 pull-left">
+                    <i></i>
+                    <span>答案解析</span>
+                </div>
+            </div>
+            <div class="content_class_line"></div>
+            <div class="content_classes1">
+                <p class="correct_answer">正确答案：<span class="xuanxiang">B</span></p>
+                <div class="content_classes_msg"><span class="answer_true"></span><span class="answer_memo"></span></div>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧 答题卡-------------------------------------------------------->
+    <div class="pull-right exam_official_r">
+        <div class="clearfix exam_official_r_dtk">
+            <div class="pull-left"><img src="__STATICS__/apps/page_portal/portal/images/icon_dtk.png"></div>
+            <div class="pull-left title">答题卡</div>
+        </div>
+        <div class="answer_sheet_line"></div>
+        <div class="edu_choice_question">选择题</div>
+        <!--<div class="f-12em color-9e icon_regular text-align m-a w-180em">总分:&nbsp;&nbsp;<span id="exam_point"></span>&nbsp;&nbsp;&nbsp;共<span id="questions_num"></span>道题</div>-->
+            <!-- 选择题 -->
+        <div class="mt-30em">               
+            <div class="list list1 clearfix" id="answerCard">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 内容区域结束 -->
+<input type="hidden" id="exam_time" name="" value="{$exam_list['exam']['exam_time']}">
+<input type="hidden" id="exam_id" name="" value="{$exam_list['exam']['exam_id']}">
+<div style="display: none" id="strBtn">{$questions_list}</div>
+<input type="hidden" id="questions_arr">
+<input type="hidden" id="str_questions_id" name="str_questions_id" >
+<input type="hidden" id="str_questions_id" name="str_questions_id" >
+<input type="hidden" id="target_array" name="target_array" >
+<input type="hidden" id="questions_list_length" name="questions_list_length" >
+<!-- 考试得分遮罩层 -->
+<section>
+    <div class="edu_score_mask di-n">
+        <div class="bullet_box">
+            <img style="width: 589px;overflow: hidden;" src="__STATICS__/apps/page_portal/portal/images/defen.png">
+            <div class="Total_score">本次考试所得总分：</div>
+            <div class="Total_score_fs point_amount">90<span>分</span></div>
+            <div class="clearfix correct_rate">
+                <div class="pull-left">
+                    <div class="box accuracy">正确率：50%</div>
+                    <div class="box exam_count">答题数：20</div>
+                </div>
+                <div class="pull-right">
+                    <div class="box exam_time_lave">用时：50%</div>
+                    <div class="box integral">积分：0</div>
+                </div>
+            </div>
+            <div class="clearfix edu_analysis">
+                <div class="learning_analysis pull-left" onclick="study_analyze({$exam_list['exam']['exam_topic']});";>学习分析</div>
+                    <div class="edu_answer_analysis pull-right" onclick="info_exam_already({$exam_list['exam']['exam_id']})">答案解析</div>
+            </div>
+        </div>
+    </div>
+</section>
+<link rel="stylesheet" href="__STATICS__/apps/page_portal/portal/css/edu_exam_official_info.css">
+<section>
+    <div class="edu_analysis_mask di-n">
+        <div class="analysis_box">
+            <div class="point_tit">积分获取</div>
+            <div class="point_close" onclick="layer_colse({$exam_list['exam']['exam_id']});"><img src="__STATICS__/apps/page_portal/portal/images/edu_close.png"></div>
+            <div class="point_four clearfix">
+                <ul>
+                <li>
+                    <div class="point_how" id="material">16</div>
+                    <div class="point_type">文章积分</div>
+                </li>
+                <li>
+                    <div class="point_how" id="video">16</div>
+                    <div class="point_type">视频积分</div>
+                </li>
+                <li>
+                    <div class="point_how" id="note">16</div>
+                    <div class="point_type">笔记积分</div>
+                </li>
+                <li>
+                    <div class="point_how" id="exam">16</div>
+                    <div class="point_type">考试积分</div>
+                </li>
+            </ul>
+            </div>
+            <div class="point_sha"></div>
+            <!--积分排行-->
+            <div class="edu_ranking">
+                <!-- <div class="ranking_l"><img src="__STATICS__/apps/page_portal/portal/images/edu_left.png"></div>
+                <div class="ranking_r"><img src="__STATICS__/apps/page_portal/portal/images/edu_right.png"></div> -->
+                <div class="point_tit1">积分排行</div>
+                <div class="point_list clearfix">
+                    <ul id="integral">
+                        <li class="clearfix">
+                            <div class="pull-left">名次</div>
+                            <div class="pull-left point_rate">用户</div>
+                            <div class="pull-left point_score" style="margin-left: -10px;">得分</div>
+                        </li>
+                        <!-- <li class="clearfix">
+                            <div class="pull-left point_number1">1</div>
+                            <div class="pull-left point_rate">专题完成率：60.5%</div>
+                            <div class="pull-left point_score">67</div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="pull-left point_number2">2</div>
+                            <div class="pull-left point_rate">专题完成率：60.5%</div>
+                            <div class="pull-left point_score">67</div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="pull-left point_number3">3</div>
+                            <div class="pull-left point_rate">专题完成率：60.5%</div>
+                            <div class="pull-left point_score">67</div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="pull-left point_number">4</div>
+                            <div class="pull-left point_rate">专题完成率：60.5%</div>
+                            <div class="pull-left point_score">67</div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="pull-left point_number">5</div>
+                            <div class="pull-left point_rate">专题完成率：60.5%</div>
+                            <div class="pull-left point_score">67</div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--分页-->
+<script src="__STATICS__/apps/page_portal/portal/js/toPage.js"></script> 
+  <!--本页面js-->
+<script src="__STATICS__/apps/page_portal/portal/js/edu_exam_mock_info.js"></script>
+<!-- <script src="__STATICS__/apps/page_portal/portal/js/ipam_home_public.js"></script -->>
+<script type="text/javascript" src="__STATICS__/apps/page_portal/portal/js/edu_exam_all.js"></script> 
+<script>
+function info_exam_already(id){
+    window.location.href="{:U('Edu/ipam_exam_attent_already')}?exam_id="+id+"";
+}
+function study_analyze(topic_id){
+    $('.edu_score_mask').addClass("di-n");
+    $('.edu_analysis_mask').removeClass("di-n");
+    $.ajax({
+        url:"{:U('Index/Edu/edu_exam_analysis')}",
+        data:{'topic_id':topic_id},
+        type:"post",
+        async:false,
+        success:function(data){
+            $('#material').html(data.integral.integral_article);
+            $('#video').html(data.integral.integral_video);
+            $('#note').html(data.integral.integral_notes_communist);
+            $('#exam').html(data.integral.exam_integral);
+            var html = '';
+            $.each(data.communist_integra, function(i, obj) {
+                if(obj.i <= 3){
+                    html += "<li class='clearfix'><div class='pull-left point_number"+obj.i+"'>"+obj.i+"</div><div class='pull-left point_rate'>"+ obj.communist_name +"</div><div class='pull-left point_score'>"+ obj.integral +"</div></li>";
+                }else{
+                    html += "<li class='clearfix'><div class='pull-left point_number'>"+obj.i+"</div><div class='pull-left point_rate'>"+ obj.communist_name +"</div><div class='pull-left point_score'>"+ obj.integral +"</div></li>";
+                }
+                
+            });
+            $("#integral").append(html);
+        }
+    })
+}
+function layer_colse(id){
+    $('.edu_analysis_mask').addClass("di-n");
+    window.location.href="{:U('Edu/ipam_exam_attent_already')}?exam_id="+id+"";
+}
+
+
+var exam_id =  $('#exam_id').val();
+var exam_time = $('#exam_time').val();
+var str_questions_id  = $('#str_questions_id').val();
+function setEduExamQuestions() {
+    var target_array = $("#target_array").val();
+    var questions_list_length = $("#questions_list_length").val();
+    // console.log(target_array);
+    // console.log(questions_list_length);
+    if(target_array==questions_list_length){
+        $(".edu_score_mask").removeClass("di-n");
+        var questions_arr = $('#questions_arr').val();
+
+        var minute = $('.minute').html();
+        var second = $('.second').html();
+        var minute_second = minute+':'+second;
+        $.ajax({
+            url:"{:U('Index/Edu/set_edu_exam_questions_ajax')}",
+            data:{'str_questions_id':str_questions_id,'exam_id':exam_id,'exam_time':exam_time,"time_lave":minute_second,'questions_arr':questions_arr},
+            type:"post",
+            async:false,
+            success:function(msg){
+                $('.point_amount').html(""+msg.point_amount+"<span>分</span>");
+                $('.accuracy').html("正确率："+msg.accuracy+"%");
+                $('.exam_count').html("答题数："+msg.count+"");
+                $('.exam_time_lave').html("用时："+msg.time_lave+"");
+                $('.integral').html("积分："+msg.integral+"");
+            }
+        })
+    }else{
+        alert('请答完题在提交');
+    }
+    
+}
+</script>
+

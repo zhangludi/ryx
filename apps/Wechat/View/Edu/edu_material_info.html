@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>视频详情</title>
+<!-- aui核心css -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+<!-- end -->
+<!-- 公司公共css -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>
+<!-- end -->
+<!-- 本项目公共css -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+<!-- end -->
+<!-- 本页面css -->
+<link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/edu/css/edu_learn.css"/>
+<!-- end -->
+<style>
+.aui-bar {
+position: relative;
+top: 0;
+right: 0;
+left: 0;
+z-index: 10;
+width: 100%;
+min-height: 1.2rem !important;
+font-size: 0.9rem;
+text-align: center;
+display: table;
+}
+header{height:1.2rem !important;}
+.top-20em {
+    top: 11rem !important;
+}
+.w-13em{width:0.6rem;}
+.h-13em{height:0.6rem;}
+.top-40em {
+    top: 1rem !important;
+}
+header ul li {
+    height: 40px !important;
+}
+</style>
+</head>
+<body class="bg-color-f9">
+<header class="aui-bar aui-bar-nav aui-bar-info bg-color-whiter border-3em-de po-fix z-index-max top-0em">
+	<ul>
+		<li class="h-45em">
+			<a class="pull-left mt-15em pl-12em" href="javascript:history.back(-1)">
+				<img class="w-9em h-19em" src="__STATICS__/apps/page_wechat/public/images/back_info.png" alt="返回" />
+			</a>
+			<div class="aui-title f-w color-21">详情</div>
+		</li>
+	</ul>
+</header>
+<!--视频  autoplay="autoplay"-->
+<section class="bg-color-whiter" style="margin-top: 40px;">
+	<div class="edu_videoinfo pb-15em pt-8em border-3em-de">
+		<div id="material_title" class="text-align f-16em color-21 f-w">{$material_list.material_title}</div>
+		<div class="clearfix mt-12em">
+			<div class="pull-left f-12em color-9e mr-12em">
+				<span>上传人：</span>
+				<span id="add_communist">{$material_list.add_staff}</span>
+			</div>
+			<div id="add_time" class="pull-left f-12em color-9e"></div>
+			<div class="pull-right f-12em color-9e">
+			类型：<span id="add_type" class="f-12em color-ff4040">{$material_list.material_topic}</span>
+			</div>
+		</div>
+	</div>
+	<div class="edu_videoinfo pb-15em border-3em-de pt-12em">
+		<div class="f-12em color-21">描述</div>
+		<div class="f-12em color-66 w-100b over-h pt-12em" id="material_content">{$material_list.material_desc}</div>
+	</div>
+	<div class="edu_videoinfo pb-15em border-3em-de">
+		<!--<div class="f-12em color-21">内容</div>-->
+		<div class="f-14em color-66 w-100b over-h icon_normal" id="material_content">{$material_list.material_content}</div>
+	</div>
+	<div class="edu_videoinfo pb-12em pt-12em clearfix" onclick="open_communist({$material_list.material_id})">
+		<div class="pull-left f-14em color-21 pt-2em">已学习的人员</div>
+		<div class="pull-right">
+		<div class="clearfix w-100b" >
+			<div class="pull-left f-12em color-9e mr-5em pt-2em">共<span id="people_no">{$material_info.log_list_count}</span>人浏览</div>
+			<div class="pull-left">
+			<volist name="material_info.log_list" id="list">
+				<if condition="$i eq 1">
+					<eq name="list.communist_avatar" valeu="">
+					<img class="w-21em h-22em over-h di-i" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" style="border-radius: 50% !important">
+					<else/>
+					<img class="w-21em h-22em over-h di-i" src="{$list.communist_avatar}" style="border-radius: 50% !important">
+					</eq>
+				<else/>
+					<eq name="list.communist_avatar" valeu="">
+					<img class="w-21em h-22em over-h di-i ml-10mem" src="__STATICS__/apps/page_wechat/images/images_oa/oa_img_head.png" style="border-radius: 50% !important">
+					<else/>
+					<img class="w-21em h-22em over-h di-i ml-10mem" src="{$list.communist_avatar}" style="border-radius: 50% !important">
+					</eq>
+				</if>
+			</volist>
+			</div>				
+			<i class="iconfont color-9e f-12em h-20em lh-20em">&#xe613;</i>
+		</div>
+		
+		</div>
+	</div>
+</section>
+<!--获取视频学习笔记接口-->
+<section class="bg-color-whiter mt-12em pb-12em" style="padding-bottom: 3rem;">
+	<div id="list1" class="edu_videoinfo">
+		<volist name="material_info.notes_list" id="notes" key="k">
+		<gt name="k" value="2">
+		<a href="{:U('Edu/edu_notes_info',array('notes_id'=>$notes['notes_id']))}" class="show_more">
+    	<li class="border-3em-de pt-12em pb-5em" >
+    		<div class="clearfix pt-8em">
+    			<div class="pull-left f-12em color-66 ">{$notes.add_staff}</div>
+    			<div class="pull-right f-12em color-66 ">{$notes.add_time}</div>
+    		</div>
+    		<div class="f-12em color-66 pt-15em" style="color: #000;font-size: 0.7rem !important;">{$notes.notes_content}
+    			<span class="f-12em color-d4a500">[详情]</span>
+    		</div>
+    	</li>
+    	</a>
+    	<else/>
+    	<a href="{:U('Edu/edu_notes_info',array('notes_id'=>$notes['notes_id']))}">
+    	<li class="border-3em-de  pt-12em pb-5em" >
+    		<div class="clearfix pt-8em">
+    			<div class="pull-left f-12em color-66 ">{$notes.add_staff}</div>
+    			<div class="pull-right f-12em color-66 ">{$notes.add_time}</div>
+    		</div>
+    		<div class="f-12em color-66 pt-15em" style="color: #000;font-size: 0.7rem !important;">{$notes.notes_content}
+    			<span class="f-12em color-d4a500">[详情]</span>
+    		</div>
+    	</li>
+    	</a>
+    	</gt>
+    	</volist>
+	</div>
+	<div class="color-66 f-13em w-100b text-align mt-20em mb-20em" id="showMore">
+		查看更多
+		<img class="w-13em h-13em m-a over-h uptodown" src="__STATICS__/apps/page_wechat/images/images_edu/down.png">	
+	</div>
+</section>
+<!--写视频学习笔记-->
+<section class="bg-color-whiter po-fix b-0 w-100b border-top-3em-de">
+	<div class="edu_videoinfo clearfix va-jz">
+		<div class="pull-left">
+		<img class="w-20em h-20em over-h mr-10em" src="__STATICS__/apps/page_wechat/images/images_edu/icon_pic.png">
+		</div>
+		<input id="edu_video_input" class="pull-left f-16em" type="text" value="" placeholder="记录今日的学习收获……">
+	</div>
+</section>
+<!--遮罩层-->
+<section class="edu_video_mask di-n">
+	<form action="{:U('Edu/edu_material_do_save')}" id="forms" method="post" >
+	<div class="po-fix w-100b h-100b top-0em left-0em z-index-mask">
+		<input type='hidden' id="material_id" name="material_id" value="{$material_list.material_id}"   />
+        <input type="hidden" id="period_score" name="period_score" value="{$material_list.period_score}">
+        <input type="hidden" id="material_duration" name="material_duration" value="{$material_list.material_duration}">
+        <input type="hidden" id="material_duration_integral" name="material_duration_integral" value="{$material_list.material_duration_integral}">
+		<div class="po-ab top-20em w-100b bg-color-whiter edu_mask_radius h-100b pl-12em pr-12em"  style="border-top: 0.1rem solid #dedede;">
+			<div class="clearfix pt-12em">
+				<div class="pull-left f-14em color-66">写笔记</div>
+				<div class="pull-right mask_close">
+					<img class="w-12em h-12em pull-right pr-16em" src="__STATICS__/apps/page_wechat/images/images_edu/mask_close.png">
+				</div>
+			</div>
+			<!--输入学习笔记-->
+			<div id="article_content" class="text-l f-13em lh-19em pl-15em pr-15em bg-color-whiter mt-9em pt-14em mb-8em">
+				<textarea id="notes_content" name="notes_content" class="bg-color-whiter h-150em f-15em lh-18em color-33 bor-ra-3 bor_none p-0" placeholder="记录今日的学习收获……"></textarea>
+			</div>
+			<div class="w-100b pl-12em pr-12em pb-20em ">
+				<div class="pl-25em pr-25em">
+					<button id="set_edu_notes" class="w-100b h-35em text-align f-16em lh-35em color-white bor-0 grad"  onclick="sub();">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<!-- <script type="text/javascript" src="__STATICS__/apps/page_wechat/edu/js/edu_learn_info.js"></script> -->
+<script type="text/javascript">
+function open_communist(material_id){
+	location.href="{:U('Edu/edu_learn_look')}?material_id="+material_id;
+}
+// function goBlack(customization,){
+// 	if(customization){
+// 		location.href="{:U('Edu/edu_learn_look')}?customization="+customization;
+// 	}else{
+// 		location.href="{:U('Edu/edu_learn_look')}?customization="+customization;
+// 	}
+// }
+
+//提交学习心得-------------------------------------------------------------------
+function sub(){
+	$("#forms").submit();
+}
+//加积分-------------------------------------------------------------------
+$(function(){
+    var material_duration = $('#material_duration').val();
+    var material_id = $('#material_id').val();
+    var material_duration_integral = $('#material_duration_integral').val();
+    var period_score = $("#period_score").val();
+    if(material_duration){
+        var video_time = material_duration*60000;
+        setTimeout(function(){
+            $.ajax({
+                url: "{:U('Wechat/Edu/set_integral')}",
+                type: "post",
+                data:{'material_id':material_id,'material_duration_integral':material_duration_integral},
+                async:false,
+                success: function(msg) {
+                    console.log(msg);
+                    if(msg){
+	                    alert('恭喜您获得'+material_duration_integral+'积分，'+period_score+'个学习时长！！！');
+	                }else{
+	                	alert('您已获得积分，请勿重复获取');
+	                }
+                }
+            });
+            set_integral();
+        },video_time)
+    }
+})
+
+//遮罩层--------------------------------------------------------
+$("#edu_video_input").focus(function(){
+	$(".edu_video_mask").removeClass("di-n");
+	$("#edu_video_input").addClass("di-n");
+});
+//关闭遮罩层
+$(".mask_close").click(function(){
+	$(".edu_video_mask").addClass("di-n");
+	$("#edu_video_input").removeClass("di-n");
+});
+if($('#list1 a').hasClass("show_more")){
+	$(".show_more").hide();
+}    			
+if($('#list1 a').length>2){
+	$("#showMore").show();
+}else{
+	$("#showMore").hide();
+}
+$("#showMore").click(function(){
+	$(".show_more").show();
+	$("#showMore").hide();
+})
+</script>
+</body>
+</html>

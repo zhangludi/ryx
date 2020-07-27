@@ -1,0 +1,155 @@
+.ffamily-sans{
+    font-family: SansSerif;
+}
+.layui-fluid{
+    padding:15px;}
+.fweight-b{font-weight: 600}
+.fcolor-65{color: rgba(0,0,0,.65); }
+.layadmin-tabsbody-item::-webkit-scrollbar {width:0px;  } /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.fcolor-45{color: rgba(0,0,0,.45); }
+.fcolor-f60{color:#f60;}
+.bg-f60{background-color:#f60; }
+.layui-btn-f60{
+    border: 1px solid #f60;
+    background-color: #fff !important;
+    color: #f60;
+}
+.layui-btn-f60:hover{
+    background-color: #f60 !important;
+}
+.layui-btn-del{
+    border: 1px solid #3f7aff;
+    background-color: #fff !important;
+    color: #3f7aff;
+}
+.layui-btn-del:hover{
+    background-color: #3f7aff !important;
+    color: #fff;
+}
+.bg-none{background: none !important;}
+/*复选框样式*/
+.layui-form-checked[lay-skin=primary] i{
+    background: #f60;
+    border: 1px solid  #f60;
+}
+
+.layui-form-checked i, .layui-form-checked:hover i{
+    border: 1px solid  #f60 !important;
+}
+
+.layui-table-view .layui-form-checkbox[lay-skin=primary] i:hover{border: 1px solid #f60 !important;}
+.layui-form-checkbox[lay-skin=primary] i:hover{border: 1px solid #f60 !important;}
+.layui-form-checked, .layui-form-checked:hover{
+    border: 1px solid  #f60;
+}
+/*单选框样式*/
+.layui-form-radio>i:hover, .layui-form-radioed>i{
+    color: #f60;
+}
+.layui-form-onswitch{
+    background: #f60;
+    border: 1px solid  #f60;
+}
+/*btn*/
+.layui-btn{
+    background: #f60;
+	text-decoration: none;
+}
+.layui-btn-primary {
+    border: 1px solid #C9C9C9;
+    background-color: #fff;
+    color: #555
+}
+.layui-btn-f90{
+    background: #f90;
+}
+
+/*日期选择器*/
+.layui-laydate .layui-this{
+    background-color: #f60 !important;
+}
+.layui-laydate-footer span:hover{
+    color: #f60 !important;
+}
+.layui-form-select dl dd.layui-this{
+    background: #f60;
+}
+
+/*步骤条*/
+.wizard > .content{
+    background: #fff;
+}
+.wizard > .steps .current a, .wizard > .steps .current a:hover, .wizard > .steps .current a:active{
+    background: #f60;
+}
+.wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active{
+    background: #f60;
+}
+.wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active{
+    background: #f90;
+}
+
+
+/*ysteps*/
+#prevBtn{
+    background: #f90;
+}
+
+/*表格*/
+.layui-laypage .layui-laypage-curr .layui-laypage-em{
+    background: #f60;
+}
+.layui-laypage a:hover{
+    color: #f60;
+}
+
+.bb-cc{border-bottom: 1px solid #ccc}
+
+.layui-footer{
+    background-color: #fff;
+    box-shadow: 0 -1px 2px 0 rgba(0,0,0,.05);
+    padding: 10px 0;
+    position: fixed;
+    left: 15px;
+    right: 15px;
+    bottom: 0px;
+    height: 44px;
+    line-height: 44px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 100;
+}
+.layadmin-shortcut li .layui-icon{background: none;!important;}
+.layadmin-shortcut li:hover .layui-icon{background: #f60 !important;}
+
+
+.bg-color-f2{background-color: #f2f2f2}
+.selectone{
+    color: #f60;
+    border:1px solid #f60 !important;
+}
+.layui-btn-group .layui-btn-primary:hover{
+    color: #f60;
+}
+.layui-btn-primary:hover{
+    border-color:#f60 ;
+}
+.project-card-hover:hover{
+    box-shadow: 0 2px 8px rgba(0,0,0,.09);
+    border-color: rgba(0,0,0,.09);
+}
+.add-hover:hover{
+    color: #f60;
+    background-color: #fff;
+    border:1px dashed #f60;
+}
+.bg-color-f7{
+    background: #f7f9fa;
+}
+.hover-f60:hover{
+    color: #f60;
+}
+.layui-input-block{
+    min-height: 64px;
+}

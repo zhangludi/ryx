@@ -1,0 +1,422 @@
+* {
+	font-family: "Microsoft YaHei";
+}
+
+/**登陆**/
+body {
+	background-color: #ededed;
+}
+
+.myheader {
+	
+}
+
+.error-msg {
+	display: none;
+	background-color: #FFE9E9;
+}
+
+.top {
+	text-align: center;
+	margin: 0 auto;
+	width: 1000px;
+	height: 80px;
+}
+
+.logo {
+	
+	margin: 20px 0;
+}
+
+.dot {
+	width: 4px;
+	height: 4px;
+	float: left;
+	display: inline-block;
+	background-color: #4d4d4d;
+	border-radius: 2px;
+	margin: 22px 10px;
+	display: inline-block;
+}
+
+.wel-text {
+	display: inline-block;
+	color: #6f6f6f;
+	font-size: 18px;
+	font-weight: 900;
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+.welcom {
+	float: left;
+	display: inline-block;
+	height: 40px;
+	margin-top: 20px;
+}
+
+.return {
+	float: right;
+	height: 40px;
+	margin: 20px 0;
+}
+
+.return a {
+	line-height: 40px;
+	font-size: 12px;
+	color: #638bc6;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.main {
+	margin: 0 auto;
+	width: 100%;
+	margin-top: 60px;
+}
+
+.content {
+	margin: 0 auto;
+	width: 1100px;
+}
+
+.main-left {
+	width: 650px;
+	float: left;
+}
+
+.login-form {
+	margin-top: 60px;
+	width: 350px;
+	height: 350px;
+	float: right;
+	padding: 0 20px;
+	background-color: #fff;
+}
+
+.login-form ul {
+	padding: 0;
+}
+
+.login-form ul li {
+	list-style-type: none;
+	height: 36px;
+	margin-top: 25px;
+}
+
+.li-1 {
+	font-family: "Helvetica", "Tahoma", "Arial", "Hiragino Sans GB",
+		"Hiragino Sans GB W3", "Microsoft YaHei", "STXihei", "STHeiti",
+		"Heiti", "SimSun", "sans-serif";
+	font-size: 22px;
+	font-weight: 900;
+	color: #f1342c;
+}
+
+.form-control {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	color: #171717;
+	outline: 0;
+	height: 35px;
+	padding: 0px 12px;
+	line-height: 35px;
+	font-size: 14px;
+	font-weight: normal;
+	vertical-align: middle;
+	min-height: 35px;
+}
+
+.login-form ul li .input-group .input-group-addon, .regiestDiv ul li .input-group .input-group-addon
+	{
+	border-right: none;
+	background-color: #fff;
+	border-radius: 0;
+	border-color: #ccc;
+}
+
+.form-control[readonly], .form-control[readonly]:focus {
+	border: 1px solid rgba(0, 0, 0, 0.2) !important;
+	border-left: none !important;
+}
+
+.login-form ul li .input-group input, .regiestDiv ul li .input-group input,
+	.regiestDiv ul li .input-group select {
+	border-left: none;
+	border-radius: 0;
+	padding-left: 0;
+	border-color: #ccc;
+	box-shadow: none;
+	outline: medium;
+	box-shadow: none;
+}
+
+.has-error .form-control, .regiestDiv .form-control:focus {
+	outline: none !important;
+	-webkit-box-shadow: none;
+	border-color: #ccc;
+}
+
+.has-error input {
+	border-color: #F3B9B9 !important;
+	background: #FFE9E9;
+}
+
+.idCod {
+	min-height: 33px;
+	padding-left: 10px;
+	min-width: 210px;
+	min-height: 35px;
+	margin-right: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-color: #ccc;
+}
+
+.idCod-img {
+	display: inline-block;
+	float: right;
+	background-color: #ededed;
+	min-width: 92px;
+	min-height: 35px;
+	min-width: 92px;
+}
+
+input, textarea, button {
+	font-family: "Helvetica", "Tahoma", "Arial", "Hiragino Sans GB",
+		"Hiragino Sans GB W3", "Microsoft YaHei", "STXihei", "STHeiti",
+		"Heiti", "SimSun", "sans-serif";
+	font-size: 12px;
+	outline: none;
+}
+
+.login-btn {
+	min-height: 35px;
+	min-width: 310px;
+	background-color: #f1342c;
+	color: #fff;
+	border: none;
+	font-family: "Helvetica", "Tahoma", "Arial", "Hiragino Sans GB",
+		"Hiragino Sans GB W3", "Microsoft YaHei", "STXihei", "STHeiti",
+		"Heiti", "SimSun", "sans-serif";
+	transition: color 0.1s linear 0s, background-color 0.1s linear 0s,
+		opacity 0.2s linear 0s !important;
+}
+
+.pull-left .checkbox {
+	margin-top: -2px;
+}
+
+.text-color-bule {
+	color: blue;
+}
+
+/**注册**/
+.split-div {
+	height: 5px;
+	background-color: #ededed;
+}
+
+.toLoginDiv {
+	min-height: 250px;
+	min-width: 200px;
+	text-align: center;
+	padding-top: 200px;
+}
+
+.regiestDiv {
+	min-width: 608px;
+	border-right: 1px solid rgba(0, 0, 0, 0.2);
+	border-right-color: #ccc;
+}
+
+.regiestDiv ul {
+	width: 350px;
+}
+
+.regiestDiv ul li {
+	margin-top: 18px;
+}
+
+.regiestDiv ul li .input-group .input-group-addon {
+	border-right: 1px solid rgba(204, 204, 204, 0.2);
+	min-width: 90px;
+}
+
+.input-group-addon {
+	color: #333;
+}
+
+.regiestDiv ul li .input-group input {
+	padding: 0 12px;
+}
+
+.first-op {
+	color: #ccc;
+}
+
+.cursor-p {
+	cursor: pointer;
+	/* text-decoration: none; */
+}
+
+.regiest-ul {
+	float: left;
+}
+
+.tip-warni-ul {
+	float: right;
+	max-width: 258px;
+}
+
+.tip-warni-ul li {
+	margin-top: 18px;
+	height: 35px;
+}
+
+.tip-span {
+	line-height: 35px;
+	display: inline-block;
+	float: left;
+	color: #f1342c;
+	display: inline-block;
+	float: left;
+}
+
+.tips-text {
+	color: #f1342c;
+	display: inherit;
+}
+
+#paryList ul li {
+	cursor: pointer;
+}
+
+.chagColor {
+	color: #f1342c;
+}
+
+.st-b-s {
+	border-bottom: solid 1px #ccc;
+}
+
+.litte-tx {
+	color: #ccc;
+}
+/* .right-border{
+	 border-right: 1px solid #ccc;
+	margin-left: 9px;
+}  */
+.vali-code{
+	color:#f1342c;
+	border:1px solid #f1342c;
+	width: 150px !important;
+    float: right !important;
+    text-align: center;
+}
+.valiCode-input{
+	width:120px !important;
+}
+.sep-tip{
+	width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display:inline-block;
+    border: 1px solid #000;
+    padding-top: 5px;
+}
+.active-tip .sep-tip{
+    border: 1px solid #f1342c;
+    text-align: center;
+    color: #fff;
+    background-color: #f1342c;
+}
+.active-tip{
+	color: #f1342c;
+}
+.progress-sepa{
+	position:relative;
+	background-color:#ccc;
+	height:10px;
+	margin-top: 15px;
+}
+.progress-sepa .progress-left{
+	position:absolute;
+	left:0;
+	background-color:#f1342c;
+	width:50%;
+	height:100%;
+}
+.progress-sepa .progress-right{
+	position:absolute;
+	right:0;
+	background-color:#f1342c;
+	width:50%;
+	height:100%;
+}
+.progress-con{
+	height:20px !important;
+}
+.margin_t{
+	margin-top:5px !important;
+}
+.margin_t_15{
+	margin-top:15px !important;
+}
+.height_auto{
+	height:auto !important;
+}
+
+.password_tip{
+	height:auto !important;
+	color:#ccc;
+	font-size:12px;
+}
+.pad_20{
+	padding:20px;	
+}
+/* -----------注册页面新改动样式------------ */
+.tip-warni-ul li:nth-child(6) {
+	margin-top: 93px !important;
+}
+.tip-warni-ul li:nth-child(10) {
+	margin-top: 0 !important;
+	position: relative;
+	top: -40px;
+}
+.register-tips {
+	color: #ccc;
+	margin-top: 10px;
+	font-size: 14px;
+}
+.register-password_tips, .password_level-box {
+	margin-top: 10px;
+}
+.register-password_tips li, .password_level-item {
+	display: inline-block;
+	margin-top: 0 !important;
+	width: 60px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	background-color: #ccc;
+	color: #999;
+}
+.register-password_tips li.active, .password_level-item.active {
+	background-color: #f67a17;
+	color: #fff;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1017239 */
+  src: url('//at.alicdn.com/t/font_1017239_x30hw1xyh4l.eot');
+  src: url('//at.alicdn.com/t/font_1017239_x30hw1xyh4l.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1017239_x30hw1xyh4l.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1017239_x30hw1xyh4l.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1017239_x30hw1xyh4l.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1017239_x30hw1xyh4l.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    }

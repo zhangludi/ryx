@@ -1,0 +1,88 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css">
+</block>
+<block name="body">
+	<div class="page-container">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="portlet light  bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<div class="cont-col1">
+								<div class="label label-sm bg-color-green2">
+									<i class="iconfont">&#xe64b;</i>
+								</div>
+							</div>
+							<span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php></span>
+							<span class="caption-helper"></span>
+						</div>
+					</div>
+					<div class="portlet-body form">
+							<input id="group_id" name="group_id" type="hidden" value="">
+							<div class="form-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label col-md-3">分组名称：</label>
+											<div class="col-md-8">
+												{$group_row.group_name}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label col-md-3">选择人员：</label>
+											<div class="col-md-8 ">
+												{$group_row.communist_name}
+	                                         </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label col-md-3">添加人员：</label>
+											<div class="col-md-8 ">
+												<php>echo getStaffInfo($group_row['add_staff']) </php>
+	                                         </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label col-md-3">添加时间：</label>
+											<div class="col-md-8 ">
+												{$group_row.add_time}
+	                                         </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions right">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-offset-3 col-md-9">
+                                                <a type="button" class="btn btn-sm default w-75 bor-ra-2 mr-10 pull-right" href="{:U('com/com_group_index')}">取消</a>
+                                            </div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+</block>

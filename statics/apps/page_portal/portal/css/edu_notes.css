@@ -1,0 +1,410 @@
+/*——————————————————————————————本页面公用—————————————————————————————————————————*/
+.public_content{
+	padding-bottom:85px !important;
+}
+.white-space{
+	overflow: hidden;
+    overflow: hidden;/*超出部分隐藏*/
+    text-overflow:ellipsis;/* 超出部分显示省略号 */
+    white-space: nowrap;/*规定段落中的文本不进行换行 */
+}
+.ipam_home_public_background .ipam_home_public_title {
+    width: 1200px;
+    margin: 36px auto 50px auto !important;
+    text-align: center;
+}
+/*——————————————————————————————左侧样式—————————————————————————————————————————*/
+.edu_notes_left{
+	margin-top: 20px;
+	width:894px;
+	height:100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+	border-radius:12px;		
+}
+.edu_notes_tit{
+	padding-top: 22px;
+    padding-left: 23px;
+    width: 125px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(33,33,33,1);
+}
+.edu_notes_edit{
+	width:110px;
+	height:32px;
+	line-height:32px;
+	background:linear-gradient(90deg,rgba(255,48,50,1),rgba(255,90,45,1));
+	border-radius:16px;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	cursor: pointer;
+	margin-right: 24px;
+	margin-top: 20px;
+}
+.edu_notes_line{
+	width:894px;
+	height:1px;
+	background:rgba(222,222,222,1);
+	margin-top: 18px;
+}
+/*——————————————————————————————左侧样式(日历)—————————————————————————————————————————*/
+#test2 .layui-laydate, .layui-laydate-hint {
+	 width: 100% !important;
+     border: none !important; 
+     box-shadow: none !important; 
+     background-color: #fff !important; 
+    color: #666;
+}
+#test2 .layui-laydate-main {
+    width: 100% !important;
+}
+#test2 .layui-laydate-header i.laydate-prev-y {
+    left: 3px !important;
+}
+#test2 .layui-laydate-header i.laydate-next-y {
+    right: 3px !important;
+}
+#test2 .laydate-month-list>li {
+    width: 7.5% !important;
+    margin: 0px !important; 
+}
+#test2 .layui-laydate-list>li {
+    font-size: 14px;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+     margin: 0 !important;
+    text-align: center;
+    cursor: pointer;
+}
+#test2 .laydate-set-ym {
+    font-size: 14px;
+    margin-left: -55px !important;
+    width: 10% !important;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#test2 .layui-laydate-header{
+	/*z-index: 999 !important;*/
+}
+#test2 .layui-laydate-content tr{
+	display: none !important;
+}
+#test2 .layui-laydate-content {
+    width: 90% !important;
+    top: -38px !important;
+    left: 79px !important;
+    position: relative;
+    padding: 0px !important; 
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+#test2 .layui-laydate-list {
+    position: absolute;
+    left: 0;
+    top: 0px !important;
+    width: 100%;
+    height: 100%;
+     padding: 0px !important; 
+    background-color: #fff;
+}
+/*当前选中样式*/
+#test2 .layui-laydate .layui-this {
+    width:56px;
+	height:20px;
+	line-height:20px;
+	background:rgba(255,64,64,1);
+	border-radius:10px;
+	color: #fff !important;
+}
+#test2{position: relative;}
+#test2 .next_year{
+	top: 15px;
+    right: 33px;
+    z-index: 999;
+    position: absolute;
+    font-size: 14px;
+    color: #666;
+    cursor:default !important; 
+}
+#test2 .laydate-set-ym span{
+	cursor:default !important; 
+}
+/*——————————————————————————————笔记内容—————————————————————————————————————————*/
+.edu_notes_con{
+	margin-top: 36px;
+}
+.edu_notes_l{
+	height: 240px;
+}
+.edu_notes_con li{
+	position: relative;
+	margin-left: 21px;
+}
+.notes_article_bg{
+	font-size: 24px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background: url(../img/notes_article_bg.png) no-repeat;
+    font-weight: bold;
+    color: rgba(33,33,33,1);
+    line-height: 77px;
+}
+.notes_video_bg{
+	font-size: 24px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background: url(../img/notes_video_bg.png) no-repeat;
+    font-weight: bold;
+    color: rgba(33,33,33,1);
+    line-height: 77px;
+}
+.notes_daily_bg{
+	font-size: 24px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background: url(../img/notes_daily_bg.png) no-repeat;
+    font-weight: bold;
+    color: rgba(33,33,33,1);
+    line-height: 77px;
+}
+.notes_meeting_bg{
+	font-size: 24px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background: url(../img/notes_meeting_bg.png) no-repeat;
+    font-weight: bold;
+    color: rgba(33,33,33,1);
+    line-height: 77px;
+}
+/*日常笔记样式*/
+.notes_daily_l {
+    height: 100px;
+}
+
+.dotted_line{
+	left: 30px;
+    top: 61px;
+    position: absolute;
+    border-left: 1px dashed #dedede;
+    height: 200px;
+}
+.article_bg{
+	z-index: 999;
+    margin-left: 14px;
+    margin-top: 43px;
+    position: relative;
+}
+.edu_notes_r{
+	width: 87%;
+    margin-left: 25px;
+}
+.edu_notes_r_tit{
+	width: 570px;
+    height: 32px;
+    font-size: 24px;
+    color: rgba(33,33,33,1);
+    line-height: 32px;
+    
+}
+.edu_notes_r_des{
+	margin-top: 5px;
+    width: 500px;
+    height: 20px;
+    font-size: 14px;
+    color: rgba(158,158,158,1);
+    line-height: 20px;
+    overflow: hidden;/*超出部分隐藏*/
+    text-overflow:ellipsis;/* 超出部分显示省略号 */
+    white-space: nowrap;/*规定段落中的文本不进行换行 */
+}
+/*视频笔记样式*/
+
+
+
+
+/*——————————————————————————————右侧样式—————————————————————————————————————————*/
+.edu_notes_right{
+	margin-top: 20px;
+}
+/*整月日历样式*/
+.edu_calendar{
+	position: relative;
+	width:282px;
+	height:100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 4px 20px 0px rgba(0, 0, 0, 0.12);
+	border-radius:7px;
+}
+.edu_calendar_tit{
+	padding-top: 16px;
+    padding-left: 17px;
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(158,158,158,1);
+    line-height: 20px;
+}
+.edu_calendar_line{
+	
+	margin: 0 auto;
+	width:253px;
+	margin-top: 35px;
+	height: 1px;
+    background: rgba(222,222,222,1);
+}
+#test3 .layui-laydate, .layui-laydate-hint {
+     border: none !important;
+     box-shadow: none !important; 
+    background-color: #fff;
+    color: #666;
+}
+#test3 .layui-laydate-header {
+     border-bottom: none !important; 
+}
+#test3 .layui-laydate-header i.laydate-prev-y {
+    left: 15px;
+    display: none !important;
+}
+#test3 .layui-laydate-header i.laydate-next-y {
+    right: 15px;
+    display: none !important;
+}
+#test3 .laydate-set-ym span, .layui-laydate-header i {
+    padding: 0 !important;
+    cursor: pointer;
+}
+#test3 .laydate-set-ym {
+	width: 100px !important;
+    font-size: 12px !important;
+    margin-left: -64px !important;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#test3 .layui-laydate-header i.laydate-prev-m {
+    left: 206px !important;
+}
+#test3 .layui-laydate-header i.laydate-next-m {
+    right: 19px !important;
+}
+#test3 .layui-laydate .layui-this {
+    color: #333;
+    width:24px;
+	height:24px;
+	background:rgba(235,235,235,1);
+	border-radius:50%;
+}
+#test3  .layui-laydate-content {
+    margin-top: -10px !important;
+    }
+.this_week{
+	left: 18px;
+    top: 34px;
+    position: absolute;
+    width: 200px;
+    overflow: hidden;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(66,133,244,1);
+    line-height: 30px;
+}
+
+
+
+
+.edu_original{
+	width:769px;
+	height:128px;
+	background:rgba(245,245,245,1);
+	border-radius:10px;
+	margin-top: 23px;
+}
+.edu_original_tit{
+	padding-top: 15px;
+    padding-left: 14px;
+    width: 500px;
+    font-size: 18px;
+    color: rgba(18,18,18,1);
+    line-height: 28px;
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+.edu_original_type{
+	padding-left: 14px;
+	width:200px;
+	height:14px;
+	font-size:14px;
+	color:rgba(158,158,158,1);
+	margin-top: 25px;
+}
+.edu_original_r img{
+	padding: 9px;
+}
+
+/*分类筛选样式*/
+.edu_assort{
+	margin-top: 24px;
+	width:282px;
+	height:100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 4px 20px 0px rgba(0, 0, 0, 0.12);
+	border-radius:7px;
+	padding-bottom: 18px;
+}
+.edu_assort_tit{
+	padding-top: 16px;
+    padding-left: 22px;
+    width: 100px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(33,33,33,1);
+    line-height: 20px;
+}
+.edu_assort li{
+	font-size: 14px;
+    padding: 1px 12px;
+    margin-right: 20px;
+    margin-top: 17px;
+    float: left;
+    text-align: center;
+    list-style: none;
+    width: 73px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid rgba(222,222,222,1);
+    border-radius: 16px;
+    cursor: pointer;
+}
+.edu_assort ul{
+	margin-left: 24px;
+}
+.edu_assort_active{
+	text-align: center;
+	width:103px;
+	height:32px;
+	line-height:32px;
+	background:linear-gradient(90deg,rgba(255,48,50,1),rgba(255,90,45,1));
+	border-radius:16px;
+	color: #fff;
+}
+
+
+/*——————————————————————————————其它样式—————————————————————————————————————————*/

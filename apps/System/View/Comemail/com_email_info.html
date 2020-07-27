@@ -1,0 +1,101 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!-- BEGIN PAGE TITLE-->
+                <h3 class="page-title"> 收件箱
+                        <small>用户 收件箱</small>
+                    </h3>
+                <div class="inbox">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="inbox-sidebar">
+                                <a href="{:U('com_imail_edit')}" data-title="Compose" class="btn red compose-btn btn-block">
+                                        <i class="fa fa-edit"></i> 撰写 </a>
+                                <ul class="inbox-nav">
+                                    <li>
+                                        <a href="{:U('com_imail_inbox')}" data-type="inbox" data-title="Inbox"> 收件箱
+                                                <span class="badge badge-success">3</span>
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="{:U('com_imail_outbox')}" data-type="important" data-title="Inbox"> 重要 </a>
+                                    </li>
+                                    <li>
+                                        <a href="{:U('com_imail_outbox')}" data-type="sent" data-title="Sent"> 发送 </a>
+                                    </li>
+                                    <li>
+                                        <a href="{:U('com_imail_outbox')}" data-type="draft" data-title="Draft"> 草稿
+                                                <span class="badge badge-danger">8</span>
+                                            </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{:U('com_imail_outbox')}" class="sbold uppercase" data-title="Trash"> 垃圾
+                                                <span class="badge badge-info">23</span>
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="{:U('com_imail_outbox')}" data-type="inbox" data-title="Promotions"> 促销
+                                                <span class="badge badge-warning">2</span>
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="{:U('com_imail_outbox')}" data-type="inbox" data-title="News"> 新闻 </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="tabbable-line">
+                                <div class="tab-content">
+                                    <div class="row">
+                                        <div class="col-sm-12 animated fadeInRight">
+                                            <div class="mail-box-header">
+                                                <h2>查看邮件</h2>
+                                                <div class="pull-right tooltip-demo">
+                                                    <a href="{:U('com_sms')}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="返回" target="_self">
+                                                            <i class="fa fa-reply"></i>
+                                                            返回
+                                                        </a>
+                                                </div>
+                                                <div class="mail-tools tooltip-demo m-t-md">
+                                                    <h3>
+                                                            <span class="font-noraml">主题： </span>
+                                                            {$imail_data.imail_title}
+                                                        </h3>
+                                                    <h5>
+                                                            <span class="pull-right font-noraml">{$imail_data.add_time}</span>
+                                                            <span class="font-noraml">发件人： </span>
+                                                            {$imail_data.send_name}
+                                                        </h5>
+                                                </div>
+                                            </div>
+                                            <div class="mail-box">
+                                                <div class="mail-body">{$imail_data.imail_content}</div>
+                                                <div class="mail-body text-right tooltip-demo">
+                                                    <neq name="next_data.imail_content_id" value="">
+                                                        <a class="btn btn-sm btn-white" data-placement="top" data-toggle="tooltip" data-original-title="下一封" href="{:U('com_imail_info')}?imail_content_id={$next_data.imail_content_id}" target="_self"></neq><i class="fa fa-arrow-right"></i>下一封</a>
+                                                    <a href="{:U('com_imail_content_del')}?imail_content_id={$imail_data.imail_content_id}" target="_self" title="" data-placement="top" data-toggle="tooltip" data-original-title="删除邮件" class="btn btn-sm btn-white" onclick="if(!confirm('确认删除？')){return false;}">
+                                                            <i class="fa fa-trash-o"></i>
+                                                            删除
+                                                        </a>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+</block>
+<block name="js">
+</block>

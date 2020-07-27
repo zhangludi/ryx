@@ -1,0 +1,325 @@
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/ipam_home_public_edu_index.css">
+<link rel="stylesheet" href="__STATICS__/apps/page_index/css/mine_life.css">
+<style>
+.mine_info{
+position:relative
+}
+
+.logoOut{
+	position:absolute;
+	top:10px;
+	right:10px;
+	color:rgb(237,57,48);
+    cursor: pointer;
+	padding: 2px 10px;
+    border-radius: 3px;
+	transition: 0.3s;
+	border: 1px solid #F00;
+}
+
+.logoOut:hover{
+	background-color:rgb(237,57,48);
+	color:#fff;
+    
+}
+</style>
+<div class="public_content clearfix">
+   <!-- 左侧 ------------------------------------------------------------>
+    <div class="edu_notes_left pull-left">
+        <div class="mine_info">
+			<div class="logoOut" onclick="logout();">退出</div>
+            <img class="icon1" src="__STATICS__/apps/page_index/images/mine_icon.png" alt="">
+            <div class="tx">
+                <img src="{$communist.communist_avatar}" style="object-fit: cover;width: 100%;border-radius: 50%;">
+                <eq name="communist.communist_sex" value="1">
+                    <img src="__STATICS__/apps/page_index/images/man.png">
+                <else/>
+                    <img src="__STATICS__/apps/page_index/images/woman.png">
+                </eq>
+            </div>
+            <div class="title">{$communist.communist_name}</div>
+            <div class="branch">支部：{$communist.party_no}</div>
+            <!-- <div class="icon2 clearfix">
+                <img src="__STATICS__/apps/page_index/images/mine_qq.png">
+                <img src="__STATICS__/apps/page_index/images/mine_wx.png">
+                <img src="__STATICS__/apps/page_index/images/mine_yx.png">
+            </div> -->
+            <div class="line1"></div>
+            <div class="dec">
+                简介：{$communist.memo}
+            </div>
+            <!-- <div class="more">更多<img class="di-ib" style="padding-left: 5px;" src="__STATICS__/apps/page_index/images/mine_more.png"></div> -->
+            <div class="more1">查看党员全纪实<img class="di-ib" style="padding-left: 5px;" src="__STATICS__/apps/page_index/images/mine_wl.png"></div>
+            
+        </div>
+        <!--学习计划-->
+        <div class="study_plan">
+            <div class="title va-jz"><img class="di-ib" style="margin-right: 8px;" src="__STATICS__/apps/page_index/images/mine_edu_icon.png">学习计划</div>
+            <div class="study_plan_con">
+                <div style="padding-top: 23px;">
+                    <img class="di-ib" style="padding-left: 20px;" src="__STATICS__/apps/page_index/images/mine_edu_icon2.png">
+                    <!--进度条-->
+                    <div class="layui-progress">
+                      <div class="layui-progress-bar bg-color-ff4040" lay-percent="{$customization.sum_learn_rate}%"></div>
+                    </div> 
+                    <div class="custom_made clearfix">
+                        <div class="pull-left">定制：{$customization.sum_learn_rate}%</div>
+                        <div class="pull-right color-9e">个性定制</div>
+                    </div>
+                </div>
+                <div class="line2"></div>
+                <ul>
+                    <li class="clearfix">
+                        <div class="pull-left tit">精选文章</div>
+                        <div class="pull-right" style="width: 50%;margin-top: 4px;">
+                            <div class="di-ib color-66 pull-left f-n"><span class="color-21 f-w">{$customization.article.learn_rate}%</span>
+                        </div>
+                        <div class="layui-progress">
+                              <div class="layui-progress-bar bg-color-9e" lay-percent="{$customization.article.learn_rate}%"></div>
+                        </div>  
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="pull-left tit">优质视频</div>
+                        <div class="pull-right" style="width: 50%;margin-top: 4px;">
+                            <div class="di-ib color-66 pull-left f-n"><span class="color-21 f-w">{$customization.video.learn_rate}%</span> 
+                        </div>
+                        <div class="layui-progress">
+                              <div class="layui-progress-bar bg-color-9e" lay-percent="{$customization.video.learn_rate}%"></div>
+                        </div>  
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="pull-left tit">学习笔记</div>
+                        <div class="pull-right" style="width: 50%;margin-top: 4px;">
+                            <div class="di-ib color-66 pull-left f-n"><span class="color-21 f-w">{$customization.notes.learn_rate}%</span> 
+                        </div>
+                        <div class="layui-progress">
+                              <div class="layui-progress-bar bg-color-9e" lay-percent="{$customization.notes.learn_rate}%"></div>
+                        </div>  
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="pull-left tit">考试</div>
+                        <div class="pull-right" style="width: 50%;margin-top: 4px;">
+                            <div class="di-ib color-66 pull-left f-n"><span class="color-21 f-w">{$customization.exam.learn_rate}%</span>  
+                        </div>
+                        <div class="layui-progress">
+                              <div class="layui-progress-bar bg-color-9e" lay-percent="{$customization.exam.learn_rate}%"></div>
+                        </div>  
+                        </div>
+                    </li>
+                </ul>
+                <div class="next_edu" onclick="fun_edu();">继续学习</div>
+            </div>
+        </div>
+    </div>
+   <!-- 右侧 ------------------------------------------------------------->
+    <div class="edu_notes_right pull-right">
+        <div class="banner">
+            <img src="__STATICS__/apps/page_index/images/mine_banner.png">
+            <div class="foot"></div>
+            <ul class="" id="tabBox2">
+                <li class="mt-5em mb-5em" num="1">
+                    <a>党内信息</a>
+                </li>
+                <li class="mt-5em mb-5em" num="2">
+                    <a>联系方式</a>
+                </li>
+                <li class="mt-5em mb-5em tabBox2-active" num="3">
+                    <a>党员生活全纪实</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-------------------------------党内信息----------------------------------------->
+        <div id="mine_list_mess" class="di-n">
+            <div class="clearfix live_tit">
+                <div class="pull-left tit va-jz">
+                    <img class="di-ib mr-5em" src='__STATICS__/apps/page_index/images/mine_icon3.png'>
+                    党内信息
+                </div>
+                
+            </div>
+            <div class="line3"></div>
+            <ul class="clearfix">
+                <li class="pull-left">
+                    <div class="color-9e f-16em">支部排名：
+                        <span class="color-21">{$communist.party_ranking}</span>
+                    </div>
+                    <div class="color-9e f-16em"> 所属党支部：
+                        <span class="color-21">{$communist.party_no}</span>
+                    </div>
+                    <div class="color-9e f-16em">申请入党时间：
+                        <span class="color-21">{$communist.communist_applytime}</span>
+                    </div>
+                    <div class="color-9e f-16em"> 党员积分：
+                        <span class="color-21">{$communist.communist_integral}分</span>
+                    </div>
+                    <div class="color-9e f-16em">党员标签：
+                        <span class="color-21">{$communist.communist_label}</span>
+                    </div>
+                </li>
+                <li class="pull-right">
+                    <div class="color-9e f-16em">系统排名：
+                        <span class="color-21">{$communist.ranking}</span>
+                    </div>
+                    <div class="color-9e f-16em"> 所属职务：
+                        <span class="color-21"> {$communist.post_no}</span>
+                    </div>
+                    <div class="color-9e f-16em">正式入党时间：
+                        <span class="color-21">{$communist.communist_ccp_date}</span>
+                    </div>
+                    <div class="color-9e f-16em"> 党员荣誉：
+                        <span class="color-21">{$communist.communist_honor}</span>
+                    </div>
+                    <div class="color-9e f-16em">信息来源：
+                        <span class="color-21">{$communist.communist_source}</span>
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
+        <!-------------------------------联系方式----------------------------------------->
+        <div id="mine_list_tell" class="di-n">
+            <div class="clearfix live_tit">
+                <div class="pull-left tit va-jz">
+                    <img class="di-ib mr-5em" src='__STATICS__/apps/page_index/images/mine_tell.png'>
+                    联系方式
+                </div>
+                
+            </div>
+            <div class="line3"></div>
+            
+            <div class="xinxi" style="width: 27%;height: 45px;">
+                <img class="pull-left mr-10em" src="__STATICS__/apps/page_index/images/mine_zuoji.png">
+                <div class="pull-left">
+                    <div class="f-14em color-9e">电话:</div>
+                    <div class="f-18em color-21">{$communist.communist_tel}</div>
+                </div>
+            </div>
+            <div class="xinxi" style="width: 24%;height: 45px;">
+                <img class="pull-left mr-10em" src="__STATICS__/apps/page_index/images/mine_shouji.png">
+                <div class="pull-left">
+                    <div class="f-14em color-9e">手机:</div>
+                    <div class="f-18em color-21">{$communist.communist_mobile}</div>
+                </div>
+            </div> 
+            <div class="xinxi" style="width: 25%;height: 45px;">
+                <img class="pull-left mr-10em" src="__STATICS__/apps/page_index/images/mine_qq2.png">
+                <div class="pull-left">
+                    <div class="f-14em color-9e">QQ:</div>
+                    <div class="f-18em color-21">{$communist.communist_qq}</div>
+                </div>
+            </div>
+            <div class="xinxi" style="width: 54%;height: 45px;">
+                <img class="pull-left mr-10em pt-6em" src="__STATICS__/apps/page_index/images/mine_yx2.png">
+                <div class="pull-left">
+                    <div class="f-14em color-9e">邮箱:</div>
+                    <div class="f-18em color-21">{$communist.communist_email}</div>
+                </div>
+            </div>
+            <div class="xinxi" style="width: 54%;height: 45px;">
+                <img class="pull-left mr-10em" src="__STATICS__/apps/page_index/images/mine_add.png">
+                <div class="pull-left">
+                    <div class="f-14em color-9e">地址:</div>
+                    <div class="f-18em color-21">{$communist.communist_address}</div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-------------------------------党员生活全纪实----------------------------------------->
+        <div id="mine_party_live">
+            <div class="clearfix live_tit">
+                <div class="pull-left tit va-jz">
+                    <img class="di-ib mr-5em" src='__STATICS__/apps/page_index/images/mine_icon2.png'>
+                    党内生活全纪实
+                </div>
+                <div class="pull-right">
+                    <select id="change_type">
+                        <php>echo getBdTypeSelect('communist_log_type','','',COMMUNIST_STATUS_COURSE);</php>
+                    </select>
+                </div>
+            </div>
+            <div class="line3"></div>
+            <input type="hidden" id="communist_no" value="{$communist_no}">
+            <ul id="log">
+                <volist name="communist_log_list" id="list">
+                <li class="clearfix">
+                    <div class="va-jz f-w">
+                        <img class="di-ib mr-10em" src="__STATICS__/apps/page_index/images/mine_time.png">
+                        {$list.add_time}
+                    </div>
+                    <div class="line4"></div>
+                    <div class="party_live_con_bg">
+                        <div class="tit">{$list.log_content}</div>
+                        <!-- <div class="clearfix w-93b m-a">
+                            <div class="pull-left color-9e">时长：124m</div>
+                            <div class="pull-right f-w color-ff3032">党小组</div>
+                        </div> -->
+                    </div>
+                </li>
+                </volist>
+                <!-- <li class="clearfix">
+                    <div class="va-jz f-w">
+                        <img class="di-ib mr-10em" src="__STATICS__/apps/page_index/images/mine_time.png">
+                        2016-12-16  11:30
+                    </div>
+                    <div class="line4"></div>
+                    <div class="party_live_con_bg">
+                        <div class="tit">习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们 继续发扬滴水穿石的精神 努力走出</div>
+                        <div class="clearfix w-93b m-a">
+                            <div class="pull-left color-9e">时长：124m</div>
+                            <div class="pull-right f-w color-2f877">党课</div>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <div class="va-jz f-w">
+                        <img class="di-ib mr-10em" src="__STATICS__/apps/page_index/images/mine_time.png">
+                        2016-12-16  11:30
+                    </div>
+                    <div class="line4"></div>
+                    <div class="party_live_con_bg">
+                        <div class="tit">习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们习近平回信勉励福建寿宁县下党乡的乡亲们 继续发扬滴水穿石的精神 努力走出</div>
+                        <div class="clearfix w-93b m-a">
+                            <div class="pull-left color-9e">时长：124m</div>
+                            <div class="pull-right f-w color-ff3032">党小组</div>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="__STATICS__/apps/page_index/js/ipam_home_public.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_index/js/mine_life.js"></script> 
+<script>
+function fun_edu(){
+    location.href="{:U('Index/Edu/ipam_edu_index')}";
+};
+function logout(){
+    location.href="{:U('Index/Index/logout')}";
+}
+$("#change_type").change(function () {
+    var change_type = $('#change_type').val();
+    var communist_no = $('#communist_no').val();
+    $.ajax({
+        type:'post',
+        url:"{:U('Index/User/getUserlog')}",
+        data:{'change_type':change_type,'communist_no':communist_no},
+        dataType:'json',
+        success:function(data){
+            $('#log').html(data.content);
+        }
+    });
+
+
+
+
+})
+
+</script>
+</body>
+</html>

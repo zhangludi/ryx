@@ -1,0 +1,408 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title><php>echo getConfig('web_name')</php>-微信端</title>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/aui2/css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public.css"/>    
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/public/css/sp_public_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_index.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATICS__/apps/page_wechat/Index/css/bd_appstore.css"/>
+</head>
+<style>
+header ul li{
+	display: block; !important;
+}
+img {
+    display: inline-block;
+}
+.pt-5em{
+    padding-top: 0.45rem !important;
+}
+.w-30em {
+    width: 1.6rem;
+}
+.h-30em {
+    height: 1.6rem;
+}
+</style>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-info">
+    <ul>
+    	<li>	    		
+    		<div class="aui-title icon_medium f-16em">超市</div>
+    		<img class="pull-right w-20em h-20em mr-17em mt-10em"src="__STATICS__/apps/page_wechat/Index/images/news.png" onclick="openMessage();"/>
+    	</li>
+    </ul>
+</header>
+<div class="aui-content m-0 bg-f5f5f5">    
+	<!--党务平台-->    
+    <section class="aui-grid index_con mt-12em mb-12em">
+    	<div class="aui-row pl-10em pr-10em pt-20em">
+    		<div class="aui-col-xs-4 p-0 ml-5em text-l f-16em color-21 icon_medium f-w">
+    			党务平台
+    		</div>
+    	</div>
+	    <div class="aui-row pl-10em pr-10em">
+	    	<a href="{:U('Wechat/Cms/cms_article_list_total')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div>
+	        	<div class="over-h ">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png1"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">党务动态</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <a href="{:U('Ccp/ccp_party_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div>
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png2"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">党建矩阵</p>
+		        </div>   
+	        </div>
+	        </a> 
+	        <!-- <div id="discover" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openDiscover('hr_discover_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png3"></div>
+					<p class="text-align icon_regular f-10em color-66">党员发展全纪实</p>
+		        </div>      
+	        </div>
+	        <div id="transfer" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openTransfer('hr_transfer_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png4"></div>
+					<p class="text-align icon_regular f-10em color-66">党员关系转移</p>
+		        </div>      
+	        </div>
+	        <div id="moving" class="aui-col-xs-3 p-0 mb-23em">
+	        	<div class="over-h" onclick="openMoving('hr_moving_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png5"></div>
+					<p class="text-align icon_regular f-10em color-66">流动党员之家</p>
+		        </div>    
+	        </div>
+	        <div id="secretary" class="aui-col-xs-3 p-0 mb-23em">
+	        	<div class="over-h" onclick="openSecretary('oa_secretary_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png7"></div>
+					<p class="text-align icon_regular f-10em color-66">第一书记</p>
+		        </div>    
+	        </div> -->
+	        <a href="{:U('Ccp/ccp_communist_integral',array('communist_no'=>$communist_no))}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png8"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">积分排名</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <a href="{:U('Ccp/ccp_dues_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png9"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">党费缴纳</p>
+		        </div>    
+	        </div>
+	    	</a>
+			<!--<div id="" class="aui-col-xs-4 p-0 mb-5em">
+	        	<div class="m-5em box-sha-6-fff b-ra-4em bg-color-f7 over-h b-1-e6">
+	        		<div class="w-40em h-40em center-block mt-20em mb-20em bg-png10"></div>
+					<p class="mb-20em text-align f-12em color-33">民生评议</p>
+		        </div>    
+	        </div>-->
+	    </div>
+	</section>
+	<!--结束-->
+	<!--学习平台-->
+	<section class="aui-grid index_con mt-12em mb-12em">
+    	<div class="aui-row pl-10em pr-10em pt-20em">
+    		<div class="aui-col-xs-4 p-0 ml-5em text-l f-16em color-21 icon_medium f-w">
+    			学习平台
+    		</div>
+    	</div>
+	    <div class="aui-row pl-10em pr-10em">
+	    	<a href="{:U('Edu/edu_material',array('type'=>3))}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png11"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">专题学习</p>
+		        </div>    
+	        </div>
+	    	</a>
+	       <!--  <div id="learn" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openLearn('edu_learn_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png12"></div>
+					<p class="text-align icon_regular f-10em color-66">在线党校</p>
+		        </div>    
+	        </div> -->
+	        <a href="{:U('Edu/edu_notes_list')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png13"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">学习笔记</p>
+		        </div>    
+	        </div>
+	        </a>
+	        <a href="{:U('Edu/edu_exam_list',array('is_exam'=>1))}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png14"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">考试中心</p>
+		        </div>    
+	        </div>
+	        </a>
+	        <a href="{:U('Oa/oa_article_list')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div>
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png31"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">党员投稿</p>
+		        </div>    
+	        </div>
+	    	</a>
+	    </div>
+	</section>
+	<!--结束-->
+	<!--民生平台-->
+	<section class="aui-grid index_con mt-12em mb-12em">
+    	<div class="aui-row pl-10em pr-10em pt-20em">
+    		<div class="aui-col-xs-4 p-0 ml-5em text-l f-16em color-21 icon_medium f-w">
+    			民生平台
+    		</div>
+    	</div>
+	    <div class="aui-row pl-10em pr-10em">
+	    	<a href="{:U('Life/life_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png15"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">办事指南</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <!--<div id="bbs" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openBbs('life_bbs_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png16"></div>
+					<p class="text-align icon_regular f-10em color-66">村务论坛</p>
+		        </div>    
+	        </div>
+	        <div id="helpwin" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openHelpwin('hr_poorhelp_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png17"></div>
+					<p class="text-align icon_regular f-10em color-66">精准扶贫</p>
+		        </div>    
+	        </div> -->
+	        <a href="{:U('Life/life_affairs_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png18"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">三务公开</p>
+		        </div>    
+	        </div>
+	        </a>
+	        <a href="{:U('Life/life_survey_list',array('type'=>1))}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div>
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png19"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">调查问卷</p>
+		        </div>    
+	        </div>
+	        </a>
+	        <!-- <div id="problem" class="aui-col-xs-3 p-0 mb-23em">
+	        	<div class="over-h" onclick="openProblem('life_problem_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png32"></div>
+					<p class="text-align icon_regular f-10em color-66">随手拍</p>
+		        </div>    
+	        </div> -->
+	        <a href="{:U('Life/life_vote_list',array('type'=>1))}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div>
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png30"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">投票</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <a href="{:U('Life/life_guestbook_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div>
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png31"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">留言建议</p>
+		        </div>    
+	        </div>
+	        </a>
+	    </div>
+	</section>
+	<!--结束-->
+	<!--党务办公-->
+	<!-- <section class="aui-grid index_con mt-12em mb-12em">
+    	<div class="aui-row pl-10em pr-10em pt-20em">
+    		<div class="aui-col-xs-4 p-0 ml-5em text-l f-16em color-21 icon_medium f-w">
+    			办公平台
+    		</div>
+    	</div>
+	    <div class="aui-row pl-10em pr-10em">
+	    	<a href="{:U('Oa/oa_notice_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em"> 
+	        <div >
+	        	<div class="over-h" >
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png22"></div>
+					<p class="text-align icon_regular f-10em color-66">通知公告</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <div id="document" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openDocument('oa_document_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png23"></div>
+					<p class="text-align icon_regular f-10em color-66">公文收发</p>
+		        </div>    
+	        </div>
+	        <div id="instructions" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openInstructions('oa_instructions_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png24"></div>
+					<p class="text-align icon_regular f-10em color-66">工作计划</p>
+		        </div>    
+	        </div>
+	        <div id="workplan" class="aui-col-xs-3 p-0 mb-0em">
+	        	<div class="over-h" onclick="openWorkplan('oa_workplan_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png25"></div>
+					<p class="text-align icon_regular f-10em color-66">日报管理</p>
+		        </div>    
+	        </div>
+			<div id="" class="aui-col-xs-3 p-0 mb-23em">
+	        	<div class="over-h" onclick="openPerformance('oa_performance_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png26"></div>
+					<p class="text-align icon_regular f-10em color-66">绩效管理</p>
+		        </div>    
+	        </div>
+	    </div>
+	</section> -->
+	<!--结束-->
+	<!--活动平台-->
+	<section class="aui-grid index_con mt-12em mb-12em">
+    	<div class="aui-row pl-10em pr-10em pt-20em">
+    		<div class="aui-col-xs-4 p-0 ml-5em text-l f-16em color-21 icon_medium f-w">
+    			活动平台
+    		</div>
+    	</div>
+	    <div class="aui-row pl-10em pr-10em">
+	    	<a href="{:U('Life/life_volunteer_index')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+			<div >
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png21"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">志愿者</p>
+		        </div>    
+	        </div>
+	    	</a>
+	    	<a href="{:U('Oa/oa_meeting_list')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png6"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">三会一课</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <!-- <div id="lifeing" class="aui-col-xs-3 p-0 mb-23em">
+	        	<div class="over-h" onclick="openLifeing('oa_attlifeing_header')">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png6"></div>
+					<p class="text-align icon_regular f-10em color-66">党内生活</p>
+		        </div>    
+	        </div> -->
+	        
+	    </div>
+	</section>
+	<!--结束-->
+	<!--通讯平台-->
+	 <section class="aui-grid index_con mt-12em mb-12em">
+    	<div class="aui-row pl-10em pr-10em pt-20em">
+    		<div class="aui-col-xs-4 p-0 ml-5em text-l f-16em color-21 icon_medium f-w">
+    			通讯平台
+    		</div>
+    	</div>
+	    <div class="aui-row pl-10em pr-10em">
+	    	<a href="{:U('Ccp/ccp_communist_list')}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+			<div>
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png27"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">党员通讯录</p>
+		        </div>    
+	        </div>
+	    	</a>
+	        <!-- <div id="chat" class="aui-col-xs-4 p-0 mb-5em">
+	        	<div class="m-5em box-sha-6-fff b-ra-4em bg-color-f7 over-h b-1-e6">
+	        		<div class="w-40em h-40em center-block mt-20em mb-20em bg-png28"></div>
+					<p class="mb-20em text-align f-12em color-33">沟通中心</p>
+		        </div>    
+	        </div> -->
+	        <a href="{:U('Oa/oa_email_index',array('status'=>1))}" class="aui-col-xs-3 p-0 mb-0em mb-23em">
+	        <div >
+	        	<div class="over-h">
+	        		<div class="w-30em h-30em center-block mt-20em mb-10em bg-png29"></div>
+					<p class="text-align icon_regular f-10em color-66 pt-5em">书记信箱</p>
+		        </div>    
+	        </div>
+	    	</a>
+	    </div>
+	</section>
+	<!--结束-->
+</div>
+<footer class="aui-nav h-49em bt-1-f9" id="aui-footer" style="background: #f4f4f4;">
+    <ul class="aui-bar-tab h-49em">
+    	<li id="tabbar1" onclick="randomSwitchBtn(this,'1')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage1.png" class="fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/indexPage2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">首页</p>
+        </li>
+        <li id="tabbar2"  class="active-info" onclick="randomSwitchBtn(this,'2')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/super_market1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/super_market2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">超市</p>
+        </li>
+        <li id="tabbar3" onclick="randomSwitchBtn(this,'3')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Learn2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">学习</p>
+        </li>
+        <li id="tabbar4" onclick="randomSwitchBtn(this,'4')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/live_lihood2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">服务</p>
+        </li>
+        <li id="tabbar5" onclick="randomSwitchBtn(this,'5')">
+            <img class="wh-24em mt-5em img1" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member1.png" class="iconfont fsize-24"/>
+            <img class="wh-24em mt-5em img2" src="__STATICS__/apps/page_wechat/images/images_bd/party_Member2.png" class="iconfont fsize-24"/>
+            <p class="icon_regular color-66">我的</p>
+        </li>
+    </ul>
+</footer>
+</body>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/api.js"></script>
+<script type="text/jscript" src="__STATICS__/apps/page_wechat/public/aui/js/aui-alert.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/public/js/sp_public_p5boss.js"></script>
+<script type="text/javascript" src="__STATICS__/apps/page_wechat/Index/js/bd_index.js"></script>
+<script type="text/javascript">
+function openMessage(){
+	location.href="{:U('Wechat/Oa/alert_msg_index')}";
+}
+function randomSwitchBtn(tag,type) {
+	if($(tag).hasClass('active-info')){
+		return ;
+	}
+	switch(type){
+	    case '1':
+	    	location.href="{:U('Wechat/Index/index')}";
+	    	;break;
+	    case '2':
+	    	location.href="{:U('Wechat/Index/store_index')}";
+	    	;break;
+	    case '3':
+	    	location.href="{:U('Wechat/Edu/edu_index')}";
+	    	;break;
+		case '4':
+			location.href="{:U('Wechat/Life/life_index')}";
+			;break;
+	    default:
+	    	location.href="{:U('Wechat/Ccp/ccp_communist_info')}";
+	    	;break;
+	}
+}
+</script>
+
+</html>

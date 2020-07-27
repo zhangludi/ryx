@@ -1,0 +1,89 @@
+<div class="public_content bg-color-gray9">
+    <!--左侧导航区开始-->
+    <div class="public_content_left">
+        {:W('Leftmenu/ipam_home_slide', array(0, $type_no))}
+    </div>
+    <!--左侧导航区结束-->
+    <!--右侧内容区开始-->
+    <div class="public_content_right meeting_content">
+        <!--高层动态开始-->
+        <div class="public_content_right_l pr-10 pull-left w-630 hr-sr-gray2">
+            <div class="public_card">
+                <div class="public_card_title bg-img-card fcolor-white">
+                    <span class="fsize-18 pl-15">党委会议</span>
+                    <!--<a href="javascript:;" class="fcolor-white">更多</a>-->
+                </div>
+                <ul class="news_content mt-15 pr-15 over-h" id="content">
+                </ul>
+            </div>
+            <div id="news_page"></div>
+        </div>
+        <div class="public_content_right_r pull-right w-280">
+            {:W('Article/hotspot_issues')}
+            {:W('Material/material_article_list', array(0, 0, 4, carousel))}
+            {:W('Material/material_video_list', array(0, 0, 4, carousel))}
+        </div>
+        <!--高层动态结束-->
+    </div>
+    <!--右侧内容区结束-->
+    <div class="clearfix"></div>
+</div>
+<script>
+    var count = {$count};
+    var type_no = {$type_no};
+    //分页
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        //完整功能
+        if (count === 0) {
+            alert('暂无数据');
+        } else {
+            laypage.render({
+                elem: 'news_page'
+                ,count: count
+                ,theme: '#ff3032'
+                ,first: '首页'
+                ,last: '尾页'
+                ,limit: 10
+                ,layout: ['count', 'prev', 'page', 'next', 'skip']
+                ,jump: function(obj){
+
+                    $.ajax({
+                        type : "post",
+                        url : "{:U('Index/Meeting/getMeetingList')}",
+                        data :{type_no:type_no, page:obj.curr, pagesize:obj.limit},
+                        datatype: "json",
+                        success: function (data) {
+                            $('#content').html(data.content);
+                            // 查看详情验证登陆
+                            $(".see-details").click(function (e) {
+                       	    	var flag = false;
+                       	    	 $.ajax({
+                       	             type: "POST",
+                       	             url: "{:U('Index/check_login')}",
+                       	             async:false,
+                       	             success: function(data){
+                       	            	 flag = data;
+                       	             }
+                       	         });
+                       	    	 if(flag == true){
+                       	    		 location.href = "{:U('Index/Index/login')}";
+                       	    		 return false;
+                       	    	 } else {
+                       	    		 return true;
+                       	    	 }
+                       	    });
+                        }
+                    });
+                    // var description = "";
+                    // for(var i in obj){
+                    //     var property=obj[i];
+                    //     description+=i+" = "+property+"\n";
+                    // }
+                    // alert(description);
+                }
+            });
+        }
+
+    });
+</script>

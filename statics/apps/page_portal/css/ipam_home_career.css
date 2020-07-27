@@ -1,0 +1,106 @@
+
+/* 表格样式开始 */
+table.career_table, table.career_table th, table.career_table td{
+    border: solid 1px #ebebeb;
+}
+table.career_table{
+    border-collapse: collapse;
+}
+/* 表格样式结束 */
+/* 按钮样式开始 */
+.app_support{
+    background: linear-gradient(90deg ,#ff4d4d, #ff3032, #ff4530);
+}
+.app_support a{
+    color: #fff;
+}
+/* 按钮样式结束 */
+.career_content_list{
+    list-style: disc inside none;
+}
+.career_content_list li{
+    list-style: disc inside none;
+}
+.career_content_card:hover .career_content_btn{
+    background: linear-gradient(90deg ,#ff4d4d, #ff3032, #ff4530);
+}
+.career_content_card:hover .career_content_btn a{
+    color: #fff;
+}
+/* o2o样式开始 */
+
+/* 提交按钮样式开始 */
+.otwoo_btn{
+    text-align: center;
+    border-radius: 4px;
+}
+.otwoo_btn_submit, .otwoo_btn_reset{
+    display: inline-block;
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    border: solid 1px #ff3032;
+}
+.otwoo_btn_submit{
+    background-image: linear-gradient(45deg, #ff4d4d, #ff3032, #ff5a2d);
+}
+/* 提交按钮样式结束 */
+.select_o2o{
+    height: 42px;
+    line-height:42px;
+    width:360px;
+    padding: 0 25px;
+    outline: none;
+}
+.input_o2o{
+    width: 260px;
+    height: 30px;
+}
+.input_o2o1{
+    outline: none;
+    border: none;
+    width: 310px;
+}
+.textarea_o2o{
+    width:770px;
+    height: 200px;
+    resize: none;
+}
+.input_bottom{
+    height:42px;
+    border: none;
+    border-bottom: 1px solid #dfdfdf;
+}
+/* o2o样式结束 */
+/* 调查问卷样式开始 */
+.career_question_list li:hover .career_question_title{
+    color: #e60616;
+}
+.career_question_listactive .career_question_title{
+    color: #e60616;
+}
+/* 调查问卷样式结束 */
+/*
+    精准扶贫样式开始
+*/
+/* 精准扶贫政策列表样式开始 */
+.career_poverty_item{
+    display: table-cell;
+    padding: 6px;
+}
+/* 精准扶贫政策列表样式结束 */
+/* 扶贫一对一帮扶文字样式开始 */
+.career_poverty_help{
+    width: 76px;
+    height: 26px;
+    line-height: 26px;
+    color: #fff;
+    border-radius: 26px ;
+    background: #ff5e60 url(../images/../../../../upload/page_portal/career_poverty_help.png) no-repeat left center;
+
+}
+/* 扶贫一对一帮扶文字样式结束 */
+/*
+    精准扶贫样式结束
+*/
