@@ -71,6 +71,7 @@ function getCommunistInfo($communist_no,$field='communist_name'){
  * @addtime   2017-11-06
  */
 function getCommunistList($party_no,$returntype='str',$ischild = '1',$post_no,$status,$communist_name,$communist_no,$communist_level,$communist_diploma,$communist_sex,$start,$end,$communist_mobile,$communist_source,$page,$pagesize){
+	//print_r($party_no);
 	$ccp_communist = M('ccp_communist');
 	if(!empty($party_no)){
 	    if($ischild == '1'){

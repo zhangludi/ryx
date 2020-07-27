@@ -96,11 +96,30 @@ class CcpduesController extends BaseController{
 	**/
 	public function ccp_dues_edit(){
 		
-        $party_no_auth = session('party_no_auth');//取本级及下级组织
-		$this->assign('party_no_auth',$party_no_auth);
+		//获取党组织列表
+		$party_no_auth = session('party_no_auth');//取本级及下级组织
+        $party_map['status'] = 1;
+        $party_map['party_no'] = array('in',$party_no_auth);
+        $party_list = M('ccp_party')->where($party_map)->field('party_no,party_name,party_pno,gc_lng,gc_lat')->select();
+       // print_r($party_list);
+		$this->assign('party_list',$party_list);
 		
 		
 		$this->display("Ccpdues/ccp_dues_edit");
+	}
+	
+	//根据ajax 获取人员列表的数据
+	public function communist_no_list_ajax(){
+		$db_dues=M("ccp_dues");
+        $data=I('post.');
+		//print_r($data);
+		if($data['party_no'] == ''){
+			return false;
+		}
+		$getCommunistSelect = getCommunistSelect('',$data['party_no']);
+		//print_r($getCommunistSelect);
+		ob_clean();$this->ajaxReturn($getCommunistSelect); 
+		
 	}
 	/**
 	* @name:ccp_dues_status
@@ -132,7 +151,7 @@ class CcpduesController extends BaseController{
     public function ccp_dues_do_save(){
         $db_dues=M("ccp_dues");
         $data=I('post.');
-	
+		
         $map['dues_month'] = $data['dues_month'];
         $map['communist_no'] = $data['communist_no'];
         $res = $db_dues->where($map)->find();
@@ -142,9 +161,9 @@ class CcpduesController extends BaseController{
         }
         $data['add_staff']=session('staff_no');//添加人
         $data['add_staff_name']=M('hr_staff')->where("staff_no = ".$data['add_staff'])->getField('staff_name');//添加人姓名
-        $data['party_no']=getCommunistInfo($data['communist_no'],'party_no');//缴费人部门
+       // $data['party_no']=getCommunistInfo($data['communist_no'],'party_no');//缴费人部门
         $data['party_name']=getPartyInfo($data['party_no'],'party_name');//缴费人部门名称
-        $data['communist_name']=getCommunistInfo($data['communist_no']);//缴费人姓名
+       $data['communist_name']=getCommunistInfo($data['communist_no']);//缴费人姓名
         $data['add_time']=date("Y-m-d H:i:s");
         $data['update_time']=date("Y-m-d H:i:s");
        

@@ -1,0 +1,88 @@
+<extend name="./apps/Common/Template/temp.html" />
+<block name="css"></block>
+<block name="body">
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                        	<div class="portlet light  bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm bg-color-green2">
+                                                <i class="iconfont">&#xe64b;</i>
+                                            </div>
+                                        </div>
+                                        <span class="bold "><php>echo getFunctionInfo(ACTION_NAME);</php>       </span>
+                                    </div>
+                                </div>
+ 								<form action="{:U('ccp_dues_summary')}" method="post" >
+									<div class="row ml-10">
+	                                    <div class="form-group  col-md-4">
+		                                     <div class="row">
+		                                         <label class="control-label col-md-4 p-0 lh-35">年月：</label>
+		                                         <div class="col-md-8  p-0">
+		                                             <input type="text" name="dues_month" id='start_time' date class=" form-control layer-date " value="{$month}" placeholder="年月" >
+		                                         </div>
+		                                     </div>
+		                                 </div>
+										<div class="pull-right text-right p-0">
+											<button class="btn btn-sm blue btn-outline bor-ra-2 mr-30 w-60">搜索</button>
+										</div>
+                                        </if>
+									</div>
+								</form>
+                              	<div class="portlet-body" id="table_body">
+                                   <div class="scroller p5-scroller"  data-always-visible="1" data-rail-visible1="1">
+									   <div id="table">
+										   <table id="client_table" 
+												class="table" 
+												data-toggle="table" 
+												data-url="" 
+												data-height=""
+												data-search="false"
+												data-page-size="20"
+												data-show-refresh="false" data-show-toggle="false"
+												data-show-columns="false" data-show-export="false"
+												data-detail-formatter="detailFormatter"
+												data-minimum-count-columns="2"
+												data-show-pagination-switch="false" data-pagination="true"
+												data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]">
+                                                    <thead>
+	                                                    <tr>
+	                                                        <th class="view-message " data-width='100px'>编号</th>
+	                                                        <th class="view-message " data-width='180px'>党支部</th>
+	                                                        <th class="view-message " data-width='200px'>缴费比例(￥)</th>
+	                                                        <th class="view-message " data-width='200px'>缴纳人数比例</th>
+	                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+	                                                    <volist name="party_list" id="list">
+	                                                        <tr class="unread" data-messageid="1">
+	                                                            <td class="view-message ">{$list.party_no}</td>
+	                                                            <td class="view-message ">{$list.party_name}</td>
+	                                                            <td class="view-message ">{$list.amount_rate}</td>
+	                                                            <td class="view-message ">{$list.communist_rate}</td>
+	                                                        </tr>
+	                                                    </volist>
+                                                    </tbody>
+						                    </table>
+										</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                	</div>
+            	</div>
+            </div>
+        </div>
+</block>
+<block name="js">
+	<script>
+		laydate.render({
+  		  elem: '#start_time'
+  		  ,type: 'month'
+  		});
+	</script>
+ </block>

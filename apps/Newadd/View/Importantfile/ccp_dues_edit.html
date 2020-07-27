@@ -9,23 +9,13 @@
 				<div class="layui-card-body layui-form">
 					<form action="{:U('ccp_dues_do_save')}" id="form_validation"  class="form-horizontal" method="post">
 					<div class="layui-row">
-					<div class="layui-col-xs12 mt-10">
-							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>支部名称：</strong></div>
-								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
-									<select name="party_no" lay-verify="required"  lay-filter="party_no">
-                                        <php>echo getPartySelect($party_list)</php>
-                                    </select>
-								</div>
-							</div>
-						</div>
+					
 						<div class="layui-col-xs12 mt-10">
 							<div class="layui-row">
 								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳人员姓名：</strong></div>
 								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
-									<select name="communist_no" lay-verify="required" lay-search="" >
-                                        <php>
-										echo getCommunistSelect('',$party_list[0]['party_no'])</php>
+									<select name="communist_no" lay-verify="required" lay-search="">
+                                        <php>echo getCommunistSelect('',$party_no_auth);</php>
                                     </select>
 								</div>
 							</div>
@@ -141,7 +131,6 @@
     })
 	laydate.render({elem: "input[name='dues_time']"});
 	laydate.render({elem: "input[name='dues_month']",type: 'month'});
-	
 </SCRIPT>
 <script type="text/javascript">
 	$('#close').click(function() {
@@ -222,7 +211,8 @@
 	
 		var party_free = $( "input[name='party_should_free']" ).val(party_should_free);
 
-
+	
+	
 		
    });
 </script>
@@ -237,47 +227,6 @@
 		$( "input[name='dues_amount']" ).val(party_real_free);
 
    });
- 
 </script>
 
-
-<script type="text/javascript" >
-
-layui.use('form', function(){
-    var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
-	form.on('select(party_no)', function(data){
-	var party_no = $( "select[name='party_no']" ).val();
-		//console.log(party_no);
-		$.ajax({
-            //提交数据的类型 POST GET
-            type:"POST",
-            //提交的网址
-            url:"{:U('communist_no_list_ajax')}",
-            //提交的数据
-            data:{party_no:party_no},
-            //成功返回之后调用的函数             
-            success:function(msg){
-			
-			  if (msg != "" && msg != null) {
-                        layui.use(['layer', 'form'], function () {
-                            var form = layui.form;
-                            var length = msg.length;
-                     
-                           $( "select[name='communist_no']" ).html(msg);
-                            form.render();//没有写这个，操作后没有效果
-                        });
- 
-                    }
-                }
-    
-         });
-		
-	});
-});
-
-
-//party_no
-
-
-</script>
 </block>
