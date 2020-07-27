@@ -65,17 +65,17 @@ function getArticleInfo($article_id,$field='article_title'){
 	}else{
 	    $category_list = $cms_article_category->where("status = '1' and (cat_type = 4 or cat_type = 1)")->order('add_time desc')->select();
 	}
-	if(!empty($category_list)){
-		foreach($category_list as $list){
-			$ids .= $list['cat_id'].",";
-		}
-		$ids = rtrim($ids,','); // 去除id字符串中的最后一个逗号
-		$article_map['article_cat'] = array('in',$ids);
-	} else {
-		if (!empty($cat_id)) {
-			$article_map['article_cat'] = $cat_id;
-		}
-	}
+	// if(!empty($category_list)){
+		// foreach($category_list as $list){
+			// $ids .= $list['cat_id'].",";
+		// }
+		// $ids = rtrim($ids,','); // 去除id字符串中的最后一个逗号
+		// $article_map['article_cat'] = array('in',$ids);
+	// } else {
+		// if (!empty($cat_id)) {
+			// $article_map['article_cat'] = $cat_id;
+		// }
+	// }
 	if (!empty($count)) { // 分页查询
 		if($type == '1'){
 			$cms_article_sonlist = $cms_article->where($article_map)->order("article_view desc")->limit($page,$count)->select();
@@ -289,7 +289,7 @@ function getAffairsInfo($article_id,$field='article_title'){
 	$article_map['article_id'] = $article_id;
 	if($field == 'all'){
 		$article_data = $cms_article->where($article_map)->find();
-		$article_data['article_cat'] = getArticleCatInfo($article_data['article_cat'],'',1);
+		//$article_data['article_cat'] = getArticleCatInfo($article_data['article_cat'],'',1);
 		return $article_data;
 	}else{
 		$article_data = $cms_article->where($article_map)->field($field)->find();
@@ -327,17 +327,9 @@ function getAffairsList($cat_id,$is_child,$page=0,$count=10,$keyword,$start_time
 	$article_list = array();
 	$party = getCommunistInfo($communist_no,'party_no');
 	$category_list = $cms_article_category->select();
-	$ids = "";
-	if($cat_id){
-		$ids = $cat_id;
-	}else{
-		foreach($category_list as $list){
-			$ids .= $list['cat_id'].",";
-		}
-		$ids = rtrim($ids,',');
-	}
+	
 	$category_list = getArticleCatList('',$cat_id,'','','',$type);
-	$cms_article_sonlist = $cms_article->where("$where and article_cat in ($ids)")->order("add_time desc")->select();
+	$cms_article_sonlist = $cms_article->where("$where")->order("add_time desc")->select();
 	foreach($cms_article_sonlist as &$sonlist){
 		$article_list[] = $sonlist;
 	}

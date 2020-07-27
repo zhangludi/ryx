@@ -3,25 +3,25 @@
 <block name="body">
 <div class="layui-fluid " >
     <div class="layui-row layui-col-space10">
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <form class="layui-form">
-                    <div class="layui-card-header">
-                        <span title="栏目管理">栏目管理</span>
-                        <a href="{:U('Lifeaffairs/life_affairs_cat_index')}" title="" style="text-decoration: none;">
-                            <i class="layui-icon" style="color: #f60;position: relative;top: 0px;left: 70%;font-size: 20px;"></i>
-                        </a>
-                    </div>
-                    <div class="layui-card-body">
-                        <div class="over-h-tree">
-                            <ul id="treeDemo" class="ztree ztree-demo">
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="layui-col-md9">
+        <!-- <div class="layui-col-md3"> -->
+            <!-- <div class="layui-card"> -->
+                <!-- <form class="layui-form"> -->
+                    <!-- <div class="layui-card-header"> -->
+                        <!-- <span title="栏目管理">栏目管理</span> -->
+                        <!-- <a href="{:U('Lifeaffairs/life_affairs_cat_index')}" title="" style="text-decoration: none;"> -->
+                            <!-- <i class="layui-icon" style="color: #f60;position: relative;top: 0px;left: 70%;font-size: 20px;"></i> -->
+                        <!-- </a> -->
+                    <!-- </div> -->
+                    <!-- <div class="layui-card-body"> -->
+                        <!-- <div class="over-h-tree"> -->
+                            <!-- <ul id="treeDemo" class="ztree ztree-demo"> -->
+                            <!-- </ul> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                <!-- </form> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <div class="layui-col-md12">
             <div class="layui-row">
                 <div class="layui-col-xs12">
                     <div class="layui-card">
@@ -80,7 +80,7 @@
                     , id: 'ztreedata'
                     , cols: [[
                         {field: 'article_id', width: 100, title: '编号', sort: true}
-                        , {field: 'article_thumb', title: '缩略图',width:80}
+                        
                         , {field: 'article_title', title: '文章标题'}
                         , {field: 'add_staff', width: 120, title: '添加人'}
                         , {field: 'add_time', width: 120, title: '添加时间'}

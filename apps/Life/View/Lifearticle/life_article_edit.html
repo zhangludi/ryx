@@ -11,35 +11,7 @@
 	                        <input type="hidden" class="form-control" name="notes_id" value="{$exam_data.exam_id}">
 	                        <input type="hidden" class="form-control" name="material_id" value="{$material_id}">
 	                        <div class="layui-row">
-	                            <div class="layui-col-xs12 mt-10">
-	                                <div class="layui-row">
-	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>所属党组织：</strong></div>
-	                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
-	                                    	<select name="party_no" lay-filter="aihao" lay-search="" lay-verify='required'>
-	                                         
-	                                           	<volist name="party_list" id="party">
-	                                           		<option value="{$party.party_no}" <eq name="party.party_no" value="$article.party_no">selected</eq>>{$party.party_name}</option>	
-	                                          	</volist>
-	                                        </select>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            <div class="layui-col-xs12 mt-10">
-	                            	<div class="layui-row">
-		                                <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>所属类型：</strong></div>
-		                                <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
-		                                    <select name="article_cat" lay-filter="aihao" lay-search="" lay-verify='required'>
-	                                           	
-												<volist name="category_list" id="list">
-														<option value ="{$list.cat_id}"<eq name="list.cat_id" value="$article.article_cat">selected</eq><eq name="list.cat_id" value="$cat_pid">selected</eq>>{$list.cat_name}</option>
-												</volist>
-	                                        </select>
-
-		                                </div>
-		                                <span class="fcolor-red fsize-18 lh-35 pl-5"></span>
-	                            	</div>
-	                        	</div>
-	                            
+	                          
 	                            <div class="layui-col-xs12 mt-10">
 	                                <div class="layui-row">
 	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>标题：</strong></div>
@@ -47,49 +19,8 @@
 	                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
 	                                </div>
 	                            </div>
-	                            <div class="layui-col-xs12 mt-10">
-	                                <div class="layui-row">
-	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>关键字：</strong></div>
-	                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35 childrenBody">
-	                                        <input type="text" name="article_keyword" value="{$article.article_keyword}"placeholder="请输入关键字" autocomplete="off" class="layui-input" lay-verify='required'>
-	                                    </div>
-	                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
-	                                </div>
-	                            </div>
 	                            
-	                            <div class="layui-col-xs12 mt-10">
-	                                <div class="layui-row">
-	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>描述：</strong></div>
-	                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35"> 
-	                                    
-										<textarea name="article_description" placeholder="请输入文章描述" class="layui-textarea">{$article.article_description}</textarea>
-	                                </div>
-	                            </div>
-	                            <div class="layui-col-xs12 mt-10">
-	                                <div class="layui-row">
-	                                    <div class="layui-col-xs2 text-r fsize-214 fcolor-65 lh-35"><strong>内容：</strong></div>
-	                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
-	                                        <!-- <textarea id="article_content" name="article_content">{$article.article_content}</textarea> -->
-	                                        <script id="editor" name="article_content" type="text/plain" style="height:350px;width:100%">{$article.article_content}</script>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            <div class="layui-col-xs12 mt-10">
-	                                <div class="layui-row">
-	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缩略图：</strong></div>
-	                                   <input type="hidden" id="source_name" name="source_name" value=""/>
-										<input type="hidden" id="article_thumb_old" name="article_thumb_old" value="{$article.article_thumb}" style="width: 60px">
-										<input type="hidden" id="article_thumb" name="article_thumb" value="{$article.article_thumb}" style="width: 60px">
-										<input type="hidden" class="form-control" id="article_img" name="article_img" value="{$article.article_thumb}">
-	                                    <button type="button" class="layui-btn" id="exam_thumb" onclick="uploader_file('life','1','article_thumb','source_name','js-grid-juicy-projects2','2','0')"><i class="layui-icon"></i>上传文件</button>
-	                                    <span class="fcolor-red fsize-14 lh-35 pl-5">建议图片比例为4:3,图片大小不要超过1M</span>
-	                                    <div id="js-grid-juicy-projects2" style="height:100px">
-	                                        <neq name="article.article_thumb" value="">
-	                                            <php>echo getUploadHtml($article['article_thumb'],'40');</php>
-	                                        </neq>
-	                                    </div>
-	                                </div>
-	                            </div>
+	                        
 	                            <div class="layui-col-xs12 mt-10">
 	                                <div class="layui-row">
 	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>附件：</strong></div>
@@ -104,6 +35,15 @@
 	                                            <php>echo getUploadHtml($article['article_attach'],'40');</php>
 	                                        </neq>
 	                                    </div>
+	                                </div>
+	                            </div>
+		
+	                            <div class="layui-col-xs12 mt-10">
+	                                <div class="layui-row">
+	                                    <div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>发布时间：</strong></div>
+	                                    <div class="layui-col-xs8 fsize-14 fcolor-65 lh-35">
+										<input type="text" name="article_time" date placeholder="请输入时间" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value="{$article.article_time}" autocomplete="off" class="layui-input" lay-verify='required'></div>
+	                                    <span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
 	                                </div>
 	                            </div>
 	                            <div class="layui-form-item">
