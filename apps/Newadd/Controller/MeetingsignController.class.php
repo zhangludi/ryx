@@ -23,6 +23,7 @@ class MeetingsignController extends BaseController//继承Controller类
 	public function meeting_sign_index_data(){
 		
         $staff_no = session('staff_nmeeting_typeo');
+        $party_no = I('get.party_no');
         $communist_name = I('get.communist_name');
         $meeting_type = I('get.meeting_type'); 
         
@@ -30,8 +31,8 @@ class MeetingsignController extends BaseController//继承Controller类
 		$pages = I('get.page') ? I('get.page') : 1;
         $page = ($pages-1)*$pagesize;
      
-        $data = getMeetingSignList($communist_name,$meeting_type,$page,$pagesize);
-	
+        $data = getMeetingSignList($communist_name,$meeting_type,$party_no,$page,$pagesize);
+
         $data['code'] = 0;
         $data['msg'] = 0;
         ob_clean();$this->ajaxReturn($data); // 返回json格式数据
@@ -101,7 +102,7 @@ class MeetingsignController extends BaseController//继承Controller类
 		
 		//删除积分
 		public function meeting_sign_del(){
-		
+
        
        
    

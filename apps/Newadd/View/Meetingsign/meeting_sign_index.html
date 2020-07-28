@@ -132,11 +132,11 @@
                 var idcard_no = data.idcard_no;
                 if(obj.event === 'del'){
                     layer.confirm('确认删除该数据吗？', function(index){
-                        window.location='{:U("Meetingsign/meeting_sign_del")}?dues_id='+data.dues_id+'';
+                        window.location='{:U("Meetingsign/meeting_sign_del")}?meeting_sign_id='+data.meeting_sign_id+'';
                         layer.close(index);
                     });
                 } else if(obj.event === 'edit'){
-					window.location='{:U("Meetingsign/meeting_sign_edit")}?dues_id='+data.dues_id+'';
+					window.location='{:U("Meetingsign/meeting_sign_edit")}?meeting_sign_id='+data.meeting_sign_id+'';
 				}					
             });
             var $ = layui.$, active = {
@@ -196,12 +196,12 @@
                         var table = layui.table;
                         table.render({
                             elem: '#demo'
-                            , url: '{:U("Meetingsign/meeting_sign_index_data")}?party_no='+node.id+'&communist_name='+communist_name+'&meeting_type'+meeting_type+''
+                            , url: '{:U("Meetingsign/meeting_sign_index_data")}?party_no='+node.id+'&communist_name='+communist_name+'&meeting_type='+meeting_type+''
                             , height: 'full-160'
                             , cols: [[
-                                  {field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}
-                                , {field: 'meeting_sign_name', title: '支部名称',minWidth: 100}
-                                , {field: 'communist_name',width: 100, title: '姓名'}
+                                {field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}
+                                , {field: 'party_name', title: '支部名称',minWidth: 100}
+                                , {field: 'meeting_sign_name',width: 100, title: '姓名'}
                                 , {field: 'meeting_sign_type',width: 100, title: '分类'}
                                 , {field: 'meeting_sign_score', width: 100, title: '积分'}
                                 , {field: 'add_staff_name', width: 100, title: '操作人'}
