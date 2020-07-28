@@ -5,19 +5,19 @@ use GuzzleHttp\RetryMiddleware;
 
 //获取会议签到积分列表
 
-function getMeetingSignList($communist_name,$meeting_type,$page,$pagesize){{
+function getMeetingSignList($communist_name,$meeting_type,$page,$pagesize){
 	
-	$party_no = getPartyChildNos($party_no);
-    $data['count'] = getCommunistCount($party_no,'',COMMUNIST_STATUS_OFFICIAL);
+
+    $data['count'] = M("meeting_sign")->where("is_deleted=1")->count();
    
     	$num = $page+1;
 		$where = "WHERE 1=1";
-		if($communist_no){
-			$where .= "and  meeting_sign_name like %$communist_no%";
+		if($communist_name){
+			$where .= " and  m.meeting_sign_name like '%$communist_name%'";
 		}
 		
 		if($meeting_type){
-			$where .= "and  meeting_sign_type_id={meeting_sign_type_id}";
+			$where .= " and  m.meeting_sign_type_id={$meeting_type}";
 
 		}
 		
@@ -28,7 +28,7 @@ function getMeetingSignList($communist_name,$meeting_type,$page,$pagesize){{
 				LEFT JOIN sp_sys_user u ON u.user_id = m.add_staff 
 				LEFT JOIN sp_meeting_sign_type t ON t.meeting_sign_type_id=m.meeting_sign_type_id 
 				 {$where} ORDER BY m.create_time DESC limit $page,$pagesize");
-    }
+
 	
         foreach ($communist_list as &$list){
         	//操作

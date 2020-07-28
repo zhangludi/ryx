@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="layui-col-xs1 text-r lh-40">分类：</div>
                                     <div class="layui-col-xs2">
-											<select name="meeting_type" lay-verify="required"  lay-filter="party_no">
+											<select name="meeting_type" lay-verify="required" id="meeting_type"  lay-filter="party_no">
 												<php>echo $party_options;</php>
                                     </select>
 									</div>
@@ -107,12 +107,10 @@
             var table = layui.table;
             table.render({
                 elem: '#demo'
-                , url: "{:U('Meetingsign/meeting_sign_index_data')}?party_no={$party_no}"
+                , url: "{:U('Meetingsign/meeting_sign_index_data')}"
                 , height: 'full-160'
                 , id: 'ztreedata'
-                , cols: [[
-
-                     {field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}
+                , cols: [[{field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}
                                 , {field: 'party_name', title: '支部名称',minWidth: 100}
                                 , {field: 'meeting_sign_name',width: 100, title: '姓名'}
                                 , {field: 'meeting_sign_type',width: 100, title: '分类'}
@@ -144,7 +142,7 @@
             var $ = layui.$, active = {
                 reload: function(){
                     var communist_name = $('#communist_name').val();
-                    var start_time = $('#start_time').val();
+                    var meeting_type = $('#meeting_type').val();
                     var party_no = $('#party_no').val();
                     table.reload('ztreedata', {
                         page: {
@@ -152,7 +150,7 @@
                         }
                         ,where: {
                             "communist_name": communist_name,
-                            "dues_month":start_time,
+                            "meeting_type":meeting_type,
                             "party_no":party_no
                         }
                     });
@@ -192,12 +190,13 @@
                 onClick: function (a, b, node) {     //node是代表zNodes里面的urltree属性
                     $('#party_no').val(node.id);
                     var communist_name = $('#communist_name').val();
-                    var start_time = $('#start_time').val();
+                    var meeting_type = $('#meeting_type').val();
+
                     layui.use('table', function () {
                         var table = layui.table;
                         table.render({
                             elem: '#demo'
-                            , url: '{:U("Meetingsign/meeting_sign_index_data")}?party_no='+node.id+'&communist_name='+communist_name+'&start_time'+start_time+''
+                            , url: '{:U("Meetingsign/meeting_sign_index_data")}?party_no='+node.id+'&communist_name='+communist_name+'&meeting_type'+meeting_type+''
                             , height: 'full-160'
                             , cols: [[
                                   {field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}

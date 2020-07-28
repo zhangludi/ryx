@@ -25,11 +25,13 @@ class MeetingsignController extends BaseController//继承Controller类
         $staff_no = session('staff_nmeeting_typeo');
         $communist_name = I('get.communist_name');
         $meeting_type = I('get.meeting_type'); 
-        $pagesize = I('get.limit');
-        $page = (I('get.page')-1)*$pagesize;
+        
+        $pagesize = I('get.limit') ? I('get.limit') : '10';
+		$pages = I('get.page') ? I('get.page') : 1;
+        $page = ($pages-1)*$pagesize;
      
         $data = getMeetingSignList($communist_name,$meeting_type,$page,$pagesize);
-		
+	
         $data['code'] = 0;
         $data['msg'] = 0;
         ob_clean();$this->ajaxReturn($data); // 返回json格式数据

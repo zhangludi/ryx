@@ -11,7 +11,7 @@ return array(
 // 	'DEFAULT_MODULE' => 'Index_gx', // 默认模块
 // 'DEFAULT_CONTROLLER' => 'Cms', // 默认控制器名称
 // 'DEFAULT_ACTION' => 'cms_article_index', // 默认操作名称
-	'LOAD_EXT_FILE' => 'function_index,function_oa,function_ccp,function_cust,function_life,function_cms,function_com,function_fa,function_rc,function_sys,function_wx,function_per,function_att,function_edu,function_pam,function_supervise,function_saas,function_hr', //自定义公共function文件 */
+	'LOAD_EXT_FILE' => 'function_new,function_index,function_oa,function_ccp,function_cust,function_life,function_cms,function_com,function_fa,function_rc,function_sys,function_wx,function_per,function_att,function_edu,function_pam,function_supervise,function_saas,function_hr', //自定义公共function文件 */
 	
 	
 	'AUTOLOAD_NAMESPACE'=>array(
