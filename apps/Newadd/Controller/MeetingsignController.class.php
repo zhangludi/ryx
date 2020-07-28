@@ -111,14 +111,14 @@ class MeetingsignController extends BaseController//继承Controller类
 	
 	//根据ajax 获取人员列表的数据
 	public function communist_no_list_ajax(){
-		$db_dues=M("ccp_dues");
+
         $data=I('post.');
 		//print_r($data);
 		if($data['party_no'] == ''){
 			return false;
 		}
 		$getCommunistSelect = getCommunistSelect('',$data['party_no']);
-		//print_r($getCommunistSelect);
+		print_r($getCommunistSelect);
 		ob_clean();$this->ajaxReturn($getCommunistSelect); 
 		
 	}
@@ -130,7 +130,7 @@ class MeetingsignController extends BaseController//继承Controller类
 		//print_r($type_arr);
 		$party_options = '';
 		foreach($type_arr as $party){
-			$party_options.="<option $selected data-type='".$party['meeting_sign_type_id']."' value='".$party['meeting_sign_type_id']."'>".$party['meeting_sign_type']."</option>";
+			$party_options.="<option  data-type='".$party['meeting_sign_type_id']."' value='".$party['meeting_sign_type_id']."'>".$party['meeting_sign_type']."</option>";
 		}
 		
 		return $party_options;

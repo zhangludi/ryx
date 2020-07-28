@@ -215,6 +215,7 @@
             }
         };
         var zNodes = [
+            {id:0,PID:0,name:'请选择'},
             <volist name="party_list" id="list" key = 'k'>
                 {id:"{$list.party_no}", pId:"{$list.party_pno}", name:"{$list.party_name}", t:"{$list.party_name}",icon:"__STATICS__/layuiadmin/style/res/wenjianjia-2.png", <if condition='$k eq 1'>open:true</if>},
             </volist>

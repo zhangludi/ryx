@@ -123,90 +123,12 @@
 </script>
 
 <script type="text/javascript" >
-//根据缴纳基数+在职情况，获取应缴纳费用
-  $( "input[name='party_free']" ).blur(function(){
-		var  party_should_free;
-	var pp_status = $( "select[name='pp_status']" ).val();
-	var party_free = parseInt($( "input[name='party_free']" ).val());
-	   	console.log(party_free);
-
-	
-	if(pp_status == 1){
-
-		switch (true){
-			case party_free<3000:
-			party_should_free =  party_free*0.0005;
-			$( "input[name='party_free_status']" ).val('0.0005')			
-			break;
-			case party_free>=3000:
-			case party_free<5000:
-			party_should_free =  party_free*0.01;
-			$( "input[name='party_free_status']" ).val('0.01')			
-
-			break;
-			case party_free>=5000:
-			case party_free<10000:
-			party_should_free =  party_free*0.015;
-			$( "input[name='party_free_status']" ).val('0.015')			
-
-			break;
-			case party_free>=10000:
-			party_should_free =  party_free*0.02;
-			$( "input[name='party_free_status']" ).val('0.02')			
-
-			break;
-		}
-		
-
-	}else if(pp_status == 2){
-			   //	console.log(2);
-
-		switch (true){
-			case party_free<5000:
-			party_should_free =  party_free*0.0005;
-						$( "input[name='party_free_status']" ).val('0.0005')			
-
-			break;
-			case party_free>=10000:
-			party_should_free =  party_free*0.01;
-						$( "input[name='party_free_status']" ).val('0.01')			
-
-			break;
-		}
-		
-
-
-	}
-	
-	
-		var party_free = $( "input[name='party_should_free']" ).val(party_should_free);
-
-
-		
-   });
-</script>
-
-<script type="text/javascript" >
-//根据缴纳基数+在职情况，获取应缴纳费用
-  $( "input[name='party_real_free']" ).blur(function(){
-		var party_should_free = parseInt($( "input[name='party_should_free']" ).val());
-		var party_real_free = parseInt($( "input[name='party_real_free']" ).val());
-	    var party_difference = party_should_free - party_real_free;
-		$( "input[name='party_difference']" ).val(party_difference);
-		$( "input[name='dues_amount']" ).val(party_real_free);
-
-   });
- 
-</script>
-
-
-<script type="text/javascript" >
 
 layui.use('form', function(){
     var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
 	form.on('select(party_no)', function(data){
 	var party_no = $( "select[name='party_no']" ).val();
-		//console.log(party_no);
+		console.log(party_no);
 		$.ajax({
             //提交数据的类型 POST GET
             type:"POST",
@@ -222,7 +144,7 @@ layui.use('form', function(){
                             var form = layui.form;
                             var length = msg.length;
                      
-                           $( "select[name='communist_no']" ).html(msg);
+                           $( "select[name='meeting_sign_name_id']" ).html(msg);
                             form.render();//没有写这个，操作后没有效果
                         });
  
