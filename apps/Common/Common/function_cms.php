@@ -310,7 +310,7 @@ function getAffairsInfo($article_id,$field='article_title'){
  * @time    2016-07-15
  * @update  2016/08/13
  */
-function getAffairsList($cat_id,$is_child,$page=0,$count=10,$keyword,$start_time,$end_time,$communist_no){
+function getAffairsList($cat_id,$is_child,$page=0,$count=10,$keyword,$start_time,$end_time,$communist_no,$cms_affairs_type=1){
 	$cms_article = M('cms_affairs');
 	$cms_article_category = M('cms_affairs_category');
 	$ccp_communist = M('ccp_communist');
@@ -321,6 +321,11 @@ function getAffairsList($cat_id,$is_child,$page=0,$count=10,$keyword,$start_time
 	if(!empty($start_time) && !empty($end_time)){
 		$where .= " and add_time >= '$start_time 00:00:00'  and add_time <= '$end_time 23:59:59' ";
 	}
+	
+	if(!empty($cms_affairs_type)){
+		$where .= " and cms_affairs_type= ".$cms_affairs_type;
+	}
+	
 	if(empty($communist_no)){
 		$staff_no = session('staff_no');
 	}

@@ -31,12 +31,13 @@
                                     <div class="layui-col-xs1 text-r lh-40">姓名：</div>
                                     <div class="layui-col-xs2">
                                         <input class="layui-input" id="communist_name" autocomplete="off" placeholder="请输入姓名">
-                                         <input type="hidden" name="party_no" id='party_no' />
                                     </div>
-                                    <div class="layui-col-xs1 text-r lh-40">年月：</div>
+                                    <div class="layui-col-xs1 text-r lh-40">分类：</div>
                                     <div class="layui-col-xs2">
-                                        <input type="text" class="layui-input " id="start_time" placeholder="请填写日期"  autocomplete="off" value="">
-                                    </div>
+											<select name="meeting_type" lay-verify="required"  lay-filter="party_no">
+												<php>echo $party_options;</php>
+                                    </select>
+									</div>
                                     <div class="layui-col-xs5 pull-right">
                                         <a class="layui-btn" data-type="reload" lay-filter="searchFilter" style="text-decoration: none;" title="查询">查询</a>
                                         
@@ -48,9 +49,7 @@
                             </div>
                             <table class="layui-table" id="demo"  lay-filter="demo"></table>
                             <script type="text/html" id="operate">
-                                {{#if(d.status == '1'){}}
-                                    <a class=" layui-btn  layui-btn-xs layui-btn-f60" lay-event="edit">缴纳</a>
-								{{#}}}
+                               
 								<a class="layui-btn layui-btn-del layui-btn-xs" lay-event="del">删除</a>
                             </script>
                         </div>
@@ -108,20 +107,19 @@
             var table = layui.table;
             table.render({
                 elem: '#demo'
-                , url: "{:U('Ccpdues/ccp_dues_list_data')}?party_no={$party_no}"
+                , url: "{:U('Meetingsign/meeting_sign_index_data')}?party_no={$party_no}"
                 , height: 'full-160'
                 , id: 'ztreedata'
                 , cols: [[
 
-                    {field: 'dues_month', width: 100, title: '月份', sort: true}
-                    , {field: 'party_name', title: '支部名称',minWidth: 200}
-                    , {field: 'communist_name',width: 100, title: '姓名'}
-                    , {field: 'dues_amount',width: 120, title: '缴费金额(￥)'}
-                    , {field: 'dues_time', width: 120, title: '缴费时间'}
-                    , {field: 'add_staff_name', width: 130, title: '操作人'}
-                    , {field: 'update_time', width: 160, title: '操作时间'}
-                    , {field: 'status_name', width: 100, title: '状态'}
-                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+                     {field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}
+                                , {field: 'party_name', title: '支部名称',minWidth: 100}
+                                , {field: 'meeting_sign_name',width: 100, title: '姓名'}
+                                , {field: 'meeting_sign_type',width: 100, title: '分类'}
+                                , {field: 'meeting_sign_score', width: 100, title: '积分'}
+                                , {field: 'add_staff_name', width: 100, title: '操作人'}
+                                , {field: 'update_time', width: 120, title: '操作时间'}
+                                , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 150}
                 ]]
                 , page: true
             });
@@ -136,11 +134,11 @@
                 var idcard_no = data.idcard_no;
                 if(obj.event === 'del'){
                     layer.confirm('确认删除该数据吗？', function(index){
-                        window.location='{:U("Ccpdues/ccp_dues_do_del")}?dues_id='+data.dues_id+'';
+                        window.location='{:U("Meetingsign/meeting_sign_del")}?dues_id='+data.dues_id+'';
                         layer.close(index);
                     });
                 } else if(obj.event === 'edit'){
-					window.location='{:U("Ccpdues/ccp_dues_status")}?dues_id='+data.dues_id+'';
+					window.location='{:U("Meetingsign/meeting_sign_edit")}?dues_id='+data.dues_id+'';
 				}					
             });
             var $ = layui.$, active = {
@@ -167,7 +165,7 @@
                         closeBtn: 0,
                         shift: 1,
                         area : ['800px' , '400px'],
-                        content: "{:U('ccp_dues_edit')}",
+                        content: "{:U('meeting_sign_edit')}",
                     });
                     layer.full(index);
                 }
@@ -199,18 +197,17 @@
                         var table = layui.table;
                         table.render({
                             elem: '#demo'
-                            , url: '{:U("Ccpdues/ccp_dues_list_data")}?party_no='+node.id+'&communist_name='+communist_name+'&start_time'+start_time+''
+                            , url: '{:U("Meetingsign/meeting_sign_index_data")}?party_no='+node.id+'&communist_name='+communist_name+'&start_time'+start_time+''
                             , height: 'full-160'
                             , cols: [[
-                                {field: 'dues_month', width: 100, title: '月份', sort: true}
-                                , {field: 'party_name', title: '支部名称',minWidth: 200}
+                                  {field: 'meeting_sign_title', width: 100, title: '会议名称', sort: true}
+                                , {field: 'meeting_sign_name', title: '支部名称',minWidth: 100}
                                 , {field: 'communist_name',width: 100, title: '姓名'}
-                                , {field: 'dues_amount',width: 120, title: '缴费金额(￥)'}
-                                , {field: 'dues_time', width: 120, title: '缴费时间'}
-                                , {field: 'add_staff_name', width: 130, title: '操作人'}
-                                , {field: 'update_time', width: 160, title: '操作时间'}
-                                , {field: 'status_name', width: 100, title: '状态'}
-                                , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 180}
+                                , {field: 'meeting_sign_type',width: 100, title: '分类'}
+                                , {field: 'meeting_sign_score', width: 100, title: '积分'}
+                                , {field: 'add_staff_name', width: 100, title: '操作人'}
+                                , {field: 'update_time', width: 120, title: '操作时间'}
+                                , {fixed: 'right', title: '操作', align: 'center', toolbar: '#operate',width: 150}
                             ]]
                             , page: true
                         });

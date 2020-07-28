@@ -7,94 +7,63 @@
 			<div class="layui-card">
 				<div class="layui-card-header" title="党费添加">党费添加</div>
 				<div class="layui-card-body layui-form">
-					<form action="{:U('ccp_dues_do_save')}" id="form_validation"  class="form-horizontal" method="post">
+					<form action="{:U('meeting_sign_save')}" id="form_validation"  class="form-horizontal" method="post">
 					<div class="layui-row">
-					
+					<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>支部名称：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
+									<select name="party_no" lay-verify="required"  lay-filter="party_no">
+                                        <php>echo getPartySelect($party_list)</php>
+                                    </select>
+								</div>
+							</div>
+						</div>
 						<div class="layui-col-xs12 mt-10">
 							<div class="layui-row">
 								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳人员姓名：</strong></div>
 								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
-									<select name="communist_no" lay-verify="required" lay-search="">
-                                        <php>echo getCommunistSelect('',$party_no_auth);</php>
+									<select name="meeting_sign_name_id" lay-verify="required" lay-search="" >
+                                        <php>
+										echo getCommunistSelect('',$party_list[0]['party_no'])</php>
                                     </select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="layui-col-xs12 mt-10">
+							<div class="layui-row">
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>会议名称：</strong></div>
+								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
+									<input type="text" name="meeting_sign_title" value="{$meeting.meeting_sign_title}" lay-verify="required" placeholder="请填写数字" class="layui-input" />
 								</div>
 							</div>
 						</div>
 					
 						<div class="layui-col-xs12 mt-10">
 							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>在职情况：</strong></div>
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>分类：</strong></div>
 								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
-									<select name="pp_status" lay-verify="required" lay-search="">
-                                        <option  value="1">在职</option>
-										<option  value="2">退休</option>
+									<select name="meeting_sign_type_id" lay-verify="required" lay-search="">
+                                        {$party_options}
                                     </select>
 								</div>
 							</div>
 						</div>
 							<div class="layui-col-xs12 mt-10">
 							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳党费基数：</strong></div>
+								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>评分：</strong></div>
 								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 layui-input-inline">
-									<input type="text" name="party_free" value="" lay-verify="required" placeholder="请填写数字" class="layui-input" />
+									<input type="text" name="meeting_sign_score" value="{$meeting.meeting_sign_bakup}" lay-verify="required" placeholder="请填写数字" class="layui-input" />
 								</div>
-							</div>
-						</div>
-						<input type="hidden" value="0.005" name="party_free_status">
-						<input type="hidden" value="0" name="dues_amount">
-						<div class="layui-col-xs12 mt-10">
-							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>应缴金额：</strong></div>
-								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
-									<input type="text"  name="party_should_free"  autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder="请填写数字" lay-verify="required">
-								</div>
-								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
 							</div>
 						</div>
 						
-						<div class="layui-col-xs12 mt-10">
-							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>实际应缴费用：</strong></div>
-								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
-									<input type="text"  name="party_real_free"  autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder="请填写数字" lay-verify="required">
-								</div>
-								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
-							</div>
-						</div>
-						
-						<div class="layui-col-xs12 mt-10">
-							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>差额：</strong></div>
-								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
-									<input type="text"  name="party_difference"  autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder="请填写数字" lay-verify="required">
-								</div>
-								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
-							</div>
-						</div>
-					
-						<div class="layui-col-xs12 mt-10">
-							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳日期：</strong></div>
-								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
-									<input type="text" name="dues_time" date  autocomplete="off" class="layui-input" value="" placeholder="请填写缴纳日期" lay-verify="required" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
-								</div>
-								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
-							</div>
-						</div>
-						<div class="layui-col-xs12 mt-10">
-							<div class="layui-row">
-								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>缴纳月份：</strong></div>
-								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35 childrenBody">
-									<input type="text" name="dues_month" date  autocomplete="off" class="layui-input" value="" placeholder="请填写缴纳日期" lay-verify="required" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
-								</div>
-								<span class="fcolor-red fsize-18 lh-35 pl-5">*</span>
-							</div>
-						</div>
 						<div class="layui-col-xs12 mt-10">
 							<div class="layui-row">
 								<div class="layui-col-xs2 text-r fsize-14 fcolor-65 lh-35"><strong>备注：</strong></div>
 								<div class="layui-col-xs6 fsize-14 fcolor-65 lh-35">
-									<textarea name="memo" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea" maxlength="225">{$dept_row.memo}</textarea>
+									<textarea name="meeting_sign_bakup" placeholder="这个文本域的最大长度为225个字符" class="layui-textarea" maxlength="225">{$meeting.meeting_sign_bakup}</textarea>
 								</div>
 							</div>
 						</div>
@@ -131,6 +100,7 @@
     })
 	laydate.render({elem: "input[name='dues_time']"});
 	laydate.render({elem: "input[name='dues_month']",type: 'month'});
+	
 </SCRIPT>
 <script type="text/javascript">
 	$('#close').click(function() {
@@ -211,8 +181,7 @@
 	
 		var party_free = $( "input[name='party_should_free']" ).val(party_should_free);
 
-	
-	
+
 		
    });
 </script>
@@ -227,6 +196,47 @@
 		$( "input[name='dues_amount']" ).val(party_real_free);
 
    });
+ 
 </script>
 
+
+<script type="text/javascript" >
+
+layui.use('form', function(){
+    var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+	form.on('select(party_no)', function(data){
+	var party_no = $( "select[name='party_no']" ).val();
+		//console.log(party_no);
+		$.ajax({
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:"{:U('communist_no_list_ajax')}",
+            //提交的数据
+            data:{party_no:party_no},
+            //成功返回之后调用的函数             
+            success:function(msg){
+			
+			  if (msg != "" && msg != null) {
+                        layui.use(['layer', 'form'], function () {
+                            var form = layui.form;
+                            var length = msg.length;
+                     
+                           $( "select[name='communist_no']" ).html(msg);
+                            form.render();//没有写这个，操作后没有效果
+                        });
+ 
+                    }
+                }
+    
+         });
+		
+	});
+});
+
+
+//party_no
+
+
+</script>
 </block>
